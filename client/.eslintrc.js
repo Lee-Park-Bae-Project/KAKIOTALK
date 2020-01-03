@@ -4,7 +4,7 @@ module.exports =  {
     'airbnb-base',
     // 'plugin:react/recommended',  // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from @typescript-eslint/eslint-plugin
-    'plugin:prettier/recommended',  // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+    // 'plugin:prettier/recommended',  // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
     'plugin:import/typescript',
     'plugin:react/recommended',
   ],
@@ -28,13 +28,14 @@ module.exports =  {
         "objects": "always-multiline",
         "imports": "always-multiline",
         "exports": "always-multiline",
-        "functions": "always-multiline"
+        "functions": "ignore"
       }
     ],
     "comma-style": [
       "error",
       "last"
     ],
+    // "function-paren-newline": ["error", { "minItems": 3 }],
     "array-element-newline": [
       "error",
       {
