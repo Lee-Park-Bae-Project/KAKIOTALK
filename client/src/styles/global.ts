@@ -10,9 +10,9 @@ const Global = createGlobalStyle`
 `;
 
 export const size = {
-  mobile: '375px',
-  tablet: '834px',
-  desktop: '1440',
+  mobile: '0px',
+  tablet: '768px',
+  desktop: '1024px',
 };
 
 export const device = {
