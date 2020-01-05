@@ -2,4 +2,4 @@
 
 kakaotalk clone
 
-### Story Book - [here](https://kakiotalk-storybook.now.sh)
+### Story Book - [here](https://kakiotalk-storybook.junow.now.sh/)
