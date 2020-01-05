@@ -45,6 +45,8 @@ module.exports =  {
     ],
     "object-property-newline": "error",
     "react/prop-types": 0,
+    "@typescript-eslint/explicit-function-return-type":0,
+    "import/no-extraneous-dependencies": 0,
   },
   settings:  {
     react:  {
