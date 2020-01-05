@@ -1,32 +1,6 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
-import { darken } from 'polished';
+import StyledButton from './styles';
 import { color } from '../../styles/global';
-
-interface StyleProp{
-  background: string;
-}
-const S = {
-  Button: styled.button<StyleProp>`
-    width: 5rem;
-    height: 2rem;
-
-    background-color: ${(props) => props.background};
-
-    outline: none;
-    border-radius: 1rem;
-    border: none;
-    cursor: pointer;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    &:active{
-      background-color: ${(props) => darken(0.1, props.background)};
-    }
-  `,
-};
 
 interface ButtonProp {
   /** 버튼안에 들어갈 텍스트 */
@@ -50,13 +24,13 @@ const Button: FC<ButtonProp> = ({
   bgColor = color.YELLO,
   onClick,
 }) => (
-  <S.Button
+  <StyledButton
     type='button'
     background={bgColor}
     onClick={onClick}
   >
     {text}
-  </S.Button>
+  </StyledButton>
 );
 
 export default Button;
