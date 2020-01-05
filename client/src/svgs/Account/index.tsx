@@ -1,10 +1,32 @@
 import React, { FC } from 'react';
 
-const Account: FC = () => (
+interface AccountProp{
+  /** 크기값 */
+  size?: 'small' | 'medium' | 'large';
+}
+
+const sizeMap = {
+  small: 36,
+  medium: 48,
+  large: 64,
+};
+
+/**
+ *
+ * - 기본 유저 프로필 사진
+ * - prop
+ *  - size
+    * - `small` - width = 36
+    * - `medium` - width = 48 (기본)
+    * - `large` - width = 64
+ */
+const Account: FC<AccountProp> = ({
+  size = 'medium',
+}) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="48"
-      height="48"
+      width={sizeMap[size]}
+      height={sizeMap[size]}
       viewBox="0 0 24 24">
         <path
           d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
