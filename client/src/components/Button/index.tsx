@@ -29,12 +29,12 @@ const S = {
 };
 
 interface ButtonProp {
-  /** 이름이다 */
+  /** 버튼안에 들어갈 텍스트 */
   text: string;
-  /** 백그라운드다 */
+  /** 버튼 색깔 */
   bgColor?: string;
-  /** 핸들러다 */
-  onClick?: any;
+  /** 클릭 핸들러 */
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 /**
