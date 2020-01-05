@@ -43,7 +43,8 @@ module.exports =  {
         "minItems": 3
       }
     ],
-    "object-property-newline": "error"
+    "object-property-newline": "error",
+    "react/prop-types": 0,
   },
   settings:  {
     react:  {
