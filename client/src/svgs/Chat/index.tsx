@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
+import sizeMap from '../../utils/constants';
 
 interface ChatProp {
   size?: 'small' | 'medium' | 'large';
   selected?: boolean;
 }
 
-const sizeMap = {
-  small: 36,
-  medium: 48,
-  large: 64,
-};
+// const sizeMap = {
+//   small: 36,
+//   medium: 48,
+//   large: 64,
+// };
 
 const SelectedChat = () => (
   <>
