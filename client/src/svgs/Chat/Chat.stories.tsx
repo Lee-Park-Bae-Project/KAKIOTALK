@@ -6,7 +6,7 @@ export default {
   component: Chat,
 };
 
-export const ChatBasic = () => <Chat/>;
+export const ChatBasic = () => <Chat />;
 
 export const ChatSmall = () => <Chat size='small'/>;
 

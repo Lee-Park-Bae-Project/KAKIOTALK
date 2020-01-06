@@ -14,7 +14,9 @@ const sizeMap = {
 const SelectedChat = () => (
   <>
     <path
-      d='M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z'/>
+      d='M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z'
+      fill='white'/>
+
     <path
       d='M0 0h24v24H0z'
       fill='none'
@@ -30,6 +32,7 @@ const UnSelectedChat = () => (
         />
       <path
         d='M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z'
+        fill='white'
         />
   </>
 );
@@ -45,8 +48,8 @@ const Chat: FC<ChatProp> = ({
     viewBox="0 0 24 24">
     {
       selected
-        ? <SelectedChat/>
-        : <UnSelectedChat/>
+        ? <SelectedChat />
+        : <UnSelectedChat />
     }
   </svg>
 );

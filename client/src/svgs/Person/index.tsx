@@ -39,7 +39,9 @@ const Person: FC<PersonProp> = ({
       height={sizeMap[size]}
       viewBox="0 0 24 24">
       <path
-        d={dMap(selected)}/>
+        d={dMap(selected)}
+        fill='white'
+        />
       <path
         d="M0 0h24v24H0z"
         fill="none"/>
