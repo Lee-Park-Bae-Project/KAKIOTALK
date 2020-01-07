@@ -12,11 +12,11 @@ const S = {
 
 interface ChatTabProp {
   /** 사이즈 */
-  size: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
   /** 현재 선택중인지 */
-  selected: boolean;
+  selected?: boolean;
   /** 클릭 핸들러 */
-  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 /**
