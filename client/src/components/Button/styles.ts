@@ -1,28 +1,43 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { darken } from 'polished';
+import { color, fontSize, weight } from '../../styles/global';
 
+export const themeMap = {
+  primary: {
+    background: color.YELLO,
+  },
+  secondary: {
+    background: color.RED,
+  },
+  tertiary: {
+    background: color.GRAY,
+  },
+};
 interface ButtonProp{
-  background: string;
+  isAllowed: boolean;
 }
 
-const Button = styled.button<ButtonProp>`
+export const Button = styled.button<ButtonProp>`
   width: 5rem;
   height: 2rem;
+  color: ${color.BLACK};
+  font-size: ${fontSize.SMALL};
+  font-weight: ${weight.NORMAL};
 
-  background-color: ${(props) => props.background};
+
+  background-color: ${(props) => props.theme.background};
 
   outline: none;
   border-radius: 1rem;
   border: none;
-  cursor: pointer;
+  cursor: ${(props) => (props.isAllowed ? 'pointer' : 'not-allowed')};
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  &:active{
-    background-color: ${(props) => darken(0.1, props.background)};
+
+  &:hover{
+    background-color: ${(props) => darken(0.1, props.theme.background)};
   }
 `;
-
-export default Button;

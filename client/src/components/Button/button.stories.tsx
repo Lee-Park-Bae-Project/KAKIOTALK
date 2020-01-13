@@ -14,19 +14,31 @@ export default {
   },
 };
 
-export const BasicButton: React.FC = () => {
-  const content = text('name', 'Storybook');
-  return (
+export const BasicButton: React.FC = () => (
   <Button
-    text={content}
+    text='primary'
+    theme='primary'
   />
-  );
-};
+);
 
-export const ButtonGray: React.FC = () => (
+export const SecondaryButton: React.FC = () => (
   <Button
-    text="전송"
-    bgColor={color.GRAY}
+    text='secondary'
+    theme='secondary'
+  />
+);
+
+export const TertiaryButton = () => (
+  <Button
+    text='tertiary'
+    theme='tertiary'
+  />
+);
+
+export const NotAllowedButton = () => (
+  <Button
+    text='전송'
+    isAllowd={false}
   />
 );
 
