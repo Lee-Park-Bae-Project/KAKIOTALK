@@ -37,7 +37,12 @@ const directionMap = {
 const S = {
   Container: styled.div<ContainerProp>`
     display: flex;
-    flex-direction: ${(props) => directionMap[props.iconPosition]};
+    flex-direction: ${(props) => {
+    if (!props.iconPosition) {
+      return 'left';
+    }
+    return directionMap[props.iconPosition];
+  }};
     width: fit-content;
     height: fit-content;
     align-items: center;
@@ -50,7 +55,7 @@ const S = {
 };
 
 /**
- *
+ * text와 icon 함께 사용할 때 이용
  */
 const TextIcon: FC<Prop> = ({
   icon,
