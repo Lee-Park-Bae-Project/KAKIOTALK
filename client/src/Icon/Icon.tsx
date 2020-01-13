@@ -1,7 +1,7 @@
 import React from 'react';
 import * as icons from './svg';
 
-type IconType = keyof typeof icons;
+export type IconType = keyof typeof icons;
 export const iconTypes: IconType[] = Object.keys(icons) as any[]; // 스토리에서 불러오기 위함
 
 export type IconProps = {
@@ -21,7 +21,7 @@ export type IconProps = {
  */
 const Icon = ({
   icon,
-  color,
+  color = 'currentColor',
   size = '2rem',
 }: IconProps) => {
   const SVGIcon = icons[icon];
@@ -29,7 +29,7 @@ const Icon = ({
     <SVGIcon
       fill={color}
       width={size}
-      height='auto'
+      height={size}
     />
   );
 };
