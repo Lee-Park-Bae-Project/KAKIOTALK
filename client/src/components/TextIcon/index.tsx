@@ -51,6 +51,7 @@ const S = {
   TextWrapper: styled.span<TextProp>`
     color: ${(props) => props.textColor};
     line-height: 2rem;
+    padding: 1rem;
   `,
 };
 
