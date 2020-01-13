@@ -34,9 +34,9 @@ export const color = {
 };
 
 export const fontSize = {
-  SMALL: '1rem',
-  MEDIUM: '1.5rem',
-  LARGE: '2rem',
+  SMALL: '0.8rem',
+  MEDIUM: '1rem',
+  LARGE: '1.2rem',
 };
 
 export const weight = {
