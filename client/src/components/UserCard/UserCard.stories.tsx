@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import UserCard from './index';
 
 export default {
-  title: 'Component/Basic/UserCard',
+  title: 'Component/UserCard',
   component: UserCard,
 };
 
@@ -26,6 +26,18 @@ export const UserCardWithClickHandler: FC = () => {
     <UserCard
       userName={userName}
       onClick={onClick}
+      statusMessage='Brand New 2020'
     />
   );
+};
+
+export const UserCardWithLongText = () => (
+  <UserCard
+    userName='junow'
+    statusMessage='was it a cat i saw was it a cat i saw was it a cat i saw'
+  />
+);
+
+UserCardWithLongText.story = {
+  name: '긴 텍스트가 들어있는 UserCard',
 };
