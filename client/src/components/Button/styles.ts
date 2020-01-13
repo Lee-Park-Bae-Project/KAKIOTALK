@@ -24,6 +24,7 @@ export const Button = styled.button<ButtonProp>`
   font-size: ${fontSize.SMALL};
   font-weight: ${weight.NORMAL};
 
+  margin: 0.5rem;
 
   background-color: ${(props) => props.theme.background};
 
