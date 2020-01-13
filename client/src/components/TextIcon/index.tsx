@@ -6,7 +6,7 @@ type iconPositionType = 'left' | 'right' | 'top' | 'bottom';
 
 interface ContainerProp {
   /** text에 대한 icon의 상대적 위치 */
-  iconPosition: iconPositionType;
+  iconPosition?: iconPositionType;
 }
 interface TextProp {
   /** 아이콘과 함께 표시될 텍스트 */
