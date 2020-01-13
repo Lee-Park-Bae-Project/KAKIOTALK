@@ -29,9 +29,9 @@ const NavigationBar: FC<NavigationBarProp> = ({
   addFriendTabOnClick,
 }) => (
     <S.Container>
-      <FriendTab selected={friendSelected} size='small' onClick={friendTabOnClick}/>
-      <ChatTab selected={chatSelected} size='small' onClick={chatTabOnClick}/>
-      <AddFriend size='small' onClick={addFriendTabOnClick}/>
+      <FriendTab selected={friendSelected} onClick={friendTabOnClick}/>
+      <ChatTab selected={chatSelected} onClick={chatTabOnClick}/>
+      <AddFriend onClick={addFriendTabOnClick}/>
     </S.Container>
 );
 export default NavigationBar;

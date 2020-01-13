@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import AddFriend from '../../../svgs/AddFriend';
 import Flex from '../../../commons/Flex';
+import { color } from '../../../styles/global';
+import Icon from '../../../Icon/Icon';
 
 const S = {
   Container: styled(Flex)`
@@ -11,17 +12,16 @@ const S = {
 };
 
 interface AddFriendProp{
-  size?: 'small' | 'medium' | 'large';
+  size?: string;
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const AddFriendTab: FC<AddFriendProp> = ({
-  size = 'small',
+  size = '1.5rem',
   onClick = undefined,
 }) => (
-  <S.Container onClick={onClick}>
-    <AddFriend size={size}/>
+    <S.Container onClick={onClick}>
+    <Icon icon='AddFriend' color={color.WHITE} size={size}/>
   </S.Container>
 );
-
 export default AddFriendTab;

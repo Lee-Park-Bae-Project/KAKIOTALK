@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Person from '../../../svgs/Person';
+import Icon from '../../../Icon/Icon';
 import Flex from '../../../commons/Flex';
+import { color } from '../../../styles/global';
 
 const S = {
   Container: styled(Flex)`
@@ -12,7 +13,7 @@ const S = {
 
 interface FriendTabProp{
   /** 크기 */
-  size?: 'small' | 'medium' | 'large';
+  size?: string;
   /** 현재 선택중인지 */
   selected?: boolean;
   /** 클릭 핸들러 */
@@ -23,12 +24,16 @@ interface FriendTabProp{
  * 클릭 했을 때 선택된 것 처럼 filled 된 이미지가 나타남
  */
 const FriendTab: FC<FriendTabProp> = ({
-  size = 'medium',
+  size = '1.5rem',
   selected = false,
   onClick = undefined,
 }) => (
     <S.Container onClick={onClick}>
-      <Person selected={selected} size={size}/>
+      {
+        selected
+          ? <Icon icon='PersonFilled' color={color.WHITE} size={size} />
+          : <Icon icon='Person' color={color.WHITE} size={size} />
+      }
     </S.Container>
 );
 

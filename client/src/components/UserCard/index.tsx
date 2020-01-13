@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import * as S from './styles';
+import Icon from '../../Icon/Icon';
+import { color } from '../../styles/global';
 
 interface UserCardProp{
   /** user card 에 표시할 유저 네임 */
   userName: string;
   /** 프로필사진 - 이름 배치 방향 */
-  direction?: 'hor' | 'ver';
+  direction?: 'row' | 'col';
   /** 클릭핸들러 */
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void);
 }
@@ -20,7 +22,7 @@ interface UserCardProp{
  */
 const UserCard: FC<UserCardProp> = ({
   userName,
-  direction = 'hor',
+  direction = 'row',
   onClick,
 }) => (
     <S.Container
@@ -28,7 +30,7 @@ const UserCard: FC<UserCardProp> = ({
       onClick={onClick}
       >
       <S.UserImg>
-        <S.Account/>
+        <Icon icon='Account' color={color.WHITE}/>
       </S.UserImg>
       {userName}
     </S.Container>

@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Chat from '../../../svgs/Chat';
 import Flex from '../../../commons/Flex';
+import Icon from '../../../Icon/Icon';
+import { color } from '../../../styles/global';
+
 
 const S = {
   Container: styled(Flex)`
@@ -12,7 +14,7 @@ const S = {
 
 interface ChatTabProp {
   /** 사이즈 */
-  size?: 'small' | 'medium' | 'large';
+  size?: string;
   /** 현재 선택중인지 */
   selected?: boolean;
   /** 클릭 핸들러 */
@@ -23,12 +25,16 @@ interface ChatTabProp {
  * 클릭 했을 때 선택된 것 처럼 filled 된 이미지가 나타남
  */
 const ChatTab: FC<ChatTabProp> = ({
-  size = 'medium',
+  size = '1.5rem',
   selected = false,
   onClick = undefined,
 }) => (
-  <S.Container onClick={onClick}>
-    <Chat selected={selected} size={size}/>
+    <S.Container onClick={onClick}>
+    {
+      selected
+        ? <Icon icon='ChatFilled' color={color.WHITE} size={size}/>
+        : <Icon icon='Chat'color={color.WHITE} size='1.5rem'/>
+    }
   </S.Container>
 );
 

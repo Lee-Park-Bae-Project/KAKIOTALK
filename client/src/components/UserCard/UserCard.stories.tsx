@@ -15,7 +15,7 @@ export const BasicUserCard: FC = () => (
 export const VerticalUserCard: FC = () => (
   <UserCard
     userName={'junow'}
-    direction={'ver'}
+    direction={'col'}
   />
 );
 
