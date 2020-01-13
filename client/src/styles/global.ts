@@ -5,7 +5,7 @@ const Global = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri;
   }
 `;
 
@@ -31,6 +31,18 @@ export const color = {
   TEXT_BLACK: '#262525',
   TEXT_GRAY: '#737373',
   ROOM_COLOR: '#C0D1DB',
+};
+
+export const fontSize = {
+  SMALL: '1rem',
+  MEDIUM: '1.5rem',
+  LARGE: '2rem',
+};
+
+export const weight = {
+  WEAK: 400,
+  NORMAL: 600,
+  STRONG: 800,
 };
 
 export default Global;
