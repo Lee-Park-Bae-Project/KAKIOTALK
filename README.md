@@ -1,4 +1,4 @@
-# WELCOME KAKIOTALK!!
+# WELCOME TO KAKIOTALK!!
 
 kakaotalk clone
 
