@@ -47,11 +47,26 @@ module.exports =  {
     "react/prop-types": 0,
     "@typescript-eslint/explicit-function-return-type":0,
     "import/no-extraneous-dependencies": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   },
   settings:  {
     react:  {
       version:  'detect',  // Tells eslint-plugin-react to automatically detect the version of React to use
     },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+      }
+    }
   },
   env: {
     "browser": true,
