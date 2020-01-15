@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FriendTab from './index';
+import FriendTab from 'components/NavigationBar/FriendTab';
 
 export default {
   title: 'Component/Tab/FriendTab',

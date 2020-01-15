@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Flex from '../../commons/Flex';
-import { color, fontSize, weight } from '../../styles/global';
+import Flex from 'commons/Flex';
+import { color, fontSize } from 'styles/global';
 
 export const Container = styled(Flex)`
   width: 20rem;

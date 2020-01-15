@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Flex from '../../commons/Flex';
-import { device } from '../../styles/global';
+import Flex from 'commons/Flex';
+import { device } from 'styles/global';
 
 export const Container = styled(Flex)``;
 

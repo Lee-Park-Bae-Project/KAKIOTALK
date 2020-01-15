@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import * as S from './styles';
-import Icon from '../../Icon/Icon';
-import { color } from '../../styles/global';
-import TextIcon from '../TextIcon';
+import * as S from 'components/Profile/styles';
+import Icon from 'Icon/Icon';
+import { color } from 'styles/global';
+import TextIcon from 'components/TextIcon';
 
 interface Prop {
   /** 유저 이름 */

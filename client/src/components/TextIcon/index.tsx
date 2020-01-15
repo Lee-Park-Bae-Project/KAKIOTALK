@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Icon, { IconType } from '../../Icon/Icon';
+import Icon, { IconType } from 'Icon/Icon';
 
 type iconPositionType = 'left' | 'right' | 'top' | 'bottom';
 

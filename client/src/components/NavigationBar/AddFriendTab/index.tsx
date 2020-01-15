@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Flex from '../../../commons/Flex';
-import { color } from '../../../styles/global';
-import Icon from '../../../Icon/Icon';
+import Flex from 'commons/Flex';
+import { color } from 'styles/global';
+import Icon from 'Icon/Icon';
 
 const S = {
   Container: styled(Flex)`

@@ -1,6 +1,6 @@
 import React from 'react';
-import * as S from './styles';
-import LogoImage from '../../assets/logo.png';
+import LogoImage from 'assets/logo.png';
+import * as S from 'components/Logo/styles';
 
 const Logo: React.FC = () => (
   <S.Container>

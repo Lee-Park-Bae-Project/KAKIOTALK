@@ -1,6 +1,6 @@
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import { darken } from 'polished';
-import { color, fontSize, weight } from '../../styles/global';
+import { color, fontSize, weight } from 'styles/global';
 
 export const themeMap = {
   primary: {

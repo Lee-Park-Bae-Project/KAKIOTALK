@@ -1,6 +1,6 @@
 import React from 'react';
-import Routes from './components/Routes';
-import Global from './styles/global';
+import Routes from 'components/Routes';
+import Global from 'styles/global';
 
 const App: React.FC = () => (
     <div>

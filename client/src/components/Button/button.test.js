@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from './index';
+import Button from 'components/Button/index';
 
 describe('<Button />', () => {
   // it('matches snapshot', () => {

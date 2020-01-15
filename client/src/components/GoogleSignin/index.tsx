@@ -1,6 +1,6 @@
 import React from 'react';
-import * as S from './styles';
-import GoogleSigninImage from '../../assets/google_signin.png';
+import * as S from 'components/GoogleSignin/styles';
+import GoogleSigninImage from 'assets/google_signin.png';
 
 const GoogleSignin: React.FC = () => (
     <S.Container>

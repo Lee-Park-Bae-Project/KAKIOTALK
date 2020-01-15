@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from '../Button';
-import ButtonGroup from './index';
+import Button from 'components/Button';
+import ButtonGroup from 'components/ButtonGroup';
 
 describe('<ButtonnGroup />', () => {
-  it('버튼 2개 렌더링 되는지 확인', () => {
+  it('Button 2개 렌더링 되는지 확인', () => {
     const wrapper = mount((
       <ButtonGroup>
         <Button text='confirm'/>
@@ -17,7 +17,7 @@ describe('<ButtonnGroup />', () => {
     expect(wrapper.find(Button)).toHaveLength(2);
   });
 
-  it('버튼 텍스트 확인', () => {
+  it('Button 텍스트 확인', () => {
     const wrapper = mount((
       <ButtonGroup>
         <Button text='confirm' id='confirm-button'/>

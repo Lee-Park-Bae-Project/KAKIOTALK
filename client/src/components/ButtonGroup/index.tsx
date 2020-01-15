@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import * as S from './styles';
+import * as S from 'components/ButtonGroup/styles';
 
 interface Props{
   /** 정렬 방향 */

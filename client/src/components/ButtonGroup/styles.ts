@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Flex from '../../commons/Flex';
+import Flex from 'commons/Flex';
 
 interface CotnainerProps {
   direction: 'row' | 'col';

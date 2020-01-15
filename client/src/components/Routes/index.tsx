@@ -3,10 +3,9 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-import Login from '../../pages/login';
+import Login from 'pages/login';
 
-const Routes: React.FC = () => {
-  return (
+const Routes: React.FC = () => (
     <Router>
       <Route
         exact
@@ -16,7 +15,6 @@ const Routes: React.FC = () => {
         }
       />
     </Router>
-  );
-};
+);
 
 export default Routes;

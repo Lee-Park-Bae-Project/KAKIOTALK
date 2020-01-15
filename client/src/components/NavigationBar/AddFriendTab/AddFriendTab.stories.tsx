@@ -1,5 +1,5 @@
 import React from 'react';
-import AddFriend from './index';
+import AddFriend from 'components/NavigationBar/AddFriendTab';
 
 export default {
   title: 'Component/Tab/AddFriend',

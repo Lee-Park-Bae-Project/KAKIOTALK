@@ -1,8 +1,8 @@
-import React, { FC, useState, useEffect } from 'react';
-import * as S from './styles';
-import FriendTab from './FriendTab';
-import ChatTab from './ChatTab';
-import AddFriend from './AddFriendTab';
+import React, { FC } from 'react';
+import * as S from 'components/NavigationBar/styles';
+import FriendTab from 'components/NavigationBar/FriendTab';
+import ChatTab from 'components/NavigationBar/ChatTab';
+import AddFriend from 'components/NavigationBar/AddFriendTab';
 
 interface NavigationBarProp{
   /** 친구목록이 선택되었는지 */

@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from './index';
+import Profile from 'components/Profile';
 
 export default {
   title: 'Component/Profile',

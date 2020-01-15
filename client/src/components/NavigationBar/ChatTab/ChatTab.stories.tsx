@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ChatTab from './index';
+import ChatTab from 'components/NavigationBar/ChatTab';
 
 export default {
   title: 'Component/Tab/ChatTab',

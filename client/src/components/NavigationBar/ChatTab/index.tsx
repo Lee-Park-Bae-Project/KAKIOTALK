@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Flex from '../../../commons/Flex';
-import Icon from '../../../Icon/Icon';
-import { color } from '../../../styles/global';
+import Flex from 'commons/Flex';
+import Icon from 'Icon/Icon';
+import { color } from 'styles/global';
 
 
 const S = {

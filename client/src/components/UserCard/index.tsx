@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import * as S from './styles';
-import Icon from '../../Icon/Icon';
-import { color } from '../../styles/global';
-import TextIcon from '../TextIcon';
+import * as S from 'components/UserCard/styles';
+import { color } from 'styles/global';
+import TextIcon from 'components/TextIcon';
 
 interface UserCardProp{
   /** user card 에 표시할 유저 네임 */
