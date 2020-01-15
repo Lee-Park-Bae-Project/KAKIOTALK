@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       num_of_participants: {
         allowNull: false,
-        type: DataTypes.INT
+        type: DataTypes.INT,
+        unique: false
       }
     },
     {
