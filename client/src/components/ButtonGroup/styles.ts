@@ -7,7 +7,7 @@ interface CotnainerProps {
 }
 const Container = styled(Flex)<CotnainerProps>`
   flex-direction: ${(props) => (props.direction == 'row' ? 'row' : 'column')};
-  justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')}
+  justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
 `;
 
 
