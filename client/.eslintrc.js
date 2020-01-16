@@ -4,7 +4,7 @@ module.exports =  {
     'airbnb-base',
     // 'plugin:react/recommended',  // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from @typescript-eslint/eslint-plugin
-    'plugin:prettier/recommended',  // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+    // 'plugin:prettier/recommended',  // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
     'plugin:import/typescript',
     'plugin:react/recommended',
   ],
@@ -28,13 +28,14 @@ module.exports =  {
         "objects": "always-multiline",
         "imports": "always-multiline",
         "exports": "always-multiline",
-        "functions": "always-multiline"
+        "functions": "ignore"
       }
     ],
     "comma-style": [
       "error",
       "last"
     ],
+    // "function-paren-newline": ["error", { "minItems": 3 }],
     "array-element-newline": [
       "error",
       {
@@ -42,12 +43,30 @@ module.exports =  {
         "minItems": 3
       }
     ],
-    "object-property-newline": "error"
+    "object-property-newline": "error",
+    "react/prop-types": 0,
+    "@typescript-eslint/explicit-function-return-type":0,
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   },
   settings:  {
     react:  {
       version:  'detect',  // Tells eslint-plugin-react to automatically detect the version of React to use
     },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+      }
+    }
   },
   env: {
     "browser": true,
