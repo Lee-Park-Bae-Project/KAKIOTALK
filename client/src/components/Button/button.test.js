@@ -4,10 +4,10 @@ import { mount } from 'enzyme';
 import Button from 'components/Button/index';
 
 describe('<Button />', () => {
-  // it('matches snapshot', () => {
-  //   const wrapper = mount(<Button test="button"/>);
-  //   expect(wrapper).toMatchSnapshot();
-  // });
+  it('matches snapshot', () => {
+    const wrapper = mount(<Button test="button"/>);
+    expect(wrapper).toMatchSnapshot();
+  });
 
   it('버튼 text 확인', () => {
     const wrapper = mount(<Button text='text'/>);
