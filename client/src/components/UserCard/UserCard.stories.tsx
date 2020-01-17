@@ -8,15 +8,9 @@ export default {
 
 export const BasicUserCard: FC = () => (
   <UserCard
-    userName={'junow'}
+    userName='junow'
+    statusMessage='Brand New 2020'
     />
-);
-
-export const VerticalUserCard: FC = () => (
-  <UserCard
-    userName={'junow'}
-    direction={'col'}
-  />
 );
 
 export const UserCardWithClickHandler: FC = () => {

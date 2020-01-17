@@ -8,8 +8,6 @@ interface UserCardProp{
   userName: string;
   /** 유저 상태메시지 */
   statusMessage?: string;
-  /** 프로필사진 - 이름 배치 방향 */
-  direction?: 'row' | 'col';
   /** 클릭핸들러 */
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void);
 }
@@ -18,29 +16,28 @@ interface UserCardProp{
  * UserCard
  *
  * - 유저의 프로필 사진과 이름이 표시됩니다.
- * - 프로필 - 사진의 배치는
- * - `row` - 수평배치 (default)
- * - `col` - 수직배치
  */
 const UserCard: FC<UserCardProp> = ({
   userName,
-  direction = 'row',
   onClick,
   statusMessage,
 }) => (
     <S.Container
-      direction={direction}
       onClick={onClick}
       >
-        <S.ProfileWrapper>
+        <S.ProfileWrapper >
           <TextIcon
             icon='Account'
             color={color.GRAY}
             text={userName}
           />
-          <S.StatusMessageWrapper>
-          {statusMessage}
-          </S.StatusMessageWrapper>
+          {
+            statusMessage
+              && <S.StatusMessageWrapper>
+              {statusMessage}
+              </S.StatusMessageWrapper>
+          }
+
         </S.ProfileWrapper>
     </S.Container>
 );
