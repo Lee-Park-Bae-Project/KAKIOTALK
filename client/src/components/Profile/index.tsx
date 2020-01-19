@@ -9,6 +9,10 @@ interface Prop {
   name: string;
   /** 상태메시지 */
   statusMessage?: string;
+  /** 1:1 채팅 버튼 클릭 핸들러 */
+  onChatClick?: () => void;
+  /** 삭제 버튼 클릭 핸들러 */
+  onRemoveClick?: () => void;
 }
 
 /**
@@ -17,6 +21,8 @@ interface Prop {
 const Profile: FC<Prop> = ({
   name,
   statusMessage,
+  onChatClick = undefined,
+  onRemoveClick = undefined,
 }) => (
     <S.Container>
       <Icon icon='PersonFilled' color={color.GRAY} size='4rem'/>
@@ -32,6 +38,7 @@ const Profile: FC<Prop> = ({
           text='1:1 채팅'
           textColor={color.BLACK}
           iconPosition='top'
+          onClick={onChatClick}
         />
         <TextIcon
           icon='Close'
@@ -39,8 +46,8 @@ const Profile: FC<Prop> = ({
           text='삭제'
           textColor={color.BLACK}
           iconPosition='top'
+          onClick={onRemoveClick}
         />
-
       </S.Footer>
     </S.Container>
 );
