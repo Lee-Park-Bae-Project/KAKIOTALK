@@ -52,4 +52,25 @@ describe('Redux/userlist', () => {
     const { userList: curState } = store.getState();
     expect(curState).toEqual([]);
   });
+
+  it('Add Users', () => {
+    const users = [
+      {
+        id: '1',
+        userName: '1',
+        statusMessage: '1',
+      },
+      {
+        id: '2',
+        userName: '2',
+        statusMessage: '2',
+      },
+    ];
+
+    const AddUsersAction = addUser(users);
+    const { userList: prevState } = store.getState();
+    store.dispatch(AddUsersAction);
+    const { userList: curState } = store.getState();
+    expect(curState).toEqual(prevState.concat(users));
+  });
 });

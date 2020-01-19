@@ -13,9 +13,7 @@ const initialState: User[] = [];
 function userList(state: User[] = initialState, action: UserListAction) {
   switch (action.type) {
     case ADD_USER: {
-      return [
-        ...state, action.payload,
-      ];
+      return state.concat(action.payload);
     }
     case REMOVE_USER: {
       const newState = state.filter((user) => user.id !== action.payload);
