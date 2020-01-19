@@ -10,6 +10,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.0",
+    "@types/shortid": "^0.0.29",
     "dotenv": "^8.2.0",
     "enzyme-to-json": "^3.4.3",
     "polished": "^3.4.2",
@@ -19,6 +20,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "redux": "^4.0.5",
+    "shortid": "^2.2.15",
     "styled-components": "^4.4.1",
     "typescript": "~3.7.2"
   },
