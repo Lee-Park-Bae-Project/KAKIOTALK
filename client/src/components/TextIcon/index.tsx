@@ -67,7 +67,7 @@ const TextIcon: FC<Prop> = ({
   textColor = 'black',
   textSize = '1rem',
 }) => (
-    <S.Container iconPosition={iconPosition} className='hihi'>
+    <S.Container iconPosition={iconPosition} >
       <Icon icon={icon} color={color} size={size}/>
       <S.TextWrapper
         text={text}
