@@ -7,6 +7,8 @@ type iconPositionType = 'left' | 'right' | 'top' | 'bottom';
 interface ContainerProp {
   /** text에 대한 icon의 상대적 위치 */
   iconPosition?: iconPositionType;
+  /** 클릭핸들러 */
+  onClick?: () => void;
 }
 interface TextProp {
   /** 아이콘과 함께 표시될 텍스트 */
@@ -63,11 +65,12 @@ const TextIcon: FC<Prop> = ({
   color,
   size,
   iconPosition = 'left',
+  onClick = undefined,
   text,
   textColor = 'black',
   textSize = '1rem',
 }) => (
-    <S.Container iconPosition={iconPosition} className='hihi'>
+    <S.Container iconPosition={iconPosition} onClick={onClick}>
       <Icon icon={icon} color={color} size={size}/>
       <S.TextWrapper
         text={text}

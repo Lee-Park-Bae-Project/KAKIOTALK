@@ -5,7 +5,7 @@ import Button from './index';
 
 
 export default {
-  title: 'Component/Basic/Button',
+  title: 'Component/Button',
   component: Button,
   decorators: [withKnobs],
   parameters: {

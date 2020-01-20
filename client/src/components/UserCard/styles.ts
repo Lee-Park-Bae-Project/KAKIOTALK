@@ -2,18 +2,17 @@ import styled from 'styled-components';
 import Flex from 'commons/Flex';
 import { color, fontSize } from 'styles/global';
 
-interface ContainerProp{
-  direction?: 'row' | 'col';
-}
-export const Container = styled(Flex)<ContainerProp>`
-  width: 15rem;
+export const Container = styled(Flex)`
+  /* width: 15rem; */
+  width: 80%;
+  justify-content: flex-start;
   padding: 0 1rem;
-  flex-direction: ${(props) => (props.direction === 'row' ? 'row' : 'column')};
   background-color: ${color.WHITE};
 `;
 
 export const ProfileWrapper = styled(Flex)`
   justify-content: flex-start;
+
 `;
 
 export const StatusMessageWrapper = styled.span`
