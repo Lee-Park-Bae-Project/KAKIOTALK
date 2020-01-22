@@ -5,10 +5,11 @@ import { color } from 'styles/global';
 export const Container = styled(Flex)`
   flex-direction: column;
   justify-content: flex-start;
+  align-items: flex-start;
   margin-top: 1rem;
   margin-bottom: auto;
   background-color: ${color.WHITE};
-  height: 100vh;
+  /* height: 100vh; */
   
   width: 100%;
   margin: 0;
