@@ -8,7 +8,8 @@ export default {
 
 export const Default = () => (
   <Profile
-    name='남강우'
+    id= '1'
+    userName='남강우'
     statusMessage='Brand New 2020'
   />
 );
@@ -16,6 +17,8 @@ export const Default = () => (
 
 export const withNoStatus = () => (
   <Profile
-    name='남강우'
+    id='2'
+    userName='남강우'
+    statusMessage=''
   />
 );
