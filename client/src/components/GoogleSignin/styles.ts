@@ -11,7 +11,7 @@ export const Img = styled.img`
     width: 10rem;
   }
 
-  @media ${device.tablet}{
+  @media ${device.tablet} {
     width: 12rem;
   }
 

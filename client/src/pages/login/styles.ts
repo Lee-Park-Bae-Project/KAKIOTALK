@@ -4,7 +4,9 @@ import Logo from '../../components/Logo';
 import Signin from '../../components/GoogleSignin';
 import { color } from '../../styles/global';
 
-export const Container = styled(Flex)`
+export const Container = styled(
+  Flex,
+)`
   background: ${color.YELLO};
   width: 100%;
   height: 100%;
@@ -18,9 +20,5 @@ export const SigninButton = styled.div`
   outline: none;
   background: none;
   border: none;
-
 `;
-export {
-  Logo,
-  Signin,
-};
+export { Logo, Signin };
