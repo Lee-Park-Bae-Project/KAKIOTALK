@@ -1,8 +1,8 @@
 import React from 'react';
-import Profile from 'components/Profile';
+import Profile from 'system/Profile';
 
 export default {
-  title: 'Component/Profile',
+  title: 'Systems/Profile',
   component: Profile,
 };
 

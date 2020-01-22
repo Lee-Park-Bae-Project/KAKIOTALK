@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { mount } from 'enzyme';
-import Profile from 'components/Profile';
+import Profile from 'system/Profile';
 import TextIcon from 'components/TextIcon';
 
 const user = {

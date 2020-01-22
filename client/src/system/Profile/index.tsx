@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import * as S from 'components/Profile/styles';
+import * as S from 'system/Profile/styles';
 import Icon from 'Icon/Icon';
 import { color } from 'styles/global';
 import TextIcon from 'components/TextIcon';
