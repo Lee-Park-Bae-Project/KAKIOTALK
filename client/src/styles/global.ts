@@ -10,18 +10,6 @@ const Global = createGlobalStyle`
   }
 `;
 
-export const size = {
-  mobile: '0px',
-  tablet: '768px',
-  desktop: '1440px',
-};
-
-export const device = {
-  mobile: `(min-width: ${size.mobile})`,
-  tablet: `(min-width: ${size.tablet})`,
-  desktop: `(min-width: ${size.desktop})`,
-};
-
 export const color = {
   YELLO: '#F7CF46',
   WHITE: '#FEFFFF',
