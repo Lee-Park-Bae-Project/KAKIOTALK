@@ -10,10 +10,10 @@ export const Container = styled(Flex)`
   background-color: ${color.WHITE};
   height: 100vh;
   
-    width: 40%;
-    margin: 0;
-    margin-right: auto;
-    margin-bottom: auto;
+  width: 100%;
+  margin: 0;
+  margin-right: auto;
+  margin-bottom: auto;
 `;
 
 export const Friend = styled(Flex)`
