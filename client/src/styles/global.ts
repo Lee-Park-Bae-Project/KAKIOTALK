@@ -4,9 +4,9 @@ const Global = createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
-    height: 100vh;
+    /* height: 100vh; */
     box-sizing: border-box;
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri;
+    /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri; */
   }
 `;
 
