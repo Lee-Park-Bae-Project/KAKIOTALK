@@ -3,20 +3,16 @@ import React, {
   useState,
 } from 'react';
 import * as S from 'components/GoogleSignin/styles';
-import { GoogleLogin } from 'react-google-login';
 import GoogleSigninImage from 'assets/google_signin.png';
 import qs from 'qs';
-
-const AUTHORIZE_URI =
-  'https://accounts.google.com/o/oauth2/v2/auth';
-
-const PEOPLE_URI =
-  'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const queryStr = qs.stringify(
   {
     client_id:
-      '559423734767-eqosl4f6j9kc771u93ste9g78ecrgl6d.apps.googleusercontent.com',
+      process.env
+        .REACT_APP_CLIENT_ID,
     response_type: 'token',
     redirect_uri:
       window.location.href,
@@ -26,20 +22,16 @@ const queryStr = qs.stringify(
 );
 
 const loginUrl =
-  AUTHORIZE_URI +
+  process.env
+    .REACT_APP_AUTHORIZE_URI +
   '?' +
   queryStr;
 const GoogleSignin: React.FC = () => {
-  // const [
-  //   userInfo,
-  //   setUserInfo,
-  // ] = useState([]);
   const googleLogin = () => {
     window.location.assign(
       loginUrl,
     );
   };
-
   return (
     <S.Container>
       <button
