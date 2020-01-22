@@ -4,7 +4,8 @@ import { color, fontSize } from 'styles/global';
 
 export const Container = styled(Flex)`
   /* width: 15rem; */
-  width: 80%;
+  /* width: 80%; */
+  height: 5rem;
   justify-content: flex-start;
   padding: 0 1rem;
   background-color: ${color.WHITE};
