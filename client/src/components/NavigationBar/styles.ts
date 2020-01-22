@@ -6,5 +6,5 @@ export const Container = styled(Flex)`
   background-color: ${color.BROWN};
   height: 3rem;
   justify-content: space-evenly;
-  max-width: 18.75rem;
+  width: 100%;
 `;
