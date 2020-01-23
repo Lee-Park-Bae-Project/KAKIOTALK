@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import NavigationBar from 'components/NavigationBar';
+import styled from 'styled-components';
+
+const S = {
+  Container: styled.div`
+    height: 30rem;
+  `,
+};
 
 export default {
   title: 'NavigationBar',
@@ -29,10 +36,14 @@ export const NavigationBarBasic = () => {
     alert('hihi');
   };
 
-  return <NavigationBar
-    tabSelector={tabSelector}
-    friendTabOnClick={friendTabOnClick}
-    chatTabOnClick={chatTabOnClick}
-    addFriendTabOnClick={addFriendTabOnClick}
-  />;
+  return (
+    <S.Container>
+      <NavigationBar
+      tabSelector={tabSelector}
+      friendTabOnClick={friendTabOnClick}
+      chatTabOnClick={chatTabOnClick}
+      addFriendTabOnClick={addFriendTabOnClick}
+      />
+    </S.Container>
+  );
 };
