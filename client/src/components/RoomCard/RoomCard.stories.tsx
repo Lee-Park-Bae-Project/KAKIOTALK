@@ -10,11 +10,11 @@ export default {
 
 export const Default = () => {
   const userList = [
-    faker.helpers.userCard().username,
-    faker.helpers.userCard().username,
-    faker.helpers.userCard().username,
+    faker.helpers.userCard().name,
+    faker.helpers.userCard().name,
+    faker.helpers.userCard().name,
   ];
-  const lastMessage = faker.lorem.sentence();
+  const lastMessage = faker.lorem.paragraph();
   const lastModified = Date.now();
   const numOfNewMessage = Math.round(Math.random() * 100);
   const Wrapper = styled.div`

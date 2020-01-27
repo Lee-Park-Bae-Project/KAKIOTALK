@@ -24,11 +24,21 @@ const ChatCard: FC<Props> = ({
         <Icon icon="Person"/>
       </S.ImgWrapper>
       <S.InfoWrapper>
-        <span>{userList.join(', ')}</span>
-        {lastMessage}
+        <S.Row>
+          <S.UserListWrapper>
+            {userList.join(', ')}
+          </S.UserListWrapper>
+          <S.NumWrapper>
+            {userList.length}
+          </S.NumWrapper>
+        </S.Row>
+
+        <S.LastMsgWrapper>
+          <span>{lastMessage}</span>
+        </S.LastMsgWrapper>
       </S.InfoWrapper>
       <S.SubInfoWrapper>
-        <p>{moment(lastModified).format('LT')}</p>
+        <span>{moment(lastModified).format('LT')}</span>
         <Circle num={numOfNewMessage}/>
       </S.SubInfoWrapper>
     </S.Container>
