@@ -1,5 +1,8 @@
 import React, { FC, useState } from 'react';
 import * as S from 'components/RoomCard/styles';
+import Icon from 'Icon/Icon';
+import Circle from 'commons/Circle';
+import moment from 'moment';
 
 interface Props{
   userList: string[];
@@ -14,12 +17,20 @@ const ChatCard: FC<Props> = ({
   numOfNewMessage,
 }) => {
   const [isSelected, setIsSelected] = useState(false);
+  const numOfUser = userList.length;
   return (
     <S.Container>
-      {userList}
-      {lastMessage}
-      {lastModified}
-      {numOfNewMessage}
+      <S.ImgWrapper>
+        <Icon icon="Person"/>
+      </S.ImgWrapper>
+      <S.InfoWrapper>
+        <span>{userList.join(', ')}</span>
+        {lastMessage}
+      </S.InfoWrapper>
+      <S.SubInfoWrapper>
+        <p>{moment(lastModified).format('LT')}</p>
+        <Circle num={numOfNewMessage}/>
+      </S.SubInfoWrapper>
     </S.Container>
   );
 };
