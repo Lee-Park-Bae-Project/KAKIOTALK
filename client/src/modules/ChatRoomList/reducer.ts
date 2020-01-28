@@ -16,7 +16,7 @@ function chatRoomList(state: ChatRoom[] = initialState, action: ChatRoomListActi
       return state.concat(action.payload);
     }
     case REMOVE_CHAT_ROOM: {
-      return state;
+      return state.filter((chatRoom) => chatRoom.id !== action.payload);
     }
     default:
       return state;

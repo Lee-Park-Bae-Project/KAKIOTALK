@@ -47,4 +47,18 @@ describe('Redux/chatRoomList', () => {
     const { chatRoomList: curState } = store.getState();
     expect(curState).toEqual([newChatRoom]);
   });
+
+  it('Remove ChatRoomList Action Creator', () => {
+    RemoveChatRoomAction = removeChatRoom(newChatRoom.id);
+    expect(RemoveChatRoomAction).toEqual({
+      type: REMOVE_CHAT_ROOM,
+      payload: newChatRoom.id,
+    });
+  });
+
+  it('Remove Chat Room', () => {
+    store.dispatch(RemoveChatRoomAction);
+    const { chatRoomList: curState } = store.getState();
+    expect(curState).toEqual([]);
+  });
 });
