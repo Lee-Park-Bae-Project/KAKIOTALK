@@ -13,7 +13,7 @@ const initialState: ChatRoom[] = [];
 function chatRoomList(state: ChatRoom[] = initialState, action: ChatRoomListAction) {
   switch (action.type) {
     case ADD_CHAT_ROOM: {
-      return state;
+      return state.concat(action.payload);
     }
     case REMOVE_CHAT_ROOM: {
       return state;

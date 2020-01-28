@@ -14,7 +14,6 @@ import faker from 'faker';
 const store = createStore(rootReducer);
 
 describe('Redux/chatRoomList', () => {
-  console.log(store.getState());
   const chatRoomList = [];
   let AddChatRoomAction;
   let RemoveChatRoomAction;
@@ -30,11 +29,10 @@ describe('Redux/chatRoomList', () => {
     ],
   };
 
-  // it('Initial State', () => {
-  //   const { chatRoomList: curState } = store.getState();
-  //   console.log(store.getState());
-  //   expect(curState).toEqual(chatRoomList);
-  // });
+  it('Initial State', () => {
+    const { chatRoomList: curState } = store.getState();
+    expect(curState).toEqual(chatRoomList);
+  });
 
   it('Add Action Creator', () => {
     AddChatRoomAction = addChatRoom(newChatRoom);
@@ -42,5 +40,11 @@ describe('Redux/chatRoomList', () => {
       type: ADD_CHAT_ROOM,
       payload: newChatRoom,
     });
+  });
+
+  it('Add ChatRoom', () => {
+    store.dispatch(AddChatRoomAction);
+    const { chatRoomList: curState } = store.getState();
+    expect(curState).toEqual([newChatRoom]);
   });
 });
