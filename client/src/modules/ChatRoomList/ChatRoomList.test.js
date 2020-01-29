@@ -61,4 +61,17 @@ describe('Redux/chatRoomList', () => {
     const { chatRoomList: curState } = store.getState();
     expect(curState).toEqual([]);
   });
+
+  it('Add Many Users', () => {
+    const newUsers = [
+      '123',
+      '234',
+      '345',
+    ];
+    const addUsersAction = addChatRoom(newUsers);
+    const { chatRoomList: prevState } = store.getState();
+    store.dispatch(addUsersAction);
+    const { chatRoomList: curState } = store.getState();
+    expect(curState).toEqual(prevState.concat(newUsers));
+  });
 });
