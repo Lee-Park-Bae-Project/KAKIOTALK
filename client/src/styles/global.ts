@@ -20,6 +20,7 @@ export const color = {
   TEXT_BLACK: '#262525',
   TEXT_GRAY: '#737373',
   ROOM_COLOR: '#C0D1DB',
+  HOVER_GRAY: '#F1F2F2',
 };
 
 export const fontSize = {
