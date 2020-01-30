@@ -9,17 +9,19 @@ interface Props{
   lastMessage: string;
   lastModified: number;
   numOfNewMessage: number;
+  onClick?: () => void;
 }
 const ChatCard: FC<Props> = ({
   userList,
   lastMessage,
   lastModified,
   numOfNewMessage,
+  onClick = undefined,
 }) => {
   const [isSelected, setIsSelected] = useState(false);
   const numOfUser = userList.length;
   return (
-    <S.Container>
+    <S.Container onClick={onClick}>
       <S.ImgWrapper>
         <Icon icon="Person"/>
       </S.ImgWrapper>
