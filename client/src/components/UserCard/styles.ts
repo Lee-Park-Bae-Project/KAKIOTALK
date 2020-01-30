@@ -7,6 +7,9 @@ export const Container = styled(Flex)`
   justify-content: flex-start;
   padding: 0 1rem;
   background-color: ${color.WHITE};
+  &:hover{
+    background-color: ${color.HOVER_GRAY};
+  }
 `;
 
 export const ProfileWrapper = styled(Flex)`
