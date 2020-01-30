@@ -8,10 +8,15 @@ export const grayColor = css`
 
 export const Container = styled(Flex)`
   height: 5rem;
+
+  &:hover{
+    background: ${color.HOVER_GRAY};
+  }
 `;
 
 export const ImgWrapper = styled(Flex)`
   margin: 1rem;
+  width: auto;
 `;
 
 export const InfoWrapper = styled(Flex)`
