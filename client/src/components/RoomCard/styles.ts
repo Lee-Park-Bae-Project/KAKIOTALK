@@ -22,8 +22,6 @@ export const ImgWrapper = styled(Flex)`
 export const InfoWrapper = styled(Flex)`
   flex-direction: column;
   align-items: flex-start;
-
-  
 `;
 
 export const Row = styled(Flex)`
@@ -56,6 +54,7 @@ export const LastMsgWrapper = styled.div`
 
 export const SubInfoWrapper = styled(Flex)`
   flex-direction: column;
+  align-items: flex-end;
   span{
     ${(props) => grayColor};
   }  
