@@ -4,15 +4,18 @@ import {
   Route,
 } from 'react-router-dom';
 import Login from 'pages/login';
+import Main from 'pages/main';
 
 const Routes: React.FC = () => (
     <Router>
       <Route
         exact
-        path="/"
-        component={
-          Login
-        }
+        path='/'
+        component={Main}
+      />
+      <Route
+        path="/login"
+        component={Login}
       />
     </Router>
 );

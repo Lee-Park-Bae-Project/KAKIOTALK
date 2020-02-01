@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import NavigationBar from 'components/NavigationBar';
+import styled from 'styled-components';
+
+const S = {
+  Container: styled.div`
+    height: 30rem;
+  `,
+};
 
 export default {
   title: 'NavigationBar',
@@ -7,35 +14,36 @@ export default {
 };
 
 export const NavigationBarBasic = () => {
-  const [friendSelected, setFriendSelected] = useState(true);
-  const [chatSelected, setChatSelected] = useState(false);
+  const [tabSelector, setTabSelector] = useState({
+    friend: true,
+    chat: false,
+  });
   const friendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    setFriendSelected(!friendSelected);
+    setTabSelector({
+      friend: true,
+      chat: false,
+    });
   };
 
   const chatTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    setChatSelected(!chatSelected);
+    setTabSelector({
+      friend: false,
+      chat: true,
+    });
   };
 
   const addFriendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     alert('hihi');
   };
-  useEffect(() => {
-    if (friendSelected) {
-      setChatSelected(false);
-    }
-  }, [friendSelected]);
 
-  useEffect(() => {
-    if (chatSelected) {
-      setFriendSelected(false);
-    }
-  }, [chatSelected]);
-  return <NavigationBar
-    friendSelected={friendSelected}
-    chatSelected={chatSelected}
-    friendTabOnClick={friendTabOnClick}
-    chatTabOnClick={chatTabOnClick}
-    addFriendTabOnClick={addFriendTabOnClick}
-  />;
+  return (
+    <S.Container>
+      <NavigationBar
+      tabSelector={tabSelector}
+      friendTabOnClick={friendTabOnClick}
+      chatTabOnClick={chatTabOnClick}
+      addFriendTabOnClick={addFriendTabOnClick}
+      />
+    </S.Container>
+  );
 };

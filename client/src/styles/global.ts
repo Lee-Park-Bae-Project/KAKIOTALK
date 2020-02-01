@@ -4,23 +4,11 @@ const Global = createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
-    height: 100vh;
+    /* height: 100vh; */
     box-sizing: border-box;
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri;
+    /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri; */
   }
 `;
-
-export const size = {
-  mobile: '0px',
-  tablet: '768px',
-  desktop: '1440px',
-};
-
-export const device = {
-  mobile: `(min-width: ${size.mobile})`,
-  tablet: `(min-width: ${size.tablet})`,
-  desktop: `(min-width: ${size.desktop})`,
-};
 
 export const color = {
   YELLO: '#F7CF46',
@@ -32,6 +20,7 @@ export const color = {
   TEXT_BLACK: '#262525',
   TEXT_GRAY: '#737373',
   ROOM_COLOR: '#C0D1DB',
+  HOVER_GRAY: '#F1F2F2',
 };
 
 export const fontSize = {

@@ -4,7 +4,15 @@ import { color } from 'styles/global';
 
 export const Container = styled(Flex)`
   background-color: ${color.BROWN};
-  height: 3rem;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  width: 3rem;
+`;
+
+export const ItemWrapper = styled(Flex)`
+  flex-direction: column;
   justify-content: space-evenly;
-  max-width: 18.75rem;
+  height: 10rem;
+  width: 100%;
 `;
