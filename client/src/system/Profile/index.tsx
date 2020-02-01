@@ -1,32 +1,37 @@
 import React, { FC } from 'react';
-import * as S from 'components/Profile/styles';
+import * as S from 'system/Profile/styles';
 import Icon from 'Icon/Icon';
 import { color } from 'styles/global';
 import TextIcon from 'components/TextIcon';
 
 interface Prop {
+  /** 유져 식별자 */
+  id: string;
   /** 유저 이름 */
-  name: string;
+  userName: string;
   /** 상태메시지 */
-  statusMessage?: string;
-  /** 1:1 채팅 버튼 클릭 핸들러 */
-  onChatClick?: () => void;
-  /** 삭제 버튼 클릭 핸들러 */
-  onRemoveClick?: () => void;
+  statusMessage: string;
 }
 
 /**
  * 친구 목록을 하나 클릭 했을 때 뜨는 Modal 에 들어갈 내용
  */
 const Profile: FC<Prop> = ({
-  name,
-  statusMessage,
-  onChatClick = undefined,
-  onRemoveClick = undefined,
-}) => (
+  id,
+  userName,
+  statusMessage = '',
+}) => {
+  const onChatClick = () => {
+    alert(`chat id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
+  };
+  const onRemoveClick = () => {
+    alert(`remove id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
+  };
+
+  return (
     <S.Container>
       <Icon icon='PersonFilled' color={color.GRAY} size='4rem'/>
-      <S.NameWrapper>{name}</S.NameWrapper>
+      <S.NameWrapper>{userName}</S.NameWrapper>
       {
         statusMessage
         && <S.StatusWrapper>{statusMessage}</S.StatusWrapper>
@@ -50,6 +55,7 @@ const Profile: FC<Prop> = ({
         />
       </S.Footer>
     </S.Container>
-);
+  );
+};
 
 export default Profile;

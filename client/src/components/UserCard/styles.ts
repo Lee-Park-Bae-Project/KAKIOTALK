@@ -3,11 +3,13 @@ import Flex from 'commons/Flex';
 import { color, fontSize } from 'styles/global';
 
 export const Container = styled(Flex)`
-  /* width: 15rem; */
-  width: 80%;
+  height: 5rem;
   justify-content: flex-start;
   padding: 0 1rem;
   background-color: ${color.WHITE};
+  &:hover{
+    background-color: ${color.HOVER_GRAY};
+  }
 `;
 
 export const ProfileWrapper = styled(Flex)`
