@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 
 require("dotenv").config();
+import { connect } from '../socket'
 
 // eslint-disable-next-line import/first
 
 import ErrnoException = NodeJS.ErrnoException;
+import { Socket } from 'dgram';
 
 /**
  * Module dependencies.
  */
 
-const debug = require("debug")("nodejs-express-typescript-sample:server");
+const debug = require("debug")("api:server");
 const http = require("http");
 const app = require("../app");
 
@@ -38,6 +40,8 @@ const server = http.createServer(app);
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
+
+connect(server)
 
 /**
  * Normalize a port into a number, string, or false.

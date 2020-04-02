@@ -5,3 +5,5 @@ const sizeMap = {
 };
 
 export default sizeMap;
+
+export const socketUrl = 'localhost:3050' as string;
