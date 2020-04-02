@@ -6,6 +6,7 @@ import * as S from 'components/GoogleSignin/styles';
 import GoogleSigninImage from 'assets/google_signin.png';
 import qs from 'qs';
 import dotenv from 'dotenv';
+import axios from 'axios';
 dotenv.config();
 
 const queryStr = qs.stringify(
@@ -17,7 +18,7 @@ const queryStr = qs.stringify(
     redirect_uri:
       window.location.href,
     scope:
-      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
   },
 );
 
@@ -27,6 +28,32 @@ const loginUrl =
   '?' +
   queryStr;
 const GoogleSignin: React.FC = () => {
+  const {
+    access_token,
+  } = qs.parse(
+    window.location.hash.substr(
+      1,
+    ),
+  );
+
+  console.log(access_token);
+
+  if (access_token) {
+    axios
+      .post(
+        'localhost:3000/auth/login',
+        {
+          access_token: access_token,
+        },
+      )
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   const googleLogin = () => {
     window.location.assign(
       loginUrl,

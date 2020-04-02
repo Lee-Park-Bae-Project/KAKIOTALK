@@ -7,7 +7,8 @@ import session = require("express-session");
 import FileStore = require("session-file-store");
 import passport = require("passport");
 import GoogleStrategy = require("passport-google-oauth");
-import v1Route from "./routes/v1";
+import user from "./routes/v1/users.route";
+import auth from "./routes/v1/auth.route";
 
 const app = express();
 
@@ -18,7 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/v1", v1Route);
+app.use("/v1/user", user);
+app.use("/v1/auth", auth);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {

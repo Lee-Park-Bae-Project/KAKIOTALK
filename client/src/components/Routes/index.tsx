@@ -6,15 +6,13 @@ import {
 import Login from 'pages/login';
 
 const Routes: React.FC = () => (
-    <Router>
-      <Route
-        exact
-        path="/"
-        component={
-          Login
-        }
-      />
-    </Router>
+  <Router>
+    <Route
+      exact
+      path="/"
+      component={Login}
+    />
+  </Router>
 );
 
 export default Routes;
