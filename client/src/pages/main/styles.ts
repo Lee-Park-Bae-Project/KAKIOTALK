@@ -9,7 +9,6 @@ export const Container = styled(Flex)`
 `;
 
 export const Left = styled(Flex)`
-  width: 25rem;
   justify-content: flex-start;
   align-items: flex-start;
 `;
