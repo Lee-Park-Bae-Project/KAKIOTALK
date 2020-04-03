@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: true
         }
       },
-      password: {
+      name: {
         allowNull: false,
         type: DataTypes.STRING
       }
     },
     {
-      tableName: "users",
+      tableName: "user",
       timestamps: true
     }
   );
