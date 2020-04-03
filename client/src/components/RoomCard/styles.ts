@@ -25,6 +25,7 @@ export const InfoWrapper = styled(Flex)`
 `;
 
 export const Row = styled(Flex)`
+  justify-content: left;
 `;
 
 export const NumWrapper = styled.span`
