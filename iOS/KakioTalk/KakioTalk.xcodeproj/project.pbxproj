@@ -1,0 +1,474 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A56B76852438A69C005518BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76842438A69C005518BD /* AppDelegate.swift */; };
+		A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76862438A69C005518BD /* SceneDelegate.swift */; };
+		A56B76892438A69C005518BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76882438A69C005518BD /* ViewController.swift */; };
+		A56B768C2438A69C005518BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56B768A2438A69C005518BD /* Main.storyboard */; };
+		A56B768E2438A69E005518BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A56B768D2438A69E005518BD /* Assets.xcassets */; };
+		A56B76912438A69E005518BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56B768F2438A69E005518BD /* LaunchScreen.storyboard */; };
+		A56B769C2438A69E005518BD /* KakioTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B769B2438A69E005518BD /* KakioTalkTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A56B76982438A69E005518BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A56B76792438A69C005518BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A56B76802438A69C005518BD;
+			remoteInfo = KakioTalk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A56B76812438A69C005518BD /* KakioTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakioTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A56B76842438A69C005518BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A56B76862438A69C005518BD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A56B76882438A69C005518BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A56B768B2438A69C005518BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A56B768D2438A69E005518BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A56B76902438A69E005518BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A56B76922438A69E005518BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A56B76972438A69E005518BD /* KakioTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakioTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A56B769B2438A69E005518BD /* KakioTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakioTalkTests.swift; sourceTree = "<group>"; };
+		A56B769D2438A69E005518BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A56B767E2438A69C005518BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A56B76942438A69E005518BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A56B76782438A69C005518BD = {
+			isa = PBXGroup;
+			children = (
+				A56B76832438A69C005518BD /* KakioTalk */,
+				A56B769A2438A69E005518BD /* KakioTalkTests */,
+				A56B76822438A69C005518BD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A56B76822438A69C005518BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A56B76812438A69C005518BD /* KakioTalk.app */,
+				A56B76972438A69E005518BD /* KakioTalkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A56B76832438A69C005518BD /* KakioTalk */ = {
+			isa = PBXGroup;
+			children = (
+				A56B76842438A69C005518BD /* AppDelegate.swift */,
+				A56B76862438A69C005518BD /* SceneDelegate.swift */,
+				A56B76882438A69C005518BD /* ViewController.swift */,
+				A56B768A2438A69C005518BD /* Main.storyboard */,
+				A56B768D2438A69E005518BD /* Assets.xcassets */,
+				A56B768F2438A69E005518BD /* LaunchScreen.storyboard */,
+				A56B76922438A69E005518BD /* Info.plist */,
+			);
+			path = KakioTalk;
+			sourceTree = "<group>";
+		};
+		A56B769A2438A69E005518BD /* KakioTalkTests */ = {
+			isa = PBXGroup;
+			children = (
+				A56B769B2438A69E005518BD /* KakioTalkTests.swift */,
+				A56B769D2438A69E005518BD /* Info.plist */,
+			);
+			path = KakioTalkTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A56B76802438A69C005518BD /* KakioTalk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A56B76A02438A69E005518BD /* Build configuration list for PBXNativeTarget "KakioTalk" */;
+			buildPhases = (
+				A56B767D2438A69C005518BD /* Sources */,
+				A56B767E2438A69C005518BD /* Frameworks */,
+				A56B767F2438A69C005518BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KakioTalk;
+			productName = KakioTalk;
+			productReference = A56B76812438A69C005518BD /* KakioTalk.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A56B76962438A69E005518BD /* KakioTalkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A56B76A32438A69E005518BD /* Build configuration list for PBXNativeTarget "KakioTalkTests" */;
+			buildPhases = (
+				A56B76932438A69E005518BD /* Sources */,
+				A56B76942438A69E005518BD /* Frameworks */,
+				A56B76952438A69E005518BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A56B76992438A69E005518BD /* PBXTargetDependency */,
+			);
+			name = KakioTalkTests;
+			productName = KakioTalkTests;
+			productReference = A56B76972438A69E005518BD /* KakioTalkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A56B76792438A69C005518BD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "신한섭";
+				TargetAttributes = {
+					A56B76802438A69C005518BD = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					A56B76962438A69E005518BD = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = A56B76802438A69C005518BD;
+					};
+				};
+			};
+			buildConfigurationList = A56B767C2438A69C005518BD /* Build configuration list for PBXProject "KakioTalk" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A56B76782438A69C005518BD;
+			productRefGroup = A56B76822438A69C005518BD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A56B76802438A69C005518BD /* KakioTalk */,
+				A56B76962438A69E005518BD /* KakioTalkTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A56B767F2438A69C005518BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A56B76912438A69E005518BD /* LaunchScreen.storyboard in Resources */,
+				A56B768E2438A69E005518BD /* Assets.xcassets in Resources */,
+				A56B768C2438A69C005518BD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A56B76952438A69E005518BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A56B767D2438A69C005518BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A56B76892438A69C005518BD /* ViewController.swift in Sources */,
+				A56B76852438A69C005518BD /* AppDelegate.swift in Sources */,
+				A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A56B76932438A69E005518BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A56B769C2438A69E005518BD /* KakioTalkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A56B76992438A69E005518BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A56B76802438A69C005518BD /* KakioTalk */;
+			targetProxy = A56B76982438A69E005518BD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A56B768A2438A69C005518BD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A56B768B2438A69C005518BD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A56B768F2438A69E005518BD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A56B76902438A69E005518BD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A56B769E2438A69E005518BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A56B769F2438A69E005518BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A56B76A12438A69E005518BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 735P3R8MUU;
+				INFOPLIST_FILE = KakioTalk/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = hanseop.KakioTalk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A56B76A22438A69E005518BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 735P3R8MUU;
+				INFOPLIST_FILE = KakioTalk/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = hanseop.KakioTalk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A56B76A42438A69E005518BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 735P3R8MUU;
+				INFOPLIST_FILE = KakioTalkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = hanseop.KakioTalkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KakioTalk.app/KakioTalk";
+			};
+			name = Debug;
+		};
+		A56B76A52438A69E005518BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 735P3R8MUU;
+				INFOPLIST_FILE = KakioTalkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = hanseop.KakioTalkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KakioTalk.app/KakioTalk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A56B767C2438A69C005518BD /* Build configuration list for PBXProject "KakioTalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A56B769E2438A69E005518BD /* Debug */,
+				A56B769F2438A69E005518BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A56B76A02438A69E005518BD /* Build configuration list for PBXNativeTarget "KakioTalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A56B76A12438A69E005518BD /* Debug */,
+				A56B76A22438A69E005518BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A56B76A32438A69E005518BD /* Build configuration list for PBXNativeTarget "KakioTalkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A56B76A42438A69E005518BD /* Debug */,
+				A56B76A52438A69E005518BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A56B76792438A69C005518BD /* Project object */;
+}
