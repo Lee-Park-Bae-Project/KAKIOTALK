@@ -19,8 +19,6 @@ export const Container = styled(Flex)`
 export const RoomInfoWrapper = styled.div`
   display: flex;
   max-width: 80%;
-  
-
 `;
 
 export const ImgWrapper = styled.div`
@@ -40,11 +38,6 @@ export const InfoWrapper = styled.div`
 
 export const Row = styled.div`
   justify-content: left;
-  /* min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 80%; */
 `;
 
 export const UserListWrapper = styled.span`
@@ -59,9 +52,6 @@ export const UserListWrapper = styled.span`
 
 export const NumWrapper = styled.span`
   ${(props) => grayColor};
-  /* display: inline-flex; */
-
-  /* color: ${color.GRAY}; */
 `;
 
 export const LastMsgWrapper = styled.div`
@@ -70,17 +60,17 @@ export const LastMsgWrapper = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  /* width: 10rem; */
   height: 2.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: normal;
 `;
 
 export const SubInfoWrapper = styled(Flex)`
   flex-direction: column;
   align-items: flex-end;
   flex:1
-  span{
+  span {
     ${(props) => grayColor};
   }  
 `;

@@ -28,18 +28,22 @@ const ChatCard: FC<Props> = ({
         </S.ImgWrapper>
         <S.InfoWrapper>
           <S.Row>
-            <S.UserListWrapper>
-              {userList.join(', ')}
-            </S.UserListWrapper>
-            {/* <S.NumWrapper>
-              {userList.length}
-            </S.NumWrapper> */}
+            <div>
+              <S.UserListWrapper>
+                {userList.join(', ')}
+              </S.UserListWrapper>
+            </div>
+
+
           </S.Row>
 
           <S.LastMsgWrapper>
             <span>{lastMessage}</span>
           </S.LastMsgWrapper>
-      </S.InfoWrapper>
+        </S.InfoWrapper>
+        <S.NumWrapper>
+          {userList.length}
+        </S.NumWrapper>
       </S.RoomInfoWrapper>
 
       <S.SubInfoWrapper>
