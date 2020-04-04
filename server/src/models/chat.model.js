@@ -34,6 +34,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Chat.associate = function(models) {
     // associations
+    Chat.belongsTo(models.room.model, {
+      foreignKey: "room_id"
+    });
+    Chat.belongsTo(models.user.model, {
+      foreignKey: "sender"
+    });
   };
 
   // hooks

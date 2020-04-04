@@ -4,13 +4,13 @@ module.exports = (sequelize, DataTypes) => {
   const Chat_Is_Read = sequelize.define(
     "Chat_Is_Read",
     {
-      id: {
+      user_id: {
         allowNull: false,
         unique: true,
         type: DataTypes.STRING,
         validate: true
       },
-      room_id: {
+      chat_id: {
         allowNull: false,
         unique: true,
         type: DataTypes.STRING
@@ -29,6 +29,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Chat_Is_Read.associate = function(models) {
     // associations
+    Chat_Is_Read.belongsTo(models.user.model, {
+      foreignKey: "user_id"
+    });
+    Chat_Is_Read.belongsTo(models.chat.model, {
+      foreignKey: "chat_id"
+    });
   };
 
   // hooks

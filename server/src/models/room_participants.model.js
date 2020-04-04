@@ -8,6 +8,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         type: DataTypes.STRING
+      },
+      participants: {
+        allowNull: false,
+        unique: true,
+        type: DataTypes.STRING
+      },
+      num_of_unread: {
+        allowNull: false,
+        unique: true,
+        type: DataTypes.INT
       }
     },
     {
@@ -17,6 +27,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Room_Participants.associate = function(models) {
     // associations
+    Room_Participants.belongsTo(models.ROOM.model, {
+      foreignKey: "room_id"
+    });
+    Room_Participants.belongsTo(models.user.model, {
+      foreignKey: "participants"
+    });
   };
 
   // hooks

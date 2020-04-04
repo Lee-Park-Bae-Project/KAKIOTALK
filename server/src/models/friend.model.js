@@ -27,6 +27,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Friend.associate = function(models) {
     // associations
+    Friend.belongsTo(models.user.model, {
+      foreignKey: "follower_id"
+    });
+    Friend.belongsTo(models.user.model, {
+      foreignKey: "followee_id"
+    });
   };
 
   // hooks
