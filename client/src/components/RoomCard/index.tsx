@@ -31,9 +31,9 @@ const ChatCard: FC<Props> = ({
             <S.UserListWrapper>
               {userList.join(', ')}
             </S.UserListWrapper>
-            <S.NumWrapper>
+            {/* <S.NumWrapper>
               {userList.length}
-            </S.NumWrapper>
+            </S.NumWrapper> */}
           </S.Row>
 
           <S.LastMsgWrapper>
