@@ -4,9 +4,13 @@ import Flex from 'commons/Flex';
 export const Container = styled(Flex)`
   flex-direction: column;
   justify-content: flex-start;
-  width: 100%;
+  width: auto;
   height: 100vh;
-  min-width: 20rem;
+  float:left;
+  justify-content: flex-start;
+  margin-right: auto;
+  width: 100%;
+  /* min-width: 20rem; */
 `;
 
 export const ItemWrapper = styled(Flex)`

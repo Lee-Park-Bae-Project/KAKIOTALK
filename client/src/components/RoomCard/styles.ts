@@ -8,23 +8,30 @@ export const grayColor = css`
 
 export const Container = styled(Flex)`
   height: 5rem;
-
+  margin: 0.5rem 0;
+  min-width: 10rem;
   &:hover{
     background: ${color.HOVER_GRAY};
   }
 `;
 
-export const ImgWrapper = styled(Flex)`
+export const RoomInfoWrapper = styled.div`
+  display: flex;
+  max-width: 80%;
+
+`;
+
+export const ImgWrapper = styled.div`
   margin: 1rem;
   width: auto;
 `;
 
-export const InfoWrapper = styled(Flex)`
+export const InfoWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
 `;
 
-export const Row = styled(Flex)`
+export const Row = styled.div`
   justify-content: left;
 `;
 
@@ -35,7 +42,6 @@ export const NumWrapper = styled.span`
 export const UserListWrapper = styled.span`
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 10rem;
   white-space: nowrap;
   margin-right: 1rem;
 
@@ -47,7 +53,7 @@ export const LastMsgWrapper = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  width: 10rem;
+  /* width: 10rem; */
   height: 2.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,4 +65,8 @@ export const SubInfoWrapper = styled(Flex)`
   span{
     ${(props) => grayColor};
   }  
+`;
+
+export const Time = styled.span`
+  font-size: 0.7rem;
 `;

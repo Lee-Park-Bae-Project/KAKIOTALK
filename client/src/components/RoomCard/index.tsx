@@ -22,25 +22,28 @@ const ChatCard: FC<Props> = ({
   const numOfUser = userList.length;
   return (
     <S.Container onClick={onClick}>
-      <S.ImgWrapper>
-        <Icon icon="Person"/>
-      </S.ImgWrapper>
-      <S.InfoWrapper>
-        <S.Row>
-          <S.UserListWrapper>
-            {userList.join(', ')}
-          </S.UserListWrapper>
-          <S.NumWrapper>
-            {userList.length}
-          </S.NumWrapper>
-        </S.Row>
+      <S.RoomInfoWrapper>
+        <S.ImgWrapper>
+          <Icon icon="Person"/>
+        </S.ImgWrapper>
+        <S.InfoWrapper>
+          <S.Row>
+            <S.UserListWrapper>
+              {userList.join(', ')}
+            </S.UserListWrapper>
+            <S.NumWrapper>
+              {userList.length}
+            </S.NumWrapper>
+          </S.Row>
 
-        <S.LastMsgWrapper>
-          <span>{lastMessage}</span>
-        </S.LastMsgWrapper>
+          <S.LastMsgWrapper>
+            <span>{lastMessage}</span>
+          </S.LastMsgWrapper>
       </S.InfoWrapper>
+      </S.RoomInfoWrapper>
+
       <S.SubInfoWrapper>
-        <span>{moment(lastModified).format('LT')}</span>
+        <S.Time>{moment(lastModified).format('LT')}</S.Time>
         <Circle num={numOfNewMessage}/>
       </S.SubInfoWrapper>
     </S.Container>

@@ -18,6 +18,7 @@ export const Wrapper = styled(Flex)`
   height: 50rem;
   max-height: 100vh;
   height: 100%;
+  float:left;
 `;
 
 export const NavigationBarWrapper = styled(Flex)`
