@@ -11,25 +11,28 @@ interface ChatList {
 }
 
 interface Props {
+  searchKeyword: string;
   chatList: ChatList[];
 }
 
 
 const Chat: FC<Props> = ({
+  searchKeyword,
   chatList,
 }) => (
     <List>
       {
-        chatList.map(({
-          userList,
-          lastMessage,
-          lastModified,
-          numOfNewMessage,
-        }) => {
-          const onRoomCardClick = () => {
-            alert(userList.toString());
-          };
-          return (
+        searchKeyword.length > 0
+          ? chatList.filter((chat) => chat.userList.some((user) => user.indexOf(searchKeyword) > 0)).map(({
+            userList,
+            lastMessage,
+            lastModified,
+            numOfNewMessage,
+          }) => {
+            const onRoomCardClick = () => {
+              alert(userList.toString());
+            };
+            return (
             <RoomCard
               key={shortid.generate()}
               userList={userList}
@@ -38,8 +41,29 @@ const Chat: FC<Props> = ({
               numOfNewMessage={numOfNewMessage}
               onClick={onRoomCardClick}
             />
-          );
-        })
+            );
+          })
+          : chatList.map(({
+            userList,
+            lastMessage,
+            lastModified,
+            numOfNewMessage,
+          }) => {
+            const onRoomCardClick = () => {
+              alert(userList.toString());
+            };
+            return (
+            <RoomCard
+              key={shortid.generate()}
+              userList={userList}
+              lastMessage={lastMessage}
+              lastModified={lastModified}
+              numOfNewMessage={numOfNewMessage}
+              onClick={onRoomCardClick}
+            />
+            );
+          })
+
 
       }
     </List>
