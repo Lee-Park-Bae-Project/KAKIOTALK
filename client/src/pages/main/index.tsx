@@ -37,7 +37,7 @@ const Main: FC<Props> = () => {
   };
 
   return (
-    <S.Container id='container'>
+    <S.Container>
       <S.Left>
         <S.NavigationBarWrapper>
           <NavigationBar
