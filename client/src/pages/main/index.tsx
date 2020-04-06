@@ -1,23 +1,24 @@
 import React, { FC, useState, useEffect } from 'react';
 import * as S from 'pages/main/styles';
-import UserList from 'system/UserList';
 import NavigationBar from 'components/NavigationBar';
-import List from 'system/List';
 import shortid from 'shortid';
 import faker from 'faker';
-import RoomCard from 'components/RoomCard';
-import UserCard from 'components/UserCard';
-import Hr from 'commons/Hr';
+import SearchInput from 'components/SearchInput';
+import { chatList, friendList, myProfile } from 'fixture';
+import Chat from './Chat';
+import Friend from './Friend';
 
-interface Props{
-
-}
+interface Props {}
 
 const Main: FC<Props> = () => {
   const [tabSelector, setTabSelector] = useState({
     friend: true,
     chat: false,
   });
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
+  };
   const friendTabOnClick = () => {
     setTabSelector({
       friend: true,
@@ -34,188 +35,7 @@ const Main: FC<Props> = () => {
   const addFriendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     alert('hihi');
   };
-  const myProfile = {
-    id: shortid.generate(),
-    userName: faker.internet.userName(),
-    statusMessage: faker.lorem.lines(),
-  };
-  const friendList = [
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
-    {
-      id: shortid.generate(),
-      userName: faker.internet.userName(),
-      statusMessage: faker.lorem.lines(),
-    },
 
-  ];
-
-  const chatList = [
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-    {
-      userList: [faker.internet.userName(),
-        faker.internet.userName(),
-        faker.internet.userName()],
-      lastMessage: faker.lorem.sentence(),
-      lastModified: Date.now(),
-      numOfNewMessage: Math.round(Math.random() * 100),
-    },
-
-  ];
   return (
     <S.Container id='container'>
       <S.Left>
@@ -228,63 +48,21 @@ const Main: FC<Props> = () => {
             />
         </S.NavigationBarWrapper>
         <S.Wrapper>
+          { tabSelector.friend && <Friend myProfile={myProfile} friendList={friendList} /> }
           {
-            tabSelector.friend
-              && (
-                <List>
-                  <UserCard userName={myProfile.userName} />
-                  <Hr/>
-                  친구 {friendList.length}
-                  {
-                    friendList.map(({
-                      id,
-                      statusMessage,
-                      userName,
-                    }) => {
-                      const onUserCardClick = () => {
-                        alert(userName);
-                      };
-                      return (
-                        <UserCard
-                          key={id}
-                          userName={userName}
-                          statusMessage={statusMessage}
-                          onClick={onUserCardClick}
-                        />
-                      );
-                    })
-                  }
-                </List>
-              )
-          }
-          {
-            tabSelector.chat
-            && (
-              <List>
-                {
-                  chatList.map(({
-                    userList,
-                    lastMessage,
-                    lastModified,
-                    numOfNewMessage,
-                  }) => {
-                    const onRoomCardClick = () => {
-                      alert(userList.toString());
-                    };
-                    return (
-                      <RoomCard
-                        key={shortid.generate()}
-                        userList={userList}
-                        lastMessage={lastMessage}
-                        lastModified={lastModified}
-                        numOfNewMessage={numOfNewMessage}
-                        onClick={onRoomCardClick}
-                      />
-                    );
-                  })
+            tabSelector.chat && (
+              <S.Column>
+                <SearchInput
+                  value={searchKeyword}
+                  onChange={onSearchKeywordChange}
+                  placeholder="채팅방 이름, 참여자 검색"
+                />
+                <Chat
+                  searchKeyword={searchKeyword}
+                  chatList={chatList}
 
-                }
-              </List>
+                />
+              </S.Column>
             )
           }
         </S.Wrapper>

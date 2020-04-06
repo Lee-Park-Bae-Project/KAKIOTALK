@@ -6,6 +6,7 @@ const Global = createGlobalStyle`
     padding: 0;
     /* height: 100vh; */
     box-sizing: border-box;
+    font-size: 1rem;
     /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri; */
   }
 `;

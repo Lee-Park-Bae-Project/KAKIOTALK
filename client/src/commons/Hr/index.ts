@@ -3,6 +3,6 @@ import { color } from 'styles/global';
 
 export default styled.hr`
   width: 90%;
-  margin: auto;
+  margin: 1rem auto;
   border-color: ${color.GRAY};
 `;
