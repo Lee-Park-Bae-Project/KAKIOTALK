@@ -7,17 +7,17 @@ import Login from 'pages/login';
 import Main from 'pages/main';
 
 const Routes: React.FC = () => (
-    <Router>
-      <Route
+  <Router>
+    {/* <Route
         exact
         path='/'
         component={Main}
-      />
-      <Route
-        path="/login"
-        component={Login}
-      />
-    </Router>
+      /> */}
+    <Route
+      path="/"
+      component={Login}
+    />
+  </Router>
 );
 
 export default Routes;
