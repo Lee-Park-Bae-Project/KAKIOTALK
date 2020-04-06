@@ -1,42 +1,40 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
-import shortid from 'shortid';
-import faker from 'faker';
 import SearchInput from 'components/SearchInput';
-import { chatList, friendList, myProfile } from 'fixture';
+import { User } from 'modules/userlist';
+import { ChatRoom } from 'modules/ChatRoomList';
 import Chat from './Chat';
 import Friend from './Friend';
 
-interface Props {}
+interface TabSelector {
+  friend: boolean;
+  chat: boolean;
+}
+interface Props {
+  searchKeyword: string;
+  onSearchKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  myProfile: User;
+  friendList: User[];
+  chatList: ChatRoom[];
+  tabSelector: TabSelector;
+  friendTabOnClick: () => void;
+  chatTabOnClick: () => void;
+  addFriendTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
-const Main: FC<Props> = () => {
-  const [tabSelector, setTabSelector] = useState({
-    friend: true,
-    chat: false,
-  });
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(e.target.value);
-  };
-  const friendTabOnClick = () => {
-    setTabSelector({
-      friend: true,
-      chat: false,
-    });
-  };
+}
 
-  const chatTabOnClick = () => {
-    setTabSelector({
-      friend: false,
-      chat: true,
-    });
-  };
-  const addFriendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    alert('hihi');
-  };
-
-  return (
+const Main: FC<Props> = ({
+  searchKeyword,
+  onSearchKeywordChange,
+  myProfile,
+  friendList,
+  chatList,
+  tabSelector,
+  addFriendTabOnClick,
+  friendTabOnClick,
+  chatTabOnClick,
+}) => (
     <S.Container>
       <S.Left>
         <S.NavigationBarWrapper>
@@ -68,7 +66,6 @@ const Main: FC<Props> = () => {
         </S.Wrapper>
       </S.Left>
     </S.Container>
-  );
-};
+);
 
 export default Main;

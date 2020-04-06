@@ -4,14 +4,14 @@ import {
   Route,
 } from 'react-router-dom';
 import Login from 'pages/login';
-import Main from 'pages/main';
+import MainContainer from 'containers/MainContainer';
 
 const Routes: React.FC = () => (
     <Router>
       <Route
         exact
         path='/'
-        component={Main}
+        component={MainContainer}
       />
       <Route
         path="/login"

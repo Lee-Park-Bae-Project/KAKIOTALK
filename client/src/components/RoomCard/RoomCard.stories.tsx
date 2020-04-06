@@ -16,7 +16,7 @@ export const Default = () => {
   ];
   const lastMessage = faker.lorem.paragraph();
   const lastModified = Date.now();
-  const numOfNewMessage = Math.round(Math.random() * 100);
+  const numOfNewMessages = Math.round(Math.random() * 100);
   const Wrapper = styled.div`
     width: 25rem;
   `;
@@ -26,7 +26,7 @@ export const Default = () => {
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
         />
     </Wrapper>
   );

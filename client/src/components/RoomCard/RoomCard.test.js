@@ -19,7 +19,7 @@ describe('<RoomCard/>', () => {
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={3}
+        numOfNewMessages={3}
     />
     );
     expect(wrapper).toMatchSnapshot();

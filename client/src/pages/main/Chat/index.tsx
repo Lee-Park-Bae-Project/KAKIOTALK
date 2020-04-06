@@ -2,17 +2,11 @@ import React, { FC, useState, useEffect } from 'react';
 import List from 'system/List';
 import shortid from 'shortid';
 import RoomCard from 'components/RoomCard';
-
-interface ChatList {
-  userList: string[];
-  lastMessage: string;
-  lastModified: number;
-  numOfNewMessage: number;
-}
+import { ChatRoom } from 'modules/ChatRoomList';
 
 interface Props {
   searchKeyword: string;
-  chatList: ChatList[];
+  chatList: ChatRoom[];
 }
 
 
@@ -27,7 +21,7 @@ const Chat: FC<Props> = ({
             userList,
             lastMessage,
             lastModified,
-            numOfNewMessage,
+            numOfNewMessages,
           }) => {
             const onRoomCardClick = () => {
               alert(userList.toString());
@@ -38,7 +32,7 @@ const Chat: FC<Props> = ({
               userList={userList}
               lastMessage={lastMessage}
               lastModified={lastModified}
-              numOfNewMessage={numOfNewMessage}
+              numOfNewMessages={numOfNewMessages}
               onClick={onRoomCardClick}
             />
             );
@@ -47,7 +41,7 @@ const Chat: FC<Props> = ({
             userList,
             lastMessage,
             lastModified,
-            numOfNewMessage,
+            numOfNewMessages,
           }) => {
             const onRoomCardClick = () => {
               alert(userList.toString());
@@ -58,7 +52,7 @@ const Chat: FC<Props> = ({
               userList={userList}
               lastMessage={lastMessage}
               lastModified={lastModified}
-              numOfNewMessage={numOfNewMessage}
+              numOfNewMessages={numOfNewMessages}
               onClick={onRoomCardClick}
             />
             );
