@@ -8,25 +8,31 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         type: DataTypes.STRING,
-        validate: true
+        validate: true,
       },
-      follower_id: {
+      followerId: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
-      followee_id: {
+      followeeId: {
         allowNull: false,
-        type: DataTypes.STRING
-      }
+        type: DataTypes.STRING,
+      },
     },
     {
       tableName: "Friend",
-      timestamps: true
+      timestamps: true,
     }
   );
 
-  Friend.associate = function(models) {
+  Friend.associate = function (models) {
     // associations
+    Friend.belongsTo(models.user.model, {
+      foreignKey: "followerId",
+    });
+    Friend.belongsTo(models.user.model, {
+      foreignKey: "followeeId",
+    });
   };
 
   // hooks

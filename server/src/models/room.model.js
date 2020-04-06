@@ -7,20 +7,20 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         allowNull: false,
         unique: true,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
-      num_of_participants: {
+      numOfParticipants: {
         allowNull: false,
         type: DataTypes.INT,
-        unique: false
-      }
+        unique: false,
+      },
     },
     {
-      tableName: "room"
+      tableName: "Room",
     }
   );
 
-  Room.associate = function(models) {
+  Room.associate = function (models) {
     // associations
   };
 

@@ -8,32 +8,38 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         type: DataTypes.STRING,
-        validate: true
+        validate: true,
       },
-      room_id: {
+      roomId: {
         allowNull: false,
         unique: true,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       sender: {
         allowNull: false,
         unique: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       context: {
         allowNull: false,
         unique: false,
-        type: DataTypes.TEXT
-      }
+        type: DataTypes.TEXT,
+      },
     },
     {
       tableName: "Chats",
-      timestamps: true
+      timestamps: true,
     }
   );
 
-  Chat.associate = function(models) {
+  Chat.associate = function (models) {
     // associations
+    Chat.belongsTo(models.room.model, {
+      foreignKey: "roomId",
+    });
+    Chat.belongsTo(models.user.model, {
+      foreignKey: "sender",
+    });
   };
 
   // hooks
