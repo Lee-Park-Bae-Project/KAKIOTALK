@@ -15,6 +15,7 @@
     "express": "~4.16.1",
     "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
+    "http-status": "^1.4.2",
     "moment": "^2.24.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
