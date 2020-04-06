@@ -1,37 +1,37 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-  const Room_Participants = sequelize.define(
+  const RoomParticipants = sequelize.define(
     "Room_Participants",
     {
-      room_id: {
+      roomId: {
         allowNull: false,
         unique: true,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       participants: {
         allowNull: false,
         unique: true,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
-      num_of_unread: {
+      numOfUnread: {
         allowNull: false,
         unique: true,
-        type: DataTypes.INT
-      }
+        type: DataTypes.INT,
+      },
     },
     {
-      tableName: "Room_Participant"
+      tableName: "RoomParticipant",
     }
   );
 
-  Room_Participants.associate = function(models) {
+  Room_Participants.associate = function (models) {
     // associations
     Room_Participants.belongsTo(models.ROOM.model, {
-      foreignKey: "room_id"
+      foreignKey: "roomId",
     });
     Room_Participants.belongsTo(models.user.model, {
-      foreignKey: "participants"
+      foreignKey: "participants",
     });
   };
 

@@ -9,21 +9,25 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         type: DataTypes.STRING,
         validate: {
-          isEmail: true
-        }
+          isEmail: true,
+        },
       },
       name: {
         allowNull: false,
-        type: DataTypes.STRING
-      }
+        type: DataTypes.STRING,
+      },
+      googleId: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
     },
     {
-      tableName: "user",
-      timestamps: true
+      tableName: "User",
+      timestamps: true,
     }
   );
 
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations
   };
 
