@@ -23,7 +23,7 @@ const Chat: FC<Props> = ({
     <List>
       {
         searchKeyword.length > 0
-          ? chatList.filter((chat) => chat.userList.some((user) => user.indexOf(searchKeyword) > 0)).map(({
+          ? chatList.filter((chat) => chat.userList.some((user) => user.toLowerCase().indexOf(searchKeyword.toLowerCase()) >= 0)).map(({
             userList,
             lastMessage,
             lastModified,
