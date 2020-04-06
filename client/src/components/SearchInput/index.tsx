@@ -3,10 +3,17 @@ import styled from 'styled-components';
 import { color } from 'styles/global';
 
 const S = {
+  Container: styled.div`
+    display: flex;
+    width: 100%;
+  `,
   Input: styled.input`
     width: 100%;
     background: #F7F7F7;
     outline: none;
+    padding:0.3rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
   `,
 };
 
@@ -20,11 +27,13 @@ const SearchInpust: FC<Props> = ({
   onChange,
   placeholder,
 }) => (
+  <S.Container>
     <S.Input
       value={value}
       onChange={onChange}
       placeholder={placeholder}
     />
+  </S.Container>
 );
 
 export default SearchInpust;
