@@ -92,7 +92,8 @@
     "eslint-plugin-react": "^7.17.0",
     "faker": "^4.1.0",
     "prettier": "^1.19.1",
-    "react-docgen-typescript-loader": "^3.6.0"
+    "react-docgen-typescript-loader": "^3.6.0",
+    "redux-devtools-extension": "^2.13.8"
   },
   "jest": {
     "snapshotSerializers": [
