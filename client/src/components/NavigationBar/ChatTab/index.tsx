@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Flex from 'commons/Flex';
+import Flex from 'atoms/Flex';
 import Icon from 'Icon/Icon';
 import { color } from 'styles/global';
 

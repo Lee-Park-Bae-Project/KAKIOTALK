@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Input from 'commons/Input';
+import Input from 'atoms/Input';
 
 export default {
-  title: 'Commons/Input',
+  title: 'Atoms/Input',
   component: Input,
 };
 

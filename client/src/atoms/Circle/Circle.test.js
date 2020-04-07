@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { mount } from 'enzyme';
-import Circle from 'commons/Circle';
+import Circle from 'atoms/Circle';
 
 describe('<Circle />', () => {
   it('matches snapshot', () => {

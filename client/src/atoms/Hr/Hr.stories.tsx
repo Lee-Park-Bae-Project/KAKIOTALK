@@ -1,8 +1,8 @@
 import React from 'react';
-import Hr from 'commons/Hr';
+import Hr from 'atoms/Hr';
 
 export default {
-  title: 'Commons/Hr',
+  title: 'Atoms/Hr',
   component: Hr,
 };
 

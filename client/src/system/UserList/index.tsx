@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import * as S from 'system/UserList/styles';
 import UserCard from 'components/UserCard';
-import Hr from 'commons/Hr';
+import Hr from 'atoms/Hr';
 import { User } from 'modules/userlist';
 
 interface Props{

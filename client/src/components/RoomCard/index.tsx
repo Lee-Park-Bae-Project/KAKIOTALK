@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import * as S from 'components/RoomCard/styles';
 import Icon from 'Icon/Icon';
-import Circle from 'commons/Circle';
+import Circle from 'atoms/Circle';
 import moment from 'moment';
 
 interface Props{

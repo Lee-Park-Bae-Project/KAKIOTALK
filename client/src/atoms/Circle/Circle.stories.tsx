@@ -1,8 +1,8 @@
 import React from 'react';
-import Circle from 'commons/Circle';
+import Circle from 'atoms/Circle';
 
 export default {
-  title: 'Commons/Circle',
+  title: 'Atoms/Circle',
   component: Circle,
 };
 
