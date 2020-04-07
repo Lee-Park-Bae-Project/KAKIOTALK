@@ -1,5 +1,5 @@
 import socketOpen from 'socket.io-client';
-import { socketUrl } from '../utils/constants';
+import { socketUrl } from '../common/constants';
 
 const socket = socketOpen(socketUrl, { transports: ['websocket'] });
 

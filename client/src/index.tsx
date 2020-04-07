@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import socketio from 'socket.io-client';
 import App from './App';
 
-import { socketUrl } from './utils/constants';
+import { socketUrl } from './common/constants';
 
 const socket = socketio.connect(socketUrl);
 
