@@ -1,9 +1,11 @@
 import {
+  initChatRoom,
   addChatRoom,
   removeChatRoom,
-} from 'modules/ChatRoomList/action';
+} from 'modules/chatRoomList/action';
 
 export type ChatRoomListAction =
+| ReturnType<typeof initChatRoom>
 | ReturnType<typeof addChatRoom>
 | ReturnType<typeof removeChatRoom>
 

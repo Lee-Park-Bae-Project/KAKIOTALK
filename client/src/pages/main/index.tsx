@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
-import { User } from 'modules/userlist';
-import { ChatRoom } from 'modules/ChatRoomList';
+import { User } from 'modules/friends';
+import { ChatRoom } from 'modules/chatRoomList';
 import Chat from './Chat';
 import Friend from './Friend';
 

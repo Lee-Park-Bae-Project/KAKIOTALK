@@ -1,8 +1,8 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import List from 'system/List';
 import shortid from 'shortid';
 import RoomCard from 'components/RoomCard';
-import { ChatRoom } from 'modules/ChatRoomList';
+import { ChatRoom } from 'modules/chatRoomList';
 
 interface Props {
   searchKeyword: string;

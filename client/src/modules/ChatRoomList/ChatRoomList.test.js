@@ -5,7 +5,7 @@ import {
   addChatRoom,
   removeChatRoom,
   ChatRoom,
-} from 'modules/ChatRoomList';
+} from 'modules/chatRoomList';
 import rootReducer from 'modules';
 import { createStore } from 'redux';
 import shortid from 'shortid';

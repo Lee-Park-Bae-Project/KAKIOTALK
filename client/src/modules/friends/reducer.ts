@@ -1,17 +1,21 @@
 import {
+  INIT_USER,
   ADD_USER,
   REMOVE_USER,
-} from 'modules/userlist/action';
+} from 'modules/friends/action';
 
 import {
   User,
   UserListAction,
-} from 'modules/userlist/types';
+} from 'modules/friends/types';
 
 const initialState: User[] = [];
 
 function userList(state: User[] = initialState, action: UserListAction) {
   switch (action.type) {
+    case INIT_USER: {
+      return action.payload;
+    }
     case ADD_USER: {
       return state.concat(action.payload);
     }

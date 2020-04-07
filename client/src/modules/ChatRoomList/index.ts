@@ -1,3 +1,3 @@
-export { default } from 'modules/ChatRoomList/reducer';
-export * from 'modules/ChatRoomList/action';
-export * from 'modules/ChatRoomList/types';
+export { default } from 'modules/chatRoomList/reducer';
+export * from 'modules/chatRoomList/action';
+export * from 'modules/chatRoomList/types';

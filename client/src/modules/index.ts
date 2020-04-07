@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import userList from 'modules/userlist';
-import chatRoomList from 'modules/ChatRoomList';
+import friends from 'modules/friends';
+import chatRoomList from 'modules/chatRoomList';
+import profile from 'modules/profile';
 
 const rootReducer = combineReducers({
-  userList,
+  friends,
   chatRoomList,
+  profile,
 });
 
 export default rootReducer;

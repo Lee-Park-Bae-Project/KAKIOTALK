@@ -2,9 +2,9 @@
 import {
   ADD_USER,
   REMOVE_USER,
-  addUser,
-  removeUser,
-} from 'modules/userlist';
+  addFriends,
+  removeFriend,
+} from 'modules/friends';
 import rootReducer from 'modules';
 import { createStore } from 'redux';
 
@@ -26,7 +26,7 @@ describe('Redux/userlist', () => {
   });
 
   it('Add Action Creator', () => {
-    AddUserAction = addUser(newUser);
+    AddUserAction = addFriends(newUser);
     expect(AddUserAction).toEqual({
       type: ADD_USER,
       payload: newUser,
@@ -40,7 +40,7 @@ describe('Redux/userlist', () => {
   });
 
   it('Remove User', () => {
-    RemoveUserAction = removeUser('123');
+    RemoveUserAction = removeFriend('123');
     expect(RemoveUserAction).toEqual({
       type: REMOVE_USER,
       payload: '123',
@@ -67,7 +67,7 @@ describe('Redux/userlist', () => {
       },
     ];
 
-    const AddUsersAction = addUser(users);
+    const AddUsersAction = addFriends(users);
     const { userList: prevState } = store.getState();
     store.dispatch(AddUsersAction);
     const { userList: curState } = store.getState();
