@@ -18,7 +18,11 @@ const Friend: FC<Props> = ({
   friendList,
 }) => (
     <List>
-      <UserCard userName={myProfile.userName} />
+      <UserCard
+        key={myProfile.id}
+        userName={myProfile.userName}
+        statusMessage={myProfile.statusMessage}
+      />
       <Hr/>
       친구 {friendList.length}
       {
