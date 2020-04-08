@@ -4,9 +4,9 @@ import { RootState } from 'modules';
 import Main from 'pages/main';
 import { initFriends } from 'modules/friends';
 import { initChatRoom } from 'modules/chatRoomList';
-import { initProfile } from 'modules/profile';
+import { getProfile } from 'modules/profile';
 import {
-  Axios, getChatList, getFriendList, getProfile,
+  Axios, getChatList, getFriendList,
 } from '../common/request';
 
 const { useState, useEffect } = React;
@@ -18,9 +18,7 @@ const MainContainer: React.FC = () => {
   const chatList = useSelector((state: RootState) => state.chatRoomList);
 
   useEffect(() => {
-    Axios(getProfile)
-      .then((res) => dispatch(initProfile(res.data.data)))
-      .catch((e) => console.log(e));
+    dispatch(getProfile());
     Axios(getFriendList)
       .then((res) => dispatch(initFriends(res.data.data)))
       .catch((e) => console.log(e));

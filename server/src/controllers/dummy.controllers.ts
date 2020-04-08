@@ -1,6 +1,7 @@
 import {Request, NextFunction, Response} from 'express'
 import { response } from '../common/utils';
-
+import createError from 'http-errors'
+import httpStatus from 'http-status'
 import shortid from 'shortid';
 import faker from 'faker';
 export interface User {
@@ -48,7 +49,12 @@ const friendList = makeUsers(15);
 const chatList = makeChatList(15);
 
 const getProfile = (req: Request, res: Response, next: NextFunction) => {
-  return response(res, myProfile)
+  try{
+    // throw (createError(httpStatus.NOT_FOUND, '에러다 에러'));
+    return response(res, myProfile)
+  } catch(e) {
+    next(e)
+  }
 }
 
 const getFriendList = (req: Request, res: Response, next: NextFunction) => {
