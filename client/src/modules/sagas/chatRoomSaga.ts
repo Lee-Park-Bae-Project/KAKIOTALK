@@ -6,7 +6,7 @@ import {
   GET_CHAT_ROOM,
   getChatRoomFailure,
   getChatRoomSuccess,
-} from 'modules/chatRoomList/action';
+} from 'modules/chatRoom/action';
 
 import request from 'common/request';
 

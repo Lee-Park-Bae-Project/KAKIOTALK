@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
 import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
-import { getChatRoom } from 'modules/chatRoomList';
+import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
 
 const { useState, useEffect } = React;

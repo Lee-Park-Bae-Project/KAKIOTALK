@@ -2,7 +2,7 @@ import {
   combineReducers, createStore, applyMiddleware, Store, Dispatch, Action,
 } from 'redux';
 import friends from 'modules/friends';
-import chatRoomList from 'modules/chatRoomList';
+import chatRoomList from 'modules/chatRoom';
 import profile from 'modules/profile';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';

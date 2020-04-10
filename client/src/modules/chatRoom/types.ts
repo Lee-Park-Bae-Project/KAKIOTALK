@@ -4,7 +4,7 @@ import {
   removeChatRoom,
   getChatRoomSuccess,
   getChatRoomFailure,
-} from 'modules/chatRoomList/action';
+} from 'modules/chatRoom/action';
 
 export type ChatRoomListAction =
 | ReturnType<typeof initChatRoom>

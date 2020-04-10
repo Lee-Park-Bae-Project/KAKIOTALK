@@ -4,11 +4,11 @@ import {
   REMOVE_CHAT_ROOM,
   GET_CHAT_ROOM_FAILURE,
   GET_CHAT_ROOM_SUCCESS,
-} from 'modules/chatRoomList/action';
+} from 'modules/chatRoom/action';
 import { ChatRoom } from 'types';
 import {
   ChatRoomListAction,
-} from 'modules/chatRoomList/types';
+} from 'modules/chatRoom/types';
 
 const initialState: ChatRoom[] = [];
 
