@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 require("dotenv").config();
-import { connect } from '../socket'
+import { connect } from "../socket";
 
 // eslint-disable-next-line import/first
 
 import ErrnoException = NodeJS.ErrnoException;
-import { Socket } from 'dgram';
+import { Socket } from "dgram";
 
 /**
  * Module dependencies.
@@ -41,7 +41,7 @@ server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
-connect(server)
+connect(server);
 
 /**
  * Normalize a port into a number, string, or false.

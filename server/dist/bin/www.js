@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
+const socket_1 = require("../socket");
 /**
  * Module dependencies.
  */
-const debug = require("debug")("nodejs-express-typescript-sample:server");
+const debug = require("debug")("api:server");
 const http = require("http");
 const app = require("../app");
 /**
@@ -25,6 +27,7 @@ const server = http.createServer(app);
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
+socket_1.connect(server);
 /**
  * Normalize a port into a number, string, or false.
  */

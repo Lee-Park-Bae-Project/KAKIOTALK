@@ -7,8 +7,8 @@ import Login from 'pages/login';
 import MainContainer from 'containers/MainContainer';
 
 const Routes: React.FC = () => (
-    <Router>
-      <Route
+  <Router>
+    <Route
         exact
         path='/'
         component={MainContainer}
