@@ -1,4 +1,5 @@
 import { User } from 'types';
+import { AxiosError } from 'axios';
 
 export const GET_FRIENDS = 'friends/GET_FRIENDS' as const;
 export const GET_FRIENDS_SUCCESS = 'friends/GET_FRIENDS_SUCCESS' as const;
@@ -13,7 +14,7 @@ export const getFriendsSuccess = (friends: User[]) => ({
   type: GET_FRIENDS_SUCCESS,
   payload: friends,
 });
-export const getFriendsFailure = (e: any) => ({
+export const getFriendsFailure = (e: AxiosError) => ({
   type: GET_FRIENDS_FAILURE,
   payload: e,
 });

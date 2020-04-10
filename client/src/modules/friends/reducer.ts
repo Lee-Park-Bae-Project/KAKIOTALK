@@ -24,7 +24,10 @@ function userList(state: User[] = initialState, action: UserListAction) {
       return action.payload;
     }
     case GET_FRIENDS_FAILURE: {
-      alert(action.payload.response.data.message);
+      const error = action.payload;
+      if (error.response) {
+        alert(error.response.data.message);
+      }
       return state;
     }
     default:

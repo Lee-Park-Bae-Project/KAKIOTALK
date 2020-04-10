@@ -14,8 +14,7 @@ function* getProfileSaga() {
     const response = yield call(request.getProfile);
     yield put(getProfileSuccess(response.data.data));
   } catch (e) {
-    const errorMessage = e.response.data.message;
-    yield put(getProfileFailure(errorMessage));
+    yield put(getProfileFailure(e));
   }
 }
 

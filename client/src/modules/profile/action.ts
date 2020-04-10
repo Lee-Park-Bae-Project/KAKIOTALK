@@ -1,4 +1,5 @@
 import { User } from 'types';
+import { AxiosError } from 'axios';
 
 export const INIT_PROFILE = 'profile/INIT_PROFILE' as const;
 export const GET_PROFILE = 'profile/GET_PROFILE' as const;
@@ -13,7 +14,7 @@ export const getProfileSuccess = (profile: User) => ({
   payload: profile,
 });
 
-export const getProfileFailure = (errorMessage: any) => ({
+export const getProfileFailure = (errorMessage: AxiosError) => ({
   type: GET_PROFILE_FAILURE,
   payload: errorMessage,
 });

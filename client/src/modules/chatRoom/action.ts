@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+
 export const INIT_CHAT_ROOM = 'chatroom/INIT_CHAT_ROOM' as const;
 export const GET_CHAT_ROOM = 'chatroom/GET_CHAT_ROOM' as const;
 export const GET_CHAT_ROOM_SUCCESS = 'chatroom/GET_CHAT_ROOM_SUCCESS' as const;
@@ -19,7 +21,7 @@ export const getChatRoomSuccess = (chatRoom: any) => ({
   payload: chatRoom,
 });
 
-export const getChatRoomFailure = (e: any) => ({
+export const getChatRoomFailure = (e: AxiosError) => ({
   type: GET_CHAT_ROOM_FAILURE,
   payload: e,
 });

@@ -21,7 +21,10 @@ function chatRoomList(state: ChatRoom[] = initialState, action: ChatRoomListActi
       return action.payload;
     }
     case GET_CHAT_ROOM_FAILURE: {
-      alert(action.payload.response.data.message);
+      const error = action.payload;
+      if (error.response) {
+        alert(error.response.data.message);
+      }
       return state;
     }
     case ADD_CHAT_ROOM: {

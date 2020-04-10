@@ -16,7 +16,11 @@ const profile = (state: User = initialState, action: ProfileAction) => {
       return action.payload;
     }
     case GET_PROFILE_FAILURE: {
-      alert(action.payload);
+      const error = action.payload;
+      if (error.response) {
+        alert(error.response.data.message);
+      }
+
       return state;
     }
 
