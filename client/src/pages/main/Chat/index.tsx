@@ -2,13 +2,12 @@ import React, { FC } from 'react';
 import List from 'system/List';
 import shortid from 'shortid';
 import RoomCard from 'components/RoomCard';
-import { ChatRoom } from 'modules/chatRoomList';
+import { ChatRoom } from 'types';
 
 interface Props {
   searchKeyword: string;
   chatList: ChatRoom[];
 }
-
 
 const Chat: FC<Props> = ({
   searchKeyword,

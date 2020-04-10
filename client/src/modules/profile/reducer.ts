@@ -1,15 +1,16 @@
 import {
   INIT_PROFILE, GET_PROFILE, GET_PROFILE_FAILURE, GET_PROFILE_SUCCESS,
 } from 'modules/profile/action';
-import { Profile, ProfileAction } from 'modules/profile/types';
+import { ProfileAction } from 'modules/profile/types';
+import { User } from 'types';
 
-const initialState: Profile = {
+const initialState: User = {
   id: '',
   statusMessage: '',
   userName: '',
 };
 
-const profile = (state: Profile = initialState, action: ProfileAction) => {
+const profile = (state: User = initialState, action: ProfileAction) => {
   switch (action.type) {
     case GET_PROFILE_SUCCESS: {
       return action.payload;

@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
-import { User } from 'modules/friends';
-import { ChatRoom } from 'modules/chatRoomList';
+import { User, ChatRoom } from 'types';
 import Chat from './Chat';
 import Friend from './Friend';
 
@@ -21,7 +20,6 @@ interface Props {
   friendTabOnClick: () => void;
   chatTabOnClick: () => void;
   addFriendTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-
 }
 
 const Main: FC<Props> = ({

@@ -1,5 +1,5 @@
 import {
-  delay, put, takeEvery, call,
+  put, takeEvery, call,
 } from 'redux-saga/effects';
 import {
   GET_PROFILE,
@@ -7,15 +7,11 @@ import {
   getProfileSuccess,
 } from 'modules/profile/action';
 
-import { Axios, getProfile } from 'common/request';
-
-function Api() {
-  return Axios(getProfile);
-}
+import request from 'common/request';
 
 function* getProfileSaga() {
   try {
-    const response = yield call(Api);
+    const response = yield call(request.getProfile);
     yield put(getProfileSuccess(response.data.data));
   } catch (e) {
     const errorMessage = e.response.data.message;

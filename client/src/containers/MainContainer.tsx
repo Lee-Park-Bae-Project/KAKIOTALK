@@ -2,12 +2,9 @@ import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
 import Main from 'pages/main';
-import { initFriends } from 'modules/friends';
-import { initChatRoom } from 'modules/chatRoomList';
+import { getFriends } from 'modules/friends';
+import { getChatRoom } from 'modules/chatRoomList';
 import { getProfile } from 'modules/profile';
-import {
-  Axios, getChatList, getFriendList,
-} from '../common/request';
 
 const { useState, useEffect } = React;
 
@@ -19,14 +16,10 @@ const MainContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(getProfile());
-    Axios(getFriendList)
-      .then((res) => dispatch(initFriends(res.data.data)))
-      .catch((e) => console.log(e));
-
-    Axios(getChatList)
-      .then((res) => dispatch(initChatRoom(res.data.data)))
-      .catch((e) => console.log(e));
+    dispatch(getFriends());
+    dispatch(getChatRoom());
   }, []);
+
   const [tabSelector, setTabSelector] = useState({
     friend: true,
     chat: false,

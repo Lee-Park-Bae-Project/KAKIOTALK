@@ -10,19 +10,27 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-export const getProfile: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'dummy/my-profile',
+const Axios = async (config: AxiosRequestConfig) => instance.request(config);
+
+const apiConfig: {[key: string]: AxiosRequestConfig} = {
+  getProfile: {
+    method: 'GET',
+    url: 'dummy/my-profile',
+  },
+  getFriendList: {
+    method: 'GET',
+    url: 'dummy/friend-list',
+  },
+  getChatList: {
+    method: 'GET',
+    url: 'dummy/chat-list',
+  },
 };
 
-export const getFriendList: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'dummy/friend-list',
+const request = {
+  getProfile: () => Axios(apiConfig.getProfile),
+  getFriendList: () => Axios(apiConfig.getFriendList),
+  getChatList: () => Axios(apiConfig.getChatList),
 };
 
-export const getChatList: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'dummy/chat-list',
-};
-
-export const Axios = async (config: AxiosRequestConfig) => instance.request(config);
+export default request;

@@ -4,7 +4,6 @@ import {
   REMOVE_CHAT_ROOM,
   addChatRoom,
   removeChatRoom,
-  ChatRoom,
 } from 'modules/chatRoomList';
 import rootReducer from 'modules';
 import { createStore } from 'redux';

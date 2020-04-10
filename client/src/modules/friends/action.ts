@@ -1,12 +1,23 @@
-export const INIT_USER = 'friends/INIT_USER' as const;
+import { User } from 'types';
+
+export const GET_FRIENDS = 'friends/GET_FRIENDS' as const;
+export const GET_FRIENDS_SUCCESS = 'friends/GET_FRIENDS_SUCCESS' as const;
+export const GET_FRIENDS_FAILURE = 'friends/GET_FRIENDS_FAILURE' as const;
 export const ADD_USER = 'friends/ADD_USER' as const;
 export const REMOVE_USER = 'friends/REMOVE_USER' as const;
 
-export const initFriends = (friend: any) => ({
-  type: INIT_USER,
-  payload: friend,
+export const getFriends = () => ({
+  type: GET_FRIENDS,
 });
-export const addFriends = (newFriend: any) => ({
+export const getFriendsSuccess = (friends: User[]) => ({
+  type: GET_FRIENDS_SUCCESS,
+  payload: friends,
+});
+export const getFriendsFailure = (e: any) => ({
+  type: GET_FRIENDS_FAILURE,
+  payload: e,
+});
+export const addFriends = (newFriend: User) => ({
   type: ADD_USER,
   payload: newFriend,
 });

@@ -2,7 +2,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import RoomCard from 'components/RoomCard';
-import faker from 'faker';
 
 // faker.locale = 'ko';
 describe('<RoomCard/>', () => {

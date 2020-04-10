@@ -7,9 +7,3 @@ export type ProfileAction =
 | ReturnType<typeof getProfile>
 | ReturnType<typeof getProfileSuccess>
 | ReturnType<typeof getProfileFailure>
-
-export interface Profile {
-  id: string;
-  userName: string;
-  statusMessage: string;
-}
