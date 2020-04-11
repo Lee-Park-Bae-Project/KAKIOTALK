@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import Flex from 'commons/Flex';
+import Flex from 'atoms/Flex';
 import { color, weight } from 'styles/global';
 
 export const grayColor = css`

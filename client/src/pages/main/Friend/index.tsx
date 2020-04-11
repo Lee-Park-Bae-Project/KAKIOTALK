@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import List from 'system/List';
 import UserCard from 'components/UserCard';
-import Hr from 'commons/Hr';
+import Hr from 'atoms/Hr';
 
 interface User {
   id: string;
@@ -18,7 +18,11 @@ const Friend: FC<Props> = ({
   friendList,
 }) => (
     <List>
-      <UserCard userName={myProfile.userName} />
+      <UserCard
+        key={myProfile.id}
+        userName={myProfile.userName}
+        statusMessage={myProfile.statusMessage}
+      />
       <Hr/>
       친구 {friendList.length}
       {

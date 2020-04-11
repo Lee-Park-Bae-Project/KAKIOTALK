@@ -4,20 +4,20 @@ import {
   Route,
 } from 'react-router-dom';
 import Login from 'pages/login';
-import Main from 'pages/main';
+import MainContainer from 'containers/MainContainer';
 
 const Routes: React.FC = () => (
   <Router>
-    {/* <Route
+    <Route
         exact
         path='/'
-        component={Main}
-      /> */}
-    <Route
-      path="/"
-      component={Login}
-    />
-  </Router>
+        component={MainContainer}
+      />
+      <Route
+        path="/login"
+        component={Login}
+      />
+    </Router>
 );
 
 export default Routes;

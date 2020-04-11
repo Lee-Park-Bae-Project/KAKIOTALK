@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Flex from 'commons/Flex';
+import Flex from 'atoms/Flex';
 
 export const Container = styled(Flex)``;
 

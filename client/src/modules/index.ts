@@ -1,12 +1,31 @@
-import { combineReducers } from 'redux';
-import userList from 'modules/userlist';
-import chatRoomList from 'modules/ChatRoomList';
+import {
+  combineReducers, createStore, applyMiddleware, Store, Dispatch, Action,
+} from 'redux';
+import friends from 'modules/friends';
+import chatRoomList from 'modules/chatRoom';
+import profile from 'modules/profile';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from 'modules/sagas';
 
 const rootReducer = combineReducers({
-  userList,
+  friends,
   chatRoomList,
+  profile,
 });
-
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(
+      logger, sagaMiddleware
+    )
+  )
+);
+sagaMiddleware.run(rootSaga);
 export default rootReducer;
-
 export type RootState = ReturnType<typeof rootReducer>;
+export {
+  store,
+};

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Flex from '../../commons/Flex';
+import Flex from '../../atoms/Flex';
 import Logo from '../../components/Logo';
 import Signin from '../../components/GoogleSignin';
 import { color } from '../../styles/global';

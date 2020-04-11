@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import * as S from 'system/UserList/styles';
 import UserCard from 'components/UserCard';
-import Hr from 'commons/Hr';
-import { User } from 'modules/userlist';
+import Hr from 'atoms/Hr';
+import { User } from 'types';
 
 interface Props{
   /** 내 정보 */

@@ -7,6 +7,7 @@ import GoogleSigninImage from 'assets/google_signin.png';
 import * as S from 'components/GoogleSignin/styles';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
+
 type LoginForm = {
   loginSuccess: (state: {
     id: string;
@@ -17,8 +18,7 @@ type LoginForm = {
 
 const GoogleSignin: React.FC = () => {
   const [
-    state,
-    setState,
+    state, setState,
   ] = useState({
     id: '',
     email: '',
@@ -39,12 +39,12 @@ const GoogleSignin: React.FC = () => {
           id: state.id,
         },
       })
-      .then(response => {
+      .then((response) => {
         console.log(
           'response',
         );
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(
           'failed',
           error,

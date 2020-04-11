@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import socketio from 'socket.io-client';
 import App from './App';
+import { configs } from './common/constants';
 
-import { socketUrl } from './utils/constants';
+const { SOCKET_URL } = configs;
 
-const socket = socketio.connect(socketUrl);
+const socket = socketio.connect(SOCKET_URL);
 
 socket.on('connection', (msg: string) => {
   console.log(msg);

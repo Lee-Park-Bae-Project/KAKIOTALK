@@ -6,8 +6,8 @@ import UserList from 'system/UserList';
 import UserCard from 'components/UserCard';
 
 import {
-  addUser,
-} from 'modules/userlist';
+  addFriends,
+} from 'modules/friends';
 import rootReducer from 'modules';
 import { createStore } from 'redux';
 
@@ -84,7 +84,7 @@ describe('<UserList/>', () => {
 
 describe('<UserList/> with redux', () => {
   it('redux', () => {
-    const action = addUser(userList);
+    const action = addFriends(userList);
     store.dispatch(action);
     const onClick = (id) => () => { console.log(id); };
 

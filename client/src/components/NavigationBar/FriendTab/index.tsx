@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Icon from 'Icon/Icon';
-import Flex from 'commons/Flex';
+import Flex from 'atoms/Flex';
 import { color } from 'styles/global';
 
 const S = {

@@ -1,7 +1,7 @@
 import socketOpen from 'socket.io-client';
-import { socketUrl } from '../utils/constants';
+import { configs } from '../common/constants';
 
-const socket = socketOpen(socketUrl, { transports: ['websocket'] });
+const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] });
 
 const connect = () => {
   socket.on('connect', (msg: string) => {

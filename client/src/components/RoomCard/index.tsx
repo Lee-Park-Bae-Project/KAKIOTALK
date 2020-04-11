@@ -1,21 +1,21 @@
 import React, { FC, useState } from 'react';
 import * as S from 'components/RoomCard/styles';
 import Icon from 'Icon/Icon';
-import Circle from 'commons/Circle';
+import Circle from 'atoms/Circle';
 import moment from 'moment';
 
 interface Props{
   userList: string[];
   lastMessage: string;
   lastModified: number;
-  numOfNewMessage: number;
+  numOfNewMessages: number;
   onClick?: () => void;
 }
 const ChatCard: FC<Props> = ({
   userList,
   lastMessage,
   lastModified,
-  numOfNewMessage,
+  numOfNewMessages,
   onClick = undefined,
 }) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -48,7 +48,7 @@ const ChatCard: FC<Props> = ({
 
       <S.SubInfoWrapper>
         <S.Time>{moment(lastModified).format('LT')}</S.Time>
-        <Circle num={numOfNewMessage}/>
+        <Circle num={numOfNewMessages}/>
       </S.SubInfoWrapper>
     </S.Container>
   );

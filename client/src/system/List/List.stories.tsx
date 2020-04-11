@@ -55,7 +55,7 @@ export const RoomCardList = () => {
     'user2',
     'user3'];
   const lastMessage = 'lastMessage';
-  const numOfNewMessage = 1;
+  const numOfNewMessages = 1;
   const lastModified = Date.now();
   return (
     <List>
@@ -63,73 +63,73 @@ export const RoomCardList = () => {
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
         userList={userList}
         lastMessage={lastMessage}
         lastModified={lastModified}
-        numOfNewMessage={numOfNewMessage}
+        numOfNewMessages={numOfNewMessages}
       />
     </List>
   );
