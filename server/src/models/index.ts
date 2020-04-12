@@ -1,10 +1,13 @@
 import {
   DataTypes, Sequelize,
 } from 'sequelize'
+import { env } from '../configs'
 import Chat from './chat'
 import User from './user'
 
-const sequelize = new Sequelize('mysql://root:1234@localhost:3306/mydb')
+const config = require('../configs/sequelize.js')[env || 'development']
+
+const sequelize = new Sequelize(config.database, config.username, config.password, config)
 
 const models = {
   User: User(sequelize, DataTypes),
@@ -12,3 +15,4 @@ const models = {
 }
 
 export default models
+
