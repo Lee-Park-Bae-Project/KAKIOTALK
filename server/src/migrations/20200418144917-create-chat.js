@@ -1,4 +1,4 @@
-const tableName = 'users'
+const tableName = 'chats'
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(tableName, {
     id: {
@@ -7,21 +7,13 @@ module.exports = {
       type: Sequelize.UUID,
       default: Sequelize.UUIDV4,
     },
-    name: {
+    roomId: {
       allowNull: false,
-      unique: true,
-      type: Sequelize.STRING,
+      type: Sequelize.UUID,
     },
-    curState: {
-      allowNull: true,
-      type: Sequelize.STRING,
-    },
-    email: {
+    sender: { type: Sequelize.UUID },
+    content: {
       allowNull: false,
-      type: Sequelize.STRING,
-    },
-    accessToken: {
-      allowNull: true,
       type: Sequelize.STRING,
     },
   }),

@@ -1,4 +1,4 @@
-const tableName = 'users'
+const tableName = 'rooms'
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(tableName, {
     id: {
@@ -7,22 +7,9 @@ module.exports = {
       type: Sequelize.UUID,
       default: Sequelize.UUIDV4,
     },
-    name: {
+    numOfParticipants: {
       allowNull: false,
-      unique: true,
-      type: Sequelize.STRING,
-    },
-    curState: {
-      allowNull: true,
-      type: Sequelize.STRING,
-    },
-    email: {
-      allowNull: false,
-      type: Sequelize.STRING,
-    },
-    accessToken: {
-      allowNull: true,
-      type: Sequelize.STRING,
+      type: Sequelize.DataTypes.INTEGER,
     },
   }),
 
