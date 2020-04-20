@@ -1,5 +1,6 @@
 import {
   BuildOptions,
+  DataTypes,
   Model,
   Sequelize,
 } from 'sequelize'
@@ -11,15 +12,15 @@ type RoomStatic = typeof Model & {
   associate: (models: any) => void;
 }
 
-export default (sequelize: Sequelize, DataTypes) => {
+export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Room = <RoomStatic>sequelize.define('Room', {
     id: {
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
       primaryKey: true,
       allowNull: false,
     },
     numOfParticipants: {
-      type: DataTypes.NUMBER,
+      type: dataTypes.NUMBER,
       allowNull: false,
     },
   })

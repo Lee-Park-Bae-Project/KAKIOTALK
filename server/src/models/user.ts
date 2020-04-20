@@ -1,5 +1,6 @@
 import {
   BuildOptions,
+  DataTypes,
   Model,
   Sequelize,
 } from 'sequelize'
@@ -11,16 +12,16 @@ type UserStatic = typeof Model & {
   associate: (models: any) => void;
 }
 
-export default (sequelize: Sequelize, DataTypes) => {
+export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const User = <UserStatic>sequelize.define('User', {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
     },
-    name: { type: DataTypes.STRING },
-    curState: { type: DataTypes.STRING },
-    email: { type: DataTypes.STRING },
-    accessToken: { type: DataTypes.STRING },
+    name: { type: dataTypes.STRING },
+    curState: { type: dataTypes.STRING },
+    email: { type: dataTypes.STRING },
+    accessToken: { type: dataTypes.STRING },
   })
   User.associate = (models) => {
     User.hasMany(models.Chat)

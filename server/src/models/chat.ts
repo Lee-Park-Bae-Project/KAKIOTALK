@@ -1,5 +1,6 @@
 import {
   BuildOptions,
+  DataTypes,
   Model,
   Sequelize,
 } from 'sequelize'
@@ -14,17 +15,17 @@ type ChatStatic = typeof Model & {
 
 // TS can't derive a proper class definition from a `.define` call, therefor we need to cast here.
 
-export default (sequelize: Sequelize, DataTypes) => {
+export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Chat = <ChatStatic>sequelize.define('Chat', {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
     },
-    roomId: { type: DataTypes.STRING },
-    sender: { type: DataTypes.STRING },
-    context: { type: DataTypes.STRING },
-    createdAt: { type: DataTypes.DATE },
-    updatedAt: { type: DataTypes.DATE },
+    roomId: { type: dataTypes.STRING },
+    sender: { type: dataTypes.STRING },
+    context: { type: dataTypes.STRING },
+    createdAt: { type: dataTypes.DATE },
+    updatedAt: { type: dataTypes.DATE },
   })
 
   Chat.associate = (models) => {

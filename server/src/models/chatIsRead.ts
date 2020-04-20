@@ -1,5 +1,6 @@
 import {
   BuildOptions,
+  DataTypes,
   Model,
   Sequelize,
 } from 'sequelize'
@@ -11,15 +12,15 @@ type ChatIsReadStatic = typeof Model & {
   associate: (models: any) => void;
 }
 
-export default (sequelize: Sequelize, DataTypes) => {
+export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const ChatIsRead = <ChatIsReadStatic>sequelize.define('ChatIsRead', {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
     },
-    userId: { type: DataTypes.STRING },
-    chatId: { type: DataTypes.STRING },
-    isRead: { type: DataTypes.BOOLEAN },
+    userId: { type: dataTypes.STRING },
+    chatId: { type: dataTypes.STRING },
+    isRead: { type: dataTypes.BOOLEAN },
   })
   ChatIsRead.associate = (models) => {
     ChatIsRead.belongsTo(models.User)
