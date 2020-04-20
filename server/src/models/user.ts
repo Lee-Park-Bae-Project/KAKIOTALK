@@ -8,9 +8,9 @@ import {
 interface IUser extends Model {
   id: string;
   name: string;
+  curState: string;
   email: string;
-  createdAt: Date;
-  updatedAt: Date;
+  accessToken: string
 }
 
 type UserStatic = typeof Model & {
@@ -25,9 +25,9 @@ export default (sequelize: Sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     name: { type: DataTypes.STRING },
+    curState: { type: DataTypes.STRING },
     email: { type: DataTypes.STRING },
-    createdAt: { type: DataTypes.DATE },
-    updatedAt: { type: DataTypes.DATE },
+    accessToken: { type: DataTypes.STRING },
   })
   User.associate = (models) => {
     User.hasMany(models.Chat)

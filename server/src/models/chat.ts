@@ -9,9 +9,7 @@ interface IChat extends Model {
   id: string;
   roomId: string;
   sender: string;
-  context: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  content: string;
 }
 
 // Need to declare the static model so `findOne` etc. use correct types.
@@ -36,7 +34,7 @@ export default (sequelize: Sequelize, DataTypes) => {
   })
 
   Chat.associate = (models) => {
-
+    Chat.belongsTo(models.User)
   }
   return Chat
 }

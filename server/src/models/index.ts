@@ -14,5 +14,8 @@ const models = {
   Chat: Chat(sequelize, DataTypes),
 }
 
-export default models
+Object.keys(models).forEach((modelName) => {
+  models[modelName].associate(models)
+})
 
+export default models
