@@ -2,6 +2,7 @@ const tableName = 'rooms'
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(tableName, {
     id: {
+      primaryKey: true,
       allowNull: false,
       unique: true,
       type: Sequelize.UUID,
