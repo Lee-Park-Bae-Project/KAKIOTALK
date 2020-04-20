@@ -4,12 +4,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-interface IChatIsRead extends Model {
-  id: string
-  userId: string;
-  chatId: string;
-  isRead: boolean;
-}
+import { IChatIsRead } from 'types'
 
 type ChatIsReadStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IChatIsRead;

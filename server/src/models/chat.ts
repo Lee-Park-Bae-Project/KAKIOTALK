@@ -4,13 +4,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-// const sequelize = new Sequelize('mysql://root:asd123@localhost:3306/mydb')
-interface IChat extends Model {
-  id: string;
-  roomId: string;
-  sender: string;
-  content: string;
-}
+import { IChat } from 'types'
 
 // Need to declare the static model so `findOne` etc. use correct types.
 type ChatStatic = typeof Model & {

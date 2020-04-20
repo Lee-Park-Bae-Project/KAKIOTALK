@@ -5,12 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-interface IRoomParticipants extends Model {
-  id: string;
-  roomId: string;
-  participants: string;
-  numOfUnread: number;
-}
+import { IRoomParticipants } from 'types'
 
 type RoomParticipants = typeof Model & {
   new (values?: object, options?: BuildOptions): IRoomParticipants;

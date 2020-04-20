@@ -5,11 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-interface IFriend {
-  id: string
-  followerId: string
-  followeeId: string
-}
+import { IFriend } from 'types'
 
 type FriendStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IFriend

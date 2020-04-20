@@ -4,10 +4,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-interface IRoom extends Model {
-  id: string
-  numOfParticipants: number
-}
+import { IRoom } from 'types'
 
 type RoomStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IRoom;

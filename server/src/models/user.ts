@@ -4,14 +4,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-// TS can't derive a proper class definition from a `.define` call, therefor we need to cast here.
-interface IUser extends Model {
-  id: string;
-  name: string;
-  curState: string;
-  email: string;
-  accessToken: string
-}
+import { IUser } from 'types'
 
 type UserStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IUser;
