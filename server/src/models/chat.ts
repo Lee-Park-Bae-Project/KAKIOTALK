@@ -35,6 +35,7 @@ export default (sequelize: Sequelize, DataTypes) => {
 
   Chat.associate = (models) => {
     Chat.belongsTo(models.User)
+    Chat.belongsTo(models.Room)
   }
   return Chat
 }
