@@ -6,6 +6,7 @@ import {
 } from 'sequelize'
 
 import { IRoom } from 'types'
+import { uuid } from '../common/utils'
 
 type RoomStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IRoom;
@@ -23,7 +24,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: () => dataTypes.UUIDV4,
+      defaultValue: uuid(),
     },
     numOfParticipants: {
       type: dataTypes.NUMBER,

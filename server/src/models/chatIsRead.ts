@@ -6,6 +6,7 @@ import {
 } from 'sequelize'
 
 import { IChatIsRead } from 'types'
+import { uuid } from '../common/utils'
 
 type ChatIsReadStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IChatIsRead;
@@ -22,7 +23,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: () => dataTypes.UUIDV4,
+      defaultValue: uuid(),
     },
     userId: { type: dataTypes.STRING },
     chatId: { type: dataTypes.STRING },
