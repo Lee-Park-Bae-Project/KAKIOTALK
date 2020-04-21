@@ -19,7 +19,14 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Chat = <ChatStatic>sequelize.define('Chat', {
     id: {
       primaryKey: true,
-      type: dataTypes.STRING,
+      autoIncrement: true,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
+    uuid: {
+      allowNull: false,
+      unique: true,
+      type: dataTypes.UUID,
+      defaultValue: () => dataTypes.UUIDV4,
     },
     roomId: { type: dataTypes.STRING },
     sender: { type: dataTypes.STRING },

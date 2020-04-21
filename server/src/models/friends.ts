@@ -16,11 +16,19 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Friend = <FriendStatic>sequelize.define('friend', {
     id: {
       primaryKey: true,
+      autoIncrement: true,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
+    uuid: {
+      allowNull: false,
+      unique: true,
       type: dataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      defaultValue: () => dataTypes.UUIDV4,
     },
     followerId: { type: dataTypes.STRING },
     followeeId: { type: dataTypes.STRING },
+    createdAt: { type: dataTypes.DATE },
+    updatedAt: { type: dataTypes.DATE },
   })
 
   Friend.associate = (models) => {

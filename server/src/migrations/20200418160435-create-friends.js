@@ -4,12 +4,13 @@ module.exports = {
     id: {
       primaryKey: true,
       allowNull: false,
-      unique: true,
-      type: Sequelize.UUID,
-      default: Sequelize.UUIDV4,
+      autoIncrement: true,
+      type: Sequelize.INTEGER.UNSIGNED,
     },
-    followerId: { type: Sequelize.UUID },
-    followeeId: { type: Sequelize.UUID },
+    followerId: { type: Sequelize.INTEGER.UNSIGNED },
+    followeeId: { type: Sequelize.INTEGER.UNSIGNED },
+    createdAt: { type: Sequelize.DATE },
+    updatedAt: { type: Sequelize.DATE },
   }),
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),

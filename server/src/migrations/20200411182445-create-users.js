@@ -4,9 +4,13 @@ module.exports = {
     id: {
       primaryKey: true,
       allowNull: false,
+      autoIncrement: true,
+      type: Sequelize.INTEGER.UNSIGNED,
+    },
+    uuid: {
+      allowNull: false,
       unique: true,
       type: Sequelize.UUID,
-      default: Sequelize.UUIDV4,
     },
     name: {
       allowNull: false,
@@ -25,6 +29,8 @@ module.exports = {
       allowNull: true,
       type: Sequelize.STRING,
     },
+    createdAt: { type: Sequelize.DATE },
+    updatedAt: { type: Sequelize.DATE },
   }),
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),

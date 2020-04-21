@@ -15,14 +15,22 @@ type RoomStatic = typeof Model & {
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Room = <RoomStatic>sequelize.define('Room', {
     id: {
-      type: dataTypes.STRING,
       primaryKey: true,
+      autoIncrement: true,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
+    uuid: {
       allowNull: false,
+      unique: true,
+      type: dataTypes.UUID,
+      defaultValue: () => dataTypes.UUIDV4,
     },
     numOfParticipants: {
       type: dataTypes.NUMBER,
       allowNull: false,
     },
+    createdAt: { type: dataTypes.DATE },
+    updatedAt: { type: dataTypes.DATE },
   })
 
   Room.associate = (models) => {

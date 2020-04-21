@@ -1,5 +1,5 @@
 import {
-  DataTypes, Sequelize,
+  DataTypes, ENUM, Sequelize,
 } from 'sequelize'
 import { env } from '../configs'
 import Chat from './chat'
@@ -19,9 +19,9 @@ export type ModelTypes =
 
 const config = require('../configs/sequelize.js')[env || 'development']
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config)
+export const sequelize = new Sequelize(config.database, config.username, config.password, config)
 
-const models:{[key: string ]: ModelTypes} = {
+export const models:{[key: string ]: ModelTypes} = {
   User: User(sequelize, DataTypes),
   Chat: Chat(sequelize, DataTypes),
   ChatIsRead: ChatIsRead(sequelize, DataTypes),
@@ -33,5 +33,3 @@ const models:{[key: string ]: ModelTypes} = {
 Object.keys(models).forEach((modelName) => {
   models[modelName].associate(models)
 })
-
-export default models

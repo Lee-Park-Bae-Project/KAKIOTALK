@@ -16,11 +16,19 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const ChatIsRead = <ChatIsReadStatic>sequelize.define('ChatIsRead', {
     id: {
       primaryKey: true,
-      type: dataTypes.STRING,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
+    uuid: {
+      allowNull: false,
+      unique: true,
+      type: dataTypes.UUID,
+      defaultValue: () => dataTypes.UUIDV4,
     },
     userId: { type: dataTypes.STRING },
     chatId: { type: dataTypes.STRING },
     isRead: { type: dataTypes.BOOLEAN },
+    createdAt: { type: dataTypes.DATE },
+    updatedAt: { type: dataTypes.DATE },
   })
   ChatIsRead.associate = (models) => {
     ChatIsRead.belongsTo(models.User)

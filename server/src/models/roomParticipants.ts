@@ -16,11 +16,20 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const RoomParticipants = <RoomParticipants>sequelize.define('RoomParticipants', {
     id: {
       primaryKey: true,
-      type: dataTypes.STRING,
+      autoIncrement: true,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
+    uuid: {
+      allowNull: false,
+      unique: true,
+      type: dataTypes.UUID,
+      defaultValue: () => dataTypes.UUIDV4,
     },
     roomId: { type: dataTypes.STRING },
     participants: { type: dataTypes.STRING },
     numOfUnread: { type: dataTypes.NUMBER },
+    createdAt: { type: dataTypes.DATE },
+    updatedAt: { type: dataTypes.DATE },
   })
 
   RoomParticipants.associate = (models) => {
