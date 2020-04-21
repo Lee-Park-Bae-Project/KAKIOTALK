@@ -1,4 +1,11 @@
 module.exports = {
   verbose: true,
-  testRegex: '(/__tests__/*|(\\.|/)(test|spec))\\.ts?$',
+  transform: { '^.+\\.ts$': 'ts-jest' },
+  testRegex: '((\\.|/)(test|spec))\\.ts?$',
+  testEnvironment: 'node',
+  moduleFileExtensions: [
+    'ts', 'js',
+  ],
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  globals: { 'ts-jest': { enableTsDiagnostics: true } },
 }

@@ -1,7 +1,7 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
-import models from '../models'
+import { models } from '../models'
 
 const userTest = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -9,8 +9,6 @@ const userTest = async (req: Request, res: Response, next: NextFunction) => {
       id: `${Date.now()}`,
       name: 'name',
       email: '123',
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
     })
 
     res.status(200).json(user)

@@ -2,9 +2,6 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
 const baseDbSetting = {
-  username: process.env.DB_USER,
-  password: process.env.DB_PW,
-  host: process.env.DB_HOST,
   timezone: '+09:00',
   dialect: 'mysql',
   pool: {
@@ -21,19 +18,28 @@ const baseDbSetting = {
 
 module.exports = {
   production: {
+    host: process.env.DB_HOST,
     database: process.env.DB_NAME,
+    username: process.env.DB_USER,
+    password: process.env.DB_PW,
     logging: false,
     ...baseDbSetting,
   },
 
   development: {
-    database: process.env.DB_DEV,
+    host: process.env.DB_DEV_HOST,
+    database: process.env.DB_DEV_NAME,
+    username: process.env.DB_DEV_USER,
+    password: process.env.DB_DEV_PW,
     logging: true,
     ...baseDbSetting,
   },
 
   test: {
-    database: process.env.DB_TEST,
+    host: process.env.DB_TEST_HOST,
+    database: process.env.DB_TEST_NAME,
+    username: process.env.DB_TEST_USER,
+    password: process.env.DB_TEST_PW,
     logging: false,
     ...baseDbSetting,
   },
