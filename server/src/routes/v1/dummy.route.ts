@@ -1,9 +1,9 @@
 import express from 'express'
 import {
-  getProfile,
-  getFriendList,
   getChatList,
-} from '../../controllers/dummy.controllers'
+  getFriendList,
+  getProfile,
+} from '../../controllers/dummy'
 
 const router = express.Router()
 
