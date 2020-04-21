@@ -21,7 +21,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     uuid: {
       allowNull: false,
       unique: true,
-      type: dataTypes.UUID,
+      type: dataTypes.UUIDV4,
       defaultValue: () => dataTypes.UUIDV4,
     },
     userId: { type: dataTypes.STRING },
