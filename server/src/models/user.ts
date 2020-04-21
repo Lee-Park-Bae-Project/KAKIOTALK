@@ -4,8 +4,8 @@ import {
   Model,
   Sequelize,
 } from 'sequelize'
-import { uuid } from 'common/utils'
 import { IUser } from 'types'
+import { uuid } from '../common/utils'
 
 export type UserStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IUser;
@@ -23,7 +23,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: () => dataTypes.UUIDV4,
+      defaultValue: uuid(),
     },
     name: { type: dataTypes.STRING },
     curState: { type: dataTypes.STRING },

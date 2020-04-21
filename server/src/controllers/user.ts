@@ -17,10 +17,4 @@ const userTest = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const chatTest = async (req: Request, res: Response, next: NextFunction) => {
-
-}
-
-export {
-  userTest, chatTest,
-}
+export { userTest }

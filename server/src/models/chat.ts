@@ -6,6 +6,7 @@ import {
 } from 'sequelize'
 
 import { IChat } from 'types'
+import { uuid } from '../common/utils'
 
 // Need to declare the static model so `findOne` etc. use correct types.
 type ChatStatic = typeof Model & {
@@ -26,7 +27,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: () => dataTypes.UUIDV4,
+      defaultValue: uuid(),
     },
     roomId: { type: dataTypes.STRING },
     sender: { type: dataTypes.STRING },

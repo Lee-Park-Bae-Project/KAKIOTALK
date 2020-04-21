@@ -6,6 +6,7 @@ import {
 } from 'sequelize'
 
 import { IFriend } from 'types'
+import { uuid } from '../common/utils'
 
 type FriendStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): IFriend
@@ -23,7 +24,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: () => dataTypes.UUIDV4,
+      defaultValue: uuid(),
     },
     followerId: { type: dataTypes.STRING },
     followeeId: { type: dataTypes.STRING },
