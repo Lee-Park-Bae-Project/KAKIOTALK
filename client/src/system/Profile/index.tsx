@@ -3,7 +3,7 @@ import * as S from 'system/Profile/styles';
 import Icon from 'Icon/Icon';
 import { color } from 'styles/global';
 import TextIcon from 'components/TextIcon';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 interface Prop {
   /** 유져 식별자 */
   id: string;
@@ -24,43 +24,44 @@ const Profile: FC<Prop> = ({
   statusMessage = '',
   onRemoveClick
 }) => {
-  const onChatClick = () => {
-    // alert(`chat id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
-    
-  };
 
   return (
     <S.PopUp>
       <S.PopUpInner>
-    <S.Container>
-      <Icon icon='PersonFilled' color={color.GRAY} size='4rem'/>
-      <S.NameWrapper>{userName}</S.NameWrapper>
-      {
-        statusMessage
-        && <S.StatusWrapper>{statusMessage}</S.StatusWrapper>
-      }
-      <S.Footer>
-        <Link to='/chat' style={{textDecoration:'none'}}>
-        <TextIcon
-          icon='Send'
-          color={color.GRAY}
-          text='1:1 채팅'
-          textColor={color.BLACK}
-          iconPosition='top'
-          onClick={onChatClick}
-        />
-        </Link>
-        <TextIcon
-          icon='Close'
-          color={color.GRAY}
-          text='삭제'
-          textColor={color.BLACK}
-          iconPosition='top'
-          onClick={onRemoveClick}
-        />
-      </S.Footer>
-    </S.Container>
-    </S.PopUpInner>
+        <S.Container>
+          <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />
+          <S.NameWrapper>{userName}</S.NameWrapper>
+          {
+            statusMessage
+            && <S.StatusWrapper>{statusMessage}</S.StatusWrapper>
+          }
+          <S.Footer>
+            <Link to={{
+              pathname: '/chat',
+              state: {
+                id,
+                userName,
+              }
+            }} style={{ textDecoration: 'none' }}>
+              <TextIcon
+                icon='Send'
+                color={color.GRAY}
+                text='1:1 채팅'
+                textColor={color.BLACK}
+                iconPosition='top'
+              />
+            </Link>
+            <TextIcon
+              icon='Close'
+              color={color.GRAY}
+              text='삭제'
+              textColor={color.BLACK}
+              iconPosition='top'
+              onClick={onRemoveClick}
+            />
+          </S.Footer>
+        </S.Container>
+      </S.PopUpInner>
 
     </S.PopUp>
 
