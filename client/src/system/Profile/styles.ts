@@ -3,12 +3,13 @@ import Flex from 'atoms/Flex';
 import { color, fontSize } from 'styles/global';
 
 export const Container = styled(Flex)`
-  width: 30rem;
+  width: 100%;
   height: 20rem;
   flex-direction: column;
   background-color: ${color.WHITE};
   align-items: center;
   padding:1rem;
+  box-shadow : 5px 5px 5px 5px ;
 `;
 
 export const NameWrapper = styled.span`
