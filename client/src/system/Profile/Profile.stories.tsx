@@ -11,6 +11,7 @@ export const Default = () => (
     id= '1'
     userName='남강우'
     statusMessage='Brand New 2020'
+    onRemoveClick= {()=>{}}
   />
 );
 
@@ -20,5 +21,7 @@ export const withNoStatus = () => (
     id='2'
     userName='남강우'
     statusMessage=''
+    onRemoveClick= {()=>{}}
+
   />
 );

@@ -11,6 +11,8 @@ interface Prop {
   userName: string;
   /** 상태메시지 */
   statusMessage: string;
+  /** 프로필닫기 핸들러 */
+  onRemoveClick: (() => void);
 }
 
 /**
@@ -20,15 +22,18 @@ const Profile: FC<Prop> = ({
   id,
   userName,
   statusMessage = '',
+  onRemoveClick
 }) => {
   const onChatClick = () => {
     alert(`chat id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
   };
-  const onRemoveClick = () => {
-    alert(`remove id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
-  };
+  // const onRemoveClick = () => {
+  //   alert(`remove id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
+  // };
 
   return (
+    <S.PopUp>
+      <S.PopUpInner>
     <S.Container>
       <Icon icon='PersonFilled' color={color.GRAY} size='4rem'/>
       <S.NameWrapper>{userName}</S.NameWrapper>
@@ -55,6 +60,10 @@ const Profile: FC<Prop> = ({
         />
       </S.Footer>
     </S.Container>
+    </S.PopUpInner>
+
+    </S.PopUp>
+
   );
 };
 

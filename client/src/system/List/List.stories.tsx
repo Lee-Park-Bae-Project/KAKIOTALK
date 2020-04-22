@@ -15,16 +15,19 @@ export const Default = () => (
         id='asd'
         statusMessage='asd'
         userName='asd'
+        onRemoveClick= {()=>{}}
       />
       <Profile
         id='asd'
         statusMessage='asd'
         userName='asd'
+        onRemoveClick= {()=>{}}
       />
       <Profile
         id='asd'
         statusMessage='asd'
         userName='asd'
+        onRemoveClick= {()=>{}}
       />
     </List>
 );

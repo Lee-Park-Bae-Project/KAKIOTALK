@@ -2,6 +2,9 @@ import React, { FC, useState, useEffect } from 'react';
 import List from 'system/List';
 import UserCard from 'components/UserCard';
 import Hr from 'atoms/Hr';
+import * as S from './style'
+import Profile from 'system/Profile'
+
 
 interface User {
   id: string;
@@ -16,14 +19,20 @@ interface Props {
 const Friend: FC<Props> = ({
   myProfile,
   friendList,
-}) => (
+}) => {
+  const [popup, setPopup] = useState(false)
+  const [clickedUser,setClickedUser] = useState({id:'',userName:'',statusMessage:''})
+  const onProfileClose = () => {
+    setPopup(!popup)
+  }
+  return (
     <List>
       <UserCard
         key={myProfile.id}
         userName={myProfile.userName}
         statusMessage={myProfile.statusMessage}
       />
-      <Hr/>
+      <Hr />
       친구 {friendList.length}
       {
         friendList.map(({
@@ -32,8 +41,11 @@ const Friend: FC<Props> = ({
           userName,
         }) => {
           const onUserCardClick = () => {
-            alert(userName);
+            setPopup(!popup)
+            setClickedUser({id:id,userName:userName,statusMessage:statusMessage})
+            console.log(popup)
           };
+       
           return (
             <UserCard
               key={id}
@@ -44,7 +56,9 @@ const Friend: FC<Props> = ({
           );
         })
       }
+      {popup ? <Profile id={clickedUser.id} userName={clickedUser.userName} statusMessage={clickedUser.statusMessage} onRemoveClick={onProfileClose}/> :null}
     </List>
-);
+  );
+}
 
 export default Friend;
