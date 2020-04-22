@@ -12,9 +12,12 @@ module.exports = {
       unique: true,
       type: Sequelize.UUID,
     },
+    googleId: {
+      allowNull: true,
+      type: Sequelize.STRING,
+    },
     name: {
       allowNull: false,
-      unique: true,
       type: Sequelize.STRING,
     },
     curState: {

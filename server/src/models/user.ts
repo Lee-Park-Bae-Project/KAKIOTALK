@@ -25,6 +25,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.UUIDV4,
       defaultValue: uuid(),
     },
+    googleId: { type: dataTypes.STRING },
     name: { type: dataTypes.STRING },
     curState: { type: dataTypes.STRING },
     email: { type: dataTypes.STRING },
