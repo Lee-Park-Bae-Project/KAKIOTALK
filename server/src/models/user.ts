@@ -37,9 +37,9 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
-  User.associate = (models) => {
-    User.hasMany(models.Chat)
-  }
+  // User.associate = (models) => {
+  //   User.hasMany(models.Chat)
+  // }
 
   return User
 }

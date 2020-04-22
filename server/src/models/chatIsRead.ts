@@ -31,10 +31,10 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-  ChatIsRead.associate = (models) => {
-    ChatIsRead.belongsTo(models.User)
-    ChatIsRead.belongsTo(models.Chat)
-  }
+  // ChatIsRead.associate = (models) => {
+  //   ChatIsRead.belongsTo(models.User)
+  //   ChatIsRead.belongsTo(models.Chat)
+  // }
 
   return ChatIsRead
 }

@@ -3,7 +3,6 @@ import React, {
   useState,
 } from 'react';
 
-import GoogleSigninImage from 'assets/google_signin.png';
 import * as S from 'components/GoogleSignin/styles';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
@@ -24,31 +23,26 @@ const GoogleSignin: React.FC = () => {
     email: '',
     name: '',
   });
-  const responseSuccess = (
-    e: any,
-  ) => {
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+  const responseSuccess = (e: any) => {
+    console.log(e);
     setState({
       id: e.googleId,
       email: e.email,
       name: e.name,
     });
-    axios
-      .post('/login', {
-        params: {
-          email: state.email,
-          id: state.id,
-        },
-      })
-      .then((response) => {
-        console.log(
-          'response',
-        );
-      })
+
+    axios.post('http://localhost:3050/v1/login/test', {
+      googleId: e.googleId,
+      accessToken: e.accessToken,
+    }).then((response) => {
+      console.log(response);
+    })
       .catch((error) => {
-        console.log(
-          'failed',
-          error,
-        );
+        console.log(error);
       });
   };
   const responseFail = (

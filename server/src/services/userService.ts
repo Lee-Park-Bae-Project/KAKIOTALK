@@ -1,11 +1,28 @@
 import { models } from '../models'
-import { UserStatic } from '../models/user'
 
-export const signUp = (name: string, email: string) => models.User.create({
-  name,
-  email,
-})
+const findByGoogleId = (googleId: string) => models.User.findOne({ where: { googleId } })
+const createUser = (googleId: string) => models.User.create({ googleId })
+const setAccessToken = (googleId: string, accessToken: string) => models.User.update(
+  { accessToken },
+  {
+    where: { googleId },
+    returning: true,
+  },
+)
+const setUserInfo = (googleId: string, name: string, email: string) => models.User.update(
+  {
+    name,
+    email,
+  },
+  {
+    where: { googleId },
+    returning: true,
+  },
+)
 
-export const withdrawal = () => {
-
+export default {
+  findByGoogleId,
+  createUser,
+  setAccessToken,
+  setUserInfo,
 }

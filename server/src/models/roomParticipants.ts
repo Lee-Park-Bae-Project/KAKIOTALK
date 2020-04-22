@@ -14,7 +14,7 @@ type RoomParticipants = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const RoomParticipants = <RoomParticipants>sequelize.define('RoomParticipants', {
+  const RoomParticipants = <RoomParticipants>sequelize.define('roomparticipants', {
     id: {
       primaryKey: true,
       autoIncrement: true,
@@ -33,10 +33,10 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
-  RoomParticipants.associate = (models) => {
-    RoomParticipants.hasOne(models.User)
-    RoomParticipants.belongsTo(models.Room)
-  }
+  // RoomParticipants.associate = (models) => {
+  //   RoomParticipants.hasOne(models.User)
+  //   RoomParticipants.belongsTo(models.Room)
+  // }
 
   return RoomParticipants
 }
