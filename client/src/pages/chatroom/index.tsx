@@ -1,16 +1,14 @@
-import React from 'react'
+import React,{FC} from 'react'
 import Styled from 'styled-components'
 import Profile from 'system/Profile'
 
-class ChatRoom extends React.Component{
+const ChatRoom:FC =()=> {
 
-    render(){
         return (
             <Room>
                 Nothing
             </Room>
         )
-    }
 
 
 }

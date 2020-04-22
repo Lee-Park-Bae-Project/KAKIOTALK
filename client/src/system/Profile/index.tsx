@@ -3,7 +3,7 @@ import * as S from 'system/Profile/styles';
 import Icon from 'Icon/Icon';
 import { color } from 'styles/global';
 import TextIcon from 'components/TextIcon';
-
+import {Link} from 'react-router-dom'
 interface Prop {
   /** 유져 식별자 */
   id: string;
@@ -25,11 +25,9 @@ const Profile: FC<Prop> = ({
   onRemoveClick
 }) => {
   const onChatClick = () => {
-    alert(`chat id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
+    // alert(`chat id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
+    
   };
-  // const onRemoveClick = () => {
-  //   alert(`remove id: ${id} userName: ${userName} statusMessage: ${statusMessage}`);
-  // };
 
   return (
     <S.PopUp>
@@ -42,6 +40,7 @@ const Profile: FC<Prop> = ({
         && <S.StatusWrapper>{statusMessage}</S.StatusWrapper>
       }
       <S.Footer>
+        <Link to='/chat' style={{textDecoration:'none'}}>
         <TextIcon
           icon='Send'
           color={color.GRAY}
@@ -50,6 +49,7 @@ const Profile: FC<Prop> = ({
           iconPosition='top'
           onClick={onChatClick}
         />
+        </Link>
         <TextIcon
           icon='Close'
           color={color.GRAY}

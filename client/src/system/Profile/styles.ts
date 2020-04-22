@@ -4,7 +4,7 @@ import { color, fontSize } from 'styles/global';
 
 export const Container = styled(Flex)`
   width: 100%;
-  height: 20rem;
+  height: 100%;
   flex-direction: column;
   background-color: ${color.WHITE};
   align-items: center;
