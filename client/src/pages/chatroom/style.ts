@@ -26,7 +26,7 @@ const InputArea = styled.input`
 width:90%;
 text-decoration: none;
 outline: none;
-height: 8rem;
+height: 5rem;
 border:none;
 `
 const ButtonWrapper = styled.div`
