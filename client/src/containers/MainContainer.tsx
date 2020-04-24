@@ -10,31 +10,22 @@ import { getLogin } from 'modules/login';
 
 const { useState, useEffect } = React;
 
-// const [isLogin, setIsLogin] = useState({
-//   id: '',
-//   token: '',
-//   name: '',
-//   googleId: ''
-// });
-
 const MainContainer: React.FC = () => {
   const dispatch = useDispatch();
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
   const chatList = useSelector((state: RootState) => state.chatRoomList);
-  const loginState = useSelector((state: RootState) => state.login);
+
   useEffect(() => {
     dispatch(getProfile());
     dispatch(getFriends());
     dispatch(getChatRoom());
-    // dispatch(getLogin(isLogin));
   }, []);
 
   const [tabSelector, setTabSelector] = useState({
     friend: true,
     chat: false
   });
-
   const friendTabOnClick = () => {
     setTabSelector({
       friend: true,
