@@ -1,4 +1,4 @@
-const tableName = 'friends'
+const tableName = 'chats'
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(tableName, {
     id: {
@@ -12,13 +12,29 @@ module.exports = {
       unique: true,
       type: Sequelize.UUID,
     },
-    userId: {
+    roomId: {
       allowNull: false,
       type: Sequelize.INTEGER.UNSIGNED,
+      references: {
+        model: 'rooms',
+        key: 'id',
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     },
-    friendId: {
-      allowNull: true,
+    content: {
+      type: Sequelize.TEXT,
+      allowNull: false,
+    },
+    senderId: {
       type: Sequelize.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: 'room_participants',
+        key: 'userId',
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     },
     createdAt: {
       allowNull: false,

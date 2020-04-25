@@ -1,4 +1,4 @@
-const tableName = 'chats'
+const tableName = 'chat_is_read'
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(tableName, {
     id: {
@@ -12,17 +12,25 @@ module.exports = {
       unique: true,
       type: Sequelize.UUID,
     },
-    roomId: {
-      allowNull: false,
-      type: Sequelize.INTEGER.UNSIGNED,
-    },
-    content: {
-      type: Sequelize.TEXT,
-      allowNull: false,
-    },
-    senderId: {
+    unreaderId: {
       type: Sequelize.INTEGER.UNSIGNED,
       allowNull: false,
+      references: {
+        model: 'room_participants',
+        key: 'userId',
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    },
+    chatId: {
+      type: Sequelize.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: 'chats',
+        key: 'id',
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     },
     createdAt: {
       allowNull: false,

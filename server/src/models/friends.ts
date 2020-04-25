@@ -39,16 +39,5 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
-  // Friend.associate = (models) => {
-  //   Friend.hasOne(models.User, {
-  //     sourceKey: 'followerId',
-  //     foreignKey: 'id',
-  //   })
-  //   Friend.hasOne(models.User, {
-  //     sourceKey: 'followeeId',
-  //     foreignKey: 'id',
-  //   })
-  // }
-
   return Friend
 }
