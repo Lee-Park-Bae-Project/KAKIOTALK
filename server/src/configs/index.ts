@@ -11,3 +11,8 @@ export const corsConfig: CorsOptions = {
   origin: whiteList,
   credentials: true,
 }
+
+export const jwtConfig = {
+  secret: process.env.JWT_SECRET || 'secret',
+  ttl: '2h',
+}

@@ -2,23 +2,15 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 import * as S from 'components/GoogleSignin/styles';
-import axios from 'axios';
 import GoogleLogin from 'react-google-login';
+import request from 'common/request';
+import { configs } from 'common/constants';
 
-type LoginForm = {
-  loginSuccess: (state: {
-    id: string;
-    email: string;
-    name: string;
-  }) => void;
-};
-
-const GoogleSignin: React.FC = () => {
-  const [
-    state, setState,
-  ] = useState({
+const GoogleSignin: React.FC<RouteComponentProps> = ({ match, location }) => {
+  const [state, setState] = useState({
     id: '',
     email: '',
     name: '',
@@ -28,20 +20,23 @@ const GoogleSignin: React.FC = () => {
     console.log(state);
   }, [state]);
   const responseSuccess = (e: any) => {
-    console.log(e);
+    const { googleId } = e;
+    const googleAccessToken = e.accessToken;
+    const { name, email } = e.profileObj;
     setState({
-      id: e.googleId,
-      email: e.email,
-      name: e.name,
+      id: googleId,
+      email,
+      name,
     });
 
-    axios.post('http://localhost:3050/v1/login/test', {
-      googleId: e.googleId,
-      accessToken: e.accessToken,
-    }).then((response) => {
-      console.log(response);
-    })
-      .catch((error) => {
+
+    request.login(googleId,
+      email,
+      name,
+      googleAccessToken)
+      .then((response) => {
+        console.log(response);
+      }).catch((error) => {
         console.log(error);
       });
   };
@@ -54,8 +49,9 @@ const GoogleSignin: React.FC = () => {
   return (
     <S.Container>
       <h2>{state.id}</h2>
+
       <GoogleLogin
-        clientId="559423734767-eqosl4f6j9kc771u93ste9g78ecrgl6d.apps.googleusercontent.com"
+        clientId={configs.CLIENT_ID}
         buttonText="Google"
         onSuccess={
           responseSuccess
@@ -63,19 +59,13 @@ const GoogleSignin: React.FC = () => {
         onFailure={
           responseFail
         }
+        redirectUri="http://localhost:3000/login/"
         cookiePolicy={
           'single_host_origin'
         }
       />
-      {/* <S.Img
-          src={
-            GoogleSigninImage
-          }
-          alt="google signin"
-        />
-      </button> */}
     </S.Container>
   );
 };
 
-export default GoogleSignin;
+export default withRouter(GoogleSignin);
