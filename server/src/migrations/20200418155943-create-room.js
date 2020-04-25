@@ -7,12 +7,19 @@ module.exports = {
       autoIncrement: true,
       type: Sequelize.INTEGER.UNSIGNED,
     },
-    numOfParticipants: {
+    uuid: {
       allowNull: false,
-      type: Sequelize.INTEGER.UNSIGNED,
+      unique: true,
+      type: Sequelize.UUID,
     },
-    createdAt: { type: Sequelize.DATE },
-    updatedAt: { type: Sequelize.DATE },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
   }),
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),

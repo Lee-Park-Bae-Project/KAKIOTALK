@@ -12,19 +12,27 @@ module.exports = {
       unique: true,
       type: Sequelize.UUID,
     },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    statue: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     googleId: {
       allowNull: true,
       type: Sequelize.STRING,
     },
-    name: {
+    googldAccessToken: {
       allowNull: true,
       type: Sequelize.STRING,
     },
-    curState: {
-      allowNull: true,
-      type: Sequelize.STRING,
-    },
-    email: {
+    googleRefreshToken: {
       allowNull: true,
       type: Sequelize.STRING,
     },
@@ -32,8 +40,14 @@ module.exports = {
       allowNull: true,
       type: Sequelize.STRING,
     },
-    createdAt: { type: Sequelize.DATE },
-    updatedAt: { type: Sequelize.DATE },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
   }),
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),

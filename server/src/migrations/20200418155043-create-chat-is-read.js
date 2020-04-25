@@ -7,11 +7,27 @@ module.exports = {
       autoIncrement: true,
       type: Sequelize.INTEGER.UNSIGNED,
     },
-    userId: { type: Sequelize.INTEGER.UNSIGNED },
-    chatId: { type: Sequelize.INTEGER.UNSIGNED },
-    isRead: { type: Sequelize.DataTypes.BOOLEAN },
-    createdAt: { type: Sequelize.DATE },
-    updatedAt: { type: Sequelize.DATE },
+    uuid: {
+      allowNull: false,
+      unique: true,
+      type: Sequelize.UUID,
+    },
+    unreaderId: {
+      type: Sequelize.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
+    chatId: {
+      type: Sequelize.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
   }),
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),

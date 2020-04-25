@@ -1,134 +1,127 @@
 module.exports = {
   up: (queryInterface, Sequelize) => Promise.all([
     queryInterface.addConstraint(
-      'chats',
+      'friends',
+      ['userId'],
+      {
+        type: 'foreign key',
+        name: 'add_fk_friends_userid',
+        references: {
+          table: 'users',
+          field: 'id',
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+      }
+    ),
+    queryInterface.addConstraint(
+      'friends',
+      ['friendId'],
+      {
+        type: 'foreign key',
+        name: 'add_fk_friends_friendid',
+        references: {
+          table: 'users',
+          field: 'id',
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+      }
+    ),
+    queryInterface.addConstraint(
+      'roomparticipants',
+      ['userId'],
+      {
+        type: 'foreign key',
+        name: 'add_fk_roomparticipants_userid',
+        references: {
+          table: 'users',
+          field: 'id',
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+      }
+    ),
+    queryInterface.addConstraint(
+      'roomparticipants',
       ['roomId'],
       {
         type: 'foreign key',
-        name: 'add_fk_to_chats_roomid',
+        name: 'add_fk_roomparticipants_roomid',
         references: {
           table: 'rooms',
           field: 'id',
         },
-        onDelete: 'cascade',
         onUpdate: 'cascade',
+        onDelete: 'cascade',
       }
     ),
-
     queryInterface.addConstraint(
       'chats',
-      ['sender'],
+      ['roomId'],
       {
         type: 'foreign key',
-        name: 'add_fk_to_chats_sender',
+        name: 'add_fk_chats_roomid',
         references: {
-          table: 'users',
+          table: 'rooms',
           field: 'id',
         },
-        onDelete: 'cascade',
         onUpdate: 'cascade',
+        onDelete: 'cascade',
       }
     ),
-
     queryInterface.addConstraint(
-      'chatisread',
-      ['userId'],
+      'chats',
+      ['senderId'],
       {
         type: 'foreign key',
-        name: 'add_fk_to_chatisread_userId',
+        name: 'add_fk_chats_senderid',
         references: {
-          table: 'users',
-          field: 'id',
+          table: 'roomparticipants',
+          field: 'userId',
         },
-        onDelete: 'cascade',
         onUpdate: 'cascade',
+        onDelete: 'cascade',
       }
     ),
-
     queryInterface.addConstraint(
       'chatisread',
       ['chatId'],
       {
         type: 'foreign key',
-        name: 'add_fk_to_chatisread_chatId',
+        name: 'add_fk_chatisread_chatid',
         references: {
-          table: 'rooms',
+          table: 'chats',
           field: 'id',
         },
-        onDelete: 'cascade',
         onUpdate: 'cascade',
+        onDelete: 'cascade',
       }
     ),
-
     queryInterface.addConstraint(
-      'roomparticipants',
-      ['roomId'],
+      'chatisread',
+      ['unreaderId'],
       {
         type: 'foreign key',
-        name: 'add_fk_to_roomparticipants_roomId',
+        name: 'add_fk_chatisread_unreaderId',
         references: {
-          table: 'rooms',
-          field: 'id',
+          table: 'roomparticipants',
+          field: 'userId',
         },
-        onDelete: 'cascade',
         onUpdate: 'cascade',
-      }
-    ),
-
-    queryInterface.addConstraint(
-      'roomparticipants',
-      ['participants'],
-      {
-        type: 'foreign key',
-        name: 'add_fk_to_roomparticipants_participants',
-        references: {
-          table: 'users',
-          field: 'id',
-        },
         onDelete: 'cascade',
-        onUpdate: 'cascade',
-      }
-    ),
-
-    queryInterface.addConstraint(
-      'friends',
-      ['followerId'],
-      {
-        type: 'foreign key',
-        name: 'add_fk_to_friends_followerId',
-        references: {
-          table: 'users',
-          field: 'id',
-        },
-        onDelete: 'cascade',
-        onUpdate: 'cascade',
-      }
-    ),
-
-    queryInterface.addConstraint(
-      'friends',
-      ['followeeId'],
-      {
-        type: 'foreign key',
-        name: 'add_fk_to_friends_followeeId',
-        references: {
-          table: 'users',
-          field: 'id',
-        },
-        onDelete: 'cascade',
-        onUpdate: 'cascade',
       }
     ),
   ]),
 
   down: (queryInterface, Sequelize) => Promise.all([
-    queryInterface.removeConstraint('chats', 'add_fk_to_chats_roomid'),
-    queryInterface.removeConstraint('chats', 'add_fk_to_chats_sender'),
-    queryInterface.removeConstraint('chatisread', 'add_fk_to_chatisread_userId'),
-    queryInterface.removeConstraint('chatisread', 'add_fk_to_chatisread_chatId'),
-    queryInterface.removeConstraint('roomparticipants', 'add_fk_to_roomparticipants_roomId'),
-    queryInterface.removeConstraint('roomparticipants', 'add_fk_to_roomparticipants_participants'),
-    queryInterface.removeConstraint('friends', 'add_fk_to_friends_followerId'),
-    queryInterface.removeConstraint('friends', 'add_fk_to_friends_followeeId'),
+    queryInterface.removeConstraint('friends', 'add_fk_friends_userid'),
+    queryInterface.removeConstraint('friends', 'add_fk_friends_friendid'),
+    queryInterface.removeConstraint('roomparticipants', 'add_fk_roomparticipants_userid'),
+    queryInterface.removeConstraint('roomparticipants', 'add_fk_roomparticipants_roomid'),
+    queryInterface.removeConstraint('chats', 'add_fk_chats_roomid'),
+    queryInterface.removeConstraint('chats', 'add_fk_chats_senderid'),
+    queryInterface.removeConstraint('chatisread', 'add_fk_chatisread_chatid'),
+    queryInterface.removeConstraint('chatisread', 'add_fk_chatisread_unreaderId'),
   ]),
 }

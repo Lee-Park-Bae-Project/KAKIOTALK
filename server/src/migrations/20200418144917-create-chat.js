@@ -7,17 +7,31 @@ module.exports = {
       autoIncrement: true,
       type: Sequelize.INTEGER.UNSIGNED,
     },
+    uuid: {
+      allowNull: false,
+      unique: true,
+      type: Sequelize.UUID,
+    },
     roomId: {
       allowNull: false,
       type: Sequelize.INTEGER.UNSIGNED,
     },
-    sender: { type: Sequelize.INTEGER.UNSIGNED },
     content: {
+      type: Sequelize.TEXT,
       allowNull: false,
-      type: Sequelize.STRING,
     },
-    createdAt: { type: Sequelize.DATE },
-    updatedAt: { type: Sequelize.DATE },
+    senderId: {
+      type: Sequelize.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
   }),
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),
