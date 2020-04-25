@@ -1,4 +1,5 @@
 import { CorsOptions } from 'cors'
+import { CookieOptions } from 'express'
 
 require('dotenv').config()
 
@@ -10,6 +11,11 @@ const whiteList = [
 export const corsConfig: CorsOptions = {
   origin: whiteList,
   credentials: true,
+}
+
+export const cookieConfig: CookieOptions = {
+  httpOnly: true,
+  maxAge: 1000 * 60 * 60 * 20,
 }
 
 export const jwtConfig = {
