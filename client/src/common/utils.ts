@@ -2,8 +2,14 @@ import moment from 'moment';
 import 'moment-timezone';
 
 moment.locale('ko');
-moment.tz.setDefault('Asia/Seoul');
+const tzSeoul = 'Asia/Seoul';
 
-export const convertDBTimeTohhmmA = (dbTime: string) => moment(new Date(dbTime), 'MM-DD-YYYY HH:mm:ss').tz('Asia/Seoul').format('hh:mm A');
+export const convertDBTimeTohhmmA = (dbTime: string) => {
+  const seoul = moment.tz(new Date(dbTime), tzSeoul);
+  return seoul.format('hh:mm A');
+};
 
-export const convertMillToMMDDYYYY = (date: number) => moment(date).tz('Asia/Seoul').format('MM-DD-YYYY');
+export const convertMillToMMDDYYYY = (date: number) => {
+  const seoul = moment.tz(date, tzSeoul);
+  return seoul.format('MM-DD-YYYY');
+};
