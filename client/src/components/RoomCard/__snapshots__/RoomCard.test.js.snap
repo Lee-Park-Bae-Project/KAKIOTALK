@@ -3,7 +3,7 @@
 exports[`<RoomCard/> matches snapshots 1`] = `
 <ChatCard
   lastMessage="hihi"
-  lastModified="123"
+  lastModified="2020-04-25 22:13:52"
   numOfNewMessages={3}
   userList={
     Array [
@@ -428,7 +428,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                   <span
                     className="sc-iwsKbI gnPtlj"
                   >
-                    12:00 AM
+                    04-25-2020
                   </span>
                 </StyledComponent>
               </styled.span>

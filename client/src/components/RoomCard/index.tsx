@@ -3,6 +3,7 @@ import * as S from 'components/RoomCard/styles';
 import Icon from 'Icon/Icon';
 import Circle from 'atoms/Circle';
 import moment from 'moment';
+import { convertMillToMMDDYYYY } from 'common/utils';
 
 interface Props{
   userList: string[];
@@ -48,7 +49,7 @@ const ChatCard: FC<Props> = ({
       </S.RoomInfoWrapper>
 
       <S.SubInfoWrapper>
-        <S.Time>{moment(lastModified).format('LT')}</S.Time>
+        <S.Time>{convertMillToMMDDYYYY(lastModified)}</S.Time>
         <Circle num={numOfNewMessages}/>
       </S.SubInfoWrapper>
     </S.Container>
