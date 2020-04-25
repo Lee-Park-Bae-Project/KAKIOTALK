@@ -1,21 +1,27 @@
+import jwt from 'jsonwebtoken'
 import request from '../common/request'
-import UserService from './userService'
-// TODO: Refactoring
-const login = async (googleId: string, accessToken: string) => {
-  let user = await UserService.findByGoogleId(googleId)
-  if (user) {
-    const { data } = await request.getUserInfo(accessToken)
-    await UserService.setAccessToken(googleId, accessToken)
-    await UserService.setUserInfo(googleId, data.name, data.email)
-    user = await UserService.findByGoogleId(googleId)
-    return user
-  }
-  user = await UserService.createUser(googleId)
-  const { data } = await request.getUserInfo(accessToken)
-  await UserService.setAccessToken(googleId, accessToken)
-  await UserService.setUserInfo(googleId, data.name, data.email)
-  user = await UserService.findByGoogleId(googleId)
-  return user
+import userService from './userService'
+import { jwtConfig } from '../configs'
+
+const login = async (
+  googleId: string,
+  email: string,
+  name: string,
+  googleAccessToken: string,
+) => {
+  userService.findOrCreate(
+    googleId,
+    name,
+    email,
+    googleAccessToken,
+  )
+
+  const payload = { googleId }
+  const accessToken = jwt.sign(payload, jwtConfig.secret, { expiresIn: jwtConfig.ttl })
+
+  await userService.setAccessToken(googleId, accessToken)
+
+  return accessToken
 }
 
 export default { login }

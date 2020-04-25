@@ -1,21 +1,29 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
+import {
+  cookieConfig, cookieName,
+} from 'configs'
 import { response } from '../common/utils'
-import LoginService from '../services/auth'
+import loginService from '../services/auth'
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {
-      googleId, accessToken,
+      googleId,
+      email,
+      name,
+      googleAccessToken,
     } = req.body
 
-    const userInfo = await LoginService.login(googleId, accessToken)
+    const token = await loginService.login(googleId, name, email, googleAccessToken)
 
-    response(res, userInfo)
+    res.cookie(cookieName, token, cookieConfig)
+
+    response(res)
   } catch (e) {
     next(e)
   }
 }
 
-export { login }
+export default login
