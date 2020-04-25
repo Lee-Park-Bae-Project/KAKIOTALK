@@ -7,7 +7,7 @@ describe('moment', () => {
   describe('convertDBTimeTohhmmA()', () => {
     const dbTime = '2020-04-25 22:13:52';
     it('should return hh:mm A format', () => {
-      expect(convertDBTimeTohhmmA(dbTime)).toEqual('10:13 PM');
+      expect(convertDBTimeTohhmmA(dbTime)).toEqual('10:13 오후');
     });
   });
 
