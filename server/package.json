@@ -45,6 +45,7 @@
     "@types/express-session": "^1.15.16",
     "@types/http-errors": "^1.6.3",
     "@types/jest": "^25.2.1",
+    "@types/jsonwebtoken": "^8.3.9",
     "@types/morgan": "^1.9.0",
     "@types/nodemon": "^1.19.0",
     "@types/session-file-store": "^1.2.1",
