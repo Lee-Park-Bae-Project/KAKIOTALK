@@ -17,6 +17,8 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const ChatIsRead = <ChatIsReadStatic>sequelize.define('ChatIsRead', {
     id: {
       primaryKey: true,
+      allowNull: false,
+      autoIncrement: true,
       type: dataTypes.INTEGER.UNSIGNED,
     },
     uuid: {
@@ -25,9 +27,14 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.UUIDV4,
       defaultValue: uuid(),
     },
-    userId: { type: dataTypes.STRING },
-    chatId: { type: dataTypes.STRING },
-    isRead: { type: dataTypes.BOOLEAN },
+    unreaderId: {
+      type: dataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
+    chatId: {
+      type: dataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })

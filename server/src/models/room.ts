@@ -17,6 +17,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Room = <RoomStatic>sequelize.define('Room', {
     id: {
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
       type: dataTypes.INTEGER.UNSIGNED,
     },
@@ -25,10 +26,6 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       unique: true,
       type: dataTypes.UUIDV4,
       defaultValue: uuid(),
-    },
-    numOfParticipants: {
-      type: dataTypes.NUMBER,
-      allowNull: false,
     },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
