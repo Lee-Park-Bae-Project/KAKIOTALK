@@ -20,6 +20,7 @@ const ChatCard: FC<Props> = ({
 }) => {
   const [isSelected, setIsSelected] = useState(false);
   const numOfUser = userList.length;
+  moment.locale();
   return (
     <S.Container onClick={onClick}>
       <S.RoomInfoWrapper>

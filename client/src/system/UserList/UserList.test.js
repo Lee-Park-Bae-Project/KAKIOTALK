@@ -81,30 +81,3 @@ describe('<UserList/>', () => {
     expect(result).toBe(userList[1].id);
   });
 });
-
-describe('<UserList/> with redux', () => {
-  it('redux', () => {
-    const action = addFriends(userList);
-    store.dispatch(action);
-    const onClick = (id) => () => { console.log(id); };
-
-    const { userList: curState } = store.getState();
-    expect(curState).toEqual(userList);
-    const props = {
-      myProfile,
-      userList: curState,
-    };
-
-    const wrapper = mount((
-      <Provider store={store}>
-        <UserList
-          myProfile={myProfile}
-          userList={props.userList}
-          onClick={onClick}
-        />
-      </Provider>
-    ));
-
-    expect(wrapper.find(UserCard).length).toEqual(3);
-  });
-});

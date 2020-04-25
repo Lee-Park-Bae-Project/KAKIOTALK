@@ -29,7 +29,6 @@ const GoogleSignin: React.FC<RouteComponentProps> = ({ match, location }) => {
       name,
     });
 
-
     request.login(googleId,
       email,
       name,
