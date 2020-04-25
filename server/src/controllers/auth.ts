@@ -3,7 +3,7 @@ import {
 } from 'express'
 import {
   cookieConfig, cookieName,
-} from 'configs'
+} from '../configs'
 import { response } from '../common/utils'
 import loginService from '../services/auth'
 
