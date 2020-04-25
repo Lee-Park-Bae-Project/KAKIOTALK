@@ -20,7 +20,7 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    statue: {
+    status: {
       type: Sequelize.STRING,
       allowNull: true,
     },
@@ -28,7 +28,7 @@ module.exports = {
       allowNull: true,
       type: Sequelize.STRING,
     },
-    googldAccessToken: {
+    googleAccessToken: {
       allowNull: true,
       type: Sequelize.STRING,
     },
