@@ -1,14 +1,23 @@
-import express from "express";
+import express from 'express';
 import {
-  getProfile,
-  getFriendList,
   getChatList,
-} from "../../controllers/dummy.controllers";
+  getFriendList,
+  getProfile,
+} from '../../controllers/dummy';
 
 const router = express.Router();
 
-router.get("/my-profile", getProfile);
-router.get("/friend-list", getFriendList);
-router.get("/chat-list", getChatList);
+router.get(
+  '/my-profile',
+  getProfile,
+);
+router.get(
+  '/friend-list',
+  getFriendList,
+);
+router.get(
+  '/chat-list',
+  getChatList,
+);
 
 export default router;

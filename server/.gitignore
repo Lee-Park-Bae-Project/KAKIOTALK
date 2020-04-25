@@ -1,0 +1,6 @@
+# server dist folder
+/dist
+
+# env
+src/.env
+src/*.env.*
