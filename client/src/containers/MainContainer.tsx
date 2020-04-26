@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
+import { Profile } from 'types';
 import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
+import { getLogin } from 'modules/login';
 
 const { useState, useEffect } = React;
 
@@ -22,27 +24,30 @@ const MainContainer: React.FC = () => {
 
   const [tabSelector, setTabSelector] = useState({
     friend: true,
-    chat: false,
+    chat: false
   });
-
   const friendTabOnClick = () => {
     setTabSelector({
       friend: true,
-      chat: false,
+      chat: false
     });
   };
 
   const chatTabOnClick = () => {
     setTabSelector({
       friend: false,
-      chat: true,
+      chat: true
     });
   };
-  const addFriendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+
+  const addFriendTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ): void => {
     alert('hihi');
   };
 
   const [searchKeyword, setSearchKeyword] = useState('');
+
   const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
   };
