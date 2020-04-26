@@ -10,6 +10,7 @@ import friends from 'modules/friends';
 import chatRoomList from 'modules/chatRoom';
 import profile from 'modules/profile';
 import login from 'modules/login';
+import chat from 'modules/chat';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   friends,
   chatRoomList,
   profile,
-  login
+  login,
+  chat
 });
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

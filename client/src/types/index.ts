@@ -17,3 +17,7 @@ export interface Profile {
   name: string;
   googleId: string;
 }
+export interface Chat {
+  chatList: [];
+  socketId: null;
+}
