@@ -8,13 +8,12 @@ import FileStore = require("session-file-store");
 import passport = require("passport");
 import GoogleStrategy = require("passport-google-oauth");
 import v1Route from "./routes/v1";
-import cors from "cors";
-import { corsConfig } from "./configs";
+import cors from 'cors';
+import {corsConfig} from './configs'
 const app = express();
 
 // view engine setup
-app.use(cors(corsConfig));
-
+app.use(cors(corsConfig))
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
