@@ -6,7 +6,6 @@ import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
-import { getLogin } from 'modules/login';
 
 const { useState, useEffect } = React;
 

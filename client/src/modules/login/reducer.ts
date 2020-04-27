@@ -1,17 +1,21 @@
 import {
-  GET_LOGIN,
+  LOGIN_REQUEST,
   GET_LOGIN_SUCCESS,
   GET_LOGIN_FAILURE
 } from 'modules/login/action';
-import { Profile } from 'types';
+import { Profile, loginInfo } from 'types';
 import { LoginAction } from 'modules/login/types';
 
-const initialState: Profile[] = [];
+const initialState: loginInfo[] = [];
 
-function userLogin(state: Profile[] = initialState, action: LoginAction) {
+function userLogin(state: loginInfo[] = initialState, action: LoginAction) {
   switch (action.type) {
-    case GET_LOGIN: {
-      return state.concat(action.payload);
+    case LOGIN_REQUEST: {
+      const isLogin: loginInfo = {
+        loginToken: action.payload,
+        isLoggedIn: true
+      };
+      return state.concat(isLogin);
     }
     case GET_LOGIN_SUCCESS: {
       return action.payload;

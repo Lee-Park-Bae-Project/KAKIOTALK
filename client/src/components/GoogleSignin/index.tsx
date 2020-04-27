@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import dotenv from 'dotenv';
 import GoogleSigninImage from 'assets/google_signin.png';
 import * as S from 'components/GoogleSignin/styles';
@@ -8,49 +8,63 @@ import { withRouter, RouteComponentProps, useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'modules';
+import { loginRequest } from 'modules/login';
+import { useCookies } from 'react-cookie';
+import { instanceOf } from 'prop-types';
+
+const { useState, useEffect } = React;
+
 dotenv.config();
 
-type LoginForm = {
-  loginSuccess: (state: { id: string; email: string; name: string }) => void;
-};
+// type LoginForm = {
+//   loginSuccess: (state: { id: string; email: string; name: string }) => void;
+// };
 const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
-  const loginState = useSelector((state: RootState) => state.login);
-  const [state, setState] = useState({
-    id: '',
+  const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies(['name']);
+  const [login, setLogin] = useState({
     email: '',
     name: '',
-    accessToken: ''
+    googleId: ''
   });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const history = useHistory();
   const responseSuccess = (e: any) => {
-    setState({
-      id: e.googleId,
-      email: e.email,
-      name: e.name,
-      accessToken: e.access_token
+    setLogin({
+      email: e.profileObj.email,
+      name: e.profileObj.name,
+      googleId: e.profileObj.googleId
     });
-    console.log(e);
-    axios
-      .post(
-        '/v1/dummy',
-        qs.stringify({
-          e: e.googleId,
-          email: e.email,
-          name: e.name,
-          aceessToken: e.accessToken
-        })
-      )
-      .then(response => {
-        alert('login Success');
-        console.log('response');
-        history.push('/main');
-      })
-      .catch(error => {
-        alert('login Failure');
-        console.log('failed', error);
-      });
+    dispatch(loginRequest(login));
+    const { isLoggedIn } = useSelector((state: RootState) => state.login);
+    if (isLoggedIn) {
+      history.push('/main');
+      e.profileObj.name;
+    } else {
+      alert('login Failure');
+      console.log('logi Fail');
+    }
+
+    // axios
+    //   .post(
+    //     '/v1/dummy',
+    //     qs.stringify({
+    //       e: e.googleId,
+    //       email: e.email,
+    //       name: e.name,
+    //       aceessToken: e.accessToken
+    //     })
+    //   )
+    //   .then(response => {
+    //     alert('login Success');
+    //     console.log('response');
+    //     history.push('/main');
+    //   })
+    //   .catch(error => {
+    //     alert('login Failure');
+    //     console.log('failed', error);
+    //   });
   };
   const responseFail = (err: Error) => {
     console.error(err);
@@ -58,7 +72,6 @@ const GoogleSignin: React.FC = () => {
 
   return (
     <S.Container>
-      <h2>{state.id}</h2>
       <GoogleLogin
         clientId={clientGoogleId}
         buttonText="Google"

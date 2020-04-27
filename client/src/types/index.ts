@@ -11,13 +11,7 @@ export interface ChatRoom {
   lastModified: number;
   numOfNewMessages: number;
 }
-export interface Profile {
-  id: string;
-  token: string;
-  name: string;
-  googleId: string;
-}
 export interface Chat {
-  chatList: [];
-  socketId: null;
+  chatList: string[];
+  socketId: string;
 }

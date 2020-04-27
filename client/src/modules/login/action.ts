@@ -4,9 +4,8 @@ export const GET_LOGIN = 'login/GET_LOGIN' as const;
 export const GET_LOGIN_SUCCESS = 'login/LOGIN_SUCCESS' as const;
 export const GET_LOGIN_FAILURE = 'login/LOGIN_FAILURE' as const;
 
-export const getLogin = (loginUser: Profile) => ({
-  type: GET_LOGIN,
-  payload: loginUser
+export const getLogin = () => ({
+  type: GET_LOGIN
 });
 export const getLoginSuccess = (token: Object) => ({
   type: GET_LOGIN_SUCCESS,
