@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IRoom } from 'types'
+import { IRoom } from '../types'
 import { uuid } from '../common/utils'
 
 type RoomStatic = typeof Model & {

@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IRoomParticipants } from 'types'
+import { IRoomParticipants } from '../types'
 import { uuid } from '../common/utils'
 
 type RoomParticipants = typeof Model & {

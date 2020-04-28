@@ -34,6 +34,7 @@ const GoogleSignin: React.FC<RouteComponentProps> = ({ match, location }) => {
       name,
       googleAccessToken)
       .then((response) => {
+        // TODO: 메인으로 리다이렉트
         console.log(response);
       }).catch((error) => {
         console.log(error);

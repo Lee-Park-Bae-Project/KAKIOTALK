@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IFriend } from 'types'
+import { IFriend } from '../types'
 import { uuid } from '../common/utils'
 
 type FriendStatic = typeof Model & {

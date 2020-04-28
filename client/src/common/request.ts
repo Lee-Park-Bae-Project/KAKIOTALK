@@ -25,6 +25,11 @@ const getChatList: AxiosRequestConfig = {
   url: 'dummy/chat-list',
 };
 
+const getUserInfo: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'auth/check-auth',
+};
+
 const login = (
   googleId: string,
   email: string,
@@ -51,6 +56,7 @@ const request = {
     name: string,
     googleAccessToken: string
   ) => Axios(login(googleId, email, name, googleAccessToken)),
+  getUserInfo: () => Axios(getUserInfo),
 };
 
 export default request;

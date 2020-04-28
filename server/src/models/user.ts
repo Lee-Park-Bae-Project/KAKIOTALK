@@ -4,7 +4,7 @@ import {
   Model,
   Sequelize,
 } from 'sequelize'
-import { IUser } from 'types'
+import { IUser } from '../types'
 import { uuid } from '../common/utils'
 
 export type UserStatic = typeof Model & {

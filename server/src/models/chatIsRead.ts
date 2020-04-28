@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IChatIsRead } from 'types'
+import { IChatIsRead } from '../types'
 import { uuid } from '../common/utils'
 
 type ChatIsReadStatic = typeof Model & {

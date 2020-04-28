@@ -6,9 +6,10 @@ import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
 
-const { useState, useEffect } = React;
+import withAuth, { Props } from 'hocs/withAuth';
 
-const MainContainer: React.FC = () => {
+const { useState, useEffect } = React;
+const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const dispatch = useDispatch();
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
@@ -18,7 +19,14 @@ const MainContainer: React.FC = () => {
     dispatch(getProfile());
     dispatch(getFriends());
     dispatch(getChatRoom());
+    console.log(name, email, uuid);
   }, []);
+
+  useEffect(() => {
+    console.log(name, email, uuid);
+  }, [name,
+    email,
+    uuid]);
 
   const [tabSelector, setTabSelector] = useState({
     friend: true,
@@ -62,4 +70,4 @@ const MainContainer: React.FC = () => {
   );
 };
 
-export default MainContainer;
+export default withAuth(MainContainer);

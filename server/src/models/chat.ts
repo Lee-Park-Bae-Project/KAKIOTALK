@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IChat } from 'types'
+import { IChat } from '../types'
 import { uuid } from '../common/utils'
 
 // Need to declare the static model so `findOne` etc. use correct types.
