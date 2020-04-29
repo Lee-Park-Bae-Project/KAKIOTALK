@@ -2,53 +2,42 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-import GoogleSigninImage from 'assets/google_signin.png';
 import * as S from 'components/GoogleSignin/styles';
-import axios from 'axios';
 import GoogleLogin from 'react-google-login';
+import request from 'common/request';
+import { configs } from 'common/constants';
 
-type LoginForm = {
-  loginSuccess: (state: {
-    id: string;
-    email: string;
-    name: string;
-  }) => void;
-};
-
-const GoogleSignin: React.FC = () => {
-  const [
-    state, setState,
-  ] = useState({
+const GoogleSignin: React.FC<RouteComponentProps> = ({ match, location }) => {
+  const [state, setState] = useState({
     id: '',
     email: '',
     name: '',
   });
-  const responseSuccess = (
-    e: any,
-  ) => {
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+  const responseSuccess = (e: any) => {
+    const { googleId } = e;
+    const googleAccessToken = e.accessToken;
+    const { name, email } = e.profileObj;
     setState({
-      id: e.googleId,
-      email: e.email,
-      name: e.name,
+      id: googleId,
+      email,
+      name,
     });
-    axios
-      .post('/login', {
-        params: {
-          email: state.email,
-          id: state.id,
-        },
-      })
+
+    request.login(googleId,
+      email,
+      name,
+      googleAccessToken)
       .then((response) => {
-        console.log(
-          'response',
-        );
-      })
-      .catch((error) => {
-        console.log(
-          'failed',
-          error,
-        );
+        // TODO: 메인으로 리다이렉트
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
       });
   };
   const responseFail = (
@@ -60,8 +49,9 @@ const GoogleSignin: React.FC = () => {
   return (
     <S.Container>
       <h2>{state.id}</h2>
+
       <GoogleLogin
-        clientId="559423734767-eqosl4f6j9kc771u93ste9g78ecrgl6d.apps.googleusercontent.com"
+        clientId={configs.CLIENT_ID}
         buttonText="Google"
         onSuccess={
           responseSuccess
@@ -69,19 +59,13 @@ const GoogleSignin: React.FC = () => {
         onFailure={
           responseFail
         }
+        redirectUri="http://localhost:3000/login/"
         cookiePolicy={
           'single_host_origin'
         }
       />
-      {/* <S.Img
-          src={
-            GoogleSigninImage
-          }
-          alt="google signin"
-        />
-      </button> */}
     </S.Container>
   );
 };
 
-export default GoogleSignin;
+export default withRouter(GoogleSignin);

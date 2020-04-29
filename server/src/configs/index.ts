@@ -1,4 +1,5 @@
 import { CorsOptions } from 'cors'
+import { CookieOptions } from 'express'
 
 require('dotenv').config()
 
@@ -10,4 +11,15 @@ const whiteList = [
 export const corsConfig: CorsOptions = {
   origin: whiteList,
   credentials: true,
+}
+
+export const cookieConfig: CookieOptions = {
+  httpOnly: true,
+  maxAge: 1000 * 60 * 60 * 20,
+}
+export const cookieName = 'kakio_jwt'
+
+export const jwtConfig = {
+  secret: process.env.JWT_SECRET || 'secret',
+  ttl: '2h',
 }

@@ -1,4 +1,4 @@
-const tableName = 'friends'
+const tableName = 'rooms'
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(tableName, {
     id: {
@@ -7,10 +7,19 @@ module.exports = {
       autoIncrement: true,
       type: Sequelize.INTEGER.UNSIGNED,
     },
-    followerId: { type: Sequelize.INTEGER.UNSIGNED },
-    followeeId: { type: Sequelize.INTEGER.UNSIGNED },
-    createdAt: { type: Sequelize.DATE },
-    updatedAt: { type: Sequelize.DATE },
+    uuid: {
+      allowNull: false,
+      unique: true,
+      type: Sequelize.UUID,
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
   }),
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),
