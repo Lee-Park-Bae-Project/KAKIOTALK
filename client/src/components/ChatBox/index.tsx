@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC,useState } from 'react';
 import * as S from './style';
 
 const MAX_COLS = 25;
@@ -8,17 +8,18 @@ const ChatBox = (props: any) => {
     if (escape(props.text[i]).length > 4) textLength += 2;
     else textLength++;
   }
-  const rows = parseInt((textLength / MAX_COLS).toString()) + 1;
-  const cols = textLength > MAX_COLS ? MAX_COLS : textLength - 1;
-  console.log(rows, cols);
+  const [boxSize,setBoxSize] = useState({
+    rows:parseInt((textLength / MAX_COLS).toString()) + 1,
+    cols: textLength > MAX_COLS ? MAX_COLS : textLength - 1,
+  })
   return (
     <div>
       {props.received ? (
         <S.LeftBox>
           <S.Text
             value={props.text}
-            rows={rows}
-            cols={cols > 0 ? cols : 1}
+            rows={boxSize.rows}
+            cols={boxSize.cols > 0 ? boxSize.cols : 1}
             readOnly
           />
           <S.SendTime>{props.sendTime}</S.SendTime>
@@ -28,8 +29,8 @@ const ChatBox = (props: any) => {
           <S.SendTime>{props.sendTime}</S.SendTime>
           <S.Text
             value={props.text}
-            rows={rows}
-            cols={cols > 0 ? cols : 1}
+            rows={boxSize.rows}
+            cols={boxSize.cols > 0 ? boxSize.cols : 1}
             readOnly
           />
         </S.RightBox>
