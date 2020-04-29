@@ -38,6 +38,13 @@ const SendBtn = styled.button`
 outline:none;
 margin:auto;
 `
+const html:any =document.getElementsByTagName('html')
+html[0].style.height='100%';
+const body:any =document.getElementsByTagName('body')
+body[0].style.height='100%'
+const root:any = document.getElementById('root')
+root.style.height='100%';
+
 export {
     Room,
     UserCard,
