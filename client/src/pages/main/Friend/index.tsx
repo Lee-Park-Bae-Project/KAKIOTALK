@@ -23,7 +23,7 @@ const Friend: FC<Props> = ({
   const [popup, setPopup] = useState(false)
   const [clickedUser,setClickedUser] = useState({id:'',userName:'',statusMessage:''})
   const onProfileClose = () => {
-    setPopup(!popup)
+    setPopup(false)
   }
   return (
     <List>
@@ -41,9 +41,8 @@ const Friend: FC<Props> = ({
           userName,
         }) => {
           const onUserCardClick = () => {
-            setPopup(!popup)
+            setPopup(true)
             setClickedUser({id:id,userName:userName,statusMessage:statusMessage})
-            console.log(popup)
           };
        
           return (
