@@ -25,17 +25,26 @@ const getChatList: AxiosRequestConfig = {
   method: 'GET',
   url: 'dummy/chat-list'
 };
-const getLogin = (props?: Profile): AxiosRequestConfig => ({
+const getLogin = (
+  googleId: string,
+  email: string,
+  name: string
+): AxiosRequestConfig => ({
   method: 'POST',
-  url: 'login',
-  headers: props
+  url: 'dummy/login',
+  data: {
+    googleId,
+    email,
+    name
+  }
 });
 
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
   getChatList: () => Axios(getChatList),
-  getLogin: () => Axios(getLogin())
+  getLogin: (googleId: string, email: string, name: string) =>
+    Axios(getLogin(googleId, email, name))
 };
 
 export default request;

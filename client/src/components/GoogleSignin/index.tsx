@@ -40,10 +40,10 @@ const GoogleSignin: React.FC = () => {
     const { isLoggedIn } = useSelector((state: RootState) => state.login);
     if (isLoggedIn) {
       history.push('/main');
-      e.profileObj.name;
+      setCookie(e.profileObj.name, btoa(JSON.stringify('asdf')), { path: '/' });
     } else {
       alert('login Failure');
-      console.log('logi Fail');
+      console.log('login Fail');
     }
 
     // axios

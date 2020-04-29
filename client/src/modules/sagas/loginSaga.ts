@@ -1,24 +1,26 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import {
-  GET_LOGIN,
+  loginRequest,
   getLoginSuccess,
   getLoginFailure,
-  getLogin
+  LOGIN_REQUEST
 } from 'modules/login/action';
 import axios from 'axios';
 import request from 'common/request';
+import Profile from 'system/Profile';
 
-function* getLoginSaga({ payload }: any) {
-  const { loginData } = payload;
+function* getLoginSaga() {
   try {
-    const response = yield call(request.getLogin(loginData));
-    console.log(response);
-    yield put(getLoginSuccess(response));
+    // const response = yield call(
+    //   request.getLogin(profile.name,profile.email,profile.googleId)
+    // );
+    //yield put(getLoginSuccess(response));
+    console.log('asdf');
   } catch (e) {
     yield put(getLoginFailure(e));
   }
 }
 
 export default function* loginSaga() {
-  yield takeEvery(GET_LOGIN, getLoginSaga);
+  yield takeEvery(LOGIN_REQUEST, getLoginSaga);
 }

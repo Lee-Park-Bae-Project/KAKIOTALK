@@ -6,21 +6,28 @@ import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
+import { Cookies, useCookies } from 'react-cookie';
+import GoogleSignIn from 'components/GoogleSignin';
 
 const { useState, useEffect } = React;
+const [cookies, getCookie] = useCookies(['name']);
+const [hasCookie, setHasCookie] = useState(false);
 
 const MainContainer: React.FC = () => {
   const dispatch = useDispatch();
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
   const chatList = useSelector((state: RootState) => state.chatRoomList);
-
+  const { loginState } = useSelector((state: RootState) => state.login);
   useEffect(() => {
     dispatch(getProfile());
     dispatch(getFriends());
     dispatch(getChatRoom());
   }, []);
-
+  useEffect(() => {
+    dispatch(hasCookie);
+  });
+  cookies.get('name');
   const [tabSelector, setTabSelector] = useState({
     friend: true,
     chat: false
@@ -51,7 +58,7 @@ const MainContainer: React.FC = () => {
     setSearchKeyword(e.target.value);
   };
 
-  return (
+  return loginState ? (
     <Main
       searchKeyword={searchKeyword}
       onSearchKeywordChange={onSearchKeywordChange}
@@ -63,6 +70,8 @@ const MainContainer: React.FC = () => {
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
     />
+  ) : (
+    <GoogleSignIn />
   );
 };
 

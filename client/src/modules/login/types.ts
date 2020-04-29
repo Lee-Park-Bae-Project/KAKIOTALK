@@ -1,10 +1,10 @@
 import {
-  getLogin,
+  loginRequest,
   getLoginSuccess,
   getLoginFailure
 } from 'modules/login/action';
 
 export type LoginAction =
-  | ReturnType<typeof getLogin>
+  | ReturnType<typeof loginRequest>
   | ReturnType<typeof getLoginSuccess>
   | ReturnType<typeof getLoginFailure>;

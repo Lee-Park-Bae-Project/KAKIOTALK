@@ -3,6 +3,10 @@ export interface User {
   userName: string;
   statusMessage: string;
 }
+export interface loginInfo {
+  loginToken: Profile;
+  isLoggedIn: boolean;
+}
 
 export interface ChatRoom {
   id: string;
@@ -10,6 +14,11 @@ export interface ChatRoom {
   lastMessage: string;
   lastModified: number;
   numOfNewMessages: number;
+}
+export interface Profile {
+  email: string;
+  name: string;
+  googleId: string;
 }
 export interface Chat {
   chatList: string[];
