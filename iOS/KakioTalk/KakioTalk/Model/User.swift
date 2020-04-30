@@ -13,14 +13,10 @@ struct ModelFromServer: Decodable {
 }
 
 struct User: Decodable {
-    var name: Name
-    var email: String
-    var picture: Picture
-}
-
-struct Name: Decodable {
-    var firstName: String
-    var lastName: String
+    var id: String
+    var userName: String
+    var picture: Picture?
+    var statusMessage: String
 }
 
 struct Picture: Decodable {
