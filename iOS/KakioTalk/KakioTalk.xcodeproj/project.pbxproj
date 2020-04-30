@@ -72,6 +72,41 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A535B6A8245B0D170057D603 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A56B76842438A69C005518BD /* AppDelegate.swift */,
+				A56B76862438A69C005518BD /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		A535B6AA245B0D490057D603 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				A56B76882438A69C005518BD /* ViewController.swift */,
+			);
+			name = LoginView;
+			path = ../LoginView;
+			sourceTree = "<group>";
+		};
+		A535B6AB245B0D860057D603 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A56B768D2438A69E005518BD /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		A535B6AD245B0D930057D603 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				A56B768A2438A69C005518BD /* Main.storyboard */,
+				A56B768F2438A69E005518BD /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoard;
+			sourceTree = "<group>";
+		};
 		A56B76782438A69C005518BD = {
 			isa = PBXGroup;
 			children = (
@@ -95,12 +130,10 @@
 		A56B76832438A69C005518BD /* KakioTalk */ = {
 			isa = PBXGroup;
 			children = (
-				A56B76842438A69C005518BD /* AppDelegate.swift */,
-				A56B76862438A69C005518BD /* SceneDelegate.swift */,
-				A56B76882438A69C005518BD /* ViewController.swift */,
-				A56B768A2438A69C005518BD /* Main.storyboard */,
-				A56B768D2438A69E005518BD /* Assets.xcassets */,
-				A56B768F2438A69E005518BD /* LaunchScreen.storyboard */,
+				A535B6AD245B0D930057D603 /* StoryBoard */,
+				A535B6AB245B0D860057D603 /* Resource */,
+				A535B6AA245B0D490057D603 /* LoginView */,
+				A535B6A8245B0D170057D603 /* AppDelegate */,
 				A56B76922438A69E005518BD /* Info.plist */,
 			);
 			path = KakioTalk;
