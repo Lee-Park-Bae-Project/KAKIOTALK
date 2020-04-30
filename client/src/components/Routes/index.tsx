@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import Login from 'pages/login';
 import MainContainer from 'containers/MainContainer';
-
+import ChatRoom from 'pages/chatroom'
 const Routes: React.FC = () => (
   <Router>
     <Route
@@ -17,6 +17,7 @@ const Routes: React.FC = () => (
         path="/login"
         component={Login}
       />
+      <Route path="/chat" component={ChatRoom}/>
     </Router>
 );
 
