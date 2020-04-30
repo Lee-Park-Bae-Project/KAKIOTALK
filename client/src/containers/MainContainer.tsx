@@ -7,7 +7,7 @@ import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
 import { Cookies, useCookies } from 'react-cookie';
-import GoogleSignIn from 'components/GoogleSignin';
+import Login from 'pages/login'
 
 const { useState, useEffect } = React;
 
@@ -66,7 +66,7 @@ const MainContainer: React.FC = () => {
       addFriendTabOnClick={addFriendTabOnClick}
     />
   ) : (
-    <GoogleSignIn />
+    <Login/>
   );
 };
 
