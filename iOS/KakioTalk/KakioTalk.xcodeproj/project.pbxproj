@@ -3,17 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A56B76852438A69C005518BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76842438A69C005518BD /* AppDelegate.swift */; };
 		A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76862438A69C005518BD /* SceneDelegate.swift */; };
-		A56B76892438A69C005518BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76882438A69C005518BD /* ViewController.swift */; };
+		A56B76892438A69C005518BD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76882438A69C005518BD /* LoginViewController.swift */; };
 		A56B768C2438A69C005518BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56B768A2438A69C005518BD /* Main.storyboard */; };
 		A56B768E2438A69E005518BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A56B768D2438A69E005518BD /* Assets.xcassets */; };
 		A56B76912438A69E005518BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56B768F2438A69E005518BD /* LaunchScreen.storyboard */; };
 		A56B769C2438A69E005518BD /* KakioTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B769B2438A69E005518BD /* KakioTalkTests.swift */; };
+		D0AD936AA3940711612C5D98 /* Pods_KakioTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,10 +28,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakioTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79846E01974272EE21981D01 /* Pods-KakioTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakioTalk.release.xcconfig"; path = "Target Support Files/Pods-KakioTalk/Pods-KakioTalk.release.xcconfig"; sourceTree = "<group>"; };
+		8B142BD3F95D30E7F9AE4E69 /* Pods-KakioTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakioTalk.debug.xcconfig"; path = "Target Support Files/Pods-KakioTalk/Pods-KakioTalk.debug.xcconfig"; sourceTree = "<group>"; };
 		A56B76812438A69C005518BD /* KakioTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakioTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56B76842438A69C005518BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A56B76862438A69C005518BD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A56B76882438A69C005518BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A56B76882438A69C005518BD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A56B768B2438A69C005518BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A56B768D2438A69E005518BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A56B76902438A69E005518BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0AD936AA3940711612C5D98 /* Pods_KakioTalk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +63,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46708643858112AFF8C60896 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B142BD3F95D30E7F9AE4E69 /* Pods-KakioTalk.debug.xcconfig */,
+				79846E01974272EE21981D01 /* Pods-KakioTalk.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A535B6AE245B13530057D603 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A56B76842438A69C005518BD /* AppDelegate.swift */,
+				A56B76862438A69C005518BD /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		A535B6AF245B135F0057D603 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A56B768D2438A69E005518BD /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		A535B6B0245B13660057D603 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				A56B768A2438A69C005518BD /* Main.storyboard */,
+				A56B768F2438A69E005518BD /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoard;
+			sourceTree = "<group>";
+		};
 		A56B76782438A69C005518BD = {
 			isa = PBXGroup;
 			children = (
 				A56B76832438A69C005518BD /* KakioTalk */,
 				A56B769A2438A69E005518BD /* KakioTalkTests */,
 				A56B76822438A69C005518BD /* Products */,
+				46708643858112AFF8C60896 /* Pods */,
+				C79C7280BB82545C3C42BFB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,12 +121,10 @@
 		A56B76832438A69C005518BD /* KakioTalk */ = {
 			isa = PBXGroup;
 			children = (
-				A56B76842438A69C005518BD /* AppDelegate.swift */,
-				A56B76862438A69C005518BD /* SceneDelegate.swift */,
-				A56B76882438A69C005518BD /* ViewController.swift */,
-				A56B768A2438A69C005518BD /* Main.storyboard */,
-				A56B768D2438A69E005518BD /* Assets.xcassets */,
-				A56B768F2438A69E005518BD /* LaunchScreen.storyboard */,
+				A5DA507C245B149100FCFD54 /* GoogleLoginView */,
+				A535B6B0245B13660057D603 /* StoryBoard */,
+				A535B6AF245B135F0057D603 /* Resource */,
+				A535B6AE245B13530057D603 /* AppDelegate */,
 				A56B76922438A69E005518BD /* Info.plist */,
 			);
 			path = KakioTalk;
@@ -99,6 +139,22 @@
 			path = KakioTalkTests;
 			sourceTree = "<group>";
 		};
+		A5DA507C245B149100FCFD54 /* GoogleLoginView */ = {
+			isa = PBXGroup;
+			children = (
+				A56B76882438A69C005518BD /* LoginViewController.swift */,
+			);
+			path = GoogleLoginView;
+			sourceTree = "<group>";
+		};
+		C79C7280BB82545C3C42BFB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +162,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A56B76A02438A69E005518BD /* Build configuration list for PBXNativeTarget "KakioTalk" */;
 			buildPhases = (
+				FA9B9E8AFBCA3AABA8740AB8 /* [CP] Check Pods Manifest.lock */,
 				A56B767D2438A69C005518BD /* Sources */,
 				A56B767E2438A69C005518BD /* Frameworks */,
 				A56B767F2438A69C005518BD /* Resources */,
+				AF05F330AB2635103541F67C /* [CP] Embed Pods Frameworks */,
+				8BB320F69783D8392C09C0C7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,12 +254,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8BB320F69783D8392C09C0C7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF05F330AB2635103541F67C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA9B9E8AFBCA3AABA8740AB8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KakioTalk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A56B767D2438A69C005518BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56B76892438A69C005518BD /* ViewController.swift in Sources */,
+				A56B76892438A69C005518BD /* LoginViewController.swift in Sources */,
 				A56B76852438A69C005518BD /* AppDelegate.swift in Sources */,
 				A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */,
 			);
@@ -294,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -348,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -360,11 +478,13 @@
 		};
 		A56B76A12438A69E005518BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B142BD3F95D30E7F9AE4E69 /* Pods-KakioTalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
 				INFOPLIST_FILE = KakioTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,11 +498,13 @@
 		};
 		A56B76A22438A69E005518BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79846E01974272EE21981D01 /* Pods-KakioTalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
 				INFOPLIST_FILE = KakioTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
