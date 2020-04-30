@@ -56,7 +56,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="kKz-AT-sPn"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="person" catalog="system" id="Mp0-kh-wvQ"/>
+                    <tabBarItem key="tabBarItem" title="" image="person" catalog="system" selectedImage="person.fill" id="Mp0-kh-wvQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5LE-HK-nF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -83,6 +83,7 @@
     <resources>
         <image name="Logo" width="166.66667175292969" height="166.66667175292969"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="PrimaryYellow">
             <color red="0.96470588235294119" green="0.81568627450980391" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
