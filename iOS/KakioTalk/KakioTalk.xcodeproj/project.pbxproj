@@ -16,6 +16,7 @@
 		A56B76912438A69E005518BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56B768F2438A69E005518BD /* LaunchScreen.storyboard */; };
 		A56B769C2438A69E005518BD /* KakioTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B769B2438A69E005518BD /* KakioTalkTests.swift */; };
 		A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C211245B192B0088DE3F /* ProfileViewController.swift */; };
+		A5F0C226245B23480088DE3F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C225245B23480088DE3F /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		A56B769B2438A69E005518BD /* KakioTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakioTalkTests.swift; sourceTree = "<group>"; };
 		A56B769D2438A69E005518BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5F0C211245B192B0088DE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A5F0C225245B23480088DE3F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		A56B76832438A69C005518BD /* KakioTalk */ = {
 			isa = PBXGroup;
 			children = (
+				A5F0C224245B233B0088DE3F /* Model */,
 				A5F0C20F245B19100088DE3F /* TabBarView */,
 				A5DA507C245B149100FCFD54 /* GoogleLoginView */,
 				A535B6B0245B13660057D603 /* StoryBoard */,
@@ -164,6 +167,14 @@
 				A5F0C211245B192B0088DE3F /* ProfileViewController.swift */,
 			);
 			path = PorfileView;
+			sourceTree = "<group>";
+		};
+		A5F0C224245B233B0088DE3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A5F0C225245B23480088DE3F /* NetworkManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C79C7280BB82545C3C42BFB6 /* Frameworks */ = {
@@ -321,6 +332,7 @@
 			files = (
 				A56B76892438A69C005518BD /* LoginViewController.swift in Sources */,
 				A56B76852438A69C005518BD /* AppDelegate.swift in Sources */,
+				A5F0C226245B23480088DE3F /* NetworkManager.swift in Sources */,
 				A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */,
 				A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */,
 			);
