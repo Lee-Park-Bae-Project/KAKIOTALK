@@ -9,8 +9,10 @@ import axios from 'axios';
 import request from 'common/request';
 import Profile from 'system/Profile';
 
-function* getLoginSaga() {
+function* getLoginSaga({ payload }: any) {
   try {
+    const { loginData } = payload;
+
     // const response = yield call(
     //   request.getLogin(profile.name,profile.email,profile.googleId)
     // );
