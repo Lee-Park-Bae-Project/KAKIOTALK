@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextIcon/> matches snapshot 1`] = `
+<TextIcon
+  icon="Account"
+  text="hi"
+>
+  <styled.div
+    iconPosition="left"
+  >
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "jBfTTi",
+            "rules": Array [
+              "
+    display: flex;
+    flex-direction: ",
+              [Function],
+              ";
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+  ",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      iconPosition="left"
+    >
+      <div
+        className="sc-bdVaJa jBfTTi"
+      >
+        <Icon
+          icon="Account"
+        >
+          <ForwardRef(SvgAccount)
+            fill="currentColor"
+            height="2rem"
+            width="2rem"
+          >
+            <svg
+              fill="currentColor"
+              height="2rem"
+              width="2rem"
+            >
+              account.svg
+            </svg>
+          </ForwardRef(SvgAccount)>
+        </Icon>
+        <styled.span
+          text="hi"
+          textColor="black"
+          textSize="1rem"
+        >
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-bwzfXH",
+                  "isStatic": false,
+                  "lastClassName": "efmkIq",
+                  "rules": Array [
+                    "
+    color: ",
+                    [Function],
+                    ";
+    line-height: 2rem;
+    padding: 1rem;
+  ",
+                  ],
+                },
+                "displayName": "styled.span",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-bwzfXH",
+                "target": "span",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+            text="hi"
+            textColor="black"
+            textSize="1rem"
+          >
+            <span
+              className="sc-bwzfXH efmkIq"
+            >
+              hi
+            </span>
+          </StyledComponent>
+        </styled.span>
+      </div>
+    </StyledComponent>
+  </styled.div>
+</TextIcon>
+`;

@@ -1,0 +1,503 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dialog/> matches snapshot 1`] = `
+<Dialog
+  canCancel={true}
+  cancelText="cancel"
+  confirmText="confirm"
+  description="this is description"
+  isHideButton={false}
+  isVisible={true}
+  title="this is title"
+>
+  <Styled(styled.div)>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": false,
+            "lastClassName": "fATUcp",
+            "rules": Array [
+              "
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+",
+              "
+
+",
+            ],
+          },
+          "displayName": "Styled(styled.div)",
+          "foldedComponentIds": Array [
+            "sc-bdVaJa",
+          ],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <div
+        className="sc-bdVaJa sc-bwzfXH fATUcp"
+      >
+        <styled.div>
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-htpNat",
+                  "isStatic": false,
+                  "lastClassName": "kCsuXH",
+                  "rules": Array [
+                    "
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.1);
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-htpNat",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+          >
+            <div
+              className="sc-htpNat kCsuXH"
+            />
+          </StyledComponent>
+        </styled.div>
+        <styled.div>
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-bxivhb",
+                  "isStatic": false,
+                  "lastClassName": "ljdJbk",
+                  "rules": Array [
+                    "
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-bxivhb",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+          >
+            <div
+              className="sc-bxivhb ljdJbk"
+            >
+              <Styled(styled.div)>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-ifAKCX",
+                        "isStatic": false,
+                        "lastClassName": "fopSWI",
+                        "rules": Array [
+                          "
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+",
+                          "
+  flex-direction: column;
+  
+  background-color: white;
+  width: 20rem;
+  padding: 2rem;
+",
+                        ],
+                      },
+                      "displayName": "Styled(styled.div)",
+                      "foldedComponentIds": Array [
+                        "sc-bdVaJa",
+                      ],
+                      "render": [Function],
+                      "styledComponentId": "sc-ifAKCX",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <div
+                    className="sc-bdVaJa sc-ifAKCX fopSWI"
+                  >
+                    <styled.p>
+                      <StyledComponent
+                        forwardedComponent={
+                          Object {
+                            "$$typeof": Symbol(react.forward_ref),
+                            "attrs": Array [],
+                            "componentStyle": ComponentStyle {
+                              "componentId": "sc-EHOje",
+                              "isStatic": false,
+                              "lastClassName": "dNfnXd",
+                              "rules": Array [
+                                "
+  font-size: ",
+                                "1.2rem",
+                                ";
+  color: ",
+                                "#4B4B4B",
+                                ";
+  font-weight: ",
+                                "800",
+                                ";
+  margin-right: auto;
+",
+                              ],
+                            },
+                            "displayName": "styled.p",
+                            "foldedComponentIds": Array [],
+                            "render": [Function],
+                            "styledComponentId": "sc-EHOje",
+                            "target": "p",
+                            "toString": [Function],
+                            "warnTooManyClasses": [Function],
+                            "withComponent": [Function],
+                          }
+                        }
+                        forwardedRef={null}
+                      >
+                        <p
+                          className="sc-EHOje dNfnXd"
+                        >
+                          this is title
+                        </p>
+                      </StyledComponent>
+                    </styled.p>
+                    <styled.p>
+                      <StyledComponent
+                        forwardedComponent={
+                          Object {
+                            "$$typeof": Symbol(react.forward_ref),
+                            "attrs": Array [],
+                            "componentStyle": ComponentStyle {
+                              "componentId": "sc-bZQynM",
+                              "isStatic": false,
+                              "lastClassName": "bOBsNY",
+                              "rules": Array [
+                                "
+  font-size: ",
+                                "1rem",
+                                ";
+  color: ",
+                                "#4B4B4B",
+                                ";
+  font-weight: ",
+                                "600",
+                                ";
+  margin-right: auto;
+",
+                              ],
+                            },
+                            "displayName": "styled.p",
+                            "foldedComponentIds": Array [],
+                            "render": [Function],
+                            "styledComponentId": "sc-bZQynM",
+                            "target": "p",
+                            "toString": [Function],
+                            "warnTooManyClasses": [Function],
+                            "withComponent": [Function],
+                          }
+                        }
+                        forwardedRef={null}
+                      >
+                        <p
+                          className="sc-bZQynM bOBsNY"
+                        >
+                          this is description
+                        </p>
+                      </StyledComponent>
+                    </styled.p>
+                    <ButtonGroup
+                      right={true}
+                    >
+                      <Styled(styled.div)
+                        direction="row"
+                        right={true}
+                      >
+                        <StyledComponent
+                          direction="row"
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-htoDjs",
+                                "isStatic": false,
+                                "lastClassName": "OoopI",
+                                "rules": Array [
+                                  "
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+",
+                                  "
+  flex-direction: ",
+                                  [Function],
+                                  ";
+  justify-content: ",
+                                  [Function],
+                                  ";
+",
+                                ],
+                              },
+                              "displayName": "Styled(styled.div)",
+                              "foldedComponentIds": Array [
+                                "sc-bdVaJa",
+                              ],
+                              "render": [Function],
+                              "styledComponentId": "sc-htoDjs",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          right={true}
+                        >
+                          <div
+                            className="sc-bdVaJa sc-htoDjs OoopI"
+                            direction="row"
+                          >
+                            <Button
+                              text="confirm"
+                              theme="primary"
+                            >
+                              <ThemeProvider
+                                theme={
+                                  Object {
+                                    "background": "#F7CF46",
+                                  }
+                                }
+                              >
+                                <styled.button
+                                  isAllowed={true}
+                                  type="button"
+                                >
+                                  <StyledComponent
+                                    forwardedComponent={
+                                      Object {
+                                        "$$typeof": Symbol(react.forward_ref),
+                                        "attrs": Array [],
+                                        "componentStyle": ComponentStyle {
+                                          "componentId": "sc-gzVnrw",
+                                          "isStatic": false,
+                                          "lastClassName": "jyyXun",
+                                          "rules": Array [
+                                            "
+  width: 5rem;
+  height: 2rem;
+  color: ",
+                                            "#4B4B4B",
+                                            ";
+  font-size: ",
+                                            "0.8rem",
+                                            ";
+  font-weight: ",
+                                            "600",
+                                            ";
+
+  margin: 0.5rem;
+
+  background-color: ",
+                                            [Function],
+                                            ";
+
+  outline: none;
+  border-radius: 1rem;
+  border: none;
+  cursor: ",
+                                            [Function],
+                                            ";
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+
+  &:hover{
+    background-color: ",
+                                            [Function],
+                                            ";
+  }
+",
+                                          ],
+                                        },
+                                        "displayName": "styled.button",
+                                        "foldedComponentIds": Array [],
+                                        "render": [Function],
+                                        "styledComponentId": "sc-gzVnrw",
+                                        "target": "button",
+                                        "toString": [Function],
+                                        "warnTooManyClasses": [Function],
+                                        "withComponent": [Function],
+                                      }
+                                    }
+                                    forwardedRef={null}
+                                    isAllowed={true}
+                                    type="button"
+                                  >
+                                    <button
+                                      className="sc-gzVnrw hcBSYu"
+                                      type="button"
+                                    >
+                                      confirm
+                                    </button>
+                                  </StyledComponent>
+                                </styled.button>
+                              </ThemeProvider>
+                            </Button>
+                            <Button
+                              text="cancel"
+                              theme="tertiary"
+                            >
+                              <ThemeProvider
+                                theme={
+                                  Object {
+                                    "background": "#C6C3C1",
+                                  }
+                                }
+                              >
+                                <styled.button
+                                  isAllowed={true}
+                                  type="button"
+                                >
+                                  <StyledComponent
+                                    forwardedComponent={
+                                      Object {
+                                        "$$typeof": Symbol(react.forward_ref),
+                                        "attrs": Array [],
+                                        "componentStyle": ComponentStyle {
+                                          "componentId": "sc-gzVnrw",
+                                          "isStatic": false,
+                                          "lastClassName": "jyyXun",
+                                          "rules": Array [
+                                            "
+  width: 5rem;
+  height: 2rem;
+  color: ",
+                                            "#4B4B4B",
+                                            ";
+  font-size: ",
+                                            "0.8rem",
+                                            ";
+  font-weight: ",
+                                            "600",
+                                            ";
+
+  margin: 0.5rem;
+
+  background-color: ",
+                                            [Function],
+                                            ";
+
+  outline: none;
+  border-radius: 1rem;
+  border: none;
+  cursor: ",
+                                            [Function],
+                                            ";
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+
+  &:hover{
+    background-color: ",
+                                            [Function],
+                                            ";
+  }
+",
+                                          ],
+                                        },
+                                        "displayName": "styled.button",
+                                        "foldedComponentIds": Array [],
+                                        "render": [Function],
+                                        "styledComponentId": "sc-gzVnrw",
+                                        "target": "button",
+                                        "toString": [Function],
+                                        "warnTooManyClasses": [Function],
+                                        "withComponent": [Function],
+                                      }
+                                    }
+                                    forwardedRef={null}
+                                    isAllowed={true}
+                                    type="button"
+                                  >
+                                    <button
+                                      className="sc-gzVnrw jyyXun"
+                                      type="button"
+                                    >
+                                      cancel
+                                    </button>
+                                  </StyledComponent>
+                                </styled.button>
+                              </ThemeProvider>
+                            </Button>
+                          </div>
+                        </StyledComponent>
+                      </Styled(styled.div)>
+                    </ButtonGroup>
+                  </div>
+                </StyledComponent>
+              </Styled(styled.div)>
+            </div>
+          </StyledComponent>
+        </styled.div>
+      </div>
+    </StyledComponent>
+  </Styled(styled.div)>
+</Dialog>
+`;

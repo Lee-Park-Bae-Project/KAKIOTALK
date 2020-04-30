@@ -10,7 +10,7 @@ describe('<RoomCard/>', () => {
     'd',
     'c'];
   const lastMessage = 'hihi';
-  const lastModified = '123';
+  const lastModified = '2020-04-25 22:13:52';
 
   it('matches snapshots', () => {
     const wrapper = mount(

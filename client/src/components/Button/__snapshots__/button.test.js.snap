@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> matches snapshot 1`] = `
+<Button
+  test="button"
+>
+  <ThemeProvider
+    theme={
+      Object {
+        "background": "#F7CF46",
+      }
+    }
+  >
+    <styled.button
+      isAllowed={true}
+      type="button"
+    >
+      <StyledComponent
+        forwardedComponent={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bdVaJa",
+              "isStatic": false,
+              "lastClassName": "eknSne",
+              "rules": Array [
+                "
+  width: 5rem;
+  height: 2rem;
+  color: ",
+                "#4B4B4B",
+                ";
+  font-size: ",
+                "0.8rem",
+                ";
+  font-weight: ",
+                "600",
+                ";
+
+  margin: 0.5rem;
+
+  background-color: ",
+                [Function],
+                ";
+
+  outline: none;
+  border-radius: 1rem;
+  border: none;
+  cursor: ",
+                [Function],
+                ";
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+
+  &:hover{
+    background-color: ",
+                [Function],
+                ";
+  }
+",
+              ],
+            },
+            "displayName": "styled.button",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bdVaJa",
+            "target": "button",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          }
+        }
+        forwardedRef={null}
+        isAllowed={true}
+        type="button"
+      >
+        <button
+          className="sc-bdVaJa eknSne"
+          type="button"
+        />
+      </StyledComponent>
+    </styled.button>
+  </ThemeProvider>
+</Button>
+`;

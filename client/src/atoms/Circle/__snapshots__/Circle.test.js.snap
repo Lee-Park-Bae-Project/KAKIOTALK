@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Circle /> matches snapshot 1`] = `
+<Circle
+  num={22}
+>
+  <styled.div>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "kZWESs",
+            "rules": Array [
+              "
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: 1rem;
+    margin: 1rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 2rem;
+    text-align: center;
+    font-size: ",
+              "0.8rem",
+              ";
+    background-color: ",
+              "#DD6F5A",
+              ";
+    color: ",
+              "#FEFFFF",
+              ";
+    font-weight: ",
+              "600",
+              ";
+  ",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <div
+        className="sc-bdVaJa kZWESs"
+      >
+        22
+      </div>
+    </StyledComponent>
+  </styled.div>
+</Circle>
+`;

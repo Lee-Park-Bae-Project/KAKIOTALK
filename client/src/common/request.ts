@@ -12,25 +12,51 @@ const instance = axios.create({
 
 const Axios = async (config: AxiosRequestConfig) => instance.request(config);
 
-const apiConfig: {[key: string]: AxiosRequestConfig} = {
-  getProfile: {
-    method: 'GET',
-    url: 'dummy/my-profile',
-  },
-  getFriendList: {
-    method: 'GET',
-    url: 'dummy/friend-list',
-  },
-  getChatList: {
-    method: 'GET',
-    url: 'dummy/chat-list',
-  },
+const getProfile: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'dummy/my-profile',
+};
+const getFriendList: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'dummy/friend-list',
+};
+const getChatList: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'dummy/chat-list',
 };
 
+const getUserInfo: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'auth/check-auth',
+};
+
+const login = (
+  googleId: string,
+  email: string,
+  name: string,
+  googleAccessToken: string,
+): AxiosRequestConfig => ({
+  method: 'POST',
+  url: 'auth/google',
+  data: {
+    googleId,
+    email,
+    name,
+    googleAccessToken,
+  },
+});
+
 const request = {
-  getProfile: () => Axios(apiConfig.getProfile),
-  getFriendList: () => Axios(apiConfig.getFriendList),
-  getChatList: () => Axios(apiConfig.getChatList),
+  getProfile: () => Axios(getProfile),
+  getFriendList: () => Axios(getFriendList),
+  getChatList: () => Axios(getChatList),
+  login: (
+    googleId: string,
+    email: string,
+    name: string,
+    googleAccessToken: string
+  ) => Axios(login(googleId, email, name, googleAccessToken)),
+  getUserInfo: () => Axios(getUserInfo),
 };
 
 export default request;
