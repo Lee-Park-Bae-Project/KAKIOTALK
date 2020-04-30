@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6DCDF9F41AC050D0558174AF /* libPods-KakioTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFDC6A5219DD4710398D6EC /* libPods-KakioTalk.a */; };
 		A56B76852438A69C005518BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76842438A69C005518BD /* AppDelegate.swift */; };
 		A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76862438A69C005518BD /* SceneDelegate.swift */; };
 		A56B76892438A69C005518BD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76882438A69C005518BD /* LoginViewController.swift */; };
@@ -15,7 +16,6 @@
 		A56B76912438A69E005518BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56B768F2438A69E005518BD /* LaunchScreen.storyboard */; };
 		A56B769C2438A69E005518BD /* KakioTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B769B2438A69E005518BD /* KakioTalkTests.swift */; };
 		A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C211245B192B0088DE3F /* ProfileViewController.swift */; };
-		D0AD936AA3940711612C5D98 /* Pods_KakioTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakioTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79846E01974272EE21981D01 /* Pods-KakioTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakioTalk.release.xcconfig"; path = "Target Support Files/Pods-KakioTalk/Pods-KakioTalk.release.xcconfig"; sourceTree = "<group>"; };
+		7EFDC6A5219DD4710398D6EC /* libPods-KakioTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KakioTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B142BD3F95D30E7F9AE4E69 /* Pods-KakioTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakioTalk.debug.xcconfig"; path = "Target Support Files/Pods-KakioTalk/Pods-KakioTalk.debug.xcconfig"; sourceTree = "<group>"; };
 		A56B76812438A69C005518BD /* KakioTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakioTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56B76842438A69C005518BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0AD936AA3940711612C5D98 /* Pods_KakioTalk.framework in Frameworks */,
+				6DCDF9F41AC050D0558174AF /* libPods-KakioTalk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +169,7 @@
 		C79C7280BB82545C3C42BFB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */,
+				7EFDC6A5219DD4710398D6EC /* libPods-KakioTalk.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,7 +185,6 @@
 				A56B767D2438A69C005518BD /* Sources */,
 				A56B767E2438A69C005518BD /* Frameworks */,
 				A56B767F2438A69C005518BD /* Resources */,
-				AF05F330AB2635103541F67C /* [CP] Embed Pods Frameworks */,
 				8BB320F69783D8392C09C0C7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -289,23 +288,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF05F330AB2635103541F67C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA9B9E8AFBCA3AABA8740AB8 /* [CP] Check Pods Manifest.lock */ = {
