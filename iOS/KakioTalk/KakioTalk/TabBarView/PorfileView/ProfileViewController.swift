@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var statusMessage: UILabel!
+    @IBOutlet weak var friendsTableView: UITableView!
     
     private(set) var userManager = UserManager()
     
