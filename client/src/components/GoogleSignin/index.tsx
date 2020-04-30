@@ -22,31 +22,21 @@ dotenv.config();
 const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
   const dispatch = useDispatch();
-  const [cookies, setCookie] = useCookies(['name']);
   const { isLoggedIn } = useSelector((state: RootState) => state.login);
-  const [login, setLogin] = useState({
-    email: '',
-    name: '',
-    googleId: ''
-  });
 
   const history = useHistory();
   const responseSuccess = (e: any) => {
-    setLogin({
-      email: e.profileObj.email,
-      name: e.profileObj.name,
-      googleId: e.profileObj.googleId
-    });
-    dispatch(loginRequest(login));
+    dispatch(
+      loginRequest({
+        email: e.profileObj.email,
+        name: e.profileObj.name,
+        googleId: e.profileObj.googleId
+      })
+    );
 
-    if (isLoggedIn) {
-      setCookie(e.profileObj.name, btoa(JSON.stringify('asdf')), { path: '/' });
-    } else {
-      history.push('/main');
-      alert('login Failure');
-      console.log('login Fail');
-    }
+    history.push('/main');
   };
+
   const responseFail = (err: Error) => {
     console.error(err);
   };
