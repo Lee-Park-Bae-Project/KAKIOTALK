@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from 'react';
 import * as S from './style';
 
 const ChatRoom: FC = (props: any) => {
-  console.log('chatRoom rendered');
   const [messages, setMessages] = useState([
     {
       writerId: '',
@@ -33,11 +32,11 @@ const ChatRoom: FC = (props: any) => {
     inputRef.value = '';
   };
   const handleEnterPress = (e: any) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      if (e.target.value !== ('' || '\n') && e.target.value.length > 0) {
+    if (e.key === 'Enter') {
+      if (e.target.value.trim().length > 0) {
         handleSubmit();
+        inputRef.scrollIntoView();
       }
-      inputRef.value = '';
     }
   };
   const { id, userName } = props.location.state;
