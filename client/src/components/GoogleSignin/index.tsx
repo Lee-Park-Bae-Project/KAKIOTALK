@@ -23,6 +23,7 @@ const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(['name']);
+  const { isLoggedIn } = useSelector((state: RootState) => state.login);
   const [login, setLogin] = useState({
     email: '',
     name: '',
@@ -37,34 +38,14 @@ const GoogleSignin: React.FC = () => {
       googleId: e.profileObj.googleId
     });
     dispatch(loginRequest(login));
-    const { isLoggedIn } = useSelector((state: RootState) => state.login);
+
     if (isLoggedIn) {
-      history.push('/main');
       setCookie(e.profileObj.name, btoa(JSON.stringify('asdf')), { path: '/' });
     } else {
+      history.push('/main');
       alert('login Failure');
       console.log('login Fail');
     }
-
-    // axios
-    //   .post(
-    //     '/v1/dummy',
-    //     qs.stringify({
-    //       e: e.googleId,
-    //       email: e.email,
-    //       name: e.name,
-    //       aceessToken: e.accessToken
-    //     })
-    //   )
-    //   .then(response => {
-    //     alert('login Success');
-    //     console.log('response');
-    //     history.push('/main');
-    //   })
-    //   .catch(error => {
-    //     alert('login Failure');
-    //     console.log('failed', error);
-    //   });
   };
   const responseFail = (err: Error) => {
     console.error(err);

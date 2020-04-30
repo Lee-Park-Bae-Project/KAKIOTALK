@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { configs } from './constants';
 import { Profile } from 'types';
+import { boolean } from '@storybook/addon-knobs';
 const { API_SERVER_URL } = configs;
 
 const instance = axios.create({
@@ -36,7 +37,8 @@ const getLogin = (
     googleId,
     email,
     name
-  }
+  },
+  withCredentials: true
 });
 
 const request = {
