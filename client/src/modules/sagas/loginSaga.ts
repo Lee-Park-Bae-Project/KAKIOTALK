@@ -11,13 +11,11 @@ import Profile from 'system/Profile';
 
 function* getLoginSaga({ payload }: any) {
   try {
-    const { loginData } = payload;
-
-    // const response = yield call(
-    //   request.getLogin(profile.name,profile.email,profile.googleId)
-    // );
-    //yield put(getLoginSuccess(response));
-    console.log('asdf');
+    const getLogin = request.getLogin
+    const response = yield call(
+      ()=> getLogin(payload.name,payload.email,payload.googleId)
+      );
+    yield put(getLoginSuccess(response));
   } catch (e) {
     yield put(getLoginFailure(e));
   }
