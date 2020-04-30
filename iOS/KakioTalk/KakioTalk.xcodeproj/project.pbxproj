@@ -18,6 +18,7 @@
 		A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C211245B192B0088DE3F /* ProfileViewController.swift */; };
 		A5F0C226245B23480088DE3F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C225245B23480088DE3F /* NetworkManager.swift */; };
 		A5F0C229245B2E2F0088DE3F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C228245B2E2F0088DE3F /* User.swift */; };
+		A5F0C22B245B37B60088DE3F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C22A245B37B60088DE3F /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		A5F0C211245B192B0088DE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A5F0C225245B23480088DE3F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A5F0C228245B2E2F0088DE3F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A5F0C22A245B37B60088DE3F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			children = (
 				A5F0C225245B23480088DE3F /* NetworkManager.swift */,
 				A5F0C228245B2E2F0088DE3F /* User.swift */,
+				A5F0C22A245B37B60088DE3F /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 			files = (
 				A56B76892438A69C005518BD /* LoginViewController.swift in Sources */,
 				A56B76852438A69C005518BD /* AppDelegate.swift in Sources */,
+				A5F0C22B245B37B60088DE3F /* UserManager.swift in Sources */,
 				A5F0C229245B2E2F0088DE3F /* User.swift in Sources */,
 				A5F0C226245B23480088DE3F /* NetworkManager.swift in Sources */,
 				A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */,

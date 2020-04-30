@@ -53,10 +53,108 @@
                     <view key="view" contentMode="scaleToFill" id="5kA-NA-GWd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUp-QW-6rs" userLabel="Title View">
+                                <rect key="frame" x="20.5" y="44" width="373" height="77"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="친구" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSk-8s-0yY">
+                                        <rect key="frame" x="0.0" y="20.5" width="373" height="36"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="xSk-8s-0yY" firstAttribute="centerY" secondItem="XUp-QW-6rs" secondAttribute="centerY" id="4LH-yJ-t2M"/>
+                                    <constraint firstItem="xSk-8s-0yY" firstAttribute="leading" secondItem="XUp-QW-6rs" secondAttribute="leading" id="fhh-Cc-ECY"/>
+                                    <constraint firstAttribute="trailing" secondItem="xSk-8s-0yY" secondAttribute="trailing" id="ovZ-Er-lPW"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EH0-ga-gu7">
+                                <rect key="frame" x="20.5" y="121" width="373" height="692"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="o1M-m1-pBx">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="96"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOK-vH-pif" userLabel="My Profile View">
+                                                <rect key="frame" x="0.0" y="0.0" width="373" height="92"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XIR-Dk-fkb">
+                                                        <rect key="frame" x="0.0" y="9" width="74" height="74"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="XIR-Dk-fkb" secondAttribute="height" multiplier="1:1" id="Y1C-4V-joL"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rEw-aO-RdV">
+                                                        <rect key="frame" x="84" y="25" width="289" height="42"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEz-mm-Z4B">
+                                                                <rect key="frame" x="0.0" y="0.0" width="289" height="24"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상메" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfX-aA-MQF">
+                                                                <rect key="frame" x="0.0" y="24" width="289" height="18"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="rEw-aO-RdV" firstAttribute="leading" secondItem="XIR-Dk-fkb" secondAttribute="trailing" constant="10" id="Btz-WU-Rix"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rEw-aO-RdV" secondAttribute="trailing" id="MjK-KM-HfY"/>
+                                                    <constraint firstItem="rEw-aO-RdV" firstAttribute="centerY" secondItem="WOK-vH-pif" secondAttribute="centerY" id="Vgz-0N-TQG"/>
+                                                    <constraint firstItem="XIR-Dk-fkb" firstAttribute="centerY" secondItem="WOK-vH-pif" secondAttribute="centerY" id="fZi-a6-HKi"/>
+                                                    <constraint firstItem="XIR-Dk-fkb" firstAttribute="leading" secondItem="WOK-vH-pif" secondAttribute="leading" id="htO-m4-Ueq"/>
+                                                    <constraint firstItem="XIR-Dk-fkb" firstAttribute="height" secondItem="WOK-vH-pif" secondAttribute="height" multiplier="0.8" id="y8R-aF-nXx"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="koL-2T-vsE" userLabel="Division View">
+                                                <rect key="frame" x="0.0" y="95" width="373" height="1"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="Pys-PP-Buo"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="o1M-m1-pBx" firstAttribute="leading" secondItem="hUC-by-Ykw" secondAttribute="leading" id="JV6-Jc-dne"/>
+                                    <constraint firstItem="o1M-m1-pBx" firstAttribute="width" secondItem="u5f-SN-qJq" secondAttribute="width" id="NIM-lm-2tP"/>
+                                    <constraint firstItem="o1M-m1-pBx" firstAttribute="trailing" secondItem="hUC-by-Ykw" secondAttribute="trailing" id="TNo-u5-F8B"/>
+                                    <constraint firstItem="o1M-m1-pBx" firstAttribute="bottom" secondItem="hUC-by-Ykw" secondAttribute="bottom" id="YfI-a7-hoV"/>
+                                    <constraint firstItem="hUC-by-Ykw" firstAttribute="top" secondItem="o1M-m1-pBx" secondAttribute="top" id="gGD-3l-XF1"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="hUC-by-Ykw"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="u5f-SN-qJq"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="XUp-QW-6rs" firstAttribute="centerX" secondItem="kKz-AT-sPn" secondAttribute="centerX" id="2Ed-Sa-Z9M"/>
+                            <constraint firstItem="EH0-ga-gu7" firstAttribute="leading" secondItem="XUp-QW-6rs" secondAttribute="leading" id="UOO-kO-Ddh"/>
+                            <constraint firstItem="XUp-QW-6rs" firstAttribute="height" secondItem="kKz-AT-sPn" secondAttribute="height" multiplier="0.1" id="Yjn-Df-yy5"/>
+                            <constraint firstItem="kKz-AT-sPn" firstAttribute="bottom" secondItem="EH0-ga-gu7" secondAttribute="bottom" id="aiy-sp-jM3"/>
+                            <constraint firstItem="EH0-ga-gu7" firstAttribute="trailing" secondItem="XUp-QW-6rs" secondAttribute="trailing" id="e3V-IM-92z"/>
+                            <constraint firstItem="EH0-ga-gu7" firstAttribute="top" secondItem="XUp-QW-6rs" secondAttribute="bottom" id="jTj-iQ-uw3"/>
+                            <constraint firstItem="XUp-QW-6rs" firstAttribute="top" secondItem="kKz-AT-sPn" secondAttribute="top" id="lfF-dZ-lBH"/>
+                            <constraint firstItem="WOK-vH-pif" firstAttribute="height" secondItem="kKz-AT-sPn" secondAttribute="height" multiplier="0.12" id="nyX-Xo-fWB"/>
+                            <constraint firstItem="XUp-QW-6rs" firstAttribute="width" secondItem="kKz-AT-sPn" secondAttribute="width" multiplier="0.9" id="syO-w1-nin"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="kKz-AT-sPn"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="person" catalog="system" selectedImage="person.fill" id="Mp0-kh-wvQ"/>
+                    <connections>
+                        <outlet property="name" destination="AEz-mm-Z4B" id="lf7-Fp-X7d"/>
+                        <outlet property="profileImage" destination="XIR-Dk-fkb" id="EAR-Dv-OyL"/>
+                        <outlet property="statusMessage" destination="MfX-aA-MQF" id="Rih-t9-ys3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5LE-HK-nF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

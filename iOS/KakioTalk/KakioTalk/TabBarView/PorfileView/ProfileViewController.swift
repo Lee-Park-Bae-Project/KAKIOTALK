@@ -10,6 +10,12 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var statusMessage: UILabel!
+    
+    private(set) var userManager = UserManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
