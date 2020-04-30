@@ -106,4 +106,8 @@ class NetworkManager: NetworkManageable {
             handler(.success(data))
         }.resume()
     }
+    
+    func getMyPlofile() -> User {
+        return  User(id: "hanseop95", userName: "신한섭", picture: Picture(large: "https://avatars1.githubusercontent.com/u/37682858?s=460&u=c0b30709b1fa60e649320e73039ca4e4c874e221&v=4", medium: "https://avatars1.githubusercontent.com/u/37682858?s=460&u=c0b30709b1fa60e649320e73039ca4e4c874e221&v=4", thumbnail: "https://avatars1.githubusercontent.com/u/37682858?s=460&u=c0b30709b1fa60e649320e73039ca4e4c874e221&v=4"), statusMessage: "상태메세지")
+    }
 }

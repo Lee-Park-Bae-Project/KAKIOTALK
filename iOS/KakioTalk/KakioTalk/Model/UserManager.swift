@@ -9,8 +9,14 @@
 import Foundation
 
 class UserManager {
-    let me: User = User(id: "hanseop95", userName: "신한섭", picture: Picture(large: "https://avatars1.githubusercontent.com/u/37682858?s=460&u=c0b30709b1fa60e649320e73039ca4e4c874e221&v=4", medium: "https://avatars1.githubusercontent.com/u/37682858?s=460&u=c0b30709b1fa60e649320e73039ca4e4c874e221&v=4", thumbnail: "https://avatars1.githubusercontent.com/u/37682858?s=460&u=c0b30709b1fa60e649320e73039ca4e4c874e221&v=4"), statusMessage: "상태메세지")
+    var me: User?
     var friends: [User] = []
+    
+    func setMyProfile(profile: User) {
+        me = profile
+        NotificationCenter.default.post(name: .receiveMyProfile,
+                                        object: nil)
+    }
     
     func friendsCount() -> Int {
         return friends.count
@@ -19,4 +25,8 @@ class UserManager {
     func friendInfo(at index: Int) -> User{
         return friends[index]
     }
+}
+
+extension Notification.Name {
+    static let receiveMyProfile = Notification.Name("receiveMyProfile")
 }
