@@ -53,5 +53,15 @@ class ProfileViewController: UIViewController {
     @objc func setupMyProfileUI() {
         name.text = userManager.me?.userName
         statusMessage.text = userManager.me?.statusMessage
+        
+        let imageURL = userManager.me?.picture?.thumbnail ?? ""
+        ImageUseCase.loadData(with: NetworkManager(), from: imageURL, failureHandler: {
+            self.errorHandling(error: $0)
+        }) {data in
+            DispatchQueue.main.async {
+                self.profileImage.image = UIImage(data: data)
+                self.profileImage.layer.cornerRadius = (self.profileImage.frame.height) / 3
+            }
+        }
     }
 }
