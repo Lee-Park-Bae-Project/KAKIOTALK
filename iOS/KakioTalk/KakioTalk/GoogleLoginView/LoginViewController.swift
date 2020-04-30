@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         print(givenName)
         print(familyName)
         print(email)
+        
+        guard let tabBarController = storyboard?.instantiateViewController(identifier: "TabBarController") as? UITabBarController else {return}
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true)
     }
 }
 
