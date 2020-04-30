@@ -32,7 +32,7 @@ const getLogin = (
   name: string
 ): AxiosRequestConfig => ({
   method: 'POST',
-  url: 'dummy/login',
+  url: 'auth/google',
   data: {
     googleId,
     email,
