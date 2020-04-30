@@ -53,7 +53,7 @@ const MainContainer: React.FC = () => {
     setSearchKeyword(e.target.value);
   };
 
-  return (
+  return loginState ? (
     <Main
       searchKeyword={searchKeyword}
       onSearchKeywordChange={onSearchKeywordChange}
@@ -65,6 +65,8 @@ const MainContainer: React.FC = () => {
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
     />
+  ) : (
+    <GoogleSignIn />
   );
 };
 
