@@ -26,13 +26,18 @@ const getChatList: AxiosRequestConfig = {
   method: 'GET',
   url: 'dummy/chat-list'
 };
+const getUserInfo: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'auth/check-auth'
+};
 const getLogin = (
   googleId: string,
   email: string,
   name: string
+  //googleAccessToken: string,
 ): AxiosRequestConfig => ({
   method: 'POST',
-  url: 'dummy/login',
+  url: 'auth/google',
   data: {
     googleId,
     email,
@@ -46,7 +51,8 @@ const request = {
   getFriendList: () => Axios(getFriendList),
   getChatList: () => Axios(getChatList),
   getLogin: (googleId: string, email: string, name: string) =>
-    Axios(getLogin(googleId, email, name))
+    Axios(getLogin(googleId, email, name)),
+  getUserInfo: () => Axios(getUserInfo)
 };
 
 export default request;

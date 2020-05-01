@@ -1,24 +1,21 @@
 import React from 'react';
 import dotenv from 'dotenv';
-import GoogleSigninImage from 'assets/google_signin.png';
 import * as S from 'components/GoogleSignin/styles';
-import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import { withRouter, RouteComponentProps, useHistory } from 'react-router-dom';
-import qs from 'qs';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'modules';
 import { loginRequest } from 'modules/login';
 import { useCookies } from 'react-cookie';
-import { instanceOf } from 'prop-types';
 
 const { useState, useEffect } = React;
 
 dotenv.config();
 
-// type LoginForm = {
-//   loginSuccess: (state: { id: string; email: string; name: string }) => void;
-// };
+type LoginForm = {
+  loginSuccess: (state: { id: string; email: string; name: string }) => void;
+};
 const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,14 +27,20 @@ const GoogleSignin: React.FC = () => {
     googleId: ''
   });
 
+  useEffect(() => {
+    console.log(login);
+  }, [login]);
+
   const history = useHistory();
   const responseSuccess = (e: any) => {
+    const { email, name, googleId } = e.profileObj;
+    const { googleAccessToken } = e.accessToken;
     setLogin({
-      email: e.profileObj.email,
-      name: e.profileObj.name,
-      googleId: e.profileObj.googleId
+      email,
+      name,
+      googleId
     });
-    dispatch(loginRequest(login));
+    dispatch(loginRequest({ email: email, name: name, googleId: googleId }));
 
     if (isLoggedIn) {
       setCookie(e.profileObj.name, btoa(JSON.stringify('asdf')), { path: '/' });
@@ -60,13 +63,6 @@ const GoogleSignin: React.FC = () => {
         onFailure={responseFail}
         cookiePolicy={'single_host_origin'}
       />
-      {/* <S.Img
-          src={
-            GoogleSigninImage
-          }
-          alt="google signin"
-        />
-      </button> */}
     </S.Container>
   );
 };

@@ -7,17 +7,15 @@ import {
 } from 'modules/login/action';
 import axios from 'axios';
 import request from 'common/request';
-import Profile from 'system/Profile';
+import { Profile, loginInfo } from 'types/index';
 
-function* getLoginSaga({ payload }: any) {
+function* getLoginSaga(payload: any) {
   try {
-    const { loginData } = payload;
-
-    // const response = yield call(
-    //   request.getLogin(profile.name,profile.email,profile.googleId)
-    // );
-    //yield put(getLoginSuccess(response));
-    console.log('asdf');
+    console.log(payload);
+    const response = yield call(() =>
+      request.getLogin(payload.email, payload.name, payload.googleId)
+    );
+    yield put(getLoginSuccess(response));
   } catch (e) {
     yield put(getLoginFailure(e));
   }

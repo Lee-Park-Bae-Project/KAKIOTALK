@@ -48,15 +48,6 @@ const Main: FC<Props> = ({
       <S.Wrapper>
         {tabSelector.friend && (
           <S.Column>
-            {/* <SearchInput
-              value={
-                searchKeyword
-              }
-              onChange={
-                onSearchKeywordChange
-              }
-              placeholder="친구 이름 검색"
-            /> */}
             <Friend myProfile={myProfile} friendList={friendList} />
           </S.Column>
         )}

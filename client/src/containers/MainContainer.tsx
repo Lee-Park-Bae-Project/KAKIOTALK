@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
-import { Profile } from 'types';
+import { Route } from 'react-router-dom';
 import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
-import { Cookies, useCookies } from 'react-cookie';
-import GoogleSignIn from 'components/GoogleSignin';
+import Login from 'pages/login';
 
 const { useState, useEffect } = React;
 
@@ -17,6 +16,7 @@ const MainContainer: React.FC = () => {
   const friendList = useSelector((state: RootState) => state.friends);
   const chatList = useSelector((state: RootState) => state.chatRoomList);
   const { loginState } = useSelector((state: RootState) => state.login);
+
   useEffect(() => {
     dispatch(getProfile());
     dispatch(getFriends());
@@ -66,7 +66,7 @@ const MainContainer: React.FC = () => {
       addFriendTabOnClick={addFriendTabOnClick}
     />
   ) : (
-    <GoogleSignIn />
+    <Route path="/" component={Login} />
   );
 };
 
