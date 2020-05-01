@@ -6,7 +6,12 @@ import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
+<<<<<<< HEAD
 import Login from 'pages/login';
+=======
+import { Cookies, useCookies } from 'react-cookie';
+import Login from 'pages/login'
+>>>>>>> 7d0d72c133db76bc41bbbb1eb3382de780847f12
 
 const { useState, useEffect } = React;
 
@@ -66,7 +71,11 @@ const MainContainer: React.FC = () => {
       addFriendTabOnClick={addFriendTabOnClick}
     />
   ) : (
+<<<<<<< HEAD
     <Route path="/" component={Login} />
+=======
+    <Login/>
+>>>>>>> 7d0d72c133db76bc41bbbb1eb3382de780847f12
   );
 };
 

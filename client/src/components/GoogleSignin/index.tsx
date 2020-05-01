@@ -19,14 +19,13 @@ type LoginForm = {
 const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
   const dispatch = useDispatch();
-  const [cookies, setCookie] = useCookies(['name']);
   const { isLoggedIn } = useSelector((state: RootState) => state.login);
+
   const [login, setLogin] = useState({
     email: '',
     name: '',
     googleId: ''
   });
-
   useEffect(() => {
     console.log(login);
   }, [login]);
@@ -42,14 +41,9 @@ const GoogleSignin: React.FC = () => {
     });
     dispatch(loginRequest({ email: email, name: name, googleId: googleId }));
 
-    if (isLoggedIn) {
-      setCookie(e.profileObj.name, btoa(JSON.stringify('asdf')), { path: '/' });
-    } else {
-      history.push('/main');
-      alert('login Failure');
-      console.log('login Fail');
-    }
+    history.push('/main');
   };
+
   const responseFail = (err: Error) => {
     console.error(err);
   };
