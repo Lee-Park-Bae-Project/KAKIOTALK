@@ -22,6 +22,7 @@ class NetworkManager: NetworkManageable {
     enum EndPoints {
         static let defaultURL = "http://34.64.167.225:3050/v1/dummy/"
         static let friendList = "friend-list"
+        static let firendsImage = "https://randomuser.me/api/?results="
     }
     
     enum NetworkError: Error {
@@ -109,6 +110,10 @@ class NetworkManager: NetworkManageable {
     
     func getFriendsList(handler: @escaping dataHandler) {
         getResource(from: EndPoints.defaultURL + EndPoints.friendList, method: .get, headers: nil, handler: handler)
+    }
+    
+    func getFriendsImageList(numOfFriends: Int, handler: @escaping dataHandler) {
+        getResource(from: EndPoints.firendsImage + "\(numOfFriends)", method: .get, headers: nil, handler: handler)
     }
     
     func getMyPlofile() -> User {

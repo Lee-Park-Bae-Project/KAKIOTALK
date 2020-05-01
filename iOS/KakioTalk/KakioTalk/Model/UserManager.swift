@@ -31,6 +31,19 @@ class UserManager {
         return users[section].count
     }
     
+    func friendsCount() -> Int {
+        return users[1].count
+    }
+    
+    func insertFirendsPicture(pictures: [PictureList]) {
+        for (index, pictureList) in pictures.enumerated() {
+            users[1][index].picture = pictureList.picture
+            NotificationCenter.default.post(name: .receiveFriendImage,
+                                            object: nil,
+                                            userInfo: ["index":index])
+        }
+    }
+    
     func userInfo(at indexPath: IndexPath) -> User{
         return users[indexPath.section][indexPath.row]
     }
@@ -39,4 +52,5 @@ class UserManager {
 extension Notification.Name {
     static let receiveMyProfile = Notification.Name("receiveMyProfile")
     static let receiveFriendsList = Notification.Name("receiveFriendsList")
+    static let receiveFriendImage = Notification.Name("receiveFriendImage")
 }

@@ -27,6 +27,7 @@ class FriendsTableViewCell: UITableViewCell {
         DispatchQueue.main.async {
             let image = UIImage(data: data)
             self.profileImage.image = image
+            self.profileImage.layer.cornerRadius = self.profileImage.frame.height / 2.5
         }
     }
     

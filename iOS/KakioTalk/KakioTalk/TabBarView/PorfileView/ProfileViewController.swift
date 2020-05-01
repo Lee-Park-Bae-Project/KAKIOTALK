@@ -27,6 +27,10 @@ class ProfileViewController: UIViewController {
                                                selector: #selector(setupTableView),
                                                name: .receiveFriendsList,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setupImageView(_:)),
+                                               name: .receiveFriendImage,
+                                               object: nil)
     }
     
     private func configureMyProfile() {
@@ -41,6 +45,11 @@ class ProfileViewController: UIViewController {
         UserUseCase.loadFriendsList(networkManager: NetworkManager(), failureHandler: { self.errorHandling(error: $0)
         }) {
             self.dataSource.userManager.insertFriendsList(friendsList: $0)
+            UserUseCase.loadFirendsImage(networkManager: NetworkManager(), numOfFriends: self.dataSource.userManager.friendsCount(), failureHandler: {
+                self.errorHandling(error: $0)
+            }) {
+                self.dataSource.userManager.insertFirendsPicture(pictures: $0)
+            }
         }
     }
     
@@ -67,6 +76,13 @@ class ProfileViewController: UIViewController {
         DispatchQueue.main.async {
             self.friendsTableView.reloadData()
             self.friendsTableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.friendsTableView.contentSize.height)
+        }
+    }
+    
+    @objc func setupImageView(_ notification: Notification) {
+        guard let index = notification.userInfo?["index"] as? Int else {return}
+        DispatchQueue.main.async {
+            self.friendsTableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
         }
     }
 }

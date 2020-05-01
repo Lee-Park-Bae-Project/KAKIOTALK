@@ -26,6 +26,10 @@ class FriendsTableViewDataSource: NSObject, UITableViewDataSource {
         if indexPath.section == 0 {
             cell.configureFontSize(title: 25, status: 20)
         }
+        let imageURL = userManager.userInfo(at: indexPath).picture?.thumbnail
+        ImageUseCase.loadData(with: NetworkManager(), from: imageURL ?? "", failureHandler: {_ in}) {
+            cell.setImageFromData(data: $0)
+        }
         return cell
     }
 }

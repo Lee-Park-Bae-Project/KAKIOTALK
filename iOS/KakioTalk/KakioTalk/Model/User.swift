@@ -24,3 +24,11 @@ struct Picture: Decodable {
     var medium: String
     var thumbnail: String
 }
+
+struct DummyFirendsImage: Decodable {
+    var results: [PictureList]
+}
+
+struct PictureList: Decodable {
+    var picture: Picture
+}

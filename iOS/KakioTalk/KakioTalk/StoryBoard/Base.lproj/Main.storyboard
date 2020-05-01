@@ -83,13 +83,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hHA-MY-7xR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="43.5" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="4.5" width="35" height="34.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="hHA-MY-7xR" secondAttribute="height" multiplier="1:1" id="0Ir-xX-r86"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kcw-Bv-RkY">
-                                                    <rect key="frame" x="53.5" y="-0.5" width="35" height="44.5"/>
+                                                    <rect key="frame" x="45" y="-0.5" width="35" height="44.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMU-DX-Vgt">
                                                             <rect key="frame" x="0.0" y="0.0" width="35" height="24"/>
@@ -108,11 +108,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="kcw-Bv-RkY" firstAttribute="centerY" secondItem="ox4-d4-lDk" secondAttribute="centerY" id="1cd-bi-q86"/>
-                                                <constraint firstItem="hHA-MY-7xR" firstAttribute="top" secondItem="ox4-d4-lDk" secondAttribute="top" id="AVh-9y-5te"/>
                                                 <constraint firstItem="hHA-MY-7xR" firstAttribute="leading" secondItem="ox4-d4-lDk" secondAttribute="leading" id="Tdp-ls-4Fu"/>
+                                                <constraint firstItem="hHA-MY-7xR" firstAttribute="height" secondItem="ox4-d4-lDk" secondAttribute="height" multiplier="0.8" id="UhR-WY-u4w"/>
                                                 <constraint firstItem="hHA-MY-7xR" firstAttribute="centerY" secondItem="ox4-d4-lDk" secondAttribute="centerY" id="UlM-qY-46g"/>
                                                 <constraint firstItem="kcw-Bv-RkY" firstAttribute="leading" secondItem="hHA-MY-7xR" secondAttribute="trailing" constant="10" id="hKI-DS-zj8"/>
-                                                <constraint firstAttribute="bottom" secondItem="hHA-MY-7xR" secondAttribute="bottom" id="xRV-il-snN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
