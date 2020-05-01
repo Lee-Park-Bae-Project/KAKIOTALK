@@ -30,6 +30,11 @@ class FriendsTableViewDataSource: NSObject, UITableViewDataSource {
         ImageUseCase.loadData(with: NetworkManager(), from: imageURL, failureHandler: {_ in}) {
             cell.setImageFromData(data: $0)
         }
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .clear
+        cell.selectedBackgroundView = backgroundView
+        
         return cell
     }
 }
