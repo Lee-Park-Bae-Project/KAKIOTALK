@@ -1,5 +1,5 @@
 const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../.env') })
+require('dotenv').config()
 
 const baseDbSetting = {
   timezone: '+09:00',
@@ -22,6 +22,7 @@ module.exports = {
     database: process.env.DB_NAME,
     username: process.env.DB_USER,
     password: process.env.DB_PW,
+    port: process.env.DB_PORT,
     logging: false,
     ...baseDbSetting,
   },
@@ -31,6 +32,7 @@ module.exports = {
     database: process.env.DB_DEV_NAME,
     username: process.env.DB_DEV_USER,
     password: process.env.DB_DEV_PW,
+    port: process.env.DB_DEV_PORT,
     logging: true,
     ...baseDbSetting,
   },
@@ -40,6 +42,7 @@ module.exports = {
     database: process.env.DB_TEST_NAME,
     username: process.env.DB_TEST_USER,
     password: process.env.DB_TEST_PW,
+    port: process.env.DB_TEST_PORT,
     logging: false,
     ...baseDbSetting,
   },
