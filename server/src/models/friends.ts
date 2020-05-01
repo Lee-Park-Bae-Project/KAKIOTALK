@@ -14,7 +14,7 @@ type FriendStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const Friend = <FriendStatic>sequelize.define('friend', {
+  const Friend = <FriendStatic>sequelize.define('friends', {
     id: {
       primaryKey: true,
       allowNull: false,

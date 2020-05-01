@@ -14,7 +14,7 @@ type ChatIsReadStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const ChatIsRead = <ChatIsReadStatic>sequelize.define('ChatIsRead', {
+  const ChatIsRead = <ChatIsReadStatic>sequelize.define('chat_is_read', {
     id: {
       primaryKey: true,
       allowNull: false,

@@ -14,7 +14,7 @@ type RoomParticipants = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const RoomParticipants = <RoomParticipants>sequelize.define('roomparticipants', {
+  const RoomParticipants = <RoomParticipants>sequelize.define('room_participants', {
     id: {
       primaryKey: true,
       allowNull: false,

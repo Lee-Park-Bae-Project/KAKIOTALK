@@ -15,7 +15,7 @@ type ChatStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const Chat = <ChatStatic>sequelize.define('Chat', {
+  const Chat = <ChatStatic>sequelize.define('chats', {
     id: {
       primaryKey: true,
       allowNull: false,

@@ -14,7 +14,7 @@ type RoomStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const Room = <RoomStatic>sequelize.define('Room', {
+  const Room = <RoomStatic>sequelize.define('rooms', {
     id: {
       primaryKey: true,
       allowNull: false,
