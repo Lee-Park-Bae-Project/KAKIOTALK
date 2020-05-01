@@ -18,10 +18,10 @@ class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(test(_:)), name: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil)
+                                               selector: #selector(GoogleOAuth(_:)), name: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil)
     }
     
-    @objc func test(_ notification: Notification) {
+    @objc func GoogleOAuth(_ notification: Notification) {
         guard let user = notification.userInfo?["statusText"] as? GIDGoogleUser else {return}
         guard let userId = user.userID, let idToken = user.authentication.idToken, let fullName = user.profile.name, let givenName = user.profile.givenName, let familyName = user.profile.familyName, let email = user.profile.email else {return}
         print(userId)
@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         print(givenName)
         print(familyName)
         print(email)
+        
+        guard let tabBarController = storyboard?.instantiateViewController(identifier: "TabBarController") as? UITabBarController else {return}
+         tabBarController.modalPresentationStyle = .fullScreen
+         present(tabBarController, animated: true)
     }
 }
 

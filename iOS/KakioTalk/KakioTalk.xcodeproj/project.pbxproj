@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6DCDF9F41AC050D0558174AF /* libPods-KakioTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFDC6A5219DD4710398D6EC /* libPods-KakioTalk.a */; };
 		A56B76852438A69C005518BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76842438A69C005518BD /* AppDelegate.swift */; };
 		A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76862438A69C005518BD /* SceneDelegate.swift */; };
 		A56B76892438A69C005518BD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B76882438A69C005518BD /* LoginViewController.swift */; };
@@ -14,7 +15,14 @@
 		A56B768E2438A69E005518BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A56B768D2438A69E005518BD /* Assets.xcassets */; };
 		A56B76912438A69E005518BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56B768F2438A69E005518BD /* LaunchScreen.storyboard */; };
 		A56B769C2438A69E005518BD /* KakioTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B769B2438A69E005518BD /* KakioTalkTests.swift */; };
-		D0AD936AA3940711612C5D98 /* Pods_KakioTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */; };
+		A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C211245B192B0088DE3F /* ProfileViewController.swift */; };
+		A5F0C226245B23480088DE3F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C225245B23480088DE3F /* NetworkManager.swift */; };
+		A5F0C229245B2E2F0088DE3F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C228245B2E2F0088DE3F /* User.swift */; };
+		A5F0C22B245B37B60088DE3F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C22A245B37B60088DE3F /* UserManager.swift */; };
+		A5F0C22E245B50120088DE3F /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C22D245B50120088DE3F /* UserUseCase.swift */; };
+		A5F0C232245B54400088DE3F /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C231245B54400088DE3F /* ImageUseCase.swift */; };
+		A5F0C234245B5B9F0088DE3F /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C233245B5B9F0088DE3F /* FriendsTableViewCell.swift */; };
+		A5F0C23E245C33F90088DE3F /* FriendsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C23D245C33F90088DE3F /* FriendsTableViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,8 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakioTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79846E01974272EE21981D01 /* Pods-KakioTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakioTalk.release.xcconfig"; path = "Target Support Files/Pods-KakioTalk/Pods-KakioTalk.release.xcconfig"; sourceTree = "<group>"; };
+		7EFDC6A5219DD4710398D6EC /* libPods-KakioTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KakioTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B142BD3F95D30E7F9AE4E69 /* Pods-KakioTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakioTalk.debug.xcconfig"; path = "Target Support Files/Pods-KakioTalk/Pods-KakioTalk.debug.xcconfig"; sourceTree = "<group>"; };
 		A56B76812438A69C005518BD /* KakioTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakioTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56B76842438A69C005518BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +50,14 @@
 		A56B76972438A69E005518BD /* KakioTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakioTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56B769B2438A69E005518BD /* KakioTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakioTalkTests.swift; sourceTree = "<group>"; };
 		A56B769D2438A69E005518BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5F0C211245B192B0088DE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A5F0C225245B23480088DE3F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A5F0C228245B2E2F0088DE3F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A5F0C22A245B37B60088DE3F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		A5F0C22D245B50120088DE3F /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		A5F0C231245B54400088DE3F /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
+		A5F0C233245B5B9F0088DE3F /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		A5F0C23D245C33F90088DE3F /* FriendsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0AD936AA3940711612C5D98 /* Pods_KakioTalk.framework in Frameworks */,
+				6DCDF9F41AC050D0558174AF /* libPods-KakioTalk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +137,9 @@
 		A56B76832438A69C005518BD /* KakioTalk */ = {
 			isa = PBXGroup;
 			children = (
+				A5F0C22C245B4FE60088DE3F /* UseCase */,
+				A5F0C224245B233B0088DE3F /* Model */,
+				A5F0C20F245B19100088DE3F /* TabBarView */,
 				A5DA507C245B149100FCFD54 /* GoogleLoginView */,
 				A535B6B0245B13660057D603 /* StoryBoard */,
 				A535B6AF245B135F0057D603 /* Resource */,
@@ -147,10 +166,47 @@
 			path = GoogleLoginView;
 			sourceTree = "<group>";
 		};
+		A5F0C20F245B19100088DE3F /* TabBarView */ = {
+			isa = PBXGroup;
+			children = (
+				A5F0C210245B191C0088DE3F /* PorfileView */,
+			);
+			path = TabBarView;
+			sourceTree = "<group>";
+		};
+		A5F0C210245B191C0088DE3F /* PorfileView */ = {
+			isa = PBXGroup;
+			children = (
+				A5F0C211245B192B0088DE3F /* ProfileViewController.swift */,
+				A5F0C233245B5B9F0088DE3F /* FriendsTableViewCell.swift */,
+				A5F0C23D245C33F90088DE3F /* FriendsTableViewDataSource.swift */,
+			);
+			path = PorfileView;
+			sourceTree = "<group>";
+		};
+		A5F0C224245B233B0088DE3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A5F0C225245B23480088DE3F /* NetworkManager.swift */,
+				A5F0C228245B2E2F0088DE3F /* User.swift */,
+				A5F0C22A245B37B60088DE3F /* UserManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A5F0C22C245B4FE60088DE3F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				A5F0C22D245B50120088DE3F /* UserUseCase.swift */,
+				A5F0C231245B54400088DE3F /* ImageUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		C79C7280BB82545C3C42BFB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				67CAD9BC2ED199A1EDEDF685 /* Pods_KakioTalk.framework */,
+				7EFDC6A5219DD4710398D6EC /* libPods-KakioTalk.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,7 +222,6 @@
 				A56B767D2438A69C005518BD /* Sources */,
 				A56B767E2438A69C005518BD /* Frameworks */,
 				A56B767F2438A69C005518BD /* Resources */,
-				AF05F330AB2635103541F67C /* [CP] Embed Pods Frameworks */,
 				8BB320F69783D8392C09C0C7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -272,23 +327,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AF05F330AB2635103541F67C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakioTalk/Pods-KakioTalk-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FA9B9E8AFBCA3AABA8740AB8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,8 +356,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5F0C23E245C33F90088DE3F /* FriendsTableViewDataSource.swift in Sources */,
 				A56B76892438A69C005518BD /* LoginViewController.swift in Sources */,
 				A56B76852438A69C005518BD /* AppDelegate.swift in Sources */,
+				A5F0C22B245B37B60088DE3F /* UserManager.swift in Sources */,
+				A5F0C229245B2E2F0088DE3F /* User.swift in Sources */,
+				A5F0C22E245B50120088DE3F /* UserUseCase.swift in Sources */,
+				A5F0C226245B23480088DE3F /* NetworkManager.swift in Sources */,
+				A5F0C232245B54400088DE3F /* ImageUseCase.swift in Sources */,
+				A5F0C234245B5B9F0088DE3F /* FriendsTableViewCell.swift in Sources */,
+				A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */,
 				A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
