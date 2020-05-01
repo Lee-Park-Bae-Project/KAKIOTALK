@@ -20,8 +20,8 @@ class NetworkManager: NetworkManageable {
     static var jwtToken: String?
     
     enum EndPoints {
-        static let defaultURL = "https://randomuser.me/api/"
-        static let users = "?results="
+        static let defaultURL = "http://34.64.167.225:3050/v1/dummy/"
+        static let friendList = "friend-list"
     }
     
     enum NetworkError: Error {
@@ -105,6 +105,10 @@ class NetworkManager: NetworkManageable {
             
             handler(.success(data))
         }.resume()
+    }
+    
+    func getFriendsList(handler: @escaping dataHandler) {
+        getResource(from: EndPoints.defaultURL + EndPoints.friendList, method: .get, headers: nil, handler: handler)
     }
     
     func getMyPlofile() -> User {

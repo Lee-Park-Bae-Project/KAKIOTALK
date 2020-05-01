@@ -9,24 +9,34 @@
 import Foundation
 
 class UserManager {
-    var me: User?
-    var friends: [User] = []
+    var users: [[User]] = [[]]
     
     func setMyProfile(profile: User) {
-        me = profile
+        users.insert([profile], at: 0)
         NotificationCenter.default.post(name: .receiveMyProfile,
                                         object: nil)
     }
     
-    func friendsCount() -> Int {
-        return friends.count
+    func insertFriendsList(friendsList: [User]) {
+        users.insert(friendsList, at: 1)
+        NotificationCenter.default.post(name: .receiveFriendsList,
+                                        object: nil)
     }
     
-    func friendInfo(at index: Int) -> User{
-        return friends[index]
+    func sectionCount() -> Int {
+        return users.count
+    }
+    
+    func usersCount(at section: Int) -> Int {
+        return users[section].count
+    }
+    
+    func userInfo(at indexPath: IndexPath) -> User{
+        return users[indexPath.section][indexPath.row]
     }
 }
 
 extension Notification.Name {
     static let receiveMyProfile = Notification.Name("receiveMyProfile")
+    static let receiveFriendsList = Notification.Name("receiveFriendsList")
 }

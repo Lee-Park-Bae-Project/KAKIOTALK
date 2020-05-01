@@ -9,7 +9,7 @@
 import Foundation
 
 struct ModelFromServer: Decodable {
-    var result: [User]
+    var data: [User]
 }
 
 struct User: Decodable {

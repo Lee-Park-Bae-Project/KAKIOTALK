@@ -10,32 +10,44 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var statusMessage: UILabel!
     @IBOutlet weak var friendsTableView: UITableView!
     
-    private(set) var userManager = UserManager()
+    private let dataSource = FriendsTableViewDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureObserver()
+        configureTableView()
         configureMyProfile()
+        configureFriendsList()
     }
     
-    func configureObserver() {
+    private func configureObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(setupMyProfileUI),
-                                               name: .receiveMyProfile,
+                                               selector: #selector(setupTableView),
+                                               name: .receiveFriendsList,
                                                object: nil)
     }
     
-    func configureMyProfile() {
+    private func configureMyProfile() {
         UserUseCase.loadMyProfile(networkManager: NetworkManager(), failureHandler: {
             self.errorHandling(error: $0)
         }) {
-            self.userManager.setMyProfile(profile: $0)
+            self.dataSource.userManager.setMyProfile(profile: $0)
         }
+    }
+    
+    private func configureFriendsList() {
+        UserUseCase.loadFriendsList(networkManager: NetworkManager(), failureHandler: { self.errorHandling(error: $0)
+        }) {
+            self.dataSource.userManager.insertFriendsList(friendsList: $0)
+        }
+    }
+    
+    private func configureTableView() {
+        friendsTableView.dataSource = dataSource
+        friendsTableView.separatorStyle = .none
+        friendsTableView.delegate = self
     }
     
     private func alertError(message: String) {
@@ -51,18 +63,32 @@ class ProfileViewController: UIViewController {
         alertError(message: error.message())
     }
     
-    @objc func setupMyProfileUI() {
-        name.text = userManager.me?.userName
-        statusMessage.text = userManager.me?.statusMessage
-        
-        let imageURL = userManager.me?.picture?.thumbnail ?? ""
-        ImageUseCase.loadData(with: NetworkManager(), from: imageURL, failureHandler: {
-            self.errorHandling(error: $0)
-        }) {data in
-            DispatchQueue.main.async {
-                self.profileImage.image = UIImage(data: data)
-                self.profileImage.layer.cornerRadius = (self.profileImage.frame.height) / 3
-            }
+    @objc func setupTableView() {
+        DispatchQueue.main.async {
+            self.friendsTableView.reloadData()
+            self.friendsTableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.friendsTableView.contentSize.height)
         }
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return CGFloat.leastNormalMagnitude
+        } else {
+            return 30
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return view.frame.height * 0.1
+        } else {
+            return view.frame.height * 0.07
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UITableViewCell()
     }
 }

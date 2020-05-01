@@ -12,4 +12,21 @@ struct UserUseCase {
     static func loadMyProfile(networkManager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping(User) -> ()) {
         completed(networkManager.getMyPlofile())
     }
+    
+    static func loadFriendsList(networkManager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([User]) -> ()) {
+        networkManager.getFriendsList {
+            switch $0{
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(ModelFromServer.self, from: data)
+                    completed(model.data)
+                } catch {
+                    print(error)
+                    failureHandler(.DecodeError)
+                }
+            }
+        }
+    }
 }

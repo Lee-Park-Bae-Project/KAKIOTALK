@@ -21,7 +21,8 @@
 		A5F0C22B245B37B60088DE3F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C22A245B37B60088DE3F /* UserManager.swift */; };
 		A5F0C22E245B50120088DE3F /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C22D245B50120088DE3F /* UserUseCase.swift */; };
 		A5F0C232245B54400088DE3F /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C231245B54400088DE3F /* ImageUseCase.swift */; };
-		A5F0C234245B5B9F0088DE3F /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C233245B5B9F0088DE3F /* FriendTableViewCell.swift */; };
+		A5F0C234245B5B9F0088DE3F /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C233245B5B9F0088DE3F /* FriendsTableViewCell.swift */; };
+		A5F0C23E245C33F90088DE3F /* FriendsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C23D245C33F90088DE3F /* FriendsTableViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +56,8 @@
 		A5F0C22A245B37B60088DE3F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A5F0C22D245B50120088DE3F /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		A5F0C231245B54400088DE3F /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
-		A5F0C233245B5B9F0088DE3F /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		A5F0C233245B5B9F0088DE3F /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		A5F0C23D245C33F90088DE3F /* FriendsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				A5F0C211245B192B0088DE3F /* ProfileViewController.swift */,
-				A5F0C233245B5B9F0088DE3F /* FriendTableViewCell.swift */,
+				A5F0C233245B5B9F0088DE3F /* FriendsTableViewCell.swift */,
+				A5F0C23D245C33F90088DE3F /* FriendsTableViewDataSource.swift */,
 			);
 			path = PorfileView;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5F0C23E245C33F90088DE3F /* FriendsTableViewDataSource.swift in Sources */,
 				A56B76892438A69C005518BD /* LoginViewController.swift in Sources */,
 				A56B76852438A69C005518BD /* AppDelegate.swift in Sources */,
 				A5F0C22B245B37B60088DE3F /* UserManager.swift in Sources */,
@@ -360,7 +364,7 @@
 				A5F0C22E245B50120088DE3F /* UserUseCase.swift in Sources */,
 				A5F0C226245B23480088DE3F /* NetworkManager.swift in Sources */,
 				A5F0C232245B54400088DE3F /* ImageUseCase.swift in Sources */,
-				A5F0C234245B5B9F0088DE3F /* FriendTableViewCell.swift in Sources */,
+				A5F0C234245B5B9F0088DE3F /* FriendsTableViewCell.swift in Sources */,
 				A5F0C212245B192B0088DE3F /* ProfileViewController.swift in Sources */,
 				A56B76872438A69C005518BD /* SceneDelegate.swift in Sources */,
 			);
