@@ -40,8 +40,12 @@ const GoogleSignin: React.FC = () => {
       googleId
     });
     dispatch(loginRequest({ email: email, name: name, googleId: googleId }));
-
-    history.push('/main');
+    if (isLoggedIn) {
+      history.push('/main');
+    } else {
+      console.log('login error');
+      alert('login failure');
+    }
   };
 
   const responseFail = (err: Error) => {
