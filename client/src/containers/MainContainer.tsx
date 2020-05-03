@@ -8,47 +8,53 @@ import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
 import Login from 'pages/login';
 
-const { useState, useEffect } = React;
+import withAuth, { Props } from 'hocs/withAuth';
 
-const MainContainer: React.FC = () => {
+const { useState, useEffect } = React;
+const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const dispatch = useDispatch();
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
   const chatList = useSelector((state: RootState) => state.chatRoomList);
-  const { loginState } = useSelector((state: RootState) => state.login);
+  const loginState = useSelector((state: RootState) => state.login);
 
   useEffect(() => {
     dispatch(getProfile());
     dispatch(getFriends());
     dispatch(getChatRoom());
+    console.log(name, email, uuid);
   }, []);
+
+  useEffect(() => {
+    console.log(name, email, uuid);
+  }, [name, email, uuid]);
+
   const [tabSelector, setTabSelector] = useState({
     friend: true,
-    chat: false
+    chat: false,
   });
+
   const friendTabOnClick = () => {
     setTabSelector({
       friend: true,
-      chat: false
+      chat: false,
     });
   };
 
   const chatTabOnClick = () => {
     setTabSelector({
       friend: false,
-      chat: true
+      chat: true,
     });
   };
-
   const addFriendTabOnClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
     alert('hihi');
     console.log(loginState);
   };
 
   const [searchKeyword, setSearchKeyword] = useState('');
-
   const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
   };
@@ -70,4 +76,4 @@ const MainContainer: React.FC = () => {
   );
 };
 
-export default MainContainer;
+export default withAuth(MainContainer);

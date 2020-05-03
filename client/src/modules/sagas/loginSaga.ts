@@ -3,21 +3,20 @@ import {
   loginRequest,
   getLoginSuccess,
   getLoginFailure,
-  LOGIN_REQUEST
+  LOGIN_REQUEST,
 } from 'modules/login/action';
 import axios from 'axios';
 import request from 'common/request';
-import { Profile, loginInfo } from 'types/index';
+import { loginInfo } from 'types/index';
 
 function* getLoginSaga(payload: any) {
   try {
     const response = yield request.getLogin(
       payload.email,
       payload.name,
-      payload.googleId
+      payload.googleId,
+      payload.googleAccessToken,
     );
-
-    console.log(response);
     yield put(getLoginSuccess(response.data.data));
   } catch (e) {
     yield put(getLoginFailure(e));

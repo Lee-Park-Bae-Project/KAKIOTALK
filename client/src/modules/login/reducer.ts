@@ -1,9 +1,9 @@
 import {
   LOGIN_REQUEST,
   GET_LOGIN_SUCCESS,
-  GET_LOGIN_FAILURE
+  GET_LOGIN_FAILURE,
 } from 'modules/login/action';
-import { Profile, loginInfo } from 'types';
+import { loginInfo } from 'types';
 import { LoginAction } from 'modules/login/types';
 
 const initialState: loginInfo[] = [];
@@ -11,9 +11,10 @@ const initialState: loginInfo[] = [];
 function userLogin(state: loginInfo[] = initialState, action: LoginAction) {
   switch (action.type) {
     case GET_LOGIN_SUCCESS: {
+      const user = action.payload;
       return {
-        ...state,
-        isLoggedIn: true
+        ...user,
+        isLoggedIn: true,
       };
     }
     case GET_LOGIN_FAILURE: {

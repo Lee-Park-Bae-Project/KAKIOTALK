@@ -5,7 +5,7 @@ dotenv.config();
 const sizeMap = {
   small: 24,
   medium: 36,
-  large: 48
+  large: 48,
 };
 
 export default sizeMap;
@@ -18,5 +18,5 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '';
 export const configs = {
   SOCKET_URL,
   API_SERVER_URL,
-  CLIENT_ID
+  CLIENT_ID,
 };

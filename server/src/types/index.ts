@@ -37,3 +37,9 @@ export interface IUser {
   email: string;
   accessToken: string
 }
+
+export interface IDecodedUser {
+  googleId: string;
+  iat: string;
+  exp: string;
+}

@@ -20,7 +20,7 @@ interface Props {
   friendTabOnClick: () => void;
   chatTabOnClick: () => void;
   addFriendTabOnClick: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
 }
 
@@ -33,7 +33,7 @@ const Main: FC<Props> = ({
   tabSelector,
   addFriendTabOnClick,
   friendTabOnClick,
-  chatTabOnClick
+  chatTabOnClick,
 }) => (
   <S.Container>
     <S.Left>
@@ -47,9 +47,7 @@ const Main: FC<Props> = ({
       </S.NavigationBarWrapper>
       <S.Wrapper>
         {tabSelector.friend && (
-          <S.Column>
-            <Friend myProfile={myProfile} friendList={friendList} />
-          </S.Column>
+          <Friend myProfile={myProfile} friendList={friendList} />
         )}
         {tabSelector.chat && (
           <S.Column>

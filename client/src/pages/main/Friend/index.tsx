@@ -1,8 +1,9 @@
-import React, { FC, useState, useEffect, HtmlHTMLAttributes } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import List from 'system/List';
 import UserCard from 'components/UserCard';
 import Hr from 'atoms/Hr';
-import SearchInput from 'components/SearchInput';
+import * as S from './style';
+import Profile from 'system/Profile';
 
 interface User {
   id: string;

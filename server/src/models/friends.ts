@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IFriend } from 'types'
+import { IFriend } from '../types'
 import { uuid } from '../common/utils'
 
 type FriendStatic = typeof Model & {
@@ -17,6 +17,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Friend = <FriendStatic>sequelize.define('friend', {
     id: {
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
       type: dataTypes.INTEGER.UNSIGNED,
     },
@@ -26,22 +27,17 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.UUIDV4,
       defaultValue: uuid(),
     },
-    followerId: { type: dataTypes.STRING },
-    followeeId: { type: dataTypes.STRING },
+    userId: {
+      allowNull: false,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
+    friendId: {
+      allowNull: true,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-
-  Friend.associate = (models) => {
-    Friend.hasOne(models.User, {
-      sourceKey: 'followerId',
-      foreignKey: 'id',
-    })
-    Friend.hasOne(models.User, {
-      sourceKey: 'followeeId',
-      foreignKey: 'id',
-    })
-  }
 
   return Friend
 }

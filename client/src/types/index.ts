@@ -4,7 +4,7 @@ export interface User {
   statusMessage: string;
 }
 export interface loginInfo {
-  loginToken: Profile;
+  loginToken: string;
   isLoggedIn: boolean;
 }
 
@@ -14,13 +14,4 @@ export interface ChatRoom {
   lastMessage: string;
   lastModified: number;
   numOfNewMessages: number;
-}
-export interface Profile {
-  email: string;
-  name: string;
-  googleId: string;
-}
-export interface Chat {
-  chatList: string[];
-  socketId: string;
 }

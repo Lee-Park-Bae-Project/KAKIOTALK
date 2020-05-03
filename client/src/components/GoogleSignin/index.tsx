@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 import * as S from 'components/GoogleSignin/styles';
 import GoogleLogin from 'react-google-login';
 import { withRouter, RouteComponentProps, useHistory } from 'react-router-dom';
-
+import { configs } from 'common/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'modules';
 import { loginRequest } from 'modules/login';
+import { RootState } from 'modules';
 import { useCookies } from 'react-cookie';
 
 const { useState, useEffect } = React;
@@ -24,7 +24,8 @@ const GoogleSignin: React.FC = () => {
   const [login, setLogin] = useState({
     email: '',
     name: '',
-    googleId: ''
+    googleId: '',
+    googleAccessToken: '',
   });
   useEffect(() => {
     console.log(login);
@@ -33,20 +34,20 @@ const GoogleSignin: React.FC = () => {
   const history = useHistory();
   const responseSuccess = (e: any) => {
     const { email, name, googleId } = e.profileObj;
-    const { googleAccessToken } = e.accessToken;
+    const googleAccessToken = e.accessToken;
     setLogin({
       email,
       name,
       googleId,
-      googleAccessToken
+      googleAccessToken,
     });
     dispatch(
       loginRequest({
         email: email,
         name: name,
         googleId: googleId,
-        googleAccessToken: googleAccessToken
-      })
+        googleAccessToken: googleAccessToken,
+      }),
     );
     if (isLoggedIn) {
       history.push('/main');
@@ -63,14 +64,15 @@ const GoogleSignin: React.FC = () => {
   return (
     <S.Container>
       <GoogleLogin
-        clientId={clientGoogleId}
+        clientId={configs.CLIENT_ID}
         buttonText="Google"
         onSuccess={responseSuccess}
         onFailure={responseFail}
+        redirectUri="http://localhost:3000/login/"
         cookiePolicy={'single_host_origin'}
       />
     </S.Container>
   );
 };
 
-export default GoogleSignin;
+export default withRouter(GoogleSignin);

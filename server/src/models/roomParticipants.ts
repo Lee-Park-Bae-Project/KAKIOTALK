@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IRoomParticipants } from 'types'
+import { IRoomParticipants } from '../types'
 import { uuid } from '../common/utils'
 
 type RoomParticipants = typeof Model & {
@@ -14,9 +14,10 @@ type RoomParticipants = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const RoomParticipants = <RoomParticipants>sequelize.define('RoomParticipants', {
+  const RoomParticipants = <RoomParticipants>sequelize.define('roomparticipants', {
     id: {
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
       type: dataTypes.INTEGER.UNSIGNED,
     },
@@ -26,17 +27,17 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.UUIDV4,
       defaultValue: uuid(),
     },
-    roomId: { type: dataTypes.STRING },
-    participants: { type: dataTypes.STRING },
-    numOfUnread: { type: dataTypes.NUMBER },
+    userId: {
+      allowNull: false,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
+    roomId: {
+      allowNull: false,
+      type: dataTypes.INTEGER.UNSIGNED,
+    },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-
-  RoomParticipants.associate = (models) => {
-    RoomParticipants.hasOne(models.User)
-    RoomParticipants.belongsTo(models.Room)
-  }
 
   return RoomParticipants
 }

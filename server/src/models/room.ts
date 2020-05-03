@@ -5,7 +5,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IRoom } from 'types'
+import { IRoom } from '../types'
 import { uuid } from '../common/utils'
 
 type RoomStatic = typeof Model & {
@@ -17,6 +17,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Room = <RoomStatic>sequelize.define('Room', {
     id: {
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
       type: dataTypes.INTEGER.UNSIGNED,
     },
@@ -26,17 +27,9 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.UUIDV4,
       defaultValue: uuid(),
     },
-    numOfParticipants: {
-      type: dataTypes.NUMBER,
-      allowNull: false,
-    },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-
-  Room.associate = (models) => {
-    Room.belongsTo(models.Chat)
-  }
 
   return Room
 }
