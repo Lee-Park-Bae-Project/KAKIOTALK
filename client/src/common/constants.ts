@@ -13,7 +13,7 @@ export default sizeMap;
 const SOCKET_URL = 'localhost:3050';
 const API_SERVER_URL = 'http://localhost:3050/v1/';
 
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '';
+const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 
 export const configs = {
   SOCKET_URL,

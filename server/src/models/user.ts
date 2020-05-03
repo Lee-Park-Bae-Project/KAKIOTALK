@@ -13,7 +13,7 @@ export type UserStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const User = <UserStatic>sequelize.define('User', {
+  const User = <UserStatic>sequelize.define('users', {
     id: {
       primaryKey: true,
       allowNull: false,
