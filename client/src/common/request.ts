@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { configs } from './constants';
-
+import { boolean } from '@storybook/addon-knobs';
 const { API_SERVER_URL } = configs;
 
 const instance = axios.create({
@@ -30,7 +30,7 @@ const getUserInfo: AxiosRequestConfig = {
   url: 'auth/check-auth',
 };
 
-const login = (
+const getLogin = (
   googleId: string,
   email: string,
   name: string,
@@ -50,12 +50,12 @@ const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
   getChatList: () => Axios(getChatList),
-  login: (
+  getLogin: (
     googleId: string,
     email: string,
     name: string,
-    googleAccessToken: string
-  ) => Axios(login(googleId, email, name, googleAccessToken)),
+    googleAccessToken: string,
+  ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios(getUserInfo),
 };
 

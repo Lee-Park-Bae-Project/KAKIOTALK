@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
+import { Route } from 'react-router-dom';
 import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
+import Login from 'pages/login';
 
 import withAuth, { Props } from 'hocs/withAuth';
 
@@ -14,6 +16,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
   const chatList = useSelector((state: RootState) => state.chatRoomList);
+  const loginState = useSelector((state: RootState) => state.login);
 
   useEffect(() => {
     dispatch(getProfile());
@@ -24,9 +27,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
 
   useEffect(() => {
     console.log(name, email, uuid);
-  }, [name,
-    email,
-    uuid]);
+  }, [name, email, uuid]);
 
   const [tabSelector, setTabSelector] = useState({
     friend: true,
@@ -46,8 +47,11 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       chat: true,
     });
   };
-  const addFriendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+  const addFriendTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ): void => {
     alert('hihi');
+    console.log(loginState);
   };
 
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -55,7 +59,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
     setSearchKeyword(e.target.value);
   };
 
-  return (
+  return loginState ? (
     <Main
       searchKeyword={searchKeyword}
       onSearchKeywordChange={onSearchKeywordChange}
@@ -67,6 +71,8 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
     />
+  ) : (
+    <Route path="/" component={Login} />
   );
 };
 

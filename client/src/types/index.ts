@@ -3,6 +3,10 @@ export interface User {
   userName: string;
   statusMessage: string;
 }
+export interface loginInfo {
+  loginToken: string;
+  isLoggedIn: boolean;
+}
 
 export interface ChatRoom {
   id: string;

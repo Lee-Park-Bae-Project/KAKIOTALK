@@ -1,5 +1,8 @@
 import {
-  INIT_PROFILE, GET_PROFILE, GET_PROFILE_FAILURE, GET_PROFILE_SUCCESS,
+  INIT_PROFILE,
+  GET_PROFILE,
+  GET_PROFILE_FAILURE,
+  GET_PROFILE_SUCCESS
 } from 'modules/profile/action';
 import { ProfileAction } from 'modules/profile/types';
 import { User } from 'types';
@@ -7,7 +10,7 @@ import { User } from 'types';
 const initialState: User = {
   id: '',
   statusMessage: '',
-  userName: '',
+  userName: ''
 };
 
 const profile = (state: User = initialState, action: ProfileAction) => {
@@ -20,13 +23,14 @@ const profile = (state: User = initialState, action: ProfileAction) => {
       if (error.response) {
         alert(error.response.data.message);
       }
-
       return state;
     }
 
-    case INIT_PROFILE: return action.payload;
+    case INIT_PROFILE:
+      return action.payload;
 
-    default: return state;
+    default:
+      return state;
   }
 };
 

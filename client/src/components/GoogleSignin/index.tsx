@@ -1,68 +1,75 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
-import { withRouter, RouteComponentProps } from 'react-router';
-
+import React from 'react';
+import dotenv from 'dotenv';
 import * as S from 'components/GoogleSignin/styles';
 import GoogleLogin from 'react-google-login';
-import request from 'common/request';
+import { withRouter, RouteComponentProps, useHistory } from 'react-router-dom';
 import { configs } from 'common/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest } from 'modules/login';
+import { RootState } from 'modules';
+import { useCookies } from 'react-cookie';
 
-const GoogleSignin: React.FC<RouteComponentProps> = ({ match, location }) => {
-  const [state, setState] = useState({
-    id: '',
+const { useState, useEffect } = React;
+
+dotenv.config();
+
+type LoginForm = {
+  loginSuccess: (state: { id: string; email: string; name: string }) => void;
+};
+const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
+const GoogleSignin: React.FC = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.login);
+
+  const [login, setLogin] = useState({
     email: '',
     name: '',
+    googleId: '',
+    googleAccessToken: '',
   });
-
   useEffect(() => {
-    console.log(state);
-  }, [state]);
-  const responseSuccess = (e: any) => {
-    const { googleId } = e;
-    const googleAccessToken = e.accessToken;
-    const { name, email } = e.profileObj;
-    setState({
-      id: googleId,
-      email,
-      name,
-    });
+    console.log(login);
+  }, [login]);
 
-    request.login(googleId,
+  const history = useHistory();
+  const responseSuccess = (e: any) => {
+    const { email, name, googleId } = e.profileObj;
+    const googleAccessToken = e.accessToken;
+    setLogin({
       email,
       name,
-      googleAccessToken)
-      .then((response) => {
-        // TODO: 메인으로 리다이렉트
-        console.log(response);
-      }).catch((error) => {
-        console.log(error);
-      });
+      googleId,
+      googleAccessToken,
+    });
+    dispatch(
+      loginRequest({
+        email: email,
+        name: name,
+        googleId: googleId,
+        googleAccessToken: googleAccessToken,
+      }),
+    );
+    if (isLoggedIn) {
+      history.push('/main');
+    } else {
+      console.log('login error');
+      alert('login failure');
+    }
   };
-  const responseFail = (
-    err: Error,
-  ) => {
+
+  const responseFail = (err: Error) => {
     console.error(err);
   };
 
   return (
     <S.Container>
-      <h2>{state.id}</h2>
-
       <GoogleLogin
         clientId={configs.CLIENT_ID}
         buttonText="Google"
-        onSuccess={
-          responseSuccess
-        }
-        onFailure={
-          responseFail
-        }
+        onSuccess={responseSuccess}
+        onFailure={responseFail}
         redirectUri="http://localhost:3000/login/"
-        cookiePolicy={
-          'single_host_origin'
-        }
+        cookiePolicy={'single_host_origin'}
       />
     </S.Container>
   );
