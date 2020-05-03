@@ -33,15 +33,16 @@ const getUserInfo: AxiosRequestConfig = {
 const getLogin = (
   googleId: string,
   email: string,
-  name: string
-  //googleAccessToken: string,
+  name: string,
+  googleAccessToken: string
 ): AxiosRequestConfig => ({
   method: 'POST',
   url: 'auth/google',
   data: {
     googleId,
     email,
-    name
+    name,
+    googleAccessToken
   },
   withCredentials: true
 });
@@ -50,8 +51,12 @@ const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
   getChatList: () => Axios(getChatList),
-  getLogin: (googleId: string, email: string, name: string) =>
-    Axios(getLogin(googleId, email, name)),
+  getLogin: (
+    googleId: string,
+    email: string,
+    name: string,
+    googleAccessToken: string
+  ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios(getUserInfo)
 };
 

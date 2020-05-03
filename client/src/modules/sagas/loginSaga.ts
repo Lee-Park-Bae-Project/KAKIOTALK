@@ -18,7 +18,7 @@ function* getLoginSaga(payload: any) {
     );
 
     console.log(response);
-    yield put(getLoginSuccess(response));
+    yield put(getLoginSuccess(response.data.data));
   } catch (e) {
     yield put(getLoginFailure(e));
   }

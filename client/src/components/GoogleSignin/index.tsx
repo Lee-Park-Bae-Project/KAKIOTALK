@@ -19,7 +19,7 @@ type LoginForm = {
 const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state: RootState) => state.login);
+  const isLoggedIn = useSelector((state: RootState) => state.login);
 
   const [login, setLogin] = useState({
     email: '',
@@ -37,9 +37,17 @@ const GoogleSignin: React.FC = () => {
     setLogin({
       email,
       name,
-      googleId
+      googleId,
+      googleAccessToken
     });
-    dispatch(loginRequest({ email: email, name: name, googleId: googleId }));
+    dispatch(
+      loginRequest({
+        email: email,
+        name: name,
+        googleId: googleId,
+        googleAccessToken: googleAccessToken
+      })
+    );
     if (isLoggedIn) {
       history.push('/main');
     } else {
