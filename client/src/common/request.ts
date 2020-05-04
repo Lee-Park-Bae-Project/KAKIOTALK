@@ -11,10 +11,9 @@ const instance = axios.create({
 });
 
 const Axios = async (config: AxiosRequestConfig) => instance.request(config);
-
 const getProfile: AxiosRequestConfig = {
   method: 'GET',
-  url: 'dummy/my-profile',
+  url: 'user/my-profile',
 };
 const getFriendList: AxiosRequestConfig = {
   method: 'GET',
