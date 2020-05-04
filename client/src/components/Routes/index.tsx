@@ -5,8 +5,8 @@ import MainContainer from 'containers/MainContainer';
 import ChatRoom from 'pages/chatroom';
 const Routes: React.FC = () => (
   <Router>
-    <Route exact path="/" component={Login} />
-    <Route path="/main" component={MainContainer} />
+    <Route exact path="/" component={MainContainer} />
+    <Route path="/login" component={Login} />
     <Route path="/chat" component={ChatRoom} />
   </Router>
 );
