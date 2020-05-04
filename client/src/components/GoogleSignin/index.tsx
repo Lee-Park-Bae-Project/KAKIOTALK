@@ -5,9 +5,9 @@ import GoogleLogin from 'react-google-login';
 import { withRouter, RouteComponentProps, useHistory } from 'react-router-dom';
 import { configs } from 'common/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginRequest } from 'modules/login';
 import { RootState } from 'modules';
 import { useCookies } from 'react-cookie';
+import request from 'common/request';
 
 const { useState, useEffect } = React;
 
@@ -19,13 +19,11 @@ type LoginForm = {
 const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: RootState) => state.login);
 
   const [login, setLogin] = useState({
     email: '',
     name: '',
     googleId: '',
-    googleAccessToken: '',
   });
   useEffect(() => {
     console.log(login);
@@ -33,30 +31,24 @@ const GoogleSignin: React.FC = () => {
 
   const history = useHistory();
   const responseSuccess = (e: any) => {
-    const { email, name, googleId } = e.profileObj;
+    const { googleId } = e;
     const googleAccessToken = e.accessToken;
+    const { name, email } = e.profileObj;
     setLogin({
       email,
       name,
       googleId,
-      googleAccessToken,
     });
-    dispatch(
-      loginRequest({
-        email: email,
-        name: name,
-        googleId: googleId,
-        googleAccessToken: googleAccessToken,
-      }),
-    );
-    if (isLoggedIn) {
-      history.push('/main');
-    } else {
-      console.log('login error');
-      alert('login failure');
-    }
+    request
+      .getLogin(googleId, email, name, googleAccessToken)
+      .then(response => {
+        // TODO: 메인으로 리다이렉트
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
-
   const responseFail = (err: Error) => {
     console.error(err);
   };

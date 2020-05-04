@@ -50,7 +50,6 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
-    alert('hihi');
     console.log(loginState);
   };
 
@@ -59,7 +58,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
     setSearchKeyword(e.target.value);
   };
 
-  return loginState ? (
+  return (
     <Main
       searchKeyword={searchKeyword}
       onSearchKeywordChange={onSearchKeywordChange}
@@ -71,8 +70,6 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
     />
-  ) : (
-    <Route path="/" component={Login} />
   );
 };
 
