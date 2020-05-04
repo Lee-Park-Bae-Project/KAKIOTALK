@@ -24,7 +24,7 @@ const Friend: FC<Props> = ({ myProfile, friendList }) => (
       statusMessage={myProfile.statusMessage}
     />
     <Hr />
-    {myProfile.id}'s friends {friendList.length}
+    {myProfile.userName}'s friends {friendList.length}
     {friendList.map(({ id, statusMessage, userName }) => {
       const onUserCardClick = () => {
         alert(userName);
