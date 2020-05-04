@@ -26,7 +26,7 @@ function withAuth<T extends Props>(Component: React.ComponentType<T>) {
             setNewProps({ name, email, uuid });
           })
           .catch((e: AxiosError) => {
-            alert(e.response?.data.message);
+            // alert(e.response?.data.message);
             props.history.push('/login');
           });
       })();
