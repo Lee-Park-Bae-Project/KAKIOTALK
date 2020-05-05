@@ -1,11 +1,11 @@
-const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../.env') })
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 const baseDbSetting = {
   timezone: '+09:00',
   dialect: 'mysql',
   pool: {
-    max: 100,
+    max: 1000,
     min: 0,
     idle: 10000,
   },
@@ -14,7 +14,7 @@ const baseDbSetting = {
     collate: 'utf8mb4_unicode_ci',
     timestamps: true,
   },
-}
+};
 module.exports = {
   production: {
     host: process.env.DB_HOST,
@@ -45,4 +45,4 @@ module.exports = {
     logging: false,
     ...baseDbSetting,
   },
-}
+};

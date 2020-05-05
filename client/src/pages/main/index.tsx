@@ -22,6 +22,7 @@ interface Props {
   addFriendTabOnClick: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
+  logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const Main: FC<Props> = ({
@@ -34,6 +35,7 @@ const Main: FC<Props> = ({
   addFriendTabOnClick,
   friendTabOnClick,
   chatTabOnClick,
+  logoutTabOnClick,
 }) => (
   <S.Container>
     <S.Left>
@@ -43,6 +45,7 @@ const Main: FC<Props> = ({
           friendTabOnClick={friendTabOnClick}
           chatTabOnClick={chatTabOnClick}
           addFriendTabOnClick={addFriendTabOnClick}
+          logoutTabOnClick={logoutTabOnClick}
         />
       </S.NavigationBarWrapper>
       <S.Wrapper>

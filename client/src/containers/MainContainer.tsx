@@ -49,9 +49,11 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   };
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ): void => {
-    console.log(loginState);
-  };
+  ): void => {};
+
+  const logoutTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ): void => {};
 
   const [searchKeyword, setSearchKeyword] = useState('');
   const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +71,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       friendTabOnClick={friendTabOnClick}
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
+      logoutTabOnClick={logoutTabOnClick}
     />
   );
 };

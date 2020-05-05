@@ -2,7 +2,7 @@ import React from 'react';
 import dotenv from 'dotenv';
 import * as S from 'components/GoogleSignin/styles';
 import GoogleLogin from 'react-google-login';
-import { withRouter, RouteComponentProps, useHistory } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import { configs } from 'common/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'modules';
@@ -42,7 +42,7 @@ const GoogleSignin: React.FC = () => {
     request
       .getLogin(googleId, email, name, googleAccessToken)
       .then(response => {
-        // TODO: 메인으로 리다이렉트
+        history.push('/main');
         console.log(response);
       })
       .catch(error => {
