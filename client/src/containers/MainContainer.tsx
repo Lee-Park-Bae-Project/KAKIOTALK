@@ -57,7 +57,6 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
     request
       .getLogout()
       .then(response => {
-        console.log(response);
         history.push('/');
       })
       .catch(error => {
