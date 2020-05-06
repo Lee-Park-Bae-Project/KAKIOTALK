@@ -1,6 +1,8 @@
 import { models } from '../models'
+import { access } from 'fs'
 
 const findByGoogleId = (googleId: string) => models.User.findOne({ where: { googleId } })
+const findByAccessToken = (accessToken:string) => models.User.findOne({where:{accessToken}})
 const createUser = (googleId: string) => models.User.create({ googleId })
 
 const findOrCreate = (
@@ -40,6 +42,7 @@ const setUserInfo = (googleId: string, name: string, email: string) => models.Us
 
 export default {
   findByGoogleId,
+  findByAccessToken,
   createUser,
   setAccessToken,
   setUserInfo,
