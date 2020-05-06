@@ -3,5 +3,5 @@
 
 # env
 src/.env
-server/.env
+.env
 src/*.env.*
