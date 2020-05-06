@@ -57,7 +57,9 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-
+  User.associate = (models)=>{
+    User.hasMany(models.Friend);
+  }
   return User
 }
 

@@ -38,6 +38,10 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-
+  Friend.associate = (models) => {
+    Friend.belongsTo(models.User, {
+      foreignKey: "userId"
+    })
+  }
   return Friend
 }
