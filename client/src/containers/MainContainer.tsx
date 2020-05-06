@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
-import { Route } from 'react-router-dom';
 import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
-import Login from 'pages/login';
-
 import withAuth, { Props } from 'hocs/withAuth';
-
 const { useState, useEffect } = React;
 const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const dispatch = useDispatch();
@@ -47,12 +43,20 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       chat: true,
     });
   };
+
+  const [addFriendPopUp, setAddFriendPopUp] = useState(false);
+  const [friendIdToAdd,setFriendIdToAdd] = useState('');
+  const onPopUpClose = () => {
+    setAddFriendPopUp(false);
+  };
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
-    console.log(loginState);
+    setAddFriendPopUp(true)
   };
-
+  const onFriendIdChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    setFriendIdToAdd(e.target.value);
+  }
   const [searchKeyword, setSearchKeyword] = useState('');
   const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
@@ -69,6 +73,10 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       friendTabOnClick={friendTabOnClick}
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
+      popupAddFriend={addFriendPopUp}
+      cancelAddFriend={onPopUpClose}
+      friendIdToAdd={friendIdToAdd}
+      onFriendIdChange={onFriendIdChange}
     />
   );
 };

@@ -2,9 +2,8 @@ import React, { FC, useState, useEffect } from 'react';
 import List from 'system/List';
 import UserCard from 'components/UserCard';
 import Hr from 'atoms/Hr';
-import * as S from './style';
 import Profile from 'system/Profile';
-
+import {PopUp} from 'components'
 interface User {
   id: string;
   userName: string;
@@ -54,12 +53,15 @@ const Friend: FC<Props> = ({ myProfile, friendList }) => {
         );
       })}
       {popup ? (
+        <PopUp>
         <Profile
           id={clickedUser.id}
           userName={clickedUser.userName}
           statusMessage={clickedUser.statusMessage}
           onRemoveClick={onProfileClose}
         />
+        </PopUp>
+
       ) : null}
     </List>
   );
