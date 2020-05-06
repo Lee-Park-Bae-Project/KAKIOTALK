@@ -5,7 +5,7 @@ const baseDbSetting = {
   timezone: '+09:00',
   dialect: 'mysql',
   pool: {
-    max: 1000,
+    max: 100,
     min: 0,
     idle: 10000,
   },

@@ -24,7 +24,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 const logout = async (req: Request, res: Response, next: NextFunction) => {
   try {
     res.clearCookie(cookieName, { path: '/' });
-    res.send('Success');
+    response(res);
   } catch (e) {
     next(e);
   }
