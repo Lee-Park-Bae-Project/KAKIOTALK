@@ -1,60 +1,84 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, {
+  FC, useState, useEffect, InputHTMLAttributes,
+} from 'react';
+import { sendMsg } from 'socket';
+import { RouteComponentProps } from 'react-router-dom';
 import * as S from './style';
+import withAuth, { WithAuthProps } from '../../hocs/withAuth';
 
-const ChatRoom: FC = (props: any) => {
-  const [messages, setMessages] = useState([
+interface Chat {
+  uuid: string;
+  roomId: string;
+  sender: string;
+  content: string;
+  createdAt: string;
+}
+
+const ChatRoom: FC<WithAuthProps & RouteComponentProps> = ({
+  name, email, uuid, location,
+}) => {
+  const [messages, setMessages] = useState<Chat[]>([
     {
-      writerId: '',
-      writerName: 'beomjoon',
-      writerEmail: '',
-      writerUuid: '',
-      sendTime: new Date(),
-      text: 'sample message',
-      received: true,
+      uuid: '',
+      roomId: '',
+      sender: '',
+      content: '',
+      createdAt: '',
     },
   ]);
+
+  useEffect(() => {
+    console.log(uuid);
+  }, [uuid]);
+
   let inputRef: any;
   const handleSubmit = () => {
     const date = new Date();
     setMessages(
       messages.concat([
         {
-          writerUuid: '',
-          writerId: '',
-          writerName: '',
-          writerEmail: '',
-          sendTime: date,
-          text: inputRef.value,
-          received: false,
+          uuid: '123',
+          roomId: '123',
+          sender: '123',
+          content: inputRef.value,
+          createdAt: date.toUTCString(),
         },
       ]),
     );
+    sendMsg({
+      sender: 'sender',
+      content: 'content',
+      roomId: 'typo',
+      createdAt: date.toUTCString(),
+    });
+
     inputRef.value = '';
   };
-  const handleEnterPress = (e: any) => {
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      if (e.target.value.trim().length > 0) {
+      if (e.target && e.currentTarget.value.trim().length > 0) {
         handleSubmit();
         inputRef.scrollIntoView();
       }
     }
   };
-  const { id, userName } = props.location.state;
-  const chatLogs = messages.map(msg => (
+  const { id, userName } = location.state;
+  const chatLogs = messages.map((msg) => (
     <S.ChatBox
-      sendTime={`${msg.sendTime.getMonth()}월 ${msg.sendTime.getDay()}일 ${msg.sendTime.getHours()}:${msg.sendTime.getMinutes()}`}
-      text={msg.text}
-      received={msg.received}
-      key={msg.sendTime.getTime()}
+      sendTime={msg.createdAt}
+      text={msg.content}
+      received={false}
+      key={msg.createdAt}
     />
   ));
+
   return (
     <S.Room>
       <S.UserCard userName={userName} />
       <S.ChatContainer>{chatLogs}</S.ChatContainer>
       <S.InputContainer>
         <S.InputArea
-          ref={el => (inputRef = el)}
+          ref={(el) => (inputRef = el)}
           onKeyPress={handleEnterPress}
         />
         <S.ButtonWrapper>
@@ -65,4 +89,4 @@ const ChatRoom: FC = (props: any) => {
   );
 };
 
-export default ChatRoom;
+export default withAuth(ChatRoom);
