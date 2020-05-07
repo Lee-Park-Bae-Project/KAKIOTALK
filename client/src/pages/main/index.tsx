@@ -24,6 +24,7 @@ interface Props {
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
   popupAddFriend: boolean;
+  confirmAddFriend: ()=>void;
   cancelAddFriend: ()=>void;
   friendIdToAdd : string;
   onFriendIdChange : (e:React.ChangeEvent<HTMLInputElement>)=>void;
@@ -40,6 +41,7 @@ const Main: FC<Props> = ({
   friendTabOnClick,
   chatTabOnClick,
   popupAddFriend,
+  confirmAddFriend,
   cancelAddFriend,
   friendIdToAdd,
   onFriendIdChange
@@ -76,15 +78,15 @@ const Main: FC<Props> = ({
         <PopUp>
           <Dialog
             isVisible={true}
-            title="친구추가"
+            title="친구 추가"
             isHideButton={false}
             canCancel={true}
             cancelText="취소"
             confirmText="확인"
             onCancel={cancelAddFriend}
-            onConfirm={() => null}
+            onConfirm={confirmAddFriend}
           >
-            <SearchInput value={friendIdToAdd} onChange={onFriendIdChange} placeholder='친구 아이디 입력'/>
+            <SearchInput value={friendIdToAdd} onChange={onFriendIdChange} placeholder='이메일을 입력해주세요'/>
           </Dialog>
         </PopUp>
       ) : null}
