@@ -25,7 +25,7 @@ const getChatList: AxiosRequestConfig = {
   url: 'dummy/chat-list',
 };
 const getLogout: AxiosRequestConfig = {
-  method: 'POST',
+  method: 'GET',
   url: 'auth/logout',
 };
 const getUserInfo: AxiosRequestConfig = {

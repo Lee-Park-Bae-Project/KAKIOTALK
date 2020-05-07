@@ -6,7 +6,7 @@ import isAuth from '../../middlewares/auth';
 const router = express.Router();
 
 router.post('/google/', login);
-router.post('/logout', logout);
+router.get('/logout', logout);
 router.get('/check-auth', isAuth, getUserInfo);
 
 export default router;
