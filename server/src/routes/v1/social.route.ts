@@ -1,7 +1,8 @@
 import express from 'express';
-import {getFriendList} from '../../controllers/social'
+import {getFriendsList,addFriend} from '../../controllers/social'
 
 const router = express.Router();
 
-router.get('/friend-list',getFriendList);
+router.get('/friend-list',getFriendsList);
+router.post('/add-friend',addFriend)
 export default router;
