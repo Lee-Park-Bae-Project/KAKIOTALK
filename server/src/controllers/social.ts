@@ -19,7 +19,8 @@ const getFriendsList = async (
     //const friendsData = await socialServce.getFriendsList(userId);
     response(res,);
   } catch (e) {
-    next(`${__dirname} ${e}`);
+    // next(e);
+    console.log('getFriendList error')
   }
 };
 const addFriend = async (req: Request, res: Response, next: NextFunction) => {
