@@ -12,11 +12,11 @@ module.exports = {
       unique: true,
       type: Sequelize.UUID,
     },
-    roomId: {
+    roomParticipantsId: {
       allowNull: false,
       type: Sequelize.INTEGER.UNSIGNED,
       references: {
-        model: 'rooms',
+        model: 'room_participants',
         key: 'id',
       },
       onUpdate: 'cascade',
@@ -25,16 +25,6 @@ module.exports = {
     content: {
       type: Sequelize.TEXT,
       allowNull: false,
-    },
-    senderId: {
-      type: Sequelize.INTEGER.UNSIGNED,
-      allowNull: false,
-      references: {
-        model: 'room_participants',
-        key: 'userId',
-      },
-      onUpdate: 'cascade',
-      onDelete: 'cascade',
     },
     createdAt: {
       allowNull: false,
