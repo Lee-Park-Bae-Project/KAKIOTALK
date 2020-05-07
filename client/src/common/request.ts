@@ -5,7 +5,7 @@ const { API_SERVER_URL } = configs;
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
-  timeout: 1000,
+  timeout: 3000,
   timeoutErrorMessage: '서버가 응답하지 않습니다.',
   withCredentials: true,
 });
@@ -17,7 +17,7 @@ const getProfile: AxiosRequestConfig = {
 };
 const getFriendList: AxiosRequestConfig = {
   method: 'GET',
-  url: 'dummy/friend-list',
+  url: 'social/friend-list',
 };
 const getChatList: AxiosRequestConfig = {
   method: 'GET',
@@ -45,6 +45,11 @@ const getLogin = (
   },
 });
 
+const addFriend = (email:string):AxiosRequestConfig=>({
+  method:'POST',
+  url: 'social/add-friend',
+  data: {email}
+})
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
@@ -56,6 +61,9 @@ const request = {
     googleAccessToken: string,
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios(getUserInfo),
+
+  //친구추가
+  addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail))
 };
 
 export default request;
