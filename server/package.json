@@ -7,7 +7,9 @@
     "deploy": "tsc && pm2 stop all && pm2 delete all && pm2 start dist/bin/www.js",
     "test": "NODE_ENV=test npm run migrate:reset && NODE_ENV=test npm run migrate && node_modules/.bin/jest",
     "migrate": "cd ./src && sequelize db:migrate",
-    "migrate:reset": "cd ./src && sequelize db:migrate:undo:all"
+    "migrate:reset": "cd ./src && sequelize db:migrate:undo:all",
+    "seed": "cd ./src && sequelize db:seed:all",
+    "seed:reset": "cd ./src && sequelize db:seed:undo:all"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
