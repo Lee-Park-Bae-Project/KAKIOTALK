@@ -31,5 +31,9 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
+  Room.associate = (models: any) => {
+
+  }
+
   return Room
 }

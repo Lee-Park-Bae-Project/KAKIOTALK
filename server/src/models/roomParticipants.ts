@@ -39,5 +39,20 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
+  RoomParticipants.associate = (models: any) => {
+    RoomParticipants.hasMany(
+      models.User, {
+        sourceKey: 'userId',
+        foreignKey: 'id',
+      }
+    )
+
+    RoomParticipants.hasMany(
+      models.Room, {
+        sourceKey: 'roomId',
+        foreignKey: 'id',
+      }
+    )
+  }
   return RoomParticipants
 }

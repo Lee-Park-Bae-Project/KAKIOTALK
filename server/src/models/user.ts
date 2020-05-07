@@ -58,6 +58,9 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
+  User.associate = (models: any) => {
+    // User.belongsTo(models.RoomParticipants, { targetKey: 'userId' })
+  }
   return User
 }
 

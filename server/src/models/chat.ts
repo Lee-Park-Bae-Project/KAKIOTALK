@@ -43,6 +43,13 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
+  Chat.associate = (models: any) => {
+    Chat.hasMany(models.RoomParticipants, {
+      sourceKey: 'senderId',
+      foreignKey: 'id',
+      as: 'sender',
+    })
+  }
 
   return Chat
 }

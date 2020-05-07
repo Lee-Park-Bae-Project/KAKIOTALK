@@ -2,8 +2,8 @@ import React, { FC, useState, useEffect } from 'react';
 import List from 'system/List';
 import UserCard from 'components/UserCard';
 import Hr from 'atoms/Hr';
-import * as S from './style';
 import Profile from 'system/Profile';
+import * as S from './style';
 
 interface User {
   id: string;
@@ -15,30 +15,57 @@ interface Props {
   myProfile: User;
   friendList: User[];
 }
+const Friend: FC<Props> = ({ myProfile, friendList }) => {
+  const [popup, setPopup] = useState(false);
+  const [clickedUser, setClickedUser] = useState({
+    id: '',
+    userName: '',
+    statusMessage: '',
+  });
+  const onProfileClose = () => {
+    setPopup(false);
+  };
+  useEffect(() => {
+    console.log(clickedUser);
+  }, [clickedUser]);
+  return (
+    <List>
+      <UserCard
+        key={myProfile.id}
+        userName={myProfile.userName}
+        statusMessage={myProfile.statusMessage}
+      />
+      <Hr />
+      친구 {friendList.length}
+      {friendList.map(({ id, statusMessage, userName }) => {
+        const onUserCardClick = () => {
+          setPopup(true);
+          setClickedUser({
+            id,
+            userName,
+            statusMessage,
+          });
+        };
 
-const Friend: FC<Props> = ({ myProfile, friendList }) => (
-  <List>
-    <UserCard
-      key={myProfile.id}
-      userName={myProfile.userName}
-      statusMessage={myProfile.statusMessage}
-    />
-    <Hr />
-    {myProfile.id}'s friends {friendList.length}
-    {friendList.map(({ id, statusMessage, userName }) => {
-      const onUserCardClick = () => {
-        alert(userName);
-      };
-      return (
-        <UserCard
-          key={id}
-          userName={userName}
-          statusMessage={statusMessage}
-          onClick={onUserCardClick}
+        return (
+          <UserCard
+            key={id}
+            userName={userName}
+            statusMessage={statusMessage}
+            onClick={onUserCardClick}
+          />
+        );
+      })}
+      {popup ? (
+        <Profile
+          id={clickedUser.id}
+          userName={clickedUser.userName}
+          statusMessage={clickedUser.statusMessage}
+          onRemoveClick={onProfileClose}
         />
-      );
-    })}
-  </List>
-);
+      ) : null}
+    </List>
+  );
+};
 
 export default Friend;
