@@ -18,6 +18,21 @@ module.exports = {
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
       },
+      {
+        uuid: '345',
+        userId: 1,
+        roomId: 2,
+        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+      },
+      {
+        uuid: '456',
+        userId: 3,
+        roomId: 2,
+        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+      },
+
     ]
 
   ),
