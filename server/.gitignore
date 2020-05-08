@@ -3,4 +3,5 @@
 
 # env
 src/.env
+.env
 src/*.env.*

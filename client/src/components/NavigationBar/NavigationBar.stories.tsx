@@ -18,31 +18,42 @@ export const NavigationBarBasic = () => {
     friend: true,
     chat: false,
   });
-  const friendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+  const friendTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ): void => {
     setTabSelector({
       friend: true,
       chat: false,
     });
   };
 
-  const chatTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+  const chatTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ): void => {
     setTabSelector({
       friend: false,
       chat: true,
     });
   };
 
-  const addFriendTabOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+  const addFriendTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ): void => {
     alert('hihi');
   };
+
+  const logoutTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ): void => {};
 
   return (
     <S.Container>
       <NavigationBar
-      tabSelector={tabSelector}
-      friendTabOnClick={friendTabOnClick}
-      chatTabOnClick={chatTabOnClick}
-      addFriendTabOnClick={addFriendTabOnClick}
+        tabSelector={tabSelector}
+        friendTabOnClick={friendTabOnClick}
+        chatTabOnClick={chatTabOnClick}
+        addFriendTabOnClick={addFriendTabOnClick}
+        logoutTabOnClick={logoutTabOnClick}
       />
     </S.Container>
   );
