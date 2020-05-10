@@ -60,6 +60,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
 
   const confirmAddFriend = ()=>{
     dispatch(addFriend(friendIdToAdd))
+    onPopUpClose()
   }
 
   const [searchKeyword, setSearchKeyword] = useState('');
