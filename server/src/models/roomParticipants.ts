@@ -44,6 +44,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       models.User, {
         sourceKey: 'userId',
         foreignKey: 'id',
+        as: 'sender',
       }
     )
 
@@ -51,6 +52,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       models.Room, {
         sourceKey: 'roomId',
         foreignKey: 'id',
+        as: 'roomInfo',
       }
     )
   }

@@ -43,7 +43,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     Chat.hasMany(models.RoomParticipants, {
       sourceKey: 'roomParticipantsId',
       foreignKey: 'id',
-      as: 'sender',
+      as: 'chatInfo',
     })
   }
 
