@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env DEBUG=api:server nodemon --exec ts-node ./src/bin/www.ts",
     "deploy": "tsc && pm2 stop all && pm2 delete all && pm2 start dist/bin/www.js",
-    "test": "NODE_ENV=test npm run migrate:reset && NODE_ENV=test npm run migrate && node_modules/.bin/jest",
+    "test": "NODE_ENV=test npm run migrate:reset && NODE_ENV=test npm run migrate && NODE_ENV=test npm run seed && node_modules/.bin/jest --detectOpenHandles",
     "migrate": "cd ./src && sequelize db:migrate",
     "migrate:reset": "cd ./src && sequelize db:migrate:undo:all",
     "seed": "cd ./src && sequelize db:seed:all",
@@ -51,6 +51,7 @@
     "@types/nodemon": "^1.19.0",
     "@types/session-file-store": "^1.2.1",
     "@types/socket.io": "^2.1.4",
+    "@types/supertest": "^2.0.9",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^25.4.0",
