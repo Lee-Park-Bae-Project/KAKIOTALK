@@ -29,10 +29,8 @@ function userList(state: User[] = initialState, action: UserListAction) {
       return state;
     }
     case ADD_FRIEND_SUCCESS: {
-      console.log(action.payload)
-      // 현재 서버에서 값을 못넘겨줌
-      // return state.concat(action.payload);
-      return state;
+      alert(`${action.payload.name}님을 친구로 추가했습니다.`)
+      return state.concat(action.payload);
     }
     case ADD_FRIEND_FAILURE: {
       const error = action.payload;
