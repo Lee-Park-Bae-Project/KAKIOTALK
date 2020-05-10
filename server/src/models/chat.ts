@@ -41,7 +41,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   })
   Chat.associate = (models: any) => {
     Chat.hasMany(models.RoomParticipants, {
-      sourceKey: 'senderId',
+      sourceKey: 'roomParticipantsId',
       foreignKey: 'id',
       as: 'sender',
     })
