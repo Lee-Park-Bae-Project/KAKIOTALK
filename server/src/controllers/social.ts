@@ -14,13 +14,12 @@ const getFriendsList = async (
       return next(createError(401, '로그인이 필요합니다.'));
     }
     const user = await userService.findByAccessToken(token);
-    console.log(user.id)
     const userId = user.id;
-    //const friendsData = await socialServce.getFriendsList(userId);
-    response(res,);
+    const data = await socialServce.getFriendsList(userId);
+    const friendlist = data.friend.map(friend=> ({id:friend.user.email,userName:friend.user.name,statusMessage:friend.user.status}))
+    response(res,friendlist)
   } catch (e) {
-    // next(e);
-    console.log('getFriendList error')
+    next(e);
   }
 };
 const addFriend = async (req: Request, res: Response, next: NextFunction) => {
@@ -29,13 +28,20 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     const user = await userService.findByAccessToken(token);
     const friendEmail = req.body.email;
     const friend = await userService.findByEmail(friendEmail);
-    const addedFriend = await socialServce.addFriend(user.id, friend.id);
-    response(res, {
-      id: friend.googleId,
-      userName: friend.name,
-      statusMessage: friend.status,
-    });
-  } catch (e) {}
+    if(friend) {
+      await socialServce.addFriend(user.id, friend.id);
+      response(res, {
+        id: friend.googleId,
+        userName: friend.name,
+        statusMessage: friend.status,
+      });
+    } else {
+      return next(createError(401, '유효하지 않은 이메일입니다.'));
+    }
+ 
+  } catch (e) {
+    next(e)
+  }
 };
 
 export { getFriendsList, addFriend };
