@@ -18,11 +18,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
     dispatch(getFriends());
     dispatch(getChatRoom());
     console.log(name, email, uuid);
-  }, [name,email,uuid]);
-
-  // useEffect(() => {
-  //   console.log(name, email, uuid);
-  // }, [name, email, uuid]);
+  }, []);
 
   const [tabSelector, setTabSelector] = useState({
     friend: true,
