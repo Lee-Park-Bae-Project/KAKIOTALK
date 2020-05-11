@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'modules';
 import { useCookies } from 'react-cookie';
 import request from 'common/request';
-
 const { useState, useEffect } = React;
 
 dotenv.config();
@@ -42,8 +41,7 @@ const GoogleSignin: React.FC = () => {
     request
       .getLogin(googleId, email, name, googleAccessToken)
       .then(response => {
-        history.push('/main');
-        console.log(response);
+        history.push('/')
       })
       .catch(error => {
         console.log(error);

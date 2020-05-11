@@ -4,15 +4,16 @@ import { cookieConfig, cookieName } from '../configs';
 import { response } from '../common/utils';
 import loginService from '../services/auth';
 import userService from '../services/userService';
-
+import { models } from '../models'
+import {uuid} from '../common/utils'
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { googleId, email, name, googleAccessToken } = req.body;
 
     const token = await loginService.login(
       googleId,
-      name,
       email,
+      name,
       googleAccessToken
     );
     res.cookie(cookieName, token, cookieConfig);

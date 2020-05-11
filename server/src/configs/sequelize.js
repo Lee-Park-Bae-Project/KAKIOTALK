@@ -1,5 +1,5 @@
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../../env') });
+const path = require('path')
+require('dotenv').config()
 
 const baseDbSetting = {
   timezone: '+09:00',

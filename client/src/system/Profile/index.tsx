@@ -26,8 +26,6 @@ const Profile: FC<Prop> = ({
 }) => {
 
   return (
-    <S.PopUp>
-      <S.PopUpInner>
         <S.Container>
           <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />
           <S.NameWrapper>{userName}</S.NameWrapper>
@@ -61,10 +59,6 @@ const Profile: FC<Prop> = ({
             />
           </S.Footer>
         </S.Container>
-      </S.PopUpInner>
-
-    </S.PopUp>
-
   );
 };
 

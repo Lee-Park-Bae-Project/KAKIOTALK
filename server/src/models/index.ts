@@ -33,3 +33,5 @@ export const models:{[key: string ]: ModelTypes} = {
 // Object.keys(models).forEach((modelName) => {
 //   models[modelName].associate(models)
 // })
+models.User.associate(models)
+models.Friend.associate(models)
