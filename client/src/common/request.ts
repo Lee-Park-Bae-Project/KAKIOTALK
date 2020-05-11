@@ -23,7 +23,10 @@ const getChatList: AxiosRequestConfig = {
   method: 'GET',
   url: 'dummy/chat-list',
 };
-
+const getLogout: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'auth/logout',
+};
 const getUserInfo: AxiosRequestConfig = {
   method: 'GET',
   url: 'auth/check-auth',
@@ -61,9 +64,8 @@ const request = {
     googleAccessToken: string,
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios(getUserInfo),
-
-  //친구추가
-  addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail))
+  addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
+  getLogout: () => Axios(getLogout),
 };
 
 export default request;

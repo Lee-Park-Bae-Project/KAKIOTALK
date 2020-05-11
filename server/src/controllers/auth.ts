@@ -16,8 +16,15 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       name,
       googleAccessToken
     );
-
     res.cookie(cookieName, token, cookieConfig);
+    response(res);
+  } catch (e) {
+    next(e);
+  }
+};
+const logout = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.clearCookie(cookieName, { path: '/' });
     response(res);
   } catch (e) {
     next(e);
@@ -41,4 +48,4 @@ const getUserInfo = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { login, getUserInfo };
+export { login, getUserInfo, logout };

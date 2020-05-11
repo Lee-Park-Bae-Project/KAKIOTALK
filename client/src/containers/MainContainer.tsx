@@ -5,6 +5,8 @@ import Main from 'pages/main';
 import { getFriends,addFriend } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
+import request from 'common/request';
+import { useHistory } from 'react-router-dom';
 import withAuth, { Props } from 'hocs/withAuth';
 const { useState, useEffect } = React;
 const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
@@ -12,6 +14,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
   const chatList = useSelector((state: RootState) => state.chatRoomList);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getProfile());
@@ -48,7 +51,21 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
-    setAddFriendPopUp(true)
+    setAddFriendPopUp(true);
+
+  };
+
+  const logoutTabOnClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ): void => {
+    request
+      .getLogout()
+      .then(response => {
+        history.push('/login');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
   const onFriendIdChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     setFriendIdToAdd(e.target.value);
@@ -80,6 +97,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       cancelAddFriend={onPopUpClose}
       friendIdToAdd={friendIdToAdd}
       onFriendIdChange={onFriendIdChange}
+      logoutTabOnClick={logoutTabOnClick}
     />
   );
 };

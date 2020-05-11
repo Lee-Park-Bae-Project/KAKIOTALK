@@ -28,16 +28,12 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.UUIDV4,
       defaultValue: uuid(),
     },
-    roomId: {
+    roomParticipantsId: {
       allowNull: false,
-      type: dataTypes.STRING,
+      type: dataTypes.INTEGER.UNSIGNED,
     },
     content: {
       type: dataTypes.TEXT,
-      allowNull: false,
-    },
-    senderId: {
-      type: dataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
     createdAt: { type: dataTypes.DATE },

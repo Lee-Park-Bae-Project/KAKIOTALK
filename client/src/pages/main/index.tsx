@@ -24,10 +24,11 @@ interface Props {
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
   popupAddFriend: boolean;
-  confirmAddFriend: ()=>void;
-  cancelAddFriend: ()=>void;
-  friendIdToAdd : string;
-  onFriendIdChange : (e:React.ChangeEvent<HTMLInputElement>)=>void;
+  confirmAddFriend: () => void;
+  cancelAddFriend: () => void;
+  friendIdToAdd: string;
+  onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const Main: FC<Props> = ({
@@ -44,14 +45,15 @@ const Main: FC<Props> = ({
   confirmAddFriend,
   cancelAddFriend,
   friendIdToAdd,
-  onFriendIdChange
-  
+  onFriendIdChange,
+  logoutTabOnClick,
 }) => {
   return (
     <S.Container>
       <S.Left>
         <S.NavigationBarWrapper>
           <NavigationBar
+            logoutTabOnClick={logoutTabOnClick}
             tabSelector={tabSelector}
             friendTabOnClick={friendTabOnClick}
             chatTabOnClick={chatTabOnClick}
@@ -86,7 +88,11 @@ const Main: FC<Props> = ({
             onCancel={cancelAddFriend}
             onConfirm={confirmAddFriend}
           >
-            <SearchInput value={friendIdToAdd} onChange={onFriendIdChange} placeholder='이메일을 입력해주세요'/>
+            <SearchInput
+              value={friendIdToAdd}
+              onChange={onFriendIdChange}
+              placeholder="이메일을 입력해주세요"
+            />
           </Dialog>
         </PopUp>
       ) : null}
