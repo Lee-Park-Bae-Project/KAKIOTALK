@@ -38,10 +38,11 @@ const GoogleSignin: React.FC = () => {
       name,
       googleId,
     });
+    console.log(e);
     request
       .getLogin(googleId, email, name, googleAccessToken)
       .then(response => {
-        history.push('/')
+        history.push('/');
       })
       .catch(error => {
         console.log(error);
@@ -60,6 +61,7 @@ const GoogleSignin: React.FC = () => {
         onFailure={responseFail}
         redirectUri="http://localhost:3000/login/"
         cookiePolicy={'single_host_origin'}
+        prompt="consent"
       />
     </S.Container>
   );

@@ -29,6 +29,9 @@ interface Props {
   friendIdToAdd: string;
   onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  confirmLogout: () => void;
+  cancelLogout: () => void;
+  popupLogout: boolean;
 }
 
 const Main: FC<Props> = ({
@@ -47,6 +50,8 @@ const Main: FC<Props> = ({
   friendIdToAdd,
   onFriendIdChange,
   logoutTabOnClick,
+  confirmLogout,
+  popupLogout,
 }) => {
   return (
     <S.Container>
@@ -94,6 +99,19 @@ const Main: FC<Props> = ({
               placeholder="이메일을 입력해주세요"
             />
           </Dialog>
+        </PopUp>
+      ) : null}
+      {popupLogout ? (
+        <PopUp>
+          <Dialog
+            isVisible={true}
+            title="로그 아웃"
+            isHideButton={false}
+            canCancel={true}
+            cancelText="취소"
+            confirmText="확인"
+            onConfirm={confirmLogout}
+          ></Dialog>
         </PopUp>
       ) : null}
     </S.Container>
