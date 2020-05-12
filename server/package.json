@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env DEBUG=api:server nodemon --exec ts-node ./src/bin/www.ts",
+    "start": "cross-env DEBUG=api:server nodemon --exec ts-node --ignore ./src/__test__ ./src/bin/www.ts",
     "deploy": "tsc && pm2 stop all && pm2 delete all && pm2 start dist/bin/www.js",
     "test": "NODE_ENV=test npm run migrate:reset && NODE_ENV=test npm run migrate && NODE_ENV=test npm run seed && node_modules/.bin/jest --detectOpenHandles",
     "migrate": "cd ./src && sequelize db:migrate",
@@ -44,6 +44,7 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
     "@types/express-session": "^1.15.16",
+    "@types/faker": "^4.1.11",
     "@types/http-errors": "^1.6.3",
     "@types/jest": "^25.2.1",
     "@types/jsonwebtoken": "^8.3.9",
