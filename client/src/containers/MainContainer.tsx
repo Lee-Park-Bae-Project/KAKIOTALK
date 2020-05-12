@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
 import Main from 'pages/main';
-import { getFriends,addFriend } from 'modules/friends';
+import { getFriends, addFriend } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
 import request from 'common/request';
@@ -43,16 +43,15 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   };
 
   const [addFriendPopUp, setAddFriendPopUp] = useState(false);
-  const [friendIdToAdd,setFriendIdToAdd] = useState('');
+  const [friendIdToAdd, setFriendIdToAdd] = useState('');
 
-  const onPopUpClose = () => {
+  const onFriendPopUpClose = () => {
     setAddFriendPopUp(false);
   };
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
     setAddFriendPopUp(true);
-
   };
 
   const logoutTabOnClick = (
@@ -67,14 +66,14 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
         console.log(error);
       });
   };
-  const onFriendIdChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+  const onFriendIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFriendIdToAdd(e.target.value);
-  }
+  };
 
-  const confirmAddFriend = ()=>{
-    dispatch(addFriend(friendIdToAdd))
-    onPopUpClose()
-  }
+  const confirmAddFriend = () => {
+    dispatch(addFriend(friendIdToAdd));
+    onFriendPopUpClose();
+  };
 
   const [searchKeyword, setSearchKeyword] = useState('');
   const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +93,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       addFriendTabOnClick={addFriendTabOnClick}
       popupAddFriend={addFriendPopUp}
       confirmAddFriend={confirmAddFriend}
-      cancelAddFriend={onPopUpClose}
+      cancelAddFriend={onFriendPopUpClose}
       friendIdToAdd={friendIdToAdd}
       onFriendIdChange={onFriendIdChange}
       logoutTabOnClick={logoutTabOnClick}
