@@ -1,6 +1,19 @@
 import { models } from '../models'
 
 export const findRoomById = (roomId: string) => models.Room.findOne({ where: { roomId } })
+export const findAllRooms = (userId: string) => models.RoomParticipants.findAll(
+  {
+    raw: true,
+    nest: true,
+    where: { userId },
+    include: [
+      {
+        model: models.Room,
+        as: 'roomInfo',
+      },
+    ],
+  }
+)
 export const getChatsByRoomId = (roomId: string) => models.Chat.findAll({ include: [
   {
     model: models.RoomParticipants,
@@ -19,3 +32,12 @@ export const getChatsByRoomId = (roomId: string) => models.Chat.findAll({ includ
   },
 ] })
 
+export const getRoomParticipants = (roomId: string) => models.RoomParticipants.findAll({
+  where: { roomId },
+  include: [
+    {
+      model: models.User,
+      as: 'participants',
+    },
+  ],
+})

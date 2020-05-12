@@ -5,7 +5,7 @@ const app = require('../../app')
 const roomId = 1
 describe(`GET: /v1/chat/${roomId}`, () => {
   it('roomId 로 채팅 조회 | 200', async () => {
-    const response = await request(app).get(`/v1/chat/chat/${roomId}`)
+    const response = await request(app).get(`/v1/chat/message/${roomId}`)
     expect(response.status).toEqual(200)
   })
 

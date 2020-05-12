@@ -3,7 +3,7 @@ import { CookieOptions } from 'express'
 
 require('dotenv').config()
 
-export const env = process.env.NODE_ENV
+export const env = process.env.NODE_ENV || 'development'
 
 const whiteList = ['http://localhost:3000']
 export const corsConfig: CorsOptions = {
@@ -11,9 +11,11 @@ export const corsConfig: CorsOptions = {
   credentials: true,
 }
 
+const maxAge = env === 'development' ? 1000 * 60 * 60 * 20000 : 1000 * 60 * 60 * 20
+
 export const cookieConfig: CookieOptions = {
   httpOnly: true,
-  maxAge: env === 'development' ? 1000 * 60 * 60 * 20000 : 1000 * 60 * 60 * 20,
+  maxAge,
 }
 export const cookieName = 'kakio_jwt'
 

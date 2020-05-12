@@ -2,7 +2,9 @@ import {
   NextFunction, Request, Response,
 } from 'express'
 import createError from 'http-errors'
+import httpStatus from 'http-status'
 import * as chatService from '../services/chat'
+import * as userService from '../services/userService'
 import { response } from '../common/utils'
 
 export const getChats = async (req: Request, res: Response, next: NextFunction) => {
@@ -21,9 +23,23 @@ export const getChats = async (req: Request, res: Response, next: NextFunction) 
 export const getRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { roomId } = req.params
-    const room = await chatService.findRoomById(roomId)
+    let rooms
+    if (roomId) {
+      rooms = await chatService.findRoomById(roomId)
+    } else {
+      const { googleId } = req.decodedUser!
 
-    response(res, room)
+      const user = await userService.findByGoogleId(googleId)
+      if (!user) {
+        return next(createError(httpStatus.NOT_FOUND, '사용자를 찾을 수 없습니다.'))
+      }
+      rooms = await chatService.findAllRooms(user.id)
+      console.log(rooms)
+      const roomIds = rooms.map((room) => room.roomInfo.id)
+      console.log(roomIds)
+    }
+
+    response(res, rooms)
   } catch (e) {
     next(e)
   }

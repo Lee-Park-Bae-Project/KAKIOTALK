@@ -8,7 +8,7 @@ import isAuth from '../../middlewares/auth'
 const router = express.Router()
 
 // router.use(isAuth)
-router.get('/:roomId', getChats)
-router.get('/room/:roomId', getRoom)
+router.get('/message/:roomId', getChats)
+router.get('/room/:roomId?', isAuth, getRoom)
 
 export default router

@@ -44,11 +44,11 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       models.User, {
         sourceKey: 'userId',
         foreignKey: 'id',
-        as: 'sender',
+        as: 'participants',
       }
     )
 
-    RoomParticipants.hasMany(
+    RoomParticipants.hasOne(
       models.Room, {
         sourceKey: 'roomId',
         foreignKey: 'id',

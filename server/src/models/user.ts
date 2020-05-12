@@ -59,7 +59,13 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   })
 
   User.associate = (models: any) => {
-    // User.belongsTo(models.RoomParticipants, { targetKey: 'userId' })
+    User.belongsTo(
+      models.RoomParticipants,
+      {
+        targetKey: 'userId',
+        foreignKey: 'id',
+      }
+    )
   }
   return User
 }
