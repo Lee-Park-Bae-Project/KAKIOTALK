@@ -3,7 +3,6 @@ import request from 'supertest'
 const app = require('../../app')
 
 const agent = request.agent(app)
-const roomId = 1
 const googleId = '113283872440363914094'
 const email = 'leeparkbaeproject@gmail.com'
 const name = 'Junho Lee'
@@ -21,8 +20,9 @@ it('로그인 | 200', async () => {
   expect(response.status).toEqual(200)
 })
 
-describe(`GET: /v1/chat/${roomId}`, () => {
+describe('GET: /v1/chat/', () => {
   it('roomId 로 채팅 조회 | 200', async () => {
+    const roomId = 1
     const response = await agent.get(`/v1/chat/message/${roomId}`)
     expect(response.status).toEqual(200)
   })
@@ -41,5 +41,14 @@ describe('GET: v1/chat/room', () => {
     expect(response.status).toEqual(200)
     expect(data.name).toEqual(name)
     expect(data.email).toEqual(email)
+  })
+
+  it('특정 방 조회 | 200', async () => {
+    const roomId = '123'
+    const response = await agent.get(`/v1/chat/room/${roomId}`)
+
+    const { data } = response.body
+    expect(response.status).toEqual(200)
+    expect(data.uuid).toEqual(roomId)
   })
 })
