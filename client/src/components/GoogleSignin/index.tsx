@@ -38,6 +38,7 @@ const GoogleSignin: React.FC = () => {
       name,
       googleId,
     });
+    console.log(e);
     request
       .getLogin(googleId, email, name, googleAccessToken)
       .then(response => {
@@ -64,6 +65,7 @@ const GoogleSignin: React.FC = () => {
         onAutoLoadFinished={responseAutoLoad}
         redirectUri="http://localhost:3000/login/"
         cookiePolicy={'single_host_origin'}
+        prompt="consent"
       />
     </S.Container>
   );
