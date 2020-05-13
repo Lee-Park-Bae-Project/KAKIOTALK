@@ -15,3 +15,17 @@ export interface ChatRoom {
   lastModified: number;
   numOfNewMessages: number;
 }
+
+export interface ChatRoom2 {
+  uuid: string;
+  participants: User[];
+}
+
+export interface User2 {
+  user: {
+    name: string;
+    email: string;
+    uuid: string;
+  };
+
+}
