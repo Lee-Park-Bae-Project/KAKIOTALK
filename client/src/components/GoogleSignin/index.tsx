@@ -41,7 +41,7 @@ const GoogleSignin: React.FC = () => {
     request
       .getLogin(googleId, email, name, googleAccessToken)
       .then(response => {
-        history.push('/')
+        history.push('/');
       })
       .catch(error => {
         console.log(error);
@@ -51,6 +51,9 @@ const GoogleSignin: React.FC = () => {
     console.error(err);
   };
 
+  const responseAutoLoad = (success: Boolean) => {
+    console.log(success);
+  };
   return (
     <S.Container>
       <GoogleLogin
@@ -58,6 +61,7 @@ const GoogleSignin: React.FC = () => {
         buttonText="Google"
         onSuccess={responseSuccess}
         onFailure={responseFail}
+        onAutoLoadFinished={responseAutoLoad}
         redirectUri="http://localhost:3000/login/"
         cookiePolicy={'single_host_origin'}
       />

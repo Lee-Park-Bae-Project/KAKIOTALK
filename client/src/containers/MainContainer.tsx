@@ -43,10 +43,14 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   };
 
   const [addFriendPopUp, setAddFriendPopUp] = useState(false);
+  const [logoutPopUp, setLogoutPopUp] = useState(false);
   const [friendIdToAdd, setFriendIdToAdd] = useState('');
 
   const onFriendPopUpClose = () => {
     setAddFriendPopUp(false);
+  };
+  const onLogoutPopUpClose = () => {
+    setLogoutPopUp(false);
   };
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -57,14 +61,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const logoutTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
-    request
-      .getLogout()
-      .then(response => {
-        history.push('/login');
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    setLogoutPopUp(true);
   };
   const onFriendIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFriendIdToAdd(e.target.value);
@@ -73,6 +70,17 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const confirmAddFriend = () => {
     dispatch(addFriend(friendIdToAdd));
     onFriendPopUpClose();
+  };
+  const confirmLogout = () => {
+    request
+      .getLogout()
+      .then(response => {
+        history.push('/login');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    onLogoutPopUpClose();
   };
 
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -97,6 +105,9 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       friendIdToAdd={friendIdToAdd}
       onFriendIdChange={onFriendIdChange}
       logoutTabOnClick={logoutTabOnClick}
+      popupLogout={logoutPopUp}
+      cancelLogout={onLogoutPopUpClose}
+      confirmLogout={confirmLogout}
     />
   );
 };
