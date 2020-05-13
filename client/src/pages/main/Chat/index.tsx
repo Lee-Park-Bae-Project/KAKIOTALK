@@ -5,52 +5,34 @@ import RoomCard from 'components/RoomCard';
 import { ChatRoom } from 'types';
 
 interface Props {
-  searchKeyword: string;
+  searchChatKeyword: string;
   chatList: ChatRoom[];
 }
 
-const Chat: FC<Props> = ({ searchKeyword, chatList }) => (
+const Chat: FC<Props> = ({ searchChatKeyword, chatList }) => (
   <List>
-    {searchKeyword.length > 0
-      ? chatList
-          .filter(chat =>
-            chat.userList.some(
-              user =>
-                user.toLowerCase().indexOf(searchKeyword.toLowerCase()) >= 0
-            )
-          )
-          .map(({ userList, lastMessage, lastModified, numOfNewMessages }) => {
-            const onRoomCardClick = () => {
-              alert(userList.toString());
-            };
-            return (
-              <RoomCard
-                key={shortid.generate()}
-                userList={userList}
-                lastMessage={lastMessage}
-                lastModified={lastModified}
-                numOfNewMessages={numOfNewMessages}
-                onClick={onRoomCardClick}
-              />
-            );
-          })
-      : chatList.map(
-          ({ userList, lastMessage, lastModified, numOfNewMessages }) => {
-            const onRoomCardClick = () => {
-              alert(userList.toString());
-            };
-            return (
-              <RoomCard
-                key={shortid.generate()}
-                userList={userList}
-                lastMessage={lastMessage}
-                lastModified={lastModified}
-                numOfNewMessages={numOfNewMessages}
-                onClick={onRoomCardClick}
-              />
-            );
-          }
-        )}
+    {chatList
+      .filter(chat =>
+        chat.userList.some(
+          user =>
+            user.toLowerCase().indexOf(searchChatKeyword.toLowerCase()) >= 0,
+        ),
+      )
+      .map(({ userList, lastMessage, lastModified, numOfNewMessages }) => {
+        const onRoomCardClick = () => {
+          alert(userList.toString());
+        };
+        return (
+          <RoomCard
+            key={shortid.generate()}
+            userList={userList}
+            lastMessage={lastMessage}
+            lastModified={lastModified}
+            numOfNewMessages={numOfNewMessages}
+            onClick={onRoomCardClick}
+          />
+        );
+      })}
   </List>
 );
 

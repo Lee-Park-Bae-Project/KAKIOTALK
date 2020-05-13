@@ -76,15 +76,21 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
     onPopUpClose()
   }
 
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(e.target.value);
+  const [searchChatKeyword, setSearchChatKeyword] = useState('');
+  const onChatKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchChatKeyword(e.target.value);
   };
 
+  const [searchFriendKeyword,setSearchFriendKeyword] = useState('');
+  const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    setSearchFriendKeyword(e.target.value);
+  }
   return (
     <Main
-      searchKeyword={searchKeyword}
-      onSearchKeywordChange={onSearchKeywordChange}
+      searchChatKeyword={searchChatKeyword}
+      onChatKeywordChange={onChatKeywordChange}
+      searchFriendKeyword={searchFriendKeyword}
+      onFriendKeywordChange={onFriendKeywordChange}
       myProfile={myProfile}
       friendList={friendList}
       chatList={chatList}
