@@ -59,13 +59,16 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   })
 
   User.associate = (models: any) => {
-    User.belongsTo(
-      models.RoomParticipants,
+    User.belongsToMany(
+      models.Room,
       {
-        targetKey: 'userId',
-        foreignKey: 'id',
+        through: models.RoomParticipants,
+        as: 'rooms',
+        foreignKey: 'userId',
+        otherKey: 'roomId',
       }
     )
+    // User.hasMany(models.RoomParticipants, { as: 'roomInfo' })
   }
   return User
 }

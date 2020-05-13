@@ -40,21 +40,8 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   })
 
   RoomParticipants.associate = (models: any) => {
-    RoomParticipants.hasMany(
-      models.User, {
-        sourceKey: 'userId',
-        foreignKey: 'id',
-        as: 'participants',
-      }
-    )
-
-    RoomParticipants.hasOne(
-      models.Room, {
-        sourceKey: 'roomId',
-        foreignKey: 'id',
-        as: 'roomInfo',
-      }
-    )
+    RoomParticipants.belongsTo(models.User)
+    RoomParticipants.belongsTo(models.Room)
   }
   return RoomParticipants
 }
