@@ -6,8 +6,8 @@ import ChatRoom from 'pages/chatroom';
 import { configs } from 'common/constants';
 const Routes: React.FC = () => (
   <Router basename={configs.PUBLIC_URL}>
-    <Route exact path="/" component={MainContainer} />
-    <Route path="/login" component={Login} />
+    <Route exact path="/" component={Login} />
+    <Route path="/login" component={MainContainer} />
     <Route path="/chat" component={ChatRoom} />
   </Router>
 );
