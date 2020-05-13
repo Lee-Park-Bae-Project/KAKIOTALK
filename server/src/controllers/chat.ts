@@ -34,9 +34,6 @@ export const getRoom = async (req: Request, res: Response, next: NextFunction) =
         return next(createError(httpStatus.NOT_FOUND, '사용자를 찾을 수 없습니다.'))
       }
       rooms = await chatService.findAllRooms(user.id)
-      console.log(rooms)
-      const roomIds = rooms.map((room) => room.roomInfo.id)
-      console.log(roomIds)
     }
 
     response(res, rooms)
