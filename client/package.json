@@ -50,6 +50,7 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
