@@ -40,10 +40,10 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
   Chat.associate = (models: any) => {
-    Chat.hasMany(models.RoomParticipants, {
-      sourceKey: 'roomParticipantsId',
-      foreignKey: 'id',
-      as: 'chatInfo',
+    Chat.belongsTo(models.RoomParticipants, {
+      foreignKey: 'roomParticipantsId',
+      targetKey: 'id',
+      as: 'info',
     })
   }
 
