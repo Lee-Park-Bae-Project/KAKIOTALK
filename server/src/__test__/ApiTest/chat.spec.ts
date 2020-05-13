@@ -4,12 +4,11 @@ const app = require('../../app')
 
 const agent = request.agent(app)
 const roomId = 1
-
+const googleId = '113283872440363914094'
+const email = 'leeparkbaeproject@gmail.com'
+const name = 'Junho Lee'
+const googleAccessToken = '123'
 it('로그인 | 200', async () => {
-  const googleId = '113283872440363914094'
-  const email = 'leeparkbaeproject@gmail.com'
-  const name = 'Junow Lee'
-  const googleAccessToken = '123'
   const response = await agent
     .post('/v1/auth/google')
     .send({
@@ -37,6 +36,10 @@ describe(`GET: /v1/chat/${roomId}`, () => {
 describe('GET: v1/chat/room', () => {
   it('내가 참여중인 방목록 조회 | 200', async () => {
     const response = await agent.get('/v1/chat/room')
+
+    const { data } = response.body
     expect(response.status).toEqual(200)
+    expect(data.name).toEqual(name)
+    expect(data.email).toEqual(email)
   })
 })

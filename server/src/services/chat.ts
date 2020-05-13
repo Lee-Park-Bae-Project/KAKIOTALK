@@ -1,23 +1,17 @@
 import { models } from '../models'
 
 export const findRoomById = (roomId: string) => models.Room.findOne({ where: { roomId } })
-export const findAllRooms = (userId: string) => models.User.findAll(
+export const findAllRooms = (userId: string) => models.User.findOne(
   {
-    raw: true,
-    nest: true,
     where: { id: userId },
-    include: [
-      {
-        model: models.Room,
-        as: 'rooms',
-        include: [
-          {
-            model: models.User,
-            as: 'participants',
-          },
-        ],
-      },
-    ],
+    include: [{
+      model: models.Room,
+      as: 'rooms',
+      include: [{
+        model: models.User,
+        as: 'participants',
+      }],
+    }],
   }
 )
 export const getChatsByRoomId = (roomId: string) => models.Chat.findAll(
