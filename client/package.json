@@ -18,6 +18,8 @@
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "enzyme-to-json": "^3.4.3",
+    "gh-pages": "^2.2.0",
+    "global": "^4.4.0",
     "jest-styled-components": "^7.0.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
@@ -37,7 +39,8 @@
     "shortid": "^2.2.15",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "vercel": "^19.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,7 +49,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json"
+    "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -113,5 +117,6 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  }
+  },
+  "homepage": "https://Lee-Park-Bae-Project.github.io/KAKIOTALK/"
 }
