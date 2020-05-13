@@ -3,7 +3,7 @@ import List from 'system/List';
 import UserCard from 'components/UserCard';
 import Hr from 'atoms/Hr';
 import Profile from 'system/Profile';
-import {PopUp} from 'components'
+import { PopUp } from 'components';
 interface User {
   id: string;
   userName: string;
@@ -13,8 +13,9 @@ interface User {
 interface Props {
   myProfile: User;
   friendList: User[];
+  searchFriendKeyword: string;
 }
-const Friend: FC<Props> = ({ myProfile, friendList }) => {
+const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   const [popup, setPopup] = useState(false);
   const [clickedUser, setClickedUser] = useState({
     id: '',
@@ -33,35 +34,41 @@ const Friend: FC<Props> = ({ myProfile, friendList }) => {
       />
       <Hr />
       친구 {friendList.length}
-      {friendList.map(({ id, statusMessage, userName }) => {
-        const onUserCardClick = () => {
-          setPopup(true);
-          setClickedUser({
-            id: id,
-            userName: userName,
-            statusMessage: statusMessage,
-          });
-        };
+      {friendList
+        .filter(
+          friend =>
+            friend.userName
+              .toLowerCase()
+              .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
+        )
+        .map(({ id, statusMessage, userName }) => {
+          const onUserCardClick = () => {
+            setPopup(true);
+            setClickedUser({
+              id: id,
+              userName: userName,
+              statusMessage: statusMessage,
+            });
+          };
 
-        return (
-          <UserCard
-            key={id}
-            userName={userName}
-            statusMessage={statusMessage}
-            onClick={onUserCardClick}
-          />
-        );
-      })}
+          return (
+            <UserCard
+              key={id}
+              userName={userName}
+              statusMessage={statusMessage}
+              onClick={onUserCardClick}
+            />
+          );
+        })}
       {popup ? (
         <PopUp>
-        <Profile
-          id={clickedUser.id}
-          userName={clickedUser.userName}
-          statusMessage={clickedUser.statusMessage}
-          onRemoveClick={onProfileClose}
-        />
+          <Profile
+            id={clickedUser.id}
+            userName={clickedUser.userName}
+            statusMessage={clickedUser.statusMessage}
+            onRemoveClick={onProfileClose}
+          />
         </PopUp>
-
       ) : null}
     </List>
   );

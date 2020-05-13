@@ -12,8 +12,10 @@ interface TabSelector {
   chat: boolean;
 }
 interface Props {
-  searchKeyword: string;
-  onSearchKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchChatKeyword: string;
+  onChatKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchFriendKeyword: string;
+  onFriendKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   myProfile: User;
   friendList: User[];
   chatList: ChatRoom[];
@@ -32,8 +34,10 @@ interface Props {
 }
 
 const Main: FC<Props> = ({
-  searchKeyword,
-  onSearchKeywordChange,
+  searchChatKeyword,
+  onChatKeywordChange,
+  searchFriendKeyword,
+  onFriendKeywordChange,
   myProfile,
   friendList,
   chatList,
@@ -62,16 +66,27 @@ const Main: FC<Props> = ({
         </S.NavigationBarWrapper>
         <S.Wrapper>
           {tabSelector.friend && (
-            <Friend myProfile={myProfile} friendList={friendList} />
+            <S.Column>
+              <SearchInput
+                value={searchFriendKeyword}
+                onChange={onFriendKeywordChange}
+                placeholder="이름 검색"
+              />
+              <Friend
+                myProfile={myProfile}
+                friendList={friendList}
+                searchFriendKeyword={searchFriendKeyword}
+              />
+            </S.Column>
           )}
           {tabSelector.chat && (
             <S.Column>
               <SearchInput
-                value={searchKeyword}
-                onChange={onSearchKeywordChange}
+                value={searchChatKeyword}
+                onChange={onChatKeywordChange}
                 placeholder="채팅방 이름, 참여자 검색"
               />
-              <Chat searchKeyword={searchKeyword} chatList={chatList} />
+              <Chat searchChatKeyword={searchChatKeyword} chatList={chatList} />
             </S.Column>
           )}
         </S.Wrapper>
