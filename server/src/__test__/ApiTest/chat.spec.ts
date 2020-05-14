@@ -39,8 +39,8 @@ describe('GET: v1/chat/room', () => {
 
     const { data } = response.body
     expect(response.status).toEqual(200)
-    expect(data.name).toEqual(name)
-    expect(data.email).toEqual(email)
+    expect(data[0].uuid).toBeTruthy()
+    expect(data[0].participants).toBeTruthy()
   })
 
   it('특정 방 조회 | 200', async () => {
