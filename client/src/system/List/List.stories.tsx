@@ -15,19 +15,19 @@ export const Default = () => (
         id='asd'
         statusMessage='asd'
         userName='asd'
-        onRemoveClick= {()=>{}}
+        onRemoveClick= {() => {}}
       />
       <Profile
         id='asd'
         statusMessage='asd'
         userName='asd'
-        onRemoveClick= {()=>{}}
+        onRemoveClick= {() => {}}
       />
       <Profile
         id='asd'
         statusMessage='asd'
         userName='asd'
-        onRemoveClick= {()=>{}}
+        onRemoveClick= {() => {}}
       />
     </List>
 );
@@ -63,73 +63,73 @@ export const RoomCardList = () => {
   return (
     <List>
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
       />
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}
