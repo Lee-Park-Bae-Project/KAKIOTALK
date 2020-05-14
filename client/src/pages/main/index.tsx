@@ -2,8 +2,9 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
-import { User, ChatRoom } from 'types';
-import Chat from './Chat';
+import { User } from 'types';
+import Room from 'system/Room';
+import { RoomState } from 'modules/room';
 import Friend from './Friend';
 
 interface TabSelector {
@@ -15,13 +16,13 @@ interface Props {
   onSearchKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   myProfile: User;
   friendList: User[];
-  chatList: ChatRoom[];
   tabSelector: TabSelector;
   friendTabOnClick: () => void;
   chatTabOnClick: () => void;
   addFriendTabOnClick: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
+  roomState: RoomState;
 }
 
 const Main: FC<Props> = ({
@@ -29,11 +30,11 @@ const Main: FC<Props> = ({
   onSearchKeywordChange,
   myProfile,
   friendList,
-  chatList,
   tabSelector,
   addFriendTabOnClick,
   friendTabOnClick,
   chatTabOnClick,
+  roomState,
 }) => (
   <S.Container>
     <S.Left>
@@ -56,7 +57,7 @@ const Main: FC<Props> = ({
               onChange={onSearchKeywordChange}
               placeholder="채팅방 이름, 참여자 검색"
             />
-            <Chat searchKeyword={searchKeyword} chatList={chatList} />
+            <Room searchKeyword={searchKeyword} roomState={roomState}/>
           </S.Column>
         )}
       </S.Wrapper>
