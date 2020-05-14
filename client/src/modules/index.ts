@@ -4,7 +4,6 @@ import {
   applyMiddleware,
 } from 'redux';
 import friends from 'modules/friends';
-import chatRoomList from 'modules/chatRoom';
 import profile from 'modules/profile';
 import login from 'modules/login';
 import room from 'modules/room';
@@ -16,7 +15,6 @@ import rootSaga from 'modules/sagas';
 
 const rootReducer = combineReducers({
   friends,
-  chatRoomList,
   profile,
   login,
   room,
