@@ -7,19 +7,42 @@ export const findRoomById = (roomId: string) => models.Room.findOne({
     as: 'participants',
   }],
 })
-export const findAllRooms = (userId: string) => models.User.findOne(
-  {
-    where: { id: userId },
-    include: [{
-      model: models.Room,
-      as: 'rooms',
+export const findAllRooms = async (userId: string) => {
+  const data = await models.User.findOne(
+    {
+      where: { id: userId },
       include: [{
-        model: models.User,
-        as: 'participants',
+        attributes: ['uuid'],
+        model: models.Room,
+        as: 'rooms',
+        include: [{
+          attributes: ['uuid', 'name', 'status', 'email'],
+          model: models.User,
+          as: 'participants',
+        }],
       }],
-    }],
-  }
-)
+    }
+  )
+  const { rooms } = data
+  const preProcessed = rooms.map((room) => {
+    const participants = room.participants.map((participant) => {
+      const {
+        uuid, name, status, email,
+      } = participant
+      return {
+        uuid,
+        name,
+        status,
+        email,
+      }
+    })
+    return {
+      uuid: room.uuid,
+      participants,
+    }
+  })
+  return preProcessed
+}
 export const getChatsByRoomId = (roomId: string) => models.Chat.findAll(
   { include: [
     {
