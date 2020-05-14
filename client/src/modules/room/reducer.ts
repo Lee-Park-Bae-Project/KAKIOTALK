@@ -3,33 +3,27 @@ import {
   GET_ROOM_SUCCESS,
   GET_ROOM_FAILURE,
 } from 'modules/room/action';
-
-import { Room } from 'types';
-
 import {
   RoomAction,
+  RoomState,
 } from 'modules/room/types';
 
-interface InitialState {
-  isLoading: boolean;
-  data: Room[];
-}
-const initialState: InitialState = {
+const initialState: RoomState = {
   isLoading: false,
   data: [],
 };
-const room = (state: InitialState = initialState, action: RoomAction) => {
+const room = (state: RoomState = initialState, action: RoomAction) => {
   switch (action.type) {
     case GET_ROOM_REQUEST: {
       return {
-        ...state,
         isLoading: true,
+        data: state.data,
       };
     }
     case GET_ROOM_SUCCESS: {
       return {
-        ...action.payload,
         isLoading: false,
+        data: action.payload,
       };
     }
     case GET_ROOM_FAILURE: {

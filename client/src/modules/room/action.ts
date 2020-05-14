@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { Room } from 'types';
+import { IRoom } from 'types';
 
 export const GET_ROOM_REQUEST = 'room/GET_ROOM_REQUEST' as const;
 export const GET_ROOM_SUCCESS = 'room/GET_ROOM_SUCCESS' as const;
@@ -10,10 +10,13 @@ export const getRoomRequest = () => ({
   payload: {},
 });
 
-export const getRoomSuccess = (room: Room[]) => ({
-  type: GET_ROOM_SUCCESS,
-  payload: room,
-});
+export const getRoomSuccess = (room: IRoom[]) => {
+  console.log(room);
+  return {
+    type: GET_ROOM_SUCCESS,
+    payload: room,
+  };
+};
 
 export const getRoomFailure = (e: AxiosError) => ({
   type: GET_ROOM_FAILURE,
