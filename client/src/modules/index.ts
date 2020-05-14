@@ -2,14 +2,12 @@ import {
   combineReducers,
   createStore,
   applyMiddleware,
-  Store,
-  Dispatch,
-  Action,
 } from 'redux';
 import friends from 'modules/friends';
 import chatRoomList from 'modules/chatRoom';
 import profile from 'modules/profile';
 import login from 'modules/login';
+import room from 'modules/room';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
@@ -21,6 +19,7 @@ const rootReducer = combineReducers({
   chatRoomList,
   profile,
   login,
+  room,
 });
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
