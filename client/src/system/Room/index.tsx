@@ -2,13 +2,14 @@ import * as React from 'react';
 import List from 'system/List';
 import RoomCard from 'components/RoomCard';
 import { RoomState } from 'modules/room';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface Props {
   searchKeyword: string;
   roomState: RoomState;
 }
 
-const Room: React.FC<Props> = ({ searchKeyword, roomState }) => (
+const Room: React.FC<Props & RouteComponentProps> = ({ searchKeyword, roomState, history }) => (
   roomState.isLoading ? (
     <div>
       loading...
@@ -19,7 +20,7 @@ const Room: React.FC<Props> = ({ searchKeyword, roomState }) => (
       roomState.data.map(({ uuid, participants }) => {
         const participantsNames = participants.map((v) => v.name).join(', ');
         const onClick = () => {
-          console.log(uuid);
+          history.push(`chat/${uuid}`);
         };
         return (
           <RoomCard
@@ -34,4 +35,4 @@ const Room: React.FC<Props> = ({ searchKeyword, roomState }) => (
 );
 
 
-export default Room;
+export default withRouter(Room);

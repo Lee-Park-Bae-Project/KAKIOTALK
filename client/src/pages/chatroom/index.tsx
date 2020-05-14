@@ -1,5 +1,5 @@
 import React, {
-  FC, useState, useEffect, InputHTMLAttributes,
+  FC, useState, useEffect,
 } from 'react';
 import { sendMsg } from 'socket';
 import { RouteComponentProps } from 'react-router-dom';
@@ -62,7 +62,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps> = ({
       }
     }
   };
-  const { id, userName } = location.state;
+  // const { id, userName } = location.state;
   const chatLogs = messages.map((msg) => (
     <S.ChatBox
       sendTime={msg.createdAt}
@@ -74,7 +74,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps> = ({
 
   return (
     <S.Room>
-      <S.UserCard userName={userName} />
+      <S.UserCard userName={'123'} />
       <S.ChatContainer>{chatLogs}</S.ChatContainer>
       <S.InputContainer>
         <S.InputArea
