@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
 import Main from 'pages/main';
 import { getFriends } from 'modules/friends';
-import { getChatRoom } from 'modules/chatRoom';
 import { getProfile } from 'modules/profile';
+import { getRoomRequest } from 'modules/room';
 
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { afterLogin } from '../socket';
@@ -14,13 +14,13 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
   const dispatch = useDispatch();
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
-  const chatList = useSelector((state: RootState) => state.chatRoomList);
   const loginState = useSelector((state: RootState) => state.login);
+  const roomState = useSelector((state: RootState) => state.room);
 
   useEffect(() => {
     dispatch(getProfile());
     dispatch(getFriends());
-    dispatch(getChatRoom());
+    dispatch(getRoomRequest());
   }, []);
 
   useEffect(() => {
@@ -68,11 +68,11 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
       onSearchKeywordChange={onSearchKeywordChange}
       myProfile={myProfile}
       friendList={friendList}
-      chatList={chatList}
       tabSelector={tabSelector}
       friendTabOnClick={friendTabOnClick}
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
+      roomState={roomState}
     />
   );
 };
