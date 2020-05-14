@@ -62,7 +62,7 @@ const Main: FC<Props> = ({
         </S.Wrapper>
       </S.Left>
       {popupAddFriend ? (
-        <PopUp>
+        <PopUp onClose={cancelAddFriend}>
           <Dialog
             isVisible={true}
             title="친구 추가"
