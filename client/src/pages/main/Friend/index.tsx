@@ -10,7 +10,7 @@ interface User {
   statusMessage: string;
 }
 
-interface Props {
+export interface Props {
   myProfile: User;
   friendList: User[];
   searchFriendKeyword: string;

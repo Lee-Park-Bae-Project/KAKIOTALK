@@ -2,23 +2,14 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
-import { User, ChatRoom } from 'types';
-import Chat from './Chat';
-import Friend from './Friend';
-import { useState } from 'react';
 import { PopUp, Dialog } from 'components';
+import FriendContainer from 'containers/FriendContainer';
+import ChatContainer from 'containers/ChatContainer'
 interface TabSelector {
   friend: boolean;
   chat: boolean;
 }
 interface Props {
-  searchChatKeyword: string;
-  onChatKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchFriendKeyword: string;
-  onFriendKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  myProfile: User;
-  friendList: User[];
-  chatList: ChatRoom[];
   tabSelector: TabSelector;
   friendTabOnClick: () => void;
   chatTabOnClick: () => void;
@@ -34,23 +25,16 @@ interface Props {
 }
 
 const Main: FC<Props> = ({
-  searchChatKeyword,
-  onChatKeywordChange,
-  searchFriendKeyword,
-  onFriendKeywordChange,
-  myProfile,
-  friendList,
-  chatList,
   tabSelector,
   addFriendTabOnClick,
-  friendTabOnClick,
-  chatTabOnClick,
-  popupAddFriend,
+  friendTabOnClick, 
+  chatTabOnClick, 
+  popupAddFriend, 
   confirmAddFriend,
   cancelAddFriend,
   friendIdToAdd,
   onFriendIdChange,
-  logoutTabOnClick,
+  logoutTabOnClick, 
 }) => {
   return (
     <S.Container>
@@ -67,26 +51,12 @@ const Main: FC<Props> = ({
         <S.Wrapper>
           {tabSelector.friend && (
             <S.Column>
-              <SearchInput
-                value={searchFriendKeyword}
-                onChange={onFriendKeywordChange}
-                placeholder="이름 검색"
-              />
-              <Friend
-                myProfile={myProfile}
-                friendList={friendList}
-                searchFriendKeyword={searchFriendKeyword}
-              />
+              <FriendContainer />
             </S.Column>
           )}
           {tabSelector.chat && (
             <S.Column>
-              <SearchInput
-                value={searchChatKeyword}
-                onChange={onChatKeywordChange}
-                placeholder="채팅방 이름, 참여자 검색"
-              />
-              <Chat searchChatKeyword={searchChatKeyword} chatList={chatList} />
+              <ChatContainer/>
             </S.Column>
           )}
         </S.Wrapper>
