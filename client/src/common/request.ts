@@ -75,7 +75,7 @@ const request = {
     googleAccessToken: string,
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios<Type.User2>(getUserInfo),
-  getRooms: () => Axios<Type.ChatRoom2>(getRooms),
+  getRooms: () => Axios<Type.IRoom>(getRooms),
 };
 
 export default request;
