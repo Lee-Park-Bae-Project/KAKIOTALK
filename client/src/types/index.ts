@@ -2,6 +2,7 @@ export interface User {
   id: string;
   userName: string;
   statusMessage: string;
+  name?: string;
 }
 export interface loginInfo {
   loginToken: string;
