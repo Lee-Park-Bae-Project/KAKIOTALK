@@ -16,7 +16,7 @@ export interface ChatRoom {
   numOfNewMessages: number;
 }
 
-export interface ChatRoom2 {
+export interface IRoom {
   uuid: string;
   participants: User[];
 }
