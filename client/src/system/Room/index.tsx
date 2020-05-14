@@ -9,7 +9,12 @@ interface Props {
 }
 
 const Room: React.FC<Props> = ({ searchKeyword, roomState }) => (
-  <List>
+  roomState.isLoading ? (
+    <div>
+      loading...
+    </div>
+  )
+    : <List>
     {
       roomState.data.map(({ uuid, participants }) => {
         const participantsNames = participants.map((v) => v.name).join(', ');
