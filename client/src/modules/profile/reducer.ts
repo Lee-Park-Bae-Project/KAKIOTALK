@@ -9,6 +9,7 @@ import { User } from 'types';
 
 const initialState: User = {
   id: '',
+  email:'',
   statusMessage: '',
   userName: ''
 };
@@ -21,7 +22,7 @@ const profile = (state: User = initialState, action: ProfileAction) => {
     case GET_PROFILE_FAILURE: {
       const error = action.payload;
       if (error.response) {
-        // alert(error.response.data.message);
+        alert(error.response.data.message);
       }
       return state;
     }
