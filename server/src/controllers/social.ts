@@ -18,8 +18,9 @@ const getFriendsList = async (
     const {id} = await userService.findByGoogleId(googleId);
     const data = await socialServce.getFriendsList(id);
     const friendlist = data.friend.map((friend) => ({
-      id: friend.user.email,
+      id: friend.user.googleId,
       userName: friend.user.name,
+      email:friend.user.email,
       statusMessage: friend.user.status,
     }));
     response(res, friendlist);
@@ -39,6 +40,7 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
       await socialServce.addFriend(user.id, friend.id);
       response(res, {
         id: friend.googleId,
+        email:friend.email,
         userName: friend.name,
         statusMessage: friend.status,
       });
@@ -49,5 +51,18 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     next(e);
   }
 };
+const removeFriend =async (req:Request,res:Response,next:NextFunction)=>{
+  try{
+    if(!req.decodedUser) {
+      return next(createError(401, '로그인이 필요합니다.'));
+    }
+    const user = await userService.findByGoogleId(req.decodedUser.googleId)
+    const deleteUser = await userService.findByGoogleId(req.body.googleId);
+    await socialServce.removeFriend(user.id,deleteUser.id)
+    console.log('삭제되면 안보이니?'+deleteUser.googleId)
+    response(res,{googleId:deleteUser.googleId})
+  }catch (e) {
 
-export { getFriendsList, addFriend };
+  }
+}
+export { getFriendsList, addFriend ,removeFriend};
