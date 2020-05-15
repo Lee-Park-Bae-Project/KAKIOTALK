@@ -5,22 +5,8 @@ import { fontSize, color, weight } from 'styles/global';
 export const Container = styled(Flex)`
 
 `;
-export const Background = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.1);
-`;
 
 export const ContentWrapper = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  
   display: flex;
   align-items: center;
   justify-content: center;
