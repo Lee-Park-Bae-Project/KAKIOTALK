@@ -1,5 +1,6 @@
 import {
-  REMOVE_USER,
+  REMOVE_FRIEND_SUCCESS,
+  REMOVE_FRIEND_FAILURE,
   GET_FRIENDS_FAILURE,
   GET_FRIENDS_SUCCESS,
   ADD_FRIEND_SUCCESS,
@@ -14,9 +15,17 @@ const initialState: User[] = [];
 
 function userList(state: User[] = initialState, action: UserListAction) {
   switch (action.type) {
-    case REMOVE_USER: {
-      const newState = state.filter((user) => user.id !== action.payload);
+    case REMOVE_FRIEND_SUCCESS: {
+      alert('삭제되었습니당.')
+      const newState = state.filter((user) => user.id !== action.payload.googleId);
       return newState;
+    }
+    case REMOVE_FRIEND_FAILURE: {
+      const error = action.payload
+      if (error.response) {
+        alert(error.response.data.message);
+      }
+      return state;
     }
     case GET_FRIENDS_SUCCESS: {
       return action.payload;
