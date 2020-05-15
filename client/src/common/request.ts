@@ -53,6 +53,12 @@ const addFriend = (email:string):AxiosRequestConfig=>({
   url: 'social/add-friend',
   data: {email}
 })
+
+const removeFriend = (googleId:string):AxiosRequestConfig=>({
+  method:'POST',
+  url:'social/remove-friend',
+  data: {googleId}
+})
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
@@ -65,6 +71,7 @@ const request = {
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios(getUserInfo),
   addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
+  removeFriend: (frinedGoogleId:string)=>Axios(removeFriend(frinedGoogleId)),
   getLogout: () => Axios(getLogout),
 };
 
