@@ -59,7 +59,6 @@ const removeFriend =async (req:Request,res:Response,next:NextFunction)=>{
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
     const deleteUser = await userService.findByGoogleId(req.body.googleId);
     await socialServce.removeFriend(user.id,deleteUser.id)
-    console.log('삭제되면 안보이니?'+deleteUser.googleId)
     response(res,{googleId:deleteUser.googleId})
   }catch (e) {
 
