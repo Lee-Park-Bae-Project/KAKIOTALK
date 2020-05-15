@@ -6,6 +6,7 @@ import Profile from 'system/Profile';
 import { UserCard, PopUp } from 'components';
 import { removeFriend } from 'modules/friends';
 import {User} from 'types'
+import swal from 'sweetalert'
 export interface Props {
   myProfile: User;
   friendList: User[];
@@ -27,8 +28,15 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   };
   const dispatch =useDispatch()
   const deleteFriend = () => {
-    const confirmResult = window.confirm(`${clickedUser.userName}님을 친구에서 삭제하시겠습니까?`)
-    if(confirmResult) dispatch(removeFriend(clickedUser.id))
+    swal(`${clickedUser.userName}님을 친구에서 삭제하시겠습니까?`,{
+      buttons:['취소',true]
+    }).then(value=>{
+      if(value) {
+        dispatch(removeFriend(clickedUser.id))
+        setPopup(false)
+      }
+    })
+    
   };
 
   return (

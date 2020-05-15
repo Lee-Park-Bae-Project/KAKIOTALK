@@ -37,8 +37,6 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   };
   const dialogRef:any= React.createRef();
   const onOutsideClicked = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    console.log(dialogRef.current)
-    console.log(e.target)
     if(!dialogRef.current.contains(e.target)) setAddFriendPopUp(false)
   }
   const addFriendTabOnClick = (
