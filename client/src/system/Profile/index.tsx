@@ -14,7 +14,6 @@ interface Prop {
   /** 프로필닫기 핸들러 */
   onRemoveClick: (() => void);
 
-  refs? : any
 }
 
 /**
@@ -25,18 +24,17 @@ const Profile: FC<Prop> = ({
   userName,
   statusMessage = '',
   onRemoveClick,
-  refs
 }) => {
   
   return (
-        <S.Container ref ={refs.profileElement}>
+        <S.Container>
           <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />
           <S.NameWrapper>{userName}</S.NameWrapper>
           {
             statusMessage
             && <S.StatusWrapper>{statusMessage}</S.StatusWrapper>
           }
-          <S.Footer ref = {refs.footerElement}>
+          <S.Footer>
             <Link to={{
               pathname: '/chat',
               state: {

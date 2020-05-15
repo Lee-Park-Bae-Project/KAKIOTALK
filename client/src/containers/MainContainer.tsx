@@ -35,6 +35,12 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const onPopUpClose = () => {
     setAddFriendPopUp(false);
   };
+  const dialogRef:any= React.createRef();
+  const onOutsideClicked = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    console.log(dialogRef.current)
+    console.log(e.target)
+    if(!dialogRef.current.contains(e.target)) setAddFriendPopUp(false)
+  }
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
@@ -73,6 +79,8 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       friendIdToAdd={friendIdToAdd}
       onFriendIdChange={onFriendIdChange}
       logoutTabOnClick={logoutTabOnClick}
+      onPopupOutClicked = {onOutsideClicked}
+      dialogRef = {dialogRef}
     ></Main>
   );
 };
