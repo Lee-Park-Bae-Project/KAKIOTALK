@@ -37,4 +37,3 @@ export const setUserInfo = (googleId: string, name: string, email: string) => mo
     returning: true,
   },
 )
-

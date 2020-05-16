@@ -29,7 +29,7 @@ export const getRoom = async (req: Request, res: Response, next: NextFunction) =
     } else {
       const { googleId } = req.decodedUser!
 
-      const user = await userService.findByGoogleId(googleId)
+      const user: any = await userService.findByGoogleId(googleId)
       if (!user) {
         return next(createError(httpStatus.NOT_FOUND, '사용자를 찾을 수 없습니다.'))
       }

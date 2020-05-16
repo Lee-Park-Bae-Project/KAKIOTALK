@@ -8,7 +8,7 @@ export const findRoomById = (roomId: string) => models.Room.findOne({
   }],
 })
 export const findAllRooms = async (userId: string) => {
-  const data = await models.User.findOne(
+  const data: any = await models.User.findOne(
     {
       where: { id: userId },
       include: [{
