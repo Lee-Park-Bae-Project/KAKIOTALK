@@ -8,8 +8,10 @@ import {
 import { IChatIsRead } from '../types'
 import { uuid } from '../common/utils'
 
-type ChatIsReadStatic = typeof Model & {
-  new (values?: object, options?: BuildOptions): IChatIsRead;
+export interface ChatIsReadModel extends Model, IChatIsRead {}
+
+export type ChatIsReadStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): ChatIsReadModel;
   associate: (models: any) => void;
 }
 
@@ -39,9 +41,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
-  ChatIsRead.associate = (models: any) => {
-
-  }
+  ChatIsRead.associate = (models: any) => {}
 
   return ChatIsRead
 }

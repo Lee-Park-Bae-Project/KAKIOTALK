@@ -2,9 +2,9 @@ import { models } from '../models'
 
 export const findByGoogleId = (googleId: string) => models.User.findOne({ where: { googleId } })
 export const createUser = (googleId: string) => models.User.create({ googleId })
-export const findByAccessToken = (accessToken:string) => models.User.findOne({where:{accessToken}})
-export const findByEmail = (email:string)=>models.User.findOne({where:{email}})
-export const findById = (id:number) => models.User.findOne({where:{id}})
+export const findByAccessToken = (accessToken:string) => models.User.findOne({ where: { accessToken } })
+export const findByEmail = (email:string) => models.User.findOne({ where: { email } })
+export const findById = (id:number) => models.User.findOne({ where: { id } })
 export const findOrCreate = (
   googleId: string,
   name: string,
@@ -39,3 +39,4 @@ export const setUserInfo = (googleId: string, name: string, email: string) => mo
     returning: true,
   },
 )
+

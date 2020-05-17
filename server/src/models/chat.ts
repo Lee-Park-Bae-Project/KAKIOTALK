@@ -7,11 +7,16 @@ import {
 
 import { IChat } from '../types'
 import { uuid } from '../common/utils'
+import { RoomModel } from './room'
 
-// Need to declare the static model so `findOne` etc. use correct types.
-type ChatStatic = typeof Model & {
-  new (values?: object, options?: BuildOptions): IChat;
+export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'info' as const }
+
+export interface ChatModel extends Model, IChat {}
+
+export type ChatStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): ChatModel;
   associate: (models: any) => void;
+  [CHAT_ASSOCIATION_ALIAS.RoomParticipants]: RoomModel[];
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
@@ -43,7 +48,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     Chat.belongsTo(models.RoomParticipants, {
       foreignKey: 'roomParticipantsId',
       targetKey: 'id',
-      as: 'info',
+      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
     })
   }
 

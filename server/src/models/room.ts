@@ -5,12 +5,22 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IRoom } from '../types'
+import {
+  IRoom, IRoomParticipants,
+} from '../types'
 import { uuid } from '../common/utils'
+import { UserModel } from './user'
 
-type RoomStatic = typeof Model & {
-  new (values?: object, options?: BuildOptions): IRoom;
+export const ROOM_ASSOCIATION_ALIAS = { RoomParticipants: 'participants' as const }
+
+export interface RoomModel extends Model, IRoom {
+  [ROOM_ASSOCIATION_ALIAS.RoomParticipants]: UserModel[]
+}
+
+export type RoomStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): RoomModel;
   associate: (models: any) => void;
+  [ROOM_ASSOCIATION_ALIAS.RoomParticipants]?: IRoomParticipants
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
@@ -36,7 +46,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       models.User,
       {
         through: models.RoomParticipants,
-        as: 'participants',
+        as: ROOM_ASSOCIATION_ALIAS.RoomParticipants,
         foreignKey: 'roomId',
         otherKey: 'userId',
       }

@@ -1,41 +1,58 @@
 export interface IChat {
-  id: string;
-  roomId: string;
-  sender: string;
+  id: number;
+  uuid: string;
+  roomParticipantsId: number;
   content: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IChatIsRead{
-  id: string
-  userId: string;
-  chatId: string;
-  isRead: boolean;
+  id: number;
+  uuid: string;
+  unreaderId: number;
+  chatId: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IFriend {
-  id: string
-  followerId: string
-  followeeId: string
+  id: number;
+  uuid: string;
+  userId: number;
+  friendId: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IRoom {
-  id: string
-  numOfParticipants: number
+  id: number;
+  uuid: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IRoomParticipants {
-  id: string
-  roomId: string
-  participants: string
-  numOfUnread: number
+  id: number;
+  uuid: string;
+  userId: number;
+  roomId: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IUser {
-  id: string;
+  id: number;
+  uuid: string;
   name: string;
-  curState: string;
   email: string;
-  accessToken: string
+  status: string;
+  googleId: string;
+  googleAccessToken: string;
+  googleRefreshToken: string;
+  accessToken: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IDecodedUser {
