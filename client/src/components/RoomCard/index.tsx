@@ -4,25 +4,22 @@ import Icon from 'Icon/Icon';
 import Circle from 'atoms/Circle';
 import moment from 'moment';
 import { convertMillToMMDDYYYY } from 'common/utils';
+import { User } from 'types';
 
 interface Props{
-  userList: string[];
-  lastMessage: string;
-  lastModified: number;
-  numOfNewMessages: number;
+  participantsName: string;
+  lastMessage?: string;
+  lastModified?: number;
+  numOfNewMessages?: number;
   onClick?: () => void;
 }
 const ChatCard: FC<Props> = ({
-  userList,
-  lastMessage,
-  lastModified,
-  numOfNewMessages,
+  participantsName,
+  lastMessage = 'this is last message',
+  lastModified = Date.now(),
+  numOfNewMessages = 99,
   onClick = undefined,
-}) => {
-  const [isSelected, setIsSelected] = useState(false);
-  const numOfUser = userList.length;
-  moment.locale();
-  return (
+}) => (
     <S.Container onClick={onClick}>
       <S.RoomInfoWrapper>
         <S.ImgWrapper>
@@ -32,19 +29,16 @@ const ChatCard: FC<Props> = ({
           <S.Row>
             <div>
               <S.UserListWrapper>
-                {userList.join(', ')}
+                {participantsName}
               </S.UserListWrapper>
             </div>
-
-
           </S.Row>
-
           <S.LastMsgWrapper>
             <span>{lastMessage}</span>
           </S.LastMsgWrapper>
         </S.InfoWrapper>
         <S.NumWrapper>
-          {userList.length}
+          {participantsName.length}
         </S.NumWrapper>
       </S.RoomInfoWrapper>
 
@@ -53,7 +47,6 @@ const ChatCard: FC<Props> = ({
         <Circle num={numOfNewMessages}/>
       </S.SubInfoWrapper>
     </S.Container>
-  );
-};
+);
 
 export default ChatCard;

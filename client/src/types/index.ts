@@ -3,6 +3,7 @@ export interface User {
   email:string;
   userName: string;
   statusMessage: string;
+  name?: string;
 }
 export interface loginInfo {
   loginToken: string;
@@ -15,4 +16,18 @@ export interface ChatRoom {
   lastMessage: string;
   lastModified: number;
   numOfNewMessages: number;
+}
+
+export interface IRoom {
+  uuid: string;
+  participants: User[];
+}
+
+export interface User2 {
+  user: {
+    name: string;
+    email: string;
+    uuid: string;
+  };
+
 }

@@ -26,6 +26,15 @@ module.exports = {
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
       },
+      {
+        id: 3,
+        name: 'ghost',
+        uuid: '345',
+        email: 'ghost@gmail.com',
+        status: 'im ghost',
+        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+      },
     ], {}
   ),
 

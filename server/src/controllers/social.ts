@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import createError from 'http-errors';
 import { response } from '../common/utils';
-import userService from '../services/userService';
+import * as userService from '../services/userService';
 import socialServce from '../services/socialService';
 import { IDecodedUser } from 'src/types';
+
 const getFriendsList = async (
   req: Request,
   res: Response,
@@ -15,8 +16,8 @@ const getFriendsList = async (
       return next(createError(401, '로그인이 필요합니다.'));
     }
     const { googleId } = req.decodedUser;
-    const {id} = await userService.findByGoogleId(googleId);
-    const data = await socialServce.getFriendsList(id);
+    const {id}: any = await userService.findByGoogleId(googleId);
+    const data : any = await socialServce.getFriendsList(id);
     const friendlist = data.friend.map((friend) => ({
       id: friend.user.googleId,
       userName: friend.user.name,
@@ -33,9 +34,9 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.decodedUser) {
       return next(createError(401, '로그인이 필요합니다.'));
     }
-    const user = await userService.findByGoogleId(req.decodedUser.googleId);
-    const friendEmail = req.body.email;
-    const friend = await userService.findByEmail(friendEmail);
+    const user: any = await userService.findByGoogleId(req.decodedUser.googleId);
+    const friendEmail: any = req.body.email;
+    const friend: any = await userService.findByEmail(friendEmail);
     if (friend) {
       await socialServce.addFriend(user.id, friend.id);
       response(res, {
@@ -56,8 +57,8 @@ const removeFriend =async (req:Request,res:Response,next:NextFunction)=>{
     if(!req.decodedUser) {
       return next(createError(401, '로그인이 필요합니다.'));
     }
-    const user = await userService.findByGoogleId(req.decodedUser.googleId)
-    const deleteUser = await userService.findByGoogleId(req.body.googleId);
+    const user:any = await userService.findByGoogleId(req.decodedUser.googleId)
+    const deleteUser:any = await userService.findByGoogleId(req.body.googleId);
     await socialServce.removeFriend(user.id,deleteUser.id)
     response(res,{googleId:deleteUser.googleId})
   }catch (e) {

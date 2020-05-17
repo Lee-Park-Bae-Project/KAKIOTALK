@@ -57,7 +57,18 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-  User.associate = (models:any)=>{
+
+  User.associate = (models: any) => {
+    User.belongsToMany(
+      models.Room,
+      {
+        through: models.RoomParticipants,
+        as: 'rooms',
+        foreignKey: 'userId',
+        otherKey: 'roomId',
+      }
+    )
+    // User.hasMany(models.RoomParticipants, { as: 'roomInfo' })
     User.hasMany(models.Friend,{
       foreignKey: 'userId',
       sourceKey :'id',
@@ -66,6 +77,3 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   }
   return User
 }
-
-
-

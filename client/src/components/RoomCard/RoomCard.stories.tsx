@@ -23,7 +23,7 @@ export const Default = () => {
   return (
     <Wrapper>
       <RoomCard
-        userList={userList}
+        participantsName={userList.join(',')}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={numOfNewMessages}

@@ -18,19 +18,22 @@
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "enzyme-to-json": "^3.4.3",
+    "gh-pages": "^2.2.0",
+    "global": "^4.4.0",
     "jest-styled-components": "^7.0.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
+    "now": "^19.0.1",
     "polished": "^3.4.2",
     "qs": "^6.9.3",
     "react": "^16.12.0",
     "react-cookie": "^4.0.3",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.12.0",
-    "react-google-login": "^5.1.3",
+    "react-google-login": "^5.1.19",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
     "shortid": "^2.2.15",
@@ -46,7 +49,9 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json"
+    "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -113,5 +118,6 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  }
+  },
+  "homepage": "https://Lee-Park-Bae-Project.github.io/KAKIOTALK"
 }

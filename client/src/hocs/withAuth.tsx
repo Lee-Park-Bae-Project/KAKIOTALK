@@ -1,18 +1,18 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
 import request from 'common/request';
-import { withRouter, RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { AxiosError } from 'axios';
 
-export interface Props {
+export interface WithAuthProps {
   name: string;
   email: string;
   uuid: string;
 }
 
-function withAuth<T extends Props>(Component: React.ComponentType<T>) {
+function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
   return (props: T & RouteComponentProps) => {
-    const [newProps, setNewProps] = useState({
+    const [userInfo, setNewProps] = useState({
       name: '',
       email: '',
       uuid: '',
@@ -20,24 +20,20 @@ function withAuth<T extends Props>(Component: React.ComponentType<T>) {
 
     useEffect(() => {
       (async () => {
-        request.getUserInfo()
-          .then((response) => {
+        request
+          .getUserInfo()
+          .then(response => {
             const { name, email, uuid } = response.data.data.user;
             setNewProps({ name, email, uuid });
           })
           .catch((e: AxiosError) => {
-            // alert(e.response?.data.message);
+            console.log(e);
             props.history.push('/login');
           });
       })();
     }, []);
 
-    return (
-      <Component
-        {...props as T}
-        {...newProps}
-      />
-    );
+    return <Component {...(props as T)} {...userInfo} />;
   };
 }
 export default withAuth;

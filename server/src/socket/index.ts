@@ -9,7 +9,6 @@ declare global {
     }
   }
 }
-
 const init = (socket: openSocket.Socket) => {
   socket.on('init', (data) => {
     global.io.emit('init', `${socket.id} is initialized`)
@@ -23,6 +22,19 @@ const onDisconnect = (socket: openSocket.Socket) => {
   })
 }
 
+const afterLogin = (socket: openSocket.Socket) => {
+  socket.on('afterLogin', (msg) => {
+    console.log(chalk.blue(msg))
+  })
+}
+
+const sendMsg = (socket: openSocket.Socket) => {
+  socket.on('sendMsg', ({
+    sender, roomId, content, createdAt,
+  }) => {
+    console.log(sender, roomId, content, createdAt)
+  })
+}
 const connection = (io:openSocket.Server) => {
   io.on('connection', (socket:openSocket.Socket) => {
     global.socket = socket
@@ -31,6 +43,8 @@ const connection = (io:openSocket.Server) => {
 
     init(socket)
     onDisconnect(socket)
+    afterLogin(socket)
+    sendMsg(socket)
   })
 }
 
@@ -40,6 +54,4 @@ const connect = (server: any) => {
   connection(io)
 }
 
-export {
-  connect,
-}
+export { connect }
