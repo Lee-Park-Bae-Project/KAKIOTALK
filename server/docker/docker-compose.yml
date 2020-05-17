@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - '../../../mysql-data:/var/lib/mysql'
+      - './mysql-init/:/docker-entrypoint-initdb.d'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+  redis:
+    restart: always
+    image: redis:6.0-alpine
+    container_name: redis-6.0-alpine
+    environment:
+      REQUIREPASS: password
+    volumes:
+      - '../../../redis-data:/data'
+    ports:
+      - '6379:6379'
+    expose:
+      - '6379'

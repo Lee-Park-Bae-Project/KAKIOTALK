@@ -39,6 +39,13 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
+  Chat.associate = (models: any) => {
+    Chat.belongsTo(models.RoomParticipants, {
+      foreignKey: 'roomParticipantsId',
+      targetKey: 'id',
+      as: 'info',
+    })
+  }
 
   return Chat
 }

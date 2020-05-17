@@ -56,7 +56,8 @@ module.exports =  {
         "ts": "never",
         "tsx": "never"
       }
-   ]
+  ],
+  "@typescript-eslint/interface-name-prefix": 0,
   },
   settings:  {
     react:  {

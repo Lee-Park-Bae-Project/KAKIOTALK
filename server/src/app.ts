@@ -4,6 +4,7 @@ import express, {
 import cors from 'cors'
 import v1Route from './routes/v1'
 import { corsConfig } from './configs'
+import { response } from './common/utils'
 
 import createError = require('http-errors');
 import path = require('path');
@@ -37,10 +38,14 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
   // set locals, only providing error in development
   res.locals.message = apiError.message
-  res.locals.error = process.env.NODE_ENV === 'development' ? apiError : {}
+  res.locals.error = apiError
 
   // render the error page
-  return res.status(apiError.status).json({ message: apiError.message })
+  return response(
+    res,
+    { message: apiError.message },
+    apiError.status
+  )
 })
 
 module.exports = app

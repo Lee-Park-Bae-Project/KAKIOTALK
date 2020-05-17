@@ -2,9 +2,13 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
+import { User } from 'types';
+import { RoomState } from 'modules/room';
+import Friend from './Friend';
 import { PopUp, Dialog } from 'components';
 import FriendContainer from 'containers/FriendContainer';
 import ChatContainer from 'containers/ChatContainer'
+import Room from 'system/Room'
 interface TabSelector {
   friend: boolean;
   chat: boolean;
@@ -16,38 +20,39 @@ interface Props {
   addFriendTabOnClick: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
-  popupAddFriend: boolean;
+  popupAddFriend: boolean;  
   confirmAddFriend: () => void;
   cancelAddFriend: () => void;
   friendIdToAdd: string;
   onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  roomState: RoomState;
 }
 
 const Main: FC<Props> = ({
   tabSelector,
   addFriendTabOnClick,
-  friendTabOnClick, 
-  chatTabOnClick, 
-  popupAddFriend, 
-  confirmAddFriend,
+  friendTabOnClick,
+  chatTabOnClick,
+  roomState,
   cancelAddFriend,
+  confirmAddFriend,
   friendIdToAdd,
+  logoutTabOnClick,
   onFriendIdChange,
-  logoutTabOnClick, 
-}) => {
-  return (
-    <S.Container>
-      <S.Left>
-        <S.NavigationBarWrapper>
-          <NavigationBar
-            logoutTabOnClick={logoutTabOnClick}
-            tabSelector={tabSelector}
-            friendTabOnClick={friendTabOnClick}
-            chatTabOnClick={chatTabOnClick}
-            addFriendTabOnClick={addFriendTabOnClick}
-          />
-        </S.NavigationBarWrapper>
+  popupAddFriend,
+}) => (
+  <S.Container>
+    <S.Left>
+      <S.NavigationBarWrapper>
+        <NavigationBar
+          tabSelector={tabSelector}
+          friendTabOnClick={friendTabOnClick}
+          chatTabOnClick={chatTabOnClick}
+          addFriendTabOnClick={addFriendTabOnClick}
+          logoutTabOnClick={logoutTabOnClick}
+        />
+      </S.NavigationBarWrapper>
         <S.Wrapper>
           {tabSelector.friend && (
             <S.Column>
@@ -56,7 +61,8 @@ const Main: FC<Props> = ({
           )}
           {tabSelector.chat && (
             <S.Column>
-              <ChatContainer/>
+              <Room roomState={roomState}/>
+              {/* <ChatContainer/> */}
             </S.Column>
           )}
         </S.Wrapper>
@@ -81,8 +87,7 @@ const Main: FC<Props> = ({
           </Dialog>
         </PopUp>
       ) : null}
-    </S.Container>
-  );
-};
+  </S.Container>
+);
 
 export default Main;

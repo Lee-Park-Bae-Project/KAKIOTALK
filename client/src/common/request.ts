@@ -1,6 +1,7 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import * as Type from 'types';
 import { configs } from './constants';
-import { boolean } from '@storybook/addon-knobs';
+
 const { API_SERVER_URL } = configs;
 
 const instance = axios.create({
@@ -10,7 +11,20 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-const Axios = async (config: AxiosRequestConfig) => instance.request(config);
+export type ResponseType<T> = {
+  success: boolean;
+  data: T;
+}
+
+export type ApiCallback<T = {}> = (
+  err: AxiosResponse<ResponseType<T>> | null,
+  response?: AxiosResponse<ResponseType<T>>,
+) => void
+
+async function Axios<T>(config: AxiosRequestConfig) {
+  return instance.request<ResponseType<T>>(config);
+}
+
 const getProfile: AxiosRequestConfig = {
   method: 'GET',
   url: 'user/my-profile',
@@ -48,11 +62,17 @@ const getLogin = (
   },
 });
 
+const getRooms: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'chat/room',
+};
+
 const addFriend = (email:string):AxiosRequestConfig=>({
   method:'POST',
   url: 'social/add-friend',
   data: {email}
 })
+
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
@@ -63,7 +83,8 @@ const request = {
     name: string,
     googleAccessToken: string,
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
-  getUserInfo: () => Axios(getUserInfo),
+  getUserInfo: () => Axios<Type.User2>(getUserInfo),
+  getRooms: () => Axios<Type.IRoom>(getRooms),
   addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
   getLogout: () => Axios(getLogout),
 };

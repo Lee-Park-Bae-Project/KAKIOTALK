@@ -39,5 +39,9 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
+  ChatIsRead.associate = (models: any) => {
+
+  }
+
   return ChatIsRead
 }

@@ -4,11 +4,7 @@ import UserCard from 'components/UserCard';
 import Hr from 'atoms/Hr';
 import Profile from 'system/Profile';
 import { PopUp } from 'components';
-interface User {
-  id: string;
-  userName: string;
-  statusMessage: string;
-}
+import {User} from 'types'
 
 export interface Props {
   myProfile: User;
