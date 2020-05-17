@@ -5,7 +5,7 @@ import { color } from 'styles/global';
 const S = {
   Container: styled.div`
     display: flex;
-    width: 100%;
+    width: 98%;
   `,
   Input: styled.input`
     width: 100%;

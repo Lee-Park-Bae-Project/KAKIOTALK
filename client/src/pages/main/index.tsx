@@ -2,21 +2,14 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
-import { User, ChatRoom } from 'types';
-import Chat from './Chat';
-import Friend from './Friend';
-import { useState } from 'react';
 import { PopUp, Dialog } from 'components';
+import FriendContainer from 'containers/FriendContainer';
+import ChatContainer from 'containers/ChatContainer'
 interface TabSelector {
   friend: boolean;
   chat: boolean;
 }
 interface Props {
-  searchKeyword: string;
-  onSearchKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  myProfile: User;
-  friendList: User[];
-  chatList: ChatRoom[];
   tabSelector: TabSelector;
   friendTabOnClick: () => void;
   chatTabOnClick: () => void;
@@ -35,24 +28,23 @@ interface Props {
 }
 
 const Main: FC<Props> = ({
-  searchKeyword,
-  onSearchKeywordChange,
-  myProfile,
-  friendList,
-  chatList,
   tabSelector,
   addFriendTabOnClick,
-  friendTabOnClick,
-  chatTabOnClick,
-  popupAddFriend,
+  friendTabOnClick, 
+  chatTabOnClick, 
+  popupAddFriend, 
   confirmAddFriend,
   cancelAddFriend,
   friendIdToAdd,
   onFriendIdChange,
+<<<<<<< HEAD
   logoutTabOnClick,
   confirmLogout,
   popupLogout,
   cancelLogout,
+=======
+  logoutTabOnClick, 
+>>>>>>> 795765c7f39366c757cf3e06c18bde741ce57a02
 }) => {
   return (
     <S.Container>
@@ -68,16 +60,13 @@ const Main: FC<Props> = ({
         </S.NavigationBarWrapper>
         <S.Wrapper>
           {tabSelector.friend && (
-            <Friend myProfile={myProfile} friendList={friendList} />
+            <S.Column>
+              <FriendContainer />
+            </S.Column>
           )}
           {tabSelector.chat && (
             <S.Column>
-              <SearchInput
-                value={searchKeyword}
-                onChange={onSearchKeywordChange}
-                placeholder="채팅방 이름, 참여자 검색"
-              />
-              <Chat searchKeyword={searchKeyword} chatList={chatList} />
+              <ChatContainer/>
             </S.Column>
           )}
         </S.Wrapper>

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'modules';
 import Main from 'pages/main';
 import { getFriends, addFriend } from 'modules/friends';
 import { getChatRoom } from 'modules/chatRoom';
@@ -9,19 +8,10 @@ import request from 'common/request';
 import { useHistory } from 'react-router-dom';
 import withAuth, { Props } from 'hocs/withAuth';
 const { useState, useEffect } = React;
+
 const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const dispatch = useDispatch();
-  const myProfile = useSelector((state: RootState) => state.profile);
-  const friendList = useSelector((state: RootState) => state.friends);
-  const chatList = useSelector((state: RootState) => state.chatRoomList);
   const history = useHistory();
-
-  useEffect(() => {
-    dispatch(getProfile());
-    dispatch(getFriends());
-    dispatch(getChatRoom());
-    console.log(name, email, uuid);
-  }, []);
 
   const [tabSelector, setTabSelector] = useState({
     friend: true,
@@ -49,9 +39,11 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   const onFriendPopUpClose = () => {
     setAddFriendPopUp(false);
   };
+
   const onLogoutPopUpClose = () => {
     setLogoutPopUp(false);
   };
+
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
@@ -63,14 +55,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
   ): void => {
     setLogoutPopUp(true);
   };
-  const onFriendIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFriendIdToAdd(e.target.value);
-  };
 
-  const confirmAddFriend = () => {
-    dispatch(addFriend(friendIdToAdd));
-    onFriendPopUpClose();
-  };
   const confirmLogout = () => {
     request
       .getLogout()
@@ -83,18 +68,17 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
     onLogoutPopUpClose();
   };
 
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const onSearchKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(e.target.value);
+  const onFriendIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFriendIdToAdd(e.target.value);
+  };
+
+  const confirmAddFriend = () => {
+    dispatch(addFriend(friendIdToAdd));
+    onFriendPopUpClose();
   };
 
   return (
     <Main
-      searchKeyword={searchKeyword}
-      onSearchKeywordChange={onSearchKeywordChange}
-      myProfile={myProfile}
-      friendList={friendList}
-      chatList={chatList}
       tabSelector={tabSelector}
       friendTabOnClick={friendTabOnClick}
       chatTabOnClick={chatTabOnClick}
@@ -108,7 +92,7 @@ const MainContainer: React.FC<Props> = ({ name, email, uuid }) => {
       popupLogout={logoutPopUp}
       cancelLogout={onLogoutPopUpClose}
       confirmLogout={confirmLogout}
-    />
+    ></Main>
   );
 };
 

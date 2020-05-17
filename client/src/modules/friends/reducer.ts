@@ -29,7 +29,7 @@ function userList(state: User[] = initialState, action: UserListAction) {
       return state;
     }
     case ADD_FRIEND_SUCCESS: {
-      alert(`${action.payload.name}님을 친구로 추가했습니다.`)
+      alert(`${action.payload.userName}님을 친구로 추가했습니다.`)
       return state.concat(action.payload);
     }
     case ADD_FRIEND_FAILURE: {

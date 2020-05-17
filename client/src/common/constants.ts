@@ -21,3 +21,9 @@ export const configs = {
   CLIENT_ID,
   PUBLIC_URL,
 };
+
+export const url = {
+  main : '/',
+  login : '/login',
+  chatRoom : '/chat',
+}
