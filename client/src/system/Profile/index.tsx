@@ -13,6 +13,7 @@ interface Prop {
   statusMessage: string;
   /** 프로필닫기 핸들러 */
   onRemoveClick: (() => void);
+
 }
 
 /**
@@ -22,9 +23,9 @@ const Profile: FC<Prop> = ({
   id,
   userName,
   statusMessage = '',
-  onRemoveClick
+  onRemoveClick,
 }) => {
-
+  
   return (
         <S.Container>
           <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />

@@ -48,7 +48,6 @@ const Dialog: FC<Props> = ({
   }
   return (
   <S.Container>
-    <S.Background/>
     <S.ContentWrapper>
       <S.Content>
         {title && <S.Title>{title}</S.Title>}

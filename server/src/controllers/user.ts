@@ -25,10 +25,11 @@ const getMyProfile = async (req:Request,res:Response,next:NextFunction) =>{
     if(!req.decodedUser){
       return next(createError(401,'로그인 필요'))
     }
-    const user: any = await userService.findByGoogleId(req.decodedUser.googleId)
-    const {email,name,status} = user
+    const user:any = await userService.findByGoogleId(req.decodedUser.googleId)
+    const {id,email,name,status} = user
     const myProfile = {
-      id:email,
+      id,
+      email,
       userName:name,
       statusMessage:status
     }

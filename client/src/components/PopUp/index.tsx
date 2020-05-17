@@ -2,14 +2,16 @@ import React,{FC} from 'react';
 import * as S from './style'
 
 interface Props {
-  children:React.ReactNode
+  children:React.ReactNode,
+  onClose? : (e : React.MouseEvent<HTMLDivElement,MouseEvent>)=>void
+  refs?: any
 }
 
-const PopUp:FC<Props> = ({children})=>{
+const PopUp:FC<Props> = ({children,onClose,refs})=>{
 
   return (
-    <S.PopUp>
-      <S.PopUpInner>
+    <S.PopUp onClick={onClose}>
+      <S.PopUpInner ref = {refs}>
         {children}
       </S.PopUpInner>
     </S.PopUp>

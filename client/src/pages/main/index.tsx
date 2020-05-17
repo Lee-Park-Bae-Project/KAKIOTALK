@@ -26,6 +26,8 @@ interface Props {
   friendIdToAdd: string;
   onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  dialogRef: any,
+  onPopupOutClicked:(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   confirmLogout: () => void;
   cancelLogout: () => void;
   popupLogout: boolean;
@@ -41,8 +43,10 @@ const Main: FC<Props> = ({
   cancelAddFriend,
   confirmAddFriend,
   friendIdToAdd,
-  logoutTabOnClick,
   onFriendIdChange,
+  logoutTabOnClick, 
+  dialogRef,
+  onPopupOutClicked,
   confirmLogout,
   popupLogout,
   cancelLogout,
@@ -75,7 +79,7 @@ const Main: FC<Props> = ({
         </S.Wrapper>
       </S.Left>
       {popupAddFriend ? (
-        <PopUp>
+        <PopUp onClose={onPopupOutClicked} refs={dialogRef}>
           <Dialog
             isVisible={true}
             title="친구 추가"

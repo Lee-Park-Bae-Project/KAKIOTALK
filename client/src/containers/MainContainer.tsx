@@ -55,6 +55,10 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
   const onFriendPopUpClose = () => {
     setAddFriendPopUp(false);
   };
+  const dialogRef:any= React.createRef();
+  const onOutsideClicked = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if(!dialogRef.current.contains(e.target)) setAddFriendPopUp(false)
+  }
 
   const onLogoutPopUpClose = () => {
     setLogoutPopUp(false);
@@ -106,6 +110,8 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
       cancelAddFriend={onFriendPopUpClose}
       friendIdToAdd={friendIdToAdd}
       logoutTabOnClick={logoutTabOnClick}
+      onPopupOutClicked = {onOutsideClicked}
+      dialogRef = {dialogRef}
       popupLogout={logoutPopUp}
       cancelLogout={onLogoutPopUpClose}
       confirmLogout={confirmLogout}

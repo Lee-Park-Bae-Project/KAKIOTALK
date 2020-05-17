@@ -8,6 +8,9 @@ import {
   ADD_FRIEND,
   addFriendFailure,
   addFriendSuccess,
+  REMOVE_FRIEND,
+  removeFriendSuccess,
+  removeFriendFailure
 } from 'modules/friends/action';
 import request from 'common/request';
 
@@ -29,7 +32,16 @@ function* addFriendSaga({payload}:any) {
     yield put(addFriendFailure(e))
   }
 }
+function* removeFriendSaga({payload}:any) {
+  try{
+    const response = yield call(request.removeFriend,payload);
+    yield put(removeFriendSuccess(response.data.data));
+  }catch(e){
+    yield put(removeFriendFailure(e))
+  }
+}
 export default function* friendsSaga() {
   yield takeEvery(GET_FRIENDS, getFriendsSaga);
   yield takeEvery(ADD_FRIEND,addFriendSaga);
+  yield takeEvery(REMOVE_FRIEND,removeFriendSaga)
 }

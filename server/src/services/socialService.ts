@@ -12,7 +12,7 @@ const getFriendsList = (userId: string) =>
         include: [
           {
             model: models.User,
-            attributes: ['email', 'name', 'status'],
+            attributes: ['googleId','email', 'name', 'status'],
           },
         ],
       },
@@ -24,4 +24,11 @@ const addFriend = (userId: number, friendId: number) =>
     where: { userId, friendId },
     defaults: { userId, friendId },
   });
-export default { getFriendsList, addFriend };
+
+const removeFriend = (userId: string, friendId : string) => models.Friend.destroy({
+  where:{
+    userId,
+    friendId
+  }
+})
+export default { getFriendsList, addFriend ,removeFriend};

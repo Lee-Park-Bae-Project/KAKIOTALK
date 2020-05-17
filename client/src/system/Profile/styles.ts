@@ -9,7 +9,7 @@ export const Container = styled(Flex)`
   background-color: ${color.WHITE};
   align-items: center;
   padding:1rem;
-  box-shadow : 5px 5px 5px 5px ;
+  box-shadow : 5px 5px 5px 5px #616161;
 `;
 
 export const NameWrapper = styled.span`
