@@ -52,6 +52,7 @@ const Main: FC<Props> = ({
   logoutTabOnClick,
   confirmLogout,
   popupLogout,
+  cancelLogout,
 }) => {
   return (
     <S.Container>
@@ -105,12 +106,13 @@ const Main: FC<Props> = ({
         <PopUp>
           <Dialog
             isVisible={true}
-            title="로그 아웃"
+            title="정말로 로그 아웃 하시겠습니까?"
             isHideButton={false}
             canCancel={true}
             cancelText="취소"
             confirmText="확인"
             onConfirm={confirmLogout}
+            onCancel={cancelLogout}
           ></Dialog>
         </PopUp>
       ) : null}
