@@ -20,3 +20,9 @@ export const configs = {
   API_SERVER_URL,
   CLIENT_ID,
 };
+
+export const url = {
+  main : '/',
+  login : '/login',
+  chatRoom : '/chat',
+}

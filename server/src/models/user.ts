@@ -69,7 +69,11 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       }
     )
     // User.hasMany(models.RoomParticipants, { as: 'roomInfo' })
+    User.hasMany(models.Friend,{
+      foreignKey: 'userId',
+      sourceKey :'id',
+      as:'friend'
+    })
   }
   return User
 }
-

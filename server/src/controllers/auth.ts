@@ -1,13 +1,9 @@
-import {
-  NextFunction, Request, Response,
-} from 'express'
-import createError from 'http-errors'
-import {
-  cookieConfig, cookieName,
-} from '../configs'
-import { response } from '../common/utils'
-import loginService from '../services/auth'
 import * as userService from '../services/userService'
+import { NextFunction, Request, Response } from 'express';
+import createError from 'http-errors';
+import { cookieConfig, cookieName } from '../configs';
+import { response } from '../common/utils';
+import loginService from '../services/auth';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -17,14 +13,21 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
     const token = await loginService.login(
       googleId,
-      name,
       email,
+      name,
       googleAccessToken
     )
 
     res.cookie(cookieName, token, cookieConfig)
-
     response(res)
+  } catch (e) {
+    next(e);
+  }
+};
+const logout = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.clearCookie(cookieName, { path: '/' });
+    response(res);
   } catch (e) {
     next(e)
   }
@@ -47,6 +50,4 @@ const getUserInfo = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export {
-  login, getUserInfo,
-}
+export { login, getUserInfo, logout };

@@ -5,7 +5,7 @@ import { color } from 'styles/global';
 const S = {
   Container: styled.div`
     display: flex;
-    width: 100%;
+    width: 98%;
   `,
   Input: styled.input`
     width: 100%;
@@ -13,7 +13,9 @@ const S = {
     outline: none;
     padding:0.3rem;
     border-radius: 0.5rem;
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
   `,
 };
 

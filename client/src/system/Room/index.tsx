@@ -5,11 +5,10 @@ import { RoomState } from 'modules/room';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface Props {
-  searchKeyword: string;
   roomState: RoomState;
 }
 
-const Room: React.FC<Props & RouteComponentProps> = ({ searchKeyword, roomState, history }) => (
+const Room: React.FC<Props & RouteComponentProps> = ({ roomState, history }) => (
   roomState.isLoading ? (
     <div>
       loading...

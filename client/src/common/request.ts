@@ -6,7 +6,7 @@ const { API_SERVER_URL } = configs;
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
-  timeout: 1000,
+  timeout: 3000,
   timeoutErrorMessage: '서버가 응답하지 않습니다.',
   withCredentials: true,
 });
@@ -27,17 +27,20 @@ async function Axios<T>(config: AxiosRequestConfig) {
 
 const getProfile: AxiosRequestConfig = {
   method: 'GET',
-  url: 'dummy/my-profile',
+  url: 'user/my-profile',
 };
 const getFriendList: AxiosRequestConfig = {
   method: 'GET',
-  url: 'dummy/friend-list',
+  url: 'social/friend-list',
 };
 const getChatList: AxiosRequestConfig = {
   method: 'GET',
   url: 'dummy/chat-list',
 };
-
+const getLogout: AxiosRequestConfig = {
+  method: 'GET',
+  url: 'auth/logout',
+};
 const getUserInfo: AxiosRequestConfig = {
   method: 'GET',
   url: 'auth/check-auth',
@@ -64,6 +67,12 @@ const getRooms: AxiosRequestConfig = {
   url: 'chat/room',
 };
 
+const addFriend = (email:string):AxiosRequestConfig=>({
+  method:'POST',
+  url: 'social/add-friend',
+  data: {email}
+})
+
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
@@ -76,6 +85,8 @@ const request = {
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios<Type.User2>(getUserInfo),
   getRooms: () => Axios<Type.IRoom>(getRooms),
+  addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
+  getLogout: () => Axios(getLogout),
 };
 
 export default request;
