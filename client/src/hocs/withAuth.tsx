@@ -20,24 +20,20 @@ function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
 
     useEffect(() => {
       (async () => {
-        request.getUserInfo()
-          .then((response) => {
+        request
+          .getUserInfo()
+          .then(response => {
             const { name, email, uuid } = response.data.data.user;
             setNewProps({ name, email, uuid });
           })
           .catch((e: AxiosError) => {
-            // alert(e.response?.data.message);
+            console.log(e);
             props.history.push('/login');
           });
       })();
     }, []);
 
-    return (
-      <Component
-        {...props as T}
-        {...userInfo}
-      />
-    );
+    return <Component {...(props as T)} {...userInfo} />;
   };
 }
 export default withAuth;

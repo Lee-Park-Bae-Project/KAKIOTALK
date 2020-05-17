@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import Main from 'pages/main';
+
 import { RootState } from 'modules';
 import { getRoomRequest } from 'modules/room';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { afterLogin } from '../socket';
 import { addFriend } from 'modules/friends';
+
 import request from 'common/request';
 import { useHistory } from 'react-router-dom';
-import Main from 'pages/main'
 
 const { useState, useEffect } = React;
 
@@ -23,11 +26,7 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
     if (uuid.length > 0) {
       afterLogin({ uuid });
     }
-  }, [
-    name,
-    email,
-    uuid,
-  ]);
+  }, [name, email, uuid]);
   const history = useHistory();
 
   const [tabSelector, setTabSelector] = useState({
@@ -50,11 +49,17 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
   };
 
   const [addFriendPopUp, setAddFriendPopUp] = useState(false);
+  const [logoutPopUp, setLogoutPopUp] = useState(false);
   const [friendIdToAdd, setFriendIdToAdd] = useState('');
 
-  const onPopUpClose = () => {
+  const onFriendPopUpClose = () => {
     setAddFriendPopUp(false);
   };
+
+  const onLogoutPopUpClose = () => {
+    setLogoutPopUp(false);
+  };
+
   const addFriendTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
@@ -64,6 +69,10 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
   const logoutTabOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
+    setLogoutPopUp(true);
+  };
+
+  const confirmLogout = () => {
     request
       .getLogout()
       .then(response => {
@@ -72,15 +81,18 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
       .catch(error => {
         console.log(error);
       });
+    onLogoutPopUpClose();
   };
+
   const onFriendIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFriendIdToAdd(e.target.value);
   };
 
   const confirmAddFriend = () => {
     dispatch(addFriend(friendIdToAdd));
-    onPopUpClose();
+    onFriendPopUpClose();
   };
+
   return (
     <Main
       tabSelector={tabSelector}
@@ -90,11 +102,14 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
       roomState={roomState}
       onFriendIdChange={onFriendIdChange}
       confirmAddFriend={confirmAddFriend}
-      logoutTabOnClick={logoutTabOnClick}
       popupAddFriend={addFriendPopUp}
-      cancelAddFriend={onPopUpClose}
+      cancelAddFriend={onFriendPopUpClose}
       friendIdToAdd={friendIdToAdd}
-    />
+      logoutTabOnClick={logoutTabOnClick}
+      popupLogout={logoutPopUp}
+      cancelLogout={onLogoutPopUpClose}
+      confirmLogout={confirmLogout}
+    ></Main>
   );
 };
 

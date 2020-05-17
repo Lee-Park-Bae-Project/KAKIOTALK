@@ -7,8 +7,8 @@ import { RoomState } from 'modules/room';
 import Friend from './Friend';
 import { PopUp, Dialog } from 'components';
 import FriendContainer from 'containers/FriendContainer';
-import ChatContainer from 'containers/ChatContainer'
-import Room from 'system/Room'
+import ChatContainer from 'containers/ChatContainer';
+import Room from 'system/Room';
 interface TabSelector {
   friend: boolean;
   chat: boolean;
@@ -20,12 +20,15 @@ interface Props {
   addFriendTabOnClick: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
-  popupAddFriend: boolean;  
+  popupAddFriend: boolean;
   confirmAddFriend: () => void;
   cancelAddFriend: () => void;
   friendIdToAdd: string;
   onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  confirmLogout: () => void;
+  cancelLogout: () => void;
+  popupLogout: boolean;
   roomState: RoomState;
 }
 
@@ -40,19 +43,23 @@ const Main: FC<Props> = ({
   friendIdToAdd,
   logoutTabOnClick,
   onFriendIdChange,
+  confirmLogout,
+  popupLogout,
+  cancelLogout,
   popupAddFriend,
-}) => (
-  <S.Container>
-    <S.Left>
-      <S.NavigationBarWrapper>
-        <NavigationBar
-          tabSelector={tabSelector}
-          friendTabOnClick={friendTabOnClick}
-          chatTabOnClick={chatTabOnClick}
-          addFriendTabOnClick={addFriendTabOnClick}
-          logoutTabOnClick={logoutTabOnClick}
-        />
-      </S.NavigationBarWrapper>
+}) => {
+  return (
+    <S.Container>
+      <S.Left>
+        <S.NavigationBarWrapper>
+          <NavigationBar
+            tabSelector={tabSelector}
+            friendTabOnClick={friendTabOnClick}
+            chatTabOnClick={chatTabOnClick}
+            addFriendTabOnClick={addFriendTabOnClick}
+            logoutTabOnClick={logoutTabOnClick}
+          />
+        </S.NavigationBarWrapper>
         <S.Wrapper>
           {tabSelector.friend && (
             <S.Column>
@@ -61,7 +68,7 @@ const Main: FC<Props> = ({
           )}
           {tabSelector.chat && (
             <S.Column>
-              <Room roomState={roomState}/>
+              <Room roomState={roomState} />
               {/* <ChatContainer/> */}
             </S.Column>
           )}
@@ -87,7 +94,22 @@ const Main: FC<Props> = ({
           </Dialog>
         </PopUp>
       ) : null}
-  </S.Container>
-);
+      {popupLogout ? (
+        <PopUp>
+          <Dialog
+            isVisible={true}
+            title="정말로 로그 아웃 하시겠습니까?"
+            isHideButton={false}
+            canCancel={true}
+            cancelText="취소"
+            confirmText="확인"
+            onConfirm={confirmLogout}
+            onCancel={cancelLogout}
+          ></Dialog>
+        </PopUp>
+      ) : null}
+    </S.Container>
+  );
+};
 
 export default Main;
