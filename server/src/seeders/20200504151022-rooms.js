@@ -12,6 +12,12 @@ module.exports = {
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
       },
+      {
+        id: '2',
+        uuid: '234',
+        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+      },
     ]
   ),
 

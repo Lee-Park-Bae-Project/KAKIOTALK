@@ -20,7 +20,6 @@ const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     )
 
     req.decodedUser = decoded as IDecodedUser
-
     next()
   } catch (e) {
     next(e)

@@ -1,41 +1,44 @@
+
 const moment = require('moment')
 
-const tableName = 'users'
-
+const tableName = 'chats'
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert(
     tableName,
     [
       {
         id: 1,
-        name: 'Junho Lee',
         uuid: '123',
-        email: 'leeparkbaeproject@gmail.com',
-        status: 'im leeparkbae',
-        googleId: '113283872440363914094',
+        roomParticipantsId: 1,
+        content: 'hihi',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
       },
       {
         id: 2,
-        name: '이준호',
         uuid: '234',
-        email: 'taristmas@gmail.com',
-        status: 'im junow',
-        googleId: '100916656626485581191',
+        roomParticipantsId: 2,
+        content: 'hihihi',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
       },
       {
         id: 3,
-        name: 'ghost',
-        uuid: '345',
-        email: 'ghost@gmail.com',
-        status: 'im ghost',
+        uuid: '321',
+        roomParticipantsId: 4,
+        content: 'im ghost',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
       },
-    ], {}
+      {
+        id: 4,
+        uuid: '432',
+        roomParticipantsId: 3,
+        content: 'im not ghost',
+        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+      },
+    ]
   ),
 
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete(tableName, null, {}),

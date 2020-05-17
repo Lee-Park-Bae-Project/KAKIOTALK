@@ -39,5 +39,9 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
+  RoomParticipants.associate = (models: any) => {
+    RoomParticipants.belongsTo(models.User)
+    RoomParticipants.belongsTo(models.Room)
+  }
   return RoomParticipants
 }
