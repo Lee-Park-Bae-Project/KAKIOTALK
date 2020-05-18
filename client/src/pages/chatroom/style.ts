@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import UserCard from 'components/UserCard';
-import ChatBox from 'components/ChatBox';
 import { color } from 'styles/global';
 
-const Room = styled.div`
+const Container = styled.div`
   height:100%;
   background : ${color.ROOM_COLOR};
   display:flex;
   flex-direction:column;
+  height: 100vh;
 `;
 
 const ChatContainer = styled.div`
@@ -36,16 +36,40 @@ const ButtonWrapper = styled.div`
 `;
 const SendBtn = styled.button`
   outline:none;
-margin:auto;
-`
+  margin:auto;
+`;
+
+export const ChatBox = styled.div`
+  width: fit-content;
+  background: yellow;
+  max-width: 70%;
+  overflow-wrap: break-word;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 0.5rem;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  padding: 1rem;
+`;
+
+export const Title = styled.div`
+  position: absolute;
+  margin: auto;
+  left: 50%;
+`;
+
+export const Back = styled.div`
+
+`;
 
 export {
-  Room,
+  Container,
   UserCard,
   ChatContainer,
   InputContainer,
   InputArea,
   ButtonWrapper,
   SendBtn,
-  ChatBox,
 };
