@@ -23,7 +23,8 @@ export const configs = {
 };
 
 export const url = {
-  main : '/',
-  login : '/login',
-  chatRoom : '/chat',
-}
+  main: '/',
+  login: '/login',
+  chatRoom: '/chat',
+  room: '/chat',
+};

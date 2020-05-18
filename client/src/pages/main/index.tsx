@@ -4,11 +4,12 @@ import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
 import { User } from 'types';
 import { RoomState } from 'modules/room';
-import Friend from './Friend';
 import { PopUp, Dialog } from 'components';
 import FriendContainer from 'containers/FriendContainer';
 import ChatContainer from 'containers/ChatContainer';
 import Room from 'system/Room';
+import Friend from './Friend';
+
 interface TabSelector {
   friend: boolean;
   chat: boolean;
@@ -26,8 +27,8 @@ interface Props {
   friendIdToAdd: string;
   onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  dialogRef: any,
-  onPopupOutClicked:(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  dialogRef: any;
+  onPopupOutClicked: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   confirmLogout: () => void;
   cancelLogout: () => void;
   popupLogout: boolean;
@@ -44,15 +45,14 @@ const Main: FC<Props> = ({
   confirmAddFriend,
   friendIdToAdd,
   onFriendIdChange,
-  logoutTabOnClick, 
+  logoutTabOnClick,
   dialogRef,
   onPopupOutClicked,
   confirmLogout,
   popupLogout,
   cancelLogout,
   popupAddFriend,
-}) => {
-  return (
+}) => (
     <S.Container>
       <S.Left>
         <S.NavigationBarWrapper>
@@ -113,7 +113,6 @@ const Main: FC<Props> = ({
         </PopUp>
       ) : null}
     </S.Container>
-  );
-};
+);
 
 export default Main;
