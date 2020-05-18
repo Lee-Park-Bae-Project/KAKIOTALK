@@ -9,7 +9,7 @@ module.exports = {
       {
         id: 1,
         name: 'Junho Lee',
-        uuid: '123',
+        uuid: '4f5f1535eec9e15d8d1a83295a98e59a',
         email: 'leeparkbaeproject@gmail.com',
         status: 'im leeparkbae',
         googleId: '113283872440363914094',
@@ -19,7 +19,7 @@ module.exports = {
       {
         id: 2,
         name: '이준호',
-        uuid: '234',
+        uuid: '4a80d7f71f7132ffb3e38947d06b43a4',
         email: 'taristmas@gmail.com',
         status: 'im junow',
         googleId: '100916656626485581191',
@@ -29,7 +29,7 @@ module.exports = {
       {
         id: 3,
         name: 'ghost',
-        uuid: '345',
+        uuid: '4bc9f0f449c09ef486edcbbb8431c62a',
         email: 'ghost@gmail.com',
         status: 'im ghost',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
