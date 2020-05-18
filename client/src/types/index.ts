@@ -1,6 +1,6 @@
 export interface User {
   id: string;
-  email:string;
+  email: string;
   userName: string;
   statusMessage: string;
   name?: string;
@@ -30,4 +30,13 @@ export interface User2 {
     uuid: string;
   };
 
+}
+
+export interface IChat {
+  id: number;
+  uuid: string;
+  roomParticipantsId: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
 }
