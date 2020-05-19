@@ -2,26 +2,27 @@ import {
   DataTypes, ENUM, Sequelize,
 } from 'sequelize'
 import { env } from '../configs'
-import Chat from './chat'
-import User from './user'
+import Chat, { CHAT_ASSOCIATION_ALIAS } from './chat'
+import User, { USER_ASSOCIATION_ALIAS } from './user'
 import ChatIsRead from './chatIsRead'
 import Friend from './friends'
-import Room from './room'
+import Room, { ROOM_ASSOCIATION_ALIAS } from './room'
 import RoomParticipants from './roomParticipants'
 
-export type ModelTypes =
-| ReturnType<typeof User>
-| ReturnType<typeof Chat>
-| ReturnType<typeof ChatIsRead>
-| ReturnType<typeof Friend>
-| ReturnType<typeof Room>
-| ReturnType<typeof RoomParticipants>
+export interface ModelTypes {
+  User: ReturnType<typeof User>;
+  Chat: ReturnType<typeof Chat>
+  ChatIsRead: ReturnType<typeof ChatIsRead>;
+  Friend: ReturnType<typeof Friend>;
+  Room: ReturnType<typeof Room>;
+  RoomParticipants: ReturnType<typeof RoomParticipants>;
+}
 
 const config = require('../configs/sequelize.js')[env || 'development']
 
 export const sequelize = new Sequelize(config.database, config.username, config.password, config)
 
-export const models:{[key: string ]: ModelTypes} = {
+export const models: ModelTypes = {
   User: User(sequelize, DataTypes),
   Chat: Chat(sequelize, DataTypes),
   ChatIsRead: ChatIsRead(sequelize, DataTypes),
@@ -33,3 +34,9 @@ export const models:{[key: string ]: ModelTypes} = {
 Object.keys(models).forEach((modelName) => {
   models[modelName].associate(models)
 })
+
+export {
+  CHAT_ASSOCIATION_ALIAS,
+  USER_ASSOCIATION_ALIAS,
+  ROOM_ASSOCIATION_ALIAS,
+}

@@ -1,10 +1,10 @@
 import {
-  NextFunction, Request, Response, request,
+  NextFunction, Request, Response,
 } from 'express'
+import createError from 'http-errors'
 import { models } from '../models'
 import { response } from '../common/utils'
 import * as userService from '../services/userService'
-import createError from 'http-errors';
 
 const userTest = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -20,23 +20,26 @@ const userTest = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const getMyProfile = async (req:Request,res:Response,next:NextFunction) =>{
-  try{
-    if(!req.decodedUser){
-      return next(createError(401,'로그인 필요'))
+const getMyProfile = async (req:Request, res:Response, next:NextFunction) => {
+  try {
+    if (!req.decodedUser) {
+      return next(createError(401, '로그인 필요'))
     }
     const user:any = await userService.findByGoogleId(req.decodedUser.googleId)
-    const {id,email,name,status} = user
+    const {
+      id, email, name, status,
+    } = user
     const myProfile = {
       id,
       email,
-      userName:name,
-      statusMessage:status
+      userName: name,
+      statusMessage: status,
     }
-    response(res,myProfile)
-  }
-  catch(e){
+    response(res, myProfile)
+  } catch (e) {
     next(e)
   }
 }
-export { userTest,getMyProfile }
+export {
+  userTest, getMyProfile,
+}

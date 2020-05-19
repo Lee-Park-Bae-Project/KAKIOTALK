@@ -8,13 +8,15 @@ import {
 import { IRoomParticipants } from '../types'
 import { uuid } from '../common/utils'
 
-type RoomParticipants = typeof Model & {
-  new (values?: object, options?: BuildOptions): IRoomParticipants;
+export interface RoomParticipantsModel extends Model, IRoomParticipants {}
+
+export type RoomParticipantsStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): RoomParticipantsModel;
   associate: (models: any) => void;
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const RoomParticipants = <RoomParticipants>sequelize.define('room_participants', {
+  const RoomParticipants = <RoomParticipantsStatic>sequelize.define('room_participants', {
     id: {
       primaryKey: true,
       allowNull: false,

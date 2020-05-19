@@ -8,11 +8,12 @@ import {
 import { IFriend } from '../types'
 import { uuid } from '../common/utils'
 
-type FriendStatic = typeof Model & {
-  new (values?: object, options?: BuildOptions): IFriend
+export interface FriendModel extends Model, IFriend {}
+
+export type FriendStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): FriendModel
   associate: (models: any) => void
 }
-
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   const Friend = <FriendStatic>sequelize.define('friends', {
     id: {
@@ -38,10 +39,10 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-  Friend.associate = (models:any)=> {
-    Friend.hasOne(models.User,{
-      foreignKey:'id',
-      sourceKey:'friendId'
+  Friend.associate = (models:any) => {
+    Friend.hasOne(models.User, {
+      foreignKey: 'id',
+      sourceKey: 'friendId',
     })
   }
   return Friend

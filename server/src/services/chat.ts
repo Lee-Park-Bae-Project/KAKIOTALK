@@ -1,4 +1,6 @@
-import { models } from '../models'
+import {
+  CHAT_ASSOCIATION_ALIAS, models, ROOM_ASSOCIATION_ALIAS, USER_ASSOCIATION_ALIAS,
+} from '../models'
 
 export const findRoomById = (roomId: string) => models.Room.findOne({
   where: { uuid: roomId },
@@ -8,22 +10,31 @@ export const findRoomById = (roomId: string) => models.Room.findOne({
   }],
 })
 export const findAllRooms = async (userId: string) => {
-  const data: any = await models.User.findOne(
+  const data = await models.User.findOne(
     {
       where: { id: userId },
       include: [{
         attributes: ['uuid'],
         model: models.Room,
-        as: 'rooms',
+        as: USER_ASSOCIATION_ALIAS.RoomParticipants,
         include: [{
           attributes: ['uuid', 'name', 'status', 'email'],
           model: models.User,
-          as: 'participants',
+          as: ROOM_ASSOCIATION_ALIAS.RoomParticipants,
         }],
       }],
     }
   )
+
+  if (!data) {
+    throw new Error()
+  }
+
   const { rooms } = data
+
+  if (!rooms) {
+    throw new Error()
+  }
   const preProcessed = rooms.map((room) => {
     const participants = room.participants.map((participant) => {
       const {
@@ -47,7 +58,7 @@ export const getChatsByRoomId = (roomId: string) => models.Chat.findAll(
   { include: [
     {
       model: models.RoomParticipants,
-      as: 'info',
+      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
       where: { roomId },
       include: [
         models.User,
