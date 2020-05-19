@@ -27,13 +27,13 @@ export const findAllRooms = async (userId: string) => {
   )
 
   if (!data) {
-    throw new Error()
+    throw new Error('데이터가 없습니다.')
   }
 
   const { rooms } = data
 
   if (!rooms) {
-    throw new Error()
+    throw new Error('데이터가 없습니다.')
   }
   const preProcessed = rooms.map((room) => {
     const participants = room.participants.map((participant) => {
