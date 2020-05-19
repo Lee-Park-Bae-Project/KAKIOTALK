@@ -20,7 +20,6 @@ export interface RoomModel extends Model, IRoom {
 export type RoomStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): RoomModel;
   associate: (models: any) => void;
-  [ROOM_ASSOCIATION_ALIAS.RoomParticipants]?: IRoomParticipants
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {

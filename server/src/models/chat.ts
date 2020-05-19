@@ -11,12 +11,13 @@ import { RoomModel } from './room'
 
 export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'info' as const }
 
-export interface ChatModel extends Model, IChat {}
+export interface ChatModel extends Model, IChat {
+  [CHAT_ASSOCIATION_ALIAS.RoomParticipants]?: RoomModel[];
+}
 
 export type ChatStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): ChatModel;
   associate: (models: any) => void;
-  [CHAT_ASSOCIATION_ALIAS.RoomParticipants]: RoomModel[];
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
