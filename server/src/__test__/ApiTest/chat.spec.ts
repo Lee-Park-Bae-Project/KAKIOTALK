@@ -20,7 +20,7 @@ it('로그인 | 200', async () => {
   expect(response.status).toEqual(200)
 })
 
-describe('GET: /v1/chat/', () => {
+describe('GET /v1/chat/', () => {
   it('roomId 로 채팅 조회 | 200', async () => {
     const roomId = '46e137796f00ee278ac7a5ca17e3b586'
     const response = await agent.get(`/v1/chat/message/${roomId}`)
@@ -28,7 +28,7 @@ describe('GET: /v1/chat/', () => {
   })
 
   it('roomId 로 채팅 조회 | 404', async () => {
-    const response = await agent.get('/v1/chat/aaa')
+    const response = await agent.get('/v1/chat/message/aaa')
     expect(response.status).toEqual(404)
   })
 })
@@ -81,8 +81,6 @@ describe('채팅추가', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
       })
-
-    console.log(response.body.data)
 
     expect(response.status).toEqual(200)
     expect(response.body.data).toBeTruthy()

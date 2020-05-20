@@ -1,3 +1,9 @@
+import {
+  NextFunction,
+  Request,
+  Response,
+} from 'express'
+
 export interface IChat {
   id: number;
   uuid: string;
@@ -60,3 +66,6 @@ export interface IDecodedUser {
   iat: string;
   exp: string;
 }
+
+export type Controller = (req: Request, res: Response, next: NextFunction) => any
+export type ControllerHelper = (controller: Controller) => Controller

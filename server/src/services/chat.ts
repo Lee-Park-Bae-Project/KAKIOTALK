@@ -6,6 +6,7 @@ import {
   USER_ASSOCIATION_ALIAS,
 } from '../models'
 import { IChat } from '../types'
+import * as Error from '../common/error'
 
 export const findRoomByUuid = (uuid: string) => models.Room.findOne({
   where: { uuid },
@@ -32,13 +33,13 @@ export const findAllRooms = async (userId: number) => {
   )
 
   if (!data) {
-    throw new Error('데이터가 없습니다.')
+    throw Error.IDK
   }
 
   const { rooms } = data
 
   if (!rooms) {
-    throw new Error('데이터가 없습니다.')
+    throw Error.IDK
   }
   const preProcessed = rooms.map((room) => {
     const participants = room.participants.map((participant) => {
@@ -62,7 +63,7 @@ export const findAllRooms = async (userId: number) => {
 export const getChatsByRoomId = async (roomUuid: string) => {
   const room = await models.Room.findOne({ where: { uuid: roomUuid } })
   if (!room) {
-    throw new Error('무언가 잘못되었습니다.')
+    throw Error.IDK
   }
   const roomId = room.id
   const chats = await models.Chat.findAll({
