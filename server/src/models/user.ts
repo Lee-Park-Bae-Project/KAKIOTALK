@@ -20,6 +20,7 @@ export interface UserModel extends Model, IUser {
 export type UserStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): UserModel;
   associate: (models: any) => void;
+
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
@@ -66,7 +67,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
-  })
+  },)
 
   User.associate = (models: any) => {
     User.belongsToMany(
@@ -78,7 +79,14 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         otherKey: 'roomId',
       }
     )
-    // User.hasMany(models.RoomParticipants, { as: 'roomInfo' })
+    // User.hasMany(
+    //   models.RoomParticipants,
+    //   {
+    //     foreignKey: 'roomParticipantsId',
+    //     sourceKey: 'id',
+    //     as: 'test',
+    //   }
+    // )
     User.hasMany(models.Friend, {
       foreignKey: 'userId',
       sourceKey: 'id',

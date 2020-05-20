@@ -7,8 +7,18 @@ import {
 
 import { IRoomParticipants } from '../types'
 import { uuid } from '../common/utils'
+import { UserModel } from './user'
+import { RoomModel } from './room'
 
-export interface RoomParticipantsModel extends Model, IRoomParticipants {}
+export const ROOM_PARTICIPANTS_ASSOCIATION_ALIAS = {
+  User: 'sender' as const,
+  Room: 'room' as const,
+}
+
+export interface RoomParticipantsModel extends Model, IRoomParticipants {
+  [ROOM_PARTICIPANTS_ASSOCIATION_ALIAS.User]?: UserModel;
+  [ROOM_PARTICIPANTS_ASSOCIATION_ALIAS.Room]?: RoomModel;
+}
 
 export type RoomParticipantsStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): RoomParticipantsModel;
@@ -42,8 +52,22 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
   })
 
   RoomParticipants.associate = (models: any) => {
-    RoomParticipants.belongsTo(models.User)
-    RoomParticipants.belongsTo(models.Room)
+    RoomParticipants.belongsTo(
+      models.User, {
+        as: 'sender',
+        foreignKey: 'userId',
+        targetKey: 'id',
+      }
+    )
+    RoomParticipants.belongsTo(
+      models.Room, {
+        as: 'room',
+        foreignKey: 'roomId',
+        targetKey: 'id',
+      }
+    )
+    // RoomParticipants.hasMany(models.Room)
+    // RoomParticipants.hasMany(models.User)
   }
   return RoomParticipants
 }

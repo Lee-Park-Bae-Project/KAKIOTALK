@@ -1,15 +1,20 @@
 import {
-  CHAT_ASSOCIATION_ALIAS, models, ROOM_ASSOCIATION_ALIAS, USER_ASSOCIATION_ALIAS,
+  CHAT_ASSOCIATION_ALIAS,
+  models,
+  ROOM_ASSOCIATION_ALIAS,
+  ROOM_PARTICIPANTS_ASSOCIATION_ALIAS,
+  USER_ASSOCIATION_ALIAS,
 } from '../models'
+import { IChat } from '../types'
 
-export const findRoomById = (roomId: string) => models.Room.findOne({
-  where: { uuid: roomId },
+export const findRoomByUuid = (uuid: string) => models.Room.findOne({
+  where: { uuid },
   include: [{
     model: models.User,
     as: 'participants',
   }],
 })
-export const findAllRooms = async (userId: string) => {
+export const findAllRooms = async (userId: number) => {
   const data = await models.User.findOne(
     {
       where: { id: userId },
@@ -54,19 +59,40 @@ export const findAllRooms = async (userId: string) => {
   })
   return preProcessed
 }
-export const getChatsByRoomId = (roomId: string) => models.Chat.findAll(
-  { include: [
-    {
-      model: models.RoomParticipants,
-      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
-      where: { roomId },
-      include: [
-        models.User,
-        models.Room,
-      ],
-    },
-  ] }
-)
+export const getChatsByRoomId = async (roomUuid: string) => {
+  const room = await models.Room.findOne({ where: { uuid: roomUuid } })
+  if (!room) {
+    throw new Error('무언가 잘못되었습니다.')
+  }
+  const roomId = room.id
+  const chats = await models.Chat.findAll({
+    raw: true,
+    nest: true,
+    attributes: ['uuid', 'content', 'createdAt', 'updatedAt'],
+    include: [
+      {
+        model: models.RoomParticipants,
+        as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
+        attributes: ['uuid', 'createdAt', 'updatedAt', 'roomId'],
+        where: { roomId },
+        include: [
+          {
+            model: models.User,
+            as: 'sender',
+            attributes: ['uuid', 'name', 'email', 'status', 'createdAt', 'updatedAt'],
+          },
+          {
+            model: models.Room,
+            as: 'room',
+            attributes: ['uuid', 'createdAt', 'updatedAt'],
+          },
+        ],
+      },
+    ],
+  })
+
+  return chats
+}
 
 export const getRoomParticipants = (roomId: string) => models.RoomParticipants.findAll({
   raw: true,
@@ -77,3 +103,20 @@ export const getRoomParticipants = (roomId: string) => models.RoomParticipants.f
   ],
 })
 
+export const findRoomParticipants = async (roomId: number, userId: number) => (
+  models.RoomParticipants.findOne({ where: {
+    roomId, userId,
+  } })
+)
+
+export const createChat = async ({
+  roomParticipantsId,
+  content,
+  createdAt,
+  updatedAt,
+}: Omit<IChat, 'id' | 'uuid'>) => models.Chat.create({
+  roomParticipantsId,
+  content,
+  createdAt,
+  updatedAt,
+})

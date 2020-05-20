@@ -50,7 +50,14 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         otherKey: 'userId',
       }
     )
-    // Room.hasMany(models.RoomParticipants)
+    // Room.hasMany(
+    //   models.RoomParticipants,
+    //   {
+    //     foreignKey: 'roomParticipantsId',
+    //     sourceKey: 'id',
+    //     as: 'test',
+    //   }
+    // )
   }
 
   return Room

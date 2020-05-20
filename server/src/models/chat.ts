@@ -8,11 +8,12 @@ import {
 import { IChat } from '../types'
 import { uuid } from '../common/utils'
 import { RoomModel } from './room'
+import { RoomParticipantsModel } from './roomParticipants'
 
-export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'info' as const }
+export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'metaInfo ' as const }
 
 export interface ChatModel extends Model, IChat {
-  [CHAT_ASSOCIATION_ALIAS.RoomParticipants]?: RoomModel[];
+  [CHAT_ASSOCIATION_ALIAS.RoomParticipants]?: RoomParticipantsModel;
 }
 
 export type ChatStatic = typeof Model & {
