@@ -21,6 +21,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps & RouteComponentProps> = 
 }) => {
   const [messages, setMessages] = useState<Partial<IChat>[]>([]);
   const messageRef = useRef<HTMLInputElement>(null);
+  const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
     console.log(name, email, uuid);
@@ -52,15 +53,15 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps & RouteComponentProps> = 
     );
     sendMsg({
       sender: 'sender',
-      content: 'content',
+      content: message,
       roomId: 'typo',
       createdAt: date.toUTCString(),
     });
 
     if (messageRef.current) {
       messageRef.current.focus();
-      messageRef.current.value = '';
     }
+    setMessage('');
   };
   const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -70,10 +71,15 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps & RouteComponentProps> = 
     }
   };
 
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+
   return (
     <S.Container>
       <S.Header>
-        <S.Back>
+        <S.Back onClick={handleBack}>
           back
         </S.Back>
         <S.Title>
@@ -90,6 +96,8 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps & RouteComponentProps> = 
       <S.InputContainer>
         <S.InputArea
           ref={messageRef}
+          value={message}
+          onChange={handleMessageChange}
           onKeyPress={handleEnterPress}
         />
         <S.ButtonWrapper>
