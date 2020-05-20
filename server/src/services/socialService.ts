@@ -30,10 +30,10 @@ const addFriend = (userId: number, friendId: number) => models.Friend.findOrCrea
   },
 })
 
-const removeFriend = (userId: string, friendId : string) => models.Friend.destroy({ where: {
+const deleteFriend = (userId: string, friendId : string) => models.Friend.destroy({ where: {
   userId,
   friendId,
 } })
 export default {
-  getFriendsList, addFriend, removeFriend,
+  getFriendsList, addFriend, deleteFriend,
 }

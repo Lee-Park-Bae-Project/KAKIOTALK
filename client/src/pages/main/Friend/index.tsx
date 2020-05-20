@@ -4,7 +4,7 @@ import List from 'system/List';
 import Hr from 'atoms/Hr';
 import Profile from 'system/Profile';
 import { UserCard, PopUp } from 'components';
-import { removeFriend } from 'modules/friends';
+import { deleteFriend } from 'modules/friends';
 import {User} from 'types'
 import swal from 'sweetalert'
 export interface Props {
@@ -27,12 +27,12 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
     }
   };
   const dispatch =useDispatch()
-  const deleteFriend = () => {
+  const onDeleteFriend = () => {
     swal(`${clickedUser.userName}님을 친구에서 삭제하시겠습니까?`,{
       buttons:['취소',true]
     }).then(value=>{
       if(value) {
-        dispatch(removeFriend(clickedUser.id))
+        dispatch(deleteFriend(clickedUser.id))
         setPopup(false)
       }
     })
@@ -81,7 +81,7 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
             id={clickedUser.id}
             userName={clickedUser.userName}
             statusMessage={clickedUser.statusMessage}
-            onRemoveClick={deleteFriend}
+            onDeleteClick={onDeleteFriend}
           />
         </PopUp>
       ) : null}

@@ -52,17 +52,17 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     next(e);
   }
 };
-const removeFriend =async (req:Request,res:Response,next:NextFunction)=>{
+const deleteFriend =async (req:Request,res:Response,next:NextFunction)=>{
   try{
     if(!req.decodedUser) {
       return next(createError(401, '로그인이 필요합니다.'));
     }
     const user:any = await userService.findByGoogleId(req.decodedUser.googleId)
     const deleteUser:any = await userService.findByGoogleId(req.body.googleId);
-    await socialServce.removeFriend(user.id,deleteUser.id)
+    await socialServce.deleteFriend(user.id,deleteUser.id)
     response(res,{googleId:deleteUser.googleId})
   }catch (e) {
 
   }
 }
-export { getFriendsList, addFriend ,removeFriend};
+export { getFriendsList, addFriend ,deleteFriend};

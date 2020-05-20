@@ -12,7 +12,7 @@ interface Prop {
   /** 상태메시지 */
   statusMessage: string;
   /** 프로필닫기 핸들러 */
-  onRemoveClick: (() => void);
+  onDeleteClick: (() => void);
 
 }
 
@@ -23,7 +23,7 @@ const Profile: FC<Prop> = ({
   id,
   userName,
   statusMessage = '',
-  onRemoveClick,
+  onDeleteClick,
 }) => {
   
   return (
@@ -56,7 +56,7 @@ const Profile: FC<Prop> = ({
               text='삭제'
               textColor={color.BLACK}
               iconPosition='top'
-              onClick={onRemoveClick}
+              onClick={onDeleteClick}
             />
           </S.Footer>
         </S.Container>

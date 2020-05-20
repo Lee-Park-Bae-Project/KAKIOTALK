@@ -1,6 +1,6 @@
 import {
-  REMOVE_FRIEND_SUCCESS,
-  REMOVE_FRIEND_FAILURE,
+  DELETE_FRIEND_SUCCESS,
+  DELETE_FRIEND_FAILURE,
   GET_FRIENDS_FAILURE,
   GET_FRIENDS_SUCCESS,
   ADD_FRIEND_SUCCESS,
@@ -15,12 +15,12 @@ const initialState: User[] = [];
 
 function userList(state: User[] = initialState, action: UserListAction) {
   switch (action.type) {
-    case REMOVE_FRIEND_SUCCESS: {
+    case DELETE_FRIEND_SUCCESS: {
       swal('삭제되었습니다.',"","success")
       const newState = state.filter((user) => user.id !== action.payload.googleId);
       return newState;
     }
-    case REMOVE_FRIEND_FAILURE: {
+    case DELETE_FRIEND_FAILURE: {
       const error = action.payload
       if (error.response) {
         swal(error.response.data.message,"","error");
