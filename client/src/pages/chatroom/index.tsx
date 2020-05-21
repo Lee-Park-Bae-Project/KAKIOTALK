@@ -12,32 +12,29 @@ import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import * as S from './style';
 
+interface MatchParams {
+  roomUuid: string;
+}
 
-const ChatRoom: FC<WithAuthProps & RouteComponentProps & RouteComponentProps> = ({
+const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
   name,
   email,
   uuid,
   history,
+  match,
 }) => {
   const [messages, setMessages] = useState<Partial<IChat>[]>([]);
   const messageRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string>('');
+  const [roomUuid, setRoomUuid] = useState<string>('');
 
   useEffect(() => {
-    console.log(name, email, uuid);
-  }, [name,
-    email,
-    uuid]);
-
-  useEffect(() => {
-    console.log(messages);
-  }, [messages]);
-
+    setRoomUuid(match.params.roomUuid);
+  }, []);
   const handleBack = () => {
     history.goBack();
   };
   const handleSubmit = () => {
-    const date = new Date();
     if (!messageRef) {
       return;
     }
@@ -51,11 +48,11 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps & RouteComponentProps> = 
         },
       ])
     );
+
     sendMsg({
-      sender: 'sender',
       content: message,
-      roomId: 'typo',
-      createdAt: date.toUTCString(),
+      roomUuid,
+      createdAt: getCurTimeDBFormat(),
     });
 
     if (messageRef.current) {

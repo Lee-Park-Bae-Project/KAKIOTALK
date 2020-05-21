@@ -22,7 +22,8 @@ export const color = {
   TEXT_GRAY: '#737373',
   ROOM_COLOR: '#C0D1DB',
   HOVER_GRAY: '#F1F2F2',
-};
+  LIGHT_GRAY: '#FAFAFA',
+} as const;
 
 export const fontSize = {
   SMALL: '0.8rem',

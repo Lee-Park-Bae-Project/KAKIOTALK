@@ -1,5 +1,6 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
+import * as T from '../types'
 
 declare global {
   namespace NodeJS {
@@ -9,30 +10,32 @@ declare global {
     }
   }
 }
-const init = (socket: openSocket.Socket) => {
-  socket.on('init', (data) => {
-    global.io.emit('init', `${socket.id} is initialized`)
-  })
+
+export enum Event {
+  connect = 'connect',
+  disconnect = 'disconnect',
+  afterLogin = 'afterLogin',
+  message = 'message',
 }
 
 const onDisconnect = (socket: openSocket.Socket) => {
-  socket.on('disconnect', () => {
+  socket.on(Event.disconnect, () => {
     console.log(chalk.yellow(`${socket.id} is disconnected`))
     global.io.emit('leave', `${socket.id} is disconnected`)
   })
 }
 
 const afterLogin = (socket: openSocket.Socket) => {
-  socket.on('afterLogin', (msg) => {
+  socket.on(Event.afterLogin, (msg) => {
     console.log(chalk.blue(msg))
   })
 }
 
-const sendMsg = (socket: openSocket.Socket) => {
-  socket.on('sendMsg', ({
-    sender, roomId, content, createdAt,
-  }) => {
-    console.log(sender, roomId, content, createdAt)
+const message = (socket: openSocket.Socket) => {
+  socket.on(Event.message, ({
+    roomUuid, content, createdAt,
+  }: T.SendMsg) => {
+    console.log(chalk.blue(roomUuid, content, createdAt))
   })
 }
 const connection = (io:openSocket.Server) => {
@@ -41,10 +44,9 @@ const connection = (io:openSocket.Server) => {
     socket.emit('connection', `connected: ${socket.id}`)
     console.log(chalk.yellow(`connected: ${socket.id}`))
 
-    init(socket)
     onDisconnect(socket)
     afterLogin(socket)
-    sendMsg(socket)
+    message(socket)
   })
 }
 

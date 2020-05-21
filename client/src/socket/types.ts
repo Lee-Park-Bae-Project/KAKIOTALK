@@ -3,8 +3,7 @@ export interface AfterLogin{
 }
 
 export interface SendMsg {
-  sender: string;
-  roomId: string;
+  roomUuid: string;
   content: string;
   createdAt: string;
 }

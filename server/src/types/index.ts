@@ -69,3 +69,9 @@ export interface IDecodedUser {
 
 export type Controller = (req: Request, res: Response, next: NextFunction) => any
 export type ControllerHelper = (controller: Controller) => Controller
+
+export interface SendMsg {
+  roomUuid: string;
+  content: string;
+  createdAt: string;
+}

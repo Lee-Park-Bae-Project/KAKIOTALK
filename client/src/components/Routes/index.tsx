@@ -9,7 +9,7 @@ const Routes: React.FC = () => (
   <Router>
     <Route exact path={url.main} component={MainContainer} />
     <Route path={url.login} component={Login} />
-    <Route path={`${url.room}/:id`}component={ChatRoom} />
+    <Route path={`${url.room}/:roomUuid`}component={ChatRoom} />
   </Router>
 );
 
