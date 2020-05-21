@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import List from 'system/List';
 import Hr from 'atoms/Hr';
@@ -15,8 +15,8 @@ export interface Props {
 const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   const [popup, setPopup] = useState(false);
   const [clickedUser, setClickedUser] = useState({
-    id: '',
-    userName: '',
+    uuid: '',
+    name: '',
     email:'',
     statusMessage: '',
   });
@@ -28,11 +28,11 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   };
   const dispatch =useDispatch()
   const onDeleteFriend = () => {
-    swal(`${clickedUser.userName}님을 친구에서 삭제하시겠습니까?`,{
+    swal(`${clickedUser.name}님을 친구에서 삭제하시겠습니까?`,{
       buttons:['취소',true]
     }).then(value=>{
       if(value) {
-        dispatch(deleteFriend(clickedUser.id))
+        dispatch(deleteFriend(clickedUser.uuid))
         setPopup(false)
       }
     })
@@ -42,8 +42,8 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   return (
     <List>
       <UserCard
-        key={myProfile.id}
-        userName={myProfile.userName}
+        key={myProfile.uuid}
+        name={myProfile.name}
         statusMessage={myProfile.statusMessage}
       />
       <Hr />
@@ -52,26 +52,26 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
       friendList
         .filter(
           friend =>
-            friend.userName
+            friend.name
               .toLowerCase()
               .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
         )
-        .map(({ id, statusMessage, userName ,email}) => {
+        .map(({ uuid, statusMessage, name ,email}) => {
           const onUserCardClick = () => {
             setPopup(true);
             setClickedUser({
-              id: id,
-              userName: userName,
-              email:email,
-              statusMessage: statusMessage,
+              uuid,
+              name,
+              email,
+              statusMessage,
             });
           };
           
 
           return (
             <UserCard
-              key={id}
-              userName={userName}
+              key={uuid}
+              name={name}
               statusMessage={statusMessage}
               onClick={onUserCardClick}
             />
@@ -82,8 +82,8 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
       {popup ? (
         <PopUp onClose={onProfileClose} refs = {profileRef}>
           <Profile
-            id={clickedUser.id}
-            userName={clickedUser.userName}
+            uuid={clickedUser.uuid}
+            name={clickedUser.name}
             statusMessage={clickedUser.statusMessage}
             onDeleteClick={onDeleteFriend}
           />

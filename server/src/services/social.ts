@@ -3,7 +3,7 @@ import {
   USER_ASSOCIATION_ALIAS,
 } from '../models'
 
-const getFriendsList = (userId: string) => models.User.findOne({
+const getFriendsList = (userId: number) => models.User.findOne({
   where: { id: userId },
   include: [
     {
@@ -14,7 +14,7 @@ const getFriendsList = (userId: string) => models.User.findOne({
       include: [
         {
           model: models.User,
-          attributes: ['googleId', 'email', 'name', 'status'],
+          attributes: ['uuid', 'email', 'name', 'statusMessage'],
         },
       ],
     },
@@ -30,7 +30,7 @@ const addFriend = (userId: number, friendId: number) => models.Friend.findOrCrea
   },
 })
 
-const deleteFriend = (userId: string, friendId : string) => models.Friend.destroy({ where: {
+const deleteFriend = (userId: number, friendId : number) => models.Friend.destroy({ where: {
   userId,
   friendId,
 } })

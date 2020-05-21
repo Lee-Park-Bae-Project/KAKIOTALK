@@ -6,9 +6,9 @@ import TextIcon from 'components/TextIcon';
 import { Link } from 'react-router-dom'
 interface Prop {
   /** 유져 식별자 */
-  id: string;
+  uuid: string;
   /** 유저 이름 */
-  userName: string;
+  name: string;
   /** 상태메시지 */
   statusMessage: string;
   /** 프로필닫기 핸들러 */
@@ -20,8 +20,8 @@ interface Prop {
  * 친구 목록을 하나 클릭 했을 때 뜨는 Modal 에 들어갈 내용
  */
 const Profile: FC<Prop> = ({
-  id,
-  userName,
+  uuid,
+  name,
   statusMessage = '',
   onDeleteClick,
 }) => {
@@ -29,7 +29,7 @@ const Profile: FC<Prop> = ({
   return (
         <S.Container>
           <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />
-          <S.NameWrapper>{userName}</S.NameWrapper>
+          <S.NameWrapper>{name}</S.NameWrapper>
           {
             statusMessage
             && <S.StatusWrapper>{statusMessage}</S.StatusWrapper>
@@ -38,8 +38,8 @@ const Profile: FC<Prop> = ({
             <Link to={{
               pathname: '/chat',
               state: {
-                id,
-                userName,
+                uuid,
+                name,
               }
             }} style={{ textDecoration: 'none' }}>
               <TextIcon

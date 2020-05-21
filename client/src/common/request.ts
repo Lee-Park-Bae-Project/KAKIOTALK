@@ -6,7 +6,7 @@ const { API_SERVER_URL } = configs;
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
-  timeout: 3000,
+  timeout: 5000,
   timeoutErrorMessage: '서버가 응답하지 않습니다.',
   withCredentials: true,
 });
@@ -88,8 +88,8 @@ const request = {
     name: string,
     googleAccessToken: string,
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
-  getUserInfo: () => Axios<Type.User2>(getUserInfo),
-  getRooms: () => Axios<Type.IRoom>(getRooms),
+  getUserInfo: () => Axios<Type.User>(getUserInfo),
+  getRooms: () => Axios<Type.Room>(getRooms),
   addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
   deleteFriend: (frinedGoogleId:string)=>Axios(deleteFriend(frinedGoogleId)),
   getLogout: () => Axios(getLogout),

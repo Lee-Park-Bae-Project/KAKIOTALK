@@ -8,6 +8,7 @@ export interface WithAuthProps {
   name: string;
   email: string;
   uuid: string;
+  statusMessage : string;
 }
 
 function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
@@ -16,6 +17,7 @@ function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
       name: '',
       email: '',
       uuid: '',
+      statusMessage:'',
     });
 
     useEffect(() => {
@@ -23,8 +25,8 @@ function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
         request
           .getUserInfo()
           .then(response => {
-            const { name, email, uuid } = response.data.data.user;
-            setNewProps({ name, email, uuid });
+            const { name, email, uuid ,statusMessage} = response.data.data;
+            setNewProps({ name, email, uuid,statusMessage });
           })
           .catch((e: AxiosError) => {
             console.log(e);

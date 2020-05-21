@@ -1,33 +1,38 @@
 export interface User {
-  id: string;
+  uuid: string;
   email:string;
-  userName: string;
+  name: string;
   statusMessage: string;
-  name?: string;
 }
 export interface loginInfo {
   loginToken: string;
   isLoggedIn: boolean;
 }
-
-export interface ChatRoom {
-  id: string;
-  userList: string[];
-  lastMessage: string;
-  lastModified: number;
-  numOfNewMessages: number;
+export interface Chat {
+  uuid:string;
+  content:string;
+  sender:string;
+  roomId:string;
+  createdAt:number;
 }
-
-export interface IRoom {
+export interface Room {
   uuid: string;
-  participants: User[];
+  participants: string[];
+  lastMessage?: string;
+  updatedAt?: number;
+  numOfNewMessages?: number;
 }
 
-export interface User2 {
-  user: {
-    name: string;
-    email: string;
-    uuid: string;
-  };
+// export interface IRoom {
+//   uuid: string;
+//   participants: User[];
+// }
 
-}
+// export interface User2 {
+//   user: {
+//     name: string;
+//     email: string;
+//     uuid: string;
+//   };
+
+// }

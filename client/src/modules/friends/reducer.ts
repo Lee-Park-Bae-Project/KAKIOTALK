@@ -15,7 +15,7 @@ const initialState: User[] = [];
 function userList(state: User[] = initialState, action: UserListAction) {
   switch (action.type) {
     case DELETE_FRIEND_SUCCESS: {
-      return state.filter((user) => user.id !== action.payload.googleId);
+      return state.filter((user) => user.uuid !== action.payload.uuid);
     }
     case DELETE_FRIEND_FAILURE: {
       const error = action.payload

@@ -3,11 +3,11 @@ import {
   getRoomSuccess,
   getRoomFailure,
 } from 'modules/room/action';
-import { IRoom } from 'types';
+import { Room } from 'types';
 
 export interface RoomState {
   isLoading: boolean;
-  data: IRoom[];
+  data: Room[];
 }
 
 export type RoomAction =

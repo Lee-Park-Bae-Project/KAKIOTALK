@@ -13,7 +13,6 @@ const FriendContainer: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProfile());
     dispatch(getFriends());
   }, []);
 

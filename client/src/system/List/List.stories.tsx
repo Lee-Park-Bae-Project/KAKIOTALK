@@ -12,21 +12,21 @@ export default {
 export const Default = () => (
     <List>
       <Profile
-        id='asd'
+        uuid='asd'
         statusMessage='asd'
-        userName='asd'
+        name='asd'
         onDeleteClick= {() => {}}
       />
       <Profile
-        id='asd'
+        uuid='asd'
         statusMessage='asd'
-        userName='asd'
+        name='asd'
         onDeleteClick= {() => {}}
       />
       <Profile
-        id='asd'
+        uuid='asd'
         statusMessage='asd'
-        userName='asd'
+        name='asd'
         onDeleteClick= {() => {}}
       />
     </List>
@@ -34,22 +34,22 @@ export const Default = () => (
 
 export const UserCardList = () => (
     <List>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
-    <UserCard userName='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
+    <UserCard name='junow' statusMessage='Brand New 2020'/>
   </List>
 );
 

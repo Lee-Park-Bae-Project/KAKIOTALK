@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import createError from 'http-errors';
 import { response } from '../common/utils';
-import * as userService from '../services/userService';
-import socialService from '../services/socialService';
-import { IDecodedUser } from 'src/types';
+import * as userService from '../services/user';
+import socialService from '../services/social';
+import { IDecodedUser, IUser } from 'src/types';
 
 const getFriendsList = async (
   req: Request,
@@ -11,17 +11,24 @@ const getFriendsList = async (
   next: NextFunction
 ) => {
   try {
-
     const { googleId } = req.decodedUser;
-    const {id}: any = await userService.findByGoogleId(googleId);
-    const data : any = await socialService.getFriendsList(id);
-    if(!id) throw(createError(401,'계정이 유효하지 않습니다.'))
-    const friendlist = data.friend.map((friend) => ({
-      id: friend.user.googleId,
-      userName: friend.user.name,
-      email:friend.user.email,
-      statusMessage: friend.user.status,
-    }));
+    const user:IUser|null= await userService.findByGoogleId(googleId);
+    let data : any 
+    if(user){
+      data = await socialService.getFriendsList(user.id);
+    }
+    else {
+      throw(createError(401,'계정이 유효하지 않습니다.'))
+    }
+    const friendlist = data.friend.map((friend) =>{ 
+      const {uuid,name,email,statusMessage} = friend.user
+      return ({
+      uuid,
+      name,
+      email,
+      statusMessage,
+    })
+  });
     response(res, friendlist);
   } catch (e) {
     next(e);
@@ -35,11 +42,12 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     const friend: any = await userService.findByEmail(friendEmail);
     if (friend) {
       await socialService.addFriend(user.id, friend.id);
+      const {uuid,email,name,statusMessage} = friend
       response(res, {
-        id: friend.googleId,
-        email:friend.email,
-        userName: friend.name,
-        statusMessage: friend.status,
+        uuid,
+        email,
+        name,
+        statusMessage
       });
     } else {
       return next(createError(401, '유효하지 않은 이메일입니다.'));
@@ -50,8 +58,8 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
 };
 const deleteFriend =async (req:Request,res:Response,next:NextFunction)=>{
   try{
-    const user:any = await userService.findByGoogleId(req.decodedUser.googleId)
-    const deleteUser:any = await userService.findByGoogleId(req.body.googleId);
+    const user:IUser|null = await userService.findByGoogleId(req.decodedUser.googleId)
+    const deleteUser:IUser|null = await userService.findByGoogleId(req.body.googleId);
     if(!user||!deleteUser) {
       throw(createError(401,'유효하지 않은 계정입니다.'))
     }
@@ -59,7 +67,7 @@ const deleteFriend =async (req:Request,res:Response,next:NextFunction)=>{
       if(deleted==0) {
         throw(createError(401,"삭제할 친구의 계정이 유효하지 않습니다."))
       }
-      response(res,{googleId:deleteUser.googleId})
+      response(res,{uuid:deleteUser.uuid})
     
   }catch (e) {
     next(e);
