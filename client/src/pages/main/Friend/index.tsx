@@ -6,7 +6,7 @@ import Profile from 'system/Profile';
 import { UserCard, PopUp } from 'components';
 import { deleteFriend } from 'modules/friends';
 import {User} from 'types'
-import swal from 'sweetalert'
+import swal from 'common/utils'
 export interface Props {
   myProfile: User;
   friendList: User[];
@@ -48,7 +48,8 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
       />
       <Hr />
       친구 {friendList.length}
-      {friendList
+      {friendList.length>0?
+      friendList
         .filter(
           friend =>
             friend.userName
@@ -65,6 +66,7 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
               statusMessage: statusMessage,
             });
           };
+          
 
           return (
             <UserCard
@@ -74,7 +76,9 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
               onClick={onUserCardClick}
             />
           );
-        })}
+        })
+        :<h1>친구를 추가해 보세요!</h1>}
+      
       {popup ? (
         <PopUp onClose={onProfileClose} refs = {profileRef}>
           <Profile

@@ -10,20 +10,16 @@ import { User } from 'types';
 import {
   UserListAction,
 } from 'modules/friends/types';
-import swal from 'sweetalert'
 const initialState: User[] = [];
 
 function userList(state: User[] = initialState, action: UserListAction) {
   switch (action.type) {
     case DELETE_FRIEND_SUCCESS: {
-      swal('삭제되었습니다.',"","success")
-      const newState = state.filter((user) => user.id !== action.payload.googleId);
-      return newState;
+      return state.filter((user) => user.id !== action.payload.googleId);
     }
     case DELETE_FRIEND_FAILURE: {
       const error = action.payload
       if (error.response) {
-        swal(error.response.data.message,"","error");
       }
       return state;
     }
@@ -38,13 +34,11 @@ function userList(state: User[] = initialState, action: UserListAction) {
       return state;
     }
     case ADD_FRIEND_SUCCESS: {
-      swal(`${action.payload.userName}님을 친구로 추가했습니다.`,"","success")
       return state.concat(action.payload);
     }
     case ADD_FRIEND_FAILURE: {
       const error = action.payload;
       if(error.response) {
-        swal(error.response.data.message,"","error");
       }
     }
     default:

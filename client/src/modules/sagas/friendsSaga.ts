@@ -13,11 +13,11 @@ import {
   deleteFriendFailure
 } from 'modules/friends/action';
 import request from 'common/request';
+import swal from 'common/utils'
 
 function* getFriendsSaga() {
   try {
     const response = yield call(request.getFriendList);
-    console.log(response.data)
     yield put(getFriendsSuccess(response.data.data));
   } catch (e) {
     yield put(getFriendsFailure(e));
@@ -27,8 +27,10 @@ function* getFriendsSaga() {
 function* addFriendSaga({payload}:any) {
   try {
     const response = yield call(request.addFriend,payload);
+    swal(`${payload.userName}님을 친구로 추가했습니다.`,"","success")
     yield put(addFriendSuccess(response.data.data));
   } catch (e) {
+    swal(e.response.data.message,"","error");
     yield put(addFriendFailure(e))
   }
 }
@@ -36,7 +38,10 @@ function* deleteFriendSaga({payload}:any) {
   try{
     const response = yield call(request.deleteFriend,payload);
     yield put(deleteFriendSuccess(response.data.data));
+    swal('삭제되었습니다.',"","success")
+
   }catch(e){
+    swal(e.response.data.message,"","error");
     yield put(deleteFriendFailure(e))
   }
 }

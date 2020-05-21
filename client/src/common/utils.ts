@@ -1,6 +1,6 @@
 import moment from 'moment';
 import 'moment-timezone';
-
+import swal from 'sweetalert'
 moment.locale('ko');
 const tzSeoul = 'Asia/Seoul';
 
@@ -13,3 +13,5 @@ export const convertMillToMMDDYYYY = (date: number) => {
   const seoul = moment.tz(date, tzSeoul);
   return seoul.format('MM-DD-YYYY');
 };
+
+export default swal
