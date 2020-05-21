@@ -1,6 +1,7 @@
 import { models } from '../models'
 
 export const findByGoogleId = (googleId: string) => models.User.findOne({ where: { googleId } })
+export const findByUuid = (uuid: string) => models.User.findOne({ where: { uuid } })
 export const createUser = (googleId: string) => models.User.create({ googleId })
 export const findByAccessToken = (accessToken:string) => models.User.findOne({ where: { accessToken } })
 export const findByEmail = (email:string) => models.User.findOne({ where: { email } })

@@ -23,8 +23,8 @@ interface Props {
   popupAddFriend: boolean;
   confirmAddFriend: () => void;
   cancelAddFriend: () => void;
-  friendIdToAdd: string;
-  onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  friendEmailToAdd: string;
+  onFriendEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   dialogRef: any,
   onPopupOutClicked:(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -42,8 +42,8 @@ const Main: FC<Props> = ({
   roomState,
   cancelAddFriend,
   confirmAddFriend,
-  friendIdToAdd,
-  onFriendIdChange,
+  friendEmailToAdd,
+  onFriendEmailChange,
   logoutTabOnClick, 
   dialogRef,
   onPopupOutClicked,
@@ -91,8 +91,8 @@ const Main: FC<Props> = ({
             onConfirm={confirmAddFriend}
           >
             <SearchInput
-              value={friendIdToAdd}
-              onChange={onFriendIdChange}
+              value={friendEmailToAdd}
+              onChange={onFriendEmailChange}
               placeholder="이메일을 입력해주세요"
             />
           </Dialog>

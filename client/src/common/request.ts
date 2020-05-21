@@ -6,7 +6,7 @@ const { API_SERVER_URL } = configs;
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
-  timeout: 5000,
+  timeout: 3000,
   timeoutErrorMessage: '서버가 응답하지 않습니다.',
   withCredentials: true,
 });
@@ -73,10 +73,10 @@ const addFriend = (email:string):AxiosRequestConfig=>({
   data: {email}
 })
 
-const deleteFriend = (googleId:string):AxiosRequestConfig=>({
+const deleteFriend = (uuid:string):AxiosRequestConfig=>({
   method:'POST',
   url:'social/delete-friend',
-  data: {googleId}
+  data: {uuid}
 })
 const request = {
   getProfile: () => Axios(getProfile),
@@ -90,8 +90,8 @@ const request = {
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios<Type.User>(getUserInfo),
   getRooms: () => Axios<Type.Room>(getRooms),
-  addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
-  deleteFriend: (frinedGoogleId:string)=>Axios(deleteFriend(frinedGoogleId)),
+  addFriend: (email:string)=>Axios(addFriend(email)),
+  deleteFriend: (uuid:string)=>Axios(deleteFriend(uuid)),
   getLogout: () => Axios(getLogout),
 };
 

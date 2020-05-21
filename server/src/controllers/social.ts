@@ -18,7 +18,7 @@ const getFriendsList = async (
       data = await socialService.getFriendsList(user.id);
     }
     else {
-      throw(createError(401,'계정이 유효하지 않습니다.'))
+      throw(createError(401,{message:'계정이 유효하지 않습니다.'}))
     }
     const friendlist = data.friend.map((friend) =>{ 
       const {uuid,name,email,statusMessage} = friend.user
@@ -37,10 +37,10 @@ const getFriendsList = async (
 const addFriend = async (req: Request, res: Response, next: NextFunction) => {
   try {
 
-    const user: any = await userService.findByGoogleId(req.decodedUser.googleId);
-    const friendEmail: any = req.body.email;
-    const friend: any = await userService.findByEmail(friendEmail);
-    if (friend) {
+    const user: IUser|null = await userService.findByGoogleId(req.decodedUser.googleId);
+    const friendEmail: string = req.body.email;
+    const friend: IUser|null = await userService.findByEmail(friendEmail);
+    if (friend&&user) {
       await socialService.addFriend(user.id, friend.id);
       const {uuid,email,name,statusMessage} = friend
       response(res, {
@@ -50,7 +50,7 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
         statusMessage
       });
     } else {
-      return next(createError(401, '유효하지 않은 이메일입니다.'));
+      return next(createError(401, {message:'유효하지 않은 이메일입니다.'}));
     }
   } catch (e) {
     next(e);
@@ -59,13 +59,13 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
 const deleteFriend =async (req:Request,res:Response,next:NextFunction)=>{
   try{
     const user:IUser|null = await userService.findByGoogleId(req.decodedUser.googleId)
-    const deleteUser:IUser|null = await userService.findByGoogleId(req.body.googleId);
+    const deleteUser:IUser|null = await userService.findByUuid(req.body.uuid);
     if(!user||!deleteUser) {
-      throw(createError(401,'유효하지 않은 계정입니다.'))
+      throw(createError(401,{message:'유효하지 않은 계정입니다.'}))
     }
       const deleted = await socialService.deleteFriend(user.id,deleteUser.id)
       if(deleted==0) {
-        throw(createError(401,"삭제할 친구의 계정이 유효하지 않습니다."))
+        throw(createError(401,{message:"삭제할 친구의 계정이 유효하지 않습니다."}))
       }
       response(res,{uuid:deleteUser.uuid})
     

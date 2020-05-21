@@ -23,9 +23,9 @@ export const getFriendsFailure = (e: AxiosError) => ({
   type: GET_FRIENDS_FAILURE,
   payload: e,
 });
-export const addFriend = (id: string) => ({
+export const addFriend = (email: string) => ({
   type: ADD_FRIEND,
-  payload: id,
+  payload: email,
 });
 export const addFriendSuccess = (newFriend: User) => ({
   type: ADD_FRIEND_SUCCESS,
@@ -35,13 +35,13 @@ export const addFriendFailure = (e: AxiosError) => ({
   type: ADD_FRIEND_FAILURE,
   payload: e,
 });
-export const deleteFriend = (id: string) => ({
+export const deleteFriend = (uuid: string) => ({
   type: DELETE_FRIEND,
-  payload: id,
+  payload: uuid,
 });
-export const deleteFriendSuccess = (id:string)=>({
+export const deleteFriendSuccess = (uuid:string)=>({
   type: DELETE_FRIEND_SUCCESS,
-  payload: id
+  payload: uuid
 })
 export const deleteFriendFailure = (e: AxiosError)=>({
   type: DELETE_FRIEND_FAILURE,

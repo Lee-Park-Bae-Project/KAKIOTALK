@@ -27,10 +27,10 @@ function* getFriendsSaga() {
 function* addFriendSaga({payload}:any) {
   try {
     const response = yield call(request.addFriend,payload);
-    swal(`${payload.userName}님을 친구로 추가했습니다.`,"","success")
+    swal(`${payload.name}님을 친구로 추가했습니다.`,"","success")
     yield put(addFriendSuccess(response.data.data));
   } catch (e) {
-    swal(e.response.data.message,"","error");
+    swal(e.response.data.data.message,"","error");
     yield put(addFriendFailure(e))
   }
 }
@@ -41,7 +41,8 @@ function* deleteFriendSaga({payload}:any) {
     swal('삭제되었습니다.',"","success")
 
   }catch(e){
-    swal(e.response.data.message,"","error");
+    console.log(e.response.data)
+    swal(e.response.data.data.message,"","error");
     yield put(deleteFriendFailure(e))
   }
 }

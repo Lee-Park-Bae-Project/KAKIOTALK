@@ -51,15 +51,15 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid,statusMessag
 
   const [addFriendPopUp, setAddFriendPopUp] = useState(false);
   const [logoutPopUp, setLogoutPopUp] = useState(false);
-  const [friendIdToAdd, setFriendIdToAdd] = useState('');
+  const [friendEmailToAdd, setFriendEmailToAdd] = useState('');
 
   const onFriendPopUpClose = () => {
     setAddFriendPopUp(false);
   };
   const dialogRef= React.createRef<HTMLDivElement>();
   const onOutsideClicked = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const node = dialogRef.current
-    if(node&&e.target instanceof Node&&!node.contains(e.target)) setAddFriendPopUp(false)
+    const dialogNode = dialogRef.current
+    if(dialogNode&&e.target instanceof Node&&!dialogNode.contains(e.target)) setAddFriendPopUp(false)
   }
 
   const onLogoutPopUpClose = () => {
@@ -90,12 +90,12 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid,statusMessag
     onLogoutPopUpClose();
   };
 
-  const onFriendIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFriendIdToAdd(e.target.value);
+  const onFriendEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFriendEmailToAdd(e.target.value);
   };
 
   const confirmAddFriend = () => {
-    dispatch(addFriend(friendIdToAdd));
+    dispatch(addFriend(friendEmailToAdd));
     onFriendPopUpClose();
   };
 
@@ -106,11 +106,11 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid,statusMessag
       chatTabOnClick={chatTabOnClick}
       addFriendTabOnClick={addFriendTabOnClick}
       roomState={roomState}
-      onFriendIdChange={onFriendIdChange}
+      onFriendEmailChange={onFriendEmailChange}
       confirmAddFriend={confirmAddFriend}
       popupAddFriend={addFriendPopUp}
       cancelAddFriend={onFriendPopUpClose}
-      friendIdToAdd={friendIdToAdd}
+      friendEmailToAdd={friendEmailToAdd}
       logoutTabOnClick={logoutTabOnClick}
       onPopupOutClicked = {onOutsideClicked}
       dialogRef = {dialogRef}

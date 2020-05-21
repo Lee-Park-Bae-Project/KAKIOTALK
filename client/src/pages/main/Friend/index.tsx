@@ -20,9 +20,10 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
     email:'',
     statusMessage: '',
   });
-  let profileRef:any = React.createRef();
+  let profileRef = React.createRef<HTMLDivElement>();
   const onProfileClose = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if (!profileRef.current.contains(e.target)) {
+    const profileNode = profileRef.current
+    if (profileNode&&e.target instanceof Node&&!profileNode.contains(e.target)) {
       setPopup(false);
     }
   };
