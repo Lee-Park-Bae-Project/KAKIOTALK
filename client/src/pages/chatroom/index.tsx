@@ -62,7 +62,6 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps> = ({
       }
     }
   };
-  // const { id, name } = location.state;
   const chatLogs = messages.map((msg) => (
     <S.ChatBox
       sendTime={msg.createdAt}

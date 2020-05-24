@@ -22,17 +22,3 @@ export interface Room {
   updatedAt?: number;
   numOfNewMessages?: number;
 }
-
-// export interface IRoom {
-//   uuid: string;
-//   participants: User[];
-// }
-
-// export interface User2 {
-//   user: {
-//     name: string;
-//     email: string;
-//     uuid: string;
-//   };
-
-// }
