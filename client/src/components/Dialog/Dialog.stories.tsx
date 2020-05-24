@@ -44,11 +44,11 @@ export const WithChildren = () => {
   const canCancel = boolean('canCancel', true);
   const cancelText = text('cancelText', '취소');
   const confirmText = text('confirmText', '확인');
-  const userName1 = text('userName1', 'junow');
+  const name1 = text('name1', 'junow');
   const statusMessage1 = text('statusMesage1', 'I Like Juno');
-  const userName2 = text('userName2', 'marshmello3773');
+  const name2 = text('name2', 'marshmello3773');
   const statusMessage2 = text('statusMessage2', 'I Like Marshmello');
-  const userName3 = text('userName3', 'Baebaam');
+  const name3 = text('name3', 'Baebaam');
   const statusMessage3 = text('statusMessage3', 'I Like Travel');
 
   return (
@@ -60,15 +60,15 @@ export const WithChildren = () => {
       confirmText={confirmText}
     >
       <UserCard
-        userName={userName1}
+        name={name1}
         statusMessage={statusMessage1}
       />
       <UserCard
-        userName={userName2}
+        name={name2}
         statusMessage={statusMessage2}
       />
       <UserCard
-        userName={userName3}
+        name={name3}
         statusMessage={statusMessage3}
       />
     </Dialog>

@@ -73,10 +73,10 @@ const addFriend = (email:string):AxiosRequestConfig=>({
   data: {email}
 })
 
-const removeFriend = (googleId:string):AxiosRequestConfig=>({
-  method:'POST',
-  url:'social/remove-friend',
-  data: {googleId}
+const deleteFriend = (uuid:string):AxiosRequestConfig=>({
+  method:'DELETE',
+  url:'social/delete-friend',
+  data: {uuid}
 })
 const request = {
   getProfile: () => Axios(getProfile),
@@ -88,10 +88,10 @@ const request = {
     name: string,
     googleAccessToken: string,
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
-  getUserInfo: () => Axios<Type.User2>(getUserInfo),
-  getRooms: () => Axios<Type.IRoom>(getRooms),
-  addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
-  removeFriend: (frinedGoogleId:string)=>Axios(removeFriend(frinedGoogleId)),
+  getUserInfo: () => Axios<Type.User>(getUserInfo),
+  getRooms: () => Axios<Type.Room>(getRooms),
+  addFriend: (email:string)=>Axios(addFriend(email)),
+  deleteFriend: (uuid:string)=>Axios(deleteFriend(uuid)),
   getLogout: () => Axios(getLogout),
 };
 

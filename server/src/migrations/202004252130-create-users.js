@@ -20,7 +20,7 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    status: {
+    statusMessage: {
       type: Sequelize.STRING,
       allowNull: true,
     },

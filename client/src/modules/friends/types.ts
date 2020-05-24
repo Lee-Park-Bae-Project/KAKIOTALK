@@ -1,5 +1,5 @@
 import {
-  removeFriend,
+  deleteFriend,
   getFriends,
   getFriendsFailure,
   getFriendsSuccess,
@@ -10,7 +10,7 @@ import {
 
 export type UserListAction =
 | ReturnType<typeof addFriend>
-| ReturnType<typeof removeFriend>
+| ReturnType<typeof deleteFriend>
 | ReturnType<typeof getFriends>
 | ReturnType<typeof getFriendsFailure>
 | ReturnType<typeof getFriendsSuccess>

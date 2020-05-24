@@ -18,7 +18,7 @@ export const findAllRooms = async (userId: string) => {
         model: models.Room,
         as: USER_ASSOCIATION_ALIAS.RoomParticipants,
         include: [{
-          attributes: ['uuid', 'name', 'status', 'email'],
+          attributes: ['uuid', 'name', 'statusMessage', 'email'],
           model: models.User,
           as: ROOM_ASSOCIATION_ALIAS.RoomParticipants,
         }],
@@ -38,12 +38,12 @@ export const findAllRooms = async (userId: string) => {
   const preProcessed = rooms.map((room) => {
     const participants = room.participants.map((participant) => {
       const {
-        uuid, name, status, email,
+        uuid, name, statusMessage, email,
       } = participant
       return {
         uuid,
         name,
-        status,
+        statusMessage,
         email,
       }
     })

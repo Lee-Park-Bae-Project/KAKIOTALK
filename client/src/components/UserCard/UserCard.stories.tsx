@@ -8,17 +8,17 @@ export default {
 
 export const BasicUserCard: FC = () => (
   <UserCard
-    userName='junow'
+    name='junow'
     statusMessage='Brand New 2020'
     />
 );
 
 export const UserCardWithClickHandler: FC = () => {
-  const userName = 'junow';
-  const onClick = () => alert(userName);
+  const name = 'junow';
+  const onClick = () => alert(name);
   return (
     <UserCard
-      userName={userName}
+      name={name}
       onClick={onClick}
       statusMessage='Brand New 2020'
     />
@@ -27,7 +27,7 @@ export const UserCardWithClickHandler: FC = () => {
 
 export const UserCardWithLongText = () => (
   <UserCard
-    userName='junow'
+    name='junow'
     statusMessage='was it a cat i saw was it a cat i saw was it a cat i saw'
   />
 );

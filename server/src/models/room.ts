@@ -51,7 +51,6 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         otherKey: 'userId',
       }
     )
-    // Room.hasMany(models.RoomParticipants)
   }
 
   return Room

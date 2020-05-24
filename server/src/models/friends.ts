@@ -7,8 +7,13 @@ import {
 
 import { IFriend } from '../types'
 import { uuid } from '../common/utils'
-
-export interface FriendModel extends Model, IFriend {}
+import {UserModel} from './user'
+export const FRIEND_ASSOCIATION_ALIAS = {
+  User: 'user' as const,
+}
+export interface FriendModel extends Model, IFriend {
+  [FRIEND_ASSOCIATION_ALIAS.User]:UserModel
+}
 
 export type FriendStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): FriendModel

@@ -17,7 +17,7 @@ const Room: React.FC<Props & RouteComponentProps> = ({ roomState, history }) => 
     : <List>
     {
       roomState.data.map(({ uuid, participants }) => {
-        const participantsNames = participants.map((v) => v.name).join(', ');
+        const participantsNames = participants.map((v) => v).join(', ');
         const onClick = () => {
           history.push(`chat/${uuid}`);
         };

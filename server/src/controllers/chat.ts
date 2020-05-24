@@ -4,7 +4,7 @@ import {
 import createError from 'http-errors'
 import httpStatus from 'http-status'
 import * as chatService from '../services/chat'
-import * as userService from '../services/userService'
+import * as userService from '../services/user'
 import { response } from '../common/utils'
 
 export const getChats = async (req: Request, res: Response, next: NextFunction) => {

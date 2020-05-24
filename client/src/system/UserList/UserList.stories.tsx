@@ -9,22 +9,22 @@ export default {
 };
 
 const myProfile = {
-  id: shortid.generate(),
+  uuid: shortid.generate(),
   email:faker.internet.email(),
-  userName: faker.internet.userName(),
+  name: faker.internet.userName(),
   statusMessage: faker.lorem.lines(),
 };
 
 const userList = [
   {
-    id: shortid.generate(),
-    userName: faker.internet.userName(),
+    uuid: shortid.generate(),
+    name: faker.internet.userName(),
     email:faker.internet.email(),
     statusMessage: faker.lorem.lines(),
   },
   {
-    id: shortid.generate(),
-    userName: faker.internet.userName(),
+    uuid: shortid.generate(),
+    name: faker.internet.userName(),
     email:faker.internet.email(),
     statusMessage: faker.lorem.lines(),
   },

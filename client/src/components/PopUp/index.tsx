@@ -4,7 +4,7 @@ import * as S from './style'
 interface Props {
   children:React.ReactNode,
   onClose? : (e : React.MouseEvent<HTMLDivElement,MouseEvent>)=>void
-  refs?: any
+  refs?: React.RefObject<HTMLDivElement>
 }
 
 const PopUp:FC<Props> = ({children,onClose,refs})=>{

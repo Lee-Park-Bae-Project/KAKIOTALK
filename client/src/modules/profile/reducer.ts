@@ -8,10 +8,10 @@ import { ProfileAction } from 'modules/profile/types';
 import { User } from 'types';
 
 const initialState: User = {
-  id: '',
+  uuid: '',
   email:'',
   statusMessage: '',
-  userName: ''
+  name: ''
 };
 
 const profile = (state: User = initialState, action: ProfileAction) => {
