@@ -6,7 +6,7 @@ import Profile from 'system/Profile';
 import { UserCard, PopUp } from 'components';
 import { deleteFriend } from 'modules/friends';
 import {User} from 'types'
-import swal from 'common/utils'
+import {alert} from 'common/utils'
 export interface Props {
   myProfile: User;
   friendList: User[];
@@ -29,15 +29,12 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   };
   const dispatch =useDispatch()
   const onDeleteFriend = () => {
-    swal(`${clickedUser.name}님을 친구에서 삭제하시겠습니까?`,{
-      buttons:['취소',true]
-    }).then(value=>{
+    alert.confirmDelete(clickedUser.name).then(value=>{
       if(value) {
         dispatch(deleteFriend(clickedUser.uuid))
         setPopup(false)
       }
     })
-    
   };
 
   return (
