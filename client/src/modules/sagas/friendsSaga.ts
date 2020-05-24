@@ -20,6 +20,7 @@ function* getFriendsSaga() {
     const response = yield call(request.getFriendList);
     yield put(getFriendsSuccess(response.data.data));
   } catch (e) {
+    alert.error(e.response.data.data.message)
     yield put(getFriendsFailure(e));
   }
 }
@@ -30,6 +31,7 @@ function* addFriendSaga({payload}:any) {
     yield put(addFriendSuccess(response.data.data));
     alert.addFriend(response.data.data.name)
   } catch (e) {
+    alert.error(e.response.data.data.message)
     yield put(addFriendFailure(e))
   }
 }
@@ -39,7 +41,7 @@ function* deleteFriendSaga({payload}:any) {
     yield put(deleteFriendSuccess(response.data.data));
     alert.deleteFriend()
   }catch(e){
-    console.log(e.response.data)
+    alert.error(e.response.data.data.message)
     yield put(deleteFriendFailure(e))
   }
 }

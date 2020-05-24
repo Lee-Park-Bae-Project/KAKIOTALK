@@ -96,6 +96,7 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid,statusMessag
 
   const confirmAddFriend = () => {
     dispatch(addFriend(friendEmailToAdd));
+    setFriendEmailToAdd('')
     onFriendPopUpClose();
   };
 
