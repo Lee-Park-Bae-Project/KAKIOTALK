@@ -74,7 +74,7 @@ const addFriend = (email:string):AxiosRequestConfig=>({
 })
 
 const deleteFriend = (uuid:string):AxiosRequestConfig=>({
-  method:'POST',
+  method:'DELETE',
   url:'social/delete-friend',
   data: {uuid}
 })
