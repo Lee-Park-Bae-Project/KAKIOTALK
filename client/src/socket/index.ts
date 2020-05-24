@@ -7,6 +7,7 @@ export enum Event {
   disconnect = 'disconnect',
   afterLogin = 'afterLogin',
   message = 'message',
+  joinRooms = 'joinRooms',
 }
 
 const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] });
@@ -15,6 +16,9 @@ const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] });
 const connect = () => {
   socket.on(Event.connect, (msg: string) => {
     console.log(`hi: ${msg}`);
+  });
+  socket.on('some', (msg: string) => {
+    console.log(msg);
   });
 };
 
@@ -36,6 +40,15 @@ const sendMsg = ({
   });
 };
 
+const joinRooms = ({ roomUuids }: T.JoinRooms) => {
+  console.log(roomUuids);
+  socket.emit(Event.joinRooms, { roomUuids });
+};
+
+socket.on('some', (msg: string) => {
+  console.log(msg);
+});
+
 export {
-  connect, disconnect, afterLogin, sendMsg,
+  connect, disconnect, afterLogin, sendMsg, joinRooms,
 };

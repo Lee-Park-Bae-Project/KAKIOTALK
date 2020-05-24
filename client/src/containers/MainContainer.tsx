@@ -6,11 +6,11 @@ import Main from 'pages/main';
 import { RootState } from 'modules';
 import { getRoomRequest } from 'modules/room';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
-import { afterLogin } from '../socket';
 import { addFriend } from 'modules/friends';
 
 import request from 'common/request';
 import { useHistory } from 'react-router-dom';
+import { afterLogin } from '../socket';
 
 const { useState, useEffect } = React;
 
@@ -26,7 +26,9 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
     if (uuid.length > 0) {
       afterLogin({ uuid });
     }
-  }, [name, email, uuid]);
+  }, [name,
+    email,
+    uuid]);
   const history = useHistory();
 
   const [tabSelector, setTabSelector] = useState({
@@ -55,10 +57,10 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
   const onFriendPopUpClose = () => {
     setAddFriendPopUp(false);
   };
-  const dialogRef:any= React.createRef();
+  const dialogRef: any = React.createRef();
   const onOutsideClicked = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if(!dialogRef.current.contains(e.target)) setAddFriendPopUp(false)
-  }
+    if (!dialogRef.current.contains(e.target)) setAddFriendPopUp(false);
+  };
 
   const onLogoutPopUpClose = () => {
     setLogoutPopUp(false);
@@ -79,10 +81,10 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid }) => {
   const confirmLogout = () => {
     request
       .getLogout()
-      .then(response => {
+      .then((response) => {
         history.push('/login');
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
     onLogoutPopUpClose();

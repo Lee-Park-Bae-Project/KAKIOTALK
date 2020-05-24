@@ -7,3 +7,7 @@ export interface SendMsg {
   content: string;
   createdAt: string;
 }
+
+export interface JoinRooms {
+  roomUuids: string[];
+}

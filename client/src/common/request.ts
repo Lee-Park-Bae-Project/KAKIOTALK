@@ -67,17 +67,17 @@ const getRooms: AxiosRequestConfig = {
   url: 'chat/room',
 };
 
-const addFriend = (email:string):AxiosRequestConfig=>({
-  method:'POST',
+const addFriend = (email: string): AxiosRequestConfig => ({
+  method: 'POST',
   url: 'social/add-friend',
-  data: {email}
-})
+  data: { email },
+});
 
-const removeFriend = (googleId:string):AxiosRequestConfig=>({
-  method:'POST',
-  url:'social/remove-friend',
-  data: {googleId}
-})
+const removeFriend = (googleId: string): AxiosRequestConfig => ({
+  method: 'POST',
+  url: 'social/remove-friend',
+  data: { googleId },
+});
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
@@ -89,9 +89,9 @@ const request = {
     googleAccessToken: string,
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios<Type.User2>(getUserInfo),
-  getRooms: () => Axios<Type.IRoom>(getRooms),
-  addFriend: (friendEmail:string)=>Axios(addFriend(friendEmail)),
-  removeFriend: (frinedGoogleId:string)=>Axios(removeFriend(frinedGoogleId)),
+  getRooms: () => Axios<Type.IRoom[]>(getRooms),
+  addFriend: (friendEmail: string) => Axios(addFriend(friendEmail)),
+  removeFriend: (frinedGoogleId: string) => Axios(removeFriend(frinedGoogleId)),
   getLogout: () => Axios(getLogout),
 };
 

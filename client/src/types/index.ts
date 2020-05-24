@@ -1,8 +1,10 @@
 export interface User {
+  uuid?: string;
   id: string;
   email: string;
   userName: string;
   statusMessage: string;
+  status?: string;
   name?: string;
 }
 export interface loginInfo {
@@ -20,7 +22,7 @@ export interface ChatRoom {
 
 export interface IRoom {
   uuid: string;
-  participants: User[];
+  participants: Pick<User, 'uuid' | 'name' | 'email' | 'status'>[];
 }
 
 export interface User2 {

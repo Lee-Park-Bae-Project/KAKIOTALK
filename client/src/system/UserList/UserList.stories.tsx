@@ -10,7 +10,8 @@ export default {
 
 const myProfile = {
   id: shortid.generate(),
-  email:faker.internet.email(),
+  uuid: shortid.generate(),
+  email: faker.internet.email(),
   userName: faker.internet.userName(),
   statusMessage: faker.lorem.lines(),
 };
@@ -18,14 +19,16 @@ const myProfile = {
 const userList = [
   {
     id: shortid.generate(),
+    uuid: shortid.generate(),
     userName: faker.internet.userName(),
-    email:faker.internet.email(),
+    email: faker.internet.email(),
     statusMessage: faker.lorem.lines(),
   },
   {
     id: shortid.generate(),
+    uuid: shortid.generate(),
     userName: faker.internet.userName(),
-    email:faker.internet.email(),
+    email: faker.internet.email(),
     statusMessage: faker.lorem.lines(),
   },
 ];

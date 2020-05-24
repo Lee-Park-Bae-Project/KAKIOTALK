@@ -11,17 +11,20 @@ declare global {
   }
 }
 
+let io:openSocket.Server
+
 export enum Event {
   connect = 'connect',
   disconnect = 'disconnect',
   afterLogin = 'afterLogin',
   message = 'message',
+  joinRooms = 'joinRooms',
 }
 
 const onDisconnect = (socket: openSocket.Socket) => {
   socket.on(Event.disconnect, () => {
     console.log(chalk.yellow(`${socket.id} is disconnected`))
-    global.io.emit('leave', `${socket.id} is disconnected`)
+    io.emit('leave', `${socket.id} is disconnected`)
   })
 }
 
@@ -36,24 +39,33 @@ const message = (socket: openSocket.Socket) => {
     roomUuid, content, createdAt,
   }: T.SendMsg) => {
     console.log(chalk.blue(roomUuid, content, createdAt))
+    // 디비에 저장
   })
 }
-const connection = (io:openSocket.Server) => {
+
+const joinRooms = (socket: openSocket.Socket) => {
+  socket.on(Event.joinRooms, ({ roomUuids }:T.JoinRooms) => {
+    roomUuids.forEach((roomUuid) => {
+      socket.join(roomUuid)
+    })
+  })
+}
+
+const connection = () => {
   io.on('connection', (socket:openSocket.Socket) => {
-    global.socket = socket
     socket.emit('connection', `connected: ${socket.id}`)
     console.log(chalk.yellow(`connected: ${socket.id}`))
 
     onDisconnect(socket)
     afterLogin(socket)
     message(socket)
+    joinRooms(socket)
   })
 }
 
 const connect = (server: any) => {
-  const io:openSocket.Server = openSocket(server)
-  global.io = io
-  connection(io)
+  io = openSocket(server)
+  connection()
 }
 
 export { connect }
