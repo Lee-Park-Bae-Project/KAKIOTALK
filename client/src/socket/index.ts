@@ -17,9 +17,6 @@ const connect = () => {
   socket.on(Event.connect, (msg: string) => {
     console.log(`hi: ${msg}`);
   });
-  socket.on('some', (msg: string) => {
-    console.log(msg);
-  });
 };
 
 const disconnect = () => {
@@ -29,7 +26,7 @@ const disconnect = () => {
 };
 
 const afterLogin = ({ uuid }: T.AfterLogin) => {
-  socket.emit(Event.afterLogin, `my uuid : ${uuid}`);
+  socket.emit(Event.afterLogin, { uuid });
 };
 
 const sendMsg = ({

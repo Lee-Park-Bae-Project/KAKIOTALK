@@ -1,6 +1,7 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
 import * as T from '../types'
+import * as Redis from '../redis'
 
 declare global {
   namespace NodeJS {
@@ -29,8 +30,10 @@ const onDisconnect = (socket: openSocket.Socket) => {
 }
 
 const afterLogin = (socket: openSocket.Socket) => {
-  socket.on(Event.afterLogin, (msg) => {
-    console.log(chalk.blue(msg))
+  socket.on(Event.afterLogin, async ({ uuid }: T.AfterLogin) => {
+    const check = await Redis.get(uuid)
+    console.log('check', check)
+    await Redis.set(uuid, socket.id)
   })
 }
 

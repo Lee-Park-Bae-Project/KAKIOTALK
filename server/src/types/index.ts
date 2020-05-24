@@ -79,3 +79,7 @@ export interface SendMsg {
 export interface JoinRooms {
   roomUuids: string[];
 }
+
+export interface AfterLogin{
+  uuid: string;
+}
