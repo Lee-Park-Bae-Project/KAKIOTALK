@@ -22,11 +22,13 @@ const S = {
 interface Props{
   value: string | number | string[] | undefined;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress?: (e:React.KeyboardEvent<HTMLInputElement>)=> void;
   placeholder: string | undefined;
 }
 const SearchInpust: FC<Props> = ({
   value,
   onChange,
+  onKeyPress,
   placeholder,
 }) => (
   <S.Container>
@@ -34,6 +36,7 @@ const SearchInpust: FC<Props> = ({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      onKeyPress={onKeyPress}
     />
   </S.Container>
 );

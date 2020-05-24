@@ -99,6 +99,11 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid,statusMessag
     setFriendEmailToAdd('')
     onFriendPopUpClose();
   };
+  const addFriendEnterPress = (e: React.KeyboardEvent<HTMLInputElement>)=> {
+    if(e.key=='Enter') {
+      confirmAddFriend()
+    }
+  }
 
   return (
     <Main
@@ -111,6 +116,7 @@ const MainContainer: React.FC<WithAuthProps> = ({ name, email, uuid,statusMessag
       confirmAddFriend={confirmAddFriend}
       popupAddFriend={addFriendPopUp}
       cancelAddFriend={onFriendPopUpClose}
+      addFriendEnterPress={addFriendEnterPress}
       friendEmailToAdd={friendEmailToAdd}
       logoutTabOnClick={logoutTabOnClick}
       onPopupOutClicked = {onOutsideClicked}
