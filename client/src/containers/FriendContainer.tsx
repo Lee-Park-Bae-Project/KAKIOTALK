@@ -12,9 +12,9 @@ const FriendContainer: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getFriends());
-  }, []);
+    if(friendList.length===0) {
+      dispatch(getFriends())
+    }
 
   const [searchFriendKeyword, setSearchFriendKeyword] = useState('');
   const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {

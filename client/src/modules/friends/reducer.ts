@@ -31,7 +31,6 @@ function userList(state: User[] = initialState, action: UserListAction) {
       if (error.response) {
         alert(error.response.data.message);
       }
-      return state;
     }
     case ADD_FRIEND_SUCCESS: {
       return state.concat(action.payload);
