@@ -6,7 +6,8 @@ import {
   USER_ASSOCIATION_ALIAS,
 } from '../models'
 import { IChat } from '../types'
-import * as Error from '../common/error'
+import * as HttpError from '../common/error'
+import * as userService from './userService'
 
 export const findRoomByUuid = (uuid: string) => models.Room.findOne({
   where: { uuid },
@@ -33,13 +34,13 @@ export const findAllRooms = async (userId: number) => {
   )
 
   if (!data) {
-    throw Error.IDK
+    throw HttpError.IDK
   }
 
   const { rooms } = data
 
   if (!rooms) {
-    throw Error.IDK
+    throw HttpError.IDK
   }
   const preProcessed = rooms.map((room) => {
     const participants = room.participants.map((participant) => {
@@ -63,7 +64,7 @@ export const findAllRooms = async (userId: number) => {
 export const getChatsByRoomId = async (roomUuid: string) => {
   const room = await models.Room.findOne({ where: { uuid: roomUuid } })
   if (!room) {
-    throw Error.IDK
+    throw HttpError.IDK
   }
   const roomId = room.id
   const chats = await models.Chat.findAll({
@@ -121,3 +122,42 @@ export const createChat = async ({
   createdAt,
   updatedAt,
 })
+
+interface AddMessage {
+  userUuid: string;
+  roomUuid: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export const addMessage = async ({
+  userUuid,
+  roomUuid,
+  content,
+  createdAt,
+  updatedAt,
+}:AddMessage) => {
+  try {
+    const room = await findRoomByUuid(roomUuid)
+    const user = await userService.findByUuid(userUuid)
+    if (!room || !user) {
+      throw new Error('no room or user')
+    }
+    const roomParticipants = await findRoomParticipants(room.id, user.id)
+    if (!roomParticipants) {
+      throw new Error('no room participants')
+    }
+
+    const roomParticipantsId = roomParticipants.id
+    const data = await createChat({
+      roomParticipantsId,
+      content,
+      createdAt,
+      updatedAt,
+    })
+
+    return data
+  } catch (e) {
+    return e
+  }
+}

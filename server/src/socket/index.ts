@@ -2,6 +2,7 @@ import openSocket from 'socket.io'
 import chalk from 'chalk'
 import * as T from '../types'
 import * as Redis from '../redis'
+import { addMessage } from '../services/chat'
 
 declare global {
   namespace NodeJS {
@@ -39,10 +40,18 @@ const afterLogin = (socket: openSocket.Socket) => {
 
 const message = (socket: openSocket.Socket) => {
   socket.on(Event.message, ({
-    roomUuid, content, createdAt,
+    roomUuid, content, createdAt, userUuid,
   }: T.SendMsg) => {
     console.log(chalk.blue(roomUuid, content, createdAt))
     // 디비에 저장
+    const updatedAt = createdAt
+    addMessage({
+      roomUuid,
+      content,
+      createdAt,
+      updatedAt,
+      userUuid,
+    })
   })
 }
 

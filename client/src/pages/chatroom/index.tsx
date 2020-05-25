@@ -53,6 +53,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
       content: message,
       roomUuid,
       createdAt: getCurTimeDBFormat(),
+      userUuid: uuid,
     });
 
     if (messageRef.current) {

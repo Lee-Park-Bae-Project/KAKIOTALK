@@ -30,10 +30,10 @@ const afterLogin = ({ uuid }: T.AfterLogin) => {
 };
 
 const sendMsg = ({
-  roomUuid, content, createdAt,
+  roomUuid, content, createdAt, userUuid,
 }: T.SendMsg) => {
   socket.emit(Event.message, {
-    roomUuid, content, createdAt,
+    roomUuid, content, createdAt, userUuid,
   });
 };
 
