@@ -19,7 +19,8 @@ export enum Event {
   connect = 'connect',
   disconnect = 'disconnect',
   afterLogin = 'afterLogin',
-  message = 'message',
+  chatFromClient = 'chatFromClient',
+  chatFromServer = 'chatFromServer',
   joinRooms = 'joinRooms',
 }
 
@@ -33,25 +34,31 @@ const onDisconnect = (socket: openSocket.Socket) => {
 const afterLogin = (socket: openSocket.Socket) => {
   socket.on(Event.afterLogin, async ({ uuid }: T.AfterLogin) => {
     const check = await Redis.get(uuid)
-    console.log('check', check)
     await Redis.set(uuid, socket.id)
   })
 }
 
-const message = (socket: openSocket.Socket) => {
-  socket.on(Event.message, ({
+export const chatFromServer = (roomUuid: string, chat: any) => {
+  io.to(roomUuid).emit(Event.chatFromServer, chat)
+}
+
+const chatFromClient = (socket: openSocket.Socket) => {
+  socket.on(Event.chatFromClient, async ({
     roomUuid, content, createdAt, userUuid,
   }: T.SendMsg) => {
-    console.log(chalk.blue(roomUuid, content, createdAt))
-    // 디비에 저장
-    const updatedAt = createdAt
-    addMessage({
-      roomUuid,
-      content,
-      createdAt,
-      updatedAt,
-      userUuid,
-    })
+    try {
+      const updatedAt = createdAt
+      const data = await addMessage({
+        roomUuid,
+        content,
+        createdAt,
+        updatedAt,
+        userUuid,
+      })
+      chatFromServer(roomUuid, data)
+    } catch (e) {
+      console.error(e)
+    }
   })
 }
 
@@ -70,7 +77,7 @@ const connection = () => {
 
     onDisconnect(socket)
     afterLogin(socket)
-    message(socket)
+    chatFromClient(socket)
     joinRooms(socket)
   })
 }

@@ -26,6 +26,8 @@ export const response = (res:Response, data = {}, code = httpStatus.OK) => {
 
 export const uuid = () => {
   const tokens = uuid4().split('-')
+  console.log('--------------------tlqkf')
+  console.log(tokens)
   return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4]
 }
 

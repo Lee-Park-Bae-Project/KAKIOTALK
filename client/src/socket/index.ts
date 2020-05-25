@@ -6,7 +6,8 @@ export enum Event {
   connect = 'connect',
   disconnect = 'disconnect',
   afterLogin = 'afterLogin',
-  message = 'message',
+  chatFromClient = 'chatFromClient',
+  chatFromServer = 'chatFromServer',
   joinRooms = 'joinRooms',
 }
 
@@ -25,27 +26,26 @@ const disconnect = () => {
   });
 };
 
+socket.on(Event.chatFromServer, (chat: any) => {
+  console.log(chat);
+});
+
 const afterLogin = ({ uuid }: T.AfterLogin) => {
   socket.emit(Event.afterLogin, { uuid });
 };
 
-const sendMsg = ({
+const chatFromClient = ({
   roomUuid, content, createdAt, userUuid,
 }: T.SendMsg) => {
-  socket.emit(Event.message, {
+  socket.emit(Event.chatFromClient, {
     roomUuid, content, createdAt, userUuid,
   });
 };
 
 const joinRooms = ({ roomUuids }: T.JoinRooms) => {
-  console.log(roomUuids);
   socket.emit(Event.joinRooms, { roomUuids });
 };
 
-socket.on('some', (msg: string) => {
-  console.log(msg);
-});
-
 export {
-  connect, disconnect, afterLogin, sendMsg, joinRooms,
+  connect, disconnect, afterLogin, chatFromClient, joinRooms,
 };

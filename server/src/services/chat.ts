@@ -1,3 +1,4 @@
+import { chatFromServer } from '../socket'
 import {
   CHAT_ASSOCIATION_ALIAS,
   models,
@@ -158,6 +159,7 @@ export const addMessage = async ({
 
     return data
   } catch (e) {
+    console.log(e)
     return e
   }
 }

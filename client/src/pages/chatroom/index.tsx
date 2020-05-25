@@ -7,7 +7,7 @@ import React, {
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
 import { getChatRequest } from 'modules/chat';
-import { sendMsg } from 'socket';
+import { chatFromClient } from 'socket';
 import { IChat } from 'types';
 import { getCurTimeDBFormat } from 'common/utils';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
@@ -55,7 +55,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
       ])
     );
 
-    sendMsg({
+    chatFromClient({
       content: message,
       roomUuid,
       createdAt: getCurTimeDBFormat(),
