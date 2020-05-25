@@ -42,3 +42,25 @@ export interface IChat {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ApiChat extends Pick<IChat, 'uuid' | 'content' | 'createdAt' | 'updatedAt'> {
+  metaInfo: {
+    uuid: string;
+    createdAt: string;
+    updatedAt: string;
+    sender: User;
+    room: {
+      uuid: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
+}
+export type ReduxState<T> = {
+  isLoading: boolean;
+  data: T;
+}
+
+export type ReduxChatType = {
+  [key: string]: ApiChat[];
+}

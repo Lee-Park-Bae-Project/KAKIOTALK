@@ -4,10 +4,12 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'modules';
+import { getChatRequest } from 'modules/chat';
 import { sendMsg } from 'socket';
 import { IChat } from 'types';
 import { getCurTimeDBFormat } from 'common/utils';
-import shortid from 'shortid';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import * as S from './style';
@@ -23,14 +25,18 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
   history,
   match,
 }) => {
+  const dispatch = useDispatch();
   const [messages, setMessages] = useState<Partial<IChat>[]>([]);
   const messageRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string>('');
   const [roomUuid, setRoomUuid] = useState<string>('');
+  const chatState = useSelector((state: RootState) => state.chat);
 
   useEffect(() => {
     setRoomUuid(match.params.roomUuid);
-  }, []);
+    dispatch(getChatRequest(match.params.roomUuid));
+  }, [match.params.roomUuid]);
+
   const handleBack = () => {
     history.goBack();
   };
@@ -69,7 +75,6 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     }
   };
 
-
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
@@ -86,9 +91,15 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
       </S.Header>
       <S.ChatContainer>
         {
-          messages.map(({ content }) => (
-            <S.ChatBox key={shortid.generate()}>{content}</S.ChatBox>
-          ))
+          !chatState.data[roomUuid]
+            ? (<div>loading</div>)
+            : (
+              (
+                chatState.data[roomUuid].map((chat) => (
+                <S.ChatBox key={chat.uuid}>{chat.content}</S.ChatBox>
+                ))
+              )
+            )
         }
       </S.ChatContainer>
       <S.InputContainer>

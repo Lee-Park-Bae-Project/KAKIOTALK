@@ -78,6 +78,12 @@ const removeFriend = (googleId: string): AxiosRequestConfig => ({
   url: 'social/remove-friend',
   data: { googleId },
 });
+
+const getChatByRoom = (roomUuid: string): AxiosRequestConfig => ({
+  method: 'GET',
+  url: `/chat/message/${roomUuid}`,
+});
+
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
@@ -93,6 +99,7 @@ const request = {
   addFriend: (friendEmail: string) => Axios(addFriend(friendEmail)),
   removeFriend: (frinedGoogleId: string) => Axios(removeFriend(frinedGoogleId)),
   getLogout: () => Axios(getLogout),
+  getChatByRoom: (roomUuid: string) => Axios<Type.ApiChat[]>(getChatByRoom(roomUuid)),
 };
 
 export default request;
