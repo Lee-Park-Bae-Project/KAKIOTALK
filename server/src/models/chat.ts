@@ -6,7 +6,6 @@ import {
 } from 'sequelize'
 
 import { IChat } from '../types'
-import { uuid } from '../common/utils'
 import { RoomModel } from './room'
 import { RoomParticipantsModel } from './roomParticipants'
 
@@ -33,7 +32,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     roomParticipantsId: {
       allowNull: false,

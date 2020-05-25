@@ -5,7 +5,6 @@ import {
   Sequelize,
 } from 'sequelize'
 import { IUser } from '../types'
-import { uuid } from '../common/utils'
 import { RoomModel } from './room'
 
 export const USER_ASSOCIATION_ALIAS = {
@@ -35,7 +34,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     name: {
       type: dataTypes.STRING,

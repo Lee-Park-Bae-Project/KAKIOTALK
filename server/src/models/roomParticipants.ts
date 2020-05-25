@@ -6,7 +6,6 @@ import {
 } from 'sequelize'
 
 import { IRoomParticipants } from '../types'
-import { uuid } from '../common/utils'
 import { UserModel } from './user'
 import { RoomModel } from './room'
 
@@ -37,7 +36,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     userId: {
       allowNull: false,

@@ -8,7 +8,6 @@ import {
 import {
   IRoom, IRoomParticipants,
 } from '../types'
-import { uuid } from '../common/utils'
 import { UserModel } from './user'
 
 export const ROOM_ASSOCIATION_ALIAS = { RoomParticipants: 'participants' as const }
@@ -34,7 +33,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },

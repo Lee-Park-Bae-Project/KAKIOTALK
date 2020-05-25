@@ -6,7 +6,6 @@ import {
 } from 'sequelize'
 
 import { IFriend } from '../types'
-import { uuid } from '../common/utils'
 
 export interface FriendModel extends Model, IFriend {}
 
@@ -26,7 +25,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     userId: {
       allowNull: false,
