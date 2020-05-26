@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import * as S from './style';
 
 const MAX_COLS = 25;
@@ -8,7 +8,7 @@ const ChatBox = (props: any) => {
     if (escape(props.text[i]).length > 4) textLength += 2;
     else textLength++;
   }
-  const [boxSize, setBoxSize] = useState({
+  const [boxSize] = useState({
     rows: parseInt((textLength / MAX_COLS).toString()) + 1,
     cols: textLength > MAX_COLS ? MAX_COLS : textLength - 1,
   });

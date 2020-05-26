@@ -1,17 +1,16 @@
 import {
   INIT_PROFILE,
-  GET_PROFILE,
   GET_PROFILE_FAILURE,
-  GET_PROFILE_SUCCESS
+  GET_PROFILE_SUCCESS,
 } from 'modules/profile/action';
 import { ProfileAction } from 'modules/profile/types';
 import { User } from 'types';
 
 const initialState: User = {
   uuid: '',
-  email:'',
+  email: '',
   statusMessage: '',
-  name: ''
+  name: '',
 };
 
 const profile = (state: User = initialState, action: ProfileAction) => {

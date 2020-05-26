@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFriends, addFriend } from 'modules/friends';
-import { getProfile } from 'modules/profile';
+import { getFriends } from 'modules/friends';
 import { RootState } from 'modules';
 import Friend from 'pages/main/Friend';
 import { SearchInput } from 'components';
@@ -12,9 +11,9 @@ const FriendContainer: React.FC = () => {
 
   const dispatch = useDispatch();
 
-    if(friendList.length===0) {
-      dispatch(getFriends())
-    }
+  useEffect(() => {
+    dispatch(getFriends());
+  }, [friendList]);
 
   const [searchFriendKeyword, setSearchFriendKeyword] = useState('');
   const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,4 +36,4 @@ const FriendContainer: React.FC = () => {
   );
 };
 
-export default FriendContainer
+export default FriendContainer;

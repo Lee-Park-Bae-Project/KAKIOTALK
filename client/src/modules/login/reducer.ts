@@ -1,8 +1,4 @@
-import {
-  LOGIN_REQUEST,
-  GET_LOGIN_SUCCESS,
-  GET_LOGIN_FAILURE,
-} from 'modules/login/action';
+import { GET_LOGIN_SUCCESS, GET_LOGIN_FAILURE } from 'modules/login/action';
 import { loginInfo } from 'types';
 import { LoginAction } from 'modules/login/types';
 
@@ -22,6 +18,7 @@ function userLogin(state: loginInfo[] = initialState, action: LoginAction) {
       if (error.response) {
         alert(error.response.data.message);
       }
+      break;
     }
     default:
       return state;
