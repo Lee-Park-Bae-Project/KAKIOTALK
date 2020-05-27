@@ -24,25 +24,29 @@ export enum Event {
   joinRooms = 'joinRooms',
 }
 
-const onDisconnect = (socket: openSocket.Socket) => {
+type SocketType = (socket: openSocket.Socket) => void
+
+const socketCallBack = ((cb: SocketType) => (socket: openSocket.Socket) => cb(socket))
+
+const onDisconnect = ((socket) => {
   socket.on(Event.disconnect, () => {
     console.log(chalk.yellow(`${socket.id} is disconnected`))
     io.emit('leave', `${socket.id} is disconnected`)
   })
-}
+})
 
-const afterLogin = (socket: openSocket.Socket) => {
+const afterLogin = ((socket) => {
   socket.on(Event.afterLogin, async ({ uuid }: T.AfterLogin) => {
     const check = await Redis.get(uuid)
     await Redis.set(uuid, socket.id)
   })
-}
+})
 
 export const chatFromServer = (roomUuid: string, chat: any) => {
   io.to(roomUuid).emit(Event.chatFromServer, chat)
 }
 
-const chatFromClient = (socket: openSocket.Socket) => {
+const chatFromClient = socketCallBack((socket) => {
   socket.on(Event.chatFromClient, async ({
     roomUuid, content, createdAt, userUuid,
   }: T.SendMsg) => {
@@ -60,15 +64,15 @@ const chatFromClient = (socket: openSocket.Socket) => {
       console.error(e)
     }
   })
-}
+})
 
-const joinRooms = (socket: openSocket.Socket) => {
+const joinRooms = socketCallBack((socket) => {
   socket.on(Event.joinRooms, ({ roomUuids }:T.JoinRooms) => {
     roomUuids.forEach((roomUuid) => {
       socket.join(roomUuid)
     })
   })
-}
+})
 
 const connection = () => {
   io.on('connection', (socket:openSocket.Socket) => {
