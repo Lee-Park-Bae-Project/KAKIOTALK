@@ -1,27 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { color } from 'styles/global';
 
-const RightBox = styled.div`
-text-align:right;
-padding:0.7rem;
-`
-const LeftBox = styled.div`
-text-align:left;
-padding:0.7rem;
-`
-const Text = styled.textarea`
-font-size:15px;
-background-color:yellow;
-padding:5px;
-border-radius: 5px 5px / 5px 5px;
-text-decoration: none;
-outline: none;
-border:none;
-resize: none; /*remove the resize handle on the bottom right*/
-`
-const SendTime = styled.span`
-font-size:10px;
-padding: 0 1rem 0 1rem;
-color:white;
-
-`
-export {LeftBox,RightBox,Text,SendTime}
+export const Container = styled.div`
+  width: fit-content;
+  background: ${color.WHITE};
+  max-width: 70%;
+  overflow-wrap: break-word;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 0.5rem;
+`;
