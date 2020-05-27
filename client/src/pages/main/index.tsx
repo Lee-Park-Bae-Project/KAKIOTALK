@@ -6,7 +6,6 @@ import { User } from 'types';
 import { RoomState } from 'modules/room';
 import { PopUp, Dialog } from 'components';
 import FriendContainer from 'containers/FriendContainer';
-import ChatContainer from 'containers/ChatContainer';
 import Room from 'system/Room';
 import Friend from './Friend';
 
@@ -73,7 +72,6 @@ const Main: FC<Props> = ({
           {tabSelector.chat && (
             <S.Column>
               <Room roomState={roomState} />
-              {/* <ChatContainer/> */}
             </S.Column>
           )}
         </S.Wrapper>
