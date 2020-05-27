@@ -1,6 +1,10 @@
 import socketOpen from 'socket.io-client';
+import { addChat } from 'modules/chat';
+import { ApiChat } from 'types';
+import { Dispatch } from 'react';
 import { configs } from '../common/constants';
 import * as T from './types';
+
 
 export enum Event {
   connect = 'connect',
@@ -11,12 +15,12 @@ export enum Event {
   joinRooms = 'joinRooms',
 }
 
-const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] });
+export const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] });
 //  순수한 소켓만 사용하고 싶기 때문에 설정
 
 const connect = () => {
   socket.on(Event.connect, (msg: string) => {
-    console.log(`hi: ${msg}`);
+    console.log(msg);
   });
 };
 
@@ -26,9 +30,11 @@ const disconnect = () => {
   });
 };
 
-socket.on(Event.chatFromServer, (chat: any) => {
-  console.log(chat);
-});
+export const chatFromServer = (dispatch: Dispatch<any>) => {
+  socket.on(Event.chatFromServer, (newChat: ApiChat) => {
+    dispatch(addChat(newChat.metaInfo.room.uuid, newChat));
+  });
+};
 
 const afterLogin = ({ uuid }: T.AfterLogin) => {
   socket.emit(Event.afterLogin, { uuid });
@@ -44,6 +50,10 @@ const chatFromClient = ({
 
 const joinRooms = ({ roomUuids }: T.JoinRooms) => {
   socket.emit(Event.joinRooms, { roomUuids });
+};
+
+export const removeSocketEventListener = (eventName: string) => {
+  socket.removeEventListener(eventName);
 };
 
 export {

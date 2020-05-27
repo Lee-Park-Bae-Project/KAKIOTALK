@@ -7,12 +7,15 @@ import React, {
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
 import { getChatRequest } from 'modules/chat';
-import { chatFromClient } from 'socket';
-import { IChat } from 'types';
+import {
+  chatFromClient, socket, Event, chatFromServer, removeSocketEventListener,
+} from 'socket';
+import { IChat, ApiChat } from 'types';
 import { getCurTimeDBFormat } from 'common/utils';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import * as S from './style';
+
 
 interface MatchParams {
   roomUuid: string;
@@ -36,6 +39,13 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     setRoomUuid(match.params.roomUuid);
     dispatch(getChatRequest(match.params.roomUuid));
   }, [match.params.roomUuid]);
+
+  useEffect(() => {
+    chatFromServer(dispatch);
+    return (() => {
+      removeSocketEventListener(Event.chatFromServer);
+    });
+  }, []);
 
   const handleBack = () => {
     history.goBack();

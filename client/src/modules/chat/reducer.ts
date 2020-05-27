@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+import produce from 'immer';
 import {
   GET_CHAT_REQUEST,
   GET_CHAT_SUCCESS,
@@ -26,35 +28,24 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
     case GET_CHAT_SUCCESS: {
       const { roomUuid } = action.payload;
       const { newChat } = action.payload;
-      const newState = {
-        [roomUuid]: newChat,
-      };
-      return {
-        isLoading: false,
-        data: newState,
-      };
+      const ns = produce(state, (draft) => {
+        draft.isLoading = false;
+        draft.data[roomUuid] = newChat;
+      });
+      return ns;
     }
     case GET_CHAT_FAILURE: {
       return state;
     }
-    // case ADD_CHAT: {
-    //   const { roomUuid } = action.payload;
-    //   const { newChat } = action.payload;
-    //   const newState = {
-    //     ...state,
-    //     data: {
-    //       ...state.data,
-    //       [roomUuid]: [
-    //         ...state.data[roomUuid], newChat,
-    //       ],
-    //     },
-    //   };
-    //   console.log(newState);
-    //   return {
-    //     isLoading: false,
-    //     data: newState,
-    //   };
-    // }
+    case ADD_CHAT: {
+      const { roomUuid } = action.payload;
+      const { newChat } = action.payload;
+      const newState = produce(state, (draftState) => {
+        draftState.data[roomUuid].push(newChat);
+      });
+
+      return newState;
+    }
 
     default: return state;
   }
