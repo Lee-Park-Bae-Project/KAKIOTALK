@@ -17,6 +17,7 @@ import {
 import { getCurTimeDBFormat } from 'common/utils';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import ChatBox from 'components/ChatBox';
 import * as S from './style';
 
 
@@ -33,9 +34,12 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
 }) => {
   const dispatch = useDispatch();
   const messageRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState<string>('');
   const [roomUuid, setRoomUuid] = useState<string>('');
   const chatState = useSelector((state: RootState) => state.chat);
+  const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true);
 
   useEffect(() => {
     setRoomUuid(match.params.roomUuid);
@@ -54,6 +58,21 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     });
   }, []);
 
+  useEffect(() => {
+    if (!chatState.data[roomUuid]) {
+      return;
+    }
+    if (isFirstScroll) {
+      setIsFirstScroll(false);
+      if (chatContainerRef && chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      }
+      return;
+    }
+    if (scrollRef && scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chatState]);
   const handleBack = () => {
     history.goBack();
   };
@@ -96,18 +115,28 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
           방이름
         </S.Title>
       </S.Header>
-      <S.ChatContainer>
+      <S.ChatContainer ref={chatContainerRef}>
         {
           !chatState.data[roomUuid]
             ? (<div>loading</div>)
             : (
               (
-                chatState.data[roomUuid].map((chat) => (
-                <S.ChatBox key={chat.uuid}>{chat.content}</S.ChatBox>
+                chatState.data[roomUuid].map(({
+                  content, createdAt, metaInfo, updatedAt, uuid: _uuid,
+                }) => (
+                <ChatBox
+                  key={_uuid}
+                  content={content}
+                  createdAt={createdAt}
+                  metaInfo={metaInfo}
+                  updatedAt={updatedAt}
+                  uuid={_uuid}
+                />
                 ))
               )
             )
         }
+        <S.ChatBottom ref={scrollRef}></S.ChatBottom>
       </S.ChatContainer>
       <S.InputContainer>
         <S.InputArea

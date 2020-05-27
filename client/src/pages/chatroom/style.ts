@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import UserCard from 'components/UserCard';
 import { color } from 'styles/global';
 
-const Container = styled.div`
+export const Container = styled.div`
   height:100%;
   /* background : ${color.ROOM_COLOR}; */
   display:flex;
@@ -10,7 +10,7 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const ChatContainer = styled.div`
+export const ChatContainer = styled.div`
   flex:1;
   display:flex;
   flex-direction:column;
@@ -18,25 +18,25 @@ const ChatContainer = styled.div`
   overflow-y: auto;
 `;
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
   display:flex;
   margin-top:auto;
 `;
 
-const InputArea = styled.input`
+export const InputArea = styled.input`
   width:90%;
   text-decoration: none;
   outline: none;
   height: 7rem;
   border:none;
 `;
-const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   width:10%;
   display:flex;
   background-color:white;
   min-width: 5rem;
 `;
-const SendBtn = styled.button`
+export const SendBtn = styled.button`
   outline:none;
   margin:auto;
   width: 5rem;
@@ -60,7 +60,7 @@ export const ChatBox = styled.div`
 export const Header = styled.div`
   display: flex;
   padding: 1rem;
-  background: ${color.LIGHT_GRAY}
+  background: ${color.LIGHT_GRAY};
 `;
 
 export const Title = styled.div`
@@ -69,16 +69,7 @@ export const Title = styled.div`
   left: 50%;
 `;
 
-export const Back = styled.div`
 
-`;
+export const Back = styled.div``;
 
-export {
-  Container,
-  UserCard,
-  ChatContainer,
-  InputContainer,
-  InputArea,
-  ButtonWrapper,
-  SendBtn,
-};
+export const ChatBottom = styled.div``;
