@@ -9,7 +9,7 @@ import { IChat } from '../types'
 import { RoomModel } from './room'
 import { RoomParticipantsModel } from './roomParticipants'
 
-export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'metaInfo ' as const }
+export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'metaInfo' as const }
 
 export interface ChatModel extends Model, IChat {
   [CHAT_ASSOCIATION_ALIAS.RoomParticipants]?: RoomParticipantsModel;
