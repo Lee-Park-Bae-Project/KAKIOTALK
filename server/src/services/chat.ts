@@ -112,6 +112,33 @@ export const findRoomParticipants = async (roomId: number, userId: number) => (
   } })
 )
 
+const findChatById = async (id: number) => models.Chat.findOne({
+  raw: true,
+  nest: true,
+  where: { id },
+  attributes: ['uuid', 'content', 'createdAt', 'updatedAt'],
+  include: [
+    {
+      model: models.RoomParticipants,
+      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
+      attributes: ['uuid', 'createdAt', 'updatedAt', 'roomId'],
+      // where: { roomId },
+      include: [
+        {
+          model: models.User,
+          as: 'sender',
+          attributes: ['uuid', 'name', 'email', 'status', 'createdAt', 'updatedAt'],
+        },
+        {
+          model: models.Room,
+          as: 'room',
+          attributes: ['uuid', 'createdAt', 'updatedAt'],
+        },
+      ],
+    },
+  ],
+})
+
 export const createChat = async ({
   roomParticipantsId,
   content,
@@ -150,14 +177,16 @@ export const addMessage = async ({
     }
 
     const roomParticipantsId = roomParticipants.id
-    const data = await createChat({
+    const newChatData = await createChat({
       roomParticipantsId,
       content,
       createdAt,
       updatedAt,
     })
+    const chatId = newChatData.id
+    const newChat = await findChatById(chatId)
 
-    return data
+    return newChat
   } catch (e) {
     console.log(e)
     return e
