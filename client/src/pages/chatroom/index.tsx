@@ -8,9 +8,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules';
 import { getChatRequest } from 'modules/chat';
 import {
-  chatFromClient, socket, Event, chatFromServer, removeSocketEventListener,
+  chatFromClient,
+  Event,
+  chatFromServer,
+  removeSocketEventListener,
+  joinRooms,
 } from 'socket';
-import { IChat, ApiChat } from 'types';
 import { getCurTimeDBFormat } from 'common/utils';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -29,7 +32,6 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
   match,
 }) => {
   const dispatch = useDispatch();
-  const [messages, setMessages] = useState<Partial<IChat>[]>([]);
   const messageRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string>('');
   const [roomUuid, setRoomUuid] = useState<string>('');
@@ -40,6 +42,11 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     dispatch(getChatRequest(match.params.roomUuid));
   }, [match.params.roomUuid]);
 
+  useEffect(() => {
+    if (roomUuid.length) {
+      joinRooms({ roomUuids: [roomUuid] });
+    }
+  }, [roomUuid]);
   useEffect(() => {
     chatFromServer(dispatch);
     return (() => {
@@ -54,16 +61,6 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     if (!messageRef) {
       return;
     }
-    setMessages(
-      messages.concat([
-        {
-          roomParticipantsId: 123,
-          updatedAt: getCurTimeDBFormat(),
-          content: messageRef.current?.value,
-          createdAt: getCurTimeDBFormat(),
-        },
-      ])
-    );
 
     chatFromClient({
       content: message,
