@@ -126,6 +126,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
                 }) => (
                 <ChatBox
                   key={_uuid}
+                  userUuid={uuid}
                   content={content}
                   createdAt={createdAt}
                   metaInfo={metaInfo}
