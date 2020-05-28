@@ -72,6 +72,7 @@ export const getChatsByRoomId = async (roomUuid: string) => {
     raw: true,
     nest: true,
     attributes: ['uuid', 'content', 'createdAt', 'updatedAt'],
+    order: [['createdAt', 'ASC']],
     include: [
       {
         model: models.RoomParticipants,
