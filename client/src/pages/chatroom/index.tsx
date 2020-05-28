@@ -38,8 +38,11 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState<string>('');
   const [roomUuid, setRoomUuid] = useState<string>('');
-  const chatState = useSelector((state: RootState) => state.chat);
   const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true);
+  const [roomName, setRoomName] = useState<string>('');
+
+  const chatState = useSelector((state: RootState) => state.chat);
+  const roomState = useSelector((state: RootState) => state.room);
 
   useEffect(() => {
     setRoomUuid(match.params.roomUuid);
@@ -47,10 +50,19 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
   }, [match.params.roomUuid]);
 
   useEffect(() => {
+    const rn = roomState.data.find((v) => v.uuid === roomUuid);
+    if (!rn) {
+      return;
+    }
+
+    setRoomName(rn.participants.map((v) => v.name).join(', '));
+  }, [roomState, roomUuid]);
+  useEffect(() => {
     if (roomUuid.length) {
       joinRooms({ roomUuids: [roomUuid] });
     }
   }, [roomUuid]);
+
   useEffect(() => {
     chatFromServer(dispatch);
     return (() => {
@@ -112,7 +124,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
           back
         </S.Back>
         <S.Title>
-          방이름
+          {roomName}
         </S.Title>
       </S.Header>
       <S.ChatContainer ref={chatContainerRef}>

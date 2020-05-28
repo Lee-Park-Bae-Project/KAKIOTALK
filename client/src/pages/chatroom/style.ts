@@ -66,6 +66,7 @@ export const Header = styled.div`
 export const Title = styled.div`
   position: absolute;
   margin: auto;
+  transform: translateX(-50%);
   left: 50%;
 `;
 
