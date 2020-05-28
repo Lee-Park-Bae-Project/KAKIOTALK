@@ -39,11 +39,11 @@ export const removeFriend = (id: string) => ({
   type: REMOVE_FRIEND,
   payload: id,
 });
-export const removeFriendSuccess = (id:string)=>({
+export const removeFriendSuccess = (id: string) => ({
   type: REMOVE_FRIEND_SUCCESS,
-  payload: id
-})
-export const removeFriendFailure = (e: AxiosError)=>({
+  payload: id,
+});
+export const removeFriendFailure = (e: AxiosError) => ({
   type: REMOVE_FRIEND_FAILURE,
   payload: e,
-})
+});
