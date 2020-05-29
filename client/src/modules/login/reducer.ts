@@ -1,22 +1,22 @@
-import { GET_LOGIN_SUCCESS, GET_LOGIN_FAILURE } from 'modules/login/action';
+import { LOGIN_SUCCESS, LOGIN_FAILURE } from 'modules/login/action';
 import { loginInfo } from 'types';
 import { LoginAction } from 'modules/login/types';
+import { alert } from 'common/utils';
+const initialState: loginInfo = {
+  isLoggedIn: false,
+};
 
-const initialState: loginInfo[] = [];
-
-function userLogin(state: loginInfo[] = initialState, action: LoginAction) {
+function login(state: loginInfo = initialState, action: LoginAction) {
   switch (action.type) {
-    case GET_LOGIN_SUCCESS: {
-      const user = action.payload;
+    case LOGIN_SUCCESS: {
       return {
-        ...user,
         isLoggedIn: true,
       };
     }
-    case GET_LOGIN_FAILURE: {
+    case LOGIN_FAILURE: {
       const error = action.payload;
       if (error.response) {
-        alert(error.response.data.message);
+        alert.error(error.response.data.message);
       }
       break;
     }
@@ -25,4 +25,4 @@ function userLogin(state: loginInfo[] = initialState, action: LoginAction) {
   }
 }
 
-export default userLogin;
+export default login;

@@ -1,17 +1,11 @@
 import { AxiosError } from 'axios';
-export const LOGIN_REQUEST = 'login/GET_LOGIN' as const;
-export const GET_LOGIN_SUCCESS = 'login/LOGIN_SUCCESS' as const;
-export const GET_LOGIN_FAILURE = 'login/LOGIN_FAILURE' as const;
+export const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS' as const;
+export const LOGIN_FAILURE = 'login/LOGIN_FAILURE' as const;
 
-export const loginRequest = (profile: any) => ({
-  type: LOGIN_REQUEST,
-  payload: profile,
+export const loginSuccess = () => ({
+  type: LOGIN_SUCCESS,
 });
-export const getLoginSuccess = (user: any) => ({
-  type: GET_LOGIN_SUCCESS,
-  payload: user,
-});
-export const getLoginFailure = (e: AxiosError) => ({
-  type: GET_LOGIN_FAILURE,
+export const loginFailure = (e: AxiosError) => ({
+  type: LOGIN_FAILURE,
   payload: e,
 });

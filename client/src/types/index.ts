@@ -1,19 +1,18 @@
 export interface User {
   uuid: string;
-  email:string;
+  email: string;
   name: string;
   statusMessage: string;
 }
 export interface loginInfo {
-  loginToken: string;
   isLoggedIn: boolean;
 }
 export interface Chat {
-  uuid:string;
-  content:string;
-  sender:string;
-  roomId:string;
-  createdAt:number;
+  uuid: string;
+  content: string;
+  sender: string;
+  roomId: string;
+  createdAt: number;
 }
 export interface Room {
   uuid: string;
