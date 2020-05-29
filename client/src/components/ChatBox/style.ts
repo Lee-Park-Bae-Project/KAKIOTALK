@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { color } from 'styles/global';
+import { color, weight } from 'styles/global';
+
 
 interface ContainerProps {
   isMine: boolean;
@@ -16,7 +17,7 @@ export const Wrapper = styled.div`
   max-width: 70%;
   overflow-wrap: break-word;
   border-radius: 5px;
-  margin: 1rem;
+  margin: 1rem 0.5rem;
   padding: 0.5rem;
 `;
 
@@ -24,5 +25,6 @@ export const Wrapper = styled.div`
 export const Time = styled.div`
   align-self: flex-end;
   margin: 1rem 0;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
+  font-weight: ${weight.WEAK}
 `;

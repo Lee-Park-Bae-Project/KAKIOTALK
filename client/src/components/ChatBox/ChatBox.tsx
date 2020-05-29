@@ -14,7 +14,7 @@ const ChatBox: FC<Props> = ({
   createdAt,
   updatedAt,
 }) => (
-    <S.Container isMine={metaInfo.sender.uuid == userUuid}>
+    <S.Container isMine={metaInfo.sender.uuid === userUuid}>
       <S.Wrapper>
         {content}
       </S.Wrapper>
