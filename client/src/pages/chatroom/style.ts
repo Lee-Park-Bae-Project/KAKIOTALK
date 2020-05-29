@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import UserCard from 'components/UserCard';
 import { color } from 'styles/global';
 
 export const Container = styled.div`

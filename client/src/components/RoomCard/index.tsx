@@ -1,10 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import * as S from 'components/RoomCard/styles';
 import Icon from 'Icon/Icon';
 import Circle from 'atoms/Circle';
-import moment from 'moment';
 import { convertMillToMMDDYYYY } from 'common/utils';
-import { User } from 'types';
 
 interface Props{
   participantsName: string;

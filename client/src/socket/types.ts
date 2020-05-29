@@ -1,14 +1,24 @@
-export interface AfterLogin{
-  uuid: string;
+export interface JoinRoomsArgs {
+  roomUuids: string[];
+}
+export interface JoinRooms {
+  (args: JoinRoomsArgs): void;
 }
 
-export interface SendMsg {
+export interface ChatFromClientArgs {
   roomUuid: string;
   content: string;
   createdAt: string;
   userUuid: string;
 }
+export interface ChatFromClient {
+  (args: ChatFromClientArgs): void;
+}
 
-export interface JoinRooms {
-  roomUuids: string[];
+export interface AfterLoginArgs {
+  uuid: string;
+}
+
+export interface AfterLogin {
+  (args: AfterLoginArgs): void;
 }

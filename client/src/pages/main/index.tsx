@@ -72,6 +72,7 @@ const Main: FC<Props> = ({
           {tabSelector.chat && (
             <S.Column>
               <Room roomState={roomState} />
+              {/* <ChatContainer/> */}
             </S.Column>
           )}
         </S.Wrapper>

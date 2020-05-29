@@ -3,72 +3,35 @@ import React, {
   useState,
   useEffect,
   useRef,
+  KeyboardEvent,
+  ChangeEvent,
 } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'modules';
-import { getChatRequest } from 'modules/chat';
-import {
-  chatFromClient,
-  Event,
-  chatFromServer,
-  removeSocketEventListener,
-  joinRooms,
-} from 'socket';
 import { getCurTimeDBFormat } from 'common/utils';
-import withAuth, { WithAuthProps } from 'hocs/withAuth';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { WithAuthProps } from 'hocs/withAuth';
 import ChatBox from 'components/ChatBox';
+import { ReduxChatType, ReduxState } from 'types';
+import { chatFromClient } from 'socket';
 import * as S from './style';
 
-
-interface MatchParams {
+interface Props extends WithAuthProps{
+  chatState: ReduxState<ReduxChatType>;
   roomUuid: string;
+  handleBack: () => void;
+  roomName: string;
 }
 
-const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
-  name,
-  email,
+const ChatRoom: FC<Props> = ({
+  chatState,
   uuid,
-  history,
-  match,
+  roomUuid,
+  handleBack,
+  roomName,
 }) => {
-  const dispatch = useDispatch();
   const messageRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState<string>('');
-  const [roomUuid, setRoomUuid] = useState<string>('');
   const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true);
-  const [roomName, setRoomName] = useState<string>('');
-
-  const chatState = useSelector((state: RootState) => state.chat);
-  const roomState = useSelector((state: RootState) => state.room);
-
-  useEffect(() => {
-    setRoomUuid(match.params.roomUuid);
-    dispatch(getChatRequest(match.params.roomUuid));
-  }, [match.params.roomUuid]);
-
-  useEffect(() => {
-    const rn = roomState.data.find((v) => v.uuid === roomUuid);
-    if (!rn) {
-      return;
-    }
-
-    setRoomName(rn.participants.map((v) => v.name).join(', '));
-  }, [roomState, roomUuid]);
-  useEffect(() => {
-    if (roomUuid.length) {
-      joinRooms({ roomUuids: [roomUuid] });
-    }
-  }, [roomUuid]);
-
-  useEffect(() => {
-    chatFromServer(dispatch);
-    return (() => {
-      removeSocketEventListener(Event.chatFromServer);
-    });
-  }, []);
 
   useEffect(() => {
     if (!chatState.data[roomUuid]) {
@@ -84,10 +47,10 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     if (scrollRef && scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [chatState]);
-  const handleBack = () => {
-    history.goBack();
-  };
+  }, [chatState,
+    roomUuid,
+    isFirstScroll]);
+
   const handleSubmit = () => {
     if (!messageRef) {
       return;
@@ -105,7 +68,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     }
     setMessage('');
   };
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (e.target && e.currentTarget.value.trim().length > 0) {
         handleSubmit();
@@ -113,7 +76,7 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
     }
   };
 
-  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
@@ -166,4 +129,4 @@ const ChatRoom: FC<WithAuthProps & RouteComponentProps<MatchParams>> = ({
   );
 };
 
-export default withAuth(withRouter(ChatRoom));
+export default ChatRoom;
