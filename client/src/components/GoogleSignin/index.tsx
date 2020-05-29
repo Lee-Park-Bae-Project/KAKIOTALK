@@ -6,7 +6,6 @@ import { withRouter, useHistory } from 'react-router-dom';
 import { configs } from 'common/constants';
 import request from 'common/request';
 import { useDispatch } from 'react-redux';
-import { loginSuccess, loginFailure } from 'modules/login/action';
 const { useState, useEffect } = React;
 
 dotenv.config();
@@ -39,11 +38,9 @@ const GoogleSignin: React.FC = () => {
     request
       .getLogin(googleId, email, name, googleAccessToken)
       .then(response => {
-        dispatch(loginSuccess());
         history.push('/');
       })
       .catch(error => {
-        dispatch(loginFailure(error));
         console.log(error);
       });
   };
