@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Main from 'pages/main';
 import { RootState } from 'modules';
 import { getRoomRequest } from 'modules/room';
-import { getProfileSuccess } from 'modules/profile';
 import withAuth, { WithAuthProps } from 'hocs/withAuth';
 import { afterLogin } from '../socket';
 import { addFriend } from 'modules/friends';
@@ -29,7 +28,6 @@ const MainContainer: React.FC<WithAuthProps> = ({
   useEffect(() => {
     if (uuid.length > 0) {
       afterLogin({ uuid });
-      dispatch(getProfileSuccess({ name, email, uuid, statusMessage }));
     }
   }, [name, email, uuid, statusMessage]);
   const history = useHistory();

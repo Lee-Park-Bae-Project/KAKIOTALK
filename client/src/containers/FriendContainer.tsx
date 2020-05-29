@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFriends } from 'modules/friends';
+import { getProfile } from 'modules/profile';
 import { RootState } from 'modules';
 import Friend from 'pages/main/Friend';
 import { SearchInput } from 'components';
@@ -8,12 +9,15 @@ const FriendContainer: React.FC = () => {
   const { useState, useEffect } = React;
   const myProfile = useSelector((state: RootState) => state.profile);
   const friendList = useSelector((state: RootState) => state.friends);
-
+  const login = useSelector((state: RootState) => state.login);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFriends());
-  }, [friendList]);
+    if (login && login.isLoggedIn) {
+      dispatch(getFriends());
+      dispatch(getProfile());
+    }
+  }, [login]);
 
   const [searchFriendKeyword, setSearchFriendKeyword] = useState('');
   const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
