@@ -107,6 +107,7 @@ const ChatRoom: FC<Props> = ({
                   metaInfo={metaInfo}
                   updatedAt={updatedAt}
                   uuid={_uuid}
+                  isMine={metaInfo.sender.uuid === uuid}
                 />
                 ))
               )

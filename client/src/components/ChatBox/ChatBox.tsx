@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { ApiChat } from 'types';
 import { convertDBTimeTohhmmA } from 'common/utils';
+import { UserCard } from 'components';
 import * as S from './style';
 
 type Props = ApiChat & {
   userUuid: string;
+  isMine: boolean;
 }
 const ChatBox: FC<Props> = ({
   uuid,
@@ -13,8 +15,17 @@ const ChatBox: FC<Props> = ({
   metaInfo,
   createdAt,
   updatedAt,
+  isMine,
 }) => (
-    <S.Container isMine={metaInfo.sender.uuid === userUuid}>
+    <S.Container isMine={isMine}>
+      {
+        !isMine && (
+          <UserCard
+            userName={metaInfo.sender.userName}
+
+          />
+        )
+      }
       <S.Wrapper>
         {content}
       </S.Wrapper>
