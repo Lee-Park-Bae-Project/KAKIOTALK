@@ -16,9 +16,9 @@ function login(state: loginInfo = initialState, action: LoginAction) {
     case LOGIN_FAILURE: {
       const error = action.payload;
       if (error.response) {
-        alert.error(error.response.data.message);
+        console.log(error.response);
+        alert.error(error.response.data.data.message);
       }
-      break;
     }
     default:
       return state;
