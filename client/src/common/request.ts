@@ -25,81 +25,57 @@ async function Axios<T>(config: AxiosRequestConfig) {
   return instance.request<ResponseType<T>>(config);
 }
 
-const getProfile: AxiosRequestConfig = {
+export const getProfile = () => Axios({
   method: 'GET',
   url: 'user/my-profile',
-};
-const getFriendList: AxiosRequestConfig = {
+});
+export const getFriendList = () => Axios({
   method: 'GET',
   url: 'social/friend-list',
-};
-const getChatList: AxiosRequestConfig = {
+});
+export const getChatList = () => Axios({
   method: 'GET',
   url: 'dummy/chat-list',
-};
-const getLogout: AxiosRequestConfig = {
+});
+export const getLogout = () => Axios({
   method: 'GET',
   url: 'auth/logout',
-};
-const getUserInfo: AxiosRequestConfig = {
+});
+export const getUserInfo = () => Axios<Type.User2>({
   method: 'GET',
   url: 'auth/check-auth',
-};
-
-const getLogin = (
-  googleId: string,
-  email: string,
-  name: string,
-  googleAccessToken: string,
-): AxiosRequestConfig => ({
-  method: 'POST',
-  url: 'auth/google',
-  data: {
-    googleId,
-    email,
-    name,
-    googleAccessToken,
-  },
 });
 
-const getRooms: AxiosRequestConfig = {
+interface GetLoginArgs {
+  googleId: string;
+  email: string;
+  name: string;
+  googleAccessToken: string;
+}
+export const getLogin = (args: GetLoginArgs) => Axios({
+  method: 'POST',
+  url: 'auth/google',
+  data: args,
+});
+
+export const getRooms = () => Axios<Type.IRoom[]>({
   method: 'GET',
   url: 'chat/room',
-};
+});
 
-const addFriend = (email: string): AxiosRequestConfig => ({
+export const addFriend = (email: string) => Axios({
   method: 'POST',
   url: 'social/add-friend',
   data: { email },
 });
 
-const removeFriend = (googleId: string): AxiosRequestConfig => ({
+export const removeFriend = (googleId: string) => Axios({
   method: 'POST',
   url: 'social/remove-friend',
   data: { googleId },
 });
 
-const getChatByRoom = (roomUuid: string): AxiosRequestConfig => ({
+export const getChatByRoom = (roomUuid: string) => Axios<Type.ApiChat[]>({
   method: 'GET',
   url: `/chat/message/${roomUuid}`,
 });
-
-const request = {
-  getProfile: () => Axios(getProfile),
-  getFriendList: () => Axios(getFriendList),
-  getChatList: () => Axios(getChatList),
-  getLogin: (
-    googleId: string,
-    email: string,
-    name: string,
-    googleAccessToken: string,
-  ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
-  getUserInfo: () => Axios<Type.User2>(getUserInfo),
-  getRooms: () => Axios<Type.IRoom[]>(getRooms),
-  addFriend: (friendEmail: string) => Axios(addFriend(friendEmail)),
-  removeFriend: (frinedGoogleId: string) => Axios(removeFriend(frinedGoogleId)),
-  getLogout: () => Axios(getLogout),
-  getChatByRoom: (roomUuid: string) => Axios<Type.ApiChat[]>(getChatByRoom(roomUuid)),
-};
-
-export default request;

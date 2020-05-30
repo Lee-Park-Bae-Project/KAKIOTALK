@@ -10,38 +10,38 @@ import {
   addFriendSuccess,
   REMOVE_FRIEND,
   removeFriendSuccess,
-  removeFriendFailure
+  removeFriendFailure,
 } from 'modules/friends/action';
-import request from 'common/request';
+import * as request from 'common/request';
 
 function* getFriendsSaga() {
   try {
     const response = yield call(request.getFriendList);
-    console.log(response.data)
+    console.log(response.data);
     yield put(getFriendsSuccess(response.data.data));
   } catch (e) {
     yield put(getFriendsFailure(e));
   }
 }
 
-function* addFriendSaga({payload}:any) {
+function* addFriendSaga({ payload }: any) {
   try {
-    const response = yield call(request.addFriend,payload);
+    const response = yield call(request.addFriend, payload);
     yield put(addFriendSuccess(response.data.data));
   } catch (e) {
-    yield put(addFriendFailure(e))
+    yield put(addFriendFailure(e));
   }
 }
-function* removeFriendSaga({payload}:any) {
-  try{
-    const response = yield call(request.removeFriend,payload);
+function* removeFriendSaga({ payload }: any) {
+  try {
+    const response = yield call(request.removeFriend, payload);
     yield put(removeFriendSuccess(response.data.data));
-  }catch(e){
-    yield put(removeFriendFailure(e))
+  } catch (e) {
+    yield put(removeFriendFailure(e));
   }
 }
 export default function* friendsSaga() {
   yield takeEvery(GET_FRIENDS, getFriendsSaga);
-  yield takeEvery(ADD_FRIEND,addFriendSaga);
-  yield takeEvery(REMOVE_FRIEND,removeFriendSaga)
+  yield takeEvery(ADD_FRIEND, addFriendSaga);
+  yield takeEvery(REMOVE_FRIEND, removeFriendSaga);
 }

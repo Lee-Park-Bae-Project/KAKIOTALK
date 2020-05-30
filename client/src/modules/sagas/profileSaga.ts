@@ -7,7 +7,7 @@ import {
   getProfileSuccess,
 } from 'modules/profile/action';
 
-import request from 'common/request';
+import * as request from 'common/request';
 
 function* getProfileSaga() {
   try {

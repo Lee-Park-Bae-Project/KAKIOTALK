@@ -11,9 +11,9 @@ import {
 
 import { ApiChat } from 'types';
 import { AxiosResponse } from 'axios';
-import request, { ResponseType } from 'common/request';
+import * as request from 'common/request';
 
-type Type = AxiosResponse<ResponseType<ApiChat[]>>
+type Type = AxiosResponse<request.ResponseType<ApiChat[]>>
 function* getChatSaga(action: ReturnType<typeof getChatRequest>) {
   try {
     const response: Type = yield call(request.getChatByRoom, action.payload);

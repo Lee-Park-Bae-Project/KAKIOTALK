@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
-import request from 'common/request';
+import * as request from 'common/request';
 import { RouteComponentProps } from 'react-router';
 import { AxiosError } from 'axios';
 import { url } from 'common/constants';
