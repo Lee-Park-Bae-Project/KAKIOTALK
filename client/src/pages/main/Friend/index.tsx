@@ -3,37 +3,57 @@ import { useDispatch } from 'react-redux';
 import List from 'system/List';
 import Hr from 'atoms/Hr';
 import Profile from 'system/Profile';
-import { UserCard, PopUp } from 'components';
+import { UserCard, PopUp, MyProfile } from 'components';
 import { deleteFriend } from 'modules/friends';
 import { User } from 'types';
 import { alert } from 'common/utils';
-
 export interface Props {
   myProfile: User;
   friendList: User[];
   searchFriendKeyword: string;
 }
 const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
-  const [popup, setPopup] = useState(false);
+  const [friendProfileClick, setFriendProfileClick] = useState(false);
   const [clickedUser, setClickedUser] = useState({
     uuid: '',
     name: '',
     email: '',
     statusMessage: '',
   });
-  const profileRef = React.createRef<HTMLDivElement>();
-  const onProfileClose = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const profileNode = profileRef.current;
-    if (profileNode && e.target instanceof Node && !profileNode.contains(e.target)) {
-      setPopup(false);
-    }
+
+  const onProfileClose = (
+    profileRef: React.RefObject<HTMLDivElement>,
+    setProfileClick: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => {
+    return (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      const profileNode = profileRef.current;
+      if (
+        profileNode &&
+        e.target instanceof Node &&
+        !profileNode.contains(e.target)
+      ) {
+        setProfileClick(false);
+      }
+    };
   };
+  const friendProfieRef = React.createRef<HTMLDivElement>();
+  const userProfileRef = React.createRef<HTMLDivElement>();
+  const [userProfileClick, setUserProfileClick] = useState(false);
+
+  const onFriendProfileClose = onProfileClose(
+    friendProfieRef,
+    setFriendProfileClick,
+  );
+  const onUserProfileClose = onProfileClose(
+    userProfileRef,
+    setUserProfileClick,
+  );
   const dispatch = useDispatch();
   const onDeleteFriend = () => {
-    alert.confirmDelete(clickedUser.name).then((value) => {
+    alert.confirmDelete(clickedUser.name).then(value => {
       if (value) {
         dispatch(deleteFriend(clickedUser.uuid));
-        setPopup(false);
+        setFriendProfileClick(false);
       }
     });
   };
@@ -44,21 +64,23 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
         key={myProfile.uuid}
         name={myProfile.name}
         statusMessage={myProfile.statusMessage}
+        onClick={() => {
+          setUserProfileClick(true);
+        }}
       />
       <Hr />
       친구 {friendList.length}
-      {friendList.length > 0
-        ? friendList
+      {friendList.length > 0 ? (
+        friendList
           .filter(
-            (friend) => friend.name
-              .toLowerCase()
-              .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
+            friend =>
+              friend.name
+                .toLowerCase()
+                .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
           )
-          .map(({
-            uuid, statusMessage, name, email,
-          }) => {
+          .map(({ uuid, statusMessage, name, email }) => {
             const onUserCardClick = () => {
-              setPopup(true);
+              setFriendProfileClick(true);
               setClickedUser({
                 uuid,
                 name,
@@ -67,25 +89,34 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
               });
             };
 
-
             return (
-            <UserCard
-              key={uuid}
-              name={name}
-              statusMessage={statusMessage}
-              onClick={onUserCardClick}
-            />
+              <UserCard
+                key={uuid}
+                name={name}
+                statusMessage={statusMessage}
+                onClick={onUserCardClick}
+              />
             );
           })
-        : <h1>친구를 추가해 보세요!</h1>}
-
-      {popup ? (
-        <PopUp onClose={onProfileClose} refs = {profileRef}>
+      ) : (
+        <h1>친구를 추가해 보세요!</h1>
+      )}
+      {friendProfileClick ? (
+        <PopUp onClose={onFriendProfileClose} refs={friendProfieRef}>
           <Profile
             uuid={clickedUser.uuid}
             name={clickedUser.name}
             statusMessage={clickedUser.statusMessage}
             onDeleteClick={onDeleteFriend}
+          />
+        </PopUp>
+      ) : null}
+      {userProfileClick ? (
+        <PopUp onClose={onUserProfileClose} refs={userProfileRef}>
+          <MyProfile
+            uuid={myProfile.uuid}
+            name={myProfile.name}
+            statusMessage={myProfile.statusMessage}
           />
         </PopUp>
       ) : null}

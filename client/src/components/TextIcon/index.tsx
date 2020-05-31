@@ -8,7 +8,7 @@ interface ContainerProp {
   /** text에 대한 icon의 상대적 위치 */
   iconPosition?: iconPositionType;
   /** 클릭핸들러 */
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 interface TextProp {
   /** 아이콘과 함께 표시될 텍스트 */
@@ -28,7 +28,6 @@ interface Prop extends TextProp, ContainerProp {
   size?: string | number;
 }
 
-
 const directionMap = {
   top: 'column',
   bottom: 'column-reverse',
@@ -39,19 +38,19 @@ const directionMap = {
 const S = {
   Container: styled.div<ContainerProp>`
     display: flex;
-    flex-direction: ${(props) => {
-    if (!props.iconPosition) {
-      return 'left';
-    }
-    return directionMap[props.iconPosition];
-  }};
+    flex-direction: ${props => {
+      if (!props.iconPosition) {
+        return 'left';
+      }
+      return directionMap[props.iconPosition];
+    }};
     width: fit-content;
     height: fit-content;
     align-items: center;
     justify-content: center;
   `,
   TextWrapper: styled.span<TextProp>`
-    color: ${(props) => props.textColor};
+    color: ${props => props.textColor};
     line-height: 2rem;
     padding: 1rem;
   `,
@@ -70,14 +69,12 @@ const TextIcon: FC<Prop> = ({
   textColor = 'black',
   textSize = '1rem',
 }) => (
-    <S.Container iconPosition={iconPosition} onClick={onClick}>
-      <Icon icon={icon} color={color} size={size}/>
-      <S.TextWrapper
-        text={text}
-        textColor={textColor}
-        textSize={textSize}
-      >{text}</S.TextWrapper>
-    </S.Container>
+  <S.Container iconPosition={iconPosition}>
+    <Icon icon={icon} color={color} size={size} onClick={onClick} />
+    <S.TextWrapper text={text} textColor={textColor} textSize={textSize}>
+      {text}
+    </S.TextWrapper>
+  </S.Container>
 );
 
 export default TextIcon;
