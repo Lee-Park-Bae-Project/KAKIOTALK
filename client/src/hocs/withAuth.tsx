@@ -5,30 +5,39 @@ import { RouteComponentProps } from 'react-router';
 import { AxiosError } from 'axios';
 import { url } from 'common/constants';
 
+import { useDispatch } from 'react-redux';
+import { loginSuccess, loginFailure } from 'modules/login';
+
 export interface WithAuthProps {
   name: string;
   email: string;
   uuid: string;
+  statusMessage: string;
 }
-
 function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
   return (props: T & RouteComponentProps) => {
     const [userInfo, setNewProps] = useState({
       name: '',
       email: '',
       uuid: '',
+      statusMessage: '',
     });
-
+    const dispatch = useDispatch();
     useEffect(() => {
       (async () => {
         request
           .getUserInfo()
           .then((response) => {
-            const { name, email, uuid } = response.data.data.user;
-            setNewProps({ name, email, uuid });
+            const {
+              name, email, uuid, statusMessage,
+            } = response.data.data;
+            setNewProps({
+              name, email, uuid, statusMessage,
+            });
+            dispatch(loginSuccess());
           })
           .catch((e: AxiosError) => {
-            console.log(e);
+            dispatch(loginFailure(e));
             props.history.push(url.login);
           });
       })();

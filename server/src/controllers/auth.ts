@@ -1,4 +1,4 @@
-import * as userService from '../services/userService'
+import * as userService from '../services/user'
 import { NextFunction, Request, Response } from 'express';
 import createError from 'http-errors';
 import { cookieConfig, cookieName } from '../configs';
@@ -44,7 +44,7 @@ const getUserInfo = async (req: Request, res: Response, next: NextFunction) => {
       return next(createError(404, '유저정보를 찾을 수 없습니다.'))
     }
 
-    return response(res, { user })
+    return response(res, user )
   } catch (e) {
     next(e)
   }

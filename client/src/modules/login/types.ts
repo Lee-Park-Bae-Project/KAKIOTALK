@@ -1,10 +1,5 @@
-import {
-  loginRequest,
-  getLoginSuccess,
-  getLoginFailure
-} from 'modules/login/action';
+import { loginSuccess, loginFailure } from 'modules/login/action';
 
 export type LoginAction =
-  | ReturnType<typeof loginRequest>
-  | ReturnType<typeof getLoginSuccess>
-  | ReturnType<typeof getLoginFailure>;
+  | ReturnType<typeof loginSuccess>
+  | ReturnType<typeof loginFailure>;

@@ -6,8 +6,12 @@ import {
 } from 'sequelize'
 
 import { IFriend } from '../types'
+import { UserModel } from './user'
 
-export interface FriendModel extends Model, IFriend {}
+export const FRIEND_ASSOCIATION_ALIAS = { User: 'user' as const }
+export interface FriendModel extends Model, IFriend {
+  [FRIEND_ASSOCIATION_ALIAS.User]:UserModel
+}
 
 export type FriendStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): FriendModel

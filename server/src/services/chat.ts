@@ -8,7 +8,7 @@ import {
 } from '../models'
 import { IChat } from '../types'
 import * as HttpError from '../common/error'
-import * as userService from './userService'
+import * as userService from './user'
 
 export const findRoomByUuid = (uuid: string) => models.Room.findOne({
   where: { uuid },
@@ -26,7 +26,7 @@ export const findAllRooms = async (userId: number) => {
         model: models.Room,
         as: USER_ASSOCIATION_ALIAS.RoomParticipants,
         include: [{
-          attributes: ['uuid', 'name', 'status', 'email'],
+          attributes: ['uuid', 'name', 'statusMessage', 'email'],
           model: models.User,
           as: ROOM_ASSOCIATION_ALIAS.RoomParticipants,
         }],
@@ -46,12 +46,12 @@ export const findAllRooms = async (userId: number) => {
   const preProcessed = rooms.map((room) => {
     const participants = room.participants.map((participant) => {
       const {
-        uuid, name, status, email,
+        uuid, name, statusMessage, email,
       } = participant
       return {
         uuid,
         name,
-        status,
+        statusMessage,
         email,
       }
     })
@@ -68,6 +68,8 @@ export const getChatsByRoomId = async (roomUuid: string) => {
     throw HttpError.IDK
   }
   const roomId = room.id
+  console.log('check-------------')
+  console.log(roomId)
   const chats = await models.Chat.findAll({
     raw: true,
     nest: true,
@@ -83,7 +85,7 @@ export const getChatsByRoomId = async (roomUuid: string) => {
           {
             model: models.User,
             as: 'sender',
-            attributes: ['uuid', 'name', 'email', 'status', 'createdAt', 'updatedAt'],
+            attributes: ['uuid', 'name', 'email', 'statusMessage', 'createdAt', 'updatedAt'],
           },
           {
             model: models.Room,
@@ -127,7 +129,7 @@ const findChatById = async (id: number) => models.Chat.findOne({
         {
           model: models.User,
           as: 'sender',
-          attributes: ['uuid', 'name', 'email', 'status', 'createdAt', 'updatedAt'],
+          attributes: ['uuid', 'name', 'email', 'statusMessage', 'createdAt', 'updatedAt'],
         },
         {
           model: models.Room,

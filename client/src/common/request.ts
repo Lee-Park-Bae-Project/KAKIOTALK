@@ -41,7 +41,7 @@ export const getLogout = () => Axios({
   method: 'GET',
   url: 'auth/logout',
 });
-export const getUserInfo = () => Axios<Type.User2>({
+export const getUserInfo = () => Axios<Type.User>({
   method: 'GET',
   url: 'auth/check-auth',
 });
@@ -58,7 +58,7 @@ export const getLogin = (args: GetLoginArgs) => Axios({
   data: args,
 });
 
-export const getRooms = () => Axios<Type.IRoom[]>({
+export const getRooms = () => Axios<Type.Room[]>({
   method: 'GET',
   url: 'chat/room',
 });
@@ -69,10 +69,10 @@ export const addFriend = (email: string) => Axios({
   data: { email },
 });
 
-export const removeFriend = (googleId: string) => Axios({
-  method: 'POST',
-  url: 'social/remove-friend',
-  data: { googleId },
+export const deleteFriend = (uuid: string) => Axios({
+  method: 'DELETE',
+  url: 'social/delete-friend',
+  data: { uuid },
 });
 
 export const getChatByRoom = (roomUuid: string) => Axios<Type.ApiChat[]>({

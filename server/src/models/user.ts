@@ -6,6 +6,7 @@ import {
 } from 'sequelize'
 import { IUser } from '../types'
 import { RoomModel } from './room'
+import { FriendModel } from './friends'
 
 export const USER_ASSOCIATION_ALIAS = {
   RoomParticipants: 'rooms' as const,
@@ -13,7 +14,7 @@ export const USER_ASSOCIATION_ALIAS = {
 }
 export interface UserModel extends Model, IUser {
   [USER_ASSOCIATION_ALIAS.RoomParticipants]?: RoomModel[];
-  [USER_ASSOCIATION_ALIAS.Friend]?: UserModel[];
+  [USER_ASSOCIATION_ALIAS.Friend]: FriendModel[];
 }
 
 export type UserStatic = typeof Model & {
@@ -44,7 +45,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.STRING,
       allowNull: false,
     },
-    status: {
+    statusMessage: {
       type: dataTypes.STRING,
       allowNull: true,
     },
@@ -78,14 +79,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         otherKey: 'roomId',
       }
     )
-    // User.hasMany(
-    //   models.RoomParticipants,
-    //   {
-    //     foreignKey: 'roomParticipantsId',
-    //     sourceKey: 'id',
-    //     as: 'test',
-    //   }
-    // )
+
     User.hasMany(models.Friend, {
       foreignKey: 'userId',
       sourceKey: 'id',

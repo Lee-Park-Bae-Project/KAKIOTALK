@@ -21,8 +21,7 @@ const ChatBox: FC<Props> = ({
       {
         !isMine && (
           <UserCard
-            userName={metaInfo.sender.userName}
-
+            name={metaInfo.sender.name}
           />
         )
       }

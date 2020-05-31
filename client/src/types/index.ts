@@ -1,37 +1,16 @@
 export interface User {
-  uuid?: string;
-  id: string;
+  uuid: string;
   email: string;
-  userName: string;
+  name: string;
   statusMessage: string;
-  status?: string;
-  name?: string;
 }
 export interface loginInfo {
-  loginToken: string;
   isLoggedIn: boolean;
 }
 
-export interface ChatRoom {
-  id: string;
-  userList: string[];
-  lastMessage: string;
-  lastModified: number;
-  numOfNewMessages: number;
-}
-
-export interface IRoom {
+export interface Room {
   uuid: string;
-  participants: Pick<User, 'uuid' | 'name' | 'email' | 'status'>[];
-}
-
-export interface User2 {
-  user: {
-    name: string;
-    email: string;
-    uuid: string;
-  };
-
+  participants: Pick<User, 'uuid' | 'name' | 'email' | 'statusMessage'>[];
 }
 
 export interface IChat {

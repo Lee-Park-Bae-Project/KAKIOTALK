@@ -4,7 +4,7 @@ import Icon from 'Icon/Icon';
 import Circle from 'atoms/Circle';
 import { convertMillToMMDDYYYY } from 'common/utils';
 
-interface Props{
+interface Props {
   participantsName: string;
   lastMessage?: string;
   lastModified?: number;
@@ -18,33 +18,29 @@ const ChatCard: FC<Props> = ({
   numOfNewMessages = 99,
   onClick = undefined,
 }) => (
-    <S.Container onClick={onClick}>
-      <S.RoomInfoWrapper>
-        <S.ImgWrapper>
-          <Icon icon="Person"/>
-        </S.ImgWrapper>
-        <S.InfoWrapper>
-          <S.Row>
-            <div>
-              <S.UserListWrapper>
-                {participantsName}
-              </S.UserListWrapper>
-            </div>
-          </S.Row>
-          <S.LastMsgWrapper>
-            <span>{lastMessage}</span>
-          </S.LastMsgWrapper>
-        </S.InfoWrapper>
-        <S.NumWrapper>
-          {participantsName.length}
-        </S.NumWrapper>
-      </S.RoomInfoWrapper>
+  <S.Container onClick={onClick}>
+    <S.RoomInfoWrapper>
+      <S.ImgWrapper>
+        <Icon icon="Person" />
+      </S.ImgWrapper>
+      <S.InfoWrapper>
+        <S.Row>
+          <div>
+            <S.UserListWrapper>{participantsName}</S.UserListWrapper>
+          </div>
+        </S.Row>
+        <S.LastMsgWrapper>
+          <span>{lastMessage}</span>
+        </S.LastMsgWrapper>
+      </S.InfoWrapper>
+      <S.NumWrapper>{participantsName.length}</S.NumWrapper>
+    </S.RoomInfoWrapper>
 
-      <S.SubInfoWrapper>
-        <S.Time>{convertMillToMMDDYYYY(lastModified)}</S.Time>
-        <Circle num={numOfNewMessages}/>
-      </S.SubInfoWrapper>
-    </S.Container>
+    <S.SubInfoWrapper>
+      <S.Time>{convertMillToMMDDYYYY(lastModified)}</S.Time>
+      <Circle num={numOfNewMessages} />
+    </S.SubInfoWrapper>
+  </S.Container>
 );
 
 export default ChatCard;

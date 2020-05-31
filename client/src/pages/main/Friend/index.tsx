@@ -1,12 +1,13 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import List from 'system/List';
 import Hr from 'atoms/Hr';
 import Profile from 'system/Profile';
 import { UserCard, PopUp } from 'components';
-import { removeFriend } from 'modules/friends';
-import {User} from 'types'
-import swal from 'sweetalert'
+import { deleteFriend } from 'modules/friends';
+import { User } from 'types';
+import { alert } from 'common/utils';
+
 export interface Props {
   myProfile: User;
   friendList: User[];
@@ -15,73 +16,76 @@ export interface Props {
 const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   const [popup, setPopup] = useState(false);
   const [clickedUser, setClickedUser] = useState({
-    id: '',
-    userName: '',
-    email:'',
+    uuid: '',
+    name: '',
+    email: '',
     statusMessage: '',
   });
-  let profileRef:any = React.createRef();
+  const profileRef = React.createRef<HTMLDivElement>();
   const onProfileClose = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if (!profileRef.current.contains(e.target)) {
+    const profileNode = profileRef.current;
+    if (profileNode && e.target instanceof Node && !profileNode.contains(e.target)) {
       setPopup(false);
     }
   };
-  const dispatch =useDispatch()
-  const deleteFriend = () => {
-    swal(`${clickedUser.userName}님을 친구에서 삭제하시겠습니까?`,{
-      buttons:['취소',true]
-    }).then(value=>{
-      if(value) {
-        dispatch(removeFriend(clickedUser.id))
-        setPopup(false)
+  const dispatch = useDispatch();
+  const onDeleteFriend = () => {
+    alert.confirmDelete(clickedUser.name).then((value) => {
+      if (value) {
+        dispatch(deleteFriend(clickedUser.uuid));
+        setPopup(false);
       }
-    })
-    
+    });
   };
 
   return (
     <List>
       <UserCard
-        key={myProfile.id}
-        userName={myProfile.userName}
+        key={myProfile.uuid}
+        name={myProfile.name}
         statusMessage={myProfile.statusMessage}
       />
       <Hr />
       친구 {friendList.length}
-      {friendList
-        .filter(
-          friend =>
-            friend.userName
+      {friendList.length > 0
+        ? friendList
+          .filter(
+            (friend) => friend.name
               .toLowerCase()
               .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
-        )
-        .map(({ id, statusMessage, userName ,email}) => {
-          const onUserCardClick = () => {
-            setPopup(true);
-            setClickedUser({
-              id: id,
-              userName: userName,
-              email:email,
-              statusMessage: statusMessage,
-            });
-          };
+          )
+          .map(({
+            uuid, statusMessage, name, email,
+          }) => {
+            const onUserCardClick = () => {
+              setPopup(true);
+              setClickedUser({
+                uuid,
+                name,
+                email,
+                statusMessage,
+              });
+            };
 
-          return (
+
+            return (
             <UserCard
-              key={id}
-              userName={userName}
+              key={uuid}
+              name={name}
               statusMessage={statusMessage}
               onClick={onUserCardClick}
             />
-          );
-        })}
+            );
+          })
+        : <h1>친구를 추가해 보세요!</h1>}
+
       {popup ? (
         <PopUp onClose={onProfileClose} refs = {profileRef}>
           <Profile
-            id={clickedUser.id}
-            userName={clickedUser.userName}
+            uuid={clickedUser.uuid}
+            name={clickedUser.name}
             statusMessage={clickedUser.statusMessage}
-            onRemoveClick={deleteFriend}
+            onDeleteClick={onDeleteFriend}
           />
         </PopUp>
       ) : null}

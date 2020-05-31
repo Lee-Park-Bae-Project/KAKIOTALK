@@ -1,6 +1,5 @@
 import {
   INIT_PROFILE,
-  GET_PROFILE,
   GET_PROFILE_FAILURE,
   GET_PROFILE_SUCCESS,
 } from 'modules/profile/action';
@@ -9,10 +8,9 @@ import { User } from 'types';
 
 const initialState: User = {
   uuid: '',
-  id: '',
   email: '',
   statusMessage: '',
-  userName: '',
+  name: '',
 };
 
 const profile = (state: User = initialState, action: ProfileAction) => {

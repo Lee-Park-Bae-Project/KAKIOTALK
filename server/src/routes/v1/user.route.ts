@@ -1,8 +1,7 @@
 import express from 'express';
-import { userTest ,getMyProfile} from '../../controllers/user';
+import { getMyProfile} from '../../controllers/user';
 import isAuth from '../../middlewares/auth'
 const router = express.Router();
-
-router.get('/user', userTest);
-router.get('/my-profile',isAuth,getMyProfile)
+router.use(isAuth)
+router.get('/my-profile',getMyProfile)
 export default router;

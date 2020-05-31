@@ -5,8 +5,6 @@ import GoogleLogin from 'react-google-login';
 import { withRouter, useHistory } from 'react-router-dom';
 import { configs } from 'common/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'modules';
-import { useCookies } from 'react-cookie';
 import * as request from 'common/request';
 
 const { useState, useEffect } = React;
@@ -16,10 +14,8 @@ dotenv.config();
 type LoginForm = {
   loginSuccess: (state: { id: string; email: string; name: string }) => void;
 };
-const clientGoogleId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const GoogleSignin: React.FC = () => {
   const dispatch = useDispatch();
-
   const [login, setLogin] = useState({
     email: '',
     name: '',
@@ -66,7 +62,7 @@ const GoogleSignin: React.FC = () => {
         onSuccess={responseSuccess}
         onFailure={responseFail}
         onAutoLoadFinished={responseAutoLoad}
-        redirectUri="http://localhost:3000/login/"
+        redirectUri={configs.LOGIN_URL}
         cookiePolicy={'single_host_origin'}
         prompt="consent"
       />

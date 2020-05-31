@@ -8,20 +8,20 @@ export default {
 
 export const Default = () => (
   <Profile
-    id= '1'
-    userName='남강우'
+    uuid= '1'
+    name='남강우'
     statusMessage='Brand New 2020'
-    onRemoveClick= {()=>{}}
+    onDeleteClick= {()=>{}}
   />
 );
 
 
 export const withNoStatus = () => (
   <Profile
-    id='2'
-    userName='남강우'
+    uuid='2'
+    name='남강우'
     statusMessage=''
-    onRemoveClick= {()=>{}}
+    onDeleteClick= {()=>{}}
 
   />
 );

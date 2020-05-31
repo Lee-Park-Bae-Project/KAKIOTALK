@@ -10,7 +10,7 @@ interface Props{
   /** 친구 목록을 담은 배열 */
   userList: User[];
   /** 각 친구들 클릭 했을 때 클릭 이벤트 핸들러 */
-  onClick: (id: string) => () => void;
+  onClick: (uuid: string) => () => void;
 }
 /**
  * - UserList 를 나열하는 컴포넌트
@@ -23,7 +23,7 @@ const UserList: FC<Props> = ({
 }) => (
     <S.Container>
       <UserCard
-        userName={myProfile.userName}
+        name={myProfile.name}
         />
       <Hr/>
       <S.Friend>
@@ -33,10 +33,10 @@ const UserList: FC<Props> = ({
       {
         userList.map((user) => (
           <UserCard
-            key={user.id}
-            userName={user.userName}
+            key={user.uuid}
+            name={user.name}
             statusMessage={user.statusMessage}
-            onClick={onClick(user.id)}
+            onClick={onClick(user.uuid)}
           />
         ))
       }

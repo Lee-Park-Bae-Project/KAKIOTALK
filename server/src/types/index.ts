@@ -11,6 +11,7 @@ export interface IChat {
   content: string;
   createdAt: string;
   updatedAt: string;
+  sender?: string;
 }
 
 export interface IChatIsRead{
@@ -52,7 +53,7 @@ export interface IUser {
   uuid: string;
   name: string;
   email: string;
-  status: string;
+  statusMessage: string;
   googleId: string;
   googleAccessToken: string;
   googleRefreshToken: string;

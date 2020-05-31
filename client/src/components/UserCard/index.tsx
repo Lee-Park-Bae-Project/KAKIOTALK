@@ -5,7 +5,7 @@ import TextIcon from 'components/TextIcon';
 
 interface UserCardProp{
   /** user card 에 표시할 유저 네임 */
-  userName: string;
+  name: string;
   /** 유저 상태메시지 */
   statusMessage?: string;
   /** 클릭핸들러 */
@@ -18,7 +18,7 @@ interface UserCardProp{
  * - 유저의 프로필 사진과 이름이 표시됩니다.
  */
 const UserCard: FC<UserCardProp> = ({
-  userName,
+  name,
   onClick,
   statusMessage,
 }) => (
@@ -29,7 +29,7 @@ const UserCard: FC<UserCardProp> = ({
           <TextIcon
             icon='Account'
             color={color.GRAY}
-            text={userName}
+            text={name}
           />
           {
             statusMessage

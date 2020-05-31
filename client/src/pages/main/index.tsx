@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
-import { User } from 'types';
 import { RoomState } from 'modules/room';
 import { PopUp, Dialog } from 'components';
 import FriendContainer from 'containers/FriendContainer';
@@ -23,8 +22,9 @@ interface Props {
   popupAddFriend: boolean;
   confirmAddFriend: () => void;
   cancelAddFriend: () => void;
-  friendIdToAdd: string;
-  onFriendIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  addFriendEnterPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  friendEmailToAdd: string;
+  onFriendEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   dialogRef: any;
   onPopupOutClicked: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -42,8 +42,9 @@ const Main: FC<Props> = ({
   roomState,
   cancelAddFriend,
   confirmAddFriend,
-  friendIdToAdd,
-  onFriendIdChange,
+  addFriendEnterPress,
+  friendEmailToAdd,
+  onFriendEmailChange,
   logoutTabOnClick,
   dialogRef,
   onPopupOutClicked,
@@ -90,8 +91,9 @@ const Main: FC<Props> = ({
             onConfirm={confirmAddFriend}
           >
             <SearchInput
-              value={friendIdToAdd}
-              onChange={onFriendIdChange}
+              value={friendEmailToAdd}
+              onChange={onFriendEmailChange}
+              onKeyPress={addFriendEnterPress}
               placeholder="이메일을 입력해주세요"
             />
           </Dialog>

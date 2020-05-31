@@ -3,37 +3,25 @@ import {
 } from 'express'
 import createError from 'http-errors'
 import { models } from '../models'
-import { response } from '../common/utils'
-import * as userService from '../services/userService'
-
-const userTest = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = await models.User.create({
-      id: `${Date.now()}`,
-      name: 'name',
-      email: '123',
-    })
-
-    res.status(200).json(user)
-  } catch (e) {
-    next(e)
-  }
-}
+import { response ,message} from '../common/utils'
+import * as userService from '../services/user'
+import { IUser } from 'src/types'
 
 const getMyProfile = async (req:Request, res:Response, next:NextFunction) => {
   try {
     if (!req.decodedUser) {
-      return next(createError(401, '로그인 필요'))
+      return next(createError(401,message.LOGIN_REQUIRED ))
     }
-    const user:any = await userService.findByGoogleId(req.decodedUser.googleId)
+    const user = await userService.findByGoogleId(req.decodedUser.googleId)
+    if(!user) throw(createError(401,message.INVALID_GOOGLE_ID))
     const {
-      id, email, name, status,
+      uuid, email, name, statusMessage,
     } = user
     const myProfile = {
-      id,
+      uuid,
       email,
-      userName: name,
-      statusMessage: status,
+      name,
+      statusMessage,
     }
     response(res, myProfile)
   } catch (e) {
@@ -41,5 +29,5 @@ const getMyProfile = async (req:Request, res:Response, next:NextFunction) => {
   }
 }
 export {
-  userTest, getMyProfile,
+   getMyProfile,
 }
