@@ -14,12 +14,12 @@ const instance = axios.create({
 export type ResponseType<T> = {
   success: boolean;
   data: T;
-}
+};
 
 export type ApiCallback<T = {}> = (
   err: AxiosResponse<ResponseType<T>> | null,
   response?: AxiosResponse<ResponseType<T>>,
-) => void
+) => void;
 
 async function Axios<T>(config: AxiosRequestConfig) {
   return instance.request<ResponseType<T>>(config);
@@ -67,17 +67,28 @@ const getRooms: AxiosRequestConfig = {
   url: 'chat/room',
 };
 
-const addFriend = (email:string):AxiosRequestConfig=>({
-  method:'POST',
+const addFriend = (email: string): AxiosRequestConfig => ({
+  method: 'POST',
   url: 'social/add-friend',
-  data: {email}
-})
+  data: { email },
+});
 
-const deleteFriend = (uuid:string):AxiosRequestConfig=>({
-  method:'DELETE',
-  url:'social/delete-friend',
-  data: {uuid}
-})
+const deleteFriend = (uuid: string): AxiosRequestConfig => ({
+  method: 'DELETE',
+  url: 'social/delete-friend',
+  data: { uuid },
+});
+const updateProfile = ({
+  name,
+  statusMessage,
+}: {
+  name: string;
+  statusMessage: string;
+}): AxiosRequestConfig => ({
+  method: 'PATCH',
+  url: 'user/update-profile',
+  data: { name, statusMessage },
+});
 const request = {
   getProfile: () => Axios(getProfile),
   getFriendList: () => Axios(getFriendList),
@@ -90,9 +101,16 @@ const request = {
   ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
   getUserInfo: () => Axios<Type.User>(getUserInfo),
   getRooms: () => Axios<Type.Room>(getRooms),
-  addFriend: (email:string)=>Axios(addFriend(email)),
-  deleteFriend: (uuid:string)=>Axios(deleteFriend(uuid)),
+  addFriend: (email: string) => Axios(addFriend(email)),
+  deleteFriend: (uuid: string) => Axios(deleteFriend(uuid)),
   getLogout: () => Axios(getLogout),
+  updateProfile: ({
+    name,
+    statusMessage,
+  }: {
+    name: string;
+    statusMessage: string;
+  }) => Axios(updateProfile({ name, statusMessage })),
 };
 
 export default request;
