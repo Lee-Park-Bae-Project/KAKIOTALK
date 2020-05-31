@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'modules';
+import { useDispatch, useSelector } from 'react-redux';
 import { SearchInput } from 'components';
+import { RootState } from 'modules';
+
 const { useState, useEffect } = React;
 const ChatContainer: React.FC = () => {
   const dispatch = useDispatch();

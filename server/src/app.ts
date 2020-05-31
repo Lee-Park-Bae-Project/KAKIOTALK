@@ -39,13 +39,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   // set locals, only providing error in development
   res.locals.message = apiError.message
   res.locals.error = apiError
-
   // render the error page
-  return response(
-    res,
-    { message: apiError.message },
-    apiError.status
-  )
+  return response(res, { message: apiError.message }, apiError.status)
 })
-
 module.exports = app

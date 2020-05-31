@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import request from '../common/request'
-import * as userService from './user'
 import { jwtConfig } from '../configs'
+import * as userService from './user'
 
 const login = async (
   googleId: string,

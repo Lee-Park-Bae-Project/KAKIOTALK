@@ -7,3 +7,4 @@ export { ReactComponent as ChatFilled } from './chat-filled.svg';
 export { ReactComponent as AddFriend } from './person-add.svg';
 export { ReactComponent as Account } from './account.svg';
 export { ReactComponent as Logout } from './logout.svg';
+export { ReactComponent as AddChat } from './add-chat.svg';
