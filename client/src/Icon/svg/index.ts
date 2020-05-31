@@ -7,3 +7,5 @@ export { ReactComponent as ChatFilled } from './chat-filled.svg';
 export { ReactComponent as AddFriend } from './person-add.svg';
 export { ReactComponent as Account } from './account.svg';
 export { ReactComponent as logout } from './logout.svg';
+export { ReactComponent as EditProfile } from './edit-profile.svg';
+export { ReactComponent as Confirm } from './confirm.svg';
