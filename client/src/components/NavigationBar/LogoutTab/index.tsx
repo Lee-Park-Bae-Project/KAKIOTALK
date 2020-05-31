@@ -21,7 +21,7 @@ const LogoutTab: FC<LogoutProp> = ({
   onClick = undefined,
 }) => (
   <S.Container onClick={onClick}>
-    <Icon icon="logout" color={color.WHITE} size={size} />
+    <Icon icon="Logout" color={color.WHITE} size={size} />
   </S.Container>
 );
 export default LogoutTab;
