@@ -1,116 +1,103 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import * as Type from 'types';
-import { configs } from './constants';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import * as Type from 'types'
+import { configs } from './constants'
 
-const { API_SERVER_URL } = configs;
+const { API_SERVER_URL } = configs
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
   timeout: 3000,
   timeoutErrorMessage: '서버가 응답하지 않습니다.',
   withCredentials: true,
-});
+})
 
 export type ResponseType<T> = {
-  success: boolean;
-  data: T;
-};
+  success: boolean
+  data: T
+}
 
 export type ApiCallback<T = {}> = (
   err: AxiosResponse<ResponseType<T>> | null,
   response?: AxiosResponse<ResponseType<T>>,
-) => void;
+) => void
 
 async function Axios<T>(config: AxiosRequestConfig) {
-  return instance.request<ResponseType<T>>(config);
+  return instance.request<ResponseType<T>>(config)
 }
 
-const getProfile: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'user/my-profile',
-};
-const getFriendList: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'social/friend-list',
-};
-const getChatList: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'dummy/chat-list',
-};
-const getLogout: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'auth/logout',
-};
-const getUserInfo: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'auth/check-auth',
-};
+export const getProfile = () =>
+  Axios({
+    method: 'GET',
+    url: 'user/my-profile',
+  })
+export const getFriendList = () =>
+  Axios({
+    method: 'GET',
+    url: 'social/friend-list',
+  })
+export const getChatList = () =>
+  Axios({
+    method: 'GET',
+    url: 'dummy/chat-list',
+  })
+export const getLogout = () =>
+  Axios({
+    method: 'GET',
+    url: 'auth/logout',
+  })
+export const getUserInfo = () =>
+  Axios<Type.User>({
+    method: 'GET',
+    url: 'auth/check-auth',
+  })
 
-const getLogin = (
-  googleId: string,
-  email: string,
-  name: string,
-  googleAccessToken: string,
-): AxiosRequestConfig => ({
-  method: 'POST',
-  url: 'auth/google',
-  data: {
-    googleId,
-    email,
-    name,
-    googleAccessToken,
-  },
-});
+interface GetLoginArgs {
+  googleId: string
+  email: string
+  name: string
+  googleAccessToken: string
+}
+export const getLogin = (args: GetLoginArgs) =>
+  Axios({
+    method: 'POST',
+    url: 'auth/google',
+    data: args,
+  })
 
-const getRooms: AxiosRequestConfig = {
-  method: 'GET',
-  url: 'chat/room',
-};
+export const getRooms = () =>
+  Axios<Type.Room[]>({
+    method: 'GET',
+    url: 'chat/room',
+  })
 
-const addFriend = (email: string): AxiosRequestConfig => ({
-  method: 'POST',
-  url: 'social/add-friend',
-  data: { email },
-});
+export const addFriend = (email: string) =>
+  Axios({
+    method: 'POST',
+    url: 'social/add-friend',
+    data: { email },
+  })
 
-const deleteFriend = (uuid: string): AxiosRequestConfig => ({
-  method: 'DELETE',
-  url: 'social/delete-friend',
-  data: { uuid },
-});
-const updateProfile = ({
+export const deleteFriend = (uuid: string) =>
+  Axios({
+    method: 'DELETE',
+    url: 'social/delete-friend',
+    data: { uuid },
+  })
+export const updateProfile = ({
   name,
   statusMessage,
 }: {
-  name: string;
-  statusMessage: string;
-}): AxiosRequestConfig => ({
-  method: 'PATCH',
-  url: 'user/update-profile',
-  data: { name, statusMessage },
-});
-const request = {
-  getProfile: () => Axios(getProfile),
-  getFriendList: () => Axios(getFriendList),
-  getChatList: () => Axios(getChatList),
-  getLogin: (
-    googleId: string,
-    email: string,
-    name: string,
-    googleAccessToken: string,
-  ) => Axios(getLogin(googleId, email, name, googleAccessToken)),
-  getUserInfo: () => Axios<Type.User>(getUserInfo),
-  getRooms: () => Axios<Type.Room>(getRooms),
-  addFriend: (email: string) => Axios(addFriend(email)),
-  deleteFriend: (uuid: string) => Axios(deleteFriend(uuid)),
-  getLogout: () => Axios(getLogout),
-  updateProfile: ({
-    name,
-    statusMessage,
-  }: {
-    name: string;
-    statusMessage: string;
-  }) => Axios(updateProfile({ name, statusMessage })),
-};
+  name: string
+  statusMessage: string
+}) =>
+  Axios({
+    method: 'PATCH',
+    url: 'user/update-profile',
+    data: { name, statusMessage },
+  })
 
-export default request;
+export const getChatByRoom = (roomUuid: string) =>
+  Axios<Type.ApiChat[]>({
+    method: 'GET',
+    url: `/chat/message/${roomUuid}`,
+  })

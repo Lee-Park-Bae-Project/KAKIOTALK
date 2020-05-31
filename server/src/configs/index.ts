@@ -22,7 +22,7 @@ export const cookieName = 'kakio_jwt'
 
 export const jwtConfig = {
   secret: process.env.JWT_SECRET || 'secret',
-  ttl: '2h',
+  ttl: process.env.NODE_ENV === 'development' ? '100h' : '2h',
 }
 
 export const getRedisOpts = () => {

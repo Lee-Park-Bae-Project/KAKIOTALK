@@ -22,7 +22,8 @@ export const color = {
   TEXT_GRAY: '#737373',
   ROOM_COLOR: '#C0D1DB',
   HOVER_GRAY: '#F1F2F2',
-};
+  LIGHT_GRAY: '#FAFAFA',
+} as const;
 
 export const fontSize = {
   SMALL: '0.8rem',
@@ -31,9 +32,9 @@ export const fontSize = {
 };
 
 export const weight = {
-  WEAK: 400,
-  NORMAL: 600,
-  STRONG: 800,
+  WEAK: 200,
+  NORMAL: 400,
+  STRONG: 600,
 };
 
 export default Global;

@@ -7,7 +7,7 @@ import User, { USER_ASSOCIATION_ALIAS } from './user'
 import ChatIsRead from './chatIsRead'
 import Friend from './friends'
 import Room, { ROOM_ASSOCIATION_ALIAS } from './room'
-import RoomParticipants from './roomParticipants'
+import RoomParticipants, { ROOM_PARTICIPANTS_ASSOCIATION_ALIAS } from './roomParticipants'
 
 export interface ModelTypes {
   User: ReturnType<typeof User>;
@@ -39,4 +39,5 @@ export {
   CHAT_ASSOCIATION_ALIAS,
   USER_ASSOCIATION_ALIAS,
   ROOM_ASSOCIATION_ALIAS,
+  ROOM_PARTICIPANTS_ASSOCIATION_ALIAS,
 }

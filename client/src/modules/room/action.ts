@@ -10,13 +10,10 @@ export const getRoomRequest = () => ({
   payload: {},
 });
 
-export const getRoomSuccess = (room: Room[]) => {
-  console.log(room);
-  return {
-    type: GET_ROOM_SUCCESS,
-    payload: room,
-  };
-};
+export const getRoomSuccess = (room: Room[]) => ({
+  type: GET_ROOM_SUCCESS,
+  payload: room,
+});
 
 export const getRoomFailure = (e: AxiosError) => ({
   type: GET_ROOM_FAILURE,

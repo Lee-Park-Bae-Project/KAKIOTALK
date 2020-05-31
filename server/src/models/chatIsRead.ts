@@ -6,7 +6,6 @@ import {
 } from 'sequelize'
 
 import { IChatIsRead } from '../types'
-import { uuid } from '../common/utils'
 
 export interface ChatIsReadModel extends Model, IChatIsRead {}
 
@@ -27,7 +26,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     unreaderId: {
       type: dataTypes.INTEGER.UNSIGNED,

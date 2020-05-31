@@ -5,9 +5,9 @@ import {
   Sequelize,
 } from 'sequelize'
 import { IUser } from '../types'
-import { uuid } from '../common/utils'
 import { RoomModel } from './room'
-import {FriendModel } from './friends'
+import { FriendModel } from './friends'
+
 export const USER_ASSOCIATION_ALIAS = {
   RoomParticipants: 'rooms' as const,
   Friend: 'friend' as const,
@@ -20,6 +20,7 @@ export interface UserModel extends Model, IUser {
 export type UserStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): UserModel;
   associate: (models: any) => void;
+
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
@@ -34,7 +35,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     name: {
       type: dataTypes.STRING,
@@ -66,7 +67,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     },
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
-  })
+  },)
 
   User.associate = (models: any) => {
     User.belongsToMany(
@@ -78,6 +79,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         otherKey: 'roomId',
       }
     )
+
     User.hasMany(models.Friend, {
       foreignKey: 'userId',
       sourceKey: 'id',

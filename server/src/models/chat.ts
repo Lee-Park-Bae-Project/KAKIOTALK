@@ -6,17 +6,18 @@ import {
 } from 'sequelize'
 
 import { IChat } from '../types'
-import { uuid } from '../common/utils'
 import { RoomModel } from './room'
+import { RoomParticipantsModel } from './roomParticipants'
 
-export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'info' as const }
+export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'metaInfo' as const }
 
-export interface ChatModel extends Model, IChat {}
+export interface ChatModel extends Model, IChat {
+  [CHAT_ASSOCIATION_ALIAS.RoomParticipants]?: RoomParticipantsModel;
+}
 
 export type ChatStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): ChatModel;
   associate: (models: any) => void;
-  [CHAT_ASSOCIATION_ALIAS.RoomParticipants]: RoomModel[];
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
@@ -31,7 +32,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     roomParticipantsId: {
       allowNull: false,

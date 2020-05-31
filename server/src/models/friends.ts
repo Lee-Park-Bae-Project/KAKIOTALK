@@ -6,11 +6,9 @@ import {
 } from 'sequelize'
 
 import { IFriend } from '../types'
-import { uuid } from '../common/utils'
-import {UserModel} from './user'
-export const FRIEND_ASSOCIATION_ALIAS = {
-  User: 'user' as const,
-}
+import { UserModel } from './user'
+
+export const FRIEND_ASSOCIATION_ALIAS = { User: 'user' as const }
 export interface FriendModel extends Model, IFriend {
   [FRIEND_ASSOCIATION_ALIAS.User]:UserModel
 }
@@ -31,7 +29,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       allowNull: false,
       unique: true,
       type: dataTypes.UUIDV4,
-      defaultValue: uuid(),
+      defaultValue: dataTypes.UUIDV4,
     },
     userId: {
       allowNull: false,

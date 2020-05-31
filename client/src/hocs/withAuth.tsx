@@ -1,10 +1,13 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
-import request from 'common/request';
+import * as request from 'common/request';
 import { RouteComponentProps } from 'react-router';
 import { AxiosError } from 'axios';
+import { url } from 'common/constants';
+
 import { useDispatch } from 'react-redux';
 import { loginSuccess, loginFailure } from 'modules/login';
+
 export interface WithAuthProps {
   name: string;
   email: string;
@@ -24,14 +27,18 @@ function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
       (async () => {
         request
           .getUserInfo()
-          .then(response => {
-            const { name, email, uuid, statusMessage } = response.data.data;
-            setNewProps({ name, email, uuid, statusMessage });
+          .then((response) => {
+            const {
+              name, email, uuid, statusMessage,
+            } = response.data.data;
+            setNewProps({
+              name, email, uuid, statusMessage,
+            });
             dispatch(loginSuccess());
           })
           .catch((e: AxiosError) => {
             dispatch(loginFailure(e));
-            props.history.push('/login');
+            props.history.push(url.login);
           });
       })();
     }, []);

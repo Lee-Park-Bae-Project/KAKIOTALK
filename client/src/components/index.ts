@@ -1,7 +1,6 @@
 import PopUp from './PopUp';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
-import ChatBox from './ChatBox';
 import Dialog from './Dialog';
 import GoogleSignIn from './GoogleSignin';
 import Logo from './Logo';
@@ -16,7 +15,6 @@ export {
   PopUp,
   Button,
   ButtonGroup,
-  ChatBox,
   Dialog,
   GoogleSignIn,
   Logo,

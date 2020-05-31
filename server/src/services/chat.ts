@@ -1,15 +1,23 @@
+import { chatFromServer } from '../socket'
 import {
-  CHAT_ASSOCIATION_ALIAS, models, ROOM_ASSOCIATION_ALIAS, USER_ASSOCIATION_ALIAS,
+  CHAT_ASSOCIATION_ALIAS,
+  models,
+  ROOM_ASSOCIATION_ALIAS,
+  ROOM_PARTICIPANTS_ASSOCIATION_ALIAS,
+  USER_ASSOCIATION_ALIAS,
 } from '../models'
+import { IChat } from '../types'
+import * as HttpError from '../common/error'
+import * as userService from './user'
 
-export const findRoomById = (roomId: string) => models.Room.findOne({
-  where: { uuid: roomId },
+export const findRoomByUuid = (uuid: string) => models.Room.findOne({
+  where: { uuid },
   include: [{
     model: models.User,
     as: 'participants',
   }],
 })
-export const findAllRooms = async (userId: string) => {
+export const findAllRooms = async (userId: number) => {
   const data = await models.User.findOne(
     {
       where: { id: userId },
@@ -27,13 +35,13 @@ export const findAllRooms = async (userId: string) => {
   )
 
   if (!data) {
-    throw new Error()
+    throw HttpError.IDK
   }
 
   const { rooms } = data
 
   if (!rooms) {
-    throw new Error()
+    throw HttpError.IDK
   }
   const preProcessed = rooms.map((room) => {
     const participants = room.participants.map((participant) => {
@@ -54,19 +62,43 @@ export const findAllRooms = async (userId: string) => {
   })
   return preProcessed
 }
-export const getChatsByRoomId = (roomId: string) => models.Chat.findAll(
-  { include: [
-    {
-      model: models.RoomParticipants,
-      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
-      where: { roomId },
-      include: [
-        models.User,
-        models.Room,
-      ],
-    },
-  ] }
-)
+export const getChatsByRoomId = async (roomUuid: string) => {
+  const room = await models.Room.findOne({ where: { uuid: roomUuid } })
+  if (!room) {
+    throw HttpError.IDK
+  }
+  const roomId = room.id
+  console.log('check-------------')
+  console.log(roomId)
+  const chats = await models.Chat.findAll({
+    raw: true,
+    nest: true,
+    attributes: ['uuid', 'content', 'createdAt', 'updatedAt'],
+    order: [['createdAt', 'ASC']],
+    include: [
+      {
+        model: models.RoomParticipants,
+        as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
+        attributes: ['uuid', 'createdAt', 'updatedAt', 'roomId'],
+        where: { roomId },
+        include: [
+          {
+            model: models.User,
+            as: 'sender',
+            attributes: ['uuid', 'name', 'email', 'statusMessage', 'createdAt', 'updatedAt'],
+          },
+          {
+            model: models.Room,
+            as: 'room',
+            attributes: ['uuid', 'createdAt', 'updatedAt'],
+          },
+        ],
+      },
+    ],
+  })
+
+  return chats
+}
 
 export const getRoomParticipants = (roomId: string) => models.RoomParticipants.findAll({
   raw: true,
@@ -77,3 +109,87 @@ export const getRoomParticipants = (roomId: string) => models.RoomParticipants.f
   ],
 })
 
+export const findRoomParticipants = async (roomId: number, userId: number) => (
+  models.RoomParticipants.findOne({ where: {
+    roomId, userId,
+  } })
+)
+
+const findChatById = async (id: number) => models.Chat.findOne({
+  raw: true,
+  nest: true,
+  where: { id },
+  attributes: ['uuid', 'content', 'createdAt', 'updatedAt'],
+  include: [
+    {
+      model: models.RoomParticipants,
+      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
+      attributes: ['uuid', 'createdAt', 'updatedAt', 'roomId'],
+      include: [
+        {
+          model: models.User,
+          as: 'sender',
+          attributes: ['uuid', 'name', 'email', 'statusMessage', 'createdAt', 'updatedAt'],
+        },
+        {
+          model: models.Room,
+          as: 'room',
+          attributes: ['uuid', 'createdAt', 'updatedAt'],
+        },
+      ],
+    },
+  ],
+})
+
+export const createChat = async ({
+  roomParticipantsId,
+  content,
+  createdAt,
+  updatedAt,
+}: Omit<IChat, 'id' | 'uuid'>) => models.Chat.create({
+  roomParticipantsId,
+  content,
+  createdAt,
+  updatedAt,
+})
+
+interface AddMessage {
+  userUuid: string;
+  roomUuid: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export const addMessage = async ({
+  userUuid,
+  roomUuid,
+  content,
+  createdAt,
+  updatedAt,
+}:AddMessage) => {
+  try {
+    const room = await findRoomByUuid(roomUuid)
+    const user = await userService.findByUuid(userUuid)
+    if (!room || !user) {
+      throw new Error('no room or user')
+    }
+    const roomParticipants = await findRoomParticipants(room.id, user.id)
+    if (!roomParticipants) {
+      throw new Error('no room participants')
+    }
+
+    const roomParticipantsId = roomParticipants.id
+    const newChatData = await createChat({
+      roomParticipantsId,
+      content,
+      createdAt,
+      updatedAt,
+    })
+    const chatId = newChatData.id
+    const newChat = await findChatById(chatId)
+    return newChat
+  } catch (e) {
+    console.log(e)
+    return e
+  }
+}

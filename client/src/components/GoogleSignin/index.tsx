@@ -4,8 +4,9 @@ import * as S from 'components/GoogleSignin/styles';
 import GoogleLogin from 'react-google-login';
 import { withRouter, useHistory } from 'react-router-dom';
 import { configs } from 'common/constants';
-import request from 'common/request';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import * as request from 'common/request';
+
 const { useState, useEffect } = React;
 
 dotenv.config();
@@ -36,11 +37,13 @@ const GoogleSignin: React.FC = () => {
     });
     console.log(e);
     request
-      .getLogin(googleId, email, name, googleAccessToken)
-      .then(response => {
+      .getLogin({
+        googleId, email, name, googleAccessToken,
+      })
+      .then((response) => {
         history.push('/');
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -48,7 +51,7 @@ const GoogleSignin: React.FC = () => {
     console.error(err);
   };
 
-  const responseAutoLoad = (success: Boolean) => {
+  const responseAutoLoad = (success: boolean) => {
     console.log(success);
   };
   return (
