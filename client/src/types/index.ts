@@ -7,17 +7,39 @@ export interface User {
 export interface loginInfo {
   isLoggedIn: boolean;
 }
-export interface Chat {
-  uuid: string;
-  content: string;
-  sender: string;
-  roomId: string;
-  createdAt: number;
-}
+
 export interface Room {
   uuid: string;
-  participants: string[];
-  lastMessage?: string;
-  updatedAt?: number;
-  numOfNewMessages?: number;
+  participants: Pick<User, 'uuid' | 'name' | 'email' | 'statusMessage'>[];
+}
+
+export interface IChat {
+  id: number;
+  uuid: string;
+  roomParticipantsId: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ApiChat extends Pick<IChat, 'uuid' | 'content' | 'createdAt' | 'updatedAt'> {
+  metaInfo: {
+    uuid: string;
+    createdAt: string;
+    updatedAt: string;
+    sender: User;
+    room: {
+      uuid: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
+}
+export type ReduxState<T> = {
+  isLoading: boolean;
+  data: T;
+}
+
+export type ReduxChatType = {
+  [key: string]: ApiChat[];
 }

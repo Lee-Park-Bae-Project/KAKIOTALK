@@ -8,11 +8,16 @@ import {
   getRoomFailure,
 } from 'modules/room/action';
 
-import request from 'common/request';
+import * as request from 'common/request';
+import { Room } from 'types';
+import { AxiosResponse } from 'axios';
+import { joinRooms } from 'socket';
 
 function* room() {
   try {
-    const response = yield call(request.getRooms);
+    const response: AxiosResponse<request.ResponseType<Room[]>> = yield call(request.getRooms);
+    const roomUuids = response.data.data.map((v) => v.uuid);
+    joinRooms({ roomUuids });
     yield put(getRoomSuccess(response.data.data));
   } catch (e) {
     yield put(getRoomFailure(e.message));

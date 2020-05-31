@@ -5,8 +5,9 @@ import Hr from 'atoms/Hr';
 import Profile from 'system/Profile';
 import { UserCard, PopUp } from 'components';
 import { deleteFriend } from 'modules/friends';
-import {User} from 'types'
-import {alert} from 'common/utils'
+import { User } from 'types';
+import { alert } from 'common/utils';
+
 export interface Props {
   myProfile: User;
   friendList: User[];
@@ -17,24 +18,24 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
   const [clickedUser, setClickedUser] = useState({
     uuid: '',
     name: '',
-    email:'',
+    email: '',
     statusMessage: '',
   });
-  let profileRef = React.createRef<HTMLDivElement>();
+  const profileRef = React.createRef<HTMLDivElement>();
   const onProfileClose = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const profileNode = profileRef.current
-    if (profileNode&&e.target instanceof Node&&!profileNode.contains(e.target)) {
+    const profileNode = profileRef.current;
+    if (profileNode && e.target instanceof Node && !profileNode.contains(e.target)) {
       setPopup(false);
     }
   };
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
   const onDeleteFriend = () => {
-    alert.confirmDelete(clickedUser.name).then(value=>{
-      if(value) {
-        dispatch(deleteFriend(clickedUser.uuid))
-        setPopup(false)
+    alert.confirmDelete(clickedUser.name).then((value) => {
+      if (value) {
+        dispatch(deleteFriend(clickedUser.uuid));
+        setPopup(false);
       }
-    })
+    });
   };
 
   return (
@@ -46,37 +47,38 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
       />
       <Hr />
       친구 {friendList.length}
-      {friendList.length>0?
-      friendList
-        .filter(
-          friend =>
-            friend.name
+      {friendList.length > 0
+        ? friendList
+          .filter(
+            (friend) => friend.name
               .toLowerCase()
               .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
-        )
-        .map(({ uuid, statusMessage, name ,email}) => {
-          const onUserCardClick = () => {
-            setPopup(true);
-            setClickedUser({
-              uuid,
-              name,
-              email,
-              statusMessage,
-            });
-          };
-          
+          )
+          .map(({
+            uuid, statusMessage, name, email,
+          }) => {
+            const onUserCardClick = () => {
+              setPopup(true);
+              setClickedUser({
+                uuid,
+                name,
+                email,
+                statusMessage,
+              });
+            };
 
-          return (
+
+            return (
             <UserCard
               key={uuid}
               name={name}
               statusMessage={statusMessage}
               onClick={onUserCardClick}
             />
-          );
-        })
-        :<h1>친구를 추가해 보세요!</h1>}
-      
+            );
+          })
+        : <h1>친구를 추가해 보세요!</h1>}
+
       {popup ? (
         <PopUp onClose={onProfileClose} refs = {profileRef}>
           <Profile
