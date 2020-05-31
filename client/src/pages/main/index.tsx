@@ -2,12 +2,10 @@ import React, { FC } from 'react';
 import * as S from 'pages/main/styles';
 import NavigationBar from 'components/NavigationBar';
 import SearchInput from 'components/SearchInput';
-import { User } from 'types';
 import { RoomState } from 'modules/room';
-import Friend from './Friend';
 import { PopUp, Dialog } from 'components';
 import FriendContainer from 'containers/FriendContainer';
-import ChatContainer from 'containers/ChatContainer';
+// import ChatContainer from 'containers/ChatContainer';
 import Room from 'system/Room';
 interface TabSelector {
   friend: boolean;
@@ -23,12 +21,12 @@ interface Props {
   popupAddFriend: boolean;
   confirmAddFriend: () => void;
   cancelAddFriend: () => void;
-  addFriendEnterPress : (e:React.KeyboardEvent<HTMLInputElement>) => void;
+  addFriendEnterPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   friendEmailToAdd: string;
   onFriendEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  dialogRef: any,
-  onPopupOutClicked:(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  dialogRef: any;
+  onPopupOutClicked: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   confirmLogout: () => void;
   cancelLogout: () => void;
   popupLogout: boolean;
@@ -46,7 +44,7 @@ const Main: FC<Props> = ({
   addFriendEnterPress,
   friendEmailToAdd,
   onFriendEmailChange,
-  logoutTabOnClick, 
+  logoutTabOnClick,
   dialogRef,
   onPopupOutClicked,
   confirmLogout,

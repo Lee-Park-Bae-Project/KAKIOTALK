@@ -6,9 +6,8 @@ interface CotnainerProps {
   right?: boolean;
 }
 const Container = styled(Flex)<CotnainerProps>`
-  flex-direction: ${(props) => (props.direction == 'row' ? 'row' : 'column')};
-  justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
+  flex-direction: ${props => (props.direction === 'row' ? 'row' : 'column')};
+  justify-content: ${props => (props.right ? 'flex-end' : 'flex-start')};
 `;
-
 
 export default Container;
