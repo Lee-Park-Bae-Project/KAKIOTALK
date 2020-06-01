@@ -72,6 +72,7 @@ module.exports = {
     'eol-last': ['error', 'always'],
     'import/no-unresolved': 'off',
     '@typescript-eslint/member-delimiter-style': 0,
+    '@typescript-eslint/no-unused-vars': 0,
   },
   settings: {
     react: {

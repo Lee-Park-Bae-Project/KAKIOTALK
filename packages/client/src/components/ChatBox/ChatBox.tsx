@@ -1,8 +1,10 @@
-import React, { FC, useState } from 'react';
-import { ApiChat } from 'types';
-import { convertDBTimeTohhmmA } from 'common/utils';
-import { UserCard } from 'components';
-import * as S from './style';
+import React, {
+  FC, useState,
+} from 'react'
+import { ApiChat } from 'types'
+import { convertDBTimeTohhmmA } from 'common/utils'
+import { UserCard } from 'components'
+import * as S from './style'
 
 type Props = ApiChat & {
   userUuid: string;
@@ -32,6 +34,6 @@ const ChatBox: FC<Props> = ({
         {convertDBTimeTohhmmA(createdAt)}
       </S.Time>
     </S.Container>
-);
+)
 
-export default ChatBox;
+export default ChatBox

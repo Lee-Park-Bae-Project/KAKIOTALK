@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@kakio/common": "1.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -110,6 +111,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
     "faker": "^4.1.0",
+    "jest": "24.9.0",
     "prettier": "^1.19.1",
     "react-docgen-typescript-loader": "^3.6.0",
     "redux-devtools-extension": "^2.13.8",

@@ -1,9 +1,9 @@
-import React from 'react';
-import Routes from 'components/Routes';
-import Global from 'styles/global';
-import { Provider } from 'react-redux';
-import { store } from 'modules';
-import { CookiesProvider } from 'react-cookie';
+import React from 'react'
+import Routes from 'components/Routes'
+import Global from 'styles/global'
+import { Provider } from 'react-redux'
+import { store } from 'modules'
+import { CookiesProvider } from 'react-cookie'
 
 const App: React.FC = () => (
   <CookiesProvider>
@@ -12,6 +12,6 @@ const App: React.FC = () => (
       <Routes />
     </Provider>
   </CookiesProvider>
-);
+)
 
-export default App;
+export default App

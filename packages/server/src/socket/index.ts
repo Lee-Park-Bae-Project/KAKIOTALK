@@ -28,14 +28,14 @@ type SocketType = (socket: openSocket.Socket) => void
 
 const socketCallBack = ((cb: SocketType) => (socket: openSocket.Socket) => cb(socket))
 
-const onDisconnect = ((socket) => {
+const onDisconnect = ((socket: openSocket.Socket) => {
   socket.on(Event.disconnect, () => {
     console.log(chalk.yellow(`${socket.id} is disconnected`))
     io.emit('leave', `${socket.id} is disconnected`)
   })
 })
 
-const afterLogin = ((socket) => {
+const afterLogin = ((socket: openSocket.Socket) => {
   socket.on(Event.afterLogin, async ({ uuid }: T.AfterLogin) => {
     const check = await Redis.get(uuid)
     await Redis.set(uuid, socket.id)

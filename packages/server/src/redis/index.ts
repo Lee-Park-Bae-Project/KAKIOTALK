@@ -1,13 +1,14 @@
-import redis from 'redis'
 import { promisify } from 'util'
 import { getRedisOpts } from '../configs'
 
+const redis = require('redis')
+
 const redisOpts = getRedisOpts()
-const client: redis.RedisClient = redis.createClient(redisOpts)
+const client = redis.createClient(redisOpts)
 // reference: https://www.npmjs.com/package/redis#promises
 const setAsync = promisify(client.set).bind(client)
 const getAsync = promisify(client.get).bind(client)
-client.on('error', (error) => {
+client.on('error', (error: any) => {
   console.error(error)
 })
 

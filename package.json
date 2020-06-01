@@ -12,6 +12,10 @@
   "scripts": {
     "client": "yarn workspace @kakio/client",
     "server": "yarn workspace @kakio/server",
-    "common": "yarn workspace @kakio/common"
+    "common": "yarn workspace @kakio/common",
+    "common:build": "yarn common build"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.3"
   }
 }
