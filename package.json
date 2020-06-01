@@ -1,0 +1,17 @@
+{
+  "name": "kakio-talk",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "repository": "https://github.com/Lee-Park-Bae-Project/KAKIOTALK",
+  "author": "junow <taristmas@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "client": "yarn workspace @kakio/client",
+    "server": "yarn workspace @kakio/server",
+    "common": "yarn workspace @kakio/common"
+  }
+}
