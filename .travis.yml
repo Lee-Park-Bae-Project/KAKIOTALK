@@ -7,7 +7,7 @@ cache:
     - node_modules
 before_script:
   - cd client
-  - yarn install
+  - yarn add
 script:
   - yarn deploy
 before_deploy:
