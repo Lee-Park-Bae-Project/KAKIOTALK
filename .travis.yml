@@ -9,13 +9,12 @@ before_script:
   - cd client
   - yarn install
 script:
-  - yarn build
+  - yarn deploy
 before_deploy:
   - cd client
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: build
   github_token: $__GITHUB_TOKEN__
   on:
     branch: feature/chat-start
