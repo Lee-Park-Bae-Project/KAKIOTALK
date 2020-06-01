@@ -8,14 +8,11 @@ cache:
 before_script:
   - cd client
   - yarn install
-script:
-  - yarn deploy
-on:
-  branch: feature/chat-start
-# before_deploy:
-#   - cd client
-# deploy:
-#   provider: pages
-#   skip_cleanup: true
-#   github_token: $__GITHUB_TOKEN__
-
+before_deploy:
+  - cd client
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $__GITHUB_TOKEN__
+  on:
+    branch: feature/chat-start
