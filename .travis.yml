@@ -9,7 +9,7 @@ before_script:
   - cd client
   - yarn install
 script:
-  - yarn deploy
+  - yarn build
 before_deploy:
   - cd client
 deploy:
