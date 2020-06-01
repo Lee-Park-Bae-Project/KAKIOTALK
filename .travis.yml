@@ -5,7 +5,8 @@ node_js:
 cache:
   directories:
     - node_modules
-script: -yarn build
+script:
+  - yarn build
 
 deploy:
   provider: pages
