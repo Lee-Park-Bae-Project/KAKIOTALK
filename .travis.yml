@@ -7,11 +7,11 @@ cache:
     - node_modules
 script:
   - yarn build
-
+before_deploy:
+  - cd client
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $__GITHUB_TOKEN__
-  local_dir: client
   on:
     branch: feature/chat-start
