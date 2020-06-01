@@ -1,10 +1,12 @@
 language: node_js
 
 node_js:
-  - 'lts/*'
+  - "lts/*"
 cache:
   directories:
     - node_modules
+before_script:
+  - cd client
 script:
   - yarn deploy
 before_deploy:
