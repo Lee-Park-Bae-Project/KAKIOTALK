@@ -1,0 +1,7 @@
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $__GITHUB_TOKEN__
+  keep_history: true
+  on:
+    branch: chat-start

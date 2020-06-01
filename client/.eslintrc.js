@@ -55,7 +55,9 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    '@typescript-eslint/interface-name-prefix': 0,
+    'eol-last': ['error', 'always'],
+    'import/no-unresolved': 'off',
+    '@typescript-eslint/member-delimiter-style': 0,
   },
   settings: {
     react: {
@@ -71,4 +73,4 @@ module.exports = {
     browser: true,
     jest: true,
   },
-};
+}

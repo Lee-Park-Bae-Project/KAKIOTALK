@@ -39,11 +39,11 @@ export const deleteFriend = (uuid: string) => ({
   type: DELETE_FRIEND,
   payload: uuid,
 });
-export const deleteFriendSuccess = (uuid:string)=>({
+export const deleteFriendSuccess = (uuid: string) => ({
   type: DELETE_FRIEND_SUCCESS,
-  payload: uuid
-})
-export const deleteFriendFailure = (e: AxiosError)=>({
+  payload: uuid,
+});
+export const deleteFriendFailure = (e: AxiosError) => ({
   type: DELETE_FRIEND_FAILURE,
   payload: e,
-})
+});

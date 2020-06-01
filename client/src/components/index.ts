@@ -1,7 +1,6 @@
 import PopUp from './PopUp';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
-import ChatBox from './ChatBox';
 import Dialog from './Dialog';
 import GoogleSignIn from './GoogleSignin';
 import Logo from './Logo';
@@ -11,12 +10,11 @@ import Routes from './Routes';
 import SearchInput from './SearchInput';
 import TextIcon from './TextIcon';
 import UserCard from './UserCard';
-
+import MyProfile from './MyProfile';
 export {
   PopUp,
   Button,
   ButtonGroup,
-  ChatBox,
   Dialog,
   GoogleSignIn,
   Logo,
@@ -26,4 +24,5 @@ export {
   SearchInput,
   TextIcon,
   UserCard,
+  MyProfile,
 };

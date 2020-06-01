@@ -5,8 +5,9 @@ import SearchInput from 'components/SearchInput';
 import { RoomState } from 'modules/room';
 import { PopUp, Dialog } from 'components';
 import FriendContainer from 'containers/FriendContainer';
-// import ChatContainer from 'containers/ChatContainer';
 import Room from 'system/Room';
+import Friend from './Friend';
+
 interface TabSelector {
   friend: boolean;
   chat: boolean;
@@ -51,8 +52,7 @@ const Main: FC<Props> = ({
   popupLogout,
   cancelLogout,
   popupAddFriend,
-}) => {
-  return (
+}) => (
     <S.Container>
       <S.Left>
         <S.NavigationBarWrapper>
@@ -114,7 +114,6 @@ const Main: FC<Props> = ({
         </PopUp>
       ) : null}
     </S.Container>
-  );
-};
+);
 
 export default Main;

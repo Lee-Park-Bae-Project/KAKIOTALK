@@ -11,7 +11,7 @@ import {
   deleteFriendSuccess,
   deleteFriendFailure,
 } from 'modules/friends/action';
-import request from 'common/request';
+import * as request from 'common/request';
 import { alert } from 'common/utils';
 
 function* getFriendsSaga() {

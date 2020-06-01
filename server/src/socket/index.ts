@@ -1,5 +1,8 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
+import * as T from '../types'
+import * as Redis from '../redis'
+import { addMessage } from '../services/chat'
 
 declare global {
   namespace NodeJS {
@@ -9,49 +12,83 @@ declare global {
     }
   }
 }
-const init = (socket: openSocket.Socket) => {
-  socket.on('init', (data) => {
-    global.io.emit('init', `${socket.id} is initialized`)
-  })
+
+let io:openSocket.Server
+
+export enum Event {
+  connect = 'connect',
+  disconnect = 'disconnect',
+  afterLogin = 'afterLogin',
+  chatFromClient = 'chatFromClient',
+  chatFromServer = 'chatFromServer',
+  joinRooms = 'joinRooms',
 }
 
-const onDisconnect = (socket: openSocket.Socket) => {
-  socket.on('disconnect', () => {
+type SocketType = (socket: openSocket.Socket) => void
+
+const socketCallBack = ((cb: SocketType) => (socket: openSocket.Socket) => cb(socket))
+
+const onDisconnect = ((socket) => {
+  socket.on(Event.disconnect, () => {
     console.log(chalk.yellow(`${socket.id} is disconnected`))
-    global.io.emit('leave', `${socket.id} is disconnected`)
+    io.emit('leave', `${socket.id} is disconnected`)
   })
+})
+
+const afterLogin = ((socket) => {
+  socket.on(Event.afterLogin, async ({ uuid }: T.AfterLogin) => {
+    const check = await Redis.get(uuid)
+    await Redis.set(uuid, socket.id)
+  })
+})
+
+export const chatFromServer = (roomUuid: string, chat: any) => {
+  io.to(roomUuid).emit(Event.chatFromServer, chat)
 }
 
-const afterLogin = (socket: openSocket.Socket) => {
-  socket.on('afterLogin', (msg) => {
-    console.log(chalk.blue(msg))
+const chatFromClient = socketCallBack((socket) => {
+  socket.on(Event.chatFromClient, async ({
+    roomUuid, content, createdAt, userUuid,
+  }: T.SendMsg) => {
+    try {
+      const updatedAt = createdAt
+      const data = await addMessage({
+        roomUuid,
+        content,
+        createdAt,
+        updatedAt,
+        userUuid,
+      })
+      chatFromServer(roomUuid, data)
+    } catch (e) {
+      console.error(e)
+    }
   })
-}
+})
 
-const sendMsg = (socket: openSocket.Socket) => {
-  socket.on('sendMsg', ({
-    sender, roomId, content, createdAt,
-  }) => {
-    console.log(sender, roomId, content, createdAt)
+const joinRooms = socketCallBack((socket) => {
+  socket.on(Event.joinRooms, ({ roomUuids }:T.JoinRooms) => {
+    roomUuids.forEach((roomUuid) => {
+      socket.join(roomUuid)
+    })
   })
-}
-const connection = (io:openSocket.Server) => {
+})
+
+const connection = () => {
   io.on('connection', (socket:openSocket.Socket) => {
-    global.socket = socket
     socket.emit('connection', `connected: ${socket.id}`)
     console.log(chalk.yellow(`connected: ${socket.id}`))
 
-    init(socket)
     onDisconnect(socket)
     afterLogin(socket)
-    sendMsg(socket)
+    chatFromClient(socket)
+    joinRooms(socket)
   })
 }
 
 const connect = (server: any) => {
-  const io:openSocket.Server = openSocket(server)
-  global.io = io
-  connection(io)
+  io = openSocket(server)
+  connection()
 }
 
 export { connect }

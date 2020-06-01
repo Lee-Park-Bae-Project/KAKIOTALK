@@ -19,7 +19,7 @@ export const Wrapper = styled(Flex)`
   /* max-height: 100vh; */
   height: 100%;
   float:left;
-  overflow: scroll;
+  overflow-y: auto;
 `;
 
 export const NavigationBarWrapper = styled(Flex)`

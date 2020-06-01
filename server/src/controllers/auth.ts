@@ -1,9 +1,13 @@
+import {
+  NextFunction, Request, Response,
+} from 'express'
+import createError from 'http-errors'
 import * as userService from '../services/user'
-import { NextFunction, Request, Response } from 'express';
-import createError from 'http-errors';
-import { cookieConfig, cookieName } from '../configs';
-import { response } from '../common/utils';
-import loginService from '../services/auth';
+import {
+  cookieConfig, cookieName,
+} from '../configs'
+import { response } from '../common/utils'
+import loginService from '../services/auth'
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -21,13 +25,13 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     res.cookie(cookieName, token, cookieConfig)
     response(res)
   } catch (e) {
-    next(e);
+    next(e)
   }
-};
+}
 const logout = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.clearCookie(cookieName, { path: '/' });
-    response(res);
+    res.clearCookie(cookieName, { path: '/' })
+    response(res)
   } catch (e) {
     next(e)
   }
@@ -44,10 +48,12 @@ const getUserInfo = async (req: Request, res: Response, next: NextFunction) => {
       return next(createError(404, '유저정보를 찾을 수 없습니다.'))
     }
 
-    return response(res, user )
+    return response(res, user)
   } catch (e) {
     next(e)
   }
 }
 
-export { login, getUserInfo, logout };
+export {
+  login, getUserInfo, logout,
+}

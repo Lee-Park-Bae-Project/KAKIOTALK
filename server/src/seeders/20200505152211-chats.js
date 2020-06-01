@@ -8,7 +8,7 @@ module.exports = {
     [
       {
         id: 1,
-        uuid: '123',
+        uuid: '487d5371680091bfbef4549652151b6d',
         roomParticipantsId: 1,
         content: 'hihi',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
@@ -16,7 +16,7 @@ module.exports = {
       },
       {
         id: 2,
-        uuid: '234',
+        uuid: '4e879584c8fd9c67a9aac350bd1f3e1f',
         roomParticipantsId: 2,
         content: 'hihihi',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
@@ -24,7 +24,7 @@ module.exports = {
       },
       {
         id: 3,
-        uuid: '321',
+        uuid: '40c468a8b9ea5aff8f10c76a681f9173',
         roomParticipantsId: 4,
         content: 'im ghost',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         id: 4,
-        uuid: '432',
+        uuid: '4bc89a80458137398886378ae7e3b105',
         roomParticipantsId: 3,
         content: 'im not ghost',
         createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),

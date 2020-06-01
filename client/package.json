@@ -20,6 +20,7 @@
     "enzyme-to-json": "^3.4.3",
     "gh-pages": "^2.2.0",
     "global": "^4.4.0",
+    "immer": "^6.0.8",
     "jest-styled-components": "^7.0.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",

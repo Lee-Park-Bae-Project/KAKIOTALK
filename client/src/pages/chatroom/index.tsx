@@ -1,91 +1,133 @@
 import React, {
-  FC, useState, useEffect,
+  FC,
+  useState,
+  useEffect,
+  useRef,
+  KeyboardEvent,
+  ChangeEvent,
 } from 'react';
-import { sendMsg } from 'socket';
-import { RouteComponentProps } from 'react-router-dom';
+import { getCurTimeDBFormat } from 'common/utils';
+import { WithAuthProps } from 'hocs/withAuth';
+import ChatBox from 'components/ChatBox';
+import { ReduxChatType, ReduxState } from 'types';
+import { chatFromClient } from 'socket';
 import * as S from './style';
-import withAuth, { WithAuthProps } from '../../hocs/withAuth';
 
-interface Chat {
-  uuid: string;
-  roomId: string;
-  sender: string;
-  content: string;
-  createdAt: string;
+interface Props extends WithAuthProps{
+  chatState: ReduxState<ReduxChatType>;
+  roomUuid: string;
+  handleBack: () => void;
+  roomName: string;
 }
 
-const ChatRoom: FC<WithAuthProps & RouteComponentProps> = ({
-  name, email, uuid, location,
+const ChatRoom: FC<Props> = ({
+  chatState,
+  uuid,
+  roomUuid,
+  handleBack,
+  roomName,
 }) => {
-  const [messages, setMessages] = useState<Chat[]>([
-    {
-      uuid: '',
-      roomId: '',
-      sender: '',
-      content: '',
-      createdAt: '',
-    },
-  ]);
+  const messageRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const [message, setMessage] = useState<string>('');
+  const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log(uuid);
-  }, [uuid]);
+    if (!chatState.data[roomUuid]) {
+      return;
+    }
+    if (isFirstScroll) {
+      setIsFirstScroll(false);
+      if (chatContainerRef && chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      }
+      return;
+    }
+    if (scrollRef && scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chatState,
+    roomUuid,
+    isFirstScroll]);
 
-  let inputRef: any;
   const handleSubmit = () => {
-    const date = new Date();
-    setMessages(
-      messages.concat([
-        {
-          uuid: '123',
-          roomId: '123',
-          sender: '123',
-          content: inputRef.value,
-          createdAt: date.toUTCString(),
-        },
-      ]),
-    );
-    sendMsg({
-      sender: 'sender',
-      content: 'content',
-      roomId: 'typo',
-      createdAt: date.toUTCString(),
+    if (!messageRef) {
+      return;
+    }
+
+    chatFromClient({
+      content: message,
+      roomUuid,
+      createdAt: getCurTimeDBFormat(),
+      userUuid: uuid,
     });
 
-    inputRef.value = '';
+    if (messageRef.current) {
+      messageRef.current.focus();
+    }
+    setMessage('');
   };
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (e.target && e.currentTarget.value.trim().length > 0) {
         handleSubmit();
-        inputRef.scrollIntoView();
       }
     }
   };
-  const chatLogs = messages.map((msg) => (
-    <S.ChatBox
-      sendTime={msg.createdAt}
-      text={msg.content}
-      received={false}
-      key={msg.createdAt}
-    />
-  ));
+
+  const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
 
   return (
-    <S.Room>
-      <S.UserCard name={'123'} />
-      <S.ChatContainer>{chatLogs}</S.ChatContainer>
+    <S.Container>
+      <S.Header>
+        <S.Back onClick={handleBack}>
+          back
+        </S.Back>
+        <S.Title>
+          {roomName}
+        </S.Title>
+      </S.Header>
+      <S.ChatContainer ref={chatContainerRef}>
+        {
+          !chatState.data[roomUuid]
+            ? (<div>loading</div>)
+            : (
+              (
+                chatState.data[roomUuid].map(({
+                  content, createdAt, metaInfo, updatedAt, uuid: _uuid,
+                }) => (
+                <ChatBox
+                  key={_uuid}
+                  userUuid={uuid}
+                  content={content}
+                  createdAt={createdAt}
+                  metaInfo={metaInfo}
+                  updatedAt={updatedAt}
+                  uuid={_uuid}
+                  isMine={metaInfo.sender.uuid === uuid}
+                />
+                ))
+              )
+            )
+        }
+        <S.ChatBottom ref={scrollRef}></S.ChatBottom>
+      </S.ChatContainer>
       <S.InputContainer>
         <S.InputArea
-          ref={(el) => (inputRef = el)}
+          ref={messageRef}
+          value={message}
+          onChange={handleMessageChange}
           onKeyPress={handleEnterPress}
         />
         <S.ButtonWrapper>
           <S.SendBtn onClick={handleSubmit}>전송</S.SendBtn>
         </S.ButtonWrapper>
       </S.InputContainer>
-    </S.Room>
+    </S.Container>
   );
 };
 
-export default withAuth(ChatRoom);
+export default ChatRoom;
