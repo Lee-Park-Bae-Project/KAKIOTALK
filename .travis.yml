@@ -9,7 +9,8 @@ before_script:
   - cd packages
   - cd client
   - yarn install
-
+script:
+  - echo "skipping tests"
 deploy:
   provider: pages
   skip_cleanup: true
