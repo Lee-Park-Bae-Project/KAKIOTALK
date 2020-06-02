@@ -13,6 +13,7 @@ script:
   - echo "skipping tests"
 deploy:
   provider: pages
+  local_dir: client
   skip_cleanup: true
   github_token: $__GITHUB_TOKEN__
   on:
