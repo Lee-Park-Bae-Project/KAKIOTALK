@@ -13,3 +13,4 @@ before_script:
   - yarn install
 script:
   - echo "skipping tests"
+  - yarn deploy
