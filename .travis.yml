@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - "lts/*"
+cache:
+  directories:
+    - node_modules
+before_script:
+  - cd packages
+  - cd client
+  - yarn install
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $__GITHUB_TOKEN__
+  on:
+    branch: feature/workspace-setting
