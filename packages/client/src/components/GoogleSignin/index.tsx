@@ -1,59 +1,62 @@
-import React from 'react';
-import dotenv from 'dotenv';
-import * as S from 'components/GoogleSignin/styles';
-import GoogleLogin from 'react-google-login';
-import { withRouter, useHistory } from 'react-router-dom';
-import { configs } from 'common/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import * as request from 'common/request';
+import React from 'react'
+import dotenv from 'dotenv'
+import * as S from 'components/GoogleSignin/styles'
+import GoogleLogin from 'react-google-login'
+import {
+  useHistory, withRouter,
+} from 'react-router-dom'
+import { configs } from 'common/constants'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import * as request from 'common/request'
 
-const { useState, useEffect } = React;
-
-dotenv.config();
+const {
+  useState, useEffect,
+} = React
 
 type LoginForm = {
   loginSuccess: (state: { id: string; email: string; name: string }) => void;
 };
 const GoogleSignin: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [login, setLogin] = useState({
     email: '',
     name: '',
     googleId: '',
-  });
-  useEffect(() => {
-    console.log(login);
-  }, [login]);
+  })
 
-  const history = useHistory();
+  const history = useHistory()
   const responseSuccess = (e: any) => {
-    const { googleId } = e;
-    const googleAccessToken = e.accessToken;
-    const { name, email } = e.profileObj;
+    const { googleId } = e
+    const googleAccessToken = e.accessToken
+    const {
+      name, email,
+    } = e.profileObj
     setLogin({
       email,
       name,
       googleId,
-    });
-    console.log(e);
+    })
+    console.log(e)
     request
       .getLogin({
         googleId, email, name, googleAccessToken,
       })
       .then((response) => {
-        history.push('/');
+        history.push('/')
       })
       .catch((error) => {
-        console.log(error);
-      });
-  };
+        console.log(error)
+      })
+  }
   const responseFail = (err: Error) => {
-    console.error(err);
-  };
+    console.error(err)
+  }
 
   const responseAutoLoad = (success: boolean) => {
-    console.log(success);
-  };
+    console.log(success)
+  }
   return (
     <S.Container>
       <GoogleLogin
@@ -67,7 +70,7 @@ const GoogleSignin: React.FC = () => {
         prompt="consent"
       />
     </S.Container>
-  );
-};
+  )
+}
 
-export default withRouter(GoogleSignin);
+export default withRouter(GoogleSignin)

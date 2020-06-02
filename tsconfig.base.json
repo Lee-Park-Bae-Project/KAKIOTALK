@@ -11,6 +11,8 @@
     // "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
     // "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
     "strictNullChecks": true /* Enable strict null checks. */,
-    "strictFunctionTypes": true /* Enable strict checking of function types. */
-  }
+    "strictFunctionTypes": true /* Enable strict checking of function types. */,
+    "skipLibCheck": true
+  },
+  "exclude": ["**/node_modules", "**/dist"]
 }
