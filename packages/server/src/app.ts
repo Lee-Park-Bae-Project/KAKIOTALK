@@ -2,6 +2,7 @@ import express, {
   NextFunction, Request, Response,
 } from 'express'
 import cors from 'cors'
+import { add } from '@kakio/common'
 import v1Route from './routes/v1'
 import { corsConfig } from './configs'
 import { response } from './common/utils'
