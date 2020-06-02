@@ -1,8 +1,8 @@
 # yarn workspace
 
-<div style="text-align:center">
+<p align="center">
   <img src="../docs/assets/yarn.png" width=50%>
-</div>
+</p>
 
 - 한 `repository` 안에 `client`, `server` 가 관리되고 있습니다.
 - 폴더를 기준으로 두 프로젝트를 관리하고 있었지만 서로간에 공유해야할 코드가 생기면서 `client`, `server` 폴더안에 같은 코드를 작성하고 똑같이 맞춰주어야 하는 불편함이 발생했습니다.
