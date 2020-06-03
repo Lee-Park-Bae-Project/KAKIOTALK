@@ -7,10 +7,14 @@ cache:
     - node_modules
 env:
   - CI=false
-github_token: $__GITHUB_TOKEN__
 before_script:
   - cd client
   - yarn install
 script:
   - echo "skipping tests"
   - yarn deploy
+deploy:
+  github_token: $__GITHUB_TOKEN__
+  skip_cleanup: true
+  on:
+    branch: feature/chat-start
