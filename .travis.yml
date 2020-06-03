@@ -15,8 +15,9 @@ script:
   - echo "skipping tests"
   # - yarn deploy
 deploy:
+  provider: pages
   github_token: $__GITHUB_TOKEN__
   skip_cleanup: true
-  local_dir: client/build
+  local_dir: build
   on:
     branch: feature/chat-start
