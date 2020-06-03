@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "lts/*"
+  - 'lts/*'
 cache:
   directories:
     - node_modules
@@ -10,6 +10,7 @@ env:
 before_script:
   - cd client
   - yarn install
+  - yarn build
 script:
   - echo "skipping tests"
   # - yarn deploy
