@@ -5,15 +5,20 @@ node_js:
 cache:
   directories:
     - node_modules
+env:
+  - CI=false
 before_script:
   - cd packages
   - cd client
   - yarn install
+  - yarn build
 script:
   - echo "skipping tests"
+  # - yarn deploy
 deploy:
   provider: pages
-  skip_cleanup: true
   github_token: $__GITHUB_TOKEN__
+  skip_cleanup: true
+  local_dir: packages/client/build
   on:
     branch: feature/workspace-setting
