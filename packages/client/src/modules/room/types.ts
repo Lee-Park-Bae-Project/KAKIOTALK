@@ -1,13 +1,13 @@
 import {
+  getRoomFailure,
   getRoomRequest,
   getRoomSuccess,
-  getRoomFailure,
-} from 'modules/room/action';
-import { Room } from 'types';
+} from 'modules/room/action'
+import { Room } from '@kakio/common'
 
 export interface RoomState {
   isLoading: boolean;
-  data: Room[];
+  data: Omit<Room, 'id'>[];
 }
 
 export type RoomAction =

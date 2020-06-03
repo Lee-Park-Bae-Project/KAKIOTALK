@@ -5,7 +5,9 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IRoomParticipants } from '../types'
+// import { IRoomParticipants } from '../types'
+import { RoomParticipants } from '@kakio/common'
+
 import { UserModel } from './user'
 import { RoomModel } from './room'
 
@@ -14,7 +16,7 @@ export const ROOM_PARTICIPANTS_ASSOCIATION_ALIAS = {
   Room: 'room' as const,
 }
 
-export interface RoomParticipantsModel extends Model, IRoomParticipants {
+export interface RoomParticipantsModel extends Model, RoomParticipants {
   [ROOM_PARTICIPANTS_ASSOCIATION_ALIAS.User]?: UserModel;
   [ROOM_PARTICIPANTS_ASSOCIATION_ALIAS.Room]?: RoomModel;
 }
@@ -25,7 +27,7 @@ export type RoomParticipantsStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const RoomParticipants = <RoomParticipantsStatic>sequelize.define('room_participants', {
+  const RoomParticipantsStaticModel = <RoomParticipantsStatic>sequelize.define('room_participants', {
     id: {
       primaryKey: true,
       allowNull: false,
@@ -50,15 +52,15 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
-  RoomParticipants.associate = (models: any) => {
-    RoomParticipants.belongsTo(
+  RoomParticipantsStaticModel.associate = (models: any) => {
+    RoomParticipantsStaticModel.belongsTo(
       models.User, {
         as: 'sender',
         foreignKey: 'userId',
         targetKey: 'id',
       }
     )
-    RoomParticipants.belongsTo(
+    RoomParticipantsStaticModel.belongsTo(
       models.Room, {
         as: 'room',
         foreignKey: 'roomId',
@@ -68,5 +70,5 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     // RoomParticipants.hasMany(models.Room)
     // RoomParticipants.hasMany(models.User)
   }
-  return RoomParticipants
+  return RoomParticipantsStaticModel
 }

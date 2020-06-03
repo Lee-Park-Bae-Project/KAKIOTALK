@@ -4,7 +4,7 @@ import {
   Model,
   Sequelize,
 } from 'sequelize'
-import { IUser } from '../types'
+import { User } from '@kakio/common'
 import { RoomModel } from './room'
 import { FriendModel } from './friends'
 
@@ -12,7 +12,7 @@ export const USER_ASSOCIATION_ALIAS = {
   RoomParticipants: 'rooms' as const,
   Friend: 'friend' as const,
 }
-export interface UserModel extends Model, IUser {
+export interface UserModel extends Model, User {
   [USER_ASSOCIATION_ALIAS.RoomParticipants]?: RoomModel[];
   [USER_ASSOCIATION_ALIAS.Friend]: FriendModel[];
 }
@@ -20,11 +20,10 @@ export interface UserModel extends Model, IUser {
 export type UserStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): UserModel;
   associate: (models: any) => void;
-
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const User = <UserStatic>sequelize.define('users', {
+  const UserStaticModel = <UserStatic>sequelize.define('users', {
     id: {
       primaryKey: true,
       allowNull: false,
@@ -69,8 +68,8 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   },)
 
-  User.associate = (models: any) => {
-    User.belongsToMany(
+  UserStaticModel.associate = (models: any) => {
+    UserStaticModel.belongsToMany(
       models.Room,
       {
         through: models.RoomParticipants,
@@ -80,13 +79,13 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       }
     )
 
-    User.hasMany(models.Friend, {
+    UserStaticModel.hasMany(models.Friend, {
       foreignKey: 'userId',
       sourceKey: 'id',
       as: USER_ASSOCIATION_ALIAS.Friend,
     })
   }
 
-  return User
+  return UserStaticModel
 }
 

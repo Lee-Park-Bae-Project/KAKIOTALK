@@ -1,9 +1,12 @@
-import { NextFunction, Request, Response } from 'express'
+import {
+  NextFunction, Request, Response,
+} from 'express'
 import createError from 'http-errors'
 import { models } from '../models'
-import { response, message } from '../common/utils'
+import {
+  message, response,
+} from '../common/utils'
 import * as userService from '../services/user'
-import { IUser } from 'src/types'
 
 const getMyProfile = async (
   req: Request,
@@ -16,7 +19,9 @@ const getMyProfile = async (
     }
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
     if (!user) throw createError(401, message.INVALID_GOOGLE_ID)
-    const { uuid, email, name, statusMessage } = user
+    const {
+      uuid, email, name, statusMessage,
+    } = user
     const myProfile = {
       uuid,
       email,
@@ -46,10 +51,16 @@ const updateProfile = async (
       req.decodedUser.googleId
     )
     if (!updatedUser) throw createError(401, message.INVALID_GOOGLE_ID)
-    const { name, uuid, email, statusMessage } = updatedUser
-    response(res, { name, uuid, email, statusMessage })
+    const {
+      name, uuid, email, statusMessage,
+    } = updatedUser
+    response(res, {
+      name, uuid, email, statusMessage,
+    })
   } catch (e) {
     next(e)
   }
 }
-export { getMyProfile, updateProfile }
+export {
+  getMyProfile, updateProfile,
+}

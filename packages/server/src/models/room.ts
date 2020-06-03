@@ -5,14 +5,12 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import {
-  IRoom, IRoomParticipants,
-} from '../types'
+import { Room } from '@kakio/common'
 import { UserModel } from './user'
 
 export const ROOM_ASSOCIATION_ALIAS = { RoomParticipants: 'participants' as const }
 
-export interface RoomModel extends Model, IRoom {
+export interface RoomModel extends Model, Room {
   [ROOM_ASSOCIATION_ALIAS.RoomParticipants]: UserModel[]
 }
 
@@ -22,7 +20,7 @@ export type RoomStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const Room = <RoomStatic>sequelize.define('rooms', {
+  const RoomStaticModel = <RoomStatic>sequelize.define('rooms', {
     id: {
       primaryKey: true,
       allowNull: false,
@@ -39,8 +37,8 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
-  Room.associate = (models: any) => {
-    Room.belongsToMany(
+  RoomStaticModel.associate = (models: any) => {
+    RoomStaticModel.belongsToMany(
       models.User,
       {
         through: models.RoomParticipants,
@@ -51,5 +49,5 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     )
   }
 
-  return Room
+  return RoomStaticModel
 }

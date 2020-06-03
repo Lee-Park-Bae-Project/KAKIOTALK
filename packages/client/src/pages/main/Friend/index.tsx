@@ -1,62 +1,67 @@
-import React, { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import List from 'system/List';
-import Hr from 'atoms/Hr';
-import Profile from 'system/Profile';
-import { UserCard, PopUp, MyProfile } from 'components';
-import { deleteFriend } from 'modules/friends';
-import { User } from 'types';
-import { alert } from 'common/utils';
+import React, {
+  FC, useState,
+} from 'react'
+import { useDispatch } from 'react-redux'
+import List from 'system/List'
+import Hr from 'atoms/Hr'
+import Profile from 'system/Profile'
+import {
+  MyProfile, PopUp, UserCard,
+} from 'components'
+import { deleteFriend } from 'modules/friends'
+import { User } from '@kakio/common'
+import { alert } from 'common/utils'
+
 export interface Props {
   myProfile: User;
   friendList: User[];
   searchFriendKeyword: string;
 }
-const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
-  const [friendProfileClick, setFriendProfileClick] = useState(false);
+const Friend: FC<Props> = ({
+  myProfile, friendList, searchFriendKeyword,
+}) => {
+  const [friendProfileClick, setFriendProfileClick] = useState(false)
   const [clickedUser, setClickedUser] = useState({
     uuid: '',
     name: '',
     email: '',
     statusMessage: '',
-  });
+  })
 
   const onProfileClose = (
     profileRef: React.RefObject<HTMLDivElement>,
     setProfileClick: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => {
-    return (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      const profileNode = profileRef.current;
-      if (
-        profileNode &&
-        e.target instanceof Node &&
-        !profileNode.contains(e.target)
-      ) {
-        setProfileClick(false);
-      }
-    };
-  };
-  const friendProfieRef = React.createRef<HTMLDivElement>();
-  const userProfileRef = React.createRef<HTMLDivElement>();
-  const [userProfileClick, setUserProfileClick] = useState(false);
+  ) => (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const profileNode = profileRef.current
+    if (
+      profileNode
+        && e.target instanceof Node
+        && !profileNode.contains(e.target)
+    ) {
+      setProfileClick(false)
+    }
+  }
+  const friendProfieRef = React.createRef<HTMLDivElement>()
+  const userProfileRef = React.createRef<HTMLDivElement>()
+  const [userProfileClick, setUserProfileClick] = useState(false)
 
   const onFriendProfileClose = onProfileClose(
     friendProfieRef,
     setFriendProfileClick,
-  );
+  )
   const onUserProfileClose = onProfileClose(
     userProfileRef,
     setUserProfileClick,
-  );
-  const dispatch = useDispatch();
+  )
+  const dispatch = useDispatch()
   const onDeleteFriend = () => {
-    alert.confirmDelete(clickedUser.name).then(value => {
+    alert.confirmDelete(clickedUser.name).then((value) => {
       if (value) {
-        dispatch(deleteFriend(clickedUser.uuid));
-        setFriendProfileClick(false);
+        dispatch(deleteFriend(clickedUser.uuid))
+        setFriendProfileClick(false)
       }
-    });
-  };
+    })
+  }
 
   return (
     <List>
@@ -65,7 +70,7 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
         name={myProfile.name}
         statusMessage={myProfile.statusMessage}
         onClick={() => {
-          setUserProfileClick(true);
+          setUserProfileClick(true)
         }}
       />
       <Hr />
@@ -73,21 +78,22 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
       {friendList.length > 0 ? (
         friendList
           .filter(
-            friend =>
-              friend.name
-                .toLowerCase()
-                .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
+            (friend) => friend.name
+              .toLowerCase()
+              .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
           )
-          .map(({ uuid, statusMessage, name, email }) => {
+          .map(({
+            uuid, statusMessage, name, email,
+          }) => {
             const onUserCardClick = () => {
-              setFriendProfileClick(true);
+              setFriendProfileClick(true)
               setClickedUser({
                 uuid,
                 name,
                 email,
                 statusMessage,
-              });
-            };
+              })
+            }
 
             return (
               <UserCard
@@ -96,7 +102,7 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
                 statusMessage={statusMessage}
                 onClick={onUserCardClick}
               />
-            );
+            )
           })
       ) : (
         <h1>친구를 추가해 보세요!</h1>
@@ -121,7 +127,7 @@ const Friend: FC<Props> = ({ myProfile, friendList, searchFriendKeyword }) => {
         </PopUp>
       ) : null}
     </List>
-  );
-};
+  )
+}
 
-export default Friend;
+export default Friend

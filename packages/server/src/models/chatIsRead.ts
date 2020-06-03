@@ -5,9 +5,9 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IChatIsRead } from '../types'
+import { ChatIsRead } from '@kakio/common'
 
-export interface ChatIsReadModel extends Model, IChatIsRead {}
+export interface ChatIsReadModel extends Model, ChatIsRead {}
 
 export type ChatIsReadStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): ChatIsReadModel;
@@ -15,7 +15,7 @@ export type ChatIsReadStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const ChatIsRead = <ChatIsReadStatic>sequelize.define('chat_is_read', {
+  const ChatIsReadStaticModel = <ChatIsReadStatic>sequelize.define('chat_is_read', {
     id: {
       primaryKey: true,
       allowNull: false,
@@ -40,7 +40,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     updatedAt: { type: dataTypes.DATE },
   })
 
-  ChatIsRead.associate = (models: any) => {}
+  ChatIsReadStaticModel.associate = (models: any) => {}
 
-  return ChatIsRead
+  return ChatIsReadStaticModel
 }

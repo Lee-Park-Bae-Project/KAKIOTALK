@@ -1,28 +1,12 @@
-export interface User {
-  uuid: string;
-  email: string;
-  name: string;
-  statusMessage: string;
-}
-export interface loginInfo {
+import {
+  Chat, User,
+} from '@kakio/common'
+
+export interface LoginInfo {
   isLoggedIn: boolean;
 }
 
-export interface Room {
-  uuid: string;
-  participants: Pick<User, 'uuid' | 'name' | 'email' | 'statusMessage'>[];
-}
-
-export interface IChat {
-  id: number;
-  uuid: string;
-  roomParticipantsId: number;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ApiChat extends Pick<IChat, 'uuid' | 'content' | 'createdAt' | 'updatedAt'> {
+export interface ApiChat extends Pick<Chat, 'uuid' | 'content' | 'createdAt' | 'updatedAt'> {
   metaInfo: {
     uuid: string;
     createdAt: string;

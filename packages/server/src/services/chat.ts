@@ -1,3 +1,4 @@
+import { Chat } from '@kakio/common'
 import { chatFromServer } from '../socket'
 import {
   CHAT_ASSOCIATION_ALIAS,
@@ -6,7 +7,6 @@ import {
   ROOM_PARTICIPANTS_ASSOCIATION_ALIAS,
   USER_ASSOCIATION_ALIAS,
 } from '../models'
-import { IChat } from '../types'
 import * as HttpError from '../common/error'
 import * as userService from './user'
 
@@ -22,7 +22,7 @@ export const findAllRooms = async (userId: number) => {
     {
       where: { id: userId },
       include: [{
-        attributes: ['uuid'],
+        attributes: ['uuid', 'createdAt', 'updatedAt'],
         model: models.Room,
         as: USER_ASSOCIATION_ALIAS.RoomParticipants,
         include: [{
@@ -57,6 +57,8 @@ export const findAllRooms = async (userId: number) => {
     })
     return {
       uuid: room.uuid,
+      createdAt: room.createdAt,
+      updatedAt: room.updatedAt,
       participants,
     }
   })
@@ -146,7 +148,7 @@ export const createChat = async ({
   content,
   createdAt,
   updatedAt,
-}: Omit<IChat, 'id' | 'uuid'>) => models.Chat.create({
+}: Omit<Chat, 'id' | 'uuid' | 'sender'>) => models.Chat.create({
   roomParticipantsId,
   content,
   createdAt,
@@ -184,6 +186,7 @@ export const addMessage = async ({
       content,
       createdAt,
       updatedAt,
+
     })
     const chatId = newChatData.id
     const newChat = await findChatById(chatId)

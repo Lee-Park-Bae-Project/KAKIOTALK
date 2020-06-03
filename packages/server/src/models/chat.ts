@@ -5,13 +5,12 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { IChat } from '../types'
-import { RoomModel } from './room'
+import { Chat } from '@kakio/common'
 import { RoomParticipantsModel } from './roomParticipants'
 
 export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'metaInfo' as const }
 
-export interface ChatModel extends Model, IChat {
+export interface ChatModel extends Model, Chat {
   [CHAT_ASSOCIATION_ALIAS.RoomParticipants]?: RoomParticipantsModel;
 }
 
@@ -21,7 +20,7 @@ export type ChatStatic = typeof Model & {
 }
 
 export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-  const Chat = <ChatStatic>sequelize.define('chats', {
+  const ChatStaticModel = <ChatStatic>sequelize.define('chats', {
     id: {
       primaryKey: true,
       allowNull: false,
@@ -45,13 +44,13 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     createdAt: { type: dataTypes.DATE },
     updatedAt: { type: dataTypes.DATE },
   })
-  Chat.associate = (models: any) => {
-    Chat.belongsTo(models.RoomParticipants, {
+  ChatStaticModel.associate = (models: any) => {
+    ChatStaticModel.belongsTo(models.RoomParticipants, {
       foreignKey: 'roomParticipantsId',
       targetKey: 'id',
       as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
     })
   }
 
-  return Chat
+  return ChatStaticModel
 }

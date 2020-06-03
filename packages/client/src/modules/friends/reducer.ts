@@ -1,43 +1,44 @@
 import {
-  DELETE_FRIEND_SUCCESS,
+  ADD_FRIEND_FAILURE,
+  ADD_FRIEND_SUCCESS,
   DELETE_FRIEND_FAILURE,
+  DELETE_FRIEND_SUCCESS,
   GET_FRIENDS_FAILURE,
   GET_FRIENDS_SUCCESS,
-  ADD_FRIEND_SUCCESS,
-  ADD_FRIEND_FAILURE,
-} from 'modules/friends/action';
-import { User } from 'types';
-import { UserListAction } from 'modules/friends/types';
-const initialState: User[] = [];
+} from 'modules/friends/action'
+import { User } from '@kakio/common'
+import { UserListAction } from 'modules/friends/types'
+
+const initialState: User[] = []
 
 function userList(state: User[] = initialState, action: UserListAction) {
   switch (action.type) {
     case DELETE_FRIEND_SUCCESS: {
-      return state.filter(user => user.uuid !== action.payload.uuid);
+      return state.filter((user) => user.uuid !== action.payload.uuid)
     }
     case DELETE_FRIEND_FAILURE: {
-      const error = action.payload;
+      const error = action.payload
       if (error.response) {
       }
-      break;
+      break
     }
     case GET_FRIENDS_SUCCESS: {
-      return action.payload;
+      return action.payload
     }
     case GET_FRIENDS_FAILURE: {
       // const error = action.payload;
-      return initialState;
+      return initialState
     }
     case ADD_FRIEND_SUCCESS: {
-      return state.concat(action.payload);
+      return state.concat(action.payload)
     }
     case ADD_FRIEND_FAILURE: {
       // const error = action.payload;
-      break;
+      break
     }
     default:
-      return state;
+      return state
   }
 }
 
-export default userList;
+export default userList

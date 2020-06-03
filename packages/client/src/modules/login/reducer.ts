@@ -1,28 +1,27 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE } from 'modules/login/action';
-import { loginInfo } from 'types';
-import { LoginAction } from 'modules/login/types';
-import { alert } from 'common/utils';
-const initialState: loginInfo = {
-  isLoggedIn: false,
-};
+import {
+  LOGIN_FAILURE, LOGIN_SUCCESS,
+} from 'modules/login/action'
+import { LoginInfo } from 'types'
+import { LoginAction } from 'modules/login/types'
+import { alert } from 'common/utils'
 
-function login(state: loginInfo = initialState, action: LoginAction) {
+const initialState: LoginInfo = { isLoggedIn: false }
+
+function login(state: LoginInfo = initialState, action: LoginAction) {
   switch (action.type) {
     case LOGIN_SUCCESS: {
-      return {
-        isLoggedIn: true,
-      };
+      return { isLoggedIn: true }
     }
     case LOGIN_FAILURE: {
-      const error = action.payload;
+      const error = action.payload
       if (error.response) {
-        console.log(error.response);
-        alert.error(error.response.data.data.message);
+        console.log(error.response)
+        alert.error(error.response.data.data.message)
       }
     }
     default:
-      return state;
+      return state
   }
 }
 
-export default login;
+export default login

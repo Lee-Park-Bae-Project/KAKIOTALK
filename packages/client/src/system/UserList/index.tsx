@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import * as S from 'system/UserList/styles';
-import UserCard from 'components/UserCard';
-import Hr from 'atoms/Hr';
-import { User } from 'types';
+import React, { FC } from 'react'
+import * as S from 'system/UserList/styles'
+import UserCard from 'components/UserCard'
+import Hr from 'atoms/Hr'
+import { User } from '@kakio/common'
 
 interface Props{
   /** 내 정보 */
@@ -41,6 +41,6 @@ const UserList: FC<Props> = ({
         ))
       }
     </S.Container>
-);
+)
 
-export default UserList;
+export default UserList
