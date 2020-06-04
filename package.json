@@ -1,0 +1,26 @@
+{
+  "name": "kakiotalk",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "repository": "https://github.com/Lee-Park-Bae-Project/KAKIOTALK",
+  "author": "junow <taristmas@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "client": "yarn workspace @kakio/client",
+    "server": "yarn workspace @kakio/server",
+    "common": "yarn workspace @kakio/common",
+    "common:start": "yarn common build:watch",
+    "common:build": "yarn common build",
+    "client:start": "yarn client start",
+    "client:build": "yarn client build",
+    "server:start": "yarn server start",
+    "server:build": "yarn server build"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.3"
+  }
+}
