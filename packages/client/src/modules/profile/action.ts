@@ -1,6 +1,8 @@
 import { User } from '@kakio/common'
 import { AxiosError } from 'axios'
 
+type UserState = Pick<User, 'uuid' | 'email' | 'statusMessage' | 'name'>
+
 export const INIT_PROFILE = 'profile/INIT_PROFILE' as const
 export const GET_PROFILE = 'profile/GET_PROFILE' as const
 export const GET_PROFILE_SUCCESS = 'profile/GET_PROFILE_SUCCESS' as const
@@ -20,7 +22,7 @@ export const getProfileFailure = (errorMessage: AxiosError) => ({
   payload: errorMessage,
 })
 
-export const initProfile = (profile: any) => ({
+export const initProfile = (profile: UserState) => ({
   type: INIT_PROFILE,
   payload: profile,
 })

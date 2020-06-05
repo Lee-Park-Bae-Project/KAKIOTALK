@@ -1,16 +1,16 @@
 /* eslint-disable no-undef */
-import React from 'react';
-import { mount } from 'enzyme';
-import RoomCard from 'components/RoomCard';
+import React from 'react'
+import { mount } from 'enzyme'
+import RoomCard from 'components/RoomCard'
 
 // faker.locale = 'ko';
 describe('<RoomCard/>', () => {
   const userList = ['a',
     's',
     'd',
-    'c'];
-  const lastMessage = 'hihi';
-  const lastModified = '2020-04-25 22:13:52';
+    'c']
+  const lastMessage = 'hihi'
+  const lastModified = '2020-04-25 22:13:52'
 
   it('matches snapshots', () => {
     const wrapper = mount(
@@ -20,7 +20,7 @@ describe('<RoomCard/>', () => {
         lastModified={lastModified}
         numOfNewMessages={3}
     />
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+    )
+    expect(wrapper).toMatchSnapshot()
+  })
+})

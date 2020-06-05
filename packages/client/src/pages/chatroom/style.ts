@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { color } from 'styles/global';
+import styled from 'styled-components'
+import { color } from 'styles/global'
 
 export const Container = styled.div`
   height:100%;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   display:flex;
   flex-direction:column;
   height: 100vh;
-`;
+`
 
 export const ChatContainer = styled.div`
   flex:1;
@@ -15,12 +15,12 @@ export const ChatContainer = styled.div`
   flex-direction:column;
   background : ${color.ROOM_COLOR};
   overflow-y: auto;
-`;
+`
 
 export const InputContainer = styled.div`
   display:flex;
   margin-top:auto;
-`;
+`
 
 export const InputArea = styled.input`
   width:90%;
@@ -28,13 +28,13 @@ export const InputArea = styled.input`
   outline: none;
   height: 7rem;
   border:none;
-`;
+`
 export const ButtonWrapper = styled.div`
   width:10%;
   display:flex;
   background-color:white;
   min-width: 5rem;
-`;
+`
 export const SendBtn = styled.button`
   outline:none;
   margin:auto;
@@ -44,7 +44,7 @@ export const SendBtn = styled.button`
   color: #B1B1B1;
   border-radius: 5px;
   border: 1px solid #ECECEC;
-`;
+`
 
 export const ChatBox = styled.div`
   width: fit-content;
@@ -54,22 +54,21 @@ export const ChatBox = styled.div`
   border-radius: 5px;
   margin: 1rem;
   padding: 0.5rem;
-`;
+`
 
 export const Header = styled.div`
   display: flex;
   padding: 1rem;
   background: ${color.LIGHT_GRAY};
-`;
+`
 
 export const Title = styled.div`
   position: absolute;
   margin: auto;
   transform: translateX(-50%);
   left: 50%;
-`;
+`
 
+export const Back = styled.div``
 
-export const Back = styled.div``;
-
-export const ChatBottom = styled.div``;
+export const ChatBottom = styled.div``

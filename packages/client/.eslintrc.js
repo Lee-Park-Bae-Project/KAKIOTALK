@@ -72,7 +72,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-unused-vars': 0,
-    'import/no-cycle': 0
+    'import/no-cycle': 0,
+    'no-console': ["error", { allow: ["warn", "error"] }]
   },
   settings: {
     react: {

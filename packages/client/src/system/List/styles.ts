@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Flex from 'atoms/Flex';
+import styled from 'styled-components'
+import Flex from 'atoms/Flex'
 
 export const Container = styled(Flex)`
   flex-direction: column;
@@ -11,8 +11,8 @@ export const Container = styled(Flex)`
   margin-right: auto;
   width: 100%;
   /* min-width: 20rem; */
-`;
+`
 
 export const ItemWrapper = styled(Flex)`
   width: 100%;
-`;
+`

@@ -1,14 +1,10 @@
-import React, { FC } from 'react';
-import * as S from 'system/List/styles';
+import React, { FC } from 'react'
+import * as S from 'system/List/styles'
 
-interface Props{}
-
-const List: FC<Props> = ({
-  children,
-}) => (
+const List: FC = ({ children }) => (
     <S.Container>
       {children}
     </S.Container>
-);
+)
 
-export default List;
+export default List

@@ -1,15 +1,13 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import Flex from 'atoms/Flex';
-import { color } from 'styles/global';
-import Icon from 'Icon/Icon';
+import React, { FC } from 'react'
+import styled from 'styled-components'
+import Flex from 'atoms/Flex'
+import { color } from 'styles/global'
+import Icon from 'Icon/Icon'
 
-const S = {
-  Container: styled(Flex)`
+const S = { Container: styled(Flex)`
     width: fit-content;
     height: fit-content;
-  `,
-};
+  ` }
 
 interface AddFriendProp{
   size?: string;
@@ -23,5 +21,5 @@ const AddFriendTab: FC<AddFriendProp> = ({
     <S.Container onClick={onClick}>
     <Icon icon='AddFriend' color={color.WHITE} size={size}/>
   </S.Container>
-);
-export default AddFriendTab;
+)
+export default AddFriendTab

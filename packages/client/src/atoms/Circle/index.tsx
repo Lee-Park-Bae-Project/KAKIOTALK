@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import { color, weight, fontSize } from 'styles/global';
+import React, { FC } from 'react'
+import styled from 'styled-components'
+import {
+  color, fontSize, weight,
+} from 'styles/global'
 
 interface Props{
   num: number;
 }
 
-const S = {
-  Container: styled.div`
+const S = { Container: styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,19 +22,16 @@ const S = {
     background-color: ${color.RED};
     color: ${color.WHITE};
     font-weight: ${weight.NORMAL};
-  `,
-};
-const Circle: FC<Props> = ({
-  num,
-}) => {
+  ` }
+const Circle: FC<Props> = ({ num }) => {
   const newNum = Math.log10(num) > 2
     ? '999+'
-    : num.toString();
+    : num.toString()
   return (
     <S.Container>
       {newNum}
     </S.Container>
-  );
-};
+  )
+}
 
-export default Circle;
+export default Circle

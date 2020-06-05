@@ -1,10 +1,10 @@
 import {
-  initProfile,
   getProfile,
   getProfileFailure,
   getProfileSuccess,
+  initProfile,
   updateProfielSuccess,
-} from 'modules/profile/action';
+} from 'modules/profile/action'
 
 export type ProfileAction =
   | ReturnType<typeof initProfile>

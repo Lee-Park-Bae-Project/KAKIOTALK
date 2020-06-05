@@ -1,10 +1,12 @@
-import styled, { css } from 'styled-components';
-import Flex from 'atoms/Flex';
-import { color, weight } from 'styles/global';
+import styled, { css } from 'styled-components'
+import Flex from 'atoms/Flex'
+import {
+  color, weight,
+} from 'styles/global'
 
 export const grayColor = css`
   color: ${(props) => color.GRAY};
-`;
+`
 
 export const Container = styled(Flex)`
   height: 5rem;
@@ -14,17 +16,17 @@ export const Container = styled(Flex)`
   &:hover{
     background: ${color.HOVER_GRAY};
   }
-`;
+`
 
 export const RoomInfoWrapper = styled.div`
   display: flex;
   max-width: 80%;
-`;
+`
 
 export const ImgWrapper = styled.div`
   margin: 1rem;
   width: auto;
-`;
+`
 
 export const InfoWrapper = styled.div`
   flex-direction: column;
@@ -34,11 +36,11 @@ export const InfoWrapper = styled.div`
   white-space: nowrap;
   min-width: 80%;
   width: 100%;
-`;
+`
 
 export const Row = styled.div`
   justify-content: left;
-`;
+`
 
 export const UserListWrapper = styled.span`
   text-overflow: ellipsis;
@@ -48,11 +50,11 @@ export const UserListWrapper = styled.span`
   min-width: 0;
   display: block;
   font-weight: ${weight.STRONG};
-`;
+`
 
 export const NumWrapper = styled.span`
   ${(props) => grayColor};
-`;
+`
 
 export const LastMsgWrapper = styled.div`
   ${(props) => grayColor};
@@ -64,7 +66,7 @@ export const LastMsgWrapper = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
-`;
+`
 
 export const SubInfoWrapper = styled(Flex)`
   flex-direction: column;
@@ -73,8 +75,8 @@ export const SubInfoWrapper = styled(Flex)`
   span {
     ${(props) => grayColor};
   }  
-`;
+`
 
 export const Time = styled.span`
   font-size: 0.7rem;
-`;
+`

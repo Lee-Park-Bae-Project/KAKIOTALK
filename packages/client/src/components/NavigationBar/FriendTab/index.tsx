@@ -1,15 +1,13 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import Icon from 'Icon/Icon';
-import Flex from 'atoms/Flex';
-import { color } from 'styles/global';
+import React, { FC } from 'react'
+import styled from 'styled-components'
+import Icon from 'Icon/Icon'
+import Flex from 'atoms/Flex'
+import { color } from 'styles/global'
 
-const S = {
-  Container: styled(Flex)`
+const S = { Container: styled(Flex)`
     width: fit-content;
     height: fit-content;
-  `,
-};
+  ` }
 
 interface FriendTabProp{
   /** 크기 */
@@ -35,6 +33,6 @@ const FriendTab: FC<FriendTabProp> = ({
           : <Icon icon='Person' color={color.WHITE} size={size} />
       }
     </S.Container>
-);
+)
 
-export default FriendTab;
+export default FriendTab

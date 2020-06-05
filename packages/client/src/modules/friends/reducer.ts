@@ -11,16 +11,15 @@ import { UserListAction } from 'modules/friends/types'
 
 const initialState: User[] = []
 
-function userList(state: User[] = initialState, action: UserListAction) {
+const userList = (state: User[] = initialState, action: UserListAction) => {
   switch (action.type) {
     case DELETE_FRIEND_SUCCESS: {
       return state.filter((user) => user.uuid !== action.payload.uuid)
     }
     case DELETE_FRIEND_FAILURE: {
       const error = action.payload
-      if (error.response) {
-      }
-      break
+      if (error.response) { console.warn(error.response) }
+      return state
     }
     case GET_FRIENDS_SUCCESS: {
       return action.payload
@@ -34,7 +33,7 @@ function userList(state: User[] = initialState, action: UserListAction) {
     }
     case ADD_FRIEND_FAILURE: {
       // const error = action.payload;
-      break
+      return state
     }
     default:
       return state

@@ -1,12 +1,12 @@
 import {
+  addFriend,
+  addFriendFailure,
+  addFriendSuccess,
   deleteFriend,
   getFriends,
   getFriendsFailure,
   getFriendsSuccess,
-  addFriend,
-  addFriendFailure,
-  addFriendSuccess
-} from 'modules/friends/action';
+} from 'modules/friends/action'
 
 export type UserListAction =
 | ReturnType<typeof addFriend>

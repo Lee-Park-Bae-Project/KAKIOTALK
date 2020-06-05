@@ -24,8 +24,7 @@ const profile = (state: UserState = initialState, action: ProfileAction) => {
     }
     case GET_PROFILE_FAILURE: {
       const error = action.payload
-      if (error.response) {
-      }
+      if (error.response) { console.error(error.response) }
       return state
     }
 

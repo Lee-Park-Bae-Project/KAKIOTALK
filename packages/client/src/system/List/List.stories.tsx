@@ -1,13 +1,13 @@
-import React from 'react';
-import List from 'system/List';
-import Profile from 'system/Profile';
-import UserCard from 'components/UserCard';
-import RoomCard from 'components/RoomCard';
+import React from 'react'
+import List from 'system/List'
+import Profile from 'system/Profile'
+import UserCard from 'components/UserCard'
+import RoomCard from 'components/RoomCard'
 
 export default {
   title: 'Systems/List',
   component: List,
-};
+}
 
 export const Default = () => (
     <List>
@@ -15,22 +15,22 @@ export const Default = () => (
         uuid='asd'
         statusMessage='asd'
         name='asd'
-        onDeleteClick= {() => {}}
+        onDeleteClick= {() => { console.warn() }}
       />
       <Profile
         uuid='asd'
         statusMessage='asd'
         name='asd'
-        onDeleteClick= {() => {}}
+        onDeleteClick= {() => { console.warn() }}
       />
       <Profile
         uuid='asd'
         statusMessage='asd'
         name='asd'
-        onDeleteClick= {() => {}}
+        onDeleteClick= {() => { console.warn() }}
       />
     </List>
-);
+)
 
 export const UserCardList = () => (
     <List>
@@ -51,15 +51,15 @@ export const UserCardList = () => (
     <UserCard name='junow' statusMessage='Brand New 2020'/>
     <UserCard name='junow' statusMessage='Brand New 2020'/>
   </List>
-);
+)
 
 export const RoomCardList = () => {
   const userList = ['user1',
     'user2',
-    'user3'];
-  const lastMessage = 'lastMessage';
-  const numOfNewMessages = 1;
-  const lastModified = Date.now();
+    'user3']
+  const lastMessage = 'lastMessage'
+  const numOfNewMessages = 1
+  const lastModified = Date.now()
   return (
     <List>
       <RoomCard
@@ -135,5 +135,5 @@ export const RoomCardList = () => {
         numOfNewMessages={numOfNewMessages}
       />
     </List>
-  );
-};
+  )
+}

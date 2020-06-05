@@ -2,7 +2,7 @@ import {
   convertDBTimeTohhmmA,
   convertMillToMMDDYYYY,
   getCurTimeDBFormatForTest,
-} from './utils';
+} from './utils'
 
 describe('moment', () => {
   describe('getTimeDBFormat', () => {
@@ -12,7 +12,7 @@ describe('moment', () => {
       ['2020-05-18T16:07:40.089Z', '2020-05-19 01:07:40'],
 
     ])('getCurTimeDBFormat(%p) = %p', (date, expected) => {
-      expect(getCurTimeDBFormatForTest(new Date(date))).toEqual(expected);
-    });
-  });
-});
+      expect(getCurTimeDBFormatForTest(new Date(date))).toEqual(expected)
+    })
+  })
+})

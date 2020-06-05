@@ -17,7 +17,9 @@ interface UserCardProp {
  *
  * - 유저의 프로필 사진과 이름이 표시됩니다.
  */
-const UserCard: FC<UserCardProp> = ({ name, onClick, statusMessage }) => (
+const UserCard: FC<UserCardProp> = ({
+  name, onClick, statusMessage,
+}) => (
   <S.Container>
     <S.ProfileWrapper>
       <TextIcon

@@ -1,7 +1,7 @@
 import React from 'react'
 import dotenv from 'dotenv'
 import * as S from 'components/GoogleSignin/styles'
-import GoogleLogin from 'react-google-login'
+import GoogleLogin, { GoogleLoginResponse } from 'react-google-login'
 import {
   useHistory, withRouter,
 } from 'react-router-dom'
@@ -27,7 +27,7 @@ const GoogleSignin: React.FC = () => {
   })
 
   const history = useHistory()
-  const responseSuccess = (e: any) => {
+  const responseSuccess = (e: GoogleLoginResponse) => {
     const { googleId } = e
     const googleAccessToken = e.accessToken
     const {
@@ -38,7 +38,6 @@ const GoogleSignin: React.FC = () => {
       name,
       googleId,
     })
-    console.log(e)
     request
       .getLogin({
         googleId, email, name, googleAccessToken,
@@ -47,7 +46,7 @@ const GoogleSignin: React.FC = () => {
         history.push('/')
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       })
   }
   const responseFail = (err: Error) => {
@@ -55,7 +54,7 @@ const GoogleSignin: React.FC = () => {
   }
 
   const responseAutoLoad = (success: boolean) => {
-    console.log(success)
+    console.warn(success)
   }
   return (
     <S.Container>
