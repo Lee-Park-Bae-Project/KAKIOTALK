@@ -27,7 +27,8 @@ const GoogleSignin: React.FC = () => {
   })
 
   const history = useHistory()
-  const responseSuccess = (e: GoogleLoginResponse) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const responseSuccess = (e: any) => {
     const { googleId } = e
     const googleAccessToken = e.accessToken
     const {

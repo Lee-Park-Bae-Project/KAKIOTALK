@@ -13,8 +13,8 @@ import { User } from '@kakio/common'
 import { alert } from 'common/utils'
 
 export interface Props {
-  myProfile: User;
-  friendList: User[];
+  myProfile: Pick<User, 'uuid' | 'email' | 'statusMessage' | 'name'>;
+  friendList: Pick<User, 'uuid' | 'email' | 'statusMessage' | 'name'>[];
   searchFriendKeyword: string;
 }
 const Friend: FC<Props> = ({
