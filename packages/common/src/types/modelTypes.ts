@@ -3,6 +3,7 @@ export interface User {
   uuid: string
   name: string
   email: string
+  imageUrl: string
   statusMessage: string
   googleId: string
   googleAccessToken: string

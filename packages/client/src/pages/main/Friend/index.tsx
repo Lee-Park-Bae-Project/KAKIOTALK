@@ -11,10 +11,11 @@ import {
 import { deleteFriend } from 'modules/friends'
 import { User } from '@kakio/common'
 import { alert } from 'common/utils'
+import { SimpleUserType } from 'types'
 
 export interface Props {
-  myProfile: User;
-  friendList: User[];
+  myProfile: SimpleUserType
+  friendList: SimpleUserType[];
   searchFriendKeyword: string;
 }
 const Friend: FC<Props> = ({
@@ -26,6 +27,7 @@ const Friend: FC<Props> = ({
     name: '',
     email: '',
     statusMessage: '',
+    imageUrl: '',
   })
 
   const onProfileClose = (
@@ -83,7 +85,7 @@ const Friend: FC<Props> = ({
               .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
           )
           .map(({
-            uuid, statusMessage, name, email,
+            uuid, statusMessage, name, email, imageUrl,
           }) => {
             const onUserCardClick = () => {
               setFriendProfileClick(true)
@@ -92,6 +94,7 @@ const Friend: FC<Props> = ({
                 name,
                 email,
                 statusMessage,
+                imageUrl,
               })
             }
 

@@ -2,7 +2,6 @@ import {
   NextFunction, Request, Response,
 } from 'express'
 import createError from 'http-errors'
-import { models } from '../models'
 import {
   message, response,
 } from '../common/utils'
@@ -15,18 +14,20 @@ const getMyProfile = async (
 ) => {
   try {
     if (!req.decodedUser) {
-      return next(createError(401, message.LOGIN_REQUIRED))
+      next(createError(401, message.LOGIN_REQUIRED))
+      return
     }
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
     if (!user) throw createError(401, message.INVALID_GOOGLE_ID)
     const {
-      uuid, email, name, statusMessage,
+      uuid, email, name, statusMessage, imageUrl,
     } = user
     const myProfile = {
       uuid,
       email,
       name,
       statusMessage,
+      imageUrl,
     }
     response(res, myProfile)
   } catch (e) {
@@ -40,7 +41,8 @@ const updateProfile = async (
 ) => {
   try {
     if (!req.decodedUser) {
-      return next(createError(401, message.LOGIN_REQUIRED))
+      next(createError(401, message.LOGIN_REQUIRED))
+      return
     }
     await userService.setUserInfo(
       req.decodedUser.googleId,
@@ -52,10 +54,10 @@ const updateProfile = async (
     )
     if (!updatedUser) throw createError(401, message.INVALID_GOOGLE_ID)
     const {
-      name, uuid, email, statusMessage,
+      name, uuid, email, statusMessage, imageUrl,
     } = updatedUser
     response(res, {
-      name, uuid, email, statusMessage,
+      name, uuid, email, statusMessage, imageUrl,
     })
   } catch (e) {
     next(e)

@@ -1,31 +1,33 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import Icon, { IconType } from 'Icon/Icon';
+import React, { FC } from 'react'
+import styled from 'styled-components'
+import Icon, { IconType } from 'Icon/Icon'
 
-type iconPositionType = 'left' | 'right' | 'top' | 'bottom';
+type iconPositionType = 'left' | 'right' | 'top' | 'bottom'
 
 interface ContainerProp {
   /** text에 대한 icon의 상대적 위치 */
-  iconPosition?: iconPositionType;
+  iconPosition?: iconPositionType
   /** 클릭핸들러 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 interface TextProp {
   /** 아이콘과 함께 표시될 텍스트 */
-  text: string;
+  text: string
   /** 텍스트 색 지정할 때 이용 */
-  textColor?: string;
+  textColor?: string
   /** 텍스트 크기 지정할 떄 이용 */
-  textSize?: string;
+  textSize?: string
 }
 
 interface Prop extends TextProp, ContainerProp {
   /** icon 이름 */
-  icon: IconType;
+  icon: IconType
   /** 색을 지정할 때 이용 */
-  color?: string;
+  color?: string
   /** 크기 지정할 때 이용 */
-  size?: string | number;
+  size?: string | number
+  /** 구글프로필사진 URL */
+  imageUrl?: string
 }
 
 const directionMap = {
@@ -33,28 +35,36 @@ const directionMap = {
   bottom: 'column-reverse',
   left: 'row',
   right: 'row-reverse',
-};
+}
 
 const S = {
   Container: styled.div<ContainerProp>`
     display: flex;
-    flex-direction: ${props => {
-      if (!props.iconPosition) {
-        return 'left';
-      }
-      return directionMap[props.iconPosition];
-    }};
+    flex-direction: ${(props) => {
+    if (!props.iconPosition) {
+      return 'left'
+    }
+    return directionMap[props.iconPosition]
+  }};
     width: fit-content;
     height: fit-content;
     align-items: center;
     justify-content: center;
   `,
   TextWrapper: styled.span<TextProp>`
-    color: ${props => props.textColor};
+    color: ${(props) => props.textColor};
     line-height: 2rem;
     padding: 1rem;
+    font-size:${(props) => props.textSize};
   `,
-};
+  Image: styled.img`
+  width: 2.5rem;
+  height : 2.5rem;
+  border-radius : 40%;
+  cursor: pointer;
+`,
+
+}
 
 /**
  * text와 icon 함께 사용할 때 이용
@@ -68,13 +78,18 @@ const TextIcon: FC<Prop> = ({
   text,
   textColor = 'black',
   textSize = '1rem',
+  imageUrl = null,
 }) => (
   <S.Container iconPosition={iconPosition}>
-    <Icon icon={icon} color={color} size={size} onClick={onClick} />
+     {
+    imageUrl ? <S.Image src ={imageUrl} onClick={onClick} />
+      : <Icon icon={icon} color={color} size={size} onClick={onClick} />
+    }
+
     <S.TextWrapper text={text} textColor={textColor} textSize={textSize}>
       {text}
     </S.TextWrapper>
   </S.Container>
-);
+)
 
-export default TextIcon;
+export default TextIcon
