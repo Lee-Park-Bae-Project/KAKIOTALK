@@ -11,4 +11,4 @@ steps:
     args: ["cd server"]
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
-    timeout: "16000s"
+    timeout: "1000s"
