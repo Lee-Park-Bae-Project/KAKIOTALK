@@ -9,15 +9,8 @@ import Friend from 'pages/main/Friend'
 import { SearchInput } from 'components'
 import styled from 'styled-components'
 import { color } from 'styles/global'
+import * as S from 'system/Room/style'
 
-const S = { Header: styled.div`
-    position: fixed;
-    left: 3rem;
-    top: 0;
-    right: 0;
-    padding: 1rem;
-    background: ${color.WHITE};
-  ` }
 const FriendContainer: React.FC = () => {
   const {
     useState, useEffect,
@@ -47,6 +40,7 @@ const FriendContainer: React.FC = () => {
           onChange={onFriendKeywordChange}
           placeholder='이름 검색'
         />
+
       </S.Header>
       <Friend
         myProfile={myProfile}

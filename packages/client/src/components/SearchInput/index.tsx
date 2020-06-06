@@ -1,15 +1,24 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import Flex from 'atoms/Flex'
 import { color } from 'styles/global'
+import Icon from 'Icon/Icon'
 
-const S = { Input: styled.input`
+const S = {
+  InputWrapper: styled.div`
+  display:flex;
+  justify-content:flex-start;
+  padding:0.3rem;
+  background: #F6F6F6;
+  border : 2px solid ${color.GRAY}
+  border-radius: 2rem;
+`,
+  Input: styled.input`
     width: 100%;
-    background: #f7f7f7;
     outline: none;
-    padding: 0.3rem;
-    border-radius: 0.5rem;
-  ` }
+    border:none;
+    background: none;
+  `,
+}
 
 interface Props {
   value: string | number | string[] | undefined;
@@ -23,12 +32,16 @@ const SearchInpust: FC<Props> = ({
   onKeyPress,
   placeholder,
 }) => (
+  <S.InputWrapper>
+  <Icon icon="Search" size="1rem"/>
     <S.Input
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       onKeyPress={onKeyPress}
     />
+  </S.InputWrapper>
+
 )
 
 export default SearchInpust
