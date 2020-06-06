@@ -1,0 +1,14 @@
+steps:
+  - name: "gcr.io/cloud-builders/yarn"
+    args: ["install", "yarn"]
+  - name: "gcr.io/cloud-builders/yarn"
+    args: ["common:build", "yarn"]
+  - name: "ubuntu"
+    args: "cd packages"
+  - name: "ubuntu"
+    args: "cd packages"
+  - name: "ubuntu"
+    args: "cd server"
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
+    timeout: "1600s"

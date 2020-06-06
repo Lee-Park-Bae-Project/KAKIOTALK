@@ -16,6 +16,7 @@ module.exports = {
     },
   },
   rules: {
+    'linebreak-style': 0,
     'comma-dangle': [
       'error',
       {
