@@ -6,17 +6,14 @@ import { convertDBTimeTohhmmA } from 'common/utils'
 import { UserCard } from 'components'
 import * as S from './style'
 
-type Props = ApiChat & {
-  userUuid: string;
-  isMine: boolean;
+type Props = {
+  createdAt: string
+  chatGroup: ApiChat[]
+  isMine: boolean
 }
 const ChatBox: FC<Props> = ({
-  uuid,
-  userUuid,
-  content,
-  metaInfo,
   createdAt,
-  updatedAt,
+  chatGroup,
   isMine,
 }) => (
   <S.Container>
@@ -24,15 +21,25 @@ const ChatBox: FC<Props> = ({
       <S.ProfileThumbnail src={'https://images.unsplash.com/photo-1591369376214-b9f91924f10d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'}/>
     </S.ProfileThumbnailWrapper>
     <S.Body>
-      <S.Name isMine={isMine}>{metaInfo.sender.name}</S.Name>
-      <S.ChatTime isMine={isMine}>
-        <S.Content>
-          {content}
-        </S.Content>
-        <S.Time>
-          {convertDBTimeTohhmmA(createdAt)}
-        </S.Time>
-      </S.ChatTime>
+      <S.Name isMine={isMine}>{chatGroup[0].metaInfo.sender.name}</S.Name>
+      <S.ChatGroup isMine={isMine}>
+        {
+          chatGroup.map((chat, idx) => (
+            <S.ContentWrapper key={chat.uuid}>
+              {
+                <S.Test isMine={isMine}>
+                  <S.Content key={chat.uuid} isMine={isMine}>
+                    {chat.content}
+                  </S.Content>
+                  {
+                    idx === chatGroup.length - 1 && <S.Time>{createdAt}</S.Time>
+                  }
+                </S.Test>
+              }
+            </S.ContentWrapper>
+          ))
+        }
+      </S.ChatGroup>
     </S.Body>
   </S.Container>
 )

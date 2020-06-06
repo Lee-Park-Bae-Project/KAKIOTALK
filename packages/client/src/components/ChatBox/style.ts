@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 1rem;
+  padding: 0 1rem;
 `
 
 interface ProfileThumbnailWrapperProps {
@@ -37,7 +37,18 @@ interface ChatTimeProps{
 }
 export const ChatTime = styled.div<ChatTimeProps>`
   display: flex;
-  flex-direction: ${({ isMine }) => (isMine ? 'row-reverse' : 'row')}
+  flex-direction: ${({ isMine }) => (isMine ? 'row-reverse' : 'row')};
+`
+
+interface ChatGroupProps {
+  isMine: boolean
+}
+export const ChatGroup = styled.div<ChatGroupProps>`
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: ${(props) => (props.isMine ? 'flex-end' : 'flex-start')};
 `
 
 interface NameProps {
@@ -48,18 +59,40 @@ export const Name = styled.p<NameProps>`
   display: ${({ isMine }) => (isMine ? 'none' : 'flex')};
 `
 
-export const Content = styled.div`
+export const ContentWrapper = styled.div`
+  width: 100%;
+  &:last-child{
+    margin-bottom: 0.5rem;
+  }
+`
+
+interface ContentProps{
+  isMine: boolean
+}
+export const Content = styled.div<ContentProps>`
   width: fit-content;
   background: ${color.WHITE};
   max-width: 70%;
   overflow-wrap: break-word;
   border-radius: 5px;
-  margin: 1rem 0.5rem;
+  margin: 0.25rem 0.5rem;
   padding: 0.5rem;
+  
+
+
 `
 export const Time = styled.div`
-  align-self: flex-end;
-  margin: 1rem 0;
   font-size: 0.6rem;
   font-weight: ${weight.WEAK};
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 0.2rem;
+`
+
+interface TestProps{
+  isMine: boolean
+}
+export const Test = styled.div<TestProps>`
+  display: flex;
+  flex-direction: ${(props) => (props.isMine ? 'row-reverse' : 'row')}
 `
