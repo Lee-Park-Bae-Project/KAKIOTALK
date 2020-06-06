@@ -19,21 +19,22 @@ const ChatBox: FC<Props> = ({
   updatedAt,
   isMine,
 }) => (
-    <S.Container isMine={isMine}>
-      {
-        !isMine && (
-          <UserCard
-            name={metaInfo.sender.name}
-          />
-        )
-      }
-      <S.Wrapper>
-        {content}
-      </S.Wrapper>
-      <S.Time>
-        {convertDBTimeTohhmmA(createdAt)}
-      </S.Time>
-    </S.Container>
+  <S.Container>
+    <S.ProfileThumbnailWrapper isMine={isMine}>
+      <S.ProfileThumbnail src={'https://images.unsplash.com/photo-1591369376214-b9f91924f10d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'}/>
+    </S.ProfileThumbnailWrapper>
+    <S.Body>
+      <S.Name isMine={isMine}>{metaInfo.sender.name}</S.Name>
+      <S.ChatTime isMine={isMine}>
+        <S.Content>
+          {content}
+        </S.Content>
+        <S.Time>
+          {convertDBTimeTohhmmA(createdAt)}
+        </S.Time>
+      </S.ChatTime>
+    </S.Body>
+  </S.Container>
 )
 
 export default ChatBox
