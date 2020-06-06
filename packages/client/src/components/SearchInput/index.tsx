@@ -1,20 +1,15 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react'
+import styled from 'styled-components'
+import Flex from 'atoms/Flex'
+import { color } from 'styles/global'
 
-const S = {
-  Container: styled.div`
-    display: flex;
-    width: 98%;
-  `,
-  Input: styled.input`
+const S = { Input: styled.input`
     width: 100%;
     background: #f7f7f7;
     outline: none;
     padding: 0.3rem;
     border-radius: 0.5rem;
-    margin-top: 1rem;
-  `,
-};
+  ` }
 
 interface Props {
   value: string | number | string[] | undefined;
@@ -28,14 +23,12 @@ const SearchInpust: FC<Props> = ({
   onKeyPress,
   placeholder,
 }) => (
-  <S.Container>
     <S.Input
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       onKeyPress={onKeyPress}
     />
-  </S.Container>
-);
+)
 
-export default SearchInpust;
+export default SearchInpust

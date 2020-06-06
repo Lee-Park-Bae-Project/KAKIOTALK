@@ -1,12 +1,14 @@
-import React, { FC } from 'react';
-import * as S from 'pages/main/styles';
-import NavigationBar from 'components/NavigationBar';
-import SearchInput from 'components/SearchInput';
-import { RoomState } from 'modules/room';
-import { PopUp, Dialog } from 'components';
-import FriendContainer from 'containers/FriendContainer';
-import Room from 'system/Room';
-import Friend from './Friend';
+import React, { FC } from 'react'
+import * as S from 'pages/main/styles'
+import NavigationBar from 'components/NavigationBar'
+import SearchInput from 'components/SearchInput'
+import { RoomState } from 'modules/room'
+import {
+  Dialog, PopUp,
+} from 'components'
+import FriendContainer from 'containers/FriendContainer'
+import Room from 'system/Room'
+import Friend from './Friend'
 
 interface TabSelector {
   friend: boolean;
@@ -54,7 +56,7 @@ const Main: FC<Props> = ({
   popupAddFriend,
 }) => (
     <S.Container>
-      <S.Left>
+
         <S.NavigationBarWrapper>
           <NavigationBar
             tabSelector={tabSelector}
@@ -64,20 +66,14 @@ const Main: FC<Props> = ({
             logoutTabOnClick={logoutTabOnClick}
           />
         </S.NavigationBarWrapper>
-        <S.Wrapper>
+        <S.MainWrapper>
           {tabSelector.friend && (
-            <S.Column>
               <FriendContainer />
-            </S.Column>
           )}
           {tabSelector.chat && (
-            <S.Column>
               <Room roomState={roomState} />
-              {/* <ChatContainer/> */}
-            </S.Column>
           )}
-        </S.Wrapper>
-      </S.Left>
+        </S.MainWrapper>
       {popupAddFriend ? (
         <PopUp onClose={onPopupOutClicked} refs={dialogRef}>
           <Dialog
@@ -114,6 +110,6 @@ const Main: FC<Props> = ({
         </PopUp>
       ) : null}
     </S.Container>
-);
+)
 
-export default Main;
+export default Main
