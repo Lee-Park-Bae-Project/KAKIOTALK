@@ -1,6 +1,11 @@
 steps:
-  - name: "gcr.io/cloud-builders/yarn"
-    args: ["yarn"]
+  - name: node
+    entrypoint: yarn
+    args: ["install"]
+  - name: "ubuntu"
+    args: ["common:build", "yarn"]
+  - name: "ubuntu"
+    args: ["server:build", "yarn"]
   - name: "ubuntu"
     args: ["cd packages"]
   - name: "ubuntu"
