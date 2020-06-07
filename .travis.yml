@@ -9,8 +9,9 @@ env:
   - CI=false
 before_script:
   - yarn install
-  - yarn common:start
   - yarn common:build
+  - cd packages
+  - cd client
 script:
   - echo "skipping tests"
   # - yarn deploy
