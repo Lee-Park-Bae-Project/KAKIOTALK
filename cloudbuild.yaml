@@ -2,15 +2,14 @@ steps:
   - name: node
     entrypoint: yarn
     args: ["install"]
-  - name: "ubuntu"
+  - name: node
+    entrypoint: yarn
     args: ["common:build", "yarn"]
-  - name: "ubuntu"
+  - name: node
+    entrypoint: yarn
     args: ["server:build", "yarn"]
-  - name: "ubuntu"
-    args: ["cd packages"]
-  - name: "ubuntu"
-    args: ["cd server"]
   - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: /packages/server
     args: ["app", "deploy"]
     timeout: "1600s"
 
