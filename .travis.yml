@@ -10,10 +10,7 @@ env:
 before_script:
   - yarn install
   - yarn common:start
-  - cd packages
-  - cd client
-  - yarn install
-  - yarn build
+  - yarn common:build
 script:
   - echo "skipping tests"
   # - yarn deploy
