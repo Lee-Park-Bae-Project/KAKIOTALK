@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
-import * as S from 'system/Profile/styles';
-import Icon from 'Icon/Icon';
-import { color } from 'styles/global';
-import TextIcon from 'components/TextIcon';
+import React, { FC } from 'react'
+import * as S from 'system/Profile/styles'
+import Icon from 'Icon/Icon'
+import { color } from 'styles/global'
+import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
+
 interface Prop {
   /** 유져 식별자 */
   uuid: string;
@@ -24,9 +25,7 @@ const Profile: FC<Prop> = ({
   name,
   statusMessage = '',
   onDeleteClick,
-}) => {
-  
-  return (
+}) => (
         <S.Container>
           <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />
           <S.NameWrapper>{name}</S.NameWrapper>
@@ -40,7 +39,7 @@ const Profile: FC<Prop> = ({
               state: {
                 uuid,
                 name,
-              }
+              },
             }} style={{ textDecoration: 'none' }}>
               <TextIcon
                 icon='Send'
@@ -60,7 +59,6 @@ const Profile: FC<Prop> = ({
             />
           </S.Footer>
         </S.Container>
-  );
-};
+)
 
-export default Profile;
+export default Profile

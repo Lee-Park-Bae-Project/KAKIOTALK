@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'modules';
-import ChatRoom from 'pages/chatroom';
-import withAuth, { WithAuthProps } from 'hocs/withAuth';
+import React, {
+  useEffect, useState,
+} from 'react'
 import {
-  Event,
+  RouteComponentProps, withRouter,
+} from 'react-router-dom'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import { RootState } from 'modules'
+import ChatRoom from 'pages/chatroom'
+import withAuth, { WithAuthProps } from 'hocs/withAuth'
+import {
   chatFromServer,
-  removeSocketEventListener,
+  Event,
   joinRooms,
-} from 'socket';
-import { getChatRequest } from 'modules/chat';
+  removeSocketEventListener,
+} from 'socket'
+import { getChatRequest } from 'modules/chat'
 
 interface MatchParams {
   roomUuid: string;
@@ -18,45 +24,47 @@ interface MatchParams {
 type Props = WithAuthProps & RouteComponentProps<MatchParams>
 
 const ChatContainer: React.FC<Props> = (props) => {
-  const { match, history } = props;
+  const {
+    match, history,
+  } = props
 
-  const dispatch = useDispatch();
-  const chatState = useSelector((state: RootState) => state.chat);
-  const roomState = useSelector((state: RootState) => state.room);
-  const [roomUuid, setRoomUuid] = useState<string>('');
-  const [roomName, setRoomName] = useState<string>('');
+  const dispatch = useDispatch()
+  const chatState = useSelector((state: RootState) => state.chat)
+  const roomState = useSelector((state: RootState) => state.room)
+  const [roomUuid, setRoomUuid] = useState<string>('')
+  const [roomName, setRoomName] = useState<string>('')
 
   const handleBack = () => {
-    history.goBack();
-  };
+    history.goBack()
+  }
 
   useEffect(() => {
     if (roomUuid.length) {
-      joinRooms({ roomUuids: [roomUuid] });
+      joinRooms({ roomUuids: [roomUuid] })
     }
-  }, [roomUuid]);
+  }, [roomUuid])
 
   useEffect(() => {
-    const rn = roomState.data.find((v) => v.uuid === roomUuid);
+    const rn = roomState.data.find((v) => v.uuid === roomUuid)
     if (!rn) {
-      return;
+      return
     }
 
-    setRoomName(rn.participants.map((v) => v.name).join(', '));
-  }, [roomState, roomUuid]);
+    setRoomName(rn.participants.map((v) => v.name).join(', '))
+  }, [roomState, roomUuid])
 
   useEffect(() => {
-    setRoomUuid(match.params.roomUuid);
-    dispatch(getChatRequest(match.params.roomUuid));
-  }, [match.params.roomUuid]);
+    setRoomUuid(match.params.roomUuid)
+    dispatch(getChatRequest(match.params.roomUuid))
+  }, [match.params.roomUuid])
 
   useEffect(() => {
-    chatFromServer(dispatch);
+    chatFromServer(dispatch)
 
     return (() => {
-      removeSocketEventListener(Event.chatFromServer);
-    });
-  });
+      removeSocketEventListener(Event.chatFromServer)
+    })
+  })
 
   return (
     <ChatRoom
@@ -66,7 +74,7 @@ const ChatContainer: React.FC<Props> = (props) => {
       handleBack={handleBack}
       roomName={roomName}
     />
-  );
-};
+  )
+}
 
-export default withAuth(withRouter(ChatContainer));
+export default withAuth(withRouter(ChatContainer))

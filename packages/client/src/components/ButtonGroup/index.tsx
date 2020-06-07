@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import * as S from 'components/ButtonGroup/styles';
+import React, { FC } from 'react'
+import * as S from 'components/ButtonGroup/styles'
 
 interface Props{
   /** 정렬 방향 */
@@ -25,6 +25,6 @@ const ButtonGroup: FC<Props> = ({
     >
       {children}
     </S.default>
-);
+)
 
-export default ButtonGroup;
+export default ButtonGroup

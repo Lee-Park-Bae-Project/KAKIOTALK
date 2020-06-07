@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-import React from 'react';
-import { mount } from 'enzyme';
-import List from 'system/List';
-import Profile from 'system/Profile';
-import faker from 'faker';
+import React from 'react'
+import { mount } from 'enzyme'
+import List from 'system/List'
+import Profile from 'system/Profile'
+import faker from 'faker'
 
 describe('<List/>', () => {
   it('matches snapshot', () => {
@@ -25,7 +25,7 @@ describe('<List/>', () => {
           userName='asd'
         />
       </List>
-    ));
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+    ))
+    expect(wrapper).toMatchSnapshot()
+  })
+})

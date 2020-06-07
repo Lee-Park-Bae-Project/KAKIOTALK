@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react'
+import styled from 'styled-components'
 
 const S = {
   Container: styled.div`
@@ -14,7 +14,7 @@ const S = {
     border-radius: 0.5rem;
     margin-top: 1rem;
   `,
-};
+}
 
 interface Props {
   value: string | number | string[] | undefined;
@@ -36,6 +36,6 @@ const SearchInpust: FC<Props> = ({
       onKeyPress={onKeyPress}
     />
   </S.Container>
-);
+)
 
-export default SearchInpust;
+export default SearchInpust

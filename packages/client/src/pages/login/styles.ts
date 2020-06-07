@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import Flex from '../../atoms/Flex';
-import Logo from '../../components/Logo';
-import Signin from '../../components/GoogleSignin';
-import { color } from '../../styles/global';
+import styled from 'styled-components'
+import Flex from '../../atoms/Flex'
+import Logo from '../../components/Logo'
+import Signin from '../../components/GoogleSignin'
+import { color } from '../../styles/global'
 
 export const Container = styled(Flex)`
   background: ${color.YELLO};
@@ -10,7 +10,7 @@ export const Container = styled(Flex)`
   height: 100%;
   min-height: 100vh;
   flex-direction: column;
-`;
+`
 
 export const SigninButton = styled.div`
   cursor: pointer;
@@ -19,8 +19,8 @@ export const SigninButton = styled.div`
   background: none;
   border: none;
 
-`;
+`
 export {
   Logo,
   Signin,
-};
+}

@@ -1,5 +1,5 @@
-import React from 'react';
-import * as S from 'pages/login/styles';
+import React from 'react'
+import * as S from 'pages/login/styles'
 
 const Login: React.FC = () => (
   <S.Container>
@@ -8,6 +8,6 @@ const Login: React.FC = () => (
       <S.Signin />
     </S.SigninButton>
   </S.Container>
-);
+)
 
-export default Login;
+export default Login

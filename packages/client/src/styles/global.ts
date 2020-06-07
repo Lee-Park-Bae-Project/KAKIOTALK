@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const Global = createGlobalStyle`
   *{
@@ -9,7 +9,7 @@ const Global = createGlobalStyle`
     font-size: 1rem;
     /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri; */
   }
-`;
+`
 
 export const color = {
   YELLO: '#F7CF46',
@@ -23,18 +23,18 @@ export const color = {
   ROOM_COLOR: '#C0D1DB',
   HOVER_GRAY: '#F1F2F2',
   LIGHT_GRAY: '#FAFAFA',
-} as const;
+} as const
 
 export const fontSize = {
   SMALL: '0.8rem',
   MEDIUM: '1rem',
   LARGE: '1.2rem',
-};
+}
 
 export const weight = {
   WEAK: 200,
   NORMAL: 400,
   STRONG: 600,
-};
+}
 
-export default Global;
+export default Global

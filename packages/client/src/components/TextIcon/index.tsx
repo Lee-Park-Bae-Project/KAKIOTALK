@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import Icon, { IconType } from 'Icon/Icon';
+import React, { FC } from 'react'
+import styled from 'styled-components'
+import Icon, { IconType } from 'Icon/Icon'
 
 type iconPositionType = 'left' | 'right' | 'top' | 'bottom';
 
@@ -33,28 +33,28 @@ const directionMap = {
   bottom: 'column-reverse',
   left: 'row',
   right: 'row-reverse',
-};
+}
 
 const S = {
   Container: styled.div<ContainerProp>`
     display: flex;
-    flex-direction: ${props => {
-      if (!props.iconPosition) {
-        return 'left';
-      }
-      return directionMap[props.iconPosition];
-    }};
+    flex-direction: ${(props) => {
+    if (!props.iconPosition) {
+      return 'left'
+    }
+    return directionMap[props.iconPosition]
+  }};
     width: fit-content;
     height: fit-content;
     align-items: center;
     justify-content: center;
   `,
   TextWrapper: styled.span<TextProp>`
-    color: ${props => props.textColor};
+    color: ${(props) => props.textColor};
     line-height: 2rem;
     padding: 1rem;
   `,
-};
+}
 
 /**
  * text와 icon 함께 사용할 때 이용
@@ -75,6 +75,6 @@ const TextIcon: FC<Prop> = ({
       {text}
     </S.TextWrapper>
   </S.Container>
-);
+)
 
-export default TextIcon;
+export default TextIcon

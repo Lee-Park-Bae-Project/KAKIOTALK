@@ -28,7 +28,6 @@ module.exports = {
     ],
     'comma-style': ['error', 'last'],
     'no-trailing-spaces': 'error',
-    // "function-paren-newline": ["error", { "minItems": 3 }],
     'object-property-newline': [
       'error',
       {
@@ -73,6 +72,10 @@ module.exports = {
     'import/no-unresolved': 'off',
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-unused-vars': 0,
+    'import/no-cycle': 0,
+    'no-console': ["error", { allow: ["warn", "error"] }],
+    'linebreak-style':0,
+    'max-len': 0,
   },
   settings: {
     react: {

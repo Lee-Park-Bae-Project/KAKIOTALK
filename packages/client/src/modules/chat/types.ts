@@ -1,10 +1,12 @@
 import {
+  addChat,
+  getChatFailure,
   getChatRequest,
   getChatSuccess,
-  getChatFailure,
-  addChat,
-} from 'modules/chat/action';
-import { ReduxState, ReduxChatType } from 'types';
+} from 'modules/chat/action'
+import {
+  ReduxChatType, ReduxState,
+} from 'types'
 
 export type ChatState = ReduxState<ReduxChatType>
 

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { ThemeProvider } from 'styled-components';
-import * as S from 'components/Button/styles';
+import React, { FC } from 'react'
+import { ThemeProvider } from 'styled-components'
+import * as S from 'components/Button/styles'
 
 interface ButtonProp {
   /** 버튼안에 들어갈 텍스트 */
@@ -34,6 +34,6 @@ const Button: FC<ButtonProp> = ({
     </S.Button>
   </ThemeProvider>
 
-);
+)
 
-export default Button;
+export default Button
