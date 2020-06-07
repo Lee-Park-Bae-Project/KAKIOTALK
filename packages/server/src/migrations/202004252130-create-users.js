@@ -24,6 +24,10 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: true,
     },
+    imageUrl: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     googleId: {
       allowNull: true,
       type: Sequelize.STRING,
