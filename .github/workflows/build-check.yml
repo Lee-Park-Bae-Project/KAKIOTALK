@@ -29,7 +29,10 @@ jobs:
 
       # Runs client build script
       - name: Build Client
-        run: yarn client:build
+        run: |
+        cd packages/client
+        yarn install
+        yarn client:build
 
       # Runs common build script
       - name: Build Common
