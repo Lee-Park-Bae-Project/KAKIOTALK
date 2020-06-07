@@ -54,7 +54,7 @@
     "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "lint": "eslint \"src/**/*.{ts,tsx}\""
+    "lint": "eslint --fix \"src/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [

@@ -56,7 +56,7 @@ const Main: FC<Props> = ({
   popupAddFriend,
 }) => (
     <S.Container>
-      <S.Left>
+
         <S.NavigationBarWrapper>
           <NavigationBar
             tabSelector={tabSelector}
@@ -66,20 +66,14 @@ const Main: FC<Props> = ({
             logoutTabOnClick={logoutTabOnClick}
           />
         </S.NavigationBarWrapper>
-        <S.Wrapper>
+        <S.MainWrapper>
           {tabSelector.friend && (
-            <S.Column>
               <FriendContainer />
-            </S.Column>
           )}
           {tabSelector.chat && (
-            <S.Column>
               <Room roomState={roomState} />
-              {/* <ChatContainer/> */}
-            </S.Column>
           )}
-        </S.Wrapper>
-      </S.Left>
+        </S.MainWrapper>
       {popupAddFriend ? (
         <PopUp onClose={onPopupOutClicked} refs={dialogRef}>
           <Dialog

@@ -17,6 +17,7 @@ export interface WithAuthProps {
   email: string;
   uuid: string;
   statusMessage: string;
+  imageUrl: string;
 }
 function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
   return (props: T & RouteComponentProps) => {
@@ -25,6 +26,7 @@ function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
       email: '',
       uuid: '',
       statusMessage: '',
+      imageUrl: '',
     })
     const dispatch = useDispatch()
     useEffect(() => {
@@ -33,10 +35,10 @@ function withAuth<T extends WithAuthProps>(Component: React.ComponentType<T>) {
           .getUserInfo()
           .then((response) => {
             const {
-              name, email, uuid, statusMessage,
+              name, email, uuid, statusMessage, imageUrl,
             } = response.data.data
             setNewProps({
-              name, email, uuid, statusMessage,
+              name, email, uuid, statusMessage, imageUrl,
             })
             dispatch(loginSuccess())
           })

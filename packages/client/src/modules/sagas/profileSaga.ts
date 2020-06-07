@@ -3,11 +3,10 @@ import {
 } from 'redux-saga/effects'
 import {
   GET_PROFILE,
-  getProfileFailure,
   getProfileSuccess,
   UPDATE_PROFILE,
   updateProfielSuccess,
-  updateProfileFailure,
+  updateProfile,
 } from 'modules/profile/action'
 import * as request from 'common/request'
 import { alert } from 'common/utils'
@@ -18,17 +17,15 @@ function* getProfileSaga() {
     yield put(getProfileSuccess(response.data.data))
   } catch (e) {
     alert.error(e.response.data.data.message)
-    yield put(getProfileFailure(e))
   }
 }
 
-function* updateProfileSaga({ payload }: any) {
+function* updateProfileSaga({ payload }: ReturnType<typeof updateProfile>) {
   try {
     const response = yield call(request.updateProfile, payload)
     yield put(updateProfielSuccess(response.data.data))
   } catch (e) {
     alert.error(e.response.data.data.message)
-    yield put(updateProfileFailure(e))
   }
 }
 export default function* profileSaga() {

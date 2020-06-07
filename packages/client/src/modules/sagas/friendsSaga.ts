@@ -4,46 +4,46 @@ import {
 
 import {
   ADD_FRIEND,
-  addFriendFailure,
+  addFriend,
   addFriendSuccess,
   DELETE_FRIEND,
-  deleteFriendFailure,
+  deleteFriend,
   deleteFriendSuccess,
   GET_FRIENDS,
-  getFriendsFailure,
   getFriendsSuccess,
 } from 'modules/friends/action'
 import * as request from 'common/request'
 import { alert } from 'common/utils'
+import { AxiosResponse } from 'axios'
+import { ApiUser } from 'types'
 
+type ApiUsersType = AxiosResponse<request.ResponseType<ApiUser[]>>
 function* getFriendsSaga() {
   try {
-    const response = yield call(request.getFriendList)
+    const response: ApiUsersType = yield call(request.getFriendList)
     yield put(getFriendsSuccess(response.data.data))
   } catch (e) {
     alert.error(e.response.data.data.message)
-    yield put(getFriendsFailure(e))
   }
 }
-
-function* addFriendSaga({ payload }: any) {
+type ApiUserType = AxiosResponse<request.ResponseType<ApiUser>>
+function* addFriendSaga({ payload }: ReturnType<typeof addFriend>) {
   try {
-    const response = yield call(request.addFriend, payload)
+    const response: ApiUserType = yield call(request.addFriend, payload)
     yield put(addFriendSuccess(response.data.data))
     alert.addFriend(response.data.data.name)
   } catch (e) {
     alert.error(e.response.data.data.message)
-    yield put(addFriendFailure(e))
   }
 }
-function* deleteFriendSaga({ payload }: any) {
+type uuidType = AxiosResponse<request.ResponseType<string>>
+function* deleteFriendSaga({ payload }: ReturnType<typeof deleteFriend>) {
   try {
-    const response = yield call(request.deleteFriend, payload)
+    const response: uuidType = yield call(request.deleteFriend, payload)
     yield put(deleteFriendSuccess(response.data.data))
     alert.deleteFriend()
   } catch (e) {
     alert.error(e.response.data.data.message)
-    yield put(deleteFriendFailure(e))
   }
 }
 export default function* friendsSaga() {

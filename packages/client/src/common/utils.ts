@@ -1,6 +1,7 @@
 import moment from 'moment'
 import 'moment-timezone'
 import swal from 'sweetalert'
+import { useEffect } from 'react'
 
 moment.locale('ko')
 const tzSeoul = 'Asia/Seoul'
@@ -35,3 +36,19 @@ const alert = {
   error: (message: string) => swal(message, '', 'error'),
 }
 export { alert }
+
+export const useOutsideClick = (ref: React.RefObject<HTMLDivElement>, callback: () => void) => {
+  const handleClick = (e: any) => {
+    if (ref.current && e.target instanceof Node && !ref.current.contains(e.target)) {
+      callback()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClick)
+
+    return () => {
+      document.removeEventListener('click', handleClick)
+    }
+  })
+}

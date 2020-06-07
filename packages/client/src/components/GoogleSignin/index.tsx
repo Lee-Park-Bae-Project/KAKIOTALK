@@ -6,42 +6,23 @@ import {
   useHistory, withRouter,
 } from 'react-router-dom'
 import { configs } from 'common/constants'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
 import * as request from 'common/request'
+import { alert } from 'common/utils'
 
-const {
-  useState, useEffect,
-} = React
+dotenv.config()
 
-type LoginForm = {
-  loginSuccess: (state: { id: string; email: string; name: string }) => void;
-};
 const GoogleSignin: React.FC = () => {
-  const dispatch = useDispatch()
-  const [login, setLogin] = useState({
-    email: '',
-    name: '',
-    googleId: '',
-  })
-
   const history = useHistory()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const responseSuccess = (e: any) => {
-    const { googleId } = e
-    const googleAccessToken = e.accessToken
+  const responseSuccess = (res: any) => {
+    const { googleId } = res
+    const googleAccessToken = res.accessToken
     const {
-      name, email,
-    } = e.profileObj
-    setLogin({
-      email,
-      name,
-      googleId,
-    })
+      name, email, imageUrl,
+    } = res.profileObj
+
     request
       .getLogin({
-        googleId, email, name, googleAccessToken,
+        googleId, email, name, googleAccessToken, imageUrl,
       })
       .then((response) => {
         history.push('/')
@@ -51,7 +32,7 @@ const GoogleSignin: React.FC = () => {
       })
   }
   const responseFail = (err: Error) => {
-    console.error(err)
+    alert.error(err.message)
   }
 
   const responseAutoLoad = (success: boolean) => {

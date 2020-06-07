@@ -48,6 +48,10 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       type: dataTypes.STRING,
       allowNull: true,
     },
+    imageUrl: {
+      type: dataTypes.STRING,
+      allowNull: false,
+    },
     googleId: {
       type: dataTypes.STRING,
       allowNull: true,

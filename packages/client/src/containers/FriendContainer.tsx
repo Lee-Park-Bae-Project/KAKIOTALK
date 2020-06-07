@@ -7,6 +7,7 @@ import { getProfile } from 'modules/profile'
 import { RootState } from 'modules'
 import Friend from 'pages/main/Friend'
 import { SearchInput } from 'components'
+import * as S from 'system/Room/style'
 
 const FriendContainer: React.FC = () => {
   const {
@@ -31,11 +32,14 @@ const FriendContainer: React.FC = () => {
 
   return (
     <React.Fragment>
-      <SearchInput
-        value={searchFriendKeyword}
-        onChange={onFriendKeywordChange}
-        placeholder="이름 검색"
-      />
+      <S.Header>
+        <SearchInput
+          value={searchFriendKeyword}
+          onChange={onFriendKeywordChange}
+          placeholder='이름 검색'
+        />
+
+      </S.Header>
       <Friend
         myProfile={myProfile}
         friendList={friendList}

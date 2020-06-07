@@ -7,7 +7,6 @@ import { RootState } from 'modules'
 import { getRoomRequest } from 'modules/room'
 import withAuth, { WithAuthProps } from 'hocs/withAuth'
 import { addFriend } from 'modules/friends'
-
 import * as request from 'common/request'
 import { useHistory } from 'react-router-dom'
 import { afterLogin } from '../socket'

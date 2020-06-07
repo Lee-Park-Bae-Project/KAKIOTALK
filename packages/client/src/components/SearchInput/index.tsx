@@ -1,18 +1,23 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import { color } from 'styles/global'
+import Icon from 'Icon/Icon'
 
 const S = {
-  Container: styled.div`
-    display: flex;
-    width: 98%;
-  `,
+  InputWrapper: styled.div`
+  display:flex;
+  justify-content:flex-start;
+  padding:0.3rem;
+  background: #F6F6F6;
+  border : 0.5px solid ${color.GRAY}
+  border-radius: 2rem;
+`,
   Input: styled.input`
+    padding-left:0.5rem;
     width: 100%;
-    background: #f7f7f7;
     outline: none;
-    padding: 0.3rem;
-    border-radius: 0.5rem;
-    margin-top: 1rem;
+    border:none;
+    background: none;
   `,
 }
 
@@ -28,14 +33,16 @@ const SearchInpust: FC<Props> = ({
   onKeyPress,
   placeholder,
 }) => (
-  <S.Container>
+  <S.InputWrapper>
+  <Icon icon="Search" size="1rem"/>
     <S.Input
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       onKeyPress={onKeyPress}
     />
-  </S.Container>
+  </S.InputWrapper>
+
 )
 
 export default SearchInpust

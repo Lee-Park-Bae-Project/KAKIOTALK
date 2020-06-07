@@ -4,8 +4,9 @@ import React, {
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
 import { color } from 'styles/global'
-import TextIcon from 'components/TextIcon'
-import SearchInput from 'components/SearchInput'
+import {
+  SearchInput, TextIcon,
+} from 'components'
 import { useDispatch } from 'react-redux'
 import { alert } from 'common/utils'
 import { updateProfile } from 'modules/profile'

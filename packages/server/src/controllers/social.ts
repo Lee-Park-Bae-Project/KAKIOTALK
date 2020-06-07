@@ -1,8 +1,12 @@
-import { NextFunction, Request, Response } from 'express';
-import createError from 'http-errors';
-import { response, message } from '../common/utils';
-import * as userService from '../services/user';
-import socialService from '../services/social';
+import {
+  NextFunction, Request, Response,
+} from 'express'
+import createError from 'http-errors'
+import {
+  message, response,
+} from '../common/utils'
+import * as userService from '../services/user'
+import socialService from '../services/social'
 
 const getFriendsList = async (
   req: Request,
@@ -10,72 +14,80 @@ const getFriendsList = async (
   next: NextFunction
 ) => {
   try {
-    const { googleId } = req.decodedUser;
-    const user = await userService.findByGoogleId(googleId);
+    const { googleId } = req.decodedUser
+    const user = await userService.findByGoogleId(googleId)
     if (!user) {
-      throw createError(401, { message: message.INVALID_GOOGLE_ID });
+      throw createError(401, { message: message.INVALID_GOOGLE_ID })
     }
-    const data = await socialService.getFriendsList(user.id);
+    const data = await socialService.getFriendsList(user.id)
     if (!data) {
-      throw createError(401, { message: message.INVALID_FRIEND_ID });
+      throw createError(401, { message: message.INVALID_FRIEND_ID })
     }
     const friendlist = data.friend.map((friend) => {
-      const { uuid, name, email, statusMessage } = friend.user;
+      const {
+        uuid, name, email, statusMessage, imageUrl,
+      } = friend.user
       return {
         uuid,
         name,
         email,
         statusMessage,
-      };
-    });
-    response(res, friendlist);
+        imageUrl,
+      }
+    })
+    response(res, friendlist)
   } catch (e) {
-    next(e);
+    next(e)
   }
-};
+}
 const addFriend = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await userService.findByGoogleId(req.decodedUser.googleId);
-    const friendEmail: string = req.body.email;
-    const friend = await userService.findByEmail(friendEmail);
+    const user = await userService.findByGoogleId(req.decodedUser.googleId)
+    const friendEmail: string = req.body.email
+    const friend = await userService.findByEmail(friendEmail)
     if (!friend || !user) {
-      return next(createError(401, { message: message.INVALID_EMAIL }));
+      next(createError(401, { message: message.INVALID_EMAIL }))
+      return
     }
-    const [, created] = await socialService.addFriend(user.id, friend.id);
+    const [, created] = await socialService.addFriend(user.id, friend.id)
     if (!created) {
-      return next(createError(401, { message: message.ALREADY_EXIST_FRIEND }));
+      next(createError(401, { message: message.ALREADY_EXIST_FRIEND }))
+      return
     }
-    const { uuid, email, name, statusMessage } = friend;
+    const {
+      uuid, email, name, statusMessage, imageUrl,
+    } = friend
     response(res, {
       uuid,
       email,
       name,
       statusMessage,
-    });
+      imageUrl,
+    })
   } catch (e) {
-    next(e);
+    next(e)
   }
-};
+}
 const deleteFriend = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const user = await userService.findByGoogleId(req.decodedUser.googleId);
-    const deleteUser = await userService.findByUuid(req.body.uuid);
+    const user = await userService.findByGoogleId(req.decodedUser.googleId)
+    const deleteUser = await userService.findByUuid(req.body.uuid)
     if (!user || !deleteUser) {
-      throw createError(401, { message: message.INVALID_FRIEND_ID });
+      throw createError(401, { message: message.INVALID_FRIEND_ID })
     }
-    const deleted = await socialService.deleteFriend(user.id, deleteUser.id);
-    if (deleted == 0) {
-      throw createError(401, {
-        message: message.ERROR_OCCURED,
-      });
+    const deleted = await socialService.deleteFriend(user.id, deleteUser.id)
+    if (deleted === 0) {
+      throw createError(401, { message: message.ERROR_OCCURED })
     }
-    response(res, { uuid: deleteUser.uuid });
+    response(res, deleteUser.uuid)
   } catch (e) {
-    next(e);
+    next(e)
   }
-};
-export { getFriendsList, addFriend, deleteFriend };
+}
+export {
+  getFriendsList, addFriend, deleteFriend,
+}
