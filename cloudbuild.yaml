@@ -1,7 +1,5 @@
 steps:
   - name: "gcr.io/cloud-builders/yarn"
-    args: ["add", "yarn"]
-  - name: "gcr.io/cloud-builders/yarn"
     args: ["common:build", "yarn"]
   - name: "ubuntu"
     args: ["cd packages"]

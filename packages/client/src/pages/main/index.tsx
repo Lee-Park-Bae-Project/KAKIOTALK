@@ -1,12 +1,14 @@
-import React, { FC } from 'react';
-import * as S from 'pages/main/styles';
-import NavigationBar from 'components/NavigationBar';
-import SearchInput from 'components/SearchInput';
-import { RoomState } from 'modules/room';
-import { PopUp, Dialog } from 'components';
-import FriendContainer from 'containers/FriendContainer';
-import Room from 'system/Room';
-import Friend from './Friend';
+import React, { FC } from 'react'
+import * as S from 'pages/main/styles'
+import NavigationBar from 'components/NavigationBar'
+import SearchInput from 'components/SearchInput'
+import { RoomState } from 'modules/room'
+import {
+  Dialog, PopUp,
+} from 'components'
+import FriendContainer from 'containers/FriendContainer'
+import Room from 'system/Room'
+import Friend from './Friend'
 
 interface TabSelector {
   friend: boolean;
@@ -114,6 +116,6 @@ const Main: FC<Props> = ({
         </PopUp>
       ) : null}
     </S.Container>
-);
+)
 
-export default Main;
+export default Main
