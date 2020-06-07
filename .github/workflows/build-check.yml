@@ -27,16 +27,13 @@ jobs:
       - name: Yarn Install
         run: yarn install
 
-      # Runs client build script
-      - name: Build Client
-        run: |
-        cd packages/client
-        yarn install
-        yarn client:build
-
       # Runs common build script
       - name: Build Common
         run: yarn common:build
+
+      # Runs client build script
+      - name: Build Client
+        run: yarn client:build
 
       # Runs server build script
       - name: Build Server
