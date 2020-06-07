@@ -1,17 +1,19 @@
 import React, {
+  ChangeEvent,
   FC,
-  useState,
+  KeyboardEvent,
   useEffect,
   useRef,
-  KeyboardEvent,
-  ChangeEvent,
-} from 'react';
-import { getCurTimeDBFormat } from 'common/utils';
-import { WithAuthProps } from 'hocs/withAuth';
-import ChatBox from 'components/ChatBox';
-import { ReduxChatType, ReduxState } from 'types';
-import { chatFromClient } from 'socket';
-import * as S from './style';
+  useState,
+} from 'react'
+import { getCurTimeDBFormat } from 'common/utils'
+import { WithAuthProps } from 'hocs/withAuth'
+import ChatBox from 'components/ChatBox'
+import {
+  ReduxChatType, ReduxState,
+} from 'types'
+import { chatFromClient } from 'socket'
+import * as S from './style'
 
 interface Props extends WithAuthProps{
   chatState: ReduxState<ReduxChatType>;
@@ -27,33 +29,33 @@ const ChatRoom: FC<Props> = ({
   handleBack,
   roomName,
 }) => {
-  const messageRef = useRef<HTMLInputElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
-  const [message, setMessage] = useState<string>('');
-  const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true);
+  const messageRef = useRef<HTMLInputElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+  const [message, setMessage] = useState<string>('')
+  const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true)
 
   useEffect(() => {
     if (!chatState.data[roomUuid]) {
-      return;
+      return
     }
     if (isFirstScroll) {
-      setIsFirstScroll(false);
+      setIsFirstScroll(false)
       if (chatContainerRef && chatContainerRef.current) {
-        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
       }
-      return;
+      return
     }
     if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }, [chatState,
     roomUuid,
-    isFirstScroll]);
+    isFirstScroll])
 
   const handleSubmit = () => {
     if (!messageRef) {
-      return;
+      return
     }
 
     chatFromClient({
@@ -61,24 +63,24 @@ const ChatRoom: FC<Props> = ({
       roomUuid,
       createdAt: getCurTimeDBFormat(),
       userUuid: uuid,
-    });
+    })
 
     if (messageRef.current) {
-      messageRef.current.focus();
+      messageRef.current.focus()
     }
-    setMessage('');
-  };
+    setMessage('')
+  }
   const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (e.target && e.currentTarget.value.trim().length > 0) {
-        handleSubmit();
+        handleSubmit()
       }
     }
-  };
+  }
 
   const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
-  };
+    setMessage(e.target.value)
+  }
 
   return (
     <S.Container>
@@ -127,7 +129,7 @@ const ChatRoom: FC<Props> = ({
         </S.ButtonWrapper>
       </S.InputContainer>
     </S.Container>
-  );
-};
+  )
+}
 
-export default ChatRoom;
+export default ChatRoom

@@ -31,8 +31,20 @@ export const setAccessToken = (googleId: string, accessToken: string) => models.
 )
 export const setUserInfo = (
   googleId: string,
+  email:string,
+  imageUrl:string
+) => models.User.update(
+  {
+    email,
+    imageUrl,
+  },
+  { where: { googleId } }
+)
+
+export const updateProfile = (
+  googleId: string,
   name: string,
-  statusMessage: string
+  statusMessage:string,
 ) => models.User.update(
   {
     name,

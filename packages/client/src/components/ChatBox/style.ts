@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import { color, weight } from 'styles/global';
-
+import styled from 'styled-components'
+import {
+  color, weight,
+} from 'styles/global'
 
 interface ContainerProps {
   isMine: boolean;
@@ -9,7 +10,7 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
   display: flex;
   flex-direction: ${({ isMine }) => (isMine ? 'row-reverse' : 'row')};
-`;
+`
 
 export const Wrapper = styled.div`
   width: fit-content;
@@ -19,12 +20,11 @@ export const Wrapper = styled.div`
   border-radius: 5px;
   margin: 1rem 0.5rem;
   padding: 0.5rem;
-`;
-
+`
 
 export const Time = styled.div`
   align-self: flex-end;
   margin: 1rem 0;
   font-size: 0.6rem;
   font-weight: ${weight.WEAK}
-`;
+`

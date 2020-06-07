@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import * as S from 'components/RoomCard/styles';
-import Icon from 'Icon/Icon';
-import Circle from 'atoms/Circle';
-import { convertMillToMMDDYYYY } from 'common/utils';
+import React, { FC } from 'react'
+import * as S from 'components/RoomCard/styles'
+import Icon from 'Icon/Icon'
+import Circle from 'atoms/Circle'
+import { convertMillToMMDDYYYY } from 'common/utils'
 
 interface Props {
   participantsName: string;
@@ -41,6 +41,6 @@ const ChatCard: FC<Props> = ({
       <Circle num={numOfNewMessages} />
     </S.SubInfoWrapper>
   </S.Container>
-);
+)
 
-export default ChatCard;
+export default ChatCard

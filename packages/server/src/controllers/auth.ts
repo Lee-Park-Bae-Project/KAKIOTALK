@@ -22,7 +22,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       googleAccessToken,
       imageUrl,
     )
-
+    await userService.setUserInfo(googleId, email, imageUrl)
     res.cookie(cookieName, token, cookieConfig)
     response(res)
   } catch (e) {

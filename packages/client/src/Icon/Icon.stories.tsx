@@ -1,23 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import Icon, { iconTypes } from './Icon';
+import React from 'react'
+import styled from 'styled-components'
+import Icon, { iconTypes } from './Icon'
 
 export default {
   component: Icon,
   title: 'Component|Icon',
-};
+}
 
-export const defaultIcon = () => <Icon icon='Send' size='4rem'/>;
-defaultIcon.story = {
-  name: 'Default',
-};
+export const defaultIcon = () => <Icon icon='Send' size='4rem'/>
+defaultIcon.story = { name: 'Default' }
 
-export const coloredIcon = () => <Icon icon='Send' color='red'/>;
+export const coloredIcon = () => <Icon icon='Send' color='red'/>
 
-export const customSizeIcon = () => <Icon icon='Send' size='4rem'/>;
+export const customSizeIcon = () => <Icon icon='Send' size='4rem'/>
 
-const S = {
-  Ul: styled.ul`
+const S = { Ul: styled.ul`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -31,8 +28,7 @@ const S = {
       margin-right: 1rem;
     }
   }
-`,
-};
+` }
 export const listOfIcons = () => (
     <S.Ul>
       {iconTypes.map((icon) => (
@@ -42,8 +38,6 @@ export const listOfIcons = () => (
         </li>
       ))}
     </S.Ul>
-);
+)
 
-listOfIcons.story = {
-  name: '전체 아이콘 목록',
-};
+listOfIcons.story = { name: '전체 아이콘 목록' }

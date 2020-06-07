@@ -44,7 +44,7 @@ const updateProfile = async (
       next(createError(401, message.LOGIN_REQUIRED))
       return
     }
-    await userService.setUserInfo(
+    await userService.updateProfile(
       req.decodedUser.googleId,
       req.body.name,
       req.body.statusMessage

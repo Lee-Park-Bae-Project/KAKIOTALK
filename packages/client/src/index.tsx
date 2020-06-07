@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 // import socketio from 'socket.io-client';
-import App from './App';
-import { configs } from './common/constants';
+import App from './App'
+import { configs } from './common/constants'
 
 // const { SOCKET_URL } = configs;
 
@@ -25,10 +25,9 @@ import { configs } from './common/constants';
 //   console.log(msg);
 // });
 
-
 ReactDOM.render(
   <App />,
   document.getElementById(
     'root',
   ),
-);
+)

@@ -1,16 +1,13 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import Flex from 'atoms/Flex';
-import Icon from 'Icon/Icon';
-import { color } from 'styles/global';
+import React, { FC } from 'react'
+import styled from 'styled-components'
+import Flex from 'atoms/Flex'
+import Icon from 'Icon/Icon'
+import { color } from 'styles/global'
 
-
-const S = {
-  Container: styled(Flex)`
+const S = { Container: styled(Flex)`
     width: fit-content;
     height: fit-content;
-  `,
-};
+  ` }
 
 interface ChatTabProp {
   /** 사이즈 */
@@ -36,6 +33,6 @@ const ChatTab: FC<ChatTabProp> = ({
         : <Icon icon='Chat'color={color.WHITE} size='1.5rem'/>
     }
   </S.Container>
-);
+)
 
-export default ChatTab;
+export default ChatTab

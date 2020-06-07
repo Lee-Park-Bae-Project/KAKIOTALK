@@ -1,4 +1,6 @@
-import React, { FC } from 'react'
+import React, {
+  FC, ReactElement,
+} from 'react'
 import styled from 'styled-components'
 import Icon, { IconType } from 'Icon/Icon'
 
@@ -28,6 +30,7 @@ interface Prop extends TextProp, ContainerProp {
   size?: string | number
   /** 구글프로필사진 URL */
   imageUrl?: string
+  children?: ReactElement | boolean
 }
 
 const directionMap = {
@@ -79,13 +82,14 @@ const TextIcon: FC<Prop> = ({
   textColor = 'black',
   textSize = '1rem',
   imageUrl = null,
+  children,
 }) => (
   <S.Container iconPosition={iconPosition}>
      {
     imageUrl ? <S.Image src ={imageUrl} onClick={onClick} />
       : <Icon icon={icon} color={color} size={size} onClick={onClick} />
     }
-
+  {children && children}
     <S.TextWrapper text={text} textColor={textColor} textSize={textSize}>
       {text}
     </S.TextWrapper>

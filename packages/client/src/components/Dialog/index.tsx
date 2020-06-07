@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import * as S from 'components/Dialog/styles';
-import Button from 'components/Button';
-import ButtonGroup from 'components/ButtonGroup';
+import React, { FC } from 'react'
+import * as S from 'components/Dialog/styles'
+import Button from 'components/Button'
+import ButtonGroup from 'components/ButtonGroup'
 
 interface Props{
   /** 렌더링 여부 */
@@ -44,7 +44,7 @@ const Dialog: FC<Props> = ({
   onConfirm,
 }) => {
   if (!isVisible) {
-    return null;
+    return null
   }
   return (
   <S.Container>
@@ -75,7 +75,7 @@ const Dialog: FC<Props> = ({
     </S.ContentWrapper>
 
   </S.Container>
-  );
-};
+  )
+}
 
-export default Dialog;
+export default Dialog

@@ -1,9 +1,11 @@
-import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import Login from 'pages/login';
-import MainContainer from 'containers/MainContainer';
-import { ChatRoomContainer } from 'containers';
-import { url } from 'common/constants';
+import React from 'react'
+import {
+  Route, HashRouter as Router,
+} from 'react-router-dom'
+import Login from 'pages/login'
+import MainContainer from 'containers/MainContainer'
+import { ChatRoomContainer } from 'containers'
+import { url } from 'common/constants'
 
 const Routes: React.FC = () => (
   <Router>
@@ -11,6 +13,6 @@ const Routes: React.FC = () => (
     <Route path={url.login} component={Login} />
     <Route path={`${url.room}/:roomUuid`} component={ChatRoomContainer} />
   </Router>
-);
+)
 
-export default Routes;
+export default Routes

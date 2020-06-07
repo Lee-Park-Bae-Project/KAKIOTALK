@@ -9,10 +9,11 @@ const S = {
   justify-content:flex-start;
   padding:0.3rem;
   background: #F6F6F6;
-  border : 2px solid ${color.GRAY}
+  border : 0.5px solid ${color.GRAY}
   border-radius: 2rem;
 `,
   Input: styled.input`
+    padding-left:0.5rem;
     width: 100%;
     outline: none;
     border:none;
