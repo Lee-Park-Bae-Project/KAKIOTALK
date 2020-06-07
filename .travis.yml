@@ -9,6 +9,7 @@ env:
   - CI=false
 before_script:
   - yarn install
+  - yarn common:build
   - yarn client:build
   - cd packages
   - cd client
