@@ -9,7 +9,7 @@ steps:
     entrypoint: yarn
     args: ["server:build"]
   - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: packages/server/
+    entrypoint: "packages/server"
     args: ["app", "deploy"]
     timeout: "1600s"
 
