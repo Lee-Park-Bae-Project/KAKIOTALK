@@ -23,16 +23,17 @@ export const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket']
 
 export const connect = () => {
   socket.on(Event.connect, (msg: string) => {
-    console.log(msg)
+    console.warn(msg)
   })
 }
 
 export const disconnect = () => {
   socket.on(Event.disconnect, (msg: string) => {
-    console.log(msg)
+    console.warn(msg)
   })
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const chatFromServer = (dispatch: Dispatch<any>) => {
   socket.on(Event.chatFromServer, (newChat: ApiChat) => {
     dispatch(addChat(newChat.metaInfo.room.uuid, newChat))

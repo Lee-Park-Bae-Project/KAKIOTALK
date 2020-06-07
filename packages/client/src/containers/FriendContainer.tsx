@@ -7,8 +7,6 @@ import { getProfile } from 'modules/profile'
 import { RootState } from 'modules'
 import Friend from 'pages/main/Friend'
 import { SearchInput } from 'components'
-import styled from 'styled-components'
-import { color } from 'styles/global'
 import * as S from 'system/Room/style'
 
 const FriendContainer: React.FC = () => {

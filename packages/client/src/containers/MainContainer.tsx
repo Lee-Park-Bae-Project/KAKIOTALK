@@ -96,7 +96,7 @@ const MainContainer: React.FC<WithAuthProps> = ({
         history.push('/login')
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       })
     onLogoutPopUpClose()
   }

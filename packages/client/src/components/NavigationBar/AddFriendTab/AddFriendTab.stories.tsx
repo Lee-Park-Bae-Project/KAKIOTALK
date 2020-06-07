@@ -7,7 +7,7 @@ export default {
 }
 
 export const AddFriendBasic = () => {
-  const onClick = () => alert('친구추가창이 뜰거임')
+  const onClick = () => console.warn('친구추가창이 뜰거임')
   return (
     <AddFriend onClick={onClick}/>
   )

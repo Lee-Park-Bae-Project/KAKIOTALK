@@ -4,7 +4,6 @@ import React, {
 import { useDispatch } from 'react-redux'
 import List from 'system/List'
 import Hr from 'atoms/Hr'
-import Profile from 'system/Profile'
 import { UserCard } from 'components'
 import { deleteFriend } from 'modules/friends'
 import { User } from '@kakio/common'

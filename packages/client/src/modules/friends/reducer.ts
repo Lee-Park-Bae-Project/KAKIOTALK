@@ -21,7 +21,6 @@ function userList(state: SimpleUserType[] = initialState, action: UserListAction
     case ADD_FRIEND_SUCCESS: {
       return state.concat(action.payload)
     }
-
     default:
       return state
   }

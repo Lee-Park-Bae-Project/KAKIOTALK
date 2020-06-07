@@ -7,6 +7,6 @@ export default {
 }
 
 export const LogoutBasic = () => {
-  const onClick = () => alert('로그아웃!')
+  const onClick = () => console.warn('로그아웃!')
   return <Logout onClick={onClick} />
 }

@@ -47,7 +47,7 @@ const MyProfile: FC<Prop> = ({
     setUpdateMessage(e.target.value)
   }
   const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key == 'Enter') onUpdateClick()
+    if (e.key === 'Enter') onUpdateClick()
   }
   return (
     <S.Container>

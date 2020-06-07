@@ -1,5 +1,7 @@
 import { User } from '@kakio/common'
 
+type UserState = Pick<User, 'uuid' | 'email' | 'statusMessage' | 'name'>
+
 export const INIT_PROFILE = 'profile/INIT_PROFILE' as const
 export const GET_PROFILE = 'profile/GET_PROFILE' as const
 export const GET_PROFILE_SUCCESS = 'profile/GET_PROFILE_SUCCESS' as const
