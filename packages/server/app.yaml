@@ -1,3 +1,8 @@
 runtime: nodejs12
 env_variables:
   NODE_OPTIONS: ''
+handlers:
+  - url: /images
+    static_dir: static/images
+    http_headers:
+      Access-Control-Allow-Origin: https://lee-park-bae-project.github.io/KAKIOTALK
