@@ -8,39 +8,6 @@ steps:
   - name: node
     entrypoint: yarn
     args: ["server:build"]
-  - name: node
-    entrypoint: npm
-    args: ["run", "create-env"]
-    dir: "packages/server"
-    env:
-      - "NODE_ENV=${_NODE_ENV}"
-      - "DEBUG=${_DEBUG}"
-      - "PORT=${_PORT}"
-      - "DB_HOST=${_DB_HOST}"
-      - "DB_USER=${_DB_USER}"
-      - "DB_PW=${_DB_PW}"
-      - "DB_NAME=${_DB_NAME}"
-      - "DB_PORT=${_DB_PORT}"
-      - "DB_DEV_HOST=${_DB_DEV_HOST}"
-      - "DB_DEV_USER=${_DB_DEV_USER}"
-      - "DB_DEV_PW=${_DB_DEV_PW}"
-      - "DB_DEV_NAME=${_DB_DEV_NAME}"
-      - "DB_DEV_PORT=${_DB_DEV_PORT}"
-      - "DB_TEST_HOST=${_DB_TEST_HOST}"
-      - "DB_TEST_USER=${_DB_TEST_USER}"
-      - "DB_TEST_PW=${_DB_TEST_PW}"
-      - "DB_TEST_NAME=${_DB_TEST_NAME}"
-      - "DB_TEST_PORT=${_DB_TEST_PORT}"
-      - "JWT_SECRET=${_JWT_SECRET}"
-      - "REDIS_HOST=${_REDIS_HOST}"
-      - "REDIS_PORT=${_REDIS_PORT}"
-      - "REDIS_DB=${_REDIS_DB}"
-      - "REDIS_DB_DEV=${_REDIS_DB_DEV}"
-      - "REDIS_DB_TEST=${_REDIS_DB_TEST}"
-
-  - name: node
-    entrypoint: npm
-    args: ["install"]
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
     dir: "packages/server"
