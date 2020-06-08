@@ -13,7 +13,7 @@ import logger = require('morgan');
 
 const app = express()
 // view engine setup
-app.use(cors())
+app.use(cors(corsConfig))
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
