@@ -10,6 +10,9 @@ steps:
     args: ["server:build"]
   - name: node
     entrypoint: npm
+    args: ["install"]
+  - name: node
+    entrypoint: npm
     args: ["run", "create-env"]
     dir: "packages/server"
     env:
