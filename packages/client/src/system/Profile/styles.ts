@@ -4,12 +4,16 @@ import {
   color, fontSize,
 } from 'styles/global'
 
+interface ContainerProps {
+  isOverflow: boolean
+}
 export const Container = styled.div`
+  display : flex;
   position: absolute;
-  left: 5%;
+  left:5rem;
+  top: ${(props: ContainerProps) => (props.isOverflow ? '0' : 'auto')};
   width: 300px;
   height: 570px;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #2c2c2c;
@@ -27,6 +31,7 @@ export const ProfileWrapper = styled(Flex)`
   justify-content: flex-end;
   align-items: center;
   flex-direction: column;
+  padding:0 1rem;
 `
 export const NameWrapper = styled.div`
   font-size: ${fontSize.LARGE};
@@ -40,8 +45,7 @@ export const StatusWrapper = styled.div`
     opacity:50%;
     line-height: 1.5rem;
     text-align:center;
-    padding:1rem;
-
+    
 `
 
 export const Footer = styled(Flex)`
@@ -51,12 +55,33 @@ export const MessageWrapper = styled.span``
 
 export const DeleteWrapper = styled.span``
 
-interface Img {
+interface ImageCSS {
   big: boolean
 }
 export const Image = styled.img`
-  width: ${(props: Img) => (props.big ? '4.5rem' : '2.5rem')};
-  height: ${(props: Img) => (props.big ? '4.5rem' : '2.5rem')};
+  width: ${(props: ImageCSS) => (props.big ? '4.5rem' : '2.5rem')};
+  height: ${(props: ImageCSS) => (props.big ? '4.5rem' : '2.5rem')};
   border-radius: 40%;
   cursor: pointer;
+`
+
+export const EditWrapper = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  margin:0.5rem;
+`
+export const Input = styled.input`
+padding:0.5rem;
+margin:0.5rem 0;
+border-radius:1rem;
+border:none;
+outline:none;
+`
+interface LabelProps{
+  isEmpty?: boolean
+}
+export const Label = styled.label`
+color:${(props: LabelProps) => (props.isEmpty ? '#FF0000' : color.WHITE)}
+font-size:10px;
 `

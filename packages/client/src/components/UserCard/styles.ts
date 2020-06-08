@@ -25,9 +25,16 @@ export const StatusMessageWrapper = styled.span`
   white-space: nowrap;
 `
 export const Tri = styled.div`
+  position:absolute;
   width: 0px;
   height: 0px;
   border-top: 15px solid transparent;
   border-right: 30px solid gray;
   border-bottom: 15px solid transparent;
+`
+export const TextWrapper = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+
 `

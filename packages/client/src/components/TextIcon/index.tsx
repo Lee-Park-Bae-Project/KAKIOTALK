@@ -30,6 +30,7 @@ interface Prop extends TextProp, ContainerProp {
   size?: string | number
   /** 구글프로필사진 URL */
   imageUrl?: string
+  /** 팝업할 프로필 컴포넌트 */
   children?: ReactElement | boolean
 }
 
