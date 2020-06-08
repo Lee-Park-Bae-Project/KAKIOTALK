@@ -8,6 +8,10 @@ steps:
   - name: node
     entrypoint: yarn
     args: ["server:build"]
+  - name: node
+    entrypoint: npm
+    args: ["run", "create-env"]
+    dir: "packages/server"
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
     dir: "packages/server"
