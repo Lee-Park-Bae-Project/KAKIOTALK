@@ -27,6 +27,7 @@ export const Title = styled.p`
   color: ${color.BLACK};
   font-weight: ${weight.STRONG};
   margin-right: auto;
+  padding:1rem;
 `
 
 export const Description = styled.p`
