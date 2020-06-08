@@ -10,9 +10,6 @@ steps:
     args: ["server:build"]
   - name: node
     entrypoint: npm
-    args: ["install"]
-  - name: node
-    entrypoint: npm
     args: ["run", "create-env"]
     dir: "packages/server"
     env:
@@ -41,6 +38,9 @@ steps:
       - "REDIS_DB_DEV=${_REDIS_DB_DEV}"
       - "REDIS_DB_TEST=${_REDIS_DB_TEST}"
 
+  - name: node
+    entrypoint: npm
+    args: ["install"]
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
     dir: "packages/server"
