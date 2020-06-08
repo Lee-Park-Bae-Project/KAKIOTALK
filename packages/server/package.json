@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/bin/www.js",
+    "start": "node dist/bin/www.js",
     "build": "tsc",
     "deploy": "yarn build && pm2 start dist/bin/www.js",
     "test": "_NODE_ENV=test npm run migrate:reset && _NODE_ENV=test npm run migrate && _NODE_ENV=test npm run seed && node_modules/.bin/jest --detectOpenHandles --watchAll",
@@ -13,7 +13,6 @@
     "seed:reset": "cd ./src && sequelize db:seed:undo:all"
   },
   "dependencies": {
-    "@kakio/common": "1.0.0",
     "@types/axios": "^0.14.0",
     "axios": "^0.19.2",
     "babel-core": "^6.26.3",
