@@ -10,12 +10,12 @@ const sizeMap = {
 
 export default sizeMap
 
-const SOCKET_URL = 'localhost:3050'
-const API_SERVER_URL = 'http://localhost:3050/v1/'
+const SOCKET_URL = 'https://sylvan-terra-275316.du.r.appspot.com/'
+const API_SERVER_URL = 'https://sylvan-terra-275316.du.r.appspot.com/v1/'
 
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || ''
 const PUBLIC_URL = process.env.REACT_APP_PUBLIC_URL
-const LOGIN_URL = 'http://localhost:3000/login'
+const LOGIN_URL = 'https://lee-park-bae-project.github.io/KAKIOTALK/login'
 
 export const configs = {
   SOCKET_URL,
