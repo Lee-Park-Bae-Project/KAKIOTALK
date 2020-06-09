@@ -10,6 +10,7 @@ import Hr from 'atoms/Hr'
 import { useDispatch } from 'react-redux'
 import { updateProfile } from 'modules/profile'
 import { alert } from 'common/utils'
+import { deleteFriend } from 'modules/friends'
 
 interface Prop {
   /** 유져 식별자 */
@@ -72,6 +73,13 @@ const Profile: FC<Prop> = ({
     setIsEditMode(!isEditMode)
   }
 
+  const onDeleteClick = () => {
+    alert.confirmDelete(name).then((confirm) => {
+      if (confirm) {
+        dispatch(deleteFriend(uuid))
+      }
+    })
+  }
   return (
     <S.Container ref={profileRef} isOverflow={isOverflow}>
       <S.CloseButton>
@@ -153,7 +161,7 @@ const Profile: FC<Prop> = ({
                 text='친구 삭제'
                 textColor={color.WHITE}
                 iconPosition='top'
-                onClick={onCloseClick}
+                onClick={onDeleteClick}
               />
             </Fragment>
           )}

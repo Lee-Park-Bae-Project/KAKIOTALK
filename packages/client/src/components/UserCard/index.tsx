@@ -39,7 +39,6 @@ const UserCard: FC<UserCardProp> = ({
   const onClick = () => {
     setIsClicked(!isClicked)
   }
-
   const profileRef = React.createRef<HTMLDivElement>()
   useOutsideClick(profileRef, () => {
     if (isClicked) setIsClicked(false)
