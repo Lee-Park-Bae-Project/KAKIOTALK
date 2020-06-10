@@ -8,12 +8,14 @@ const login = async (
   email: string,
   name: string,
   googleAccessToken: string,
+  imageUrl:string,
 ) => {
   userService.findOrCreate(
     googleId,
     name,
     email,
     googleAccessToken,
+    imageUrl,
   )
 
   const payload = { googleId }

@@ -14,7 +14,7 @@ const getFriendsList = (userId: number) => models.User.findOne({
       include: [
         {
           model: models.User,
-          attributes: ['uuid', 'email', 'name', 'statusMessage'],
+          attributes: ['uuid', 'email', 'name', 'statusMessage', 'imageUrl'],
         },
       ],
     },

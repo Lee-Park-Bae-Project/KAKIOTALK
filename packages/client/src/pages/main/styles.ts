@@ -1,32 +1,26 @@
-import styled from 'styled-components';
-import Flex from 'atoms/Flex';
+import styled from 'styled-components'
 
-export const Container = styled(Flex)`
-  width: 100%;
-  height: 100%;
-  justify-content: flex-start;
-  /* max-height: 100vh; */
-`;
+export const Container = styled.div`
+  width:100%;
+  height:100%;
+`
 
-export const Left = styled(Flex)`
-  justify-content: flex-start;
-  align-items: flex-start;
-`;
+export const MainWrapper = styled.div`
+position:absolute;
+top:4rem;
+left:3rem;
+right:0;
+`
 
-export const Wrapper = styled(Flex)`
-  /* overflow-y: scroll; */
-  /* height: 50rem; */
-  /* max-height: 100vh; */
-  height: 100%;
-  float:left;
-  overflow-y: auto;
-`;
+export const NavigationBarWrapper = styled.div`
+position:fixed;
+left:0%;
+height: 100%;
+width: auto;
+`
 
-export const NavigationBarWrapper = styled(Flex)`
-  height: 100vh;
-  width: auto;
-`;
-
-export const Column = styled(Flex)`
-  flex-direction: column;
-`;
+export const Header = styled.div`
+position:fixed;
+left:3rem;
+top:0;
+`

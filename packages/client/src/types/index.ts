@@ -27,3 +27,13 @@ export type ReduxState<T> = {
 export type ReduxChatType = {
   [key: string]: ApiChat[];
 }
+
+export type SimpleUserType = Pick<User, 'uuid'| 'name' | 'email' | 'statusMessage' | 'imageUrl'>
+
+export interface ApiUser extends SimpleUserType {
+  uuid: string;
+  name: string;
+  email: string;
+  statusMessge: string;
+  imageUrl: string;
+}

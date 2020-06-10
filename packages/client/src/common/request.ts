@@ -2,9 +2,7 @@ import axios, {
   AxiosRequestConfig, AxiosResponse,
 } from 'axios'
 import * as Type from 'types'
-import {
-  Room, User,
-} from '@kakio/common'
+import { Room } from '@kakio/common'
 // import Room from 'system/Room'
 import { configs } from './constants'
 
@@ -47,7 +45,7 @@ export const getLogout = () => Axios({
   method: 'GET',
   url: 'auth/logout',
 })
-export const getUserInfo = () => Axios<Pick<User, 'uuid' | 'name' | 'email' | 'statusMessage'>>({
+export const getUserInfo = () => Axios<Type.SimpleUserType>({
   method: 'GET',
   url: 'auth/check-auth',
 })
@@ -57,6 +55,7 @@ interface GetLoginArgs {
   email: string
   name: string
   googleAccessToken: string
+  imageUrl: string
 }
 export const getLogin = (args: GetLoginArgs) => Axios({
   method: 'POST',

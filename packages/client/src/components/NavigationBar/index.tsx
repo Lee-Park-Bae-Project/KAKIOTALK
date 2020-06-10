@@ -7,6 +7,7 @@ import Logout from 'components/NavigationBar/LogoutTab'
 
 interface NavigationBarProp {
   /** 친구 목록 | 채팅목록 중 어떤게 선택 되었는지 */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tabSelector: any;
   /** 친구목록을 클릭 했을 때 핸들러 */
   friendTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;

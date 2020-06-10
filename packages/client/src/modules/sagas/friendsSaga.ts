@@ -1,51 +1,53 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
+import {
+  call, put, takeEvery,
+} from 'redux-saga/effects'
 
 import {
-  GET_FRIENDS,
-  getFriendsFailure,
-  getFriendsSuccess,
   ADD_FRIEND,
-  addFriendFailure,
+  addFriend,
   addFriendSuccess,
   DELETE_FRIEND,
+  deleteFriend,
   deleteFriendSuccess,
-  deleteFriendFailure,
-} from 'modules/friends/action';
-import * as request from 'common/request';
-import { alert } from 'common/utils';
+  GET_FRIENDS,
+  getFriendsSuccess,
+} from 'modules/friends/action'
+import * as request from 'common/request'
+import { alert } from 'common/utils'
+import { AxiosResponse } from 'axios'
+import { ApiUser } from 'types'
 
+type ApiUsersType = AxiosResponse<request.ResponseType<ApiUser[]>>
 function* getFriendsSaga() {
   try {
-    const response = yield call(request.getFriendList);
-    yield put(getFriendsSuccess(response.data.data));
+    const response: ApiUsersType = yield call(request.getFriendList)
+    yield put(getFriendsSuccess(response.data.data))
   } catch (e) {
-    alert.error(e.response.data.data.message);
-    yield put(getFriendsFailure(e));
+    alert.error(e.response.data.data.message)
   }
 }
-
-function* addFriendSaga({ payload }: any) {
+type ApiUserType = AxiosResponse<request.ResponseType<ApiUser>>
+function* addFriendSaga({ payload }: ReturnType<typeof addFriend>) {
   try {
-    const response = yield call(request.addFriend, payload);
-    yield put(addFriendSuccess(response.data.data));
-    alert.addFriend(response.data.data.name);
+    const response: ApiUserType = yield call(request.addFriend, payload)
+    yield put(addFriendSuccess(response.data.data))
+    alert.addFriend(response.data.data.name)
   } catch (e) {
-    alert.error(e.response.data.data.message);
-    yield put(addFriendFailure(e));
+    alert.error(e.response.data.data.message)
   }
 }
-function* deleteFriendSaga({ payload }: any) {
+type uuidType = AxiosResponse<request.ResponseType<string>>
+function* deleteFriendSaga({ payload }: ReturnType<typeof deleteFriend>) {
   try {
-    const response = yield call(request.deleteFriend, payload);
-    yield put(deleteFriendSuccess(response.data.data));
-    alert.deleteFriend();
+    const response: uuidType = yield call(request.deleteFriend, payload)
+    yield put(deleteFriendSuccess(response.data.data))
+    alert.deleteFriend()
   } catch (e) {
-    alert.error(e.response.data.data.message);
-    yield put(deleteFriendFailure(e));
+    alert.error(e.response.data.data.message)
   }
 }
 export default function* friendsSaga() {
-  yield takeEvery(GET_FRIENDS, getFriendsSaga);
-  yield takeEvery(ADD_FRIEND, addFriendSaga);
-  yield takeEvery(DELETE_FRIEND, deleteFriendSaga);
+  yield takeEvery(GET_FRIENDS, getFriendsSaga)
+  yield takeEvery(ADD_FRIEND, addFriendSaga)
+  yield takeEvery(DELETE_FRIEND, deleteFriendSaga)
 }
