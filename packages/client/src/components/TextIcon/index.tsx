@@ -74,7 +74,7 @@ const S = {
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 12rem;
-    color: #BDBDBD;
+    color: #8C8C8C;
   `,
 }
 

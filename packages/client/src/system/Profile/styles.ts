@@ -74,7 +74,7 @@ export const NameWrapper = styled.div`
 export const StatusWrapper = styled.div`
     font-size:${fontSize.SMALL};
     color:${color.WHITE}
-    opacity:50%;
+    opacity:80%;
     line-height: 1.5rem;
     text-align:center;
     
