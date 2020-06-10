@@ -80,8 +80,41 @@ const Profile: FC<Prop> = ({
       }
     })
   }
+  const [slideMount, setSlideMount] = useState(0)
+  const [startPoint, setStartPoint] = useState(0)
+  const [isRender, setRender] = useState(true)
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation()
+    setStartPoint(e.touches[0].screenY)
+  }
+  const onTouch = (e: React.TouchEvent) => {
+    e.stopPropagation()
+
+    if (startPoint < e.touches[0].screenY) {
+      setSlideMount(Math.ceil((e.touches[0].screenY - startPoint) / 40))
+    } else {
+      setSlideMount(0)
+    }
+  }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (slideMount >= 4) {
+      setSlideMount(100)
+      setTimeout(onCloseClick, 500)
+    } else {
+      setSlideMount(0)
+    }
+  }
   return (
-    <S.Container ref={profileRef} isOverflow={isOverflow}>
+    <S.Container
+      ref={profileRef}
+      isOverflow={isOverflow}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouch}
+      onTouchEnd={onTouchEnd}
+      slideMount={slideMount}
+      anim={isRender ? 'slideUp' : 'slideDown'}
+    >
       <S.CloseButton>
         <Icon
           icon='Close'
