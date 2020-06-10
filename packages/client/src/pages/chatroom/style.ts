@@ -18,32 +18,41 @@ export const ChatContainer = styled.div`
 `
 
 export const InputContainer = styled.div`
-  display:flex;
-  margin-top:auto;
+  display: flex;
 `
 
-export const InputArea = styled.input`
-  width:90%;
+export const Input = styled.textarea`
+  width:100%;
   text-decoration: none;
   outline: none;
   height: 7rem;
   border:none;
+  padding: 0.5rem 1rem;
+  word-break: break-word;
+  resize: none;
 `
 export const ButtonWrapper = styled.div`
-  width:10%;
-  display:flex;
+  display: flex;
+  justify-content: center;
+  width:10rem;
+  height: 100%;
   background-color:white;
   min-width: 5rem;
 `
-export const SendBtn = styled.button`
+
+interface SendBtnProps {
+  hasContent: boolean
+}
+export const SendBtn = styled.button<SendBtnProps>`
   outline:none;
   margin:auto;
   width: 5rem;
   height: 5rem;
-  background: #F9F9F9;
-  color: #B1B1B1;
+  background: ${({ hasContent }) => (hasContent ? '#FFE503' : '#F9F9F9')};
+  color: ${({ hasContent }) => (hasContent ? 'black' : '#B1B1B1')};
   border-radius: 5px;
   border: 1px solid #ECECEC;
+  cursor: pointer;
 `
 
 export const ChatBox = styled.div`
@@ -69,6 +78,8 @@ export const Title = styled.div`
   left: 50%;
 `
 
-export const Back = styled.div``
+export const Back = styled.div`
+  cursor: pointer;
+`
 
 export const ChatBottom = styled.div``

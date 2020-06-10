@@ -44,6 +44,13 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
     const friendEmail: string = req.body.email
+    if (!user) {
+      throw createError(401, { message: message.ERROR_OCCURED })
+    }
+    if (friendEmail === user.email) {
+      throw createError(401, { message: message.CAN_NOT_ADD_ME })
+    }
+
     const friend = await userService.findByEmail(friendEmail)
     if (!friend || !user) {
       next(createError(401, { message: message.INVALID_EMAIL }))

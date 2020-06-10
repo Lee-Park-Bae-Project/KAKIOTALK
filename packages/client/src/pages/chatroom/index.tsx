@@ -6,64 +6,46 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import {
-  convertDBTimeTohhmmA, getCurTimeDBFormat,
-} from 'common/utils'
+import { getCurTimeDBFormat } from 'common/utils'
 import { WithAuthProps } from 'hocs/withAuth'
 import ChatBox from 'components/ChatBox'
-import {
-  ApiChat, ReduxChatType, ReduxState,
-} from 'types'
 import { chatFromClient } from 'socket'
+import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
 import * as S from './style'
 
 interface Props extends WithAuthProps{
-  chatState: ReduxState<ReduxChatType>;
-  roomUuid: string;
-  handleBack: () => void;
-  roomName: string;
+  roomUuid: string
+  handleBack: () => void
+  roomName: string
+  chatStateGroupByTime: ChatStateGroupByTime,
 }
-interface ChatStateGroupByTime {
-  [key: string]: ApiChat[][]
-}
+
 const ChatRoom: FC<Props> = ({
-  chatState,
   uuid,
   roomUuid,
   handleBack,
   roomName,
+  chatStateGroupByTime,
 }) => {
-  const messageRef = useRef<HTMLInputElement>(null)
+  const messageRef = useRef<HTMLTextAreaElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
-  const [message, setMessage] = useState<string>('')
-  const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true)
-  const [chatStateGroupByTime, SetChatStateGroupByTime] = useState<ChatStateGroupByTime>({})
+  const [hasContent, setHasContent] = useState<boolean>(false)
+
   useEffect(() => {
-    if (!chatState.data[roomUuid]) {
-      return
-    }
-    if (isFirstScroll) {
-      setIsFirstScroll(false)
-      if (chatContainerRef && chatContainerRef.current) {
-        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
-      }
-      return
-    }
     if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' })
+      scrollRef.current.scrollIntoView()
     }
-  }, [chatState,
-    roomUuid,
-    isFirstScroll])
+  }, [chatStateGroupByTime])
 
   const handleSubmit = () => {
-    if (!messageRef) {
+    if (!messageRef || !messageRef.current || !messageRef.current.value.trim().length) {
       return
     }
 
+    const msg = messageRef.current.value
     chatFromClient({
-      content: message,
+      content: msg,
       roomUuid,
       createdAt: getCurTimeDBFormat(),
       userUuid: uuid,
@@ -71,10 +53,10 @@ const ChatRoom: FC<Props> = ({
 
     if (messageRef.current) {
       messageRef.current.focus()
+      messageRef.current.value = ''
     }
-    setMessage('')
   }
-  const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleEnterPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       if (e.target && e.currentTarget.value.trim().length > 0) {
         handleSubmit()
@@ -82,33 +64,15 @@ const ChatRoom: FC<Props> = ({
     }
   }
 
-  const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value)
-  }
-  useEffect(() => {
-    if (chatState.data[roomUuid]) {
-      interface ChatStateGroupByTime {
-        [key: string]: ApiChat[][]
+  const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (messageRef.current) {
+      if (messageRef.current.value) {
+        setHasContent(true)
+      } else {
+        setHasContent(false)
       }
-      const init: ChatStateGroupByTime = {}
-      const newChatStateGroupByTime = chatState.data[roomUuid].reduce((acc, cur) => {
-        const key = convertDBTimeTohhmmA(cur.createdAt)
-        if (acc[key]) {
-          const len = acc[key].length
-          if (acc[key][len - 1][0].metaInfo.sender.uuid === cur.metaInfo.sender.uuid) {
-            acc[key][len - 1].push(cur)
-          } else {
-            acc[key].push([cur])
-          }
-          return acc
-        }
-
-        acc[key] = [[cur]]
-        return acc
-      }, init)
-      SetChatStateGroupByTime(newChatStateGroupByTime)
     }
-  }, [chatState])
+  }
 
   return (
     <S.Container>
@@ -122,7 +86,7 @@ const ChatRoom: FC<Props> = ({
       </S.Header>
       <S.ChatContainer ref={chatContainerRef}>
         {
-          !chatState.data[roomUuid]
+          !chatStateGroupByTime
             ? (<div>loading</div>)
             : (
               (
@@ -143,14 +107,18 @@ const ChatRoom: FC<Props> = ({
         <S.ChatBottom ref={scrollRef}></S.ChatBottom>
       </S.ChatContainer>
       <S.InputContainer>
-        <S.InputArea
+        <S.Input
           ref={messageRef}
-          value={message}
           onChange={handleMessageChange}
           onKeyPress={handleEnterPress}
         />
         <S.ButtonWrapper>
-          <S.SendBtn onClick={handleSubmit}>전송</S.SendBtn>
+          <S.SendBtn
+            onClick={handleSubmit}
+            hasContent={hasContent}
+          >
+            전송
+          </S.SendBtn>
         </S.ButtonWrapper>
       </S.InputContainer>
     </S.Container>

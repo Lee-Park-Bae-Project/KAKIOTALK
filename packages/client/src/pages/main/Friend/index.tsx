@@ -56,6 +56,7 @@ const Friend: FC<Props> = ({
     <List>
       <UserCard
         key={myProfile.uuid}
+        uuid={myProfile.uuid}
         name={myProfile.name}
         statusMessage={myProfile.statusMessage}
         imageUrl={myProfile.imageUrl}
@@ -75,6 +76,7 @@ const Friend: FC<Props> = ({
           }) => (
               <UserCard
                 key={uuid}
+                uuid={uuid}
                 name={name}
                 statusMessage={statusMessage}
                 imageUrl={imageUrl}

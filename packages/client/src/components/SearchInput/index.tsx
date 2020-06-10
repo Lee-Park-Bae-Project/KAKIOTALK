@@ -40,6 +40,7 @@ const SearchInpust: FC<Props> = ({
       onChange={onChange}
       placeholder={placeholder}
       onKeyPress={onKeyPress}
+      autoFocus={true}
     />
   </S.InputWrapper>
 
