@@ -58,6 +58,8 @@ const UserCard: FC<UserCardProp> = ({
           text={name}
           onClick={onClick}
           imageUrl={imageUrl}
+          statusMessage={statusMessage}
+          textSize="15px"
         >
           {isClicked && (
             <React.Fragment>
@@ -75,9 +77,7 @@ const UserCard: FC<UserCardProp> = ({
             </React.Fragment>
           )}
         </TextIcon>
-        {statusMessage && (
-          <S.StatusMessageWrapper>{statusMessage}</S.StatusMessageWrapper>
-        )}
+
       </S.ProfileWrapper>
     </S.Container>
   )
