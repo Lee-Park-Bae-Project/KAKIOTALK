@@ -5,10 +5,12 @@ import {
 import Main from 'pages/main'
 import { RootState } from 'modules'
 import { getRoomRequest } from 'modules/room'
+import { logoutAction } from 'modules/login'
 import withAuth, { WithAuthProps } from 'hocs/withAuth'
 import { addFriend } from 'modules/friends'
 import * as request from 'common/request'
 import { useHistory } from 'react-router-dom'
+import { url } from 'common/constants'
 import { afterLogin } from '../socket'
 
 const {
@@ -98,6 +100,7 @@ const MainContainer: React.FC<WithAuthProps> = ({
       .catch((error) => {
         console.error(error)
       })
+    dispatch(logoutAction())
     onLogoutPopUpClose()
   }
 
@@ -116,6 +119,7 @@ const MainContainer: React.FC<WithAuthProps> = ({
     }
   }
 
+  window.history.pushState(null, '', window.location.href)
   return (
     <Main
       tabSelector={tabSelector}

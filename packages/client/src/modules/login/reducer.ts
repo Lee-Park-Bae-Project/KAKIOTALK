@@ -1,5 +1,5 @@
 import {
-  LOGIN_FAILURE, LOGIN_SUCCESS,
+  LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_ACTION,
 } from 'modules/login/action'
 import { LoginInfo } from 'types'
 import { LoginAction } from 'modules/login/types'
@@ -19,6 +19,9 @@ function login(state: LoginInfo = initialState, action: LoginAction) {
         alert.error(error.response.data.data.message)
       }
       return state
+    }
+    case LOGOUT_ACTION: {
+      return { isLoggedIn: false }
     }
     default:
       return state

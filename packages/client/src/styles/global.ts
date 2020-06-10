@@ -4,11 +4,20 @@ const Global = createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
-    /* height: 100vh; */
     box-sizing: border-box;
-    font-size: 1rem;
-    /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto [Removing the "Helvetica Neue",Arial,sans-seri; */
+    font-family : verdana;
   }
+
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c1c1c1; 
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: gray;
+}
 `
 
 export const color = {

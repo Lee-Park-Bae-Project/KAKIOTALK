@@ -18,16 +18,21 @@ export const ProfileWrapper = styled(Flex)`
   justify-content: flex-start;
 `
 
-export const StatusMessageWrapper = styled.span`
-  font-size: ${fontSize.SMALL};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`
 export const Tri = styled.div`
+  position:relative;
   width: 0px;
   height: 0px;
   border-top: 15px solid transparent;
   border-right: 30px solid gray;
   border-bottom: 15px solid transparent;
+
+  @media (max-width: 500px ) {
+    display:none;
+  }
+`
+export const TextWrapper = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+
 `

@@ -24,6 +24,7 @@ const UserList: FC<Props> = ({
     <S.Container>
       <UserCard
         name={myProfile.name}
+        isMyProfile={true}
         />
       <Hr/>
       <S.Friend>
@@ -37,6 +38,7 @@ const UserList: FC<Props> = ({
             name={user.name}
             statusMessage={user.statusMessage}
             onClick={onClick(user.uuid)}
+            isMyProfile={false}
           />
         ))
       }
