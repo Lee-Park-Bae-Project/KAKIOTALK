@@ -14,16 +14,12 @@ steps:
     dir: "packages/server"
     env:
       - "NODE_ENV=${_NODE_ENV}"
-      - "PORT=${_PORT}"
       - "DB_HOST=${_DB_HOST}"
       - "DB_USER=${_DB_USER}"
       - "DB_PW=${_DB_PW}"
       - "DB_NAME=${_DB_NAME}"
       - "DB_PORT=${_DB_PORT}"
       - "JWT_SECRET=${_JWT_SECRET}"
-      - "REDIS_HOST=${_REDIS_HOST}"
-      - "REDIS_PORT=${_REDIS_PORT}"
-      - "REDIS_DB=${_REDIS_DB}"
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
     dir: "packages/server"
