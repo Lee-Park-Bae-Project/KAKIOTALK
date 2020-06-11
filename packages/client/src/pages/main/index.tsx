@@ -3,11 +3,13 @@ import * as S from 'pages/main/styles'
 import NavigationBar from 'components/NavigationBar'
 import SearchInput from 'components/SearchInput'
 import { RoomState } from 'modules/room'
+import { RootState } from 'modules'
 import {
-  Dialog, PopUp,
+  Dialog, Loader, PopUp,
 } from 'components'
 import FriendContainer from 'containers/FriendContainer'
 import Room from 'system/Room'
+import { useSelector } from 'react-redux'
 
 export interface TabSelector {
   friend: boolean
@@ -51,57 +53,65 @@ const Main: FC<Props> = ({
   popupLogout,
   cancelLogout,
   popupAddFriend,
-}) => (
-  <S.Container>
-    <S.NavigationBarWrapper>
-      <NavigationBar
-        tabSelector={tabSelector}
-        friendTabOnClick={friendTabOnClick}
-        chatTabOnClick={chatTabOnClick}
-        addFriendTabOnClick={addFriendTabOnClick}
-        logoutTabOnClick={logoutTabOnClick}
-      />
-    </S.NavigationBarWrapper>
-    <S.MainWrapper>
-      {tabSelector.friend && <FriendContainer />}
-      {tabSelector.chat && <Room roomState={roomState} />}
-    </S.MainWrapper>
-    {popupAddFriend ? (
-      <PopUp onClose={onPopupOutClicked} refs={dialogRef}>
-        <Dialog
-          isVisible={true}
-          title='친구 추가'
-          isHideButton={false}
-          canCancel={true}
-          cancelText='취소'
-          confirmText='확인'
-          onCancel={cancelAddFriend}
-          onConfirm={confirmAddFriend}
-        >
-          <SearchInput
-            value={friendEmailToAdd}
-            onChange={onFriendEmailChange}
-            onKeyPress={addFriendEnterPress}
-            placeholder='이메일을 입력해주세요'
-          />
-        </Dialog>
-      </PopUp>
-    ) : null}
-    {popupLogout ? (
-      <PopUp>
-        <Dialog
-          isVisible={true}
-          title='정말로 로그 아웃 하시겠습니까?'
-          isHideButton={false}
-          canCancel={true}
-          cancelText='취소'
-          confirmText='확인'
-          onConfirm={confirmLogout}
-          onCancel={cancelLogout}
-        ></Dialog>
-      </PopUp>
-    ) : null}
-  </S.Container>
-)
+}) => {
+  const { isLoggedIn } = useSelector((state: RootState) => state.login)
+  return (
+    <S.Container>
+      {isLoggedIn ? (
+        <S.MainWrapper>
+          {tabSelector.friend && <FriendContainer />}
+          {tabSelector.chat && <Room roomState={roomState} />}
+        </S.MainWrapper>
+      ) : (
+        <Loader/>
+      )}
+      <S.NavigationBarWrapper>
+        <NavigationBar
+          tabSelector={tabSelector}
+          friendTabOnClick={friendTabOnClick}
+          chatTabOnClick={chatTabOnClick}
+          addFriendTabOnClick={addFriendTabOnClick}
+          logoutTabOnClick={logoutTabOnClick}
+        />
+      </S.NavigationBarWrapper>
+
+      {popupAddFriend ? (
+        <PopUp onClose={onPopupOutClicked} refs={dialogRef}>
+          <Dialog
+            isVisible={true}
+            title='친구 추가'
+            isHideButton={false}
+            canCancel={true}
+            cancelText='취소'
+            confirmText='확인'
+            onCancel={cancelAddFriend}
+            onConfirm={confirmAddFriend}
+          >
+            <SearchInput
+              value={friendEmailToAdd}
+              onChange={onFriendEmailChange}
+              onKeyPress={addFriendEnterPress}
+              placeholder='이메일을 입력해주세요'
+            />
+          </Dialog>
+        </PopUp>
+      ) : null}
+      {popupLogout ? (
+        <PopUp>
+          <Dialog
+            isVisible={true}
+            title='정말로 로그 아웃 하시겠습니까?'
+            isHideButton={false}
+            canCancel={true}
+            cancelText='취소'
+            confirmText='확인'
+            onConfirm={confirmLogout}
+            onCancel={cancelLogout}
+          ></Dialog>
+        </PopUp>
+      ) : null}
+    </S.Container>
+  )
+}
 
 export default Main
