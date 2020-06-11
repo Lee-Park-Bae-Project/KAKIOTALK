@@ -9,7 +9,7 @@ steps:
     entrypoint: yarn
     args: ["server:build"]
   - name: node
-    entrypoint: yarn
+    entrypoint: npm
     args: ["run", "create-env"]
     dir: "packages/server"
     env:
