@@ -7,7 +7,6 @@ import {
 interface ContainerProps {
   isOverflow: boolean
   slideMount: number
-  anim: string
 }
 export const Container = styled.div`
   display: flex;

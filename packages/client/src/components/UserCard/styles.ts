@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import Flex from 'atoms/Flex'
-import {
-  color, fontSize,
-} from 'styles/global'
+import { color } from 'styles/global'
 
 export const Container = styled(Flex)`
   height: 5rem;

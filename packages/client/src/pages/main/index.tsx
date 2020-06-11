@@ -1,6 +1,4 @@
-import React, {
-  FC, Fragment,
-} from 'react'
+import React, { FC } from 'react'
 import * as S from 'pages/main/styles'
 import NavigationBar from 'components/NavigationBar'
 import SearchInput from 'components/SearchInput'

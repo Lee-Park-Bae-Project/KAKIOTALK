@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useEffect, useState,
+  FC, Fragment, useState,
 } from 'react'
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
@@ -82,7 +82,6 @@ const Profile: FC<Prop> = ({
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)
-  const [isRender, setRender] = useState(true)
 
   const onTouchStart = (e: React.TouchEvent) => {
     e.stopPropagation()
@@ -113,7 +112,6 @@ const Profile: FC<Prop> = ({
       onTouchMove={onTouch}
       onTouchEnd={onTouchEnd}
       slideMount={slideMount}
-      anim={isRender ? 'slideUp' : 'slideDown'}
     >
       <S.CloseButton>
         <Icon

@@ -1,5 +1,5 @@
 import React, {
-  FC, useEffect, useRef, useState,
+  FC, useEffect, useState,
 } from 'react'
 import * as S from 'components/UserCard/styles'
 import { color } from 'styles/global'
@@ -48,7 +48,7 @@ const UserCard: FC<UserCardProp> = ({
     if (userCardRef.current && userCardRef.current?.getBoundingClientRect().bottom < 300) {
       setIsOverflow(true)
     }
-  })
+  }, [userCardRef])
   return (
     <S.Container ref={userCardRef}>
       <S.ProfileWrapper>

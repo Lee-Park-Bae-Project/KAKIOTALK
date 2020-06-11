@@ -1,9 +1,5 @@
-import React, {
-  FC, useState,
-} from 'react'
+import React, { FC } from 'react'
 import { ApiChat } from 'types'
-import { convertDBTimeTohhmmA } from 'common/utils'
-import { UserCard } from 'components'
 import * as S from './style'
 
 type Props = {

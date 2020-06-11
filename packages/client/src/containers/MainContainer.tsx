@@ -10,7 +10,6 @@ import withAuth, { WithAuthProps } from 'hocs/withAuth'
 import { addFriend } from 'modules/friends'
 import * as request from 'common/request'
 import { useHistory } from 'react-router-dom'
-import { url } from 'common/constants'
 import { afterLogin } from '../socket'
 
 const {
