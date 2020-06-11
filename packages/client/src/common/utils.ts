@@ -38,7 +38,7 @@ const alert = {
 export { alert }
 
 export const useOutsideClick = (ref: React.RefObject<HTMLDivElement>, callback: () => void) => {
-  const handleClick = (e: any) => {
+  const handleClick = (e: MouseEvent) => {
     if (ref.current && e.target instanceof Node && !ref.current.contains(e.target)) {
       callback()
     }

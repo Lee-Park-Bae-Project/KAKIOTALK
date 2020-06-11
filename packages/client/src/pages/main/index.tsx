@@ -11,7 +11,7 @@ import {
 import FriendContainer from 'containers/FriendContainer'
 import Room from 'system/Room'
 
-interface TabSelector {
+export interface TabSelector {
   friend: boolean
   chat: boolean
 }
@@ -27,7 +27,7 @@ interface Props {
   friendEmailToAdd: string
   onFriendEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   logoutTabOnClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-  dialogRef: any
+  dialogRef: React.RefObject<HTMLDivElement>
   onPopupOutClicked: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   confirmLogout: () => void
   cancelLogout: () => void
