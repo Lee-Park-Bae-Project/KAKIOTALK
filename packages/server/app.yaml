@@ -1,7 +1,7 @@
 runtime: nodejs12
 env_variables:
   NODE_OPTIONS: ''
-entrypoint: npm run deploy
+entrypoint: yarn run deploy
 handlers:
   - url: /images
     static_dir: static/images
