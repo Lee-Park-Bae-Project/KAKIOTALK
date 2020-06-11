@@ -13,7 +13,7 @@ import { alert } from 'common/utils'
 
 dotenv.config()
 
-const isResOffline = (res: GoogleLoginResponse | GoogleLoginResponseOffline): res is GoogleLoginResponseOffline => res.code !== undefined
+const isResOffline = (res: any): res is GoogleLoginResponseOffline => res.code !== undefined
 
 const GoogleSignin: React.FC = () => {
   const history = useHistory()
