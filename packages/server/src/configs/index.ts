@@ -1,6 +1,5 @@
 import { CorsOptions } from 'cors'
 import { CookieOptions } from 'express'
-import { ClientOpts } from 'redis'
 
 require('dotenv').config()
 
@@ -23,25 +22,4 @@ export const cookieName = 'kakio_jwt'
 export const jwtConfig = {
   secret: process.env.JWT_SECRET || 'secret',
   ttl: process.env.NODE_ENV === 'development' ? '100h' : '2h',
-}
-
-export const getRedisOpts = () => {
-  const redisOpts: {[key: string]: ClientOpts } = {
-    production: {
-      host: process.env.REDIS_HOST,
-      port: Number(process.env.REDIS_PORT || 6379),
-      db: process.env.REDIS_DB,
-    },
-    development: {
-      host: process.env.REDIS_HOST,
-      port: Number(process.env.REDIS_PORT || 6379),
-      db: process.env.REDIS_DB_DEV,
-    },
-    test: {
-      host: process.env.REDIS_HOST,
-      port: Number(process.env.REDIS_PORT || 6379),
-      db: process.env.REDIS_DB_TEST,
-    },
-  }
-  return redisOpts[String(process.env.NODE_ENV || 'development')]
 }
