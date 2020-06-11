@@ -1,5 +1,5 @@
 import React, {
-  FC, RefObject,
+  FC, Fragment, useEffect, useState,
 } from 'react'
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
@@ -7,6 +7,10 @@ import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
+import { useDispatch } from 'react-redux'
+import { updateProfile } from 'modules/profile'
+import { alert } from 'common/utils'
+import { deleteFriend } from 'modules/friends'
 
 interface Prop {
   /** 유져 식별자 */
@@ -22,6 +26,9 @@ interface Prop {
   /** 프로필 팝업 ref */
   profileRef: React.RefObject<HTMLDivElement>
   /** 본인 or 친구의 프로필 구별 */
+  isMyProfile: boolean
+  /** 프로필 창 oveflow 여부 */
+  isOverflow: boolean
 }
 
 /**
@@ -34,56 +41,166 @@ const Profile: FC<Prop> = ({
   onCloseClick,
   imageUrl = null,
   profileRef,
-}) => (
-  <S.Container ref={profileRef}>
-    <S.CloseButton>
-      <Icon
-        icon='Close'
-        size='1.5rem'
-        color={color.WHITE}
-        onClick={onCloseClick}
-      />
-    </S.CloseButton>
-    <S.ProfileWrapper>
-      {imageUrl ? (
-        <S.Image src={imageUrl} big={true} />
-      ) : (
-        <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />
-      )}
-      <S.NameWrapper>{name}</S.NameWrapper>
-      {statusMessage && <S.StatusWrapper>{statusMessage}</S.StatusWrapper>}
-      <Hr />
-      <S.Footer>
-        <Link
-          to={{
-            pathname: '/chat',
-            state: {
-              uuid,
-              name,
-            },
-          }}
-          style={{ textDecoration: 'none' }}
-        >
+  isMyProfile,
+  isOverflow,
+}) => {
+  const [isEditMode, setIsEditMode] = useState(false)
+  const [editName, setEditName] = useState(name)
+  const [editStatusMessage, setEditStatusMessage] = useState(statusMessage)
+  const onChangename = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditName(e.target.value)
+  }
+  const onChangeStatusMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditStatusMessage(e.target.value)
+  }
+  const dispatch = useDispatch()
+  const onEditClick = () => {
+    if (isEditMode) {
+      if (editName.length === 0) {
+        alert.error('이름을 입력해주세요!')
+        return
+      }
 
-          <TextIcon
-            icon='ChatFilled'
-            color={color.GRAY}
-            text='1:1 채팅'
-            textColor={color.WHITE}
-            iconPosition='top'
-          />
-        </Link>
-        <TextIcon
-          icon='Delete'
+      if (editName !== name || editStatusMessage !== statusMessage) {
+        dispatch(
+          updateProfile({
+            name: editName,
+            statusMessage: editStatusMessage,
+          }),
+        )
+      }
+    }
+    setIsEditMode(!isEditMode)
+  }
+
+  const onDeleteClick = () => {
+    alert.confirmDelete(name).then((confirm) => {
+      if (confirm) {
+        dispatch(deleteFriend(uuid))
+      }
+    })
+  }
+  const [slideMount, setSlideMount] = useState(0)
+  const [startPoint, setStartPoint] = useState(0)
+  const [isRender, setRender] = useState(true)
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation()
+    setStartPoint(e.touches[0].screenY)
+  }
+  const onTouch = (e: React.TouchEvent) => {
+    e.stopPropagation()
+
+    if (startPoint < e.touches[0].screenY) {
+      setSlideMount(Math.ceil((e.touches[0].screenY - startPoint) / 40))
+    } else {
+      setSlideMount(0)
+    }
+  }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (slideMount >= 4) {
+      setSlideMount(100)
+      setTimeout(onCloseClick, 500)
+    } else {
+      setSlideMount(0)
+    }
+  }
+  return (
+    <S.Container
+      ref={profileRef}
+      isOverflow={isOverflow}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouch}
+      onTouchEnd={onTouchEnd}
+      slideMount={slideMount}
+      anim={isRender ? 'slideUp' : 'slideDown'}
+    >
+      <S.CloseButton>
+        <Icon
+          icon='Close'
+          size='1.5rem'
           color={color.WHITE}
-          text='삭제'
-          textColor={color.WHITE}
-          iconPosition='top'
           onClick={onCloseClick}
         />
-      </S.Footer>
-    </S.ProfileWrapper>
-  </S.Container>
-)
+      </S.CloseButton>
+      <S.ProfileWrapper>
+        {imageUrl ? (
+          <S.Image src={imageUrl} big={true} />
+        ) : (
+          <Icon icon='PersonFilled' color={color.GRAY} size='4rem' />
+        )}
+        {isMyProfile && isEditMode ? (
+          <S.EditWrapper>
+            <S.Label isEmpty={editName.length === 0}>
+              이름 ({editName.length}/20)
+            </S.Label>
+            <S.Input
+              value={editName}
+              placeholder={'이름'}
+              onChange={onChangename}
+              maxLength={20}
+            />
+            <S.Label>상태 메시지 ({editStatusMessage.length}/40)</S.Label>
+            <S.Input
+              value={editStatusMessage}
+              placeholder={'상태 메시지'}
+              onChange={onChangeStatusMessage}
+              maxLength={40}
+            />
+          </S.EditWrapper>
+        ) : (
+          <Fragment>
+            <S.NameWrapper>{name}</S.NameWrapper>
+            {statusMessage && (
+              <S.StatusWrapper>{statusMessage}</S.StatusWrapper>
+            )}
+          </Fragment>
+        )}
 
+        <Hr />
+        <S.Footer>
+          {isMyProfile ? (
+            <TextIcon
+              icon='Edit'
+              color={color.WHITE}
+              text={isEditMode ? '저장' : '프로필 수정'}
+              iconPosition='top'
+              textColor={color.WHITE}
+              onClick={onEditClick}
+            />
+          ) : (
+            <Fragment>
+              <Link
+                to={{
+                  pathname: '/chat',
+                  state: {
+                    uuid,
+                    name,
+                  },
+                }}
+                style={{ textDecoration: 'none' }}
+              >
+                <TextIcon
+                  icon='ChatFilled'
+                  color={color.WHITE}
+                  text='1:1 채팅'
+                  textColor={color.WHITE}
+                  iconPosition='top'
+                />
+              </Link>
+              <TextIcon
+                icon='Delete'
+                color={color.WHITE}
+                text='친구 삭제'
+                textColor={color.WHITE}
+                iconPosition='top'
+                onClick={onDeleteClick}
+              />
+            </Fragment>
+          )}
+        </S.Footer>
+      </S.ProfileWrapper>
+    </S.Container>
+  )
+}
 export default Profile

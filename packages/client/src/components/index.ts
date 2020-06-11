@@ -10,7 +10,6 @@ import Routes from './Routes'
 import SearchInput from './SearchInput'
 import TextIcon from './TextIcon'
 import UserCard from './UserCard'
-import MyProfile from './MyProfile'
 
 export {
   PopUp,
@@ -25,5 +24,4 @@ export {
   SearchInput,
   TextIcon,
   UserCard,
-  MyProfile,
 }

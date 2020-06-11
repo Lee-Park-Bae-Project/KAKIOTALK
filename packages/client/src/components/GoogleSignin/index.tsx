@@ -1,7 +1,9 @@
 import React from 'react'
 import dotenv from 'dotenv'
 import * as S from 'components/GoogleSignin/styles'
-import GoogleLogin, { GoogleLoginResponse } from 'react-google-login'
+import GoogleLogin, {
+  GoogleLoginResponse, GoogleLoginResponseOffline,
+} from 'react-google-login'
 import {
   useHistory, withRouter,
 } from 'react-router-dom'
@@ -11,9 +13,15 @@ import { alert } from 'common/utils'
 
 const loginURL = configs.NODE_ENV_VAR === 'production' ? configs.LOGIN_URL_PRODUCT : configs.LOGIN_URL
 
+const isResOffline = (res: any): res is GoogleLoginResponseOffline => res.code !== undefined
+
 const GoogleSignin: React.FC = () => {
   const history = useHistory()
-  const responseSuccess = (res: any) => {
+  const responseSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    if (isResOffline(res)) {
+      console.warn('offline')
+      return
+    }
     const { googleId } = res
     const googleAccessToken = res.accessToken
     const {

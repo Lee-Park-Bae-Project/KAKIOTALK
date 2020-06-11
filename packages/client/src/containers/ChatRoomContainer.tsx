@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState,
+  ChangeEvent, useEffect, useState,
 } from 'react'
 import {
   RouteComponentProps, withRouter,
@@ -17,11 +17,17 @@ import {
   removeSocketEventListener,
 } from 'socket'
 import { getChatRequest } from 'modules/chat'
+import { convertDBTimeTohhmmA } from 'common/utils'
+import { ApiChat } from 'types'
 
 interface MatchParams {
   roomUuid: string;
 }
 type Props = WithAuthProps & RouteComponentProps<MatchParams>
+
+export interface ChatStateGroupByTime {
+  [key: string]: ApiChat[][]
+}
 
 const ChatContainer: React.FC<Props> = (props) => {
   const {
@@ -33,6 +39,32 @@ const ChatContainer: React.FC<Props> = (props) => {
   const roomState = useSelector((state: RootState) => state.room)
   const [roomUuid, setRoomUuid] = useState<string>('')
   const [roomName, setRoomName] = useState<string>('')
+  const [chatStateGroupByTime, SetChatStateGroupByTime] = useState<ChatStateGroupByTime>({})
+
+  useEffect(() => {
+    if (chatState.data[roomUuid]) {
+      interface ChatStateGroupByTime {
+        [key: string]: ApiChat[][]
+      }
+      const init: ChatStateGroupByTime = {}
+      const newChatStateGroupByTime = chatState.data[roomUuid].reduce((acc, cur) => {
+        const key = convertDBTimeTohhmmA(cur.createdAt)
+        if (acc[key]) {
+          const len = acc[key].length
+          if (acc[key][len - 1][0].metaInfo.sender.uuid === cur.metaInfo.sender.uuid) {
+            acc[key][len - 1].push(cur)
+          } else {
+            acc[key].push([cur])
+          }
+          return acc
+        }
+
+        acc[key] = [[cur]]
+        return acc
+      }, init)
+      SetChatStateGroupByTime(newChatStateGroupByTime)
+    }
+  }, [chatState, roomUuid])
 
   const handleBack = () => {
     history.goBack()
@@ -69,10 +101,10 @@ const ChatContainer: React.FC<Props> = (props) => {
   return (
     <ChatRoom
       {...props}
-      chatState={chatState}
       roomUuid={roomUuid}
       handleBack={handleBack}
       roomName={roomName}
+      chatStateGroupByTime={chatStateGroupByTime}
     />
   )
 }

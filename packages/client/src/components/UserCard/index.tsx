@@ -1,5 +1,5 @@
 import React, {
-  FC, useRef, useState,
+  FC, useEffect, useRef, useState,
 } from 'react'
 import * as S from 'components/UserCard/styles'
 import { color } from 'styles/global'
@@ -19,7 +19,7 @@ interface UserCardProp {
   /** 유저 프로필사진 URL */
   imageUrl?: string
   /** 본인 or 친구 중 누구의 프로필인지 판별 */
-  isMyProfile?: boolean
+  isMyProfile: boolean
 }
 
 /**
@@ -32,19 +32,25 @@ const UserCard: FC<UserCardProp> = ({
   name,
   statusMessage = '',
   imageUrl,
+  isMyProfile,
 }) => {
-  const [clicked, setClicked] = useState(false)
+  const [isClicked, setIsClicked] = useState(false)
+  const [isOverflow, setIsOverflow] = useState(false)
   const onClick = () => {
-    setClicked(!clicked)
+    setIsClicked(!isClicked)
   }
-
-  const ref = React.createRef<HTMLDivElement>()
-  useOutsideClick(ref, () => {
-    if (clicked) setClicked(false)
+  const profileRef = React.createRef<HTMLDivElement>()
+  useOutsideClick(profileRef, () => {
+    if (isClicked) setIsClicked(false)
   })
-
+  const userCardRef = React.createRef<HTMLDivElement>()
+  useEffect(() => {
+    if (userCardRef.current && userCardRef.current?.getBoundingClientRect().bottom < 300) {
+      setIsOverflow(true)
+    }
+  })
   return (
-    <S.Container>
+    <S.Container ref={userCardRef}>
       <S.ProfileWrapper>
         <TextIcon
           icon='Account'
@@ -52,8 +58,10 @@ const UserCard: FC<UserCardProp> = ({
           text={name}
           onClick={onClick}
           imageUrl={imageUrl}
+          statusMessage={statusMessage}
+          textSize="15px"
         >
-          {clicked && (
+          {isClicked && (
             <React.Fragment>
             <S.Tri/>
             <Profile
@@ -62,14 +70,14 @@ const UserCard: FC<UserCardProp> = ({
               statusMessage={statusMessage}
               onCloseClick={onClick}
               imageUrl={imageUrl || ''}
-              profileRef={ref}
+              profileRef={profileRef}
+              isMyProfile={isMyProfile}
+              isOverflow={isOverflow}
             />
             </React.Fragment>
           )}
         </TextIcon>
-        {statusMessage && (
-          <S.StatusMessageWrapper>{statusMessage}</S.StatusMessageWrapper>
-        )}
+
       </S.ProfileWrapper>
     </S.Container>
   )
