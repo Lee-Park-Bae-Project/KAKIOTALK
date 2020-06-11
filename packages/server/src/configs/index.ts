@@ -6,7 +6,7 @@ require('dotenv').config()
 
 export const env = process.env.NODE_ENV || 'development'
 
-const whiteList = ['http://localhost:3000','https://lee-park-bae-project.github.io/KAKIOTALK/']
+const whiteList = ['http://localhost:3000','https://lee-park-bae-project.github.io']
 export const corsConfig: CorsOptions = {
   origin: whiteList,
   credentials: true,
