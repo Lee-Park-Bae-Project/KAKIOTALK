@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import Flex from 'atoms/Flex'
 import Icon from 'Icon/Icon'
 import { color } from 'styles/global'
+import { Link } from 'react-router-dom'
 
-const S = { Container: styled(Flex)`
+const S = { Container: styled.div`
     width: fit-content;
     height: fit-content;
   ` }
@@ -13,9 +13,7 @@ interface ChatTabProp {
   /** 사이즈 */
   size?: string;
   /** 현재 선택중인지 */
-  selected?: boolean;
-  /** 클릭 핸들러 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  isRouted: boolean;
 }
 
 /**
@@ -23,15 +21,16 @@ interface ChatTabProp {
  */
 const ChatTab: FC<ChatTabProp> = ({
   size = '1.5rem',
-  selected = false,
-  onClick = undefined,
+  isRouted,
 }) => (
-    <S.Container onClick={onClick}>
+    <S.Container>
+    <Link to={'/main/chat-list'}>
     {
-      selected
+      isRouted
         ? <Icon icon='ChatFilled' color={color.WHITE} size={size}/>
         : <Icon icon='Chat'color={color.WHITE} size='1.5rem'/>
     }
+    </Link>
   </S.Container>
 )
 
