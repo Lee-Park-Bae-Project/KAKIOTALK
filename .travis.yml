@@ -20,4 +20,4 @@ if: branch = develop
     skip_cleanup: true
     local_dir: packages/client/build
     on:
-      branch: feature/split-main
+      branch: develop
