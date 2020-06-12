@@ -14,7 +14,7 @@ const baseDbSetting = {
     collate: 'utf8mb4_unicode_ci',
     timestamps: true,
   },
-};
+}
 module.exports = {
   production: {
     host: process.env.DB_HOST,
@@ -45,4 +45,4 @@ module.exports = {
     logging: false,
     ...baseDbSetting,
   },
-};
+}
