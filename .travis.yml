@@ -1,21 +1,23 @@
-language: node_js
+if: branch = feature/split-main
+  language: node_js
 
-node_js:
-  - "lts/*"
-env:
-  - CI=false
-before_script:
-  - yarn common:build
-  - yarn client:build
-  - cd packages
-  - cd client
-script:
-  - echo "skipping tests"
-  # - yarn deploy
-deploy:
-  provider: pages
-  github_token: $__GITHUB_TOKEN__
-  skip_cleanup: true
-  local_dir: packages/client/build
-  on:
-    branch: feature/split-main
+  node_js:
+    - "lts/*"
+  env:
+    - CI=false
+
+  before_script:
+    - yarn common:build
+    - yarn client:build
+    - cd packages
+    - cd client
+  script:
+    - echo "skipping tests"
+    # - yarn deploy
+  deploy:
+    provider: pages
+    github_token: $__GITHUB_TOKEN__
+    skip_cleanup: true
+    local_dir: packages/client/build
+    on:
+      branch: feature/split-main
