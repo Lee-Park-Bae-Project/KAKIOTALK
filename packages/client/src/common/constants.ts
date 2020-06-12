@@ -26,7 +26,7 @@ export const configs = {
 }
 
 export const url = {
-  main: '/',
+  main: '/main',
   login: '/login',
   chatRoom: '/chat',
   room: '/chat',
