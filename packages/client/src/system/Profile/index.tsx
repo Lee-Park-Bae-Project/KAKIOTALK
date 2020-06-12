@@ -84,12 +84,9 @@ const Profile: FC<Prop> = ({
   const [startPoint, setStartPoint] = useState(0)
 
   const onTouchStart = (e: React.TouchEvent) => {
-    e.stopPropagation()
     setStartPoint(e.touches[0].screenY)
   }
   const onTouch = (e: React.TouchEvent) => {
-    e.stopPropagation()
-
     if (startPoint < e.touches[0].screenY) {
       setSlideMount(Math.ceil((e.touches[0].screenY - startPoint) / 40))
     } else {

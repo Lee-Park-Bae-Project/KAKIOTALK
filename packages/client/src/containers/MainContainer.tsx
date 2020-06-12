@@ -5,16 +5,10 @@ import {
 import Main from 'pages/main'
 import { RootState } from 'modules'
 import { getRoomRequest } from 'modules/room'
-import { logoutAction } from 'modules/login'
 import withAuth, { WithAuthProps } from 'hocs/withAuth'
-import { addFriend } from 'modules/friends'
-import * as request from 'common/request'
-import { useHistory } from 'react-router-dom'
 import { afterLogin } from '../socket'
 
-const {
-  useState, useEffect,
-} = React
+const { useEffect } = React
 
 const MainContainer: React.FC<WithAuthProps> = ({
   name,
@@ -36,108 +30,11 @@ const MainContainer: React.FC<WithAuthProps> = ({
   }, [name,
     email,
     uuid])
-  const history = useHistory()
-
-  const [tabSelector, setTabSelector] = useState({
-    friend: true,
-    chat: false,
-  })
-
-  const friendTabOnClick = () => {
-    setTabSelector({
-      friend: true,
-      chat: false,
-    })
-  }
-
-  const chatTabOnClick = () => {
-    setTabSelector({
-      friend: false,
-      chat: true,
-    })
-  }
-
-  const [addFriendPopUp, setAddFriendPopUp] = useState(false)
-  const [logoutPopUp, setLogoutPopUp] = useState(false)
-  const [friendEmailToAdd, setFriendEmailToAdd] = useState('')
-
-  const onFriendPopUpClose = () => {
-    setAddFriendPopUp(false)
-  }
-  const dialogRef = React.createRef<HTMLDivElement>()
-  const onOutsideClicked = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const dialogNode = dialogRef.current
-    if (
-      dialogNode
-      && e.target instanceof Node
-      && !dialogNode.contains(e.target)
-    ) { setAddFriendPopUp(false) }
-  }
-
-  const onLogoutPopUpClose = () => {
-    setLogoutPopUp(false)
-  }
-
-  const addFriendTabOnClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ): void => {
-    setAddFriendPopUp(true)
-  }
-
-  const logoutTabOnClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ): void => {
-    setLogoutPopUp(true)
-  }
-
-  const confirmLogout = () => {
-    request
-      .getLogout()
-      .then((response) => {
-        history.push('/login')
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-    dispatch(logoutAction())
-    onLogoutPopUpClose()
-  }
-
-  const onFriendEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFriendEmailToAdd(e.target.value)
-  }
-
-  const confirmAddFriend = () => {
-    dispatch(addFriend(friendEmailToAdd))
-    setFriendEmailToAdd('')
-    onFriendPopUpClose()
-  }
-  const addFriendEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      confirmAddFriend()
-    }
-  }
 
   window.history.pushState(null, '', window.location.href)
   return (
     <Main
-      tabSelector={tabSelector}
-      friendTabOnClick={friendTabOnClick}
-      chatTabOnClick={chatTabOnClick}
-      addFriendTabOnClick={addFriendTabOnClick}
       roomState={roomState}
-      onFriendEmailChange={onFriendEmailChange}
-      confirmAddFriend={confirmAddFriend}
-      popupAddFriend={addFriendPopUp}
-      cancelAddFriend={onFriendPopUpClose}
-      addFriendEnterPress={addFriendEnterPress}
-      friendEmailToAdd={friendEmailToAdd}
-      logoutTabOnClick={logoutTabOnClick}
-      onPopupOutClicked={onOutsideClicked}
-      dialogRef={dialogRef}
-      popupLogout={logoutPopUp}
-      cancelLogout={onLogoutPopUpClose}
-      confirmLogout={confirmLogout}
     ></Main>
   )
 }
