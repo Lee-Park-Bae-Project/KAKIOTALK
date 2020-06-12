@@ -13,6 +13,7 @@ top:4rem;
 left:3rem;
 right:0;
 ${(props: MainProps) => (props.isPoppedUp ? 'filter: blur(4px);' : '')}
+${(props: MainProps) => (props.isPoppedUp ? 'overscroll-behavior: contain;' : '')}
 `
 
 export const NavigationBarWrapper = styled.div`
