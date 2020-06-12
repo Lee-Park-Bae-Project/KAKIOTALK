@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'linebreak-style': 0,
     'max-len': 0,
     'comma-dangle': [
       'error',
