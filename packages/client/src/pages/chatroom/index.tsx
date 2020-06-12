@@ -44,10 +44,12 @@ const ChatRoom: FC<Props> = ({
     }
 
     const msg = messageRef.current.value
+    const createdAt = getCurTimeDBFormat()
+    console.log(createdAt)
     chatFromClient({
       content: msg,
       roomUuid,
-      createdAt: getCurTimeDBFormat(),
+      createdAt,
       userUuid: uuid,
     })
 
@@ -95,7 +97,7 @@ const ChatRoom: FC<Props> = ({
                   return timeGroup.map((chatGroup) => (
                       <ChatBox
                         key={chatGroup[0].uuid}
-                        createdAt={time}
+                        createdAt={chatGroup[0].createdAt}
                         chatGroup={chatGroup}
                         isMine={uuid === chatGroup[0].metaInfo.sender.uuid}
                       />

@@ -8,7 +8,6 @@ import * as httpError from '../common/error'
 
 export const getChats = controllerHelper(async (req, res, next) => {
   const { roomId } = req.params
-  console.log(roomId)
   const chats = await chatService.getChatsByRoomId(roomId)
   if (!chats) {
     throw httpError.ROOM_NOT_FOUND
