@@ -4,12 +4,15 @@ export const Container = styled.div`
   width:100%;
   height:100%;
 `
-
+interface MainProps {
+  isPoppedUp: boolean
+}
 export const MainWrapper = styled.div`
 position:absolute;
 top:4rem;
 left:3rem;
 right:0;
+${(props: MainProps) => (props.isPoppedUp ? 'filter: blur(4px);' : '')}
 `
 
 export const NavigationBarWrapper = styled.div`

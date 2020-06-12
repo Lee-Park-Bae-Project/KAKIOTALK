@@ -58,7 +58,7 @@ const Main: FC<Props> = ({
   return (
     <S.Container>
       {isLoggedIn ? (
-        <S.MainWrapper>
+        <S.MainWrapper isPoppedUp = {popupAddFriend || popupLogout}>
           {tabSelector.friend && <FriendContainer />}
           {tabSelector.chat && <Room roomState={roomState} />}
         </S.MainWrapper>
