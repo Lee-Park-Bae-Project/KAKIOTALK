@@ -18,7 +18,8 @@
     "client:start": "yarn client start",
     "client:build": "yarn client build",
     "server:start": "yarn server start",
-    "server:build": "yarn server build"
+    "server:build": "yarn server build",
+    "server:dev": "yarn server dev"
   },
   "devDependencies": {
     "typescript": "^3.9.3"
