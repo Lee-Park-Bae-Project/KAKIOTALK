@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, useEffect, useState,
+  useEffect, useState,
 } from 'react'
 import {
   RouteComponentProps, withRouter,

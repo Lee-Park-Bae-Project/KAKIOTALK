@@ -70,8 +70,6 @@ export const getChatsByRoomId = async (roomUuid: string) => {
     throw HttpError.IDK
   }
   const roomId = room.id
-  console.log('check-------------')
-  console.log(roomId)
   const chats = await models.Chat.findAll({
     raw: true,
     nest: true,
@@ -98,7 +96,8 @@ export const getChatsByRoomId = async (roomUuid: string) => {
       },
     ],
   })
-
+  console.log(chats.length)
+  console.log(chats)
   return chats
 }
 
@@ -186,7 +185,6 @@ export const addMessage = async ({
       content,
       createdAt,
       updatedAt,
-
     })
     const chatId = newChatData.id
     const newChat = await findChatById(chatId)
