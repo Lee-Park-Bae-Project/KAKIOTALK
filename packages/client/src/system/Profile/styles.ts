@@ -30,6 +30,7 @@ export const Container = styled.div`
     animation: 0.3s ease 0s 1 slideUp;
     transform:translateY(${(props: ContainerProps) => props.slideMount}%);
     transition-duration:0.5s;
+    overscroll-behavior: contain;
   }
   
   @keyframes slideUp{
@@ -40,14 +41,14 @@ export const Container = styled.div`
       transform: translateY(0);
     }
   }
-  @keyframes slideDown(
+  @keyframes slideDown{
     0% {
       transform: translateY(0);
     }
     100% {
       transform: translateY(100%);
     }
-  )
+  }
 
 `
 
