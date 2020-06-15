@@ -1,0 +1,27 @@
+steps:
+  - name: node
+    entrypoint: yarn
+    args: ["install"]
+  - name: node
+    entrypoint: yarn
+    args: ["common:build"]
+  - name: node
+    entrypoint: yarn
+    args: ["server:build"]
+  - name: node
+    entrypoint: npm
+    args: ["run", "create-env"]
+    dir: "packages/server"
+    env:
+      - "NODE_ENV=${_NODE_ENV}"
+      - "DB_HOST=${_DB_HOST}"
+      - "DB_USER=${_DB_USER}"
+      - "DB_PW=${_DB_PW}"
+      - "DB_NAME=${_DB_NAME}"
+      - "DB_PORT=${_DB_PORT}"
+      - "JWT_SECRET=${_JWT_SECRET}"
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
+    dir: "packages/server"
+    timeout: "1600s"
+timeout: "3600s"

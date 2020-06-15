@@ -16,8 +16,8 @@ module.exports = {
     },
   },
   rules: {
-    "linebreak-style":0,
-    "max-len":0,
+    'linebreak-style': 0,
+    'max-len': 0,
     'comma-dangle': [
       'error',
       {
@@ -75,8 +75,8 @@ module.exports = {
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-unused-vars': 0,
     'import/no-cycle': 0,
-    'no-console': ["error", { allow: ["warn", "error"] }],
-    'linebreak-style':0,
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'linebreak-style': 0,
     'max-len': 0,
   },
   settings: {

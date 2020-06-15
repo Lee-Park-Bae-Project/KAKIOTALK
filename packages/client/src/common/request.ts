@@ -6,7 +6,7 @@ import { Room } from '@kakio/common'
 // import Room from 'system/Room'
 import { configs } from './constants'
 
-const { API_SERVER_URL } = configs
+const API_SERVER_URL = configs.NODE_ENV_VAR === 'production' ? configs.API_SERVER_URL_PRODUCT : configs.API_SERVER_URL
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
