@@ -25,7 +25,7 @@ interface Props{
   /** 확인 버튼 클릭 핸들러 */
   onConfirm?: () => void;
   /** Dialog Ref */
-  dialogRef? : React.RefObject<HTMLDivElement>
+  dialogRef: React.MutableRefObject<null>
 }
 
 /**

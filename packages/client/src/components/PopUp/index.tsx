@@ -8,7 +8,7 @@ interface Props {
   /** 팝업 바깥을 클릭했을 때 동작할 close 핸들러 */
   onClose: () => void
   /** 팝업 컴포넌트의 ref */
-  refs: React.RefObject<HTMLDivElement>
+  refs: React.MutableRefObject<null>
 }
 
 const PopUp: FC<Props> = ({

@@ -1,5 +1,5 @@
 import React, {
-  FC, useEffect, useState,
+  FC, useCallback, useState,
 } from 'react'
 import * as S from 'components/UserCard/styles'
 import { color } from 'styles/global'
@@ -39,18 +39,17 @@ const UserCard: FC<UserCardProp> = ({
   const onClick = () => {
     setIsClicked(!isClicked)
   }
-  const profileRef = React.createRef<HTMLDivElement>()
+  const profileRef = React.useRef(null)
   useOutsideClick(profileRef, () => {
     if (isClicked) setIsClicked(false)
   })
-  const userCardRef = React.createRef<HTMLDivElement>()
-  useEffect(() => {
-    if (userCardRef.current && userCardRef.current?.getBoundingClientRect().bottom < 300) {
+  const setOverflow = useCallback((node: HTMLDivElement) => {
+    if (node && node.getBoundingClientRect().bottom < 300) {
       setIsOverflow(true)
     }
-  }, [userCardRef])
+  }, [])
   return (
-    <S.Container ref={userCardRef}>
+    <S.Container ref={setOverflow}>
       <S.ProfileWrapper>
         <TextIcon
           icon='Account'

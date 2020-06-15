@@ -40,7 +40,7 @@ const AddFriendTab: FC<AddFriendProp> = ({ size = '1.5rem' }) => {
       onConfirm()
     }
   }
-  const dialogRef = React.createRef<HTMLDivElement>()
+  const dialogRef = React.useRef(null)
   return (
     <S.Container>
       <Icon icon='AddFriend' color={color.WHITE} size={size} onClick={onClick} />

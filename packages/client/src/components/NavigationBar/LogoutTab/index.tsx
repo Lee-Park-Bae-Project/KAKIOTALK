@@ -1,5 +1,5 @@
 import React, {
-  FC, useState,
+  FC, useRef, useState,
 } from 'react'
 import styled from 'styled-components'
 import { color } from 'styles/global'
@@ -39,7 +39,7 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
     dispatch(logoutAction())
     onClick()
   }
-  const dialogRef = React.createRef<HTMLDivElement>()
+  const dialogRef = useRef(null)
   return (
     <S.Container>
       <Icon icon='logout' color={color.WHITE} size={size} onClick={onClick}/>
