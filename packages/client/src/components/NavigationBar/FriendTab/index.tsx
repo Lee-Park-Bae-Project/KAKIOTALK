@@ -9,29 +9,28 @@ const S = { Container: styled.div`
     height: fit-content;
   ` }
 
-interface FriendTabProp{
+interface FriendTabProp {
   /** 크기 */
-  size?: string;
+  size?: string
   /** 현재 선택중인지 */
-  isRouted: boolean;
+  isRouted: boolean
 }
 
 /**
  * 클릭 했을 때 선택된 것 처럼 filled 된 이미지가 나타남
  */
 const FriendTab: FC<FriendTabProp> = ({
-  size = '1.5rem',
-  isRouted,
+  size = '1.5rem', isRouted,
 }) => (
-    <S.Container>
-      <Link to='/main/friend-list'>
-      {
-        isRouted
-          ? <Icon icon='PersonFilled' color={color.WHITE} size={size} />
-          : <Icon icon='Person' color={color.WHITE} size={size} />
-      }
-      </Link>
-    </S.Container>
+  <S.Container>
+    <Link to='/main/friend-list'>
+      <Icon
+        icon={isRouted ? 'PersonFilled' : 'Person'}
+        color={color.WHITE}
+        size={size}
+      />
+    </Link>
+  </S.Container>
 )
 
 export default FriendTab

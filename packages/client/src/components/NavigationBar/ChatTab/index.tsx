@@ -11,25 +11,24 @@ const S = { Container: styled.div`
 
 interface ChatTabProp {
   /** 사이즈 */
-  size?: string;
+  size?: string
   /** 현재 선택중인지 */
-  isRouted: boolean;
+  isRouted: boolean
 }
 
 /**
  * 클릭 했을 때 선택된 것 처럼 filled 된 이미지가 나타남
  */
 const ChatTab: FC<ChatTabProp> = ({
-  size = '1.5rem',
-  isRouted,
+  size = '1.5rem', isRouted,
 }) => (
-    <S.Container>
+  <S.Container>
     <Link to={'/main/chat-list'}>
-    {
-      isRouted
-        ? <Icon icon='ChatFilled' color={color.WHITE} size={size}/>
-        : <Icon icon='Chat'color={color.WHITE} size='1.5rem'/>
-    }
+      <Icon
+        icon={isRouted ? 'ChatFilled' : 'Chat'}
+        color={color.WHITE}
+        size={size}
+      />
     </Link>
   </S.Container>
 )
