@@ -10,7 +10,7 @@ interface ContainerProps {
 }
 export const Container = styled.div`
   display: flex;
-  position: fixed;
+  position: absolute;
   left: 5rem;
   top: ${(props: ContainerProps) => (props.isOverflow ? '0' : 'auto')};
   width: 300px;
