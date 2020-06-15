@@ -36,7 +36,7 @@ const UserCard: FC<UserCardProp> = ({
 }) => {
   const [isClicked, setIsClicked] = useState(false)
   const [isOverflow, setIsOverflow] = useState(false)
-  const onClick = () => {
+  const handlePopUpClick = () => {
     setIsClicked(!isClicked)
   }
   const profileRef = React.useRef(null)
@@ -55,7 +55,7 @@ const UserCard: FC<UserCardProp> = ({
           icon='Account'
           color={color.GRAY}
           text={name}
-          onClick={onClick}
+          onClick={handlePopUpClick}
           imageUrl={imageUrl}
           statusMessage={statusMessage}
           textSize="15px"
@@ -67,7 +67,7 @@ const UserCard: FC<UserCardProp> = ({
               uuid={uuid}
               name={name}
               statusMessage={statusMessage}
-              onCloseClick={onClick}
+              handleCloseClick={handlePopUpClick}
               imageUrl={imageUrl || ''}
               profileRef={profileRef}
               isMyProfile={isMyProfile}

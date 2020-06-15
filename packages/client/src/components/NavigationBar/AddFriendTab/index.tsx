@@ -23,7 +23,7 @@ interface AddFriendProp {
 const AddFriendTab: FC<AddFriendProp> = ({ size = '1.5rem' }) => {
   const [isClicked, setClicked] = useState(false)
   const [email, setEmail] = useState('')
-  const onClick = () => {
+  const handlePopUpClick = () => {
     setClicked(!isClicked)
   }
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ const AddFriendTab: FC<AddFriendProp> = ({ size = '1.5rem' }) => {
   const onConfirm = () => {
     dispatch(addFriend(email))
     setEmail('')
-    onClick()
+    handlePopUpClick()
   }
   const onEnterPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -43,9 +43,9 @@ const AddFriendTab: FC<AddFriendProp> = ({ size = '1.5rem' }) => {
   const dialogRef = React.useRef(null)
   return (
     <S.Container>
-      <Icon icon='AddFriend' color={color.WHITE} size={size} onClick={onClick} />
+      <Icon icon='AddFriend' color={color.WHITE} size={size} onClick={handlePopUpClick} />
       {isClicked ? (
-        <PopUp refs={dialogRef} onClose={onClick}>
+        <PopUp refs={dialogRef} onClose={handlePopUpClick}>
           <Dialog
             isVisible={true}
             title='친구 추가'
@@ -53,7 +53,7 @@ const AddFriendTab: FC<AddFriendProp> = ({ size = '1.5rem' }) => {
             canCancel={true}
             cancelText='취소'
             confirmText='확인'
-            onCancel={onClick}
+            onCancel={handlePopUpClick}
             onConfirm={onConfirm}
             dialogRef={dialogRef}
           >

@@ -23,7 +23,7 @@ interface LogoutProp {
 
 const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
   const [isClicked, setClicked] = useState(false)
-  const onClick = () => {
+  const handlePopUpClick = () => {
     setClicked(!isClicked)
   }
   const dispatch = useDispatch()
@@ -37,14 +37,14 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
         console.error(error)
       })
     dispatch(logoutAction())
-    onClick()
+    handlePopUpClick()
   }
   const dialogRef = useRef(null)
   return (
     <S.Container>
-      <Icon icon='logout' color={color.WHITE} size={size} onClick={onClick}/>
+      <Icon icon='logout' color={color.WHITE} size={size} onClick={handlePopUpClick}/>
       {isClicked ? (
-        <PopUp refs={dialogRef} onClose={onClick}>
+        <PopUp refs={dialogRef} onClose={handlePopUpClick}>
           <Dialog
             dialogRef={dialogRef}
             isVisible={true}
@@ -54,7 +54,7 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
             cancelText='취소'
             confirmText='확인'
             onConfirm={confirmLogout}
-            onCancel={onClick}
+            onCancel={handlePopUpClick}
           ></Dialog>
         </PopUp>
       ) : null}
