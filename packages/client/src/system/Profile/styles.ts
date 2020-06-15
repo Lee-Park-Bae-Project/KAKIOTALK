@@ -10,7 +10,7 @@ interface ContainerProps {
 }
 export const Container = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   left: 5rem;
   top: ${(props: ContainerProps) => (props.isOverflow ? '0' : 'auto')};
   width: 300px;
@@ -19,6 +19,7 @@ export const Container = styled.div`
   justify-content: space-between;
   background-color: #2c2c2c;
   box-shadow: 4px 4px 4px 0 #616161;
+  z-index: 1;
 
 
   @media (max-width: 500px ) {
