@@ -11,7 +11,7 @@ import { configs } from 'common/constants'
 import * as request from 'common/request'
 import { alert } from 'common/utils'
 
-dotenv.config()
+const loginURL = configs.NODE_ENV_VAR === 'production' ? configs.LOGIN_URL_PRODUCT : configs.LOGIN_URL
 
 const isResOffline = (res: any): res is GoogleLoginResponseOffline => res.code !== undefined
 
@@ -54,7 +54,7 @@ const GoogleSignin: React.FC = () => {
         onSuccess={responseSuccess}
         onFailure={responseFail}
         onAutoLoadFinished={responseAutoLoad}
-        redirectUri={configs.LOGIN_URL}
+        redirectUri={loginURL}
         cookiePolicy={'single_host_origin'}
         prompt="consent"
       />

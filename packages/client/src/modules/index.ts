@@ -22,9 +22,16 @@ const rootReducer = combineReducers({
   chat,
 })
 const sagaMiddleware = createSagaMiddleware()
+
+const middlewares = []
+middlewares.push(sagaMiddleware)
+
+if (process.env.NODE_ENV !== 'production') {
+  middlewares.push(logger)
+}
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(logger, sagaMiddleware)),
+  composeWithDevTools(applyMiddleware(...middlewares)),
 )
 sagaMiddleware.run(rootSaga)
 export default rootReducer

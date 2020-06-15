@@ -14,8 +14,8 @@ module.exports = {
         statusMessage: 'im leeparkbae',
         imageUrl: 'https://lh3.googleusercontent.com/-JtrAoiGNRpA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckyagbLSdHypj6pzCqiy2iBHABqHQ/s96-c/photo.jpg',
         googleId: '113283872440363914094',
-        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       },
       {
         id: 2,
@@ -25,8 +25,8 @@ module.exports = {
         statusMessage: 'im junow',
         imageUrl: 'https://lh3.googleusercontent.com/-JtrAoiGNRpA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckyagbLSdHypj6pzCqiy2iBHABqHQ/s96-c/photo.jpg',
         googleId: '100916656626485581191',
-        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       },
       {
         id: 3,
@@ -35,8 +35,8 @@ module.exports = {
         email: 'ghost@gmail.com',
         statusMessage: 'im ghost',
         imageUrl: 'https://lh3.googleusercontent.com/-JtrAoiGNRpA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckyagbLSdHypj6pzCqiy2iBHABqHQ/s96-c/photo.jpg',
-        createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       },
     ], {}
   ),
