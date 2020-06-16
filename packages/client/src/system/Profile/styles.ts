@@ -21,36 +21,34 @@ export const Container = styled.div`
   box-shadow: 4px 4px 4px 0 #616161;
   z-index: 1;
 
-
-  @media (max-width: 500px ) {
-    position:fixed;
-    left:0%;
-    top:0%;
-    width:100%;
-    height:100%;
+  @media (max-width: 500px) {
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
     animation: 0.3s ease 0s 1 slideUp;
-    transform:translateY(${(props: ContainerProps) => props.slideMount}%);
-    transition-duration:0.5s;
+    transform: translateY(${(props: ContainerProps) => props.slideMount}%);
+    transition-duration: 0.5s;
     overscroll-behavior: contain;
   }
-  
-  @keyframes slideUp{
-    0% {
-      transform: translateY(100%);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  @keyframes slideDown{
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(100%);
-    }
-  }
 
+  @keyframes slideUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideDown {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
 `
 
 export const CloseButton = styled.div`
