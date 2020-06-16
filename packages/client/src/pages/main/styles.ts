@@ -10,6 +10,7 @@ position:absolute;
 top:4rem;
 left:3rem;
 right:0;
+
 `
 
 export const NavigationBarWrapper = styled.div`

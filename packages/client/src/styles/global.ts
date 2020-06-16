@@ -5,7 +5,7 @@ const Global = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family : verdana;
+    font-family : 'NotoSans Light','Malgun Gothic','맑은 고딕','Apple SD Gothic Neo','돋움',dotum, sans-serif;
   }
 
   ::-webkit-scrollbar {

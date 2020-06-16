@@ -1,13 +1,7 @@
-import React, {
-  FC, useState,
-} from 'react'
-import { useDispatch } from 'react-redux'
+import React, { FC } from 'react'
 import List from 'system/List'
 import Hr from 'atoms/Hr'
 import { UserCard } from 'components'
-import { deleteFriend } from 'modules/friends'
-import { User } from '@kakio/common'
-import { alert } from 'common/utils'
 import { SimpleUserType } from 'types'
 
 export interface Props {
@@ -17,42 +11,7 @@ export interface Props {
 }
 const Friend: FC<Props> = ({
   myProfile, friendList, searchFriendKeyword,
-}) => {
-  const [clickedUser, setClickedUser] = useState({
-    uuid: '',
-    name: '',
-    email: '',
-    statusMessage: '',
-    imageUrl: '',
-  })
-
-  const onProfileClose = (
-    profileRef: React.RefObject<HTMLDivElement>,
-    setProfileClick: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const profileNode = profileRef.current
-    if (
-      profileNode
-        && e.target instanceof Node
-        && !profileNode.contains(e.target)
-    ) {
-      setProfileClick(false)
-    }
-  }
-  const friendProfieRef = React.createRef<HTMLDivElement>()
-  const userProfileRef = React.createRef<HTMLDivElement>()
-  const [userProfileClick, setUserProfileClick] = useState(false)
-
-  const dispatch = useDispatch()
-  const onDeleteFriend = () => {
-    alert.confirmDelete(clickedUser.name).then((value) => {
-      if (value) {
-        dispatch(deleteFriend(clickedUser.uuid))
-      }
-    })
-  }
-
-  return (
+}) => (
     <List>
       <UserCard
         key={myProfile.uuid}
@@ -88,7 +47,6 @@ const Friend: FC<Props> = ({
       )}
 
     </List>
-  )
-}
+)
 
 export default Friend

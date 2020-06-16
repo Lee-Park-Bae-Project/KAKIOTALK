@@ -7,7 +7,6 @@ import {
 interface ContainerProps {
   isOverflow: boolean
   slideMount: number
-  anim: string
 }
 export const Container = styled.div`
   display: flex;
@@ -20,6 +19,7 @@ export const Container = styled.div`
   justify-content: space-between;
   background-color: #2c2c2c;
   box-shadow: 4px 4px 4px 0 #616161;
+  z-index: 1;
 
 
   @media (max-width: 500px ) {
@@ -31,6 +31,7 @@ export const Container = styled.div`
     animation: 0.3s ease 0s 1 slideUp;
     transform:translateY(${(props: ContainerProps) => props.slideMount}%);
     transition-duration:0.5s;
+    overscroll-behavior: contain;
   }
   
   @keyframes slideUp{
@@ -41,14 +42,14 @@ export const Container = styled.div`
       transform: translateY(0);
     }
   }
-  @keyframes slideDown(
+  @keyframes slideDown{
     0% {
       transform: translateY(0);
     }
     100% {
       transform: translateY(100%);
     }
-  )
+  }
 
 `
 

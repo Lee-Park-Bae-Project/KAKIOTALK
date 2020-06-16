@@ -2,9 +2,10 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
+import Flex from 'atoms/Flex'
 
 const S = {
-  InputWrapper: styled.div`
+  InputWrapper: styled(Flex)`
   display:flex;
   justify-content:flex-start;
   padding:0.3rem;
