@@ -33,7 +33,7 @@ const GoogleSignin: React.FC = () => {
         googleId, email, name, googleAccessToken, imageUrl,
       })
       .then((response) => {
-        history.push('/')
+        history.push('/main/friend-list')
       })
       .catch((error) => {
         console.error(error)
