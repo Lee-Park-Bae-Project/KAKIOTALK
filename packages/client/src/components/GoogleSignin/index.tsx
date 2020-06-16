@@ -1,5 +1,4 @@
 import React from 'react'
-import dotenv from 'dotenv'
 import * as S from 'components/GoogleSignin/styles'
 import GoogleLogin, {
   GoogleLoginResponse, GoogleLoginResponseOffline,
@@ -7,7 +6,9 @@ import GoogleLogin, {
 import {
   useHistory, withRouter,
 } from 'react-router-dom'
-import { configs } from 'common/constants'
+import {
+  configs, url,
+} from 'common/constants'
 import * as request from 'common/request'
 import { alert } from 'common/utils'
 
@@ -33,7 +34,7 @@ const GoogleSignin: React.FC = () => {
         googleId, email, name, googleAccessToken, imageUrl,
       })
       .then((response) => {
-        history.push('/main/friend-list')
+        history.push(`${url.main}/friend-list`)
       })
       .catch((error) => {
         console.error(error)

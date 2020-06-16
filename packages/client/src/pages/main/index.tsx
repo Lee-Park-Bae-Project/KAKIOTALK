@@ -7,6 +7,7 @@ import FriendContainer from 'containers/FriendContainer'
 import Room from 'system/Room'
 import { useSelector } from 'react-redux'
 import { Route } from 'react-router-dom'
+import { url } from 'common/constants'
 
 const Main: FC = () => {
   const { isLoggedIn } = useSelector((state: RootState) => state.login)
@@ -15,8 +16,8 @@ const Main: FC = () => {
     <S.Container>
       {isLoggedIn ? (
         <S.MainWrapper>
-          <Route path='/main/friend-list' component={FriendContainer}/>
-          <Route path='/main/chat-list' component={Room}/>
+          <Route path={`${url.main}/friend-list`} component={FriendContainer}/>
+          <Route path={`${url.main}/chat-list`} component={Room}/>
         </S.MainWrapper>
       ) : (
         <Loader/>
