@@ -16,8 +16,8 @@ const Main: FC = () => {
     <S.Container>
       {isLoggedIn ? (
         <S.MainWrapper>
-          <Route path={`${url.main}/friend-list`} component={FriendContainer}/>
-          <Route path={`${url.main}/chat-list`} component={Room}/>
+          <Route path={url.main.friendList} component={FriendContainer}/>
+          <Route path={url.main.chatList}component={Room}/>
         </S.MainWrapper>
       ) : (
         <Loader/>

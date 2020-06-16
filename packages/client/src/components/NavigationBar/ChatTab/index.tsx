@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Icon from 'Icon/Icon'
 import { color } from 'styles/global'
 import { Link } from 'react-router-dom'
+import { url } from 'common/constants'
 
 const S = { Container: styled.div`
     width: fit-content;
@@ -23,7 +24,7 @@ const ChatTab: FC<ChatTabProp> = ({
   size = '1.5rem', isRouted,
 }) => (
   <S.Container>
-    <Link to={'/main/chat-list'}>
+    <Link to={url.main.chatList}>
       <Icon
         icon={isRouted ? 'ChatFilled' : 'Chat'}
         color={color.WHITE}

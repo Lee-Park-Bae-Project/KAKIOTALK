@@ -5,6 +5,7 @@ import ChatTab from 'components/NavigationBar/ChatTab'
 import AddFriendTab from 'components/NavigationBar/AddFriendTab'
 import LogoutTab from 'components/NavigationBar/LogoutTab'
 import { useHistory } from 'react-router-dom'
+import { url } from 'common/constants'
 /**
  * - 네비게이션바
  * - 친구목록, 채팅목록, 친구추가 기능이 가능
@@ -14,8 +15,8 @@ const NavigationBar: FC = () => {
   const history = useHistory()
   const { pathname } = history.location
   const isRouted = {
-    friendList: pathname === '/main/friend-list',
-    chatList: pathname === '/main/chat-list',
+    friendList: pathname === url.main.friendList,
+    chatList: pathname === url.main.chatList,
   }
 
   return (

@@ -34,7 +34,7 @@ const GoogleSignin: React.FC = () => {
         googleId, email, name, googleAccessToken, imageUrl,
       })
       .then((response) => {
-        history.push(`${url.main}/friend-list`)
+        history.push(url.main.friendList)
       })
       .catch((error) => {
         console.error(error)
