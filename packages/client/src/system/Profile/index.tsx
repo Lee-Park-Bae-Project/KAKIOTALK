@@ -89,12 +89,12 @@ const Profile: FC<Prop> = ({
   }
   let ThrottledhandleTouch = (touches: React.TouchList) => {
     if (startPoint < touches[0].screenY) {
-      setSlideMount(Math.ceil((touches[0].screenY - startPoint) / 40))
+      setSlideMount(Math.ceil((touches[0].screenY - startPoint) / 50))
     } else {
       setSlideMount(0)
     }
   }
-  ThrottledhandleTouch = throttle(ThrottledhandleTouch, 50)
+  ThrottledhandleTouch = throttle(ThrottledhandleTouch, 5)
   const handleTouch = (e: React.TouchEvent) => {
     ThrottledhandleTouch(e.touches)
   }
