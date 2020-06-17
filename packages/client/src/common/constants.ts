@@ -10,8 +10,7 @@ const sizeMap = {
 
 export default sizeMap
 
-const SOCKET_URL = 'localhost:3050'
-const SOCKET_URL_PRODUCT = 'https://sylvan-terra-275316.du.r.appspot.com/'
+const SOCKET_URL = process.env.NODE_ENV === 'development' ? 'localhost:3050' : 'https://sylvan-terra-275316.du.r.appspot.com/'
 
 const API_SERVER_URL = 'http://localhost:3050/v1/'
 const API_SERVER_URL_PRODUCT = 'https://sylvan-terra-275316.du.r.appspot.com/v1/'
@@ -25,7 +24,6 @@ const LOGIN_URL_PRODUCT = 'https://lee-park-bae-project.github.io/KAKIOTALK/logi
 
 export const configs = {
   SOCKET_URL,
-  SOCKET_URL_PRODUCT,
   API_SERVER_URL,
   API_SERVER_URL_PRODUCT,
   CLIENT_ID,
