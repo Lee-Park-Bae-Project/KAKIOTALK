@@ -6,9 +6,12 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { getCurTimeDBFormat } from 'common/utils'
+import {
+  convertToLL, getCurTimeDBFormat,
+} from 'common/utils'
 import { WithAuthProps } from 'hocs/withAuth'
 import ChatBox from 'components/ChatBox'
+import DateDivier from 'components/DateDivider'
 import { chatFromClient } from 'socket'
 import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
 import * as S from './style'
@@ -31,6 +34,7 @@ const ChatRoom: FC<Props> = ({
   const scrollRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [hasContent, setHasContent] = useState<boolean>(false)
+  const dateToday = useRef<string>('')
 
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
@@ -93,14 +97,28 @@ const ChatRoom: FC<Props> = ({
               (
                 Object.keys(chatStateGroupByTime).map((time) => {
                   const timeGroup = chatStateGroupByTime[time]
-                  return timeGroup.map((chatGroup) => (
-                      <ChatBox
-                        key={chatGroup[0].uuid}
-                        createdAt={chatGroup[0].createdAt}
-                        chatGroup={chatGroup}
-                        isMine={uuid === chatGroup[0].metaInfo.sender.uuid}
-                      />
-                  ))
+                  return timeGroup.map((chatGroup) => {
+                    // console.log(chatGroup)
+                    let isNewDate = false
+                    const dateLL = convertToLL(chatGroup[0].createdAt)
+                    if (dateToday.current !== dateLL) {
+                      isNewDate = true
+                      dateToday.current = dateLL
+                    }
+                    return (
+                      <>
+                        {
+                          isNewDate && <DateDivier date={dateLL} key={chatGroup[0].createdAt}/>
+                        }
+                        <ChatBox
+                          key={chatGroup[0].uuid}
+                          createdAt={chatGroup[0].createdAt}
+                          chatGroup={chatGroup}
+                          isMine={uuid === chatGroup[0].metaInfo.sender.uuid}
+                        />
+                      </>
+                    )
+                  })
                 })
               )
             )
