@@ -85,7 +85,7 @@ export const getChatsByRoomId = async (roomUuid: string) => {
           {
             model: models.User,
             as: 'sender',
-            attributes: ['uuid', 'name', 'email', 'statusMessage', 'createdAt', 'updatedAt'],
+            attributes: ['uuid', 'name', 'email', 'statusMessage', 'imageUrl', 'createdAt', 'updatedAt'],
           },
           {
             model: models.Room,
@@ -96,8 +96,6 @@ export const getChatsByRoomId = async (roomUuid: string) => {
       },
     ],
   })
-  console.log(chats.length)
-  console.log(chats)
   return chats
 }
 
@@ -190,7 +188,7 @@ export const addMessage = async ({
     const newChat = await findChatById(chatId)
     return newChat
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return e
   }
 }
