@@ -14,6 +14,7 @@ import ChatBox from 'components/ChatBox'
 import DateDivier from 'components/DateDivider'
 import { chatFromClient } from 'socket'
 import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
+import Icon from 'Icon/Icon'
 import * as S from './style'
 
 interface Props extends WithAuthProps{
@@ -83,7 +84,8 @@ const ChatRoom: FC<Props> = ({
     <S.Container>
       <S.Header>
         <S.Back onClick={handleBack}>
-          back
+          <Icon icon="ArrowLeft"/>
+
         </S.Back>
         <S.Title>
           {roomName}
