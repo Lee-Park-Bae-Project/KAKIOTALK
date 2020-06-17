@@ -84,11 +84,13 @@ const ChatRoom: FC<Props> = ({
     <S.Container>
       <S.Header>
         <Icon icon="ArrowLeft" onClick={handleBack}/>
-        <span style={{
-          lineHeight: '2rem', height: '2rem', margin: 'auto',
-        }}>{roomName}</span>
-        <Icon icon="Menu"/>
-
+        <S.Title>{roomName}</S.Title>
+        <div style={{ display: 'flex' }}>
+          <div style={{ margin: 'auto 0.5rem' }}>
+            <Icon icon="Search" size='1rem' css={{ margin: 'auto 0.5rem' }}/>
+          </div>
+          <Icon icon="Menu"/>
+        </div>
       </S.Header>
       <S.ChatContainer ref={chatContainerRef}>
         {

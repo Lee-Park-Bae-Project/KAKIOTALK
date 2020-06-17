@@ -72,9 +72,13 @@ export const Header = styled.div`
   justify-content: space-between;
 `
 
-export const Title = styled.div`
-  display: flex;
+export const Title = styled.span`
+  position: absolute;
+  line-height: 2rem;
+  height: 2rem;
   margin: auto;
+  left: 50%;
+  transform: translateX(-50%);
 `
 
 export const Back = styled.div`
