@@ -69,6 +69,7 @@ export const Header = styled.div`
   display: flex;
   padding: 1rem;
   background: ${color.LIGHT_GRAY};
+  justify-content: space-between;
 `
 
 export const Title = styled.div`

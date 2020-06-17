@@ -17,6 +17,7 @@ export type IconProps = {
 
 const S = { Container: styled.div`
     cursor: pointer;
+    display: flex;
   ` }
 /** 아이콘을 보여주고 싶을 땐 `Icon` 컴포넌트를 사용하세요.
  *
