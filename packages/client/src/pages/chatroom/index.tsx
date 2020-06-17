@@ -109,17 +109,16 @@ const ChatRoom: FC<Props> = ({
                       dateToday.current = dateLL
                     }
                     return (
-                      <>
+                      <div key={chatGroup[0].uuid}>
                         {
-                          isNewDate && <DateDivier date={dateLL} key={chatGroup[0].createdAt}/>
+                          isNewDate && <DateDivier date={dateLL}/>
                         }
                         <ChatBox
-                          key={chatGroup[0].uuid}
                           createdAt={chatGroup[0].createdAt}
                           chatGroup={chatGroup}
                           isMine={uuid === chatGroup[0].metaInfo.sender.uuid}
                         />
-                      </>
+                      </div>
                     )
                   })
                 })
