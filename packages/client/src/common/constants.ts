@@ -38,4 +38,4 @@ export const url = {
   login: '/login',
   chatRoom: '/chat',
   room: '/chat',
-}
+} as const
