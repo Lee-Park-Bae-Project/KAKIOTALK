@@ -45,7 +45,6 @@ const ChatRoom: FC<Props> = ({
 
     const msg = messageRef.current.value
     const createdAt = getCurTimeDBFormat()
-    console.log(createdAt)
     chatFromClient({
       content: msg,
       roomUuid,
