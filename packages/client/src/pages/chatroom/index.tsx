@@ -85,7 +85,6 @@ const ChatRoom: FC<Props> = ({
       <S.Header>
         <S.Back onClick={handleBack}>
           <Icon icon="ArrowLeft"/>
-
         </S.Back>
         <S.Title>
           {roomName}
