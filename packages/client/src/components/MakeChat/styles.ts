@@ -46,9 +46,11 @@ export const Container = styled.label`
   & ${Input}:checked ~ ${Checkmark}{
     background-color: ${color.YELLO}
   }
+  
   & ${Input}:checked ~ ${Checkmark}:after{
     display: block;
   }
+  
   & ${Checkmark}:after{
   left: 9px;
   top: 5px;

@@ -1,34 +1,26 @@
 import moment from 'moment'
-import 'moment-timezone'
 import swal from 'sweetalert'
 import { useEffect } from 'react'
+import 'moment/locale/ko'
+
+require('moment-timezone')
 
 moment.locale('ko')
+moment.tz.setDefault('Asia/Seoul')
 const tzSeoul = 'Asia/Seoul'
-const DB_TIME_FORMAT = 'YYYY-MM-DD hh:mm:ss'
+const DB_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
-export const convertDBTimeTohhmmA = (dbTime: string) => {
-  const seoul = moment.tz(new Date(dbTime), tzSeoul)
-  return seoul.format('hh:mm A')
-}
-
+export const convertDBTimeTohhmmA = (date: string) => moment(date).format('LLL')
+export const convertTimeForMsgFormat = (date: string) => moment(date).format('LT')
 export const convertMillToMMDDYYYY = (date: number) => {
   const seoul = moment.tz(date, tzSeoul)
   return seoul.format('MM-DD-YYYY')
 }
 
-export const getCurTimeDBFormat = () => {
-  const date = new Date()
-  return moment
-    .utc(date)
-    .tz(tzSeoul)
-    .format(DB_TIME_FORMAT)
-}
+export const getCurTimeDBFormat = () => moment(Date.now()).format(DB_TIME_FORMAT)
 
-export const getCurTimeDBFormatForTest = (date: Date) => moment
-  .utc(date)
-  .tz(tzSeoul)
-  .format(DB_TIME_FORMAT)
+export const getCurTimeDBFormatForTest = (date: Date) => Date.now()
+
 const alert = {
   addFriend: (name: string) => swal(`${name}님을 친구로 추가했습니다.`, '', 'success'),
   deleteFriend: () => swal('삭제되었습니다.', '', 'success'),
@@ -46,7 +38,6 @@ export const useOutsideClick = (ref: React.RefObject<HTMLDivElement>, callback: 
 
   useEffect(() => {
     document.addEventListener('click', handleClick)
-
     return () => {
       document.removeEventListener('click', handleClick)
     }

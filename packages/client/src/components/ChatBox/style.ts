@@ -71,15 +71,12 @@ interface ContentProps{
 }
 export const Content = styled.div<ContentProps>`
   width: fit-content;
-  background: ${color.WHITE};
+  background: ${(props) => (props.isMine ? '#FFE400' : color.WHITE)};
   max-width: 70%;
   overflow-wrap: break-word;
   border-radius: 5px;
   margin: 0.25rem 0.5rem;
   padding: 0.5rem;
-  
-
-
 `
 export const Time = styled.div`
   font-size: 0.6rem;
@@ -89,10 +86,11 @@ export const Time = styled.div`
   margin-bottom: 0.2rem;
 `
 
-interface TestProps{
+interface ContentBorderProp{
   isMine: boolean
 }
-export const Test = styled.div<TestProps>`
+export const ContentBorder = styled.div<ContentBorderProp>`
   display: flex;
   flex-direction: ${(props) => (props.isMine ? 'row-reverse' : 'row')}
+  
 `

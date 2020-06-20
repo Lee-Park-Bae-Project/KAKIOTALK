@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
+import { convertTimeForMsgFormat } from 'common/utils'
 import { ApiChat } from 'types'
-
 import * as S from './style'
 
 type Props = {
@@ -24,14 +24,14 @@ const ChatBox: FC<Props> = ({
           chatGroup.map((chat, idx) => (
             <S.ContentWrapper key={chat.uuid}>
               {
-                <S.Test isMine={isMine}>
+                <S.ContentBorder isMine={isMine}>
                   <S.Content key={chat.uuid} isMine={isMine}>
                     {chat.content}
                   </S.Content>
                   {
-                    idx === chatGroup.length - 1 && <S.Time>{createdAt}</S.Time>
+                    idx === chatGroup.length - 1 && <S.Time>{convertTimeForMsgFormat(createdAt)}</S.Time>
                   }
-                </S.Test>
+                </S.ContentBorder>
               }
             </S.ContentWrapper>
           ))

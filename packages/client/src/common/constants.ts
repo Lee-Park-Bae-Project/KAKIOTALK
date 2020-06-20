@@ -16,7 +16,7 @@ const SOCKET_URL_PRODUCT = 'https://sylvan-terra-275316.du.r.appspot.com/'
 const API_SERVER_URL = 'http://localhost:3050/v1/'
 const API_SERVER_URL_PRODUCT = 'https://sylvan-terra-275316.du.r.appspot.com/v1/'
 
-const NODE_ENV_VAR = process.env.REACT_NODE_ENV
+const NODE_ENV_VAR = process.env.NODE_ENV
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || ''
 const PUBLIC_URL = process.env.REACT_APP_PUBLIC_URL
 
@@ -36,7 +36,7 @@ export const configs = {
 }
 
 export const url = {
-  main: '/',
+  main: '/main',
   login: '/login',
   chatRoom: '/chat',
   room: '/chat',

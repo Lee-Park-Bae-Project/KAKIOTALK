@@ -1,27 +1,14 @@
-import PopUp from './PopUp'
-import Button from './Button'
-import ButtonGroup from './ButtonGroup'
-import Dialog from './Dialog'
-import GoogleSignIn from './GoogleSignin'
-import Logo from './Logo'
-import NavigationBar from './NavigationBar'
-import RoomCard from './RoomCard'
-import Routes from './Routes'
-import SearchInput from './SearchInput'
-import TextIcon from './TextIcon'
-import UserCard from './UserCard'
-
-export {
-  PopUp,
-  Button,
-  ButtonGroup,
-  Dialog,
-  GoogleSignIn,
-  Logo,
-  NavigationBar,
-  RoomCard,
-  Routes,
-  SearchInput,
-  TextIcon,
-  UserCard,
-}
+export { default as PopUp } from './PopUp'
+export { default as Button } from './Button'
+export { default as ButtonGroup } from './ButtonGroup'
+export { default as Dialog } from './Dialog'
+export { default as GoogleSignIn } from './GoogleSignin'
+export { default as Logo } from './Logo'
+export { default as NavigationBar } from './NavigationBar'
+export { default as RoomCard } from './RoomCard'
+export { default as Routes } from './Routes'
+export { default as SearchInput } from './SearchInput'
+export { default as TextIcon } from './TextIcon'
+export { default as UserCard } from './UserCard'
+export { default as Loader } from './Loader'
+export { default as MakeChat } from './MakeChat'

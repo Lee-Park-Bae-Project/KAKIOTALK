@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useEffect, useState,
+  FC, Fragment, useState,
 } from 'react'
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { updateProfile } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
+import { throttle } from 'lodash'
 
 interface Prop {
   /** 유져 식별자 */
@@ -20,7 +21,7 @@ interface Prop {
   /** 상태메시지 */
   statusMessage: string
   /** 프로필닫기 핸들러 */
-  onCloseClick: () => void
+  handleCloseClick: () => void
   /** 프로필 이미지 URL */
   imageUrl: string
   /** 프로필 팝업 ref */
@@ -38,7 +39,7 @@ const Profile: FC<Prop> = ({
   uuid,
   name,
   statusMessage = '',
-  onCloseClick,
+  handleCloseClick,
   imageUrl = null,
   profileRef,
   isMyProfile,
@@ -82,25 +83,26 @@ const Profile: FC<Prop> = ({
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)
-  const [isRender, setRender] = useState(true)
 
-  const onTouchStart = (e: React.TouchEvent) => {
-    e.stopPropagation()
+  const handleTouchStart = (e: React.TouchEvent) => {
     setStartPoint(e.touches[0].screenY)
   }
-  const onTouch = (e: React.TouchEvent) => {
-    e.stopPropagation()
-
-    if (startPoint < e.touches[0].screenY) {
-      setSlideMount(Math.ceil((e.touches[0].screenY - startPoint) / 40))
+  let ThrottledhandleTouch = (touches: React.TouchList) => {
+    if (startPoint < touches[0].screenY) {
+      setSlideMount(Math.ceil((touches[0].screenY - startPoint) / 40))
     } else {
       setSlideMount(0)
     }
   }
-  const onTouchEnd = (e: React.TouchEvent) => {
+  ThrottledhandleTouch = throttle(ThrottledhandleTouch, 50)
+  const handleTouch = (e: React.TouchEvent) => {
+    ThrottledhandleTouch(e.touches)
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
     if (slideMount >= 4) {
       setSlideMount(100)
-      setTimeout(onCloseClick, 500)
+      setTimeout(handleCloseClick, 500)
     } else {
       setSlideMount(0)
     }
@@ -109,18 +111,17 @@ const Profile: FC<Prop> = ({
     <S.Container
       ref={profileRef}
       isOverflow={isOverflow}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouch}
-      onTouchEnd={onTouchEnd}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouch}
+      onTouchEnd={handleTouchEnd}
       slideMount={slideMount}
-      anim={isRender ? 'slideUp' : 'slideDown'}
     >
       <S.CloseButton>
         <Icon
           icon='Close'
           size='1.5rem'
           color={color.WHITE}
-          onClick={onCloseClick}
+          onClick={handleCloseClick}
         />
       </S.CloseButton>
       <S.ProfileWrapper>
