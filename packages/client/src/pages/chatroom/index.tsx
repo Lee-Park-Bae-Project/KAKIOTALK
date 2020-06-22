@@ -2,9 +2,6 @@ import React, {
   ChangeEvent,
   FC,
   KeyboardEvent,
-  useEffect,
-  useRef,
-  useState,
 } from 'react'
 import {
   convertToLL, getCurTimeDBFormat,
@@ -15,7 +12,12 @@ import DateDivier from 'components/DateDivider'
 import { chatFromClient } from 'socket'
 import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
 import Icon from 'Icon/Icon'
+import SearchAccordion from 'system/SearchAccordion'
 import * as S from './style'
+
+const {
+  useEffect, useRef, useState,
+} = React
 
 interface Props extends WithAuthProps{
   roomUuid: string
@@ -36,6 +38,7 @@ const ChatRoom: FC<Props> = ({
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [hasContent, setHasContent] = useState<boolean>(false)
   const dateToday = useRef<string>('')
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
@@ -80,6 +83,10 @@ const ChatRoom: FC<Props> = ({
     }
   }
 
+  const handleSearchClick = () => {
+    setIsSearchOpen(!isSearchOpen)
+  }
+
   return (
     <S.Container>
       <S.Header>
@@ -87,11 +94,18 @@ const ChatRoom: FC<Props> = ({
         <S.Title>{roomName}</S.Title>
         <div style={{ display: 'flex' }}>
           <div style={{ margin: 'auto 0.5rem' }}>
-            <Icon icon="Search" size='1rem' css={{ margin: 'auto 0.5rem' }}/>
+            <Icon
+              icon="Search"
+              size="1rem"
+              css={{ margin: 'auto 0.5rem' }}
+              onClick={handleSearchClick}
+            />
           </div>
           <Icon icon="Menu"/>
         </div>
       </S.Header>
+      <SearchAccordion open={isSearchOpen}/>
+
       <S.ChatContainer ref={chatContainerRef}>
         {
           !chatStateGroupByTime
@@ -101,7 +115,6 @@ const ChatRoom: FC<Props> = ({
                 Object.keys(chatStateGroupByTime).map((time) => {
                   const timeGroup = chatStateGroupByTime[time]
                   return timeGroup.map((chatGroup) => {
-                    // console.log(chatGroup)
                     let isNewDate = false
                     const dateLL = convertToLL(chatGroup[0].createdAt)
                     if (dateToday.current !== dateLL) {
