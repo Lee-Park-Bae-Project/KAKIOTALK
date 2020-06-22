@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width:100%;
   height:100%;
-  overscroll-behavior-y: contain;
 `
 
 export const MainWrapper = styled.div`
