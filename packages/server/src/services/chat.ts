@@ -64,7 +64,15 @@ export const findAllRooms = async (userId: number) => {
   })
   return preProcessed
 }
-export const getChatsByRoomId = async (roomUuid: string) => {
+
+interface GetChatsByRoomId {
+  roomUuid: string
+  limit: number
+  offset: number
+}
+export const getChatsByRoomId = async ({
+  roomUuid, limit, offset,
+}:GetChatsByRoomId) => {
   const room = await models.Room.findOne({ where: { uuid: roomUuid } })
   if (!room) {
     throw HttpError.IDK
@@ -74,7 +82,7 @@ export const getChatsByRoomId = async (roomUuid: string) => {
     raw: true,
     nest: true,
     attributes: ['uuid', 'content', 'createdAt', 'updatedAt'],
-    order: [['createdAt', 'ASC']],
+    order: [['createdAt', 'DESC']],
     include: [
       {
         model: models.RoomParticipants,
@@ -95,6 +103,8 @@ export const getChatsByRoomId = async (roomUuid: string) => {
         ],
       },
     ],
+    limit,
+    offset,
   })
   return chats
 }
