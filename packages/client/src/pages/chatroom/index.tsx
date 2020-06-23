@@ -12,7 +12,7 @@ import DateDivier from 'components/DateDivider'
 import { chatFromClient } from 'socket'
 import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
 import Icon from 'Icon/Icon'
-import SearchAccordion from 'system/SearchAccordion'
+import SearchAccordion from 'system/ChatRoomSearchBar'
 import * as S from './style'
 
 const {
@@ -83,7 +83,7 @@ const ChatRoom: FC<Props> = ({
     }
   }
 
-  const handleSearchClick = () => {
+  const toggleSearchBar = () => {
     setIsSearchOpen(!isSearchOpen)
   }
 
@@ -98,13 +98,16 @@ const ChatRoom: FC<Props> = ({
               icon="Search"
               size="1rem"
               css={{ margin: 'auto 0.5rem' }}
-              onClick={handleSearchClick}
+              onClick={toggleSearchBar}
             />
           </div>
           <Icon icon="Menu"/>
         </div>
       </S.Header>
-      <SearchAccordion open={isSearchOpen}/>
+      <SearchAccordion
+        open={isSearchOpen}
+        toggleSearchBar={toggleSearchBar}
+      />
 
       <S.ChatContainer ref={chatContainerRef}>
         {

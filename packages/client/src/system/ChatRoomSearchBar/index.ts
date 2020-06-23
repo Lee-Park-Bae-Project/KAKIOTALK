@@ -1,1 +1,1 @@
-export { default } from './SearchAccordion'
+export { default } from './ChatRoomSearchBar'
