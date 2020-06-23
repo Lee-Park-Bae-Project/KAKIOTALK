@@ -17,7 +17,7 @@ type Type = AxiosResponse<request.ResponseType<ApiChat[]>>
 function* getChatSaga(action: ReturnType<typeof getChatRequest>) {
   try {
     const response: Type = yield call(request.getChatByRoom, action.payload)
-    yield put(getChatSuccess(action.payload, response.data.data))
+    yield put(getChatSuccess(action.payload.roomUuid, response.data.data))
   } catch (e) {
     yield put(getChatFailure(e))
   }

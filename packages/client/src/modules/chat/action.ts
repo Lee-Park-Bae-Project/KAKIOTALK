@@ -6,9 +6,22 @@ export const GET_CHAT_SUCCESS = 'room/GET_CHAT_SUCCESS' as const
 export const GET_CHAT_FAILURE = 'room/GET_CHAT_FAIL' as const
 export const ADD_CHAT = 'room/ADD_CHAT' as const
 
-export const getChatRequest = (roomUuid: string) => ({
+interface GetChatRequest {
+  roomUuid: string
+  limit: number
+  offset: number
+}
+export const getChatRequest = ({
+  roomUuid,
+  limit,
+  offset,
+}: GetChatRequest) => ({
   type: GET_CHAT_REQUEST,
-  payload: roomUuid,
+  payload: {
+    roomUuid,
+    limit,
+    offset,
+  },
 })
 
 export const getChatSuccess = (roomUuid: string, newChat: ApiChat[]) => ({

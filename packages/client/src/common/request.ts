@@ -93,7 +93,16 @@ export const updateProfile = ({
   },
 })
 
-export const getChatByRoom = (roomUuid: string) => Axios<Type.ApiChat[]>({
+interface GetChatByRoom {
+  roomUuid: string
+  limit: number
+  offset: number
+}
+export const getChatByRoom = ({
+  roomUuid,
+  limit,
+  offset,
+}: GetChatByRoom) => Axios<Type.ApiChat[]>({
   method: 'GET',
-  url: `/chat/message/${roomUuid}`,
+  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
 })
