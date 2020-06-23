@@ -34,3 +34,11 @@ export const UNAUTHORIZED = _he(_code.UNAUTHORIZED, '로그인이 필요한 서�
  * 무언가 잘못되었습니다.
  */
 export const IDK = _he(_code.NOT_FOUND, '무언가 잘못되었습니다.')
+
+/**
+ * @code
+ * NOT FOUND (400)
+ * @message
+ * 잘못된 요청입니다.
+ */
+export const BAD_REQUEST = _he(_code.BAD_REQUEST, '잘못된 요청입니다.')
