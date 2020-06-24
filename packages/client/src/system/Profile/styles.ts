@@ -81,9 +81,9 @@ export const StatusWrapper = styled.div`
 export const Footer = styled(Flex)`
   justify-content: center;
 `
-export const MessageWrapper = styled.span``
-
-export const DeleteWrapper = styled.span``
+export const ButtonWrapper = styled.div`
+  margin: 0 1rem;
+`
 
 interface ImageCSS {
   big: boolean

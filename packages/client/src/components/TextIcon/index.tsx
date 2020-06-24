@@ -60,7 +60,7 @@ const S = {
   TextWrapper: styled.span<TextProp>`
     color: ${(props) => props.textColor};
     line-height: 1.5rem;
-    padding: 1rem;
+    padding: 0.5rem;
     font-size: ${(props) => props.textSize};
   `,
   Image: styled.img`
@@ -84,7 +84,7 @@ const S = {
 const TextIcon: FC<Prop> = ({
   icon,
   color,
-  size,
+  size = '2rem',
   iconPosition = 'left',
   onClick = undefined,
   text,
@@ -102,7 +102,7 @@ const TextIcon: FC<Prop> = ({
     )}
     {children && children}
     <S.TextWrapper text={text} textColor={textColor} textSize={textSize}>
-      <strong>{text}</strong>
+      {text}
       {statusMessage && (
         <S.statusMessageWrapper>{statusMessage}</S.statusMessageWrapper>
       )}
