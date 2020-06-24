@@ -38,7 +38,7 @@ interface Prop {
 const Profile: FC<Prop> = ({
   uuid,
   name,
-  statusMessage = '',
+  statusMessage,
   handleCloseClick,
   imageUrl = null,
   profileRef,
@@ -47,7 +47,7 @@ const Profile: FC<Prop> = ({
 }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [editName, setEditName] = useState(name)
-  const [editStatusMessage, setEditStatusMessage] = useState(statusMessage)
+  const [editStatusMessage, setEditStatusMessage] = useState(statusMessage || '')
   const onChangename = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditName(e.target.value)
   }
@@ -168,6 +168,8 @@ const Profile: FC<Prop> = ({
               iconPosition='top'
               textColor={color.WHITE}
               onClick={onEditClick}
+              size='1.2rem'
+              textSize='0.8rem'
             />
           ) : (
             <Fragment>
@@ -181,14 +183,20 @@ const Profile: FC<Prop> = ({
                 }}
                 style={{ textDecoration: 'none' }}
               >
+                <S.ButtonWrapper>
                 <TextIcon
                   icon='ChatFilled'
                   color={color.WHITE}
                   text='1:1 채팅'
                   textColor={color.WHITE}
                   iconPosition='top'
+                  size='1.2rem'
+                  textSize='0.8rem'
                 />
+                </S.ButtonWrapper>
+
               </Link>
+              <S.ButtonWrapper>
               <TextIcon
                 icon='Delete'
                 color={color.WHITE}
@@ -196,7 +204,10 @@ const Profile: FC<Prop> = ({
                 textColor={color.WHITE}
                 iconPosition='top'
                 onClick={onDeleteClick}
+                size='1.2rem'
+                textSize='0.8rem'
               />
+              </S.ButtonWrapper>
             </Fragment>
           )}
         </S.Footer>
