@@ -15,7 +15,7 @@ interface UserCardProp {
   /** 유저 상태메시지 */
   statusMessage?: string
   /** 클릭핸들러 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onClick?: () => void
   /** 유저 프로필사진 URL */
   imageUrl?: string
   /** 본인 or 친구 중 누구의 프로필인지 판별 */
@@ -33,6 +33,7 @@ const UserCard: FC<UserCardProp> = ({
   statusMessage = '',
   imageUrl,
   isMyProfile,
+  onClick = undefined,
 }) => {
   const [isClicked, setIsClicked] = useState(false)
   const [isOverflow, setIsOverflow] = useState(false)
@@ -49,7 +50,7 @@ const UserCard: FC<UserCardProp> = ({
     }
   }, [])
   return (
-    <S.Container ref={setOverflow}>
+    <S.Container ref={setOverflow} onClick={onClick}>
       <S.ProfileWrapper>
         <TextIcon
           icon='Account'

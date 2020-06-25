@@ -27,8 +27,24 @@ width: 0;
   }
 }
 `
+export const UserCardContainer = styled(Flex)`
+height:5rem;
+justify-content: flex-start;
+padding: 0 1rem;
+background-color: ${color.WHITE};
+&:hover {
+  background-color: ${color.HOVER_GRAY};
+}
+`
+export const ProfileWrapper = styled(Flex)`
+height:5rem;
+justify-content: flex-start;
+padding: 0 1rem;
+justify-content: flex-start;
+`
+
 export const Container = styled.label`
-  display: block;
+  display: flex;
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;

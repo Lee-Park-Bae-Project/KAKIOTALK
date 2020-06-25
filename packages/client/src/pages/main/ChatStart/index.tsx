@@ -10,18 +10,19 @@ import * as S from '../../../components/MakeChat/styles'
 
 const K = { Container: styled(Flex)`
     width: fit-content;
-    height: fit-content;
+    height: 0.1rem;
   ` }
 
 export interface Props{
   friendList: SimpleUserType[]
   searchFriendKeyword: string
+  size?: string
+  handleFriendToAdd?: (uuid: string, name: string) => void
 }
 
 const ChatStart: FC<Props> = ({
-  friendList, searchFriendKeyword,
+  friendList, searchFriendKeyword, handleFriendToAdd,
 }) => (
-
   <List>
     {friendList.length > 0 ? (
       friendList
@@ -31,18 +32,16 @@ const ChatStart: FC<Props> = ({
             .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
         )
         .map(({
-          uuid, statusMessage, name, email, imageUrl,
+          uuid, name, email, imageUrl,
         }) => (
           <MakeChat
                 key={uuid}
                 uuid={uuid}
                 name={name}
-                statusMessage={statusMessage}
                 imageUrl={imageUrl}
-                isMyProfile={false}
+                handleFriendToAdd={handleFriendToAdd}
               />
-        ))
-    ) : (
+        ))) : (
       <h1> 친구를 추가해 보세요!</h1>
     )}
 

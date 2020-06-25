@@ -8,6 +8,7 @@ export interface Props {
   myProfile: SimpleUserType
   friendList: SimpleUserType[]
   searchFriendKeyword: string
+  size?: string
 }
 const Friend: FC<Props> = ({
   myProfile, friendList, searchFriendKeyword,

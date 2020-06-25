@@ -17,7 +17,6 @@ const NavigationBar: FC = () => {
   const isRouted = {
     friendList: pathname === '/main/friend-list',
     chatList: pathname === '/main/chat-list',
-    makeChat: pathname === '/main/makeChat',
   }
 
   return (
@@ -26,7 +25,7 @@ const NavigationBar: FC = () => {
       <FriendTab isRouted={isRouted.friendList}/>
       <ChatTab isRouted={isRouted.chatList}/>
       <AddFriendTab/>
-      <MakeChatTab isRouted={isRouted.makeChat}/>
+      <MakeChatTab />
       <LogoutTab/>
     </S.ItemWrapper>
   </S.Container>
