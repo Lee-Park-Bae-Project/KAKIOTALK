@@ -194,3 +194,16 @@ export const addMessage = async ({
     return e
   }
 }
+interface userList{
+  userUuid: string;
+  userName: string;
+}
+
+export const createRoom = async () => models.Room.create()
+export const makeRoom = async ({
+  userUuid, userName,
+}:userList, roomId) => {
+  await models.RoomParticipants.create({
+    userName, roomId,
+  })
+}

@@ -58,4 +58,16 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 
   return data
 })
-
+export const makeChat = controllerHelper(async (req, res, next) => {
+  try {
+    const { userList } = req.body
+    const roomId = await chatService.createRoom()
+    await userList.forEach((userUuid: string, userName :string) => {
+      chatService.makeRoom({
+        userUuid, userName,
+      }, roomId.id)
+    })
+  } catch (e) {
+    next(e)
+  }
+})
