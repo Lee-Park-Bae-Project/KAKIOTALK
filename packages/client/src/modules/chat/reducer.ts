@@ -5,6 +5,7 @@ import {
   GET_CHAT_FAILURE,
   GET_CHAT_REQUEST,
   GET_CHAT_SUCCESS,
+  MAKE_CHAT,
 } from 'modules/chat/action'
 
 import {

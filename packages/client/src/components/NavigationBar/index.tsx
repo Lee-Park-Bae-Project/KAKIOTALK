@@ -5,7 +5,7 @@ import ChatTab from 'components/NavigationBar/ChatTab'
 import AddFriendTab from 'components/NavigationBar/AddFriendTab'
 import LogoutTab from 'components/NavigationBar/LogoutTab'
 import { useHistory } from 'react-router-dom'
-import MakeChatTab from './MakeChat'
+import MakeChatTab from './MakeChatTab'
 /**
  * - 네비게이션바
  * - 친구목록, 채팅목록, 친구추가 기능이 가능

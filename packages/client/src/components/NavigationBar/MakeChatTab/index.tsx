@@ -1,5 +1,5 @@
 import React, {
-  FC, useState,
+  FC, useEffect, useState,
 } from 'react'
 import styled from 'styled-components'
 import { color } from 'styles/global'
@@ -21,17 +21,26 @@ interface MakeChatProp{
 }
 
 const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
+  interface InviteUser{
+    uuid: string;
+    name: string;
+  }
   const [isClicked, setClicked] = useState(false)
-  const [email, setEmail] = useState('')
+  const [selectedList, setSelectedList] = useState<InviteUser[]>([])
   const handlePopUpClick = () => {
     setClicked(!isClicked)
   }
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+  useEffect(() => {
+    console.log('parent')
+    console.log(selectedList)
+  }, [selectedList])
+  const handleSelectedList = (selectList: InviteUser[]) => {
+    setSelectedList(selectList)
   }
   const dispatch = useDispatch()
   const onConfirm = () => {
-    setEmail('')
+    // dispatch(makeChat(selectedList))
+    setSelectedList([])
     handlePopUpClick()
   }
   const onEnterPress = (e: React.KeyboardEvent) => {
@@ -57,7 +66,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
           onConfirm={onConfirm}
           dialogRef={dialogRef}
           >
-          <ChatRoomStartContainer />
+          <ChatRoomStartContainer updateList={handleSelectedList}/>
           </Dialog>
         </PopUp>
       ) : null}

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { FC } from 'react'
 import {
   useDispatch, useSelector,
 } from 'react-redux'
@@ -9,8 +9,14 @@ import ChatStart from 'pages/main/ChatStart'
 import {
   SearchInput, SelectedList, SelectedName,
 } from 'components'
+import { InviteUser } from 'types'
 
-const ChatRoomStartContainer: React.FC = () => {
+interface ChatRoomStartContainerProp{
+
+  updateList: (selectList: InviteUser[]) => void;
+
+}
+const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   const {
     useState, useEffect,
   } = React
@@ -39,8 +45,12 @@ const ChatRoomStartContainer: React.FC = () => {
   const handleFriendToAdd = (uuid: string, name: string) => {
     if (selectedUser.find((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
+      updateList(selectedUser.filter((item) => item.uuid !== uuid))
     } else {
       setSelectedUser(selectedUser.concat({
+        uuid, name,
+      }))
+      updateList(selectedUser.concat({
         uuid, name,
       }))
     }

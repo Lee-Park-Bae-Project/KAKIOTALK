@@ -37,3 +37,8 @@ export interface ApiUser extends SimpleUserType {
   statusMessge: string;
   imageUrl: string;
 }
+
+export interface InviteUser {
+  uuid: string;
+  name: string;
+}

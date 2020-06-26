@@ -97,3 +97,9 @@ export const getChatByRoom = (roomUuid: string) => Axios<Type.ApiChat[]>({
   method: 'GET',
   url: `/chat/message/${roomUuid}`,
 })
+
+export const makeChat = (inviteUser: Type.InviteUser) => Axios({
+  method: 'POST',
+  url: '/chat/makeChat',
+  data: { inviteUser },
+})
