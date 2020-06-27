@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   ChangeEvent,
   FC,
@@ -36,7 +35,7 @@ const ChatRoom: FC<Props> = ({
   chatStateGroupByTime,
 }) => {
   const messageRef = useRef<HTMLTextAreaElement>(null)
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const ChatBottomRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatTopRef = useRef<HTMLDivElement>(null)
   const [hasContent, setHasContent] = useState<boolean>(false)
@@ -44,7 +43,6 @@ const ChatRoom: FC<Props> = ({
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const offset = useRef(15)
   const limit = useRef(0)
-  const rootRef = useRef(null)
 
   const handleSubmit = () => {
     if (!messageRef || !messageRef.current || !messageRef.current.value.trim().length) {
@@ -87,18 +85,19 @@ const ChatRoom: FC<Props> = ({
     setIsSearchOpen(!isSearchOpen)
   }
 
-  const onIntersect = (entries: any, observer: any) => {
+  const onIntersect: IntersectionObserverCallback = (entries, observer) => {
     entries.forEach((entry: any) => {
       const { target } = entry
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && entry.time > 5000) {
+        console.log(entry)
         console.log('intersecting!!')
       }
     })
   }
 
   useEffect(() => {
-    if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollIntoView()
+    if (ChatBottomRef && ChatBottomRef.current) {
+      ChatBottomRef.current.scrollIntoView()
     }
   }, [chatStateGroupByTime])
 
@@ -163,7 +162,7 @@ const ChatRoom: FC<Props> = ({
               )
             )
         }
-        <S.ChatBottom ref={scrollRef}></S.ChatBottom>
+        <S.ChatBottom ref={ChatBottomRef}></S.ChatBottom>
       </S.ChatContainer>
       <S.InputContainer>
         <S.Input
