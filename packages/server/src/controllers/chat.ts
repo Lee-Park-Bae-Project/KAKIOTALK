@@ -10,13 +10,10 @@ export const getChats = controllerHelper(async (req, res, next) => {
   const { roomId: roomUuid } = req.params
   const limit = Number(req.query.limit)
   const offset = Number(req.query.offset)
-  console.log(req.query)
-  console.log(`limit: ${limit}`)
-  console.log(`offset: ${offset}`)
+
   if (limit === undefined || offset === undefined) {
     throw httpError.BAD_REQUEST
   }
-
   const chats = await chatService.getChatsByRoomId({
     roomUuid,
     limit,
