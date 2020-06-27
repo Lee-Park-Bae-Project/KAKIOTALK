@@ -3,7 +3,7 @@ import {
   addMessage,
   getChats,
   getRoom,
-  makeChat,
+  makeRoom,
 } from '../../controllers/chat'
 
 import isAuth from '../../middlewares/auth'
@@ -14,6 +14,6 @@ router.use(isAuth)
 router.get('/message/:roomId', getChats)
 router.get('/room/:roomId?', getRoom)
 router.post('/:roomUuid', addMessage)
-router.post('/makeChat', makeChat)
+router.post('/makeRoom', makeRoom)
 
 export default router

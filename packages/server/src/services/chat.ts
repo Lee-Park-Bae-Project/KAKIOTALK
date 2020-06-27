@@ -206,4 +206,5 @@ export const makeRoom = async ({
   await models.RoomParticipants.create({
     userName, roomId,
   })
+  return roomId
 }

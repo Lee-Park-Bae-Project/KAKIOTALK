@@ -38,6 +38,7 @@ export const getFriendList = () => Axios({
   url: 'social/friend-list',
 })
 export const getChatList = () => Axios({
+
   method: 'GET',
   url: 'dummy/chat-list',
 })
@@ -98,8 +99,8 @@ export const getChatByRoom = (roomUuid: string) => Axios<Type.ApiChat[]>({
   url: `/chat/message/${roomUuid}`,
 })
 
-export const makeChat = (inviteUser: Type.InviteUser) => Axios({
+export const makeRoom = (inviteUser: Type.InviteUser) => Axios<string>({
   method: 'POST',
-  url: '/chat/makeChat',
+  url: '/chat/makeRoom',
   data: { inviteUser },
 })

@@ -28,6 +28,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   const [isClicked, setClicked] = useState(false)
   const [selectedList, setSelectedList] = useState<InviteUser[]>([])
   const handlePopUpClick = () => {
+    console.log('Is clicked?')
     setClicked(!isClicked)
   }
   useEffect(() => {

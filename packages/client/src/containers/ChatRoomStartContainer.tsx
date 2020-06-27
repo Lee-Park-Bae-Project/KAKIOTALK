@@ -46,6 +46,7 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
     if (selectedUser.find((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
       updateList(selectedUser.filter((item) => item.uuid !== uuid))
+      console.log('deleted')
     } else {
       setSelectedUser(selectedUser.concat({
         uuid, name,
@@ -53,6 +54,7 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
       updateList(selectedUser.concat({
         uuid, name,
       }))
+      console.log('added')
     }
   }
   useEffect(() => {
