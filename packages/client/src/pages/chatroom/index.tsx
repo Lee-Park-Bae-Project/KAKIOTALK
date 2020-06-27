@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   ChangeEvent,
   FC,
@@ -13,6 +14,7 @@ import { chatFromClient } from 'socket'
 import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
 import Icon from 'Icon/Icon'
 import SearchAccordion from 'system/ChatRoomSearchBar'
+import { useIntersectionObserver } from 'hooks/index'
 import * as S from './style'
 
 const {
@@ -36,15 +38,13 @@ const ChatRoom: FC<Props> = ({
   const messageRef = useRef<HTMLTextAreaElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
+  const chatTopRef = useRef<HTMLDivElement>(null)
   const [hasContent, setHasContent] = useState<boolean>(false)
   const dateToday = useRef<string>('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-
-  useEffect(() => {
-    if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollIntoView()
-    }
-  }, [chatStateGroupByTime])
+  const offset = useRef(15)
+  const limit = useRef(0)
+  const rootRef = useRef(null)
 
   const handleSubmit = () => {
     if (!messageRef || !messageRef.current || !messageRef.current.value.trim().length) {
@@ -87,6 +87,27 @@ const ChatRoom: FC<Props> = ({
     setIsSearchOpen(!isSearchOpen)
   }
 
+  const onIntersect = (entries: any, observer: any) => {
+    entries.forEach((entry: any) => {
+      const { target } = entry
+      if (entry.isIntersecting) {
+        console.log('intersecting!!')
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (scrollRef && scrollRef.current) {
+      scrollRef.current.scrollIntoView()
+    }
+  }, [chatStateGroupByTime])
+
+  useIntersectionObserver({
+    root: chatContainerRef.current,
+    target: chatTopRef.current,
+    onIntersect,
+  })
+
   return (
     <S.Container>
       <S.Header>
@@ -110,6 +131,7 @@ const ChatRoom: FC<Props> = ({
       />
 
       <S.ChatContainer ref={chatContainerRef}>
+        <div ref={chatTopRef}/>
         {
           !chatStateGroupByTime
             ? (<div>loading</div>)

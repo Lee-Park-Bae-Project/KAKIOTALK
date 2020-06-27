@@ -87,7 +87,7 @@ const ChatContainer: React.FC<Props> = (props) => {
 
   useEffect(() => {
     setRoomUuid(match.params.roomUuid)
-    const limit = 10
+    const limit = 15
     const offset = 0
     dispatch(getChatRequest({
       roomUuid: match.params.roomUuid,
