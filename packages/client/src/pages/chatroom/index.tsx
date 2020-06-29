@@ -14,6 +14,8 @@ import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
 import Icon from 'Icon/Icon'
 import SearchAccordion from 'system/ChatRoomSearchBar'
 import { useIntersectionObserver } from 'hooks/index'
+import { useDispatch } from 'react-redux'
+import { getChatRequest } from 'modules/chat'
 import * as S from './style'
 
 const {
@@ -43,6 +45,7 @@ const ChatRoom: FC<Props> = ({
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const offset = useRef(15)
   const limit = useRef(0)
+  const dispatch = useDispatch()
 
   const handleSubmit = () => {
     if (!messageRef || !messageRef.current || !messageRef.current.value.trim().length) {
@@ -86,10 +89,14 @@ const ChatRoom: FC<Props> = ({
   }
 
   const onIntersect: IntersectionObserverCallback = (entries, observer) => {
-    entries.forEach((entry: any) => {
+    entries.forEach((entry) => {
       const { target } = entry
-      if (entry.isIntersecting && entry.time > 5000) {
-        console.log(entry)
+      if (entry.isIntersecting && entry.time > 10000) {
+        // dispatch(getChatRequest({
+        //   roomUuid,
+        //   offset: offset.current,
+        //   limit: limit.current,
+        // }))
         console.log('intersecting!!')
       }
     })

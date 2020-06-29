@@ -47,7 +47,7 @@ const ChatContainer: React.FC<Props> = (props) => {
         [key: string]: ApiChat[][]
       }
       const init: ChatStateGroupByTime = {}
-      const newChatStateGroupByTime = chatState.data[roomUuid].reduce((acc, cur) => {
+      const newChatStateGroupByTime = chatState.data[roomUuid].chats.reduce((acc, cur) => {
         const key = convertDBTimeTohhmmA(cur.createdAt)
         if (acc[key]) {
           const len = acc[key].length

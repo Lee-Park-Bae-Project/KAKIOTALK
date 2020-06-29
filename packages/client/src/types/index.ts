@@ -16,8 +16,8 @@ export interface ApiChat extends Pick<Chat, 'uuid' | 'content' | 'createdAt' | '
       uuid: string;
       createdAt: string;
       updatedAt: string;
-    };
-  };
+    }
+  },
 }
 export type ReduxState<T> = {
   isLoading: boolean;
@@ -25,7 +25,11 @@ export type ReduxState<T> = {
 }
 
 export type ReduxChatType = {
-  [key: string]: ApiChat[];
+  [key: string]: {
+    chats: ApiChat[]
+    offset: number
+    limit: number
+  }
 }
 
 export type SimpleUserType = Pick<User, 'uuid'| 'name' | 'email' | 'statusMessage' | 'imageUrl'>
