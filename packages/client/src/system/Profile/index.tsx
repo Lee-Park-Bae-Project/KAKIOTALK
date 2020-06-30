@@ -55,7 +55,7 @@ const Profile: FC<Prop> = ({
     setEditStatusMessage(e.target.value)
   }
   const dispatch = useDispatch()
-  const onEditClick = () => {
+  const handleEditClick = () => {
     if (isEditMode) {
       if (editName.length === 0) {
         alert.error('이름을 입력해주세요!')
@@ -161,16 +161,19 @@ const Profile: FC<Prop> = ({
         <Hr />
         <S.Footer>
           {isMyProfile ? (
+            <S.ButtonWrapper >
             <TextIcon
               icon='Edit'
               color={color.WHITE}
               text={isEditMode ? '저장' : '프로필 수정'}
               iconPosition='top'
               textColor={color.WHITE}
-              onClick={onEditClick}
               size='1.2rem'
               textSize='0.8rem'
+              onClick={handleEditClick}
             />
+            </S.ButtonWrapper>
+
           ) : (
             <Fragment>
               <Link

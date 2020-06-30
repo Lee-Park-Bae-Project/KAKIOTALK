@@ -10,7 +10,7 @@ interface ContainerProp {
   /** text에 대한 icon의 상대적 위치 */
   iconPosition?: iconPositionType
   /** 클릭핸들러 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onClick?: () => void
 }
 interface TextProp {
   /** 아이콘과 함께 표시될 텍스트 */
@@ -69,7 +69,7 @@ const S = {
     border-radius: 40%;
     cursor: pointer;
   `,
-  statusMessageWrapper: styled.div`
+  StatusMessageWrapper: styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -98,13 +98,13 @@ const TextIcon: FC<Prop> = ({
     {imageUrl ? (
       <S.Image src={imageUrl} onClick={onClick} />
     ) : (
-      <Icon icon={icon} color={color} size={size} onClick={onClick} />
+      <Icon icon={icon} color={color} size={size} onClick={onClick}/>
     )}
     {children && children}
     <S.TextWrapper text={text} textColor={textColor} textSize={textSize}>
       {text}
       {statusMessage && (
-        <S.statusMessageWrapper>{statusMessage}</S.statusMessageWrapper>
+        <S.StatusMessageWrapper>{statusMessage}</S.StatusMessageWrapper>
       )}
     </S.TextWrapper>
   </S.Container>
