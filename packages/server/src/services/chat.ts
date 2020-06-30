@@ -200,11 +200,18 @@ interface userList{
 }
 
 export const createRoom = async () => models.Room.create()
-export const makeRoom = async ({
+export const makeRoomParticipants = async ({
   userUuid, userName,
 }:userList, roomId) => {
-  await models.RoomParticipants.create({
-    userName, roomId,
+  console.log('roomParticipants', userName)
+  const user = await userService.findByUuid(userUuid)
+  if (!user) {
+    throw new Error("can't find id")
+  }
+  const userId = user.id
+  const roomParticipant = await models.RoomParticipants.create({
+    roomId, userId,
   })
-  return roomId
+  console.log('roomParticipants created')
+  return roomParticipant
 }

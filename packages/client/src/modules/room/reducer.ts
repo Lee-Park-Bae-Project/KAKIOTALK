@@ -31,9 +31,7 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
     case GET_ROOM_FAILURE: {
       return initialState
     }
-    case MAKE_ROOM_SUCCESS: {
-      return action.payload
-    }
+
     default: return state
   }
 }

@@ -19,6 +19,7 @@ import {
 import { getChatRequest } from 'modules/chat'
 import { convertDBTimeTohhmmA } from 'common/utils'
 import { ApiChat } from 'types'
+import { Room } from '@kakio/common'
 
 interface MatchParams {
   roomUuid: string;

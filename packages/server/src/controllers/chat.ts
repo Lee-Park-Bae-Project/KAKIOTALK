@@ -1,4 +1,5 @@
 
+import { QueryTypes } from 'sequelize/types'
 import * as chatService from '../services/chat'
 import * as userService from '../services/user'
 import {
@@ -18,6 +19,7 @@ export const getChats = controllerHelper(async (req, res, next) => {
 
 export const getRoom = controllerHelper(async (req, res, next) => {
   const { roomId } = req.params
+  console.log(roomId)
   let rooms
   if (roomId) {
     rooms = await chatService.findRoomByUuid(roomId)
@@ -60,21 +62,28 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 })
 export const makeRoom = controllerHelper(async (req, res, next) => {
   try {
-    const { userList } = req.body
+    const inviteUser = req.query.args as QueryTypes[]
+    console.log(JSON.parse(inviteUser[0]).uuid)
+
     const roomId = await chatService.createRoom()
     if (!roomId) {
       throw httpError.IDK
     }
-    await userList.forEach((userUuid: string, userName :string) => {
-      const userRoom = chatService.makeRoom({
+    const addRoomParticipants = inviteUser.forEach(async (userList:QueryTypes) => {
+      const userUuid = await JSON.parse(userList).uuid
+      const userName = await JSON.parse(userList).name
+
+      const userRoom = await chatService.makeRoomParticipants({
         userUuid, userName,
       }, roomId.id)
+      console.log('error in here?')
       if (!userRoom) {
         throw httpError.IDK
       }
     })
+    console.log('helel')
+    return roomId
   } catch (e) {
     next(e)
   }
-  return makeRoom
 })

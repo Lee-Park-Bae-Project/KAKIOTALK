@@ -6,6 +6,7 @@ import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { makeRoomRequest } from 'modules/room'
 import {
   Dialog, PopUp,
 } from 'components'
@@ -40,7 +41,8 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   }
   const dispatch = useDispatch()
   const onConfirm = () => {
-    // dispatch(makeChat(selectedList))
+    console.log(selectedList)
+    dispatch(makeRoomRequest(selectedList))
     setSelectedList([])
     handlePopUpClick()
   }

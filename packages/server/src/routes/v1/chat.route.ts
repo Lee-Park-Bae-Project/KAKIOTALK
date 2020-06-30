@@ -14,6 +14,6 @@ router.use(isAuth)
 router.get('/message/:roomId', getChats)
 router.get('/room/:roomId?', getRoom)
 router.post('/:roomUuid', addMessage)
-router.post('/makeRoom', makeRoom)
+router.get('/makeRoom', makeRoom)
 
 export default router
