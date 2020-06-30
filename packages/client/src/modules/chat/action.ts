@@ -24,11 +24,21 @@ export const getChatRequest = ({
   },
 })
 
-export const getChatSuccess = (roomUuid: string, newChat: ApiChat[]) => ({
+interface GetChatSuccess {
+  roomUuid: string
+  newChat: ApiChat[]
+  offset: number
+  limit: number
+}
+export const getChatSuccess = ({
+  roomUuid, newChat, offset, limit,
+}: GetChatSuccess) => ({
   type: GET_CHAT_SUCCESS,
   payload: {
     roomUuid,
     newChat,
+    offset,
+    limit,
   },
 })
 

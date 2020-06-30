@@ -13,11 +13,16 @@ import { ApiChat } from 'types'
 import { AxiosResponse } from 'axios'
 import * as request from 'common/request'
 
-type Type = AxiosResponse<request.ResponseType<ApiChat[]>>
+type ResponseType = AxiosResponse<request.ResponseType<ApiChat[]>>
 function* getChatSaga(action: ReturnType<typeof getChatRequest>) {
   try {
-    const response: Type = yield call(request.getChatByRoom, action.payload)
-    yield put(getChatSuccess(action.payload.roomUuid, response.data.data))
+    const {
+      roomUuid, offset, limit,
+    } = action.payload
+    const response: ResponseType = yield call(request.getChatByRoom, action.payload)
+    yield put(getChatSuccess({
+      roomUuid, newChat: response.data.data, limit, offset,
+    }))
   } catch (e) {
     yield put(getChatFailure(e))
   }
