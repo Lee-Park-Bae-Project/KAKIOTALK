@@ -20,6 +20,7 @@ import {
 import { getChatRequest } from 'modules/chat'
 import { RootState } from 'modules'
 import * as S from './style'
+import Header from './Header'
 
 const {
   useEffect, useRef, useState, useCallback,
@@ -86,9 +87,9 @@ const ChatRoom: FC<Props> = ({
     }
   }
 
-  const toggleSearchBar = () => {
+  const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)
-  }
+  }, [isSearchOpen, setIsSearchOpen])
   const onIntersect: IntersectionObserverCallback = ([{
     isIntersecting, time,
   }]) => {
@@ -114,24 +115,10 @@ const ChatRoom: FC<Props> = ({
     target: chatTopRef.current,
     onIntersect,
   })
-
+  const MemoizedHeader = React.memo(Header)
   return (
     <S.Container>
-      <S.Header>
-        <Icon icon="ArrowLeft" onClick={handleBack}/>
-        <S.Title>{roomName}</S.Title>
-        <div style={{ display: 'flex' }}>
-          <div style={{ margin: 'auto 0.5rem' }}>
-            <Icon
-              icon="Search"
-              size="1rem"
-              css={{ margin: 'auto 0.5rem' }}
-              onClick={toggleSearchBar}
-            />
-          </div>
-          <Icon icon="Menu"/>
-        </div>
-      </S.Header>
+      <MemoizedHeader roomName={roomName} toggleSearchBar={toggleSearchBar}/>
       <SearchAccordion
         open={isSearchOpen}
         toggleSearchBar={toggleSearchBar}
