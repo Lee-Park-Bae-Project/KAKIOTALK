@@ -14,12 +14,15 @@ import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
 import Icon from 'Icon/Icon'
 import SearchAccordion from 'system/ChatRoomSearchBar'
 import { useIntersectionObserver } from 'hooks/index'
-import { useDispatch } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { getChatRequest } from 'modules/chat'
+import { RootState } from 'modules'
 import * as S from './style'
 
 const {
-  useEffect, useRef, useState,
+  useEffect, useRef, useState, useCallback,
 } = React
 
 interface Props extends WithAuthProps{
@@ -43,9 +46,8 @@ const ChatRoom: FC<Props> = ({
   const [hasContent, setHasContent] = useState<boolean>(false)
   const dateToday = useRef<string>('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const offset = useRef(15)
-  const limit = useRef(0)
   const dispatch = useDispatch()
+  const chatState = useSelector((state: RootState) => state.chat)
 
   const handleSubmit = () => {
     if (!messageRef || !messageRef.current || !messageRef.current.value.trim().length) {
@@ -87,19 +89,19 @@ const ChatRoom: FC<Props> = ({
   const toggleSearchBar = () => {
     setIsSearchOpen(!isSearchOpen)
   }
-
-  const onIntersect: IntersectionObserverCallback = (entries, observer) => {
-    entries.forEach((entry) => {
-      const { target } = entry
-      if (entry.isIntersecting && entry.time > 10000) {
-        // dispatch(getChatRequest({
-        //   roomUuid,
-        //   offset: offset.current,
-        //   limit: limit.current,
-        // }))
-        console.log('intersecting!!')
-      }
-    })
+  const onIntersect: IntersectionObserverCallback = ([{
+    isIntersecting, time,
+  }]) => {
+    if (!isIntersecting) return
+    // if (time < 10000) return
+    if (chatState.isLoading) {
+      return
+    }
+    dispatch(getChatRequest({
+      roomUuid,
+      offset: chatState.data[roomUuid].offset,
+      limit: chatState.data[roomUuid].offset,
+    }))
   }
 
   useEffect(() => {
@@ -109,7 +111,6 @@ const ChatRoom: FC<Props> = ({
   }, [chatStateGroupByTime])
 
   useIntersectionObserver({
-    root: chatContainerRef.current,
     target: chatTopRef.current,
     onIntersect,
   })
@@ -137,7 +138,9 @@ const ChatRoom: FC<Props> = ({
       />
 
       <S.ChatContainer ref={chatContainerRef}>
-        <div ref={chatTopRef}/>
+        {
+          chatState.isLoading === false && <div ref={chatTopRef} id="observe"/>
+        }
         {
           !chatStateGroupByTime
             ? (<div>loading</div>)
@@ -153,7 +156,7 @@ const ChatRoom: FC<Props> = ({
                       dateToday.current = dateLL
                     }
                     return (
-                      <div key={chatGroup[0].uuid}>
+                      <div key={chatGroup[0].uuid} className="observe">
                         {
                           isNewDate && <DateDivier date={dateLL}/>
                         }

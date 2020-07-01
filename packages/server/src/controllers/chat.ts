@@ -23,7 +23,11 @@ export const getChats = controllerHelper(async (req, res, next) => {
     throw httpError.ROOM_NOT_FOUND
   }
 
-  return chats.reverse()
+  return {
+    chats: chats.reverse(),
+    offset,
+    limit,
+  }
 })
 
 export const getRoom = controllerHelper(async (req, res, next) => {

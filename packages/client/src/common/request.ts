@@ -98,11 +98,18 @@ interface GetChatByRoom {
   limit: number
   offset: number
 }
+
+interface Temp {
+  chats: Type.ApiChat[]
+  offset: number
+  limit: number
+}
+
 export const getChatByRoom = ({
   roomUuid,
   limit,
   offset,
-}: GetChatByRoom) => Axios<Type.ApiChat[]>({
+}: GetChatByRoom) => Axios<Temp>({
   method: 'GET',
   url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
 })

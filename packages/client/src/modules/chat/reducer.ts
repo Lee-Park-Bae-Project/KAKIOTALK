@@ -28,17 +28,20 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
       return newState
     }
     case GET_CHAT_SUCCESS: {
-      const { roomUuid } = action.payload
-      const { newChat } = action.payload
-      let chats: ApiChat[] = []
+      const {
+        roomUuid, chats, offset, limit,
+      } = action.payload
+
+      let combinedChats: ApiChat[] = []
 
       if (state.data[roomUuid]) {
-        chats.concat(state.data[roomUuid].chats)
+        combinedChats = combinedChats.concat(state.data[roomUuid].chats).concat(chats)
       } else {
-        chats = newChat
+        combinedChats = chats
       }
 
-      chats.sort((a, b) => {
+      // 새로들어온 데이터 포함하여 시간순 정렬
+      combinedChats.sort((a, b) => {
         if (a.updatedAt < b.updatedAt) return -1
         return 1
       })
@@ -46,11 +49,12 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
       const newState = produce(state, (draft) => {
         draft.isLoading = false
         draft.data[roomUuid] = {
-          chats,
-          limit: LIMIT,
-          offset: 0,
+          chats: combinedChats,
+          limit,
+          offset: offset + LIMIT,
         }
       })
+
       return newState
     }
     case GET_CHAT_FAILURE: {

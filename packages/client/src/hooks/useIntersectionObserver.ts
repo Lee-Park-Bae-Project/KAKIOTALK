@@ -2,21 +2,21 @@
 import { useEffect } from 'react'
 
 interface UseIntersectionObserver {
-  root: Element | null
+  root?: Element | null
   target: Element | null
   onIntersect: any
   threshold?: number | number[]
   rootMargin?: string
 }
 const useIntersectionObserver = ({
-  root,
+  root = null,
   target,
   onIntersect,
   threshold = 1.0,
   rootMargin = '0px',
 }: UseIntersectionObserver) => {
   useEffect(() => {
-    if (!root || !target) return
+    if (!target) return
 
     const observer = new IntersectionObserver(onIntersect, {
       root,
@@ -30,7 +30,7 @@ const useIntersectionObserver = ({
     return () => {
       observer.unobserve(target)
     }
-  }, [target, root, rootMargin, onIntersect, threshold])
+  }, [target, root, onIntersect])
 }
 
 export default useIntersectionObserver

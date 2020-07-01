@@ -8,35 +8,35 @@ export const ADD_CHAT = 'room/ADD_CHAT' as const
 
 interface GetChatRequest {
   roomUuid: string
-  limit: number
   offset: number
+  limit: number
 }
 export const getChatRequest = ({
   roomUuid,
-  limit,
   offset,
+  limit,
 }: GetChatRequest) => ({
   type: GET_CHAT_REQUEST,
   payload: {
     roomUuid,
-    limit,
     offset,
+    limit,
   },
 })
 
 interface GetChatSuccess {
   roomUuid: string
-  newChat: ApiChat[]
+  chats: ApiChat[]
   offset: number
   limit: number
 }
 export const getChatSuccess = ({
-  roomUuid, newChat, offset, limit,
+  roomUuid, chats, offset, limit,
 }: GetChatSuccess) => ({
   type: GET_CHAT_SUCCESS,
   payload: {
     roomUuid,
-    newChat,
+    chats,
     offset,
     limit,
   },
