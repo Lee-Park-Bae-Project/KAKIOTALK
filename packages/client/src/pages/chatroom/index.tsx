@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
-import {
-  convertToLL, getCurTimeDBFormat,
-} from 'common/utils'
+import { convertToLL } from 'common/utils'
 import { WithAuthProps } from 'hocs/withAuth'
 import ChatBox from 'components/ChatBox'
 import DateDivier from 'components/DateDivider'
@@ -24,7 +22,6 @@ const {
 
 interface Props extends WithAuthProps{
   roomUuid: string
-  handleBack: () => void
   roomName: string
   chatStateGroupByTime: ChatStateGroupByTime,
 }
@@ -32,7 +29,6 @@ interface Props extends WithAuthProps{
 const ChatRoom: FC<Props> = ({
   uuid,
   roomUuid,
-  handleBack,
   roomName,
   chatStateGroupByTime,
 }) => {

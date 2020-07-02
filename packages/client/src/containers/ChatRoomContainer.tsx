@@ -66,10 +66,6 @@ const ChatContainer: React.FC<Props> = (props) => {
     }
   }, [chatState, roomUuid])
 
-  const handleBack = () => {
-    history.goBack()
-  }
-
   useEffect(() => {
     if (roomUuid.length) {
       joinRooms({ roomUuids: [roomUuid] })
@@ -108,7 +104,6 @@ const ChatContainer: React.FC<Props> = (props) => {
     <ChatRoom
       {...props}
       roomUuid={roomUuid}
-      handleBack={handleBack}
       roomName={roomName}
       chatStateGroupByTime={chatStateGroupByTime}
     />
