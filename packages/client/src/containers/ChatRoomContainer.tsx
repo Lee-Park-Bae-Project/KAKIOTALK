@@ -94,7 +94,7 @@ const ChatContainer: React.FC<Props> = (props) => {
       limit,
       offset,
     }))
-  }, [match.params.roomUuid])
+  }, [match.params.roomUuid, dispatch])
 
   useEffect(() => {
     chatFromServer(dispatch)

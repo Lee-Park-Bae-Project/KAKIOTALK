@@ -1,17 +1,11 @@
-import React, {
-  ChangeEvent,
-  FC,
-  KeyboardEvent,
-} from 'react'
+import React, { FC } from 'react'
 import {
   convertToLL, getCurTimeDBFormat,
 } from 'common/utils'
 import { WithAuthProps } from 'hocs/withAuth'
 import ChatBox from 'components/ChatBox'
 import DateDivier from 'components/DateDivider'
-import { chatFromClient } from 'socket'
 import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
-import Icon from 'Icon/Icon'
 import SearchAccordion from 'system/ChatRoomSearchBar'
 import { useIntersectionObserver } from 'hooks/index'
 import {
@@ -22,6 +16,7 @@ import { RootState } from 'modules'
 import shortid from 'shortid'
 import * as S from './style'
 import Header from './Header'
+import TextArea from './TextArea'
 
 const {
   useEffect, useRef, useState, useCallback,
@@ -41,52 +36,13 @@ const ChatRoom: FC<Props> = ({
   roomName,
   chatStateGroupByTime,
 }) => {
-  const messageRef = useRef<HTMLTextAreaElement>(null)
   const ChatBottomRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatTopRef = useRef<HTMLDivElement>(null)
-  const [hasContent, setHasContent] = useState<boolean>(false)
   const dateToday = useRef<string>('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const dispatch = useDispatch()
   const chatState = useSelector((state: RootState) => state.chat)
-
-  const handleSubmit = () => {
-    if (!messageRef || !messageRef.current || !messageRef.current.value.trim().length) {
-      return
-    }
-
-    const msg = messageRef.current.value
-    const createdAt = getCurTimeDBFormat()
-    chatFromClient({
-      content: msg,
-      roomUuid,
-      createdAt,
-      userUuid: uuid,
-    })
-
-    if (messageRef.current) {
-      messageRef.current.focus()
-      messageRef.current.value = ''
-    }
-  }
-  const handleEnterPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
-      if (e.target && e.currentTarget.value.trim().length > 0) {
-        handleSubmit()
-      }
-    }
-  }
-
-  const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    if (messageRef.current) {
-      if (messageRef.current.value) {
-        setHasContent(true)
-      } else {
-        setHasContent(false)
-      }
-    }
-  }
 
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)
@@ -162,21 +118,7 @@ const ChatRoom: FC<Props> = ({
         }
         <S.ChatBottom ref={ChatBottomRef}></S.ChatBottom>
       </S.ChatContainer>
-      <S.InputContainer>
-        <S.Input
-          ref={messageRef}
-          onChange={handleMessageChange}
-          onKeyPress={handleEnterPress}
-        />
-        <S.ButtonWrapper>
-          <S.SendBtn
-            onClick={handleSubmit}
-            hasContent={hasContent}
-          >
-            전송
-          </S.SendBtn>
-        </S.ButtonWrapper>
-      </S.InputContainer>
+      <TextArea roomUuid={roomUuid} userUuid={uuid}/>
     </S.Container>
   )
 }
