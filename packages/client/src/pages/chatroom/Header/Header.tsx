@@ -34,4 +34,4 @@ const Header: React.FC<Props> = ({
     </S.Container>
   )
 }
-export default Header
+export default React.memo(Header)

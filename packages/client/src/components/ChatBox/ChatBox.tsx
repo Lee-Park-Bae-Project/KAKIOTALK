@@ -6,6 +6,7 @@ import {
 } from 'common/utils'
 import Profile from 'system/Profile'
 import { ApiChat } from 'types'
+import shortid from 'shortid'
 import * as S from './style'
 
 type Props = {
@@ -59,7 +60,7 @@ const ChatBox: FC<Props> = ({
         <S.ChatGroup isMine={isMine}>
           {
             chatGroup.map((chat, idx) => (
-              <S.ContentWrapper key={chat.uuid}>
+              <S.ContentWrapper key={shortid.generate()}>
                 {
                   <S.ContentBorder isMine={isMine}>
                     <S.Content key={chat.uuid} isMine={isMine}>

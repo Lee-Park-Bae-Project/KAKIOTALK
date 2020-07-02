@@ -19,6 +19,7 @@ import {
 } from 'react-redux'
 import { getChatRequest } from 'modules/chat'
 import { RootState } from 'modules'
+import shortid from 'shortid'
 import * as S from './style'
 import Header from './Header'
 
@@ -90,6 +91,7 @@ const ChatRoom: FC<Props> = ({
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)
   }, [isSearchOpen, setIsSearchOpen])
+
   const onIntersect: IntersectionObserverCallback = ([{
     isIntersecting, time,
   }]) => {
@@ -115,10 +117,9 @@ const ChatRoom: FC<Props> = ({
     target: chatTopRef.current,
     onIntersect,
   })
-  const MemoizedHeader = React.memo(Header)
   return (
     <S.Container>
-      <MemoizedHeader roomName={roomName} toggleSearchBar={toggleSearchBar}/>
+      <Header roomName={roomName} toggleSearchBar={toggleSearchBar}/>
       <SearchAccordion
         open={isSearchOpen}
         toggleSearchBar={toggleSearchBar}
@@ -143,7 +144,7 @@ const ChatRoom: FC<Props> = ({
                       dateToday.current = dateLL
                     }
                     return (
-                      <div key={chatGroup[0].uuid} className="observe">
+                      <div key={shortid.generate()} className="observe">
                         {
                           isNewDate && <DateDivier date={dateLL}/>
                         }
