@@ -30,7 +30,6 @@ export const Container = styled.div`
     animation: 0.3s ease 0s 1 slideUp;
     transform: translateY(${(props: ContainerProps) => props.slideMount}%);
     transition-duration: 0.5s;
-    overscroll-behavior: contain;
   }
 
   @keyframes slideUp {
@@ -82,9 +81,9 @@ export const StatusWrapper = styled.div`
 export const Footer = styled(Flex)`
   justify-content: center;
 `
-export const MessageWrapper = styled.span``
-
-export const DeleteWrapper = styled.span``
+export const ButtonWrapper = styled.div`
+  margin: 0 1rem;
+`
 
 interface ImageCSS {
   big: boolean

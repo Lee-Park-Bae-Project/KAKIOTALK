@@ -6,6 +6,8 @@ const Global = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family : 'NotoSans Light','Malgun Gothic','맑은 고딕','Apple SD Gothic Neo','돋움',dotum, sans-serif;
+    overscroll-behavior-y: contain;
+
   }
 
   ::-webkit-scrollbar {
