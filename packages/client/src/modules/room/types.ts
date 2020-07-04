@@ -3,7 +3,6 @@ import {
   getRoomRequest,
   getRoomSuccess,
   makeRoomRequest,
-  makeRoomSuccess,
 } from 'modules/room/action'
 import { Room } from '@kakio/common'
 
@@ -17,5 +16,4 @@ export type RoomAction =
 | ReturnType<typeof getRoomSuccess>
 | ReturnType<typeof getRoomFailure>
 | ReturnType<typeof makeRoomRequest>
-| ReturnType<typeof makeRoomSuccess>
 

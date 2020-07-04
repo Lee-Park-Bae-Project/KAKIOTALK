@@ -8,7 +8,7 @@ import {
   getRoomSuccess,
   MAKE_ROOM_REQUEST,
   makeRoomRequest,
-  makeRoomSuccess,
+
 } from 'modules/room/action'
 
 import * as request from 'common/request'
@@ -28,14 +28,15 @@ function* room() {
     yield put(getRoomFailure(e.message))
   }
 }
-type roomIdType = AxiosResponse<request.ResponseType<Pick<Room, 'uuid'>>>
+type roomIdType = AxiosResponse<request.ResponseType<Room[]>>
 function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   try {
     const response: roomIdType = yield call(request.makeRoomRequest, payload)
-    console.log(response.data.data.uuid)
+    const roomUuids = response.data.data.map((v) => v.uuid)
+    joinRooms({ roomUuids })
     // yield put(makeRoomSuccess(response.data.data))
   } catch (e) {
-    alert.error(e.response.data.data.message)
+    yield put(getRoomFailure(e.message))
   }
 }
 

@@ -23,6 +23,7 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
 
   const friendList = useSelector((state: RootState) => state.friends)
   const login = useSelector((state: RootState) => state.login)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -46,7 +47,6 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
     if (selectedUser.find((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
       updateList(selectedUser.filter((item) => item.uuid !== uuid))
-      console.log('deleted')
     } else {
       setSelectedUser(selectedUser.concat({
         uuid, name,
@@ -54,12 +54,9 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
       updateList(selectedUser.concat({
         uuid, name,
       }))
-      console.log('added')
     }
   }
-  useEffect(() => {
-    console.log(selectedUser)
-  }, [selectedUser])
+
   return (
     <React.Fragment>
       <SelectedList>

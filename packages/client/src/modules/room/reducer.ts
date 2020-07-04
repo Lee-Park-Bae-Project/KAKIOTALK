@@ -2,7 +2,6 @@ import {
   GET_ROOM_FAILURE,
   GET_ROOM_REQUEST,
   GET_ROOM_SUCCESS,
-  MAKE_ROOM_SUCCESS,
 
 } from 'modules/room/action'
 import {
