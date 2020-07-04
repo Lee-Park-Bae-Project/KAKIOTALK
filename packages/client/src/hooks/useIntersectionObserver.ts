@@ -17,7 +17,6 @@ const useIntersectionObserver = ({
 }: UseIntersectionObserver) => {
   useEffect(() => {
     if (!target) return
-
     const observer = new IntersectionObserver(onIntersect, {
       root,
       rootMargin,

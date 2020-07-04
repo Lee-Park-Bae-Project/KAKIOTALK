@@ -24,12 +24,14 @@ export type ReduxState<T> = {
   data: T;
 }
 
-export type ReduxChatType = {
-  [key: string]: {
-    chats: ApiChat[]
-    offset: number
-    limit: number
-  }
+export type ReduxChat = {
+  chats: ApiChat[]
+  offset: number
+  limit: number
+}
+
+export type ReduxChatMap = {
+  [key: string]: ReduxChat
 }
 
 export type SimpleUserType = Pick<User, 'uuid'| 'name' | 'email' | 'statusMessage' | 'imageUrl'>
