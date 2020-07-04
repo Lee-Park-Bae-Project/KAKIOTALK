@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import Icon from 'Icon/Icon'
 import { useHistory } from 'react-router-dom'
 import * as S from './styles'
