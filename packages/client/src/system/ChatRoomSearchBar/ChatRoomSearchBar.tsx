@@ -1,6 +1,5 @@
 import React from 'react'
 import Icon from 'Icon/Icon'
-import search from 'assets/baseline_search_black_18dp.png'
 import * as S from './styles'
 
 const {

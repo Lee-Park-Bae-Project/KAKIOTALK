@@ -30,7 +30,7 @@ const useIntersectionObserver = ({
     return () => {
       observer.unobserve(target)
     }
-  }, [target, root, onIntersect])
+  }, [target, root, onIntersect, rootMargin, threshold])
 }
 
 export default useIntersectionObserver
