@@ -53,16 +53,14 @@ const ChatArea: React.FC<Props> = ({
 
   return (
     <S.Container ref={chatContainerRef}>
-      {
-        chatState.isLoading === false && <div ref={chatTopRef} id="observe"/>
-      }
+      <div ref={chatTopRef} id="observe"/>
       <ChatList
         userUuid={userUuid}
         roomUuid={roomUuid}
         chatState={chatState}
         chatBottomRef={chatBottomRef}
       />
-    <S.ChatBottom ref={chatBottomRef}></S.ChatBottom>
+      <S.ChatBottom ref={chatBottomRef}></S.ChatBottom>
     </S.Container>
   )
 }
