@@ -42,18 +42,25 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   }
   const dispatch = useDispatch()
   useEffect(() => {
-    if (login && login.isLoggedIn) {
-      dispatch(getProfile())
-    }
     console.log('parent')
     console.log(selectedList)
   }, [selectedList])
+  useEffect(() => {
+    if (login && login.isLoggedIn) {
+      dispatch(getProfile())
+    }
+  }, [login])
   const handleSelectedList = (selectList: InviteUser[]) => {
     setSelectedList(selectList)
   }
 
   const onConfirm = () => {
     console.log('room : ', room)
+    const { uuid } = myProfile
+    const { name } = myProfile
+    setSelectedList(selectedList.concat({
+      uuid, name,
+    }))
     dispatch(makeRoomRequest(selectedList))
     console.log('new room ', room)
     setSelectedList([])
