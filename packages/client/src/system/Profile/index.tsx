@@ -12,6 +12,7 @@ import { updateProfile } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
 import { throttle } from 'lodash'
+import { UseFormInput } from 'hooks'
 
 interface Prop {
   /** 유져 식별자 */
@@ -46,27 +47,21 @@ const Profile: FC<Prop> = ({
   isOverflow,
 }) => {
   const [isEditMode, setIsEditMode] = useState(false)
-  const [editName, setEditName] = useState(name)
-  const [editStatusMessage, setEditStatusMessage] = useState(statusMessage || '')
-  const onChangename = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditName(e.target.value)
-  }
-  const onChangeStatusMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditStatusMessage(e.target.value)
-  }
+  const editName = UseFormInput(name)
+  const editStatusMessage = UseFormInput(statusMessage || '')
   const dispatch = useDispatch()
   const handleEditClick = () => {
     if (isEditMode) {
-      if (editName.length === 0) {
+      if (editName.value.length === 0) {
         alert.error('이름을 입력해주세요!')
         return
       }
 
-      if (editName !== name || editStatusMessage !== statusMessage) {
+      if (editName.value !== name || editStatusMessage.value !== statusMessage) {
         dispatch(
           updateProfile({
-            name: editName,
-            statusMessage: editStatusMessage,
+            name: editName.value,
+            statusMessage: editStatusMessage.value,
           }),
         )
       }
@@ -132,20 +127,18 @@ const Profile: FC<Prop> = ({
         )}
         {isMyProfile && isEditMode ? (
           <S.EditWrapper>
-            <S.Label isEmpty={editName.length === 0}>
-              이름 ({editName.length}/20)
+            <S.Label isEmpty={editName.value.length === 0}>
+              이름 ({editName.value.length}/20)
             </S.Label>
             <S.Input
-              value={editName}
+              {...editName}
               placeholder={'이름'}
-              onChange={onChangename}
               maxLength={20}
             />
-            <S.Label>상태 메시지 ({editStatusMessage.length}/40)</S.Label>
+            <S.Label>상태 메시지 ({editStatusMessage.value.length}/40)</S.Label>
             <S.Input
-              value={editStatusMessage}
+              {...editStatusMessage}
               placeholder={'상태 메시지'}
-              onChange={onChangeStatusMessage}
               maxLength={40}
             />
           </S.EditWrapper>
