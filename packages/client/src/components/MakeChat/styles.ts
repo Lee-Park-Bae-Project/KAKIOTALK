@@ -3,7 +3,7 @@ import Flex from 'atoms/Flex'
 import { color } from 'styles/global'
 
 export const Checkmark = styled.span`
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   height: 25px;
@@ -16,11 +16,12 @@ export const Checkmark = styled.span`
   }
 `
 export const Input = styled.input`
-position: absolute;
+position: relative;
 opacity: 0;
 cursor: pointer;
 height: 0;
 width: 0;
+justify-content: flex-end;
 &:checked{
   ${Checkmark}:after{
     display:block;
@@ -29,31 +30,36 @@ width: 0;
 `
 export const UserCardContainer = styled(Flex)`
 height:5rem;
-justify-content: flex-start;
+justify-content: center;
+
 padding: 0 1rem;
 background-color: ${color.WHITE};
+margin-right: 5px;
 &:hover {
   background-color: ${color.HOVER_GRAY};
 }
+
 `
 export const ProfileWrapper = styled(Flex)`
 height:5rem;
 justify-content: flex-start;
-padding: 0 1rem;
-justify-content: flex-start;
+padding: 0 0.7rem;
+
 `
 
 export const Container = styled.label`
   display: flex;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  margin-top: 6px;
+  margin-bottom: 3px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 20px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; 
+  align-items: center;
+  
   /** 선택했을 때 배경색 변경 */
   &:hover ${Input} ~ ${Checkmark}{
     background-color:${color.HOVER_GRAY}    

@@ -9,7 +9,7 @@ export const Container = styled(Flex)`
   overflow:scroll;
   float:left;
   margin-right: auto;
-  align-itmes:flex-start;
+  align-items: flex-start;
   width: 100%;
   /* min-width: 20rem; */
 `

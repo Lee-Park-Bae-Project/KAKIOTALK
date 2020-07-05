@@ -44,6 +44,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   useEffect(() => {
     console.log('parent')
     console.log(selectedList)
+    console.log(isClicked)
   }, [selectedList])
   useEffect(() => {
     if (login && login.isLoggedIn) {
@@ -56,11 +57,12 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
 
   const onConfirm = () => {
     console.log('room : ', room)
-    const { uuid } = myProfile
-    const { name } = myProfile
-    setSelectedList(selectedList.concat({
-      uuid, name,
-    }))
+    // const {
+    //   uuid, name,
+    // } = myProfile
+    // setSelectedList(selectedList.concat({
+    //   uuid, name,
+    // }))
     dispatch(makeRoomRequest(selectedList))
     console.log('new room ', room)
     setSelectedList([])

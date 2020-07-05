@@ -15,15 +15,15 @@ const SelectedName: FC<Props> = ({
   name, handleFriendToAdd, uuid,
 }) => {
   const handleFriendToAddClick = () => {
-    if (handleFriendToAdd) {
-      handleFriendToAdd(uuid, name)
-    }
+    if (!handleFriendToAdd) return
+
+    handleFriendToAdd(uuid, name)
     console.log('clicked', uuid, name)
   }
   return (
     <S.Container>
       <S.name onClick={handleFriendToAddClick}>{name}</S.name>
-      <Icon icon="Quit" size="1rem" />
+      <Icon icon="Quit" size="1rem" onClick={handleFriendToAddClick} />
     </S.Container>
   )
 }
