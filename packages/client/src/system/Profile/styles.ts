@@ -21,36 +21,33 @@ export const Container = styled.div`
   box-shadow: 4px 4px 4px 0 #616161;
   z-index: 1;
 
-
-  @media (max-width: 500px ) {
-    position:fixed;
-    left:0%;
-    top:0%;
-    width:100%;
-    height:100%;
+  @media (max-width: 500px) {
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
     animation: 0.3s ease 0s 1 slideUp;
-    transform:translateY(${(props: ContainerProps) => props.slideMount}%);
-    transition-duration:0.5s;
-    overscroll-behavior: contain;
-  }
-  
-  @keyframes slideUp{
-    0% {
-      transform: translateY(100%);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  @keyframes slideDown{
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(100%);
-    }
+    transform: translateY(${(props: ContainerProps) => props.slideMount}%);
+    transition-duration: 0.5s;
   }
 
+  @keyframes slideUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideDown {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
 `
 
 export const CloseButton = styled.div`
@@ -84,9 +81,9 @@ export const StatusWrapper = styled.div`
 export const Footer = styled(Flex)`
   justify-content: center;
 `
-export const MessageWrapper = styled.span``
-
-export const DeleteWrapper = styled.span``
+export const ButtonWrapper = styled.div`
+  margin: 0 1rem;
+`
 
 interface ImageCSS {
   big: boolean

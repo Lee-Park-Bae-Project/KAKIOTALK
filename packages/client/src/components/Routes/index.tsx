@@ -9,10 +9,10 @@ import { url } from 'common/constants'
 const Routes: React.FC = () => (
   <Router>
     <Switch>
-      <Route path={url.main} component={MainContainer} />
+      <Route path={url.main.default} component={MainContainer} />
       <Route path={url.login} component={Pages.Login} />
       <Route path={`${url.room}/:roomUuid`} component={Pages.ChatRoom} />
-      <Redirect from='/' to='/main/friend-list'/>
+      <Redirect from='/' to={url.main.friendList}/>
     </Switch>
   </Router>
 )
