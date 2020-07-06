@@ -6,14 +6,8 @@ import {
 import { SimpleUserType } from 'types'
 import styled from 'styled-components'
 import Flex from 'atoms/Flex'
-import * as S from '../../../components/MakeChat/styles'
 
-const K = { Container: styled(Flex)`
-    width: fit-content;
-    height: 0.1rem;
-  ` }
-
-export interface Props{
+interface Props{
   friendList: SimpleUserType[]
   searchFriendKeyword: string
   size?: string
