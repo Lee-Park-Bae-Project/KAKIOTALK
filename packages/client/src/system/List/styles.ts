@@ -5,7 +5,7 @@ export const Container = styled(Flex)`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
-  height: 100vh;
+  height: 100%;
   float:left;
   justify-content: flex-start;
   margin-right: auto;

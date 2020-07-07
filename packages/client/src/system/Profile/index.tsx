@@ -38,7 +38,7 @@ interface Prop {
 const Profile: FC<Prop> = ({
   uuid,
   name,
-  statusMessage = '',
+  statusMessage,
   handleCloseClick,
   imageUrl = null,
   profileRef,
@@ -47,7 +47,7 @@ const Profile: FC<Prop> = ({
 }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [editName, setEditName] = useState(name)
-  const [editStatusMessage, setEditStatusMessage] = useState(statusMessage)
+  const [editStatusMessage, setEditStatusMessage] = useState(statusMessage || '')
   const onChangename = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditName(e.target.value)
   }
@@ -55,7 +55,7 @@ const Profile: FC<Prop> = ({
     setEditStatusMessage(e.target.value)
   }
   const dispatch = useDispatch()
-  const onEditClick = () => {
+  const handleEditClick = () => {
     if (isEditMode) {
       if (editName.length === 0) {
         alert.error('이름을 입력해주세요!')
@@ -161,14 +161,19 @@ const Profile: FC<Prop> = ({
         <Hr />
         <S.Footer>
           {isMyProfile ? (
+            <S.ButtonWrapper >
             <TextIcon
               icon='Edit'
               color={color.WHITE}
               text={isEditMode ? '저장' : '프로필 수정'}
               iconPosition='top'
               textColor={color.WHITE}
-              onClick={onEditClick}
+              size='1.2rem'
+              textSize='0.8rem'
+              onClick={handleEditClick}
             />
+            </S.ButtonWrapper>
+
           ) : (
             <Fragment>
               <Link
@@ -181,14 +186,20 @@ const Profile: FC<Prop> = ({
                 }}
                 style={{ textDecoration: 'none' }}
               >
+                <S.ButtonWrapper>
                 <TextIcon
                   icon='ChatFilled'
                   color={color.WHITE}
                   text='1:1 채팅'
                   textColor={color.WHITE}
                   iconPosition='top'
+                  size='1.2rem'
+                  textSize='0.8rem'
                 />
+                </S.ButtonWrapper>
+
               </Link>
+              <S.ButtonWrapper>
               <TextIcon
                 icon='Delete'
                 color={color.WHITE}
@@ -196,7 +207,10 @@ const Profile: FC<Prop> = ({
                 textColor={color.WHITE}
                 iconPosition='top'
                 onClick={onDeleteClick}
+                size='1.2rem'
+                textSize='0.8rem'
               />
+              </S.ButtonWrapper>
             </Fragment>
           )}
         </S.Footer>
