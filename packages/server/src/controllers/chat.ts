@@ -8,13 +8,27 @@ import {
 import * as httpError from '../common/error'
 
 export const getChats = controllerHelper(async (req, res, next) => {
-  const { roomId } = req.params
-  const chats = await chatService.getChatsByRoomId(roomId)
+  const { roomId: roomUuid } = req.params
+  const limit = Number(req.query.limit)
+  const offset = Number(req.query.offset)
+
+  if (limit === undefined || offset === undefined) {
+    throw httpError.BAD_REQUEST
+  }
+  const chats = await chatService.getChatsByRoomId({
+    roomUuid,
+    limit,
+    offset,
+  })
   if (!chats) {
     throw httpError.ROOM_NOT_FOUND
   }
 
-  return chats
+  return {
+    chats: chats.reverse(),
+    offset,
+    limit,
+  }
 })
 
 export const getRoom = controllerHelper(async (req, res, next) => {

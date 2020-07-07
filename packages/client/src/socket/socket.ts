@@ -18,8 +18,7 @@ export enum Event {
   joinRooms = 'joinRooms',
 }
 
-export const socket = socketOpen(configs.NODE_ENV_VAR === 'production' ? (configs.SOCKET_URL_PRODUCT, { transports: ['websocket'] }) : (configs.SOCKET_URL, { transports: ['websocket'] }))
-//  순수한 소켓만 사용하고 싶기 때문에 설정
+export const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] })
 
 export const connect = () => {
   socket.on(Event.connect, (msg: string) => {

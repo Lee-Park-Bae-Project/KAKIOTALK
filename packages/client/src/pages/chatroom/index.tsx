@@ -1,130 +1,87 @@
-import React, {
-  ChangeEvent,
-  FC,
-  KeyboardEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
-import { getCurTimeDBFormat } from 'common/utils'
-import { WithAuthProps } from 'hocs/withAuth'
-import ChatBox from 'components/ChatBox'
-import { chatFromClient } from 'socket'
-import { ChatStateGroupByTime } from 'containers/ChatRoomContainer'
+import React, { FC } from 'react'
+import withAuth, { WithAuthProps } from 'hocs/withAuth'
+import { useRouteMatch } from 'react-router-dom'
+import SearchAccordion from 'system/ChatRoomSearchBar'
+import { getChatRequest } from 'modules/chat'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import { RootState } from 'modules'
+import {
+  chatFromServer,
+  Event,
+  joinRooms,
+  removeSocketEventListener,
+} from 'socket'
+import Header from './Header'
+import TextArea from './TextArea'
+import ChatArea from './ChatArea'
 import * as S from './style'
 
-interface Props extends WithAuthProps{
-  roomUuid: string
-  handleBack: () => void
-  roomName: string
-  chatStateGroupByTime: ChatStateGroupByTime,
-}
+const {
+  useEffect, useState, useCallback,
+} = React
 
-const ChatRoom: FC<Props> = ({
-  uuid,
-  roomUuid,
-  handleBack,
-  roomName,
-  chatStateGroupByTime,
-}) => {
-  const messageRef = useRef<HTMLTextAreaElement>(null)
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const chatContainerRef = useRef<HTMLDivElement>(null)
-  const [hasContent, setHasContent] = useState<boolean>(false)
+const ChatRoom: FC<WithAuthProps> = ({ uuid }) => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const { params } = useRouteMatch<{roomUuid: string}>()
+  const [roomUuid, setRoomUuid] = useState('')
+  const [roomName, setRoomName] = useState<string>('')
+  const dispatch = useDispatch()
+  const roomState = useSelector((state: RootState) => state.room)
+
+  const toggleSearchBar = useCallback(() => {
+    setIsSearchOpen(!isSearchOpen)
+  }, [isSearchOpen, setIsSearchOpen])
 
   useEffect(() => {
-    if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollIntoView()
+    if (roomUuid.length) {
+      joinRooms({ roomUuids: [roomUuid] })
     }
-  }, [chatStateGroupByTime])
+  }, [roomUuid])
 
-  const handleSubmit = () => {
-    if (!messageRef || !messageRef.current || !messageRef.current.value.trim().length) {
+  useEffect(() => {
+    setRoomUuid(params.roomUuid)
+    const limit = 15
+    const offset = 0
+    dispatch(getChatRequest({
+      roomUuid: params.roomUuid,
+      limit,
+      offset,
+    }))
+  }, [params.roomUuid, dispatch])
+
+  useEffect(() => {
+    const rn = roomState.data.find((v) => v.uuid === roomUuid)
+    if (!rn) {
       return
     }
 
-    const msg = messageRef.current.value
-    const createdAt = getCurTimeDBFormat()
-    console.log(createdAt)
-    chatFromClient({
-      content: msg,
-      roomUuid,
-      createdAt,
-      userUuid: uuid,
+    setRoomName(rn.participants.map((v) => v.name).join(', '))
+  }, [roomState, roomUuid])
+
+  useEffect(() => {
+    setRoomUuid(params.roomUuid)
+  }, [params])
+
+  useEffect(() => {
+    chatFromServer(dispatch)
+
+    return (() => {
+      removeSocketEventListener(Event.chatFromServer)
     })
-
-    if (messageRef.current) {
-      messageRef.current.focus()
-      messageRef.current.value = ''
-    }
-  }
-  const handleEnterPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
-      if (e.target && e.currentTarget.value.trim().length > 0) {
-        handleSubmit()
-      }
-    }
-  }
-
-  const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    if (messageRef.current) {
-      if (messageRef.current.value) {
-        setHasContent(true)
-      } else {
-        setHasContent(false)
-      }
-    }
-  }
-
+  })
   return (
     <S.Container>
-      <S.Header>
-        <S.Back onClick={handleBack}>
-          back
-        </S.Back>
-        <S.Title>
-          {roomName}
-        </S.Title>
-      </S.Header>
-      <S.ChatContainer ref={chatContainerRef}>
-        {
-          !chatStateGroupByTime
-            ? (<div>loading</div>)
-            : (
-              (
-                Object.keys(chatStateGroupByTime).map((time) => {
-                  const timeGroup = chatStateGroupByTime[time]
-                  return timeGroup.map((chatGroup) => (
-                      <ChatBox
-                        key={chatGroup[0].uuid}
-                        createdAt={chatGroup[0].createdAt}
-                        chatGroup={chatGroup}
-                        isMine={uuid === chatGroup[0].metaInfo.sender.uuid}
-                      />
-                  ))
-                })
-              )
-            )
-        }
-        <S.ChatBottom ref={scrollRef}></S.ChatBottom>
-      </S.ChatContainer>
-      <S.InputContainer>
-        <S.Input
-          ref={messageRef}
-          onChange={handleMessageChange}
-          onKeyPress={handleEnterPress}
-        />
-        <S.ButtonWrapper>
-          <S.SendBtn
-            onClick={handleSubmit}
-            hasContent={hasContent}
-          >
-            전송
-          </S.SendBtn>
-        </S.ButtonWrapper>
-      </S.InputContainer>
+      <Header roomName={roomName} toggleSearchBar={toggleSearchBar}/>
+      <SearchAccordion
+        open={isSearchOpen}
+        toggleSearchBar={toggleSearchBar}
+      />
+      <ChatArea roomUuid={roomUuid} userUuid={uuid}/>
+      <TextArea roomUuid={roomUuid} userUuid={uuid}/>
     </S.Container>
   )
 }
 
-export default ChatRoom
+export default withAuth(ChatRoom)
