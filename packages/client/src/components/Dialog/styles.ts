@@ -5,7 +5,6 @@ import {
 } from 'styles/global'
 
 export const Container = styled(Flex)`
-
 `
 
 export const ContentWrapper = styled.div`
@@ -16,6 +15,7 @@ export const ContentWrapper = styled.div`
 
 export const Content = styled(Flex)`
   flex-direction: column;
+  border-radius:1rem;
   
   background-color: white;
   width: 20rem;
@@ -27,6 +27,7 @@ export const Title = styled.p`
   color: ${color.BLACK};
   font-weight: ${weight.STRONG};
   margin-right: auto;
+  padding:1rem;
 `
 
 export const Description = styled.p`

@@ -1,19 +1,28 @@
 import React from 'react'
-import dotenv from 'dotenv'
 import * as S from 'components/GoogleSignin/styles'
-import GoogleLogin, { GoogleLoginResponse } from 'react-google-login'
+import GoogleLogin, {
+  GoogleLoginResponse, GoogleLoginResponseOffline,
+} from 'react-google-login'
 import {
   useHistory, withRouter,
 } from 'react-router-dom'
-import { configs } from 'common/constants'
+import {
+  configs, url,
+} from 'common/constants'
 import * as request from 'common/request'
 import { alert } from 'common/utils'
 
-dotenv.config()
+const loginURL = configs.NODE_ENV_VAR === 'production' ? configs.LOGIN_URL_PRODUCT : configs.LOGIN_URL
+
+const isResOffline = (res: any): res is GoogleLoginResponseOffline => res.code !== undefined
 
 const GoogleSignin: React.FC = () => {
   const history = useHistory()
-  const responseSuccess = (res: any) => {
+  const responseSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    if (isResOffline(res)) {
+      console.warn('offline')
+      return
+    }
     const { googleId } = res
     const googleAccessToken = res.accessToken
     const {
@@ -25,7 +34,7 @@ const GoogleSignin: React.FC = () => {
         googleId, email, name, googleAccessToken, imageUrl,
       })
       .then((response) => {
-        history.push('/')
+        history.push(url.main.friendList)
       })
       .catch((error) => {
         console.error(error)
@@ -46,7 +55,7 @@ const GoogleSignin: React.FC = () => {
         onSuccess={responseSuccess}
         onFailure={responseFail}
         onAutoLoadFinished={responseAutoLoad}
-        redirectUri={configs.LOGIN_URL}
+        redirectUri={loginURL}
         cookiePolicy={'single_host_origin'}
         prompt="consent"
       />

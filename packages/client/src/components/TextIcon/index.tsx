@@ -10,7 +10,7 @@ interface ContainerProp {
   /** text에 대한 icon의 상대적 위치 */
   iconPosition?: iconPositionType
   /** 클릭핸들러 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onClick?: () => void
 }
 interface TextProp {
   /** 아이콘과 함께 표시될 텍스트 */
@@ -30,7 +30,10 @@ interface Prop extends TextProp, ContainerProp {
   size?: string | number
   /** 구글프로필사진 URL */
   imageUrl?: string
+  /** 팝업할 프로필 컴포넌트 */
   children?: ReactElement | boolean
+  /** 상태메시지 */
+  statusMessage?: string
 }
 
 const directionMap = {
@@ -56,17 +59,23 @@ const S = {
   `,
   TextWrapper: styled.span<TextProp>`
     color: ${(props) => props.textColor};
-    line-height: 2rem;
-    padding: 1rem;
-    font-size:${(props) => props.textSize};
+    line-height: 1.5rem;
+    padding: 0.5rem;
+    font-size: ${(props) => props.textSize};
   `,
   Image: styled.img`
-  width: 2.5rem;
-  height : 2.5rem;
-  border-radius : 40%;
-  cursor: pointer;
-`,
-
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 40%;
+    cursor: pointer;
+  `,
+  StatusMessageWrapper: styled.div`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 12rem;
+    color: #8C8C8C;
+  `,
 }
 
 /**
@@ -75,7 +84,7 @@ const S = {
 const TextIcon: FC<Prop> = ({
   icon,
   color,
-  size,
+  size = '2rem',
   iconPosition = 'left',
   onClick = undefined,
   text,
@@ -83,15 +92,20 @@ const TextIcon: FC<Prop> = ({
   textSize = '1rem',
   imageUrl = null,
   children,
+  statusMessage = null,
 }) => (
   <S.Container iconPosition={iconPosition}>
-     {
-    imageUrl ? <S.Image src ={imageUrl} onClick={onClick} />
-      : <Icon icon={icon} color={color} size={size} onClick={onClick} />
-    }
-  {children && children}
+    {imageUrl ? (
+      <S.Image src={imageUrl} onClick={onClick} />
+    ) : (
+      <Icon icon={icon} color={color} size={size} onClick={onClick}/>
+    )}
+    {children && children}
     <S.TextWrapper text={text} textColor={textColor} textSize={textSize}>
       {text}
+      {statusMessage && (
+        <S.StatusMessageWrapper>{statusMessage}</S.StatusMessageWrapper>
+      )}
     </S.TextWrapper>
   </S.Container>
 )

@@ -1,7 +1,6 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
 import * as T from '../types'
-import * as Redis from '../redis'
 import { addMessage } from '../services/chat'
 
 declare global {
@@ -37,8 +36,6 @@ const onDisconnect = ((socket: openSocket.Socket) => {
 
 const afterLogin = ((socket: openSocket.Socket) => {
   socket.on(Event.afterLogin, async ({ uuid }: T.AfterLogin) => {
-    const check = await Redis.get(uuid)
-    await Redis.set(uuid, socket.id)
   })
 })
 

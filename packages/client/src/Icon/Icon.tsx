@@ -12,11 +12,12 @@ export type IconProps = {
   color?: string;
   /** 아이콘 크기 */
   size?: string | number;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: () => void;
 };
 
 const S = { Container: styled.div`
     cursor: pointer;
+    display: flex;
   ` }
 /** 아이콘을 보여주고 싶을 땐 `Icon` 컴포넌트를 사용하세요.
  *
@@ -28,7 +29,7 @@ const Icon = ({
   icon,
   color = 'currentColor',
   size = '2rem',
-  onClick,
+  onClick = undefined,
 }: IconProps) => {
   const SVGIcon = icons[icon]
   return (

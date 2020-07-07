@@ -6,7 +6,7 @@ import { Room } from '@kakio/common'
 // import Room from 'system/Room'
 import { configs } from './constants'
 
-const { API_SERVER_URL } = configs
+const API_SERVER_URL = configs.NODE_ENV_VAR === 'production' ? configs.API_SERVER_URL_PRODUCT : configs.API_SERVER_URL
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
@@ -38,6 +38,7 @@ export const getFriendList = () => Axios({
   url: 'social/friend-list',
 })
 export const getChatList = () => Axios({
+
   method: 'GET',
   url: 'dummy/chat-list',
 })
@@ -93,7 +94,29 @@ export const updateProfile = ({
   },
 })
 
-export const getChatByRoom = (roomUuid: string) => Axios<Type.ApiChat[]>({
+interface GetChatByRoom {
+  roomUuid: string
+  limit: number
+  offset: number
+}
+
+interface Temp {
+  chats: Type.ApiChat[]
+  offset: number
+  limit: number
+}
+
+export const getChatByRoom = ({
+  roomUuid,
+  limit,
+  offset,
+}: GetChatByRoom) => Axios<Temp>({
   method: 'GET',
-  url: `/chat/message/${roomUuid}`,
+  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
+})
+
+export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Room, 'uuid'>>({
+  method: 'GET',
+  url: '/chat/makeRoom',
+  params: { args },
 })

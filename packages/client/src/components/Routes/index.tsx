@@ -1,17 +1,19 @@
 import React from 'react'
 import {
-  Route, HashRouter as Router,
+  Redirect, Route, HashRouter as Router, Switch,
 } from 'react-router-dom'
-import Login from 'pages/login'
+import * as Pages from 'pages'
 import MainContainer from 'containers/MainContainer'
-import { ChatRoomContainer } from 'containers'
 import { url } from 'common/constants'
 
 const Routes: React.FC = () => (
   <Router>
-    <Route exact path={url.main} component={MainContainer} />
-    <Route path={url.login} component={Login} />
-    <Route path={`${url.room}/:roomUuid`} component={ChatRoomContainer} />
+    <Switch>
+      <Route path={url.main.default} component={MainContainer} />
+      <Route path={url.login} component={Pages.Login} />
+      <Route path={`${url.room}/:roomUuid`} component={Pages.ChatRoom} />
+      <Redirect from='/' to={url.main.friendList}/>
+    </Switch>
   </Router>
 )
 

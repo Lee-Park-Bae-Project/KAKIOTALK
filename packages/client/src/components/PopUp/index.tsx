@@ -1,19 +1,24 @@
 import React, { FC } from 'react'
+import { useOutsideClick } from 'common/utils'
 import * as S from './style'
 
 interface Props {
+  /** 팝업 내용으로 들어갈 컴포넌트 */
   children: React.ReactNode,
-  onClose? : (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-  refs?: React.RefObject<HTMLDivElement>
+  /** 팝업 바깥을 클릭했을 때 동작할 close 핸들러 */
+  onClose: () => void
+  /** 팝업 컴포넌트의 ref */
+  refs: React.MutableRefObject<null>
 }
 
 const PopUp: FC<Props> = ({
-  children, onClose, refs,
-}) => (
-    <S.PopUp onClick={onClose}>
-      <S.PopUpInner ref = {refs}>
+  children, refs, onClose,
+}) => {
+  useOutsideClick(refs, onClose)
+  return (
+    <S.PopUp>
         {children}
-      </S.PopUpInner>
     </S.PopUp>
-)
+  )
+}
 export default PopUp

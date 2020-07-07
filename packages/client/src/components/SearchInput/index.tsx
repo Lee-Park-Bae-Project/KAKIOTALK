@@ -2,14 +2,15 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
+import Flex from 'atoms/Flex'
 
 const S = {
-  InputWrapper: styled.div`
-  display:flex;
-  justify-content:flex-start;
-  padding:0.3rem;
+  InputWrapper: styled(Flex)`
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.3rem;
   background: #F6F6F6;
-  border : 0.5px solid ${color.GRAY}
+  border : 0.5px solid ${color.GRAY};
   border-radius: 2rem;
 `,
   Input: styled.input`
@@ -40,6 +41,7 @@ const SearchInpust: FC<Props> = ({
       onChange={onChange}
       placeholder={placeholder}
       onKeyPress={onKeyPress}
+      autoFocus={true}
     />
   </S.InputWrapper>
 

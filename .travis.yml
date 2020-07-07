@@ -2,16 +2,14 @@ language: node_js
 
 node_js:
   - "lts/*"
-cache:
-  directories:
-    - node_modules
 env:
   - CI=false
+
 before_script:
+  - yarn common:build
+  - yarn client:build
   - cd packages
   - cd client
-  - yarn install
-  - yarn build
 script:
   - echo "skipping tests"
   # - yarn deploy
@@ -21,4 +19,4 @@ deploy:
   skip_cleanup: true
   local_dir: packages/client/build
   on:
-    branch: feature/workspace-setting
+    branch: develop

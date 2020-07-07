@@ -1,5 +1,5 @@
 import {
-  call, put, takeEvery,
+  call, put, takeLatest,
 } from 'redux-saga/effects'
 
 import {
@@ -13,16 +13,30 @@ import { ApiChat } from 'types'
 import { AxiosResponse } from 'axios'
 import * as request from 'common/request'
 
-type Type = AxiosResponse<request.ResponseType<ApiChat[]>>
+interface Temp {
+  chats: ApiChat[]
+  offset: number
+  limit: number
+}
+type ResponseType = AxiosResponse<request.ResponseType<Temp>>
 function* getChatSaga(action: ReturnType<typeof getChatRequest>) {
   try {
-    const response: Type = yield call(request.getChatByRoom, action.payload)
-    yield put(getChatSuccess(action.payload, response.data.data))
+    const { roomUuid } = action.payload
+    const response: ResponseType = yield call(request.getChatByRoom, action.payload)
+    const {
+      chats, offset, limit,
+    } = response.data.data
+    yield put(getChatSuccess({
+      roomUuid,
+      chats,
+      offset,
+      limit,
+    }))
   } catch (e) {
     yield put(getChatFailure(e))
   }
 }
 
 export default function* chatSaga() {
-  yield takeEvery(GET_CHAT_REQUEST, getChatSaga)
+  yield takeLatest(GET_CHAT_REQUEST, getChatSaga)
 }

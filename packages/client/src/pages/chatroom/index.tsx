@@ -1,160 +1,87 @@
-import React, {
-  ChangeEvent,
-  FC,
-  KeyboardEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { FC } from 'react'
+import withAuth, { WithAuthProps } from 'hocs/withAuth'
+import { useRouteMatch } from 'react-router-dom'
+import SearchAccordion from 'system/ChatRoomSearchBar'
+import { getChatRequest } from 'modules/chat'
 import {
-  convertDBTimeTohhmmA, getCurTimeDBFormat,
-} from 'common/utils'
-import { WithAuthProps } from 'hocs/withAuth'
-import ChatBox from 'components/ChatBox'
+  useDispatch, useSelector,
+} from 'react-redux'
+import { RootState } from 'modules'
 import {
-  ApiChat, ReduxChatType, ReduxState,
-} from 'types'
-import { chatFromClient } from 'socket'
+  chatFromServer,
+  Event,
+  joinRooms,
+  removeSocketEventListener,
+} from 'socket'
+import Header from './Header'
+import TextArea from './TextArea'
+import ChatArea from './ChatArea'
 import * as S from './style'
 
-interface Props extends WithAuthProps{
-  chatState: ReduxState<ReduxChatType>;
-  roomUuid: string;
-  handleBack: () => void;
-  roomName: string;
-}
-interface ChatStateGroupByTime {
-  [key: string]: ApiChat[][]
-}
-const ChatRoom: FC<Props> = ({
-  chatState,
-  uuid,
-  roomUuid,
-  handleBack,
-  roomName,
-}) => {
-  const messageRef = useRef<HTMLInputElement>(null)
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const chatContainerRef = useRef<HTMLDivElement>(null)
-  const [message, setMessage] = useState<string>('')
-  const [isFirstScroll, setIsFirstScroll] = useState<boolean>(true)
-  const [chatStateGroupByTime, SetChatStateGroupByTime] = useState<ChatStateGroupByTime>({})
+const {
+  useEffect, useState, useCallback,
+} = React
+
+const ChatRoom: FC<WithAuthProps> = ({ uuid }) => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const { params } = useRouteMatch<{roomUuid: string}>()
+  const [roomUuid, setRoomUuid] = useState('')
+  const [roomName, setRoomName] = useState<string>('')
+  const dispatch = useDispatch()
+  const roomState = useSelector((state: RootState) => state.room)
+
+  const toggleSearchBar = useCallback(() => {
+    setIsSearchOpen(!isSearchOpen)
+  }, [isSearchOpen, setIsSearchOpen])
+
   useEffect(() => {
-    if (!chatState.data[roomUuid]) {
-      return
+    if (roomUuid.length) {
+      joinRooms({ roomUuids: [roomUuid] })
     }
-    if (isFirstScroll) {
-      setIsFirstScroll(false)
-      if (chatContainerRef && chatContainerRef.current) {
-        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
-      }
-      return
-    }
-    if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [chatState,
-    roomUuid,
-    isFirstScroll])
+  }, [roomUuid])
 
-  const handleSubmit = () => {
-    if (!messageRef) {
+  useEffect(() => {
+    setRoomUuid(params.roomUuid)
+    const limit = 15
+    const offset = 0
+    dispatch(getChatRequest({
+      roomUuid: params.roomUuid,
+      limit,
+      offset,
+    }))
+  }, [params.roomUuid, dispatch])
+
+  useEffect(() => {
+    const rn = roomState.data.find((v) => v.uuid === roomUuid)
+    if (!rn) {
       return
     }
 
-    chatFromClient({
-      content: message,
-      roomUuid,
-      createdAt: getCurTimeDBFormat(),
-      userUuid: uuid,
+    setRoomName(rn.participants.map((v) => v.name).join(', '))
+  }, [roomState, roomUuid])
+
+  useEffect(() => {
+    setRoomUuid(params.roomUuid)
+  }, [params])
+
+  useEffect(() => {
+    chatFromServer(dispatch)
+
+    return (() => {
+      removeSocketEventListener(Event.chatFromServer)
     })
-
-    if (messageRef.current) {
-      messageRef.current.focus()
-    }
-    setMessage('')
-  }
-  const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (e.target && e.currentTarget.value.trim().length > 0) {
-        handleSubmit()
-      }
-    }
-  }
-
-  const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value)
-  }
-  useEffect(() => {
-    if (chatState.data[roomUuid]) {
-      interface ChatStateGroupByTime {
-        [key: string]: ApiChat[][]
-      }
-      const init: ChatStateGroupByTime = {}
-      const newChatStateGroupByTime = chatState.data[roomUuid].reduce((acc, cur) => {
-        const key = convertDBTimeTohhmmA(cur.createdAt)
-        if (acc[key]) {
-          const len = acc[key].length
-          if (acc[key][len - 1][0].metaInfo.sender.uuid === cur.metaInfo.sender.uuid) {
-            acc[key][len - 1].push(cur)
-          } else {
-            acc[key].push([cur])
-          }
-          return acc
-        }
-
-        acc[key] = [[cur]]
-        return acc
-      }, init)
-      SetChatStateGroupByTime(newChatStateGroupByTime)
-    }
-  }, [chatState])
-
+  })
   return (
     <S.Container>
-      <S.Header>
-        <S.Back onClick={handleBack}>
-          back
-        </S.Back>
-        <S.Title>
-          {roomName}
-        </S.Title>
-      </S.Header>
-      <S.ChatContainer ref={chatContainerRef}>
-        {
-          !chatState.data[roomUuid]
-            ? (<div>loading</div>)
-            : (
-              (
-                Object.keys(chatStateGroupByTime).map((time) => {
-                  const timeGroup = chatStateGroupByTime[time]
-                  return timeGroup.map((chatGroup) => (
-                      <ChatBox
-                        key={chatGroup[0].uuid}
-                        createdAt={time}
-                        chatGroup={chatGroup}
-                        isMine={uuid === chatGroup[0].metaInfo.sender.uuid}
-                      />
-                  ))
-                })
-              )
-            )
-        }
-        <S.ChatBottom ref={scrollRef}></S.ChatBottom>
-      </S.ChatContainer>
-      <S.InputContainer>
-        <S.InputArea
-          ref={messageRef}
-          value={message}
-          onChange={handleMessageChange}
-          onKeyPress={handleEnterPress}
-        />
-        <S.ButtonWrapper>
-          <S.SendBtn onClick={handleSubmit}>전송</S.SendBtn>
-        </S.ButtonWrapper>
-      </S.InputContainer>
+      <Header roomName={roomName} toggleSearchBar={toggleSearchBar}/>
+      <SearchAccordion
+        open={isSearchOpen}
+        toggleSearchBar={toggleSearchBar}
+      />
+      <ChatArea roomUuid={roomUuid} userUuid={uuid}/>
+      <TextArea roomUuid={roomUuid} userUuid={uuid}/>
     </S.Container>
   )
 }
 
-export default ChatRoom
+export default withAuth(ChatRoom)

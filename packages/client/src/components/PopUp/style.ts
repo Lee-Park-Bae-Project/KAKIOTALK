@@ -10,13 +10,7 @@ right: 0;
 bottom: 0;
 margin: auto;
 background-color: rgba(0,0,0, 0.5);
+display:flex;
+justify-content:center;
 `
 
-export const PopUpInner = Styled.div`
-position: absolute;
-left: 25%;
-right: 25%;
-top: 25%;
-bottom: 25%;
-margin: auto;
-`
