@@ -17,6 +17,8 @@ export const convertMillToMMDDYYYY = (date: number) => {
   return seoul.format('MM-DD-YYYY')
 }
 
+export const convertToLL = (date: string) => moment(date).format('LL')
+
 export const getCurTimeDBFormat = () => moment(Date.now()).format(DB_TIME_FORMAT)
 
 export const getCurTimeDBFormatForTest = (date: Date) => Date.now()
