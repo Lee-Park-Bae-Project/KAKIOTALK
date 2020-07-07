@@ -36,7 +36,12 @@ export const configs = {
 }
 
 export const url = {
-  main: '/main',
+  main: {
+    default: '/main',
+    friendList: '/main/friend-list',
+    chatList: '/main/chat-list',
+    makeChat: 'main/make-room',
+  },
   login: '/login',
   chatRoom: '/chat',
   room: '/chat',

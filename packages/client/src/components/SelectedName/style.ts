@@ -4,7 +4,7 @@ import Flex from 'atoms/Flex'
 
 export const Container = styled(Flex)`
   display: flex;
-  width: fit-content;
+  width: fit-content; 
   height: 2rem;
   border: 1.5px solid;
   border-color: ${color.GRAY};
@@ -18,7 +18,6 @@ export const Container = styled(Flex)`
 export const name = styled(Flex)` 
   display: flex;
   font-size: 1rem;
-  font-color: ${color.BLACK};
   margin-right: 5px;
 
 `

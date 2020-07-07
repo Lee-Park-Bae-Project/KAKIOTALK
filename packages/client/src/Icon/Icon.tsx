@@ -12,7 +12,7 @@ export type IconProps = {
   color?: string;
   /** 아이콘 크기 */
   size?: string | number;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: () => void;
 };
 
 const S = { Container: styled.div`
@@ -28,7 +28,7 @@ const Icon = ({
   icon,
   color = 'currentColor',
   size = '2rem',
-  onClick,
+  onClick = undefined,
 }: IconProps) => {
   const SVGIcon = icons[icon]
   return (

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Icon from 'Icon/Icon'
 import { color } from 'styles/global'
 import { Link } from 'react-router-dom'
+import { url } from 'common/constants'
 
 const S = { Container: styled.div`
     width: fit-content;
@@ -23,7 +24,7 @@ const FriendTab: FC<FriendTabProp> = ({
   size = '1.5rem', isRouted,
 }) => (
   <S.Container>
-    <Link to='/main/friend-list'>
+    <Link to={url.main.friendList}>
       <Icon
         icon={isRouted ? 'PersonFilled' : 'Person'}
         color={color.WHITE}
