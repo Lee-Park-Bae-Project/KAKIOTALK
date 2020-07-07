@@ -16,9 +16,7 @@ const SelectedName: FC<Props> = ({
 }) => {
   const handleFriendToAddClick = () => {
     if (!handleFriendToAdd) return
-
     handleFriendToAdd(uuid, name)
-    console.log('clicked', uuid, name)
   }
   return (
     <S.Container>

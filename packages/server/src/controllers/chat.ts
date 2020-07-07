@@ -77,7 +77,6 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 export const makeRoom = controllerHelper(async (req, res, next) => {
   try {
     const inviteUser = req.query.args as QueryTypes[]
-    console.log(JSON.parse(inviteUser[0]).uuid)
 
     const roomId = await chatService.createRoom()
     if (!roomId) {
@@ -90,12 +89,10 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
       const userRoom = await chatService.makeRoomParticipants({
         userUuid, userName,
       }, roomId.id)
-      console.log('error in here?')
       if (!userRoom) {
-        throw httpError.IDK
+        throw httpError.ROOM_NOT_FOUND
       }
     })
-    console.log('helel')
     return roomId
   } catch (e) {
     next(e)

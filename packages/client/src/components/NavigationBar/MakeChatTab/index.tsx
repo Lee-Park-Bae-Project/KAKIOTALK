@@ -37,15 +37,10 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   const myProfile = useSelector((state: RootState) => state.profile)
   const login = useSelector((state: RootState) => state.login)
   const handlePopUpClick = () => {
-    console.log('Is clicked?')
     setClicked(!isClicked)
   }
   const dispatch = useDispatch()
-  useEffect(() => {
-    console.log('parent')
-    console.log(selectedList)
-    console.log(isClicked)
-  }, [selectedList])
+
   useEffect(() => {
     if (login && login.isLoggedIn) {
       dispatch(getProfile())
@@ -56,15 +51,13 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   }
 
   const onConfirm = () => {
-    console.log('room : ', room)
-    // const {
-    //   uuid, name,
-    // } = myProfile
-    // setSelectedList(selectedList.concat({
-    //   uuid, name,
-    // }))
-    dispatch(makeRoomRequest(selectedList))
-    console.log('new room ', room)
+    const {
+      uuid, name,
+    } = myProfile
+
+    dispatch(makeRoomRequest(selectedList.concat({
+      uuid, name,
+    })))
     setSelectedList([])
     handlePopUpClick()
   }

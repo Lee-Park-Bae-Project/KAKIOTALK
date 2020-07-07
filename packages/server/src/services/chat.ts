@@ -211,15 +211,16 @@ export const createRoom = async () => models.Room.create()
 export const makeRoomParticipants = async ({
   userUuid, userName,
 }:userList, roomId) => {
-  console.log('roomParticipants', userName)
   const user = await userService.findByUuid(userUuid)
   if (!user) {
-    throw new Error("can't find id")
+    throw HttpError.USER_NOT_FOUND
   }
   const userId = user.id
   const roomParticipant = await models.RoomParticipants.create({
     roomId, userId,
   })
-  console.log('roomParticipants created')
+  if (!roomParticipant) {
+    throw HttpError.ROOM_NOT_FOUND
+  }
   return roomParticipant
 }

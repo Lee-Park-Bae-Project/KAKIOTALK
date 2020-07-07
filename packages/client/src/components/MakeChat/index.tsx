@@ -28,7 +28,6 @@ const MakeChat: FC<Props> = ({
   return (
     <S.Container >
       <S.UserCardContainer onClick={handleFriendToAddClick}>
-        <S.ProfileWrapper>
         <TextIcon
           icon='Account'
           color={color.GRAY}
@@ -37,7 +36,6 @@ const MakeChat: FC<Props> = ({
           imageUrl={imageUrl}
           textSize="15px"
         />
-        </S.ProfileWrapper>
         </S.UserCardContainer>
       <S.Input type="checkbox" />
       <S.Checkmark onClick={handleFriendToAddClick} />

@@ -3,7 +3,6 @@ import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { getFriends } from 'modules/friends'
-import { getProfile } from 'modules/profile'
 import { RootState } from 'modules'
 import ChatStart from 'pages/main/ChatStart'
 import {
@@ -23,16 +22,11 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
 
   const friendList = useSelector((state: RootState) => state.friends)
   const login = useSelector((state: RootState) => state.login)
-  const myProfile = useSelector((state: RootState) => state.profile)
-  const { name } = myProfile
-  const { uuid } = myProfile
-
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (login && login.isLoggedIn) {
       dispatch(getFriends())
-      dispatch(getProfile())
     }
   }, [login])
 
@@ -41,9 +35,7 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
     name: string
   }
   const [searchFriendKeyword, setSearchFriendKeyword] = useState('')
-  const [selectedUser, setSelectedUser] = useState<InviteUser[]>([{
-    name, uuid,
-  }])
+  const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
 
   const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchFriendKeyword(e.target.value)

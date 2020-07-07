@@ -8,6 +8,7 @@ export const Checkmark = styled.span`
   left: 0;
   height: 25px;
   width: 25px;
+  margin-right: 0;
   background-color: #eee;
   &:after{
   content: "";
@@ -28,30 +29,22 @@ justify-content: flex-end;
   }
 }
 `
+
 export const UserCardContainer = styled(Flex)`
 height:5rem;
-justify-content: center;
-
+justify-content: space-between;
 padding: 0 1rem;
 background-color: ${color.WHITE};
-margin-right: 5px;
 &:hover {
   background-color: ${color.HOVER_GRAY};
 }
-
-`
-export const ProfileWrapper = styled(Flex)`
-height:5rem;
-justify-content: flex-start;
-padding: 0 0.7rem;
-
 `
 
 export const Container = styled.label`
   display: flex;
-  position: relative;
   margin-top: 6px;
   margin-bottom: 3px;
+  width:100%;
   cursor: pointer;
   font-size: 20px;
   -webkit-user-select: none;
@@ -59,7 +52,7 @@ export const Container = styled.label`
   -ms-user-select: none;
   user-select: none; 
   align-items: center;
-  
+  justify-content: space-between;
   /** 선택했을 때 배경색 변경 */
   &:hover ${Input} ~ ${Checkmark}{
     background-color:${color.HOVER_GRAY}    
