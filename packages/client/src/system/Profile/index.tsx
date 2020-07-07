@@ -12,7 +12,7 @@ import { updateProfile } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
 import { throttle } from 'lodash'
-import { UseFormInput } from 'hooks'
+import { useInput } from 'hooks'
 
 interface Prop {
   /** 유져 식별자 */
@@ -47,8 +47,8 @@ const Profile: FC<Prop> = ({
   isOverflow,
 }) => {
   const [isEditMode, setIsEditMode] = useState(false)
-  const editName = UseFormInput(name)
-  const editStatusMessage = UseFormInput(statusMessage || '')
+  const editName = useInput(name)
+  const editStatusMessage = useInput(statusMessage || '')
   const dispatch = useDispatch()
   const handleEditClick = () => {
     if (isEditMode) {
