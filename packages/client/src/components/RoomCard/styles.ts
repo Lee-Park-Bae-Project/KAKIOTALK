@@ -74,7 +74,7 @@ export const SubInfoWrapper = styled(Flex)`
   flex:1
   span {
     ${(props) => grayColor};
-  }  
+  } 
 `
 
 export const Time = styled.span`

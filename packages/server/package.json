@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/bin/www.js",
+    "start": "pm2 start dist/bin/www.js",
     "dev": "cross-env DEBUG=api:server nodemon --exec ts-node --ignore ./src/__test__ -r tsconfig-paths/register ./src/bin/www.ts",
     "create-env": "printenv > .env",
     "build": "tsc",
@@ -37,6 +37,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
     "node": "^13.12.0",
+    "pm2": "^4.4.0",
     "sequelize": "^5.21.3",
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0",

@@ -1,4 +1,5 @@
 
+import { QueryTypes } from 'sequelize/types'
 import * as chatService from '../services/chat'
 import * as userService from '../services/user'
 import {
@@ -32,6 +33,7 @@ export const getChats = controllerHelper(async (req, res, next) => {
 
 export const getRoom = controllerHelper(async (req, res, next) => {
   const { roomId } = req.params
+  console.log(roomId)
   let rooms
   if (roomId) {
     rooms = await chatService.findRoomByUuid(roomId)
@@ -72,4 +74,27 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 
   return data
 })
+export const makeRoom = controllerHelper(async (req, res, next) => {
+  try {
+    const inviteUser = req.query.args as QueryTypes[]
 
+    const roomId = await chatService.createRoom()
+    if (!roomId) {
+      throw httpError.IDK
+    }
+    const addRoomParticipants = inviteUser.forEach(async (userList:QueryTypes) => {
+      const userUuid = await JSON.parse(userList).uuid
+      const userName = await JSON.parse(userList).name
+
+      const userRoom = await chatService.makeRoomParticipants({
+        userUuid, userName,
+      }, roomId.id)
+      if (!userRoom) {
+        throw httpError.ROOM_NOT_FOUND
+      }
+    })
+    return roomId
+  } catch (e) {
+    next(e)
+  }
+})

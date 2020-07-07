@@ -38,6 +38,7 @@ export const url = {
     default: '/main',
     friendList: '/main/friend-list',
     chatList: '/main/chat-list',
+    makeChat: 'main/make-room',
   },
   login: '/login',
   chatRoom: '/chat',

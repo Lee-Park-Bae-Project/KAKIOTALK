@@ -6,11 +6,11 @@ import Flex from 'atoms/Flex'
 
 const S = {
   InputWrapper: styled(Flex)`
-  display:flex;
-  justify-content:flex-start;
-  padding:0.3rem;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.3rem;
   background: #F6F6F6;
-  border : 0.5px solid ${color.GRAY}
+  border : 0.5px solid ${color.GRAY};
   border-radius: 2rem;
 `,
   Input: styled.input`

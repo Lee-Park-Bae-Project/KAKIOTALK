@@ -6,6 +6,8 @@ import AddFriendTab from 'components/NavigationBar/AddFriendTab'
 import LogoutTab from 'components/NavigationBar/LogoutTab'
 import { useHistory } from 'react-router-dom'
 import { url } from 'common/constants'
+import MakeChatTab from './MakeChatTab'
+
 /**
  * - 네비게이션바
  * - 친구목록, 채팅목록, 친구추가 기능이 가능
@@ -25,6 +27,7 @@ const NavigationBar: FC = () => {
       <FriendTab isRouted={isRouted.friendList}/>
       <ChatTab isRouted={isRouted.chatList}/>
       <AddFriendTab/>
+      <MakeChatTab />
       <LogoutTab/>
     </S.ItemWrapper>
   </S.Container>

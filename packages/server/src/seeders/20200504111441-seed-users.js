@@ -12,7 +12,8 @@ module.exports = {
         uuid: '4f5f1535eec9e15d8d1a83295a98e59a',
         email: 'leeparkbaeproject@gmail.com',
         statusMessage: 'im leeparkbae',
-        imageUrl: 'https://lh3.googleusercontent.com/-JtrAoiGNRpA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckyagbLSdHypj6pzCqiy2iBHABqHQ/s96-c/photo.jpg',
+        imageUrl:
+            'https://lh3.googleusercontent.com/-JtrAoiGNRpA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckyagbLSdHypj6pzCqiy2iBHABqHQ/s96-c/photo.jpg',
         googleId: '113283872440363914094',
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -23,7 +24,8 @@ module.exports = {
         uuid: '4a80d7f71f7132ffb3e38947d06b43a4',
         email: 'taristmas@gmail.com',
         statusMessage: 'im junow',
-        imageUrl: 'https://lh3.googleusercontent.com/-JtrAoiGNRpA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckyagbLSdHypj6pzCqiy2iBHABqHQ/s96-c/photo.jpg',
+        imageUrl:
+            'https://lh3.googleusercontent.com/-JtrAoiGNRpA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckyagbLSdHypj6pzCqiy2iBHABqHQ/s96-c/photo.jpg',
         googleId: '100916656626485581191',
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -38,7 +40,8 @@ module.exports = {
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       },
-    ], {}
+    ],
+    {},
   ),
 
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete(tableName, null, {}),

@@ -202,3 +202,25 @@ export const addMessage = async ({
     return e
   }
 }
+interface userList{
+  userUuid: string;
+  userName: string;
+}
+
+export const createRoom = async () => models.Room.create()
+export const makeRoomParticipants = async ({
+  userUuid, userName,
+}:userList, roomId) => {
+  const user = await userService.findByUuid(userUuid)
+  if (!user) {
+    throw HttpError.USER_NOT_FOUND
+  }
+  const userId = user.id
+  const roomParticipant = await models.RoomParticipants.create({
+    roomId, userId,
+  })
+  if (!roomParticipant) {
+    throw HttpError.ROOM_NOT_FOUND
+  }
+  return roomParticipant
+}

@@ -43,3 +43,8 @@ export interface ApiUser extends SimpleUserType {
   statusMessge: string;
   imageUrl: string;
 }
+export type InviteUserType = Pick<User, 'uuid' | 'name'>
+export interface InviteUser extends InviteUserType{
+  uuid: string;
+  name: string;
+}

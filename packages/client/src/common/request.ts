@@ -38,6 +38,7 @@ export const getFriendList = () => Axios({
   url: 'social/friend-list',
 })
 export const getChatList = () => Axios({
+
   method: 'GET',
   url: 'dummy/chat-list',
 })
@@ -112,4 +113,10 @@ export const getChatByRoom = ({
 }: GetChatByRoom) => Axios<Temp>({
   method: 'GET',
   url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
+})
+
+export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Room, 'uuid'>>({
+  method: 'GET',
+  url: '/chat/makeRoom',
+  params: { args },
 })
