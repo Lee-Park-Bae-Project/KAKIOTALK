@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "pm2-runtime start dist/bin/www.js",
+    "start": "pm2 start ecosystem.config.js --env production",
     "dev": "cross-env DEBUG=api:server nodemon --exec ts-node --ignore ./src/__test__ -r tsconfig-paths/register ./src/bin/www.ts",
     "create-env": "printenv > .env",
     "build": "tsc",
