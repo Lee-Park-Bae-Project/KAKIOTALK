@@ -6,16 +6,39 @@ export const GET_CHAT_SUCCESS = 'room/GET_CHAT_SUCCESS' as const
 export const GET_CHAT_FAILURE = 'room/GET_CHAT_FAIL' as const
 export const ADD_CHAT = 'room/ADD_CHAT' as const
 
-export const getChatRequest = (roomUuid: string) => ({
+interface GetChatRequest {
+  roomUuid: string
+  offset: number
+  limit: number
+}
+export const getChatRequest = ({
+  roomUuid,
+  offset,
+  limit,
+}: GetChatRequest) => ({
   type: GET_CHAT_REQUEST,
-  payload: roomUuid,
+  payload: {
+    roomUuid,
+    offset,
+    limit,
+  },
 })
 
-export const getChatSuccess = (roomUuid: string, newChat: ApiChat[]) => ({
+interface GetChatSuccess {
+  roomUuid: string
+  chats: ApiChat[]
+  offset: number
+  limit: number
+}
+export const getChatSuccess = ({
+  roomUuid, chats, offset, limit,
+}: GetChatSuccess) => ({
   type: GET_CHAT_SUCCESS,
   payload: {
     roomUuid,
-    newChat,
+    chats,
+    offset,
+    limit,
   },
 })
 
@@ -32,3 +55,4 @@ export const addChat = (roomUuid: string, newChat: ApiChat) => ({
     newChat,
   },
 })
+

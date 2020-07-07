@@ -64,7 +64,15 @@ export const findAllRooms = async (userId: number) => {
   })
   return preProcessed
 }
-export const getChatsByRoomId = async (roomUuid: string) => {
+
+interface GetChatsByRoomId {
+  roomUuid: string
+  limit: number
+  offset: number
+}
+export const getChatsByRoomId = async ({
+  roomUuid, limit, offset,
+}:GetChatsByRoomId) => {
   const room = await models.Room.findOne({ where: { uuid: roomUuid } })
   if (!room) {
     throw HttpError.IDK
@@ -74,7 +82,7 @@ export const getChatsByRoomId = async (roomUuid: string) => {
     raw: true,
     nest: true,
     attributes: ['uuid', 'content', 'createdAt', 'updatedAt'],
-    order: [['createdAt', 'ASC']],
+    order: [['createdAt', 'DESC']],
     include: [
       {
         model: models.RoomParticipants,
@@ -85,7 +93,7 @@ export const getChatsByRoomId = async (roomUuid: string) => {
           {
             model: models.User,
             as: 'sender',
-            attributes: ['uuid', 'name', 'email', 'statusMessage', 'createdAt', 'updatedAt'],
+            attributes: ['uuid', 'name', 'email', 'statusMessage', 'imageUrl', 'createdAt', 'updatedAt'],
           },
           {
             model: models.Room,
@@ -95,9 +103,9 @@ export const getChatsByRoomId = async (roomUuid: string) => {
         ],
       },
     ],
+    limit,
+    offset,
   })
-  console.log(chats.length)
-  console.log(chats)
   return chats
 }
 
@@ -190,7 +198,29 @@ export const addMessage = async ({
     const newChat = await findChatById(chatId)
     return newChat
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return e
   }
+}
+interface userList{
+  userUuid: string;
+  userName: string;
+}
+
+export const createRoom = async () => models.Room.create()
+export const makeRoomParticipants = async ({
+  userUuid, userName,
+}:userList, roomId) => {
+  const user = await userService.findByUuid(userUuid)
+  if (!user) {
+    throw HttpError.USER_NOT_FOUND
+  }
+  const userId = user.id
+  const roomParticipant = await models.RoomParticipants.create({
+    roomId, userId,
+  })
+  if (!roomParticipant) {
+    throw HttpError.ROOM_NOT_FOUND
+  }
+  return roomParticipant
 }

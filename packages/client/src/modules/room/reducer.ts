@@ -2,6 +2,7 @@ import {
   GET_ROOM_FAILURE,
   GET_ROOM_REQUEST,
   GET_ROOM_SUCCESS,
+
 } from 'modules/room/action'
 import {
   RoomAction,
@@ -29,6 +30,7 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
     case GET_ROOM_FAILURE: {
       return initialState
     }
+
     default: return state
   }
 }

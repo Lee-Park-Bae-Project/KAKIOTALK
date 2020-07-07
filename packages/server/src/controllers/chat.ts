@@ -1,4 +1,5 @@
 
+import { QueryTypes } from 'sequelize/types'
 import * as chatService from '../services/chat'
 import * as userService from '../services/user'
 import {
@@ -7,17 +8,32 @@ import {
 import * as httpError from '../common/error'
 
 export const getChats = controllerHelper(async (req, res, next) => {
-  const { roomId } = req.params
-  const chats = await chatService.getChatsByRoomId(roomId)
+  const { roomId: roomUuid } = req.params
+  const limit = Number(req.query.limit)
+  const offset = Number(req.query.offset)
+
+  if (limit === undefined || offset === undefined) {
+    throw httpError.BAD_REQUEST
+  }
+  const chats = await chatService.getChatsByRoomId({
+    roomUuid,
+    limit,
+    offset,
+  })
   if (!chats) {
     throw httpError.ROOM_NOT_FOUND
   }
 
-  return chats
+  return {
+    chats: chats.reverse(),
+    offset,
+    limit,
+  }
 })
 
 export const getRoom = controllerHelper(async (req, res, next) => {
   const { roomId } = req.params
+  console.log(roomId)
   let rooms
   if (roomId) {
     rooms = await chatService.findRoomByUuid(roomId)
@@ -58,4 +74,27 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 
   return data
 })
+export const makeRoom = controllerHelper(async (req, res, next) => {
+  try {
+    const inviteUser = req.query.args as QueryTypes[]
 
+    const roomId = await chatService.createRoom()
+    if (!roomId) {
+      throw httpError.IDK
+    }
+    const addRoomParticipants = inviteUser.forEach(async (userList:QueryTypes) => {
+      const userUuid = await JSON.parse(userList).uuid
+      const userName = await JSON.parse(userList).name
+
+      const userRoom = await chatService.makeRoomParticipants({
+        userUuid, userName,
+      }, roomId.id)
+      if (!userRoom) {
+        throw httpError.ROOM_NOT_FOUND
+      }
+    })
+    return roomId
+  } catch (e) {
+    next(e)
+  }
+})

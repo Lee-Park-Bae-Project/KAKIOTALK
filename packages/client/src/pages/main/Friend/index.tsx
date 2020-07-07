@@ -6,8 +6,9 @@ import { SimpleUserType } from 'types'
 
 export interface Props {
   myProfile: SimpleUserType
-  friendList: SimpleUserType[];
-  searchFriendKeyword: string;
+  friendList: SimpleUserType[]
+  searchFriendKeyword: string
+  size?: string
 }
 const Friend: FC<Props> = ({
   myProfile, friendList, searchFriendKeyword,
