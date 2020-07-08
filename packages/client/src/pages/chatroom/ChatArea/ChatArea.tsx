@@ -1,11 +1,7 @@
 import React from 'react'
 import { ApiChat } from 'types'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
-import { RootState } from 'modules'
-import { getChatRequest } from 'modules/chat'
-import { useIntersectionObserver } from 'hooks'
+import * as request from 'common/request'
+import { APIs } from '@kakio/common'
 import ChatList from './ChatList'
 import * as S from './styles'
 
@@ -17,7 +13,6 @@ const {
   useRef,
   useState,
   useEffect,
-  useCallback,
 } = React
 
 interface Props{
@@ -28,37 +23,27 @@ const ChatArea: React.FC<Props> = ({
   userUuid,
   roomUuid,
 }) => {
+  const [firstChat, setFirstChat] = useState<APIs.GetFirstChat | null>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
-  const chatTopRef = useRef<HTMLDivElement>(null)
   const chatBottomRef = useRef<HTMLDivElement>(null)
-  const chatState = useSelector((state: RootState) => state.chat)
-  const dispatch = useDispatch()
 
-  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    if (!isIntersecting) return
-    if (chatState.isLoading) {
-      return
+  useEffect(() => {
+    if (!roomUuid) return
+    const fetch = async () => {
+      const response = await request.getFirstChat({ roomUuid })
+      setFirstChat(response.data.data)
     }
-    dispatch(getChatRequest({
-      roomUuid,
-      offset: chatState.data[roomUuid].offset,
-      limit: chatState.data[roomUuid].offset,
-    }))
-  }
 
-  useIntersectionObserver({
-    target: chatTopRef.current,
-    onIntersect,
-  })
+    fetch()
+  }, [roomUuid])
 
   return (
     <S.Container ref={chatContainerRef}>
-      <div ref={chatTopRef} id="observe"/>
       <ChatList
         userUuid={userUuid}
         roomUuid={roomUuid}
-        chatState={chatState}
         chatBottomRef={chatBottomRef}
+        firstChat={firstChat}
       />
       <S.ChatBottom ref={chatBottomRef}></S.ChatBottom>
     </S.Container>

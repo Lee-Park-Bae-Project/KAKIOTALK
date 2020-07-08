@@ -43,7 +43,7 @@ module.exports = {
       },
     ],
     'no-duplicate-imports': 'error',
-    'object-curly-newline': ['error', { minProperties: 2 }],
+    'object-curly-newline': ['error', { minProperties: 3 }],
     'react/prop-types': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     'import/no-extraneous-dependencies': 0,

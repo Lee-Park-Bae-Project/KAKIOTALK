@@ -5,11 +5,11 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { Friend } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { UserModel } from './user'
 
 export const FRIEND_ASSOCIATION_ALIAS = { User: 'user' as const }
-export interface FriendModel extends Model, Friend {
+export interface FriendModel extends Model, Models.Friend {
   [FRIEND_ASSOCIATION_ALIAS.User]:UserModel
 }
 

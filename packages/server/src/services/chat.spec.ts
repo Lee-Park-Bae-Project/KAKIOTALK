@@ -1,6 +1,6 @@
 import request from 'supertest'
 
-const app = require('../../app')
+const app = require('../app')
 
 const agent = request.agent(app)
 const googleId = '113283872440363914094'
@@ -23,7 +23,7 @@ it('로그인 | 200', async () => {
 describe('GET /v1/chat/', () => {
   it('roomId 로 채팅 조회 | 200', async () => {
     const roomId = '46e137796f00ee278ac7a5ca17e3b586'
-    const response = await agent.get(`/v1/chat/message/${roomId}`)
+    const response = await agent.get(`/v1/chat/message/${roomId}?offset=0&limit=5`)
     expect(response.status).toEqual(200)
   })
 
@@ -67,7 +67,7 @@ describe('채팅추가', () => {
   })
 
   it('GET: /v1/chat/message/:roomUuid roomUuid로 해당방의 채팅 조회 | 200', async () => {
-    const response = await agent.get(`/v1/chat/message/${roomUuid}`)
+    const response = await agent.get(`/v1/chat/message/${roomUuid}?offset=0&limit=10`)
     const { data } = response.body
     expect(response.status).toEqual(200)
     prevMessages = data
@@ -88,3 +88,18 @@ describe('채팅추가', () => {
   })
 })
 
+describe('첫번째, 마지막 채팅 가져오기', () => {
+  it('GET: /v1/chat/first-chat | 200', async () => {
+    const roomUuid = '46e137796f00ee278ac7a5ca17e3b586'
+    const response = await agent.get(`/v1/chat/first-chat/${roomUuid}`)
+    const { data } = response.body
+    expect(data.content).toEqual('im ghost')
+  })
+
+  it('GET: /v1/chat/last-chat | 200', async () => {
+    const roomUuid = '46e137796f00ee278ac7a5ca17e3b586'
+    const response = await agent.get(`/v1/chat/last-chat/${roomUuid}`)
+    const { data } = response.body
+    expect(data.content).toEqual('im not ghost')
+  })
+})

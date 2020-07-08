@@ -5,12 +5,12 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { Chat } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { RoomParticipantsModel } from './roomParticipants'
 
 export const CHAT_ASSOCIATION_ALIAS = { RoomParticipants: 'metaInfo' as const }
 
-export interface ChatModel extends Model, Chat {
+export interface ChatModel extends Model, Models.Chat {
   [CHAT_ASSOCIATION_ALIAS.RoomParticipants]?: RoomParticipantsModel;
 }
 

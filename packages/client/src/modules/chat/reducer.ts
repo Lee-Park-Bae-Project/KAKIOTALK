@@ -17,7 +17,7 @@ const initialState: ChatState = {
   isLoading: false,
   data: {},
 }
-const LIMIT = 15
+const LIMIT = 30
 
 const chat = (state: ChatState = initialState, action: ChatAction) => {
   switch (action.type) {
@@ -40,12 +40,6 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
         combinedChats = chats
       }
 
-      // 새로들어온 데이터 포함하여 시간순 정렬
-      combinedChats.sort((a, b) => {
-        if (a.updatedAt < b.updatedAt) return -1
-        return 1
-      })
-
       const newState = produce(state, (draft) => {
         draft.isLoading = false
         draft.data[roomUuid] = {
@@ -64,7 +58,7 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
       const { roomUuid } = action.payload
       const { newChat } = action.payload
       const newState = produce(state, (draft) => {
-        draft.data[roomUuid].chats.push(newChat)
+        draft.data[roomUuid].chats.unshift(newChat)
       })
 
       return newState

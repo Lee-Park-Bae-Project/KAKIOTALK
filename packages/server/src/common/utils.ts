@@ -34,7 +34,7 @@ export const controllerHelper: ControllerHelper = (controller) => async (req, re
     const data = await controller(req, res, next)
     response(res, data)
   } catch (e) {
-    console.log(e)
+    console.error(e)
     next(e)
   }
 }

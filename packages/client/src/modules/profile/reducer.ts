@@ -4,9 +4,9 @@ import {
   UPDATE_PROFILE_SUCCESS,
 } from 'modules/profile/action'
 import { ProfileAction } from 'modules/profile/types'
-import { User } from '@kakio/common'
+import { Models } from '@kakio/common'
 
-type UserState = Pick<User, 'uuid' | 'email' | 'statusMessage' | 'name' | 'imageUrl'>
+type UserState = Pick<Models.User, 'uuid' | 'email' | 'statusMessage' | 'name' | 'imageUrl'>
 
 const initialState: UserState = {
   uuid: '',

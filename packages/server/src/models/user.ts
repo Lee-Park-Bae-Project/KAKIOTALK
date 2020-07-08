@@ -4,7 +4,7 @@ import {
   Model,
   Sequelize,
 } from 'sequelize'
-import { User } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { RoomModel } from './room'
 import { FriendModel } from './friends'
 
@@ -12,7 +12,7 @@ export const USER_ASSOCIATION_ALIAS = {
   RoomParticipants: 'rooms' as const,
   Friend: 'friend' as const,
 }
-export interface UserModel extends Model, User {
+export interface UserModel extends Model, Models.User {
   [USER_ASSOCIATION_ALIAS.RoomParticipants]?: RoomModel[];
   [USER_ASSOCIATION_ALIAS.Friend]: FriendModel[];
 }
