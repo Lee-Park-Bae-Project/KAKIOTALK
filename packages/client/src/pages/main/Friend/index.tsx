@@ -29,7 +29,7 @@ const Friend: FC = () => {
   useEffect(() => {
     dispatch(getFriends())
     dispatch(getProfile())
-  })
+  }, [])
 
   const [searchFriendKeyword, setSearchFriendKeyword] = useState('')
   const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {

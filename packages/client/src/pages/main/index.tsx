@@ -11,18 +11,19 @@ import { getRoomRequest } from 'modules/room'
 import { afterLogin } from 'socket'
 import Friend from 'pages/main/Friend'
 import { getUserInfo } from 'common/request'
+import { useAuth } from 'hooks'
 
 const Main: FC = () => {
   const dispatch = useDispatch()
+  useAuth()
   useEffect(() => {
     dispatch(getRoomRequest())
     getUserInfo().then((response) => {
       const { uuid } = response.data.data
       afterLogin({ uuid })
     })
-  })
+  }, [])
   window.history.pushState(null, '', window.location.href)
-
   return (
     <S.Container>
         <S.MainWrapper>
