@@ -1,8 +1,19 @@
-import React, { FC } from 'react'
+import React, {
+  FC, Fragment, useEffect, useState,
+} from 'react'
 import List from 'system/List'
 import Hr from 'atoms/Hr'
-import { UserCard } from 'components'
+import {
+  SearchInput, UserCard,
+} from 'components'
 import { SimpleUserType } from 'types'
+import * as S from 'system/Room/style'
+import { getFriends } from 'modules/friends'
+import { getProfile } from 'modules/profile'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import { RootState } from 'modules'
 
 export interface Props {
   myProfile: SimpleUserType
@@ -10,9 +21,30 @@ export interface Props {
   searchFriendKeyword: string
   size?: string
 }
-const Friend: FC<Props> = ({
-  myProfile, friendList, searchFriendKeyword,
-}) => (
+const Friend: FC = () => {
+  const myProfile: SimpleUserType = useSelector((state: RootState) => state.profile)
+  const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getFriends())
+    dispatch(getProfile())
+  })
+
+  const [searchFriendKeyword, setSearchFriendKeyword] = useState('')
+  const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchFriendKeyword(e.target.value)
+  }
+
+  return (
+    <Fragment>
+    <S.Header>
+    <SearchInput
+      value={searchFriendKeyword}
+      onChange={onFriendKeywordChange}
+      placeholder='이름 검색'
+    />
+  </S.Header>
     <List>
       <UserCard
         key={myProfile.uuid}
@@ -48,6 +80,9 @@ const Friend: FC<Props> = ({
       )}
 
     </List>
-)
+    </Fragment>
+
+  )
+}
 
 export default Friend
