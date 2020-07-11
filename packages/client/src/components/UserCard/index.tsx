@@ -5,7 +5,7 @@ import * as S from 'components/UserCard/styles'
 import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
 import Profile from 'system/Profile'
-import { useOutsideClick } from 'common/utils'
+import { useOutsideClick } from 'hooks'
 
 interface UserCardProp {
   /** user uuid */

@@ -1,9 +1,8 @@
 import React, {
   FC, useCallback, useRef, useState,
 } from 'react'
-import {
-  convertTimeForMsgFormat, useOutsideClick,
-} from 'common/utils'
+import { convertTimeForMsgFormat } from 'common/utils'
+import { useOutsideClick } from 'hooks'
 import Profile from 'system/Profile'
 import { ApiChat } from 'types'
 import shortid from 'shortid'

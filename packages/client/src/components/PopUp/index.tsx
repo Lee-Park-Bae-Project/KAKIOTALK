@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useOutsideClick } from 'common/utils'
+import { useOutsideClick } from 'hooks'
 import * as S from './style'
 
 interface Props {
