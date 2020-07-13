@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useEffect, useState,
+  FC, Fragment, useEffect,
 } from 'react'
 import List from 'system/List'
 import Hr from 'atoms/Hr'
@@ -14,34 +14,27 @@ import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { RootState } from 'modules'
+import {
+  useAuth, useInput,
+} from 'hooks'
 
-export interface Props {
-  myProfile: SimpleUserType
-  friendList: SimpleUserType[]
-  searchFriendKeyword: string
-  size?: string
-}
 const Friend: FC = () => {
   const myProfile: SimpleUserType = useSelector((state: RootState) => state.profile)
   const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
   const dispatch = useDispatch()
-
+  const { isLoggedIn } = useAuth()
   useEffect(() => {
-    dispatch(getFriends())
-    dispatch(getProfile())
-  }, [])
-
-  const [searchFriendKeyword, setSearchFriendKeyword] = useState('')
-  const onFriendKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchFriendKeyword(e.target.value)
-  }
-
+    if (isLoggedIn && myProfile.uuid === '') {
+      dispatch(getFriends())
+      dispatch(getProfile())
+    }
+  }, [isLoggedIn])
+  const friendKeyword = useInput('')
   return (
     <Fragment>
     <S.Header>
     <SearchInput
-      value={searchFriendKeyword}
-      onChange={onFriendKeywordChange}
+      {...friendKeyword}
       placeholder='이름 검색'
     />
   </S.Header>
@@ -61,7 +54,7 @@ const Friend: FC = () => {
           .filter(
             (friend) => friend.name
               .toLowerCase()
-              .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
+              .indexOf(friendKeyword.value.toLowerCase()) >= 0,
           )
           .map(({
             uuid, statusMessage, name, email, imageUrl,

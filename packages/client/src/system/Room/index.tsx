@@ -1,32 +1,30 @@
 import * as React from 'react'
 import List from 'system/List'
-import RoomCard from 'components/RoomCard'
 import {
   RouteComponentProps, withRouter,
 } from 'react-router-dom'
 import { url } from 'common/constants'
 import * as S from 'system/Room/style'
-import { SearchInput } from 'components'
+import {
+  RoomCard, SearchInput,
+} from 'components'
 import { useSelector } from 'react-redux'
 import { RootState } from 'modules'
+import { useInput } from 'hooks'
 
 const {
   useState, Fragment,
 } = React
 
 const Room: React.FC<RouteComponentProps> = ({ history }) => {
-  const [searchRoomKeyword, setSearchRoomKeyword] = useState('')
-  const onRoomKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchRoomKeyword(e.target.value)
-  }
+  const roomKeyword = useInput('')
   const roomState = useSelector((state: RootState) => state.room)
 
   return (
-    <Fragment>
+      <Fragment>
       <S.Header>
         <SearchInput
-          value={searchRoomKeyword}
-          onChange={onRoomKeywordChange}
+          {...roomKeyword}
           placeholder='참여자 검색'
         />
       </S.Header>
@@ -38,7 +36,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
             .filter(({ participants }) => participants.some(
               (participant) => participant.name
                 .toLowerCase()
-                .indexOf(searchRoomKeyword.toLowerCase()) >= 0,
+                .indexOf(roomKeyword.value.toLowerCase()) >= 0,
             ),)
             .map(({
               uuid, participants,
