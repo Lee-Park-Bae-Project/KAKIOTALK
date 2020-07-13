@@ -24,7 +24,7 @@ const Friend: FC = () => {
   const dispatch = useDispatch()
   const { isLoggedIn } = useAuth()
   useEffect(() => {
-    if (isLoggedIn && myProfile.uuid === '') {
+    if (isLoggedIn) {
       dispatch(getFriends())
       dispatch(getProfile())
     }
