@@ -29,9 +29,6 @@ const Main: FC = () => {
   window.history.pushState(null, '', window.location.href)
   return (
     <S.Container>
-      <S.NavigationBarWrapper>
-        <NavigationBar />
-      </S.NavigationBarWrapper>
       <S.MainWrapper>
         {isLoggedIn ? (
           <Fragment>
@@ -44,6 +41,9 @@ const Main: FC = () => {
           </S.LoaderContainer>
         )}
       </S.MainWrapper>
+      <S.NavigationBarWrapper>
+        <NavigationBar />
+      </S.NavigationBarWrapper>
     </S.Container>
   )
 }
