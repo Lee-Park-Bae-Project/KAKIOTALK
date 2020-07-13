@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { Fragment } from 'react'
 import List from 'system/List'
 import {
   RouteComponentProps, withRouter,
@@ -6,22 +6,18 @@ import {
 import { url } from 'common/constants'
 import * as S from 'system/Room/style'
 import {
-  RoomCard, SearchInput,
+  Loader, RoomCard, SearchInput,
 } from 'components'
 import { useSelector } from 'react-redux'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
-
-const {
-  useState, Fragment,
-} = React
 
 const Room: React.FC<RouteComponentProps> = ({ history }) => {
   const roomKeyword = useInput('')
   const roomState = useSelector((state: RootState) => state.room)
 
   return (
-      <Fragment>
+      <S.Container>
       <S.Header>
         <SearchInput
           {...roomKeyword}
@@ -29,7 +25,9 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
         />
       </S.Header>
       {roomState.isLoading ? (
-        <div>loading...</div>
+        <S.LoaderContainer>
+          <Loader/>
+        </S.LoaderContainer>
       ) : (
         <List>
           {roomState.data
@@ -55,7 +53,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
             })}
         </List>
       )}
-    </Fragment>
+    </S.Container>
   )
 }
 

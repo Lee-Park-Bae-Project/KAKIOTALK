@@ -1,5 +1,5 @@
 import React, {
-  FC, useEffect,
+  FC, Fragment, useEffect,
 } from 'react'
 import * as S from 'pages/main/styles'
 import {
@@ -27,17 +27,24 @@ const Main: FC = () => {
     }
   }, [])
   window.history.pushState(null, '', window.location.href)
-  return (isLoggedIn
-    ? <S.Container>
-      <S.MainWrapper>
-        <Route path={url.main.friendList} component={Friend} />
-        <Route path={url.main.chatList} component={Room} />
-      </S.MainWrapper>
+  return (
+    <S.Container>
       <S.NavigationBarWrapper>
         <NavigationBar />
       </S.NavigationBarWrapper>
+      <S.MainWrapper>
+        {isLoggedIn ? (
+          <Fragment>
+            <Route path={url.main.friendList} component={Friend} />
+            <Route path={url.main.chatList} component={Room} />
+          </Fragment>
+        ) : (
+          <S.LoaderContainer>
+            <Loader />
+          </S.LoaderContainer>
+        )}
+      </S.MainWrapper>
     </S.Container>
-    : <Loader/>
   )
 }
 
