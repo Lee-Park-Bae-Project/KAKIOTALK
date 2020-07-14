@@ -9,10 +9,10 @@ import {
 import { RootState } from 'modules'
 import {
   chatFromServer,
-  Event,
   joinRooms,
   removeSocketEventListener,
 } from 'socket'
+import { Sockets } from '@kakio/common'
 import Header from './Header'
 import TextArea from './TextArea'
 import ChatArea from './ChatArea'
@@ -43,7 +43,7 @@ const ChatRoom: FC = () => {
 
   useEffect(() => {
     setRoomUuid(params.roomUuid)
-    const limit = 15
+    const limit = 30
     const offset = 0
     dispatch(getChatRequest({
       roomUuid: params.roomUuid,
@@ -69,7 +69,7 @@ const ChatRoom: FC = () => {
     chatFromServer(dispatch)
 
     return (() => {
-      removeSocketEventListener(Event.chatFromServer)
+      removeSocketEventListener(Sockets.EventMap.chatFromServer)
     })
   })
   return (

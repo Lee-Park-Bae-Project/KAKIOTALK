@@ -1,4 +1,4 @@
-import { Chat } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { chatFromServer } from '../socket'
 import {
   CHAT_ASSOCIATION_ALIAS,
@@ -66,18 +66,13 @@ export const findAllRooms = async (userId: number) => {
 }
 
 interface GetChatsByRoomId {
-  roomUuid: string
+  roomId: number
   limit: number
   offset: number
 }
 export const getChatsByRoomId = async ({
-  roomUuid, limit, offset,
+  roomId, limit, offset,
 }:GetChatsByRoomId) => {
-  const room = await models.Room.findOne({ where: { uuid: roomUuid } })
-  if (!room) {
-    throw HttpError.IDK
-  }
-  const roomId = room.id
   const chats = await models.Chat.findAll({
     raw: true,
     nest: true,
@@ -155,7 +150,7 @@ export const createChat = async ({
   content,
   createdAt,
   updatedAt,
-}: Omit<Chat, 'id' | 'uuid' | 'sender'>) => models.Chat.create({
+}: Omit<Models.Chat, 'id' | 'uuid' | 'sender'>) => models.Chat.create({
   roomParticipantsId,
   content,
   createdAt,
@@ -194,6 +189,7 @@ export const addMessage = async ({
       createdAt,
       updatedAt,
     })
+
     const chatId = newChatData.id
     const newChat = await findChatById(chatId)
     return newChat
@@ -224,3 +220,29 @@ export const makeRoomParticipants = async ({
   }
   return roomParticipant
 }
+
+export const findFirstChat = async (roomId: number) => models.Chat.findOne({
+  raw: true,
+  nest: true,
+  order: [['updatedAt', 'ASC']],
+  include: [
+    {
+      model: models.RoomParticipants,
+      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
+      where: { roomId },
+    },
+  ],
+})
+
+export const findLastChat = async (roomId: number) => models.Chat.findOne({
+  raw: true,
+  nest: true,
+  order: [['updatedAt', 'ASC']],
+  include: [
+    {
+      model: models.RoomParticipants,
+      as: CHAT_ASSOCIATION_ALIAS.RoomParticipants,
+      where: { roomId },
+    },
+  ],
+})

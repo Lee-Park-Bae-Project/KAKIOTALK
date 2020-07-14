@@ -5,9 +5,9 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { ChatIsRead } from '@kakio/common'
+import { Models } from '@kakio/common'
 
-export interface ChatIsReadModel extends Model, ChatIsRead {}
+export interface ChatIsReadModel extends Model, Models.ChatIsRead {}
 
 export type ChatIsReadStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): ChatIsReadModel;

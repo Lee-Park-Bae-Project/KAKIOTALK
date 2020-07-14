@@ -26,6 +26,7 @@ function* getChatSaga(action: ReturnType<typeof getChatRequest>) {
     const {
       chats, offset, limit,
     } = response.data.data
+
     yield put(getChatSuccess({
       roomUuid,
       chats,

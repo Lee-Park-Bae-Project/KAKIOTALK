@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import * as S from 'system/UserList/styles'
 import UserCard from 'components/UserCard'
 import Hr from 'atoms/Hr'
-import { User } from '@kakio/common'
+import { Models } from '@kakio/common'
 
 interface Props{
   /** 내 정보 */
-  myProfile: User;
+  myProfile: Models.User;
   /** 친구 목록을 담은 배열 */
-  userList: User[];
+  userList: Models.User[];
   /** 각 친구들 클릭 했을 때 클릭 이벤트 핸들러 */
   onClick: (uuid: string) => () => void;
 }

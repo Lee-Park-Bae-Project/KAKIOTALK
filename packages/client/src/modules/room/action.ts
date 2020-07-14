@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { Room } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { InviteUser } from 'types'
 import RoomCardStories from 'components/RoomCard/RoomCard.stories'
 
@@ -13,7 +13,7 @@ export const getRoomRequest = () => ({
   payload: {},
 })
 
-export const getRoomSuccess = (room: Room[]) => ({
+export const getRoomSuccess = (room: Models.Room[]) => ({
   type: GET_ROOM_SUCCESS,
   payload: room,
 })

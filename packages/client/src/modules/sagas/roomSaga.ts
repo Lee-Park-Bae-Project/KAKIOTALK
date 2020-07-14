@@ -12,7 +12,7 @@ import {
 } from 'modules/room/action'
 
 import * as request from 'common/request'
-import { Room } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'socket'
 import { alert } from 'common/utils'
@@ -20,7 +20,7 @@ import { InviteUser } from 'types'
 
 function* room() {
   try {
-    const response: AxiosResponse<request.ResponseType<Room[]>> = yield call(request.getRooms)
+    const response: AxiosResponse<request.ResponseType<Models.Room[]>> = yield call(request.getRooms)
     const roomUuids = response.data.data.map((v) => v.uuid)
     joinRooms({ roomUuids })
     yield put(getRoomSuccess(response.data.data))
@@ -28,7 +28,7 @@ function* room() {
     yield put(getRoomFailure(e.message))
   }
 }
-type roomIdType = AxiosResponse<request.ResponseType<Room[]>>
+type roomIdType = AxiosResponse<request.ResponseType<Models.Room[]>>
 function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   try {
     const response: roomIdType = yield call(request.makeRoomRequest, payload)

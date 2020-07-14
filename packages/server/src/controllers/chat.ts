@@ -15,17 +15,22 @@ export const getChats = controllerHelper(async (req, res, next) => {
   if (limit === undefined || offset === undefined) {
     throw httpError.BAD_REQUEST
   }
+  const room = await chatService.findRoomByUuid(roomUuid)
+  if (!room) {
+    throw httpError.ROOM_NOT_FOUND
+  }
+
   const chats = await chatService.getChatsByRoomId({
-    roomUuid,
+    roomId: room.id,
     limit,
     offset,
   })
   if (!chats) {
-    throw httpError.ROOM_NOT_FOUND
+    throw httpError.DATA_NOT_FOUND
   }
 
   return {
-    chats: chats.reverse(),
+    chats,
     offset,
     limit,
   }
@@ -33,7 +38,6 @@ export const getChats = controllerHelper(async (req, res, next) => {
 
 export const getRoom = controllerHelper(async (req, res, next) => {
   const { roomId } = req.params
-  console.log(roomId)
   let rooms
   if (roomId) {
     rooms = await chatService.findRoomByUuid(roomId)
@@ -97,4 +101,37 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
   } catch (e) {
     next(e)
   }
+})
+
+export const getFirstChat = controllerHelper(async (req, res, next) => {
+  const { roomUuid } = req.params
+  const room = await chatService.findRoomByUuid(roomUuid)
+  if (!room) {
+    throw httpError.ROOM_NOT_FOUND
+  }
+
+  const roomId = room.id
+  const firstChat = await chatService.findFirstChat(roomId)
+  if (!firstChat) {
+    throw httpError.DATA_NOT_FOUND
+  }
+
+  return firstChat
+})
+
+export const getLastChat = controllerHelper(async (req, res, next) => {
+  const { roomUuid } = req.params
+
+  const room = await chatService.findRoomByUuid(roomUuid)
+  if (!room) {
+    throw httpError.ROOM_NOT_FOUND
+  }
+
+  const roomId = room.id
+  const lastChat = await chatService.findLastChat(roomId)
+  if (!lastChat) {
+    throw httpError.DATA_NOT_FOUND
+  }
+
+  return lastChat
 })

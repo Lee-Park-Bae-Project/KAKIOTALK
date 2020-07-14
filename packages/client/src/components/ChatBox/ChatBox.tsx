@@ -1,5 +1,9 @@
 import React, {
-  FC, useCallback, useRef, useState,
+  FC,
+  forwardRef,
+  useCallback,
+  useRef,
+  useState,
 } from 'react'
 import { convertTimeForMsgFormat } from 'common/utils'
 import { useOutsideClick } from 'hooks'
@@ -9,15 +13,15 @@ import shortid from 'shortid'
 import * as S from './style'
 
 type Props = {
-  createdAt: string
-  chatGroup: ApiChat[]
+  chat: ApiChat
   isMine: boolean
+  ref?: React.Ref<HTMLDivElement>;
 }
-const ChatBox: FC<Props> = ({
-  createdAt,
-  chatGroup,
-  isMine,
-}) => {
+
+// eslint-disable-next-line react/display-name
+const ChatBox: React.ForwardRefExoticComponent<Props> = forwardRef(({
+  chat, isMine,
+}, ref) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false)
   const [isOverflow, setIsOverflow] = useState(false)
   const handlePopUpClick = () => {
@@ -41,9 +45,9 @@ const ChatBox: FC<Props> = ({
           isProfileClicked && (
             <>
               <Profile
-                uuid={chatGroup[0].uuid}
-                name={chatGroup[0].metaInfo.sender.name}
-                statusMessage={chatGroup[0].metaInfo.sender.statusMessage}
+                uuid={chat.uuid}
+                name={chat.metaInfo.sender.name}
+                statusMessage={chat.metaInfo.sender.statusMessage}
                 handleCloseClick={handlePopUpClick}
                 imageUrl='https://images.unsplash.com/photo-1591369376214-b9f91924f10d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'
                 profileRef={profileRef}
@@ -54,29 +58,24 @@ const ChatBox: FC<Props> = ({
           )
         }
       </S.ProfileThumbnailWrapper>
-      <S.Body>
-        <S.Name isMine={isMine}>{chatGroup[0].metaInfo.sender.name}</S.Name>
+      <S.Body ref={ref}>
+        <S.Name isMine={isMine}>{chat.metaInfo.sender.name}</S.Name>
         <S.ChatGroup isMine={isMine}>
-          {
-            chatGroup.map((chat, idx) => (
-              <S.ContentWrapper key={shortid.generate()}>
-                {
-                  <S.ContentBorder isMine={isMine}>
-                    <S.Content key={chat.uuid} isMine={isMine}>
-                      {chat.content}
-                    </S.Content>
-                    {
-                      idx === chatGroup.length - 1 && <S.Time>{convertTimeForMsgFormat(createdAt)}</S.Time>
-                    }
-                  </S.ContentBorder>
-                }
-              </S.ContentWrapper>
-            ))
-          }
+          <S.ContentWrapper key={shortid.generate()}>
+            {
+              <S.ContentBorder isMine={isMine}>
+                <S.Content key={chat.uuid} isMine={isMine}>
+                  {chat.content}
+                </S.Content>
+                <S.Time>{convertTimeForMsgFormat(chat.createdAt)}</S.Time>
+              </S.ContentBorder>
+            }
+          </S.ContentWrapper>
         </S.ChatGroup>
       </S.Body>
     </S.Container>
   )
-}
+})
 
 export default ChatBox
+
