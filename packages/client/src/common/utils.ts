@@ -31,17 +31,3 @@ const alert = {
 }
 export { alert }
 
-export const useOutsideClick = (ref: React.RefObject<HTMLDivElement>, callback: () => void) => {
-  const handleClick = (e: MouseEvent) => {
-    if (ref.current && e.target instanceof Node && !ref.current.contains(e.target)) {
-      callback()
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('click', handleClick)
-    return () => {
-      document.removeEventListener('click', handleClick)
-    }
-  })
-}

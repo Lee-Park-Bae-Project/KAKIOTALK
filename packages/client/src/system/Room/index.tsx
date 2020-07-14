@@ -1,44 +1,40 @@
-import * as React from 'react'
+import React, { Fragment } from 'react'
 import List from 'system/List'
-import RoomCard from 'components/RoomCard'
 import {
   RouteComponentProps, withRouter,
 } from 'react-router-dom'
 import { url } from 'common/constants'
 import * as S from 'system/Room/style'
-import { SearchInput } from 'components'
+import {
+  Loader, RoomCard, SearchInput,
+} from 'components'
 import { useSelector } from 'react-redux'
 import { RootState } from 'modules'
-
-const {
-  useState, Fragment,
-} = React
+import { useInput } from 'hooks'
 
 const Room: React.FC<RouteComponentProps> = ({ history }) => {
-  const [searchRoomKeyword, setSearchRoomKeyword] = useState('')
-  const onRoomKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchRoomKeyword(e.target.value)
-  }
+  const roomKeyword = useInput('')
   const roomState = useSelector((state: RootState) => state.room)
 
   return (
-    <Fragment>
+      <S.Container>
       <S.Header>
         <SearchInput
-          value={searchRoomKeyword}
-          onChange={onRoomKeywordChange}
+          {...roomKeyword}
           placeholder='참여자 검색'
         />
       </S.Header>
       {roomState.isLoading ? (
-        <div>loading...</div>
+        <S.LoaderContainer>
+          <Loader/>
+        </S.LoaderContainer>
       ) : (
         <List>
           {roomState.data
             .filter(({ participants }) => participants.some(
               (participant) => participant.name
                 .toLowerCase()
-                .indexOf(searchRoomKeyword.toLowerCase()) >= 0,
+                .indexOf(roomKeyword.value.toLowerCase()) >= 0,
             ),)
             .map(({
               uuid, participants,
@@ -57,7 +53,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
             })}
         </List>
       )}
-    </Fragment>
+    </S.Container>
   )
 }
 

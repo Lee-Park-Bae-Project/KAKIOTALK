@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import withAuth, { WithAuthProps } from 'hocs/withAuth'
 import { useRouteMatch } from 'react-router-dom'
 import SearchAccordion from 'system/ChatRoomSearchBar'
 import { getChatRequest } from 'modules/chat'
+import { useAuth } from 'hooks'
 import {
   useDispatch, useSelector,
 } from 'react-redux'
@@ -22,14 +22,15 @@ const {
   useEffect, useState, useCallback,
 } = React
 
-const ChatRoom: FC<WithAuthProps> = ({ uuid }) => {
+const ChatRoom: FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { params } = useRouteMatch<{roomUuid: string}>()
   const [roomUuid, setRoomUuid] = useState('')
   const [roomName, setRoomName] = useState<string>('')
   const dispatch = useDispatch()
   const roomState = useSelector((state: RootState) => state.room)
-
+  const { userInfo } = useAuth()
+  const { uuid } = userInfo
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)
   }, [isSearchOpen, setIsSearchOpen])
@@ -84,4 +85,4 @@ const ChatRoom: FC<WithAuthProps> = ({ uuid }) => {
   )
 }
 
-export default withAuth(ChatRoom)
+export default ChatRoom
