@@ -10,10 +10,10 @@ const sizeMap = {
 
 export default sizeMap
 
-const SOCKET_URL = process.env.NODE_ENV === 'development' ? 'localhost:3050' : 'https://sylvan-terra-275316.du.r.appspot.com/'
+const SOCKET_URL = process.env.NODE_ENV === 'development' ? 'localhost:3050' : 'ws://sylvan-terra-275316.du.r.appspot.com/'
 
 const API_SERVER_URL = 'http://localhost:3050/v1/'
-const API_SERVER_URL_PRODUCT = 'https://sylvan-terra-275316.du.r.appspot.com/v1/'
+const API_SERVER_URL_PRODUCT = 'https//sylvan-terra-275316.du.r.appspot.com/v1/'
 
 const NODE_ENV_VAR = process.env.NODE_ENV
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || ''

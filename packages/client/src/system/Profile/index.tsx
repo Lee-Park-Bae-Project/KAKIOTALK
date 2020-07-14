@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useState,
+  FC, Fragment, useEffect, useState,
 } from 'react'
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
@@ -7,11 +7,15 @@ import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
-import { useDispatch } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { updateProfile } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
 import { throttle } from 'lodash'
+import { getProfile } from 'common/request'
+import { RootState } from 'modules'
 
 interface Prop {
   /** 유져 식별자 */
@@ -45,9 +49,21 @@ const Profile: FC<Prop> = ({
   isMyProfile,
   isOverflow,
 }) => {
+  interface InviteUser{
+    uuid: string;
+    name: string;
+  }
+
   const [isEditMode, setIsEditMode] = useState(false)
   const [editName, setEditName] = useState(name)
   const [editStatusMessage, setEditStatusMessage] = useState(statusMessage || '')
+  const myProfile = useSelector((state: RootState) => state.profile)
+
+  const login = useSelector((state: RootState) => state.login)
+  const [selectedList, setSelectedList] = useState([{
+    uuid, name,
+  }])
+
   const onChangename = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditName(e.target.value)
   }
@@ -55,6 +71,12 @@ const Profile: FC<Prop> = ({
     setEditStatusMessage(e.target.value)
   }
   const dispatch = useDispatch()
+  useEffect(() => {
+    if (login && login.isLoggedIn) {
+      dispatch(getProfile())
+    }
+  }, [])
+
   const handleEditClick = () => {
     if (isEditMode) {
       if (editName.length === 0) {
@@ -79,6 +101,14 @@ const Profile: FC<Prop> = ({
       if (confirm) {
         dispatch(deleteFriend(uuid))
       }
+    })
+  }
+  const onChatClick = () => {
+    const {
+      uuid: userUuid, name: userName,
+    } = myProfile
+    selectedList.concat({
+      uuid, name,
     })
   }
   const [slideMount, setSlideMount] = useState(0)
@@ -195,6 +225,7 @@ const Profile: FC<Prop> = ({
                   iconPosition='top'
                   size='1.2rem'
                   textSize='0.8rem'
+
                 />
                 </S.ButtonWrapper>
 
