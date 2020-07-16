@@ -27,3 +27,4 @@ web messenger
 # 기술문서
 
 - [Input Handler 최적화](./docs/input-handler.md)
+- [Nginx](docs/nginx.md)
