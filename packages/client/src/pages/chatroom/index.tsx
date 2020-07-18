@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import SearchAccordion from 'system/ChatRoomSearchBar'
-import { getChatRequest } from 'modules/chat'
+import {
+  getChatRequest, loadMoreRequest,
+} from 'modules/chat'
 import { useAuth } from 'hooks'
 import {
   useDispatch, useSelector,
@@ -50,7 +52,7 @@ const ChatRoom: FC = () => {
       limit,
       offset,
     }))
-  }, [params.roomUuid, dispatch])
+  }, [])
 
   useEffect(() => {
     const rn = roomState.data.find((v) => v.uuid === roomUuid)

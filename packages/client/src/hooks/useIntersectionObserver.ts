@@ -4,10 +4,12 @@ import {
 } from 'react'
 
 interface UseIntersectionObserver {
-  (cb: (isVisible: boolean) => void, deps: DependencyList): (node: any) => void
+  (cb: (entry: IntersectionObserverEntry) => void,
+  options: IntersectionObserverInit,
+  deps: DependencyList): (node: any) => void
 }
 
-const useIntersectionObserver: UseIntersectionObserver = (cb, deps) => {
+const useIntersectionObserver: UseIntersectionObserver = (cb, options, deps) => {
   const intersectionObserver = useRef<IntersectionObserver | null>(null)
 
   return useCallback((node) => {
@@ -16,8 +18,8 @@ const useIntersectionObserver: UseIntersectionObserver = (cb, deps) => {
     }
 
     intersectionObserver.current = new IntersectionObserver(([entry]) => {
-      cb(entry.isIntersecting)
-    })
+      cb(entry)
+    }, options)
 
     if (node) intersectionObserver.current.observe(node)
   }, deps)

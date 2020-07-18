@@ -77,5 +77,5 @@ const ChatBox: React.ForwardRefExoticComponent<Props> = forwardRef(({
   )
 })
 
-export default ChatBox
+export default React.memo(ChatBox)
 

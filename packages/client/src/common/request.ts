@@ -124,6 +124,23 @@ export const getChatByRoom = ({
   url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
 })
 
+export const loadMoreChat = ({
+  roomUuid,
+  limit,
+  offset,
+}: {
+  roomUuid: string
+  limit: number
+  offset: number
+}) => Axios<{
+  chats: Type.ApiChat[]
+  offset: number
+  limit: number}
+>({
+  method: 'GET',
+  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
+})
+
 export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Models.Room, 'uuid'>>({
   method: 'GET',
   url: '/chat/makeRoom',
