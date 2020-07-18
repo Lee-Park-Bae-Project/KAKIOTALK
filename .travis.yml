@@ -20,3 +20,6 @@ deploy:
   local_dir: packages/client/build
   on:
     branch: develop
+braches:
+  only: -develop
+    -feature/api-server-https
