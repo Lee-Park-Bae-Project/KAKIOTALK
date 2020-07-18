@@ -19,7 +19,4 @@ deploy:
   skip_cleanup: true
   local_dir: packages/client/build
   on:
-    branch: develop
-braches:
-  only: -develop
-    -feature/api-server-https
+    branch: feature/api-server-https
