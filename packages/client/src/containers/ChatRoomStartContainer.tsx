@@ -1,4 +1,6 @@
-import React, { FC } from 'react'
+import React, {
+  FC, useEffect, useState,
+} from 'react'
 import {
   useDispatch, useSelector,
 } from 'react-redux'
@@ -11,15 +13,10 @@ import {
 import { InviteUser } from 'types'
 
 interface ChatRoomStartContainerProp{
-
   updateList: (selectList: InviteUser[]) => void;
-
 }
-const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
-  const {
-    useState, useEffect,
-  } = React
 
+const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   const friendList = useSelector((state: RootState) => state.friends)
   const login = useSelector((state: RootState) => state.login)
   const dispatch = useDispatch()
@@ -30,10 +27,6 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
     }
   }, [login])
 
-  interface InviteUser{
-    uuid: string
-    name: string
-  }
   const [searchFriendKeyword, setSearchFriendKeyword] = useState('')
   const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
 

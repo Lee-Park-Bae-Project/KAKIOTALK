@@ -1,5 +1,8 @@
 import { Chat } from '@kakio/common'
+import { HTTPVersionNotSupported } from 'http-errors'
+import { UserModel } from '@src/models/user'
 import { chatFromServer } from '../socket'
+
 import {
   CHAT_ASSOCIATION_ALIAS,
   models,
@@ -70,6 +73,7 @@ interface GetChatsByRoomId {
   limit: number
   offset: number
 }
+
 export const getChatsByRoomId = async ({
   roomUuid, limit, offset,
 }:GetChatsByRoomId) => {
@@ -206,21 +210,49 @@ interface userList{
   userUuid: string;
   userName: string;
 }
-
-export const createRoom = async () => models.Room.create()
-export const makeRoomParticipants = async ({
-  userUuid, userName,
-}:userList, roomId) => {
-  const user = await userService.findByUuid(userUuid)
-  if (!user) {
+export const makePrivateRoom = async (user) => {
+  let myId
+  let friendId
+  const myUuid = user[1].uuid
+  const friendUuid = user[0].uuid
+  const myInfo = await userService.findByUuid(myUuid)
+  if (!myInfo) {
     throw HttpError.USER_NOT_FOUND
   }
-  const userId = user.id
-  const roomParticipant = await models.RoomParticipants.create({
-    roomId, userId,
-  })
-  if (!roomParticipant) {
-    throw HttpError.ROOM_NOT_FOUND
+  const userId = myInfo.id
+
+  const allRoom = await findAllRooms(myInfo.id)
+  if (!allRoom) {
+    throw HttpError.IDK
   }
-  return roomParticipant
+  allRoom.forEach((roomInfo) => {
+    const participantsList = roomInfo.participants
+    if (participantsList.length === 2) {
+      myId = participantsList.find((users, i) => {
+        if (users.uuid === myUuid) { return true }
+      })
+      friendId = participantsList.find((users, i) => {
+        if (users.uuid === friendUuid) { return true }
+      })
+    }
+    if (myId && friendId) { return roomInfo.uuid }
+  })
+  const roomId = async () => models.Room.create()
+  return roomId
+}
+export const createRoom = async () => models.Room.create()
+export const makeGroupRoom = async (inviteUser, roomId) => {
+  inviteUser.forEach(async (user:userList) => {
+    const userInfo = await userService.findByUuid(user.userUuid)
+    if (!userInfo) {
+      throw HttpError.USER_NOT_FOUND
+    }
+    const userId = userInfo.id
+    const roomParticipant = await models.RoomParticipants.create({
+      roomId, userId,
+    })
+    if (!roomParticipant) {
+      throw HttpError.ROOM_NOT_FOUND
+    }
+  })
 }

@@ -13,6 +13,7 @@ import {
 import { updateProfile } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
+import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
 import { getProfile } from 'common/request'
 import { RootState } from 'modules'
@@ -107,9 +108,9 @@ const Profile: FC<Prop> = ({
     const {
       uuid: userUuid, name: userName,
     } = myProfile
-    selectedList.concat({
+    dispatch(makeRoomRequest(selectedList.concat({
       uuid, name,
-    })
+    })))
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)
@@ -225,7 +226,7 @@ const Profile: FC<Prop> = ({
                   iconPosition='top'
                   size='1.2rem'
                   textSize='0.8rem'
-
+                  onClick={onChatClick}
                 />
                 </S.ButtonWrapper>
 

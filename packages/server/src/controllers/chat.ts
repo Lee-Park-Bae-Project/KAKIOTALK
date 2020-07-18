@@ -33,7 +33,7 @@ export const getChats = controllerHelper(async (req, res, next) => {
 
 export const getRoom = controllerHelper(async (req, res, next) => {
   const { roomId } = req.params
-  console.log(roomId)
+
   let rooms
   if (roomId) {
     rooms = await chatService.findRoomByUuid(roomId)
@@ -75,26 +75,17 @@ export const addMessage = controllerHelper(async (req, res, next) => {
   return data
 })
 export const makeRoom = controllerHelper(async (req, res, next) => {
-  try {
-    const inviteUser = req.query.args as QueryTypes[]
+  const inviteUser = req.body.args
 
+  if (inviteUser.length === 2) {
+    console.log('--------------')
+    const privateRoom = await chatService.makePrivateRoom(inviteUser)
+  } else {
     const roomId = await chatService.createRoom()
     if (!roomId) {
       throw httpError.IDK
     }
-    const addRoomParticipants = inviteUser.forEach(async (userList:QueryTypes) => {
-      const userUuid = await JSON.parse(userList).uuid
-      const userName = await JSON.parse(userList).name
-
-      const userRoom = await chatService.makeRoomParticipants({
-        userUuid, userName,
-      }, roomId.id)
-      if (!userRoom) {
-        throw httpError.ROOM_NOT_FOUND
-      }
-    })
+    const groupRoom = await chatService.makeGroupRoom(inviteUser, roomId)
     return roomId
-  } catch (e) {
-    next(e)
   }
 })

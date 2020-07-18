@@ -116,7 +116,7 @@ export const getChatByRoom = ({
 })
 
 export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Room, 'uuid'>>({
-  method: 'GET',
-  url: '/chat/makeRoom',
-  params: { args },
+  method: 'POST',
+  url: 'chat/makeRoom',
+  data: { args },
 })

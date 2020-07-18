@@ -18,7 +18,7 @@ const ChatStart: FC<Props> = ({
   friendList, searchFriendKeyword, handleFriendToAdd,
 }) => (
   <List>
-    {friendList.length > 0 ? (
+    {friendList.length ? (
       friendList
         .filter(
           (friend) => friend.name
