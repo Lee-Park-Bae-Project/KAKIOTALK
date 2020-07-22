@@ -10,7 +10,7 @@ const sizeMap = {
 
 export default sizeMap
 
-const SOCKET_URL = process.env.NODE_ENV === 'development' ? 'localhost:3050' : 'https://kakio.site/v1'
+const SOCKET_URL = process.env.NODE_ENV === 'development' ? 'localhost:3050' : 'https://kakio.site'
 
 const API_SERVER_URL = 'http://localhost:3050/v1/'
 const API_SERVER_URL_PRODUCT = 'https://kakio.site/v1/'
