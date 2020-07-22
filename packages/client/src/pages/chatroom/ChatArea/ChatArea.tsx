@@ -2,12 +2,10 @@ import React from 'react'
 import { ApiChat } from 'types'
 import * as request from 'common/request'
 import { APIs } from '@kakio/common'
+import { useSelector } from 'react-redux'
+import { RootState } from 'modules'
 import ChatList from './ChatList'
 import * as S from './styles'
-
-export interface ChatStateGroupByTime {
-  [key: string]: ApiChat[][]
-}
 
 const {
   useRef,
@@ -26,6 +24,12 @@ const ChatArea: React.FC<Props> = ({
   const [firstChat, setFirstChat] = useState<APIs.GetFirstChat | null>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatBottomRef = useRef<HTMLDivElement>(null)
+  const chatState = useSelector((state: RootState) => state.chat)
+
+  // useEffect(() => {
+  //   if (!chatContainerRef.current) return
+  //   console.log(chatContainerRef.current.scrollTop)
+  // }, [chatState])
 
   useEffect(() => {
     if (!roomUuid) return
@@ -44,6 +48,7 @@ const ChatArea: React.FC<Props> = ({
         roomUuid={roomUuid}
         chatBottomRef={chatBottomRef}
         firstChat={firstChat}
+        chatContainerRef={chatContainerRef}
       />
       <S.ChatBottom ref={chatBottomRef}></S.ChatBottom>
     </S.Container>

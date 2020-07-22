@@ -1,5 +1,7 @@
 import socketOpen from 'socket.io-client'
-import { addChat } from 'modules/chat'
+import {
+  addChat, addChatOffset,
+} from 'modules/chat'
 import { ApiChat } from 'types'
 import { Dispatch } from 'react'
 import { Sockets } from '@kakio/common'
@@ -36,7 +38,11 @@ export const disconnect = () => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const chatFromServer = (dispatch: Dispatch<any>) => {
   socket.on(Sockets.EventMap.chatFromServer, (newChat: ApiChat) => {
-    dispatch(addChat(newChat.metaInfo.room.uuid, newChat))
+    const { uuid: roomUuid } = newChat.metaInfo.room
+    dispatch(addChat(roomUuid, newChat))
+    dispatch(addChatOffset({
+      roomUuid, amount: 1,
+    }))
   })
 }
 
