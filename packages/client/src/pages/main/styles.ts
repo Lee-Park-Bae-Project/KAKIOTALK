@@ -28,8 +28,6 @@ left:3rem;
 top:0;
 `
 export const LoaderContainer = styled(Flex)`
-height:100%;
-flex-direction:column;
-justify-content:center;
+min-height:100vh;
 `
 
