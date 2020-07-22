@@ -21,7 +21,7 @@ import {
 //   joinRooms = 'joinRooms',
 // }
 
-export const socket = socketOpen('https://kakio.site', { transports: ['websocket'] })
+export const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] })
 
 export const connect = () => {
   socket.on(Sockets.EventMap.connect, (msg: string) => {
