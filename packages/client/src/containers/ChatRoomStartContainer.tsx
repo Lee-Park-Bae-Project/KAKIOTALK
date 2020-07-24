@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getFriends } from 'modules/friends'
 import { RootState } from 'modules'
 import ChatStart from 'pages/main/ChatStart'
@@ -16,19 +14,9 @@ interface ChatRoomStartContainerProp{
 
 }
 const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
-  const {
-    useState, useEffect,
-  } = React
+  const { useState, useEffect } = React
 
   const friendList = useSelector((state: RootState) => state.friends)
-  const login = useSelector((state: RootState) => state.login)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (login && login.isLoggedIn) {
-      dispatch(getFriends())
-    }
-  }, [login])
 
   interface InviteUser{
     uuid: string
@@ -45,21 +33,15 @@ const ChatRoomStartContainer: FC<ChatRoomStartContainerProp> = ({ updateList }) 
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
       updateList(selectedUser.filter((item) => item.uuid !== uuid))
     } else {
-      setSelectedUser(selectedUser.concat({
-        uuid, name,
-      }))
-      updateList(selectedUser.concat({
-        uuid, name,
-      }))
+      setSelectedUser(selectedUser.concat({ uuid, name }))
+      updateList(selectedUser.concat({ uuid, name }))
     }
   }
 
   return (
     <React.Fragment>
       <SelectedList>
-        {selectedUser.map(({
-          name, uuid,
-        }) => <SelectedName name={name} key={uuid} uuid={uuid} handleFriendToAdd={handleFriendToAdd}/>)}
+        {selectedUser.map(({ name, uuid }) => <SelectedName name={name} key={uuid} uuid={uuid} handleFriendToAdd={handleFriendToAdd}/>)}
       </SelectedList>
 
       <SearchInput
