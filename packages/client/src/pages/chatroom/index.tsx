@@ -9,10 +9,6 @@ import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { RootState } from 'modules'
-import {
-  chatFromServer,
-  removeSocketEventListener,
-} from 'socket'
 import { joinRooms } from 'modules/socket'
 import { Sockets } from '@kakio/common'
 import Header from './Header'
@@ -67,13 +63,6 @@ const ChatRoom: FC = () => {
     setRoomUuid(params.roomUuid)
   }, [params])
 
-  useEffect(() => {
-    chatFromServer(dispatch)
-
-    return (() => {
-      removeSocketEventListener(Sockets.EventMap.chatFromServer)
-    })
-  })
   return (
     <S.Container>
       <Header roomName={roomName} toggleSearchBar={toggleSearchBar}/>

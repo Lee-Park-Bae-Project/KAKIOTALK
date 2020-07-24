@@ -41,14 +41,15 @@ const afterLogin = ((socket: openSocket.Socket) => {
 })
 
 export const chatFromServer = (roomUuid: string, chat: any) => {
-  io.to(roomUuid).emit(Event.chatFromServer, chat)
+  io.to(roomUuid).emit('SOCKET/CHAT_FROM_SERVER', chat)
 }
 
 const chatFromClient = socketCallBack((socket) => {
-  socket.on(Event.chatFromClient, async ({
+  socket.on('SOCKET/CHAT_FROM_CLIENT', async ({
     roomUuid, content, createdAt, userUuid,
   }: T.SendMsg) => {
     try {
+      console.log(roomUuid, content, createdAt, userUuid)
       const updatedAt = createdAt
       const data = await addMessage({
         roomUuid,

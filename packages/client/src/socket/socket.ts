@@ -6,10 +6,7 @@ import { ApiChat } from 'types'
 import { Dispatch } from 'react'
 import { Sockets } from '@kakio/common'
 import { configs } from '../common/constants'
-import {
-  AfterLogin,
-  ChatFromClient,
-} from './types'
+import { AfterLogin } from './types'
 
 // export enum Event {
 //   connect = 'connect',
@@ -36,26 +33,18 @@ export const disconnect = () => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const chatFromServer = (dispatch: Dispatch<any>) => {
-  socket.on(Sockets.EventMap.chatFromServer, (newChat: ApiChat) => {
-    const { uuid: roomUuid } = newChat.metaInfo.room
-    dispatch(addChat(roomUuid, newChat))
-    dispatch(addChatOffset({
-      roomUuid, amount: 1,
-    }))
-  })
-}
+// export const chatFromServer = (dispatch: Dispatch<any>) => {
+//   socket.on(Sockets.EventMap.chatFromServer, (newChat: ApiChat) => {
+//     const { uuid: roomUuid } = newChat.metaInfo.room
+//     dispatch(addChat(roomUuid, newChat))
+//     dispatch(addChatOffset({
+//       roomUuid, amount: 1,
+//     }))
+//   })
+// }
 
 export const afterLogin: AfterLogin = ({ uuid }) => {
   socket.emit(Sockets.EventMap.afterLogin, { uuid })
-}
-
-export const chatFromClient: ChatFromClient = ({
-  roomUuid, content, createdAt, userUuid,
-}) => {
-  socket.emit(Sockets.EventMap.chatFromClient, {
-    roomUuid, content, createdAt, userUuid,
-  })
 }
 
 export const removeSocketEventListener = (eventName: string) => {
