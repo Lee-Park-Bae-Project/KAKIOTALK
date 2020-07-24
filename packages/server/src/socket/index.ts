@@ -35,7 +35,8 @@ const onDisconnect = ((socket: openSocket.Socket) => {
 })
 
 const afterLogin = ((socket: openSocket.Socket) => {
-  socket.on(Event.afterLogin, async ({ uuid }: T.AfterLogin) => {
+  socket.on('SOCKET/AFTER_LOGIN', async ({ uuid }: T.AfterLogin) => {
+    console.log(chalk.cyan('after login'))
   })
 })
 
@@ -64,7 +65,8 @@ const chatFromClient = socketCallBack((socket) => {
 })
 
 const joinRooms = socketCallBack((socket) => {
-  socket.on(Event.joinRooms, ({ roomUuids }:T.JoinRooms) => {
+  socket.on('SOCKET/JOIN_ROOM', ({ roomUuids }:T.JoinRooms) => {
+    console.log(chalk.cyan('join room'))
     roomUuids.forEach((roomUuid) => {
       socket.join(roomUuid)
     })

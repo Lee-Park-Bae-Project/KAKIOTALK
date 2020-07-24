@@ -9,7 +9,6 @@ import { configs } from '../common/constants'
 import {
   AfterLogin,
   ChatFromClient,
-  JoinRooms,
 } from './types'
 
 // export enum Event {
@@ -22,6 +21,7 @@ import {
 // }
 
 export const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] })
+export const createWebSocketConnection = () => socketOpen(configs.SOCKET_URL, { transports: ['websocket'] })
 
 export const connect = () => {
   socket.on(Sockets.EventMap.connect, (msg: string) => {
@@ -56,10 +56,6 @@ export const chatFromClient: ChatFromClient = ({
   socket.emit(Sockets.EventMap.chatFromClient, {
     roomUuid, content, createdAt, userUuid,
   })
-}
-
-export const joinRooms: JoinRooms = ({ roomUuids }) => {
-  socket.emit(Sockets.EventMap.joinRooms, { roomUuids })
 }
 
 export const removeSocketEventListener = (eventName: string) => {

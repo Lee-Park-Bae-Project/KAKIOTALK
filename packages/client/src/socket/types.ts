@@ -1,10 +1,3 @@
-export interface JoinRoomsArgs {
-  roomUuids: string[];
-}
-export interface JoinRooms {
-  (args: JoinRoomsArgs): void;
-}
-
 export interface ChatFromClientArgs {
   roomUuid: string;
   content: string;

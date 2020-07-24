@@ -11,9 +11,9 @@ import {
 import { RootState } from 'modules'
 import {
   chatFromServer,
-  joinRooms,
   removeSocketEventListener,
 } from 'socket'
+import { joinRooms } from 'modules/socket'
 import { Sockets } from '@kakio/common'
 import Header from './Header'
 import TextArea from './TextArea'
@@ -39,7 +39,7 @@ const ChatRoom: FC = () => {
 
   useEffect(() => {
     if (roomUuid.length) {
-      joinRooms({ roomUuids: [roomUuid] })
+      dispatch(joinRooms({ roomUuids: [roomUuid] }))
     }
   }, [roomUuid])
 
