@@ -1,16 +1,15 @@
 import React from 'react'
 import * as S from 'components/GoogleSignin/styles'
-import GoogleLogin, {
-  GoogleLoginResponse, GoogleLoginResponseOffline,
-} from 'react-google-login'
-import {
-  useHistory, withRouter,
-} from 'react-router-dom'
-import {
-  configs, url,
-} from 'common/constants'
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
+import { useHistory, withRouter } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { configs, url } from 'common/constants'
 import * as request from 'common/request'
 import { alert } from 'common/utils'
+import { loginSuccess } from 'modules/login'
+import { getProfile } from 'modules/profile'
+import { getFriends } from 'modules/friends'
+import { getRoomRequest } from 'modules/room'
 
 const loginURL = configs.NODE_ENV_VAR === 'production' ? configs.LOGIN_URL_PRODUCT : configs.LOGIN_URL
 
@@ -18,6 +17,7 @@ const isResOffline = (res: any): res is GoogleLoginResponseOffline => res.code !
 
 const GoogleSignin: React.FC = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const responseSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
     if (isResOffline(res)) {
       console.warn('offline')
@@ -34,6 +34,10 @@ const GoogleSignin: React.FC = () => {
         googleId, email, name, googleAccessToken, imageUrl,
       })
       .then((response) => {
+        dispatch(loginSuccess())
+        dispatch(getProfile())
+        dispatch(getFriends())
+        dispatch(getRoomRequest())
         history.push(url.main.friendList)
       })
       .catch((error) => {
