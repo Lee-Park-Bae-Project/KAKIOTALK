@@ -1,40 +1,21 @@
-import {
-  useEffect, useState,
-} from 'react'
+import { useEffect, useState } from 'react'
 import * as request from 'common/request'
 import { url } from 'common/constants'
 
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from 'modules'
 
 const useAuth = () => {
   const history = useHistory()
-  const [isLoggedIn, setLogin] = useState(false)
-  const [userInfo, setUserInfo] = useState({
-    name: '',
-    email: '',
-    uuid: '',
-    statusMessage: '',
-    imageUrl: '',
-  })
+  const { isLoggedIn } = useSelector((state: RootState) => state.login)
+
   useEffect(() => {
-    (async () => {
-      request.getUserInfo().then((res) => {
-        setLogin(true)
-        const {
-          name, email, uuid, statusMessage, imageUrl,
-        } = res.data.data
-        setUserInfo({
-          name, email, uuid, statusMessage, imageUrl,
-        })
-      })
-        .catch(() => {
-          history.push(url.login)
-        })
-    })()
+    if (!isLoggedIn) {
+      history.push(url.login)
+    }
   }, [])
-  return {
-    isLoggedIn, userInfo,
-  }
+  return { isLoggedIn }
 }
 
 export default useAuth

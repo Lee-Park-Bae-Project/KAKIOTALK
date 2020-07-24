@@ -4,9 +4,7 @@ import React, {
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
-import {
-  Dialog, PopUp,
-} from 'components'
+import { Dialog, PopUp } from 'components'
 import { getLogout } from 'common/request'
 import { logoutAction } from 'modules/login'
 import { useDispatch } from 'react-redux'
@@ -32,11 +30,11 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
     getLogout()
       .then((response) => {
         history.push('/login')
+        dispatch(logoutAction())
       })
       .catch((error) => {
         console.error(error)
       })
-    dispatch(logoutAction())
     handlePopUpClick()
   }
   const dialogRef = useRef(null)

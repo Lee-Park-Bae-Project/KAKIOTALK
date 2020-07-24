@@ -4,16 +4,10 @@ import React, {
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
-import { Link } from 'react-router-dom'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'modules'
 import { makeRoomRequest } from 'modules/room'
-import { getProfile } from 'modules/profile'
-import {
-  Dialog, PopUp,
-} from 'components'
+import { Dialog, PopUp } from 'components'
 import ChatRoomStartContainer from '../../../containers/ChatRoomStartContainer'
 
 const S = { Container: styled.div`
@@ -35,29 +29,18 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   const [selectedList, setSelectedList] = useState<InviteUser[]>([])
   const room = useSelector((state: RootState) => state.room)
   const myProfile = useSelector((state: RootState) => state.profile)
-  const login = useSelector((state: RootState) => state.login)
   const handlePopUpClick = () => {
     setClicked(!isClicked)
   }
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (login && login.isLoggedIn) {
-      dispatch(getProfile())
-    }
-  }, [login])
   const handleSelectedList = (selectList: InviteUser[]) => {
     setSelectedList(selectList)
   }
 
   const onConfirm = () => {
-    const {
-      uuid, name,
-    } = myProfile
+    const { uuid, name } = myProfile
 
-    dispatch(makeRoomRequest(selectedList.concat({
-      uuid, name,
-    })))
+    dispatch(makeRoomRequest(selectedList.concat({ uuid, name })))
     setSelectedList([])
     handlePopUpClick()
   }
