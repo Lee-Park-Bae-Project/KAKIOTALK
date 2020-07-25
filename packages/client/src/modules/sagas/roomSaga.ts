@@ -34,7 +34,7 @@ function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
     const response: roomIdType = yield call(request.makeRoomRequest, payload)
     const roomUuids = response.data.data.map((v) => v.uuid)
     joinRooms({ roomUuids })
-    // yield put(makeRoomSuccess(response.data.data))
+    yield put(getRoomSuccess(response.data.data))
   } catch (e) {
     yield put(getRoomFailure(e.message))
   }

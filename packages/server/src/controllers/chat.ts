@@ -78,10 +78,10 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
   const inviteUser = req.body.args
 
   if (inviteUser.length === 2) {
-    console.log('--------------')
     const privateRoom = await chatService.makePrivateRoom(inviteUser)
   } else {
-    const roomId = await chatService.createRoom()
+    const room = await chatService.createRoom()
+    const roomId = room.id
     if (!roomId) {
       throw httpError.IDK
     }

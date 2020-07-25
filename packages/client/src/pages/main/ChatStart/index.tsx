@@ -1,11 +1,22 @@
-import React, { FC } from 'react'
+import React, {
+  FC, Fragment, useEffect, useState,
+} from 'react'
 import List from 'system/List'
 import {
-  MakeChat, UserCard,
+  MakeChat, SearchInput, SelectedList, SelectedName,
 } from 'components'
-import { SimpleUserType } from 'types'
-import styled from 'styled-components'
-import Flex from 'atoms/Flex'
+import {
+  InviteUser, SimpleUserType,
+} from 'types'
+import {
+  useAuth, useInput,
+} from 'hooks'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import { RootState } from 'modules'
+import { getFriends } from 'modules/friends'
+import { getProfile } from 'modules/profile'
 
 interface Props{
   friendList: SimpleUserType[]
@@ -13,17 +24,55 @@ interface Props{
   size?: string
   handleFriendToAdd?: (uuid: string, name: string) => void
 }
+interface ChatRoomStartContainerProp{
+  updateList: (selectList: InviteUser[]) => void;
+}
+const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
+  const friendList = useSelector((state: RootState) => state.friends)
+  const login = useSelector((state: RootState) => state.login)
+  const dispatch = useDispatch()
+  const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
+  const { isLoggedIn } = useAuth()
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getFriends())
+      dispatch(getProfile())
+    }
+  }, [isLoggedIn])
+  const friendKeyword = useInput('')
+  const handleFriendToAdd = (uuid: string, name: string) => {
+    if (selectedUser.find((user) => user.uuid === uuid)) {
+      setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
+      updateList(selectedUser.filter((item) => item.uuid !== uuid))
+    } else {
+      setSelectedUser(selectedUser.concat({
+        uuid, name,
+      }))
+      updateList(selectedUser.concat({
+        uuid, name,
+      }))
+    }
+  }
+  return (
+<Fragment>
+    <SelectedList>
+        {selectedUser.map(({
+          name, uuid,
+        }) => <SelectedName name={name} key={uuid} uuid={uuid} handleFriendToAdd={handleFriendToAdd}/>)}
+      </SelectedList>
 
-const ChatStart: FC<Props> = ({
-  friendList, searchFriendKeyword, handleFriendToAdd,
-}) => (
+  <SearchInput
+        {...friendKeyword}
+        placeholder='초대할 상대를 입력해주세요'
+      />
+
   <List>
     {friendList.length ? (
       friendList
         .filter(
           (friend) => friend.name
             .toLowerCase()
-            .indexOf(searchFriendKeyword.toLowerCase()) >= 0,
+            .indexOf(friendKeyword.toLowerCase()) >= 0,
         )
         .map(({
           uuid, name, email, imageUrl,
@@ -40,5 +89,7 @@ const ChatStart: FC<Props> = ({
     )}
 
   </List>
-)
+  </Fragment>
+  )
+}
 export default ChatStart

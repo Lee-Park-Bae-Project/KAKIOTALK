@@ -72,11 +72,6 @@ const Profile: FC<Prop> = ({
     setEditStatusMessage(e.target.value)
   }
   const dispatch = useDispatch()
-  useEffect(() => {
-    if (login && login.isLoggedIn) {
-      dispatch(getProfile())
-    }
-  }, [])
 
   const handleEditClick = () => {
     if (isEditMode) {

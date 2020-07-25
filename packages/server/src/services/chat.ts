@@ -241,16 +241,24 @@ export const makePrivateRoom = async (user) => {
   return roomId
 }
 export const createRoom = async () => models.Room.create()
+
 export const makeGroupRoom = async (inviteUser, roomId) => {
-  inviteUser.forEach(async (user:userList) => {
-    const userInfo = await userService.findByUuid(user.userUuid)
+  inviteUser.forEach(async (user) => {
+    const userUuid = user.uuid
+    console.log(userUuid)
+    console.log('roomId -------------------------------->', roomId)
+    const userInfo = await userService.findByUuid(userUuid)
+
     if (!userInfo) {
       throw HttpError.USER_NOT_FOUND
     }
     const userId = userInfo.id
+    console.log('userId', userId)
+
     const roomParticipant = await models.RoomParticipants.create({
       roomId, userId,
     })
+    console.log('++++++++++++++++++++++++++++')
     if (!roomParticipant) {
       throw HttpError.ROOM_NOT_FOUND
     }
