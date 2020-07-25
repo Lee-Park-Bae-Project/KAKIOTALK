@@ -5,30 +5,14 @@ import {
 import {
   Buffer, buffers, eventChannel,
 } from 'redux-saga'
-import { socket as _socket } from 'socket'
+import createWebSocketConnection from 'socket'
 import * as SocketAction from 'modules/socket'
-import socketOpen from 'socket.io-client'
 import {
   addChat,
   addChatOffset,
 } from 'modules/chat'
 import { ApiChat } from 'types'
 
-function createWebSocketConnection() {
-  return new Promise((resolve, reject) => {
-    const socket = socketOpen('localhost:3050', { transports: ['websocket'] })
-
-    socket.on('connection', () => {
-      console.log('connection')
-      resolve(socket)
-    })
-    socket.on('error', (event: any) => {
-      console.log('error', event)
-
-      reject(event)
-    })
-  })
-}
 // this function creates an event channel from a given socket
 // Setup subscription to incoming `ping` events
 function createSocketChannel(socket: SocketIOClient.Socket) {
@@ -99,8 +83,8 @@ function* handleSocketAction(socket: SocketIOClient.Socket) {
   }
 }
 
-function* read() {
-  const socketChannel = yield call(createSocketChannel, _socket)
+function* read(socket: SocketIOClient.Socket) {
+  const socketChannel = yield call(createSocketChannel, socket)
   while (true) {
     const action = yield take(socketChannel)
     console.log(action)
@@ -110,8 +94,9 @@ function* read() {
 }
 
 export default function* chatSaga() {
-  const socketChannel = yield call(createSocketChannel, _socket)
-  yield fork(handleSocketAction, _socket)
+  const socket: SocketIOClient.Socket = yield call(createWebSocketConnection)
+  const socketChannel = yield call(createSocketChannel, socket)
+  yield fork(handleSocketAction, socket)
 
   while (true) {
     const payload = yield take(socketChannel) // channel 로 emit 된 값

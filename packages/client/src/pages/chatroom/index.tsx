@@ -10,7 +10,6 @@ import {
 } from 'react-redux'
 import { RootState } from 'modules'
 import { joinRooms } from 'modules/socket'
-import { Sockets } from '@kakio/common'
 import Header from './Header'
 import TextArea from './TextArea'
 import ChatArea from './ChatArea'

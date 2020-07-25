@@ -1,8 +1,12 @@
 export enum EventMap {
-  connect = 'connect',
-  disconnect = 'disconnect',
-  afterLogin = 'afterLogin',
-  chatFromClient = 'chatFromClient',
-  chatFromServer = 'chatFromServer',
-  joinRooms = 'joinRooms',
+  CONNECT = 'connect',
+  DISCONNECT = 'disconnect',
+  AFTER_LOGIN = 'SOCKET/AFTER_LOGIN',
+  JOIN_ROOM = 'SOCKET/JOIN_ROOM',
+  CHAT_FROM_CLIENT = 'SOCKET/CHAT_FROM_CLIENT',
+  CHAT_FROM_SERVER = 'SOCKET/CHAT_FROM_SERVER',
 }
+export const AFTER_LOGIN = 'SOCKET/AFTER_LOGIN' as const
+export const JOIN_ROOM = 'SOCKET/JOIN_ROOM' as const
+export const CHAT_FROM_CLIENT = 'SOCKET/CHAT_FROM_CLIENT' as const
+export const CHAT_FROM_SERVER = 'SOCKET/CHAT_FROM_SERVER' as const
