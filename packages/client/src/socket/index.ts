@@ -4,8 +4,8 @@ import { configs } from '../common/constants'
 const createWebSocketConnection = () => {
   return new Promise((resolve, reject) => {
     const socket = socketOpen(configs.SOCKET_URL, { transports: ['websocket'] })
-
-    socket.on('connection', () => {
+    console.log(socket)
+    socket.on('connect', () => {
       resolve(socket)
     })
     socket.on('error', (event: any) => {

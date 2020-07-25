@@ -6,7 +6,3 @@ export enum EventMap {
   CHAT_FROM_CLIENT = 'SOCKET/CHAT_FROM_CLIENT',
   CHAT_FROM_SERVER = 'SOCKET/CHAT_FROM_SERVER',
 }
-export const AFTER_LOGIN = 'SOCKET/AFTER_LOGIN' as const
-export const JOIN_ROOM = 'SOCKET/JOIN_ROOM' as const
-export const CHAT_FROM_CLIENT = 'SOCKET/CHAT_FROM_CLIENT' as const
-export const CHAT_FROM_SERVER = 'SOCKET/CHAT_FROM_SERVER' as const
