@@ -1,9 +1,7 @@
 import React, { FC } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import SearchAccordion from 'system/ChatRoomSearchBar'
-import {
-  getChatRequest, loadMoreRequest,
-} from 'modules/chat'
+import { getChatRequest } from 'modules/chat'
 import { useAuth } from 'hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'modules'
