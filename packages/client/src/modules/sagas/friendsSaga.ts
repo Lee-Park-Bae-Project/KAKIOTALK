@@ -36,11 +36,14 @@ function* addFriendSaga({ payload }: ReturnType<typeof addFriend>) {
     alert.error(e.response.data.data.message)
   }
 }
-type uuidType = AxiosResponse<request.ResponseType<string>>
+interface UuidType {
+  uuid: string
+}
+type ApiUuidType = AxiosResponse<request.ResponseType<UuidType>>
 function* deleteFriendSaga({ payload }: ReturnType<typeof deleteFriend>) {
   try {
-    const response: uuidType = yield call(request.deleteFriend, payload)
-    yield put(deleteFriendSuccess(response.data.data))
+    const response: ApiUuidType = yield call(request.deleteFriend, payload)
+    yield put(deleteFriendSuccess(response.data.data.uuid))
     alert.deleteFriend()
   } catch (e) {
     alert.error(e.response.data.data.message)
