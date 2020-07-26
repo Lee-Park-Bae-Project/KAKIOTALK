@@ -13,7 +13,8 @@ import { RootState } from 'modules'
 const persistConfig = {
   key: 'root',
   storage,
-  whiteList: ['friends', 'profile'],
+  blacklist: [],
+
 }
 const appReducer = combineReducers({
   friends,

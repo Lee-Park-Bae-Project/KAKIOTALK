@@ -2,9 +2,7 @@ import {
   NextFunction, Request, Response,
 } from 'express'
 import createError from 'http-errors'
-import {
-  message, response,
-} from '../common/utils'
+import { message, response } from '../common/utils'
 import * as userService from '../services/user'
 import socialService from '../services/social'
 
@@ -90,7 +88,8 @@ const deleteFriend = async (
     if (deleted === 0) {
       throw createError(401, { message: message.ERROR_OCCURED })
     }
-    response(res, deleteUser.uuid)
+    const { uuid } = deleteUser
+    response(res, { uuid })
   } catch (e) {
     next(e)
   }
