@@ -11,7 +11,7 @@ export const Container = styled.div`
   position: absolute;
   left: 5rem;
   top: ${(props: ContainerProps) => (props.isOverflow ? '0' : 'auto')};
-  bottom: 0;
+  bottom: 1rem;
   width: 300px;
   height: 570px;
   flex-direction: column;
