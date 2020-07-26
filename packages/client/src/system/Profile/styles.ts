@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import Flex from 'atoms/Flex'
-import {
-  color, fontSize,
-} from 'styles/global'
+import { color, fontSize } from 'styles/global'
 
 interface ContainerProps {
   isOverflow: boolean
@@ -13,6 +11,7 @@ export const Container = styled.div`
   position: absolute;
   left: 5rem;
   top: ${(props: ContainerProps) => (props.isOverflow ? '0' : 'auto')};
+  bottom: 0;
   width: 300px;
   height: 570px;
   flex-direction: column;
