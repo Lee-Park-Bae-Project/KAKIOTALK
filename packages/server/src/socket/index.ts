@@ -82,7 +82,7 @@ const connection = () => {
 }
 
 const connect = (server: any) => {
-  io = openSocket(server)
+  io = openSocket(server, {pingTimeout: 60000})
   connection()
 }
 
