@@ -12,11 +12,7 @@ import {
 import { ApiChat } from 'types'
 
 const { EventMap } = Socket
-// this function creates an event channel from a given socket
-// Setup subscription to incoming `ping` events
 function createSocketChannel(socket: SocketIOClient.Socket) {
-  // `eventChannel` takes a subscriber function
-  // the subscriber function takes an `emit` argument to put messages onto the channel
   return eventChannel((emit) => {
     const chatFromServerHandler = (newChat: ApiChat) => {
       const { uuid: roomUuid } = newChat.metaInfo.room
@@ -30,11 +26,8 @@ function createSocketChannel(socket: SocketIOClient.Socket) {
     const errorHandler = (errorEvent: any) => {
       emit(new Error(errorEvent))
     }
-    // setup the subscription
     socket.on('error', errorHandler)
     socket.on(EventMap.CHAT_FROM_SERVER, chatFromServerHandler)
-    // the subscriber must return an unsubscribe function
-    // this will be invoked when the saga calls `channel.close` method
     const unsubscribe = () => {
       socket.off(EventMap.CHAT_FROM_SERVER, chatFromServerHandler)
     }
