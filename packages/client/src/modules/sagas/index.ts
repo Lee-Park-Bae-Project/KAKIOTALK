@@ -3,6 +3,7 @@ import profileSaga from 'modules/sagas/profileSaga'
 import friendsSaga from 'modules/sagas/friendsSaga'
 import roomSaga from 'modules/sagas/roomSaga'
 import chatSaga from 'modules/sagas/chatSaga'
+import loginSaga from 'modules/sagas/loginSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
     friendsSaga(),
     roomSaga(),
     chatSaga(),
+    loginSaga(),
   ])
 }

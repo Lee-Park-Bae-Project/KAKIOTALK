@@ -1,5 +1,5 @@
 import {
-  LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_ACTION,
+  LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_REQUEST,
 } from 'modules/login/action'
 import { LoginInfo } from 'types'
 import { LoginAction } from 'modules/login/types'
@@ -20,7 +20,7 @@ function login(state: LoginInfo = initialState, action: LoginAction) {
       }
       return state
     }
-    case LOGOUT_ACTION: {
+    case LOGOUT_REQUEST: {
       return { isLoggedIn: false }
     }
     default:
