@@ -6,7 +6,7 @@ import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
 import { Dialog, PopUp } from 'components'
 import { getLogout } from 'common/request'
-import { logoutAction } from 'modules/login'
+import { logoutRequest } from 'modules/login'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -30,7 +30,7 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
     getLogout()
       .then((response) => {
         history.push('/login')
-        dispatch(logoutAction())
+        dispatch(logoutRequest())
       })
       .catch((error) => {
         console.error(error)
