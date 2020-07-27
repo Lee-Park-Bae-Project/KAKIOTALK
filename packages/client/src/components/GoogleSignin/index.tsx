@@ -1,15 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as S from 'components/GoogleSignin/styles'
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 import { useHistory, withRouter } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { configs, url } from 'common/constants'
-import * as request from 'common/request'
 import { alert } from 'common/utils'
-import { loginSuccess } from 'modules/login'
-import { getProfile } from 'modules/profile'
-import { getFriends } from 'modules/friends'
-import { getRoomRequest } from 'modules/room'
+import { loginRequest } from 'modules/login'
+import { RootState } from 'modules'
 
 const loginURL = configs.NODE_ENV_VAR === 'production' ? configs.LOGIN_URL_PRODUCT : configs.LOGIN_URL
 
@@ -28,29 +25,23 @@ const GoogleSignin: React.FC = () => {
     const {
       name, email, imageUrl,
     } = res.profileObj
-
-    request
-      .getLogin({
-        googleId, email, name, googleAccessToken, imageUrl,
-      })
-      .then((response) => {
-        dispatch(loginSuccess())
-        dispatch(getProfile())
-        dispatch(getFriends())
-        dispatch(getRoomRequest())
-        history.push(url.main.friendList)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    dispatch(loginRequest({
+      googleId, email, name, googleAccessToken, imageUrl,
+    }))
   }
   const responseFail = (err: Error) => {
     alert.error(err.message)
   }
-
   const responseAutoLoad = (success: boolean) => {
     console.warn(success)
   }
+  const { isLoggedIn } = useSelector((state: RootState) => state.login)
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push(url.main.friendList)
+    }
+  }, [isLoggedIn])
+
   return (
     <S.Container>
       <GoogleLogin
