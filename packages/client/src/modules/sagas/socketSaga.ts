@@ -43,7 +43,6 @@ function* handleSocketAction(socket: SocketIOClient.Socket) {
       EventMap.JOIN_ROOM,
       EventMap.CHAT_FROM_CLIENT,
     ])
-    console.log(event)
     const {
       type, payload,
     } = event
@@ -65,7 +64,6 @@ function* readFromSocketChannel(socket: SocketIOClient.Socket) {
   const socketChannel = yield call(createSocketChannel, socket)
   while (true) {
     const payload = yield take(socketChannel) // channel 로 emit 된 값
-    console.log(payload)
     yield put(payload)
   }
 }
