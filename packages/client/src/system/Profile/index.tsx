@@ -8,7 +8,7 @@ import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
 import { useDispatch } from 'react-redux'
-import { updateProfile } from 'modules/profile'
+import { updateProfileRequest } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
 import { throttle } from 'lodash'
@@ -59,10 +59,8 @@ const Profile: FC<Prop> = ({
 
       if (editName.value !== name || editStatusMessage.value !== statusMessage) {
         dispatch(
-          updateProfile({
-            name: editName.value,
-            statusMessage: editStatusMessage.value,
-          }),
+          updateProfileRequest({ name: editName.value,
+            statusMessage: editStatusMessage.value }),
         )
       }
     }
@@ -170,13 +168,9 @@ const Profile: FC<Prop> = ({
           ) : (
             <Fragment>
               <Link
-                to={{
-                  pathname: '/chat',
-                  state: {
-                    uuid,
-                    name,
-                  },
-                }}
+                to={{ pathname: '/chat',
+                  state: { uuid,
+                    name } }}
                 style={{ textDecoration: 'none' }}
               >
                 <S.ButtonWrapper>

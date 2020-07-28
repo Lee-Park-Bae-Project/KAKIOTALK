@@ -1,9 +1,7 @@
-import {
-  loginFailure, loginRequest, loginSuccess, logoutRequest,
-} from 'modules/login/action'
+import * as Action from 'modules/login/action'
 
 export type LoginAction =
-  | ReturnType<typeof loginSuccess>
-  | ReturnType<typeof loginFailure>
-  | ReturnType<typeof logoutRequest>
-  | ReturnType<typeof loginRequest>
+  | ReturnType<typeof Action.loginSuccess>
+  | ReturnType<typeof Action.loginFailure>
+  | ReturnType<typeof Action.logoutRequest>
+  | ReturnType<typeof Action.loginRequest>

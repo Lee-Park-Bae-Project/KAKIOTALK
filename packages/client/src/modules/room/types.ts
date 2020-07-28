@@ -1,9 +1,4 @@
-import {
-  getRoomFailure,
-  getRoomRequest,
-  getRoomSuccess,
-  makeRoomRequest,
-} from 'modules/room/action'
+import * as Action from 'modules/room/action'
 import { Models } from '@kakio/common'
 
 export interface RoomState {
@@ -12,8 +7,9 @@ export interface RoomState {
 }
 
 export type RoomAction =
-| ReturnType<typeof getRoomRequest>
-| ReturnType<typeof getRoomSuccess>
-| ReturnType<typeof getRoomFailure>
-| ReturnType<typeof makeRoomRequest>
+| ReturnType<typeof Action.getRoomRequest>
+| ReturnType<typeof Action.getRoomSuccess>
+| ReturnType<typeof Action.getRoomFailure>
+| ReturnType<typeof Action.makeRoomRequest>
+| ReturnType<typeof Action.resetRoom>
 
