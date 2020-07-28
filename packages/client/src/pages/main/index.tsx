@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { url } from 'common/constants'
 import { getRoomRequest } from 'modules/room'
-import { afterLogin } from 'socket'
+import { afterLogin } from 'modules/socket'
 import Friend from 'pages/main/Friend'
 import { useAuth } from 'hooks'
 
@@ -23,7 +23,7 @@ const Main: FC = () => {
   useEffect(() => {
     dispatch(getRoomRequest())
     if (isLoggedIn) {
-      afterLogin({ uuid })
+      dispatch(afterLogin({ uuid }))
     }
   }, [])
   window.history.pushState(null, '', window.location.href)

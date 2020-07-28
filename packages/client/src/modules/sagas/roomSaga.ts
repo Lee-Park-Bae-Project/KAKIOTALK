@@ -14,7 +14,7 @@ import {
 import * as request from 'common/request'
 import { Models } from '@kakio/common'
 import { AxiosResponse } from 'axios'
-import { joinRooms } from 'socket'
+import { joinRooms } from 'modules/socket'
 import { alert } from 'common/utils'
 import { InviteUser } from 'types'
 
