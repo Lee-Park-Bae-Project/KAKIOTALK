@@ -1,38 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react'
+import {
+  DependencyList, useCallback, useEffect, useRef,
+} from 'react'
 
 interface UseIntersectionObserver {
-  root?: Element | null
-  target: Element | null
-  onIntersect: any
-  threshold?: number | number[]
-  rootMargin?: string
+  (cb: (entry: IntersectionObserverEntry) => void,
+  options: IntersectionObserverInit,
+  deps: DependencyList): (node: any) => void
 }
-const useIntersectionObserver = ({
-  root = null,
-  target,
-  onIntersect,
-  threshold = 1.0,
-  rootMargin = '0px',
-}: UseIntersectionObserver) => {
-  useEffect(() => {
-    if (!target) {
-      return
+
+const useIntersectionObserver: UseIntersectionObserver = (cb, options, deps) => {
+  const intersectionObserver = useRef<IntersectionObserver | null>(null)
+
+  return useCallback((node) => {
+    if (intersectionObserver.current) {
+      intersectionObserver.current.disconnect()
     }
 
-    const observer = new IntersectionObserver(onIntersect, {
-      root,
-      rootMargin,
-      threshold,
-    })
+    intersectionObserver.current = new IntersectionObserver(([entry]) => {
+      cb(entry)
+    }, options)
 
-    observer.observe(target)
-
-    // eslint-disable-next-line consistent-return
-    return () => {
-      observer.unobserve(target)
-    }
-  }, [target, root, onIntersect, rootMargin, threshold])
+    if (node) intersectionObserver.current.observe(node)
+  }, deps)
 }
 
 export default useIntersectionObserver

@@ -5,12 +5,12 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { Room } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { UserModel } from './user'
 
 export const ROOM_ASSOCIATION_ALIAS = { RoomParticipants: 'participants' as const }
 
-export interface RoomModel extends Model, Room {
+export interface RoomModel extends Model, Models.Room {
   [ROOM_ASSOCIATION_ALIAS.RoomParticipants]: UserModel[]
 }
 

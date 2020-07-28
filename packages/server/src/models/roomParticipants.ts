@@ -6,7 +6,7 @@ import {
 } from 'sequelize'
 
 // import { IRoomParticipants } from '../types'
-import { RoomParticipants } from '@kakio/common'
+import { Models } from '@kakio/common'
 
 import { UserModel } from './user'
 import { RoomModel } from './room'
@@ -16,7 +16,7 @@ export const ROOM_PARTICIPANTS_ASSOCIATION_ALIAS = {
   Room: 'room' as const,
 }
 
-export interface RoomParticipantsModel extends Model, RoomParticipants {
+export interface RoomParticipantsModel extends Model, Models.RoomParticipants {
   [ROOM_PARTICIPANTS_ASSOCIATION_ALIAS.User]?: UserModel;
   [ROOM_PARTICIPANTS_ASSOCIATION_ALIAS.Room]?: RoomModel;
 }

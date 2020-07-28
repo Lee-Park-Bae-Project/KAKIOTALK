@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios'
-import { Room } from '@kakio/common'
+import { Models } from '@kakio/common'
 import { InviteUser } from 'types'
+import { MockedComponentClass } from 'react-dom/test-utils'
 
 export const GET_ROOM_REQUEST = 'room/GET_ROOM_REQUEST' as const
 export const GET_ROOM_SUCCESS = 'room/GET_ROOM_SUCCESS' as const
@@ -12,7 +13,7 @@ export const getRoomRequest = () => ({
   payload: {},
 })
 
-export const getRoomSuccess = (room: Room[]) => ({
+export const getRoomSuccess = (room: Models.Room[]) => ({
   type: GET_ROOM_SUCCESS,
   payload: room,
 })

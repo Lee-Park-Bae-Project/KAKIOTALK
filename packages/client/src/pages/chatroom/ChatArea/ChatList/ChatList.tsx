@@ -1,17 +1,19 @@
 import React from 'react'
-import {
-  ApiChat,
-  ReduxChat,
-  ReduxChatMap,
-  ReduxState,
-} from 'types'
-import {
-  convertDBTimeTohhmmA,
-  convertToLL,
-} from 'common/utils'
+import styled from 'styled-components'
+import { ApiChat } from 'types'
+import { APIs } from '@kakio/common'
 import DateDivider from 'components/DateDivider'
 import ChatBox from 'components/ChatBox'
-import shortid from 'shortid'
+import { loadMoreRequest } from 'modules/chat'
+import {
+  useIntersectionObserver,
+  usePrevious,
+} from 'hooks'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import { RootState } from 'modules'
+import * as S from './styles'
 
 const {
   useState,
@@ -22,87 +24,91 @@ const {
 interface Props{
   userUuid: string
   roomUuid: string
-  chatState: ReduxState<ReduxChatMap>
   chatBottomRef: React.RefObject<HTMLDivElement>
-}
-
-export interface ChatStateGroupByTime {
-  [key: string]: ApiChat[][]
+  firstChat: APIs.GetFirstChat | null
+  chatContainerRef: React.RefObject<HTMLDivElement>
 }
 
 const ChatList: React.FC<Props> = ({
   userUuid,
   roomUuid,
-  chatState,
   chatBottomRef,
+  firstChat,
+  chatContainerRef,
 }) => {
-  const [chatStateGroupByTime, SetChatStateGroupByTime] = useState<ChatStateGroupByTime>({})
   const dateToday = useRef<string>('')
+  const dispatch = useDispatch()
+  const chatState = useSelector((state: RootState) => state.chat)
+  const root = useRef<HTMLDivElement>(null)
+  const restorePos = useRef<HTMLDivElement>()
+  const [scrollHeight, setScrollHeight] = useState(10000)
+  const prevScrollHeight = usePrevious(scrollHeight)
+  const prevChats = usePrevious(chatState.data[roomUuid])
+
+  const lastTop = useCallback((node: HTMLDivElement) => {
+    restorePos.current = node
+  }, [])
+
+  const first = useIntersectionObserver(
+    (entry: IntersectionObserverEntry) => {
+      if (entry.time < 5000) return
+      if (!entry.isIntersecting) {
+        return
+      }
+      dispatch(loadMoreRequest(roomUuid))
+    },
+    { root: root.current },
+    [roomUuid]
+  )
 
   useEffect(() => {
-    if (chatBottomRef && chatBottomRef.current) {
-      chatBottomRef.current.scrollIntoView()
+    if (!chatBottomRef.current) return
+    if (!chatContainerRef.current) return
+    if (!prevScrollHeight) return
+    const target = chatContainerRef.current
+    const { chats } = chatState.data[roomUuid]
+
+    if (!prevChats) return
+    // 다른 사람이 채팅 보낸 경우
+    if (prevChats.chats[0].metaInfo.sender.uuid !== userUuid) return
+    // load more 했을 경우
+    if (prevChats.chats[prevChats.chats.length - 1].uuid !== chats[chats.length - 1].uuid) {
+      target.scrollTop = target.scrollHeight - prevScrollHeight
+      setScrollHeight(target.scrollHeight)
+      return
     }
-  }, [chatStateGroupByTime])
+    // 내가 보낸 경우
+    target.scrollTop = target.scrollHeight
+  }, [chatState.data[roomUuid]])
 
-  useEffect(() => {
-    const chatsInRedux = chatState.data[roomUuid]
-    if (chatsInRedux) {
-      const init: ChatStateGroupByTime = {}
-
-      const newChatStateGroupByTime = chatsInRedux.chats.reduce((acc, cur, i) => {
-        const time = convertDBTimeTohhmmA(cur.updatedAt)
-        if (acc[time]) {
-          const size = acc[time].length
-          const prevGroup = acc[time][size - 1]
-          if (prevGroup[0].metaInfo.sender.uuid === cur.metaInfo.sender.uuid) {
-            prevGroup.push(cur)
-          } else {
-            acc[time].push([cur])
-          }
-          return acc
-        }
-
-        acc[time] = [[cur]]
-        return acc
-      }, init)
-      SetChatStateGroupByTime(newChatStateGroupByTime)
-    }
-  }, [chatState, roomUuid])
-
-  if (!chatStateGroupByTime) {
-    return <div>loading...</div>
+  if (!chatState.data[roomUuid]) {
+    return <div>loading</div>
   }
+  if (!firstChat) {
+    return <div>loading</div>
+  }
+  const { chats } = chatState.data[roomUuid]
 
   return (
-    <>
-      {
-        Object.keys(chatStateGroupByTime).map((time) => {
-          const timeGroup = chatStateGroupByTime[time]
-          return timeGroup.map((chatGroup) => {
-            let isNewDate = false
-            const dateLL = convertToLL(chatGroup[0].createdAt)
-            if (dateToday.current !== dateLL) {
-              isNewDate = true
-              dateToday.current = dateLL
-            }
-            return (
-              <div key={shortid.generate()} className="observe">
-                {
-                  isNewDate && <DateDivider date={dateLL}/>
-                }
+    <S.Container>
+      { chatState.isLoading && <div>loading...</div> }
+      <S.Content ref={root}>
+        {
+            chats.map((chat, idx) => (
+              <div key={chat.uuid} ref={idx === chats.length - 1 ? lastTop : null}>
                 <ChatBox
-                  createdAt={chatGroup[0].createdAt}
-                  chatGroup={chatGroup}
-                  isMine={userUuid === chatGroup[0].metaInfo.sender.uuid}
+                  chat={chat}
+                  isMine={userUuid === chat.metaInfo.sender.uuid}
+                  ref={idx === chats.length - 1 && chat.uuid !== firstChat.uuid ? first : null}
                 />
               </div>
-            )
-          })
-        })
-      }
-    </>
+            ))
+        }
+      </S.Content>
+      <div ref={chatBottomRef}></div>
+
+    </S.Container>
   )
 }
 
-export default ChatList
+export default React.memo(ChatList)

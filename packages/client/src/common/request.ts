@@ -2,8 +2,9 @@ import axios, {
   AxiosRequestConfig, AxiosResponse,
 } from 'axios'
 import * as Type from 'types'
-import { Room } from '@kakio/common'
-// import Room from 'system/Room'
+import {
+  APIs, Models,
+} from '@kakio/common'
 import { configs } from './constants'
 
 const API_SERVER_URL = configs.NODE_ENV_VAR === 'production' ? configs.API_SERVER_URL_PRODUCT : configs.API_SERVER_URL
@@ -51,6 +52,14 @@ export const getUserInfo = () => Axios<Type.SimpleUserType>({
   url: 'auth/check-auth',
 })
 
+interface GetFirstChat extends AxiosRequestConfig{
+  roomUuid: string
+}
+export const getFirstChat = ({ roomUuid }: GetFirstChat) => Axios<APIs.GetFirstChat>({
+  method: 'GET',
+  url: `chat/first-chat/${roomUuid}`,
+})
+
 interface GetLoginArgs {
   googleId: string
   email: string
@@ -64,7 +73,7 @@ export const getLogin = (args: GetLoginArgs) => Axios({
   data: args,
 })
 
-export const getRooms = () => Axios<Pick<Room, 'uuid' | 'participants'>[]>({
+export const getRooms = () => Axios<Pick<Models.Room, 'uuid' | 'participants'>[]>({
   method: 'GET',
   url: 'chat/room',
 })
@@ -115,8 +124,25 @@ export const getChatByRoom = ({
   url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
 })
 
-export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Room, 'uuid'>>({
+export const loadMoreChat = ({
+  roomUuid,
+  limit,
+  offset,
+}: {
+  roomUuid: string
+  limit: number
+  offset: number
+}) => Axios<{
+  chats: Type.ApiChat[]
+  offset: number
+  limit: number}
+>({
+  method: 'GET',
+  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
+})
+
+export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Models.Room, 'uuid'>>({
   method: 'POST',
-  url: 'chat/makeRoom',
+  url: '/chat/makeRoom',
   data: { args },
 })

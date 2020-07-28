@@ -1,31 +1,49 @@
-import React, { FC } from 'react'
+import React, {
+  FC, Fragment, useEffect,
+} from 'react'
 import * as S from 'pages/main/styles'
-import NavigationBar from 'components/NavigationBar'
-import { RootState } from 'modules'
-import { Loader } from 'components'
-import FriendContainer from 'containers/FriendContainer'
+import {
+  Loader, NavigationBar,
+} from 'components'
 import Room from 'system/Room'
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { url } from 'common/constants'
+import { getRoomRequest } from 'modules/room'
+import { afterLogin } from 'socket'
+import Friend from 'pages/main/Friend'
+import { useAuth } from 'hooks'
 
 const Main: FC = () => {
-  const { isLoggedIn } = useSelector((state: RootState) => state.login)
-
+  const dispatch = useDispatch()
+  const {
+    isLoggedIn, userInfo,
+  } = useAuth()
+  const { uuid } = userInfo
+  useEffect(() => {
+    dispatch(getRoomRequest())
+    if (isLoggedIn) {
+      afterLogin({ uuid })
+    }
+  }, [])
+  window.history.pushState(null, '', window.location.href)
   return (
     <S.Container>
-      {isLoggedIn ? (
-        <S.MainWrapper>
-          <Route path={url.main.friendList} component={FriendContainer}/>
-          <Route path={url.main.chatList}component={Room}/>
-        </S.MainWrapper>
-      ) : (
-        <Loader/>
-      )}
+      <S.MainWrapper>
+        {isLoggedIn ? (
+          <Fragment>
+            <Route path={url.main.friendList} component={Friend} />
+            <Route path={url.main.chatList} component={Room} />
+          </Fragment>
+        ) : (
+          <S.LoaderContainer>
+            <Loader />
+          </S.LoaderContainer>
+        )}
+      </S.MainWrapper>
       <S.NavigationBarWrapper>
-        <NavigationBar/>
+        <NavigationBar />
       </S.NavigationBarWrapper>
-
     </S.Container>
   )
 }

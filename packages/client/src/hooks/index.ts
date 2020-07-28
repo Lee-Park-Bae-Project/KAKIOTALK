@@ -1,2 +1,5 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as useIntersectionObserver } from './useIntersectionObserver'
+export { default as useInput } from 'hooks/useInput'
+export { default as useAuth } from 'hooks/useAuth'
+export { default as useIntersectionObserver } from 'hooks/useIntersectionObserver'
+export { default as useOutsideClick } from 'hooks/useOutsideClick'
+export { default as usePrevious } from 'hooks/usePrevious'

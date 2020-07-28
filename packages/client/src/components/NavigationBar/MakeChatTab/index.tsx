@@ -13,7 +13,7 @@ import { getProfile } from 'modules/profile'
 import {
   Dialog, PopUp,
 } from 'components'
-import ChatRoomStartContainer from '../../../containers/ChatRoomStartContainer'
+import ChatStart from '../../../pages/main/ChatStart'
 
 const S = { Container: styled.div`
 width: fit-content;
@@ -79,7 +79,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
           onConfirm={onConfirm}
           dialogRef={dialogRef}
           >
-          <ChatRoomStartContainer updateList={handleSelectedList}/>
+          <ChatStart updateList={handleSelectedList}/>
           </Dialog>
         </PopUp>
       ) : null}

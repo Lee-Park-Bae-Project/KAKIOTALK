@@ -1,7 +1,13 @@
 import _he from 'http-errors'
 import _code from 'http-status'
 
-export const ROOM_NOT_FOUND = _he(_code.NOT_FOUND, '방정보가 없습니다.')
+/**
+ * @code
+ * NOT FOUND (404)
+ * @message
+ * 방 정보가 없습니다.
+ */
+export const ROOM_NOT_FOUND = _he(_code.NOT_FOUND, '방 정보가 없습니다.')
 
 /**
  * @code

@@ -5,7 +5,6 @@ export const Container = styled(Flex)`
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
-  max-height:80vh;
   overflow:scroll;
   float:left;
   margin-right: auto;

@@ -2,6 +2,8 @@ import express from 'express'
 import {
   addMessage,
   getChats,
+  getFirstChat,
+  getLastChat,
   getRoom,
   makeRoom,
 } from '../../controllers/chat'
@@ -13,7 +15,10 @@ const router = express.Router()
 router.use(isAuth)
 router.post('/makeRoom', makeRoom)
 router.get('/message/:roomId', getChats)
+router.get('/first-chat/:roomUuid', getFirstChat)
+router.get('/last-chat/:roomUuid', getLastChat)
 router.get('/room/:roomId?', getRoom)
 router.post('/:roomUuid', addMessage)
 
 export default router
+

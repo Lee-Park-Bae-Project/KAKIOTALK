@@ -28,18 +28,20 @@ interface ChatRoomStartContainerProp{
   updateList: (selectList: InviteUser[]) => void;
 }
 const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
-  const friendList = useSelector((state: RootState) => state.friends)
+  const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
   const login = useSelector((state: RootState) => state.login)
   const dispatch = useDispatch()
   const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
   const { isLoggedIn } = useAuth()
+  const friendKeyword = useInput('')
+
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getFriends())
       dispatch(getProfile())
     }
   }, [isLoggedIn])
-  const friendKeyword = useInput('')
+
   const handleFriendToAdd = (uuid: string, name: string) => {
     if (selectedUser.find((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
@@ -72,7 +74,7 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
         .filter(
           (friend) => friend.name
             .toLowerCase()
-            .indexOf(friendKeyword.toLowerCase()) >= 0,
+            .indexOf(friendKeyword.value.toLowerCase()) >= 0,
         )
         .map(({
           uuid, name, email, imageUrl,
