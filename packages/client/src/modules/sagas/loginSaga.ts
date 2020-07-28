@@ -18,7 +18,7 @@ import * as request from 'common/request'
 function* loginRequestSaga({ payload }: ReturnType<typeof loginRequest>) {
   try {
     yield call(request.getLogin, payload)
-    yield* [put(loginSuccess()), put(getProfile()), put(getFriends()), put(getRoomRequest())]
+    yield all([put(loginSuccess()), put(getProfile()), put(getFriends()), put(getRoomRequest())])
   } catch (e) {
     yield put(loginFailure(e))
     alert.error(e.response.data.data.message)
@@ -28,7 +28,7 @@ function* loginRequestSaga({ payload }: ReturnType<typeof loginRequest>) {
 function* logoutRequestSaga() {
   try {
     yield call(request.getLogout)
-    yield* [put(logoutSuccess()), put(resetProfile()), put(resetFriends()), put(resetRoom())]
+    yield all([put(logoutSuccess()), put(resetProfile()), put(resetFriends()), put(resetRoom())])
   } catch (e) {
     alert.error(e.response.data.data.message)
   }
