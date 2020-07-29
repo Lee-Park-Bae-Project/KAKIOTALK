@@ -110,7 +110,6 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
   }
   const userId = user.id
   rooms = await chatService.findAllRooms(userId)
-  console.log(roomUuid)
   return {
     rooms, roomUuid,
   }
