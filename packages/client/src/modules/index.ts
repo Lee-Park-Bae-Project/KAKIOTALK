@@ -13,6 +13,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from 'modules/sagas'
+import { createBrowserHistory } from 'history'
 
 const rootReducer = combineReducers({
   friends,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   room,
   chat,
 })
-const sagaMiddleware = createSagaMiddleware()
+const customHistory = createBrowserHistory()
+const sagaMiddleware = createSagaMiddleware({ context: { history: customHistory } })
 
 const middlewares = []
 middlewares.push(sagaMiddleware)
@@ -37,3 +39,4 @@ sagaMiddleware.run(rootSaga)
 export default rootReducer
 export type RootState = ReturnType<typeof rootReducer>;
 export { store }
+

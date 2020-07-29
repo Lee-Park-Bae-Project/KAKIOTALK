@@ -81,22 +81,27 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 export const makeRoom = controllerHelper(async (req, res, next) => {
   const inviteUser = req.body.args
   let rooms
+  let roomUuid
   if (inviteUser.length === 2) {
     const privateRoom = await chatService.makePrivateRoom(inviteUser)
     if (!privateRoom) {
       const room = await chatService.createRoom()
-      const roomId = room.id
-      if (!roomId) {
+      if (!room) {
         throw httpError.IDK
       }
+      const roomId = room.id
+      roomUuid = room.uuid
       const groupRoom = await chatService.makeGroupRoom(inviteUser, roomId)
+    } else {
+      roomUuid = privateRoom.uuid
     }
   } else {
     const room = await chatService.createRoom()
-    const roomId = room.id
-    if (!roomId) {
+    if (!room) {
       throw httpError.IDK
     }
+    const roomId = room.id
+    roomUuid = room.uuid
     const groupRoom = await chatService.makeGroupRoom(inviteUser, roomId)
   }
   const user = await userService.findByUuid(inviteUser[inviteUser.length - 1].uuid)
@@ -105,7 +110,10 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
   }
   const userId = user.id
   rooms = await chatService.findAllRooms(userId)
-  return rooms
+  console.log(roomUuid)
+  return {
+    rooms, roomUuid,
+  }
 })
 
 export const getFirstChat = controllerHelper(async (req, res, next) => {

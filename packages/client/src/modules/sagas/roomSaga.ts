@@ -1,5 +1,5 @@
 import {
-  call, put, takeEvery,
+  call, getContext, put, spawn, takeEvery,
 } from 'redux-saga/effects'
 
 import {
@@ -12,12 +12,15 @@ import {
 } from 'modules/room/action'
 
 import * as request from 'common/request'
+import { url } from 'common/constants'
 import { Models } from '@kakio/common'
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'socket'
+import { Link } from 'react-router-dom'
 import { alert } from 'common/utils'
 import { InviteUser } from 'types'
 import { MockedComponentClass } from 'react-dom/test-utils'
+import { push } from '../../common/utils'
 
 function* room() {
   try {
@@ -29,13 +32,19 @@ function* room() {
     yield put(getRoomFailure(e.message))
   }
 }
-type roomIdType = AxiosResponse<request.ResponseType<Models.Room[]>>
+
+interface RoomReturnType{
+  rooms: Models.Room[],
+  roomUuid: string
+}
+type roomIdType = AxiosResponse<request.ResponseType<RoomReturnType>>
 function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   try {
     const response: roomIdType = yield call(request.makeRoomRequest, payload)
-    const roomUuids = response.data.data.map((v) => v.uuid)
+    const roomUuids = response.data.data.rooms.map((v) => v.uuid)
     joinRooms({ roomUuids })
-    yield put(getRoomSuccess(response.data.data))
+    yield put(getRoomSuccess(response.data.data.rooms))
+    yield call(push, `${url.room}/${response.data.data.roomUuid}`)
   } catch (e) {
     yield put(getRoomFailure(e.message))
   }
