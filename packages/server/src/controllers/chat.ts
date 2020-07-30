@@ -98,11 +98,11 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
   } else {
     const room = await chatService.createRoom()
     if (!room) {
-      throw httpError.IDK
+      throw httpError.ROOM_NOT_MADE
     }
     const roomId = room.id
     roomUuid = room.uuid
-    const groupRoom = await chatService.makeGroupRoom(inviteUser, roomId)
+    await chatService.makeGroupRoom(inviteUser, roomId)
   }
   const user = await userService.findByUuid(inviteUser[inviteUser.length - 1].uuid)
   if (!user) {

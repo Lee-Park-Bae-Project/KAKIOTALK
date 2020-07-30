@@ -143,6 +143,6 @@ export const loadMoreChat = ({
 
 export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Models.Room, 'uuid'>>({
   method: 'POST',
-  url: '/chat/makeRoom',
+  url: '/chat/room',
   data: { args },
 })

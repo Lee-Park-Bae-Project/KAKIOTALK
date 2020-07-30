@@ -207,16 +207,17 @@ interface userList{
   userName: string;
 }
 export const makePrivateRoom = async (user) => {
-  let friendId
+  // let friendId
   let room
-  const myUuid = user[1].uuid
-  const friendUuid = user[0].uuid
-  const myInfo = await userService.findByUuid(myUuid)
-  if (!myInfo) {
+  const [invited, host] = user
+  const invitedUuid = invited.uuid
+  const hostUuid = host.uuid
+  const hostInfo = await userService.findByUuid(hostUuid)
+  if (!hostInfo) {
     throw HttpError.USER_NOT_FOUND
   }
 
-  const allRoom = await findAllRooms(myInfo.id)
+  const allRoom = await findAllRooms(hostInfo.id)
   if (!allRoom) {
     throw HttpError.IDK
   }
@@ -225,8 +226,8 @@ export const makePrivateRoom = async (user) => {
   allRoom.forEach(async (roomInfo) => {
     const participantsList = roomInfo.participants
     if (participantsList.length === 2) {
-      friendId = participantsList.find((users, i) => {
-        if (users.uuid === friendUuid) {
+      participantsList.find((users, i) => {
+        if (users.uuid === invitedUuid) {
           room = roomInfo
           return true
         }
@@ -252,7 +253,7 @@ export const makeGroupRoom = async (inviteUser, roomId) => {
     })
 
     if (!roomParticipant) {
-      throw HttpError.ROOM_NOT_FOUND
+      throw HttpError.CANNOT_ADD_ROOM_PARTICIPANT
     }
   })
   return roomId

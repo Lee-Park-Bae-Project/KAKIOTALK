@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios'
 import { Models } from '@kakio/common'
 import { InviteUser } from 'types'
-import { MockedComponentClass } from 'react-dom/test-utils'
 
 export const GET_ROOM_REQUEST = 'room/GET_ROOM_REQUEST' as const
 export const GET_ROOM_SUCCESS = 'room/GET_ROOM_SUCCESS' as const

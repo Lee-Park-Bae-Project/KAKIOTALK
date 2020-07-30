@@ -43,7 +43,7 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   }, [isLoggedIn])
 
   const handleFriendToAdd = (uuid: string, name: string) => {
-    if (selectedUser.find((user) => user.uuid === uuid)) {
+    if (selectedUser.some((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
       updateList(selectedUser.filter((item) => item.uuid !== uuid))
     } else {
@@ -56,42 +56,42 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
     }
   }
   return (
-<Fragment>
-    <SelectedList>
-        {selectedUser.map(({
-          name, uuid,
-        }) => <SelectedName name={name} key={uuid} uuid={uuid} handleFriendToAdd={handleFriendToAdd}/>)}
-      </SelectedList>
+  <Fragment>
+      <SelectedList>
+          {selectedUser.map(({
+            name, uuid,
+          }) => <SelectedName name={name} key={uuid} uuid={uuid} handleFriendToAdd={handleFriendToAdd}/>)}
+        </SelectedList>
 
-  <SearchInput
-        {...friendKeyword}
-        placeholder='초대할 상대를 입력해주세요'
-      />
+    <SearchInput
+          {...friendKeyword}
+          placeholder='초대할 상대를 입력해주세요'
+        />
 
-  <List>
-    {friendList.length ? (
-      friendList
-        .filter(
-          (friend) => friend.name
-            .toLowerCase()
-            .indexOf(friendKeyword.value.toLowerCase()) >= 0,
-        )
-        .map(({
-          uuid, name, email, imageUrl,
-        }) => (
-          <MakeChat
-                key={uuid}
-                uuid={uuid}
-                name={name}
-                imageUrl={imageUrl}
-                handleFriendToAdd={handleFriendToAdd}
-              />
-        ))) : (
-      <h1> 친구를 추가해 보세요!</h1>
-    )}
+    <List>
+      {friendList.length ? (
+        friendList
+          .filter(
+            (friend) => friend.name
+              .toLowerCase()
+              .indexOf(friendKeyword.value.toLowerCase()) >= 0,
+          )
+          .map(({
+            uuid, name, email, imageUrl,
+          }) => (
+            <MakeChat
+                  key={uuid}
+                  uuid={uuid}
+                  name={name}
+                  imageUrl={imageUrl}
+                  handleFriendToAdd={handleFriendToAdd}
+                />
+          ))) : (
+        <h1> 친구를 추가해 보세요!</h1>
+      )}
 
-  </List>
-  </Fragment>
+    </List>
+    </Fragment>
   )
 }
 export default ChatStart

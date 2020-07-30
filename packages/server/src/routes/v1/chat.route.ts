@@ -13,7 +13,7 @@ import isAuth from '../../middlewares/auth'
 const router = express.Router()
 
 router.use(isAuth)
-router.post('/makeRoom', makeRoom)
+router.post('/room', makeRoom)
 router.get('/message/:roomId', getChats)
 router.get('/first-chat/:roomUuid', getFirstChat)
 router.get('/last-chat/:roomUuid', getLastChat)

@@ -7,7 +7,7 @@ import { url } from 'common/constants'
 import { browserHistory } from '../../common/utils'
 
 const Routes: React.FC = () => (
-  <Router history={browserHistory} >
+  <Router history={browserHistory}>
     <Switch>
       <Route path={url.main.default} component={Pages.Main} />
       <Route path={url.login} component={Pages.Login} />
