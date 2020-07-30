@@ -4,8 +4,9 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { useDispatch } from 'react-redux'
 import { getCurTimeDBFormat } from 'common/utils'
-import { chatFromClient } from 'socket'
+import { chatFromClient } from 'modules/socket'
 import * as S from './styles'
 
 interface Props{
@@ -18,7 +19,7 @@ const TextArea: React.FC<Props> = ({
 }) => {
   const [hasContent, setHasContent] = useState<boolean>(false)
   const messageRef = useRef<HTMLTextAreaElement>(null)
-
+  const dispatch = useDispatch()
   const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (messageRef.current) {
       if (messageRef.current.value) {
@@ -36,12 +37,12 @@ const TextArea: React.FC<Props> = ({
 
     const msg = messageRef.current.value
     const createdAt = getCurTimeDBFormat()
-    chatFromClient({
+    dispatch(chatFromClient({
       content: msg,
       roomUuid,
       createdAt,
       userUuid,
-    })
+    }))
 
     if (messageRef.current) {
       messageRef.current.focus()
