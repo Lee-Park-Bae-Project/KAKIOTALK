@@ -1,40 +1,28 @@
-import {
-  GET_ROOM_FAILURE,
-  GET_ROOM_REQUEST,
-  GET_ROOM_SUCCESS,
-  MAKE_ROOM_REQUEST,
-} from 'modules/room/action'
-import {
-  RoomAction,
-  RoomState,
-} from 'modules/room/types'
+import * as Action from 'modules/room/action'
+import { RoomAction,
+  RoomState } from 'modules/room/types'
 
-const initialState: RoomState = {
-  isLoading: false,
-  data: [],
-}
+const initialState: RoomState = { isLoading: false,
+  data: [] }
 const room = (state: RoomState = initialState, action: RoomAction) => {
   switch (action.type) {
-    case GET_ROOM_REQUEST: {
-      return {
-        isLoading: true,
-        data: state.data,
-      }
+    case Action.GET_ROOM_REQUEST: {
+      return { isLoading: true,
+        data: state.data }
     }
-    case GET_ROOM_SUCCESS: {
-      return {
-        isLoading: false,
-        data: action.payload,
-      }
+    case Action.GET_ROOM_SUCCESS: {
+      return { isLoading: false,
+        data: action.payload }
     }
-    case GET_ROOM_FAILURE: {
+    case Action.GET_ROOM_FAILURE: {
       return initialState
     }
-    case MAKE_ROOM_REQUEST: {
-      return {
-        isLoading: true,
-        data: state.data,
-      }
+    case Action.RESET_ROOM: {
+      return initialState
+    }
+    case Action.MAKE_ROOM_REQUEST: {
+      return { isLoading: true,
+        data: state.data }
     }
 
     default: return state

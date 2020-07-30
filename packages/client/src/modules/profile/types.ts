@@ -1,12 +1,8 @@
-import {
-  getProfile,
-  getProfileSuccess,
-  initProfile,
-  updateProfielSuccess,
-} from 'modules/profile/action'
+import * as Action from 'modules/profile/action'
 
 export type ProfileAction =
-  | ReturnType<typeof initProfile>
-  | ReturnType<typeof getProfile>
-  | ReturnType<typeof getProfileSuccess>
-  | ReturnType<typeof updateProfielSuccess>;
+  | ReturnType<typeof Action.getProfile>
+  | ReturnType<typeof Action.getProfileSuccess>
+  | ReturnType<typeof Action.updateProfielSuccess>
+  | ReturnType<typeof Action.updateProfileRequest>
+  | ReturnType<typeof Action.resetProfile>

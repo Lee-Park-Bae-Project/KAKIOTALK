@@ -1,8 +1,4 @@
-import {
-  GET_PROFILE_SUCCESS,
-  INIT_PROFILE,
-  UPDATE_PROFILE_SUCCESS,
-} from 'modules/profile/action'
+import * as Action from 'modules/profile/action'
 import { ProfileAction } from 'modules/profile/types'
 import { Models } from '@kakio/common'
 
@@ -18,16 +14,16 @@ const initialState: UserState = {
 
 const profile = (state: UserState = initialState, action: ProfileAction) => {
   switch (action.type) {
-    case GET_PROFILE_SUCCESS: {
-      return action.payload
-    }
-    case INIT_PROFILE:
-      return action.payload
-
-    case UPDATE_PROFILE_SUCCESS: {
+    case Action.GET_PROFILE_SUCCESS: {
       return action.payload
     }
 
+    case Action.UPDATE_PROFILE_SUCCESS: {
+      return action.payload
+    }
+    case Action.RESET_PROFILE: {
+      return initialState
+    }
     default:
       return state
   }

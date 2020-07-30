@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useEffect, useState,
+  FC, Fragment, useState,
 } from 'react'
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
@@ -7,15 +7,12 @@ import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
-import { updateProfile } from 'modules/profile'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateProfileRequest } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
 import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
-import { getProfile } from 'common/request'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
 
@@ -64,9 +61,7 @@ const Profile: FC<Prop> = ({
   const myProfile = useSelector((state: RootState) => state.profile)
 
   const login = useSelector((state: RootState) => state.login)
-  const [selectedList, setSelectedList] = useState([{
-    uuid, name,
-  }])
+  const [selectedList, setSelectedList] = useState([{ uuid, name }])
 
   const handleEditClick = () => {
     if (isEditMode) {
@@ -77,10 +72,8 @@ const Profile: FC<Prop> = ({
 
       if (editName.value !== name || editStatusMessage.value !== statusMessage) {
         dispatch(
-          updateProfile({
-            name: editName.value,
-            statusMessage: editStatusMessage.value,
-          }),
+          updateProfileRequest({ name: editName.value,
+            statusMessage: editStatusMessage.value }),
         )
       }
     }
@@ -95,12 +88,8 @@ const Profile: FC<Prop> = ({
     })
   }
   const onChatClick = () => {
-    const {
-      uuid: userUuid, name: userName,
-    } = myProfile
-    dispatch(makeRoomRequest(selectedList.concat({
-      uuid, name,
-    })))
+    const { uuid: userUuid, name: userName } = myProfile
+    dispatch(makeRoomRequest(selectedList.concat({ uuid, name })))
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)
@@ -196,13 +185,9 @@ const Profile: FC<Prop> = ({
           ) : (
             <Fragment>
               <Link
-                to={{
-                  pathname: '/chat',
-                  state: {
-                    uuid,
-                    name,
-                  },
-                }}
+                to={{ pathname: '/chat',
+                  state: { uuid,
+                    name } }}
                 style={{ textDecoration: 'none' }}
               >
                 <S.ButtonWrapper>

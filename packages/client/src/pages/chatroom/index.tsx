@@ -1,13 +1,9 @@
 import React, { FC } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import SearchAccordion from 'system/ChatRoomSearchBar'
-import {
-  getChatRequest, loadMoreRequest,
-} from 'modules/chat'
+import { getChatRequest } from 'modules/chat'
 import { useAuth } from 'hooks'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'modules'
 import { joinRooms } from 'modules/socket'
 import Header from './Header'
@@ -26,8 +22,8 @@ const ChatRoom: FC = () => {
   const [roomName, setRoomName] = useState<string>('')
   const dispatch = useDispatch()
   const roomState = useSelector((state: RootState) => state.room)
-  const { userInfo } = useAuth()
-  const { uuid } = userInfo
+  const { isLoggedIn } = useAuth()
+  const { uuid } = useSelector((state: RootState) => state.profile)
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)
   }, [isSearchOpen, setIsSearchOpen])
