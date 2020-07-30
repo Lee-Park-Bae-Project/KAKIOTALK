@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.js": "/KAKIOTALK/static/js/main.2e50a13a.chunk.js",
+    "main.js.map": "/KAKIOTALK/static/js/main.2e50a13a.chunk.js.map",
+    "runtime-main.js": "/KAKIOTALK/static/js/runtime-main.5ac0ff15.js",
+    "runtime-main.js.map": "/KAKIOTALK/static/js/runtime-main.5ac0ff15.js.map",
+    "static/js/2.2a9626fb.chunk.js": "/KAKIOTALK/static/js/2.2a9626fb.chunk.js",
+    "static/js/2.2a9626fb.chunk.js.map": "/KAKIOTALK/static/js/2.2a9626fb.chunk.js.map",
+    "index.html": "/KAKIOTALK/index.html",
+    "precache-manifest.11a53ae67c8447857783849ab39bbd93.js": "/KAKIOTALK/precache-manifest.11a53ae67c8447857783849ab39bbd93.js",
+    "service-worker.js": "/KAKIOTALK/service-worker.js",
+    "static/js/2.2a9626fb.chunk.js.LICENSE.txt": "/KAKIOTALK/static/js/2.2a9626fb.chunk.js.LICENSE.txt",
+    "static/media/account.f322cb5a.svg": "/KAKIOTALK/static/media/account.f322cb5a.svg",
+    "static/media/arrow_down.95a46151.svg": "/KAKIOTALK/static/media/arrow_down.95a46151.svg",
+    "static/media/arrow_left.5cea32b1.svg": "/KAKIOTALK/static/media/arrow_left.5cea32b1.svg",
+    "static/media/arrow_up.47f91d3c.svg": "/KAKIOTALK/static/media/arrow_up.47f91d3c.svg",
+    "static/media/chat-filled.013855fd.svg": "/KAKIOTALK/static/media/chat-filled.013855fd.svg",
+    "static/media/chat-start.cbb2af31.svg": "/KAKIOTALK/static/media/chat-start.cbb2af31.svg",
+    "static/media/chat.0ec68f32.svg": "/KAKIOTALK/static/media/chat.0ec68f32.svg",
+    "static/media/check.613d650e.svg": "/KAKIOTALK/static/media/check.613d650e.svg",
+    "static/media/close.777b93c6.svg": "/KAKIOTALK/static/media/close.777b93c6.svg",
+    "static/media/confirm.4f7c9356.svg": "/KAKIOTALK/static/media/confirm.4f7c9356.svg",
+    "static/media/delete.57ab2478.svg": "/KAKIOTALK/static/media/delete.57ab2478.svg",
+    "static/media/edit-profile.2df2b9a8.svg": "/KAKIOTALK/static/media/edit-profile.2df2b9a8.svg",
+    "static/media/edit.3d22011b.svg": "/KAKIOTALK/static/media/edit.3d22011b.svg",
+    "static/media/logo.png": "/KAKIOTALK/static/media/logo.2049a84d.png",
+    "static/media/logout.a39c383b.svg": "/KAKIOTALK/static/media/logout.a39c383b.svg",
+    "static/media/menu.55f68494.svg": "/KAKIOTALK/static/media/menu.55f68494.svg",
+    "static/media/person-add.53e064ac.svg": "/KAKIOTALK/static/media/person-add.53e064ac.svg",
+    "static/media/person-filled.25cabb35.svg": "/KAKIOTALK/static/media/person-filled.25cabb35.svg",
+    "static/media/person.55787476.svg": "/KAKIOTALK/static/media/person.55787476.svg",
+    "static/media/quit.b627ea02.svg": "/KAKIOTALK/static/media/quit.b627ea02.svg",
+    "static/media/search.5f3eac93.svg": "/KAKIOTALK/static/media/search.5f3eac93.svg",
+    "static/media/send.5be1f331.svg": "/KAKIOTALK/static/media/send.5be1f331.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5ac0ff15.js",
+    "static/js/2.2a9626fb.chunk.js",
+    "static/js/main.2e50a13a.chunk.js"
+  ]
+}
