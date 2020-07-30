@@ -45,9 +45,6 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
       dispatch(getProfile())
     }
   }, [login])
-  const handleSelectedList = (selectList: InviteUser[]) => {
-    setSelectedList(selectList)
-  }
 
   const onConfirm = () => {
     const {
@@ -79,7 +76,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
           onConfirm={onConfirm}
           dialogRef={dialogRef}
           >
-          <ChatStart updateList={handleSelectedList}/>
+          <ChatStart updateList={setSelectedList}/>
           </Dialog>
         </PopUp>
       ) : null}

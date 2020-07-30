@@ -105,6 +105,8 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
     await chatService.makeGroupRoom(inviteUser, roomId)
   }
   const user = await userService.findByUuid(inviteUser[inviteUser.length - 1].uuid)
+  /* inviteUser의 마지막 index에는 항상 본인이 들어가기 때문에 inviteUser.length-1로 설정 */
+
   if (!user) {
     throw httpError.USER_NOT_FOUND
   }
