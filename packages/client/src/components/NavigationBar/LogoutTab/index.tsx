@@ -44,7 +44,6 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
       {isClicked ? (
         <PopUp refs={dialogRef} onClose={handlePopUpClick}>
           <Dialog
-            dialogRef={dialogRef}
             isVisible={true}
             title='정말로 로그 아웃 하시겠습니까?'
             isHideButton={false}
