@@ -4,7 +4,6 @@ import React, {
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
-import { Link } from 'react-router-dom'
 import {
   useDispatch, useSelector,
 } from 'react-redux'
@@ -14,22 +13,22 @@ import { getProfile } from 'modules/profile'
 import {
   Dialog, PopUp,
 } from 'components'
-import ChatRoomStartContainer from '../../../containers/ChatRoomStartContainer'
+import ChatStart from '../../../pages/main/ChatStart'
 
 const S = { Container: styled.div`
 width: fit-content;
 height: fit-content;
 ` }
+interface InviteUser{
+  uuid: string;
+  name: string;
+}
 
 interface MakeChatProp{
   size?: string;
 }
 
 const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
-  interface InviteUser{
-    uuid: string;
-    name: string;
-  }
   const [isClicked, setClicked] = useState(false)
 
   const [selectedList, setSelectedList] = useState<InviteUser[]>([])
@@ -46,9 +45,6 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
       dispatch(getProfile())
     }
   }, [login])
-  const handleSelectedList = (selectList: InviteUser[]) => {
-    setSelectedList(selectList)
-  }
 
   const onConfirm = () => {
     const {
@@ -61,11 +57,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
     setSelectedList([])
     handlePopUpClick()
   }
-  const onEnterPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      onConfirm()
-    }
-  }
+
   const dialogRef = React.useRef(null)
   return (
     <S.Container>
@@ -84,7 +76,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
           onConfirm={onConfirm}
           dialogRef={dialogRef}
           >
-          <ChatRoomStartContainer updateList={handleSelectedList}/>
+          <ChatStart updateList={setSelectedList}/>
           </Dialog>
         </PopUp>
       ) : null}

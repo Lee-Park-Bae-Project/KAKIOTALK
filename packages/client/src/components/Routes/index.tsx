@@ -1,12 +1,13 @@
 import React from 'react'
 import {
-  Redirect, Route, HashRouter as Router, Switch,
+  Redirect, Route, Router, Switch,
 } from 'react-router-dom'
 import * as Pages from 'pages'
 import { url } from 'common/constants'
+import { browserHistory } from '../../common/utils'
 
 const Routes: React.FC = () => (
-  <Router>
+  <Router history={browserHistory}>
     <Switch>
       <Route path={url.main.default} component={Pages.Main} />
       <Route path={url.login} component={Pages.Login} />
