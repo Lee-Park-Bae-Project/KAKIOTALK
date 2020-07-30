@@ -5,12 +5,7 @@ import { getChatRequest } from 'modules/chat'
 import { useAuth } from 'hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'modules'
-import {
-  chatFromServer,
-  joinRooms,
-  removeSocketEventListener,
-} from 'socket'
-import { Sockets } from '@kakio/common'
+import { joinRooms } from 'modules/socket'
 import Header from './Header'
 import TextArea from './TextArea'
 import ChatArea from './ChatArea'
@@ -35,7 +30,7 @@ const ChatRoom: FC = () => {
 
   useEffect(() => {
     if (roomUuid.length) {
-      joinRooms({ roomUuids: [roomUuid] })
+      dispatch(joinRooms({ roomUuids: [roomUuid] }))
     }
   }, [roomUuid])
 
@@ -63,13 +58,6 @@ const ChatRoom: FC = () => {
     setRoomUuid(params.roomUuid)
   }, [params])
 
-  useEffect(() => {
-    chatFromServer(dispatch)
-
-    return (() => {
-      removeSocketEventListener(Sockets.EventMap.chatFromServer)
-    })
-  })
   return (
     <S.Container>
       <Header roomName={roomName} toggleSearchBar={toggleSearchBar}/>

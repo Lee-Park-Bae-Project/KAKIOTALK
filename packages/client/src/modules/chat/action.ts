@@ -1,16 +1,16 @@
 import { AxiosError } from 'axios'
 import { ApiChat } from 'types'
 
-export const GET_CHAT_REQUEST = 'room/GET_CHAT_REQUEST' as const
-export const GET_CHAT_SUCCESS = 'room/GET_CHAT_SUCCESS' as const
-export const GET_CHAT_FAILURE = 'room/GET_CHAT_FAIL' as const
+export const GET_CHAT_REQUEST = 'chat/GET_CHAT_REQUEST' as const
+export const GET_CHAT_SUCCESS = 'chat/GET_CHAT_SUCCESS' as const
+export const GET_CHAT_FAILURE = 'chat/GET_CHAT_FAIL' as const
 
-export const ADD_CHAT = 'room/ADD_CHAT' as const
-export const ADD_CHAT_OFFSET = 'room/ADD_CHAT_OFFSET' as const
+export const ADD_CHAT = 'chat/ADD_CHAT' as const
+export const ADD_CHAT_OFFSET = 'chat/ADD_CHAT_OFFSET' as const
 
-export const LOAD_MORE_REQUEST = 'room/LOAD_MORE_REQUEST' as const
-export const LOAD_MORE_SUCCESS = 'room/LOAD_MORE_SUCCESS' as const
-export const LOAD_MORE_FAILURE = 'room/LOAD_MORE_FAILURE' as const
+export const LOAD_MORE_REQUEST = 'chat/LOAD_MORE_REQUEST' as const
+export const LOAD_MORE_SUCCESS = 'chat/LOAD_MORE_SUCCESS' as const
+export const LOAD_MORE_FAILURE = 'chat/LOAD_MORE_FAILURE' as const
 
 export const RESET_CHAT = 'room/RESET_CHAT' as const
 interface GetChatRequest {
