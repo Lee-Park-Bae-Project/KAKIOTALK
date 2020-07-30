@@ -2,6 +2,7 @@ import moment from 'moment'
 import swal from 'sweetalert'
 import { useEffect } from 'react'
 import 'moment/locale/ko'
+import { createBrowserHistory } from 'history'
 
 require('moment-timezone')
 
@@ -9,6 +10,7 @@ moment.locale('ko')
 moment.tz.setDefault('Asia/Seoul')
 const tzSeoul = 'Asia/Seoul'
 const DB_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+export const browserHistory = createBrowserHistory()
 
 export const convertDBTimeTohhmmA = (date: string) => moment(date).format('LLL')
 export const convertTimeForMsgFormat = (date: string) => moment(date).format('LT')
@@ -31,3 +33,6 @@ const alert = {
 }
 export { alert }
 
+export const push = (targetUrl: string) => {
+  browserHistory.push(targetUrl)
+}

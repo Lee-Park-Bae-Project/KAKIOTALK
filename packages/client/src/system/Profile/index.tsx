@@ -7,11 +7,13 @@ import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateProfileRequest } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
+import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
+import { RootState } from 'modules'
 import { useInput } from 'hooks'
 
 interface Prop {
@@ -46,10 +48,21 @@ const Profile: FC<Prop> = ({
   isMyProfile,
   isOverflow,
 }) => {
+  interface InviteUser{
+    uuid: string;
+    name: string;
+  }
+
   const [isEditMode, setIsEditMode] = useState(false)
   const editName = useInput(name)
   const editStatusMessage = useInput(statusMessage || '')
   const dispatch = useDispatch()
+
+  const myProfile = useSelector((state: RootState) => state.profile)
+
+  const login = useSelector((state: RootState) => state.login)
+  const [selectedList, setSelectedList] = useState([{ uuid, name }])
+
   const handleEditClick = () => {
     if (isEditMode) {
       if (editName.value.length === 0) {
@@ -73,6 +86,10 @@ const Profile: FC<Prop> = ({
         dispatch(deleteFriend(uuid))
       }
     })
+  }
+  const onChatClick = () => {
+    const { uuid: userUuid, name: userName } = myProfile
+    dispatch(makeRoomRequest(selectedList.concat({ uuid, name })))
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)
@@ -182,6 +199,7 @@ const Profile: FC<Prop> = ({
                   iconPosition='top'
                   size='1.2rem'
                   textSize='0.8rem'
+                  onClick={onChatClick}
                 />
                 </S.ButtonWrapper>
 

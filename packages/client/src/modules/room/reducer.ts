@@ -20,6 +20,10 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
     case Action.RESET_ROOM: {
       return initialState
     }
+    case Action.MAKE_ROOM_REQUEST: {
+      return { isLoading: true,
+        data: state.data }
+    }
 
     default: return state
   }

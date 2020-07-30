@@ -1,9 +1,9 @@
 
-import { QueryTypes } from 'sequelize/types'
+// import { response } from 'express'
 import * as chatService from '../services/chat'
 import * as userService from '../services/user'
 import {
-  controllerHelper, uuid,
+  controllerHelper, response, uuid,
 } from '../common/utils'
 import * as httpError from '../common/error'
 
@@ -79,27 +79,41 @@ export const addMessage = controllerHelper(async (req, res, next) => {
   return data
 })
 export const makeRoom = controllerHelper(async (req, res, next) => {
-  try {
-    const inviteUser = req.query.args as QueryTypes[]
-
-    const roomId = await chatService.createRoom()
-    if (!roomId) {
-      throw httpError.IDK
-    }
-    const addRoomParticipants = inviteUser.forEach(async (userList:QueryTypes) => {
-      const userUuid = await JSON.parse(userList).uuid
-      const userName = await JSON.parse(userList).name
-
-      const userRoom = await chatService.makeRoomParticipants({
-        userUuid, userName,
-      }, roomId.id)
-      if (!userRoom) {
-        throw httpError.ROOM_NOT_FOUND
+  const inviteUser = req.body.args
+  let rooms
+  let roomUuid
+  if (inviteUser.length === 2) {
+    const privateRoom = await chatService.makePrivateRoom(inviteUser)
+    if (!privateRoom) {
+      const room = await chatService.createRoom()
+      if (!room) {
+        throw httpError.IDK
       }
-    })
-    return roomId
-  } catch (e) {
-    next(e)
+      const roomId = room.id
+      roomUuid = room.uuid
+      const groupRoom = await chatService.makeGroupRoom(inviteUser, roomId)
+    } else {
+      roomUuid = privateRoom.uuid
+    }
+  } else {
+    const room = await chatService.createRoom()
+    if (!room) {
+      throw httpError.ROOM_NOT_MADE
+    }
+    const roomId = room.id
+    roomUuid = room.uuid
+    await chatService.makeGroupRoom(inviteUser, roomId)
+  }
+  const user = await userService.findByUuid(inviteUser[inviteUser.length - 1].uuid)
+  /* inviteUser의 마지막 index에는 항상 본인이 들어가기 때문에 inviteUser.length-1로 설정 */
+
+  if (!user) {
+    throw httpError.USER_NOT_FOUND
+  }
+  const userId = user.id
+  rooms = await chatService.findAllRooms(userId)
+  return {
+    rooms, roomUuid,
   }
 })
 

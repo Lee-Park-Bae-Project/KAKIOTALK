@@ -4,7 +4,7 @@ import { color } from 'styles/global'
 import * as S from './styles'
 
 interface Props{
-  uuid?: string
+  uuid: string
   /** user card 에 표시할 유저 네임 */
   name: string
   /** 유저 상태메시지 */

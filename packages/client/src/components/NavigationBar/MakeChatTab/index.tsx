@@ -8,24 +8,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'modules'
 import { makeRoomRequest } from 'modules/room'
 import { Dialog, PopUp } from 'components'
-import ChatRoomStartContainer from '../../../containers/ChatRoomStartContainer'
+import ChatStart from '../../../pages/main/ChatStart'
 
 const S = { Container: styled.div`
 width: fit-content;
 height: fit-content;
 ` }
+interface InviteUser{
+  uuid: string;
+  name: string;
+}
 
 interface MakeChatProp{
   size?: string;
 }
 
 const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
-  interface InviteUser{
-    uuid: string;
-    name: string;
-  }
   const [isClicked, setClicked] = useState(false)
-
   const [selectedList, setSelectedList] = useState<InviteUser[]>([])
   const room = useSelector((state: RootState) => state.room)
   const myProfile = useSelector((state: RootState) => state.profile)
@@ -33,10 +32,6 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
     setClicked(!isClicked)
   }
   const dispatch = useDispatch()
-  const handleSelectedList = (selectList: InviteUser[]) => {
-    setSelectedList(selectList)
-  }
-
   const onConfirm = () => {
     const { uuid, name } = myProfile
 
@@ -44,11 +39,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
     setSelectedList([])
     handlePopUpClick()
   }
-  const onEnterPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      onConfirm()
-    }
-  }
+
   const dialogRef = React.useRef(null)
   return (
     <S.Container>
@@ -67,7 +58,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
           onConfirm={onConfirm}
           dialogRef={dialogRef}
           >
-          <ChatRoomStartContainer updateList={handleSelectedList}/>
+          <ChatStart updateList={setSelectedList}/>
           </Dialog>
         </PopUp>
       ) : null}

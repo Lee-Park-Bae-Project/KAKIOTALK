@@ -1,5 +1,8 @@
 import { Models } from '@kakio/common'
+import { UserModel } from '@src/models/user'
+
 import { chatFromServer } from '../socket'
+
 import {
   CHAT_ASSOCIATION_ALIAS,
   models,
@@ -70,6 +73,7 @@ interface GetChatsByRoomId {
   limit: number
   offset: number
 }
+
 export const getChatsByRoomId = async ({
   roomId, limit, offset,
 }:GetChatsByRoomId) => {
@@ -202,23 +206,57 @@ interface userList{
   userUuid: string;
   userName: string;
 }
-
-export const createRoom = async () => models.Room.create()
-export const makeRoomParticipants = async ({
-  userUuid, userName,
-}:userList, roomId) => {
-  const user = await userService.findByUuid(userUuid)
-  if (!user) {
+export const makePrivateRoom = async (user) => {
+  // let friendId
+  let room
+  const [invited, host] = user
+  const invitedUuid = invited.uuid
+  const hostUuid = host.uuid
+  const hostInfo = await userService.findByUuid(hostUuid)
+  if (!hostInfo) {
     throw HttpError.USER_NOT_FOUND
   }
-  const userId = user.id
-  const roomParticipant = await models.RoomParticipants.create({
-    roomId, userId,
-  })
-  if (!roomParticipant) {
-    throw HttpError.ROOM_NOT_FOUND
+
+  const allRoom = await findAllRooms(hostInfo.id)
+  if (!allRoom) {
+    throw HttpError.IDK
   }
-  return roomParticipant
+
+  // check room exist
+  allRoom.forEach(async (roomInfo) => {
+    const participantsList = roomInfo.participants
+    if (participantsList.length === 2) {
+      participantsList.find((users, i) => {
+        if (users.uuid === invitedUuid) {
+          room = roomInfo
+          return true
+        }
+      })
+    }
+  })
+  return room
+}
+
+export const createRoom = async () => models.Room.create()
+
+export const makeGroupRoom = async (inviteUser, roomId) => {
+  inviteUser.forEach(async (user) => {
+    const userUuid = user.uuid
+    const userInfo = await userService.findByUuid(userUuid)
+
+    if (!userInfo) {
+      throw HttpError.USER_NOT_FOUND
+    }
+    const userId = userInfo.id
+    const roomParticipant = await models.RoomParticipants.create({
+      roomId, userId,
+    })
+
+    if (!roomParticipant) {
+      throw HttpError.CANNOT_ADD_ROOM_PARTICIPANT
+    }
+  })
+  return roomId
 }
 
 export const findFirstChat = async (roomId: number) => models.Chat.findOne({
