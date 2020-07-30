@@ -5,6 +5,10 @@ import {
 } from 'styles/global'
 
 export const Container = styled(Flex)`
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 `
 
 export const ContentWrapper = styled.div`
