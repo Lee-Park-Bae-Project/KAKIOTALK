@@ -4,7 +4,10 @@ import {
   List, ChatRoomSearchBar as SearchAccordion,
 } from 'system'
 import { getChatRequest } from 'modules/chat'
-import { leaveRoomRequest } from 'modules/room'
+import {
+  getRoomRequest, leaveRoomRequest,
+} from 'modules/room'
+
 import { useAuth } from 'hooks'
 import {
   useDispatch, useSelector,
@@ -56,6 +59,7 @@ const ChatRoom: FC = () => {
   useEffect(() => {
     if (roomUuid.length) {
       dispatch(joinRooms({ roomUuids: [roomUuid] }))
+      dispatch(getRoomRequest())
     }
   }, [roomUuid])
 
@@ -120,9 +124,11 @@ const ChatRoom: FC = () => {
         description={'나가시겠습니까?'}
         isHideButton={false}
         canCancel={true}
-        cancelText="취소"
         confirmText="확인"
+        cancelText="취소"
+        onConfirm={handleLeaveRoom}
         onCancel={toggleLeaveAlert}
+
       />
     </S.Container>
   )
