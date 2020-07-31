@@ -6,6 +6,7 @@ import { convertMillToMMDDYYYY } from 'common/utils'
 
 interface Props {
   participantsName: string;
+  numOfParticipants: number;
   lastMessage?: string;
   lastModified?: number;
   numOfNewMessages?: number;
@@ -13,6 +14,7 @@ interface Props {
 }
 const ChatCard: FC<Props> = ({
   participantsName,
+  numOfParticipants,
   lastMessage = 'this is last message',
   lastModified = Date.now(),
   numOfNewMessages = 99,
@@ -33,7 +35,7 @@ const ChatCard: FC<Props> = ({
           <span>{lastMessage}</span>
         </S.LastMsgWrapper>
       </S.InfoWrapper>
-      <S.NumWrapper>{participantsName.length}</S.NumWrapper>
+      <S.NumWrapper>{numOfParticipants}</S.NumWrapper>
     </S.RoomInfoWrapper>
 
     <S.SubInfoWrapper>
