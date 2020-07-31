@@ -1,6 +1,4 @@
-import React, {
-  FC, useState,
-} from 'react'
+import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import Flex from 'atoms/Flex'
 import { color } from 'styles/global'

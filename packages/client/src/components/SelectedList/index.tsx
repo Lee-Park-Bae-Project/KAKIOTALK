@@ -7,9 +7,8 @@ const S = { NameList: styled(Flex)`
   align-content: flex-start; 
   flex-direction: row;
   justify-content: flex-start;
-  height: 120%;
-  max-height:150vh;
-  overflow:scroll;
+  height: 30%;
+  max-height:50vh;
   float:left;
   width: 100%;
   ` }

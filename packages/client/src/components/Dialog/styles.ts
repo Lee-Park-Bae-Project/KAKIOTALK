@@ -11,14 +11,15 @@ export const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 60rem;
 `
 
 export const Content = styled(Flex)`
   flex-direction: column;
   border-radius:1rem;
-  
   background-color: white;
   width: 20rem;
+  height: 30rem;
   padding: 2rem;
 `
 
