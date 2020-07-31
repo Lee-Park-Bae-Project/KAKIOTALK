@@ -20,7 +20,7 @@ const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || ''
 const PUBLIC_URL = process.env.REACT_APP_PUBLIC_URL
 
 const LOGIN_URL = 'http://locahost:3000/login'
-const LOGIN_URL_PRODUCT = 'https://lee-park-bae-project.github.io/KAKIOTALK/login'
+const LOGIN_URL_PRODUCT = 'https://5f23d6929785a9000708d578--focused-mccarthy-3df3e2.netlify.app/login'
 
 export const configs = {
   SOCKET_URL,
