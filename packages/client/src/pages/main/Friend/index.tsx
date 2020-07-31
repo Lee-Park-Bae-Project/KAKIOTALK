@@ -1,34 +1,16 @@
-import React, {
-  FC, Fragment, useEffect,
-} from 'react'
+import React, { FC, Fragment } from 'react'
 import List from 'system/List'
 import Hr from 'atoms/Hr'
-import {
-  SearchInput, UserCard,
-} from 'components'
+import { SearchInput, UserCard } from 'components'
 import { SimpleUserType } from 'types'
 import * as S from 'system/Room/style'
-import { getFriends } from 'modules/friends'
-import { getProfile } from 'modules/profile'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from 'modules'
-import {
-  useAuth, useInput,
-} from 'hooks'
+import { useInput } from 'hooks'
 
 const Friend: FC = () => {
   const myProfile: SimpleUserType = useSelector((state: RootState) => state.profile)
   const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
-  const dispatch = useDispatch()
-  const { isLoggedIn } = useAuth()
-  useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getFriends())
-      dispatch(getProfile())
-    }
-  }, [isLoggedIn])
   const friendKeyword = useInput('')
   return (
     <Fragment>

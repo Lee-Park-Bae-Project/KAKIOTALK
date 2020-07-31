@@ -13,17 +13,12 @@ import {
 import * as HttpError from '../common/error'
 import * as userService from './user'
 
-export const findRoomByUuid = (uuid: string) => models.Room.findOne({
-  where: { uuid },
-  include: [{
-    model: models.User,
-    as: 'participants',
-  }],
-})
+export const findRoomByUuid = (uuid: string) => models.Room.findOne({ where: { uuid },
+  include: [{ model: models.User,
+    as: 'participants' }] })
 export const findAllRooms = async (userId: number) => {
   const data = await models.User.findOne(
-    {
-      where: { id: userId },
+    { where: { id: userId },
       include: [{
         attributes: ['uuid', 'createdAt', 'updatedAt'],
         model: models.Room,
@@ -33,8 +28,7 @@ export const findAllRooms = async (userId: number) => {
           model: models.User,
           as: ROOM_ASSOCIATION_ALIAS.RoomParticipants,
         }],
-      }],
-    }
+      }] }
   )
 
   if (!data) {
@@ -118,9 +112,7 @@ export const getRoomParticipants = (roomId: string) => models.RoomParticipants.f
 })
 
 export const findRoomParticipants = async (roomId: number, userId: number) => (
-  models.RoomParticipants.findOne({ where: {
-    roomId, userId,
-  } })
+  models.RoomParticipants.findOne({ where: { roomId, userId } })
 )
 
 const findChatById = async (id: number) => models.Chat.findOne({
@@ -248,9 +240,7 @@ export const makeGroupRoom = async (inviteUser, roomId) => {
       throw HttpError.USER_NOT_FOUND
     }
     const userId = userInfo.id
-    const roomParticipant = await models.RoomParticipants.create({
-      roomId, userId,
-    })
+    const roomParticipant = await models.RoomParticipants.create({ roomId, userId })
 
     if (!roomParticipant) {
       throw HttpError.CANNOT_ADD_ROOM_PARTICIPANT

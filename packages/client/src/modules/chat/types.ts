@@ -1,7 +1,5 @@
 import * as Action from 'modules/chat/action'
-import {
-  ReduxChatMap, ReduxState,
-} from 'types'
+import { ReduxChatMap, ReduxState } from 'types'
 
 export type ChatState = ReduxState<ReduxChatMap>
 
@@ -14,3 +12,4 @@ export type ChatAction =
 | ReturnType<typeof Action.loadMoreSuccess>
 | ReturnType<typeof Action.loadMoreFailure>
 | ReturnType<typeof Action.addChatOffset>
+| ReturnType<typeof Action.resetChat>
