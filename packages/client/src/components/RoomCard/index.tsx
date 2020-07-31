@@ -38,6 +38,7 @@ const RoomCard: FC<Props> = ({
           {lastMessage}
         </S.LastMsgWrapper>
       </S.InfoWrapper>
+      <S.NumWrapper>{numOfParticipants}</S.NumWrapper>
     </S.RoomInfoWrapper>
     <S.SubInfoWrapper>
       <S.Time>{ dayDiffFromNow >= 1 ? convertMillToMMDDYYYY(Date.parse(lastModified)) : convertTimeForMsgFormat(lastModified)}</S.Time>
