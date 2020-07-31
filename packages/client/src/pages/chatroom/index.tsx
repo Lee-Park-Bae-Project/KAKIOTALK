@@ -87,9 +87,9 @@ const ChatRoom: FC = () => {
     setRoomUuid(params.roomUuid)
   }, [params])
 
-  // if (!roomState.data[0]) {
-  //   return <div>loading</div>
-  // }
+  if (!roomState.data[0]) {
+    return <div>loading</div>
+  }
   return (
     <S.Container>
       <Header
@@ -108,13 +108,13 @@ const ChatRoom: FC = () => {
         toggleDrawer={toggleDrawer}
       >
         <Icon icon="ArrowRight" onClick={toggleDrawer}/>
-        {/* <List>
+        <List>
           {
             roomState.data[0].participants.map((v) => (
                 <p key={v.uuid}>{v.name}</p>
             ))
           }
-        </List> */}
+        </List>
         <S.Button onClick={toggleLeaveAlert}>나가기</S.Button>
 
       </Drawer>
