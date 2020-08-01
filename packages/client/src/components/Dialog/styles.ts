@@ -19,7 +19,8 @@ export const Content = styled(Flex)`
   border-radius:1rem;
   background-color: white;
   width: 20rem;
-  height: 30rem;
+  max-height: 40rem;
+  height: fit-content;
   padding: 2rem;
 `
 

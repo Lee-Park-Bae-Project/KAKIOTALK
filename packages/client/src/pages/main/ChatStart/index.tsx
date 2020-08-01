@@ -5,15 +5,9 @@ import List from 'system/List'
 import {
   MakeChat, SearchInput, SelectedList, SelectedName,
 } from 'components'
-import {
-  InviteUser, SimpleUserType,
-} from 'types'
-import {
-  useAuth, useInput,
-} from 'hooks'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { InviteUser, SimpleUserType } from 'types'
+import { useAuth, useInput } from 'hooks'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'modules'
 import { getFriends } from 'modules/friends'
 import { getProfile } from 'modules/profile'
@@ -47,20 +41,14 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
       updateList(selectedUser.filter((item) => item.uuid !== uuid))
     } else {
-      setSelectedUser(selectedUser.concat({
-        uuid, name,
-      }))
-      updateList(selectedUser.concat({
-        uuid, name,
-      }))
+      setSelectedUser(selectedUser.concat({ uuid, name }))
+      updateList(selectedUser.concat({ uuid, name }))
     }
   }
   return (
   <Fragment>
       <SelectedList>
-          {selectedUser.map(({
-            name, uuid,
-          }) => <SelectedName name={name} key={uuid} uuid={uuid} handleFriendToAdd={handleFriendToAdd}/>)}
+          {selectedUser.map(({ name, uuid }) => <SelectedName name={name} key={uuid} uuid={uuid} handleFriendToAdd={handleFriendToAdd}/>)}
         </SelectedList>
 
     <SearchInput
@@ -87,7 +75,7 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
                   handleFriendToAdd={handleFriendToAdd}
                 />
           ))) : (
-        <h1> 친구를 추가해 보세요!</h1>
+        <h3> 친구를 추가해 보세요!</h3>
       )}
 
     </List>

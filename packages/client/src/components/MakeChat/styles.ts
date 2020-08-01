@@ -16,6 +16,7 @@ export const Checkmark = styled.span`
   display: none;
   }
 `
+
 export const Input = styled.input`
 position: relative;
 opacity: 0;
@@ -53,6 +54,7 @@ export const Container = styled.label`
   user-select: none; 
   align-items: center;
   justify-content: space-between;
+  padding-right: 0.8rem;
   /** 선택했을 때 배경색 변경 */
   &:hover ${Input} ~ ${Checkmark}{
     background-color:${color.HOVER_GRAY}    
