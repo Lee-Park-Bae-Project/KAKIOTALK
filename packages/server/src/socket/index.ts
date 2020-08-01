@@ -22,7 +22,7 @@ const socketCallBack = ((cb: SocketType) => (socket: openSocket.Socket) => cb(so
 
 const onDisconnect = ((socket: openSocket.Socket) => {
   socket.on(EventMap.DISCONNECT, () => {
-    console.log(chalk.yellow(`${socket.id} is disconnected`))
+    console.log(chalk.yellow(`${socket.id} is disconnected!!`))
     io.emit('leave', `${socket.id} is disconnected`)
   })
 })
