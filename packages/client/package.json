@@ -56,7 +56,6 @@
     "build-storybook": "build-storybook -s public",
     "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
     "lint": "eslint --fix \"src/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
@@ -125,6 +124,5 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  },
-  "homepage": "https://Lee-Park-Bae-Project.github.io/KAKIOTALK"
+  }
 }
