@@ -90,7 +90,7 @@ const Profile: FC<Prop> = ({
   }
   const onChatClick = () => {
     const { uuid: userUuid, name: userName } = myProfile
-    dispatch(makeRoomRequest(selectedList.concat({ uuid, name })))
+    dispatch(makeRoomRequest(selectedList.concat({ userUuid, userName })))
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)
@@ -185,12 +185,6 @@ const Profile: FC<Prop> = ({
 
           ) : (
             <Fragment>
-              <Link
-                to={{ pathname: '/chat',
-                  state: { uuid,
-                    name } }}
-                style={{ textDecoration: 'none' }}
-              >
                 <S.ButtonWrapper>
                 <TextIcon
                   icon='ChatFilled'
@@ -204,7 +198,6 @@ const Profile: FC<Prop> = ({
                 />
                 </S.ButtonWrapper>
 
-              </Link>
               <S.ButtonWrapper>
               <TextIcon
                 icon='Delete'

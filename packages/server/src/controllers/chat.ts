@@ -79,9 +79,7 @@ export const addMessage = controllerHelper(async (req, res, next) => {
   return data
 })
 export const makeRoom = controllerHelper(async (req, res, next) => {
-  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
   const inviteUser = req.body.args
-  console.log(inviteUser)
   let rooms
   let roomUuid
   if (inviteUser.length === 2) {
@@ -114,6 +112,10 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
   }
   const userId = user.id
   rooms = await chatService.findAllRooms(userId)
+  rooms.forEach((element) => {
+    console.log(element)
+  })
+
   return { rooms, roomUuid }
 })
 
@@ -126,9 +128,9 @@ export const getFirstChat = controllerHelper(async (req, res, next) => {
 
   const roomId = room.id
   const firstChat = await chatService.findFirstChat(roomId)
-  // if (!firstChat) {
-  //   throw httpError.DATA_NOT_FOUND
-  // }
+  if (!firstChat) {
+    throw httpError.DATA_NOT_FOUND
+  }
 
   return firstChat
 })
