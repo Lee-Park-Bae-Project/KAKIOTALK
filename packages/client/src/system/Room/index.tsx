@@ -1,7 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react'
 import List from 'system/List'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
+import {
+  RouteComponentProps, withRouter,
+} from 'react-router-dom'
 import { url } from 'common/constants'
 import * as S from 'system/Room/style'
 import {
@@ -37,7 +39,9 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
                 .toLowerCase()
                 .indexOf(roomKeyword.value.toLowerCase()) >= 0,
             ),)
-            .map(({ uuid, participants }) => {
+            .map(({
+              uuid, participants, updatedAt,
+            }) => {
               const participantsNames = participants.map((v) => v.name).join(', ')
               const onClick = () => {
                 history.push(`${url.room}/${uuid}`)
@@ -48,6 +52,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
                   participantsName={participantsNames}
                   numOfParticipants={participants.length}
                   onClick={onClick}
+                  lastModified={updatedAt}
                 />
               )
             })}
