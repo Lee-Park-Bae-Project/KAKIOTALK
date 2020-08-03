@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components'
 import Flex from 'atoms/Flex'
-import {
-  color, weight,
-} from 'styles/global'
+import { color, weight } from 'styles/global'
 
 export const grayColor = css`
   color: ${(props) => color.GRAY};
@@ -20,6 +18,7 @@ export const Container = styled(Flex)`
 
 export const RoomInfoWrapper = styled.div`
   display: flex;
+  align-items:center;
   max-width: 80%;
 `
 
@@ -29,8 +28,9 @@ export const ImgWrapper = styled.div`
 `
 
 export const InfoWrapper = styled.div`
+  display:flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content:center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -39,6 +39,7 @@ export const InfoWrapper = styled.div`
 `
 
 export const Row = styled.div`
+  display:flex;
   justify-content: left;
 `
 
@@ -57,15 +58,14 @@ export const NumWrapper = styled.span`
 `
 
 export const LastMsgWrapper = styled.div`
-  ${(props) => grayColor};
   margin-right: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  height: 2.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
+  font-weight: lighter;
 `
 
 export const SubInfoWrapper = styled(Flex)`
