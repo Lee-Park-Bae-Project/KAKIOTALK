@@ -2,24 +2,28 @@ import React, { FC } from 'react'
 import * as S from 'components/RoomCard/styles'
 import Icon from 'Icon/Icon'
 import Circle from 'atoms/Circle'
-import { convertMillToMMDDYYYY } from 'common/utils'
+import {
+  convertMillToMMDDYYYY, convertTimeForMsgFormat, getCurTimeDBFormat, getDayDiff,
+} from 'common/utils'
 
 interface Props {
   participantsName: string;
   numOfParticipants: number;
   lastMessage?: string;
-  lastModified?: number;
+  lastModified?: string;
   numOfNewMessages?: number;
   onClick?: () => void;
 }
-const ChatCard: FC<Props> = ({
+const RoomCard: FC<Props> = ({
   participantsName,
   numOfParticipants,
   lastMessage = 'this is last message',
-  lastModified = Date.now(),
+  lastModified = getCurTimeDBFormat(),
   numOfNewMessages = 99,
   onClick = undefined,
-}) => (
+}) => {
+  const dayDiffFromNow = getDayDiff(lastModified)
+  return (
   <S.Container onClick={onClick}>
     <S.RoomInfoWrapper>
       <S.ImgWrapper>
@@ -27,22 +31,20 @@ const ChatCard: FC<Props> = ({
       </S.ImgWrapper>
       <S.InfoWrapper>
         <S.Row>
-          <div>
             <S.UserListWrapper>{participantsName}</S.UserListWrapper>
-          </div>
+            <S.NumWrapper>{numOfParticipants}</S.NumWrapper>
         </S.Row>
         <S.LastMsgWrapper>
-          <span>{lastMessage}</span>
+          {lastMessage}
         </S.LastMsgWrapper>
       </S.InfoWrapper>
-      <S.NumWrapper>{numOfParticipants}</S.NumWrapper>
     </S.RoomInfoWrapper>
-
     <S.SubInfoWrapper>
-      <S.Time>{convertMillToMMDDYYYY(lastModified)}</S.Time>
+      <S.Time>{ dayDiffFromNow >= 1 ? convertMillToMMDDYYYY(Date.parse(lastModified)) : convertTimeForMsgFormat(lastModified)}</S.Time>
       <Circle num={numOfNewMessages} />
     </S.SubInfoWrapper>
   </S.Container>
-)
+  )
+}
 
-export default ChatCard
+export default RoomCard
