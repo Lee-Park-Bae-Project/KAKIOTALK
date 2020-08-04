@@ -40,7 +40,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
                 .indexOf(roomKeyword.value.toLowerCase()) >= 0,
             ),)
             .map(({
-              uuid, participants, updatedAt,
+              uuid, participants, updatedAt, lastMessage,
             }) => {
               const participantsNames = participants.map((v) => v.name).join(', ')
               const onClick = () => {
@@ -53,6 +53,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
                   numOfParticipants={participants.length}
                   onClick={onClick}
                   lastModified={updatedAt}
+                  lastMessage={lastMessage}
                 />
               )
             })}
