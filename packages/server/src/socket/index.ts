@@ -1,8 +1,8 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
+import { Socket } from '@kakio/common'
 import * as T from '../types'
 import { addMessage } from '../services/chat'
-import { Socket } from '@kakio/common' 
 
 declare global {
   namespace NodeJS {
@@ -82,7 +82,7 @@ const connection = () => {
 }
 
 const connect = (server: any) => {
-  io = openSocket(server, {pingTimeout: 60000})
+  io = openSocket(server, { pingTimeout: 60000 })
   connection()
 }
 
