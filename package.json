@@ -20,7 +20,8 @@
     "server:start": "yarn server start",
     "server:build": "yarn server build",
     "server:dev": "yarn server dev",
-    "deploy:client": "vercel --prod"
+    "deploy:client": "vercel --prod",
+    "deploy:server": "yarn common:build && yarn server deploy"
   },
   "devDependencies": {
     "typescript": "^3.9.3"
