@@ -7,9 +7,7 @@ interface Props{
   roomName: string
   toggleSearchBar: () => void
 }
-const Header: React.FC<Props> = ({
-  roomName, toggleSearchBar,
-}) => {
+const Header: React.FC<Props> = ({ roomName, toggleSearchBar }) => {
   const history = useHistory()
 
   const handleBack = () => {
@@ -25,7 +23,7 @@ const Header: React.FC<Props> = ({
           <Icon
             icon="Search"
             size="1rem"
-            css={{ margin: 'auto 0.5rem' }}
+            // css={{ margin: 'auto 0.5rem' }}
             onClick={toggleSearchBar}
           />
         </div>

@@ -7,16 +7,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@types/axios": "^0.14.0",
-    "@types/cors": "^2.8.6",
-    "@types/jest": "^24.0.0",
-    "@types/lodash": "^4.14.155",
-    "@types/node": "^12.0.0",
-    "@types/qs": "^6.9.1",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.0",
-    "@types/redux-logger": "^3.0.7",
-    "@types/shortid": "^0.0.29",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "enzyme-to-json": "^3.4.3",
@@ -52,11 +42,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
-    "deploy-storybook": "yarn build-storybook && now deploy storybook-static --local-config=now.json",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
     "lint": "eslint --fix \"src/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
@@ -82,15 +67,6 @@
     "^src/(.*)$": "<rootDir>/src/$1"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.8",
-    "@storybook/addon-docs": "^5.2.8",
-    "@storybook/addon-info": "^5.2.8",
-    "@storybook/addon-knobs": "^5.2.8",
-    "@storybook/addon-links": "^5.2.8",
-    "@storybook/addons": "^5.2.8",
-    "@storybook/preset-create-react-app": "^1.5.0",
-    "@storybook/react": "^5.2.8",
-    "@storybook/theming": "^5.2.8",
     "@types/axios": "^0.14.0",
     "@types/enzyme": "^3.10.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
@@ -102,6 +78,15 @@
     "@types/redux": "^3.6.0",
     "@types/socket.io-client": "^1.4.32",
     "@types/styled-components": "^4.4.1",
+    "@types/cors": "^2.8.6",
+    "@types/jest": "^24.0.0",
+    "@types/lodash": "^4.14.155",
+    "@types/node": "^12.0.0",
+    "@types/qs": "^6.9.1",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.0",
+    "@types/redux-logger": "^3.0.7",
+    "@types/shortid": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.14.0",
     "babel-preset-react-app": "^9.1.0",
@@ -125,6 +110,5 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  },
-  "homepage": "https://Lee-Park-Bae-Project.github.io/KAKIOTALK"
+  }
 }
