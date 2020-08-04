@@ -2,7 +2,9 @@ import {
   NextFunction, Request, Response,
 } from 'express'
 import createError from 'http-errors'
-import { message, response } from '../common/utils'
+import {
+  message, response,
+} from '../common/utils'
 import * as userService from '../services/user'
 import socialService from '../services/social'
 
