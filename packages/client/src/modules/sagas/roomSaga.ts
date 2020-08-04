@@ -16,9 +16,6 @@ import { url } from 'common/constants'
 import { Models } from '@kakio/common'
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'modules/socket'
-import { alert } from 'common/utils'
-import { InviteUser } from 'types'
-import { MockedComponentClass } from 'react-dom/test-utils'
 import { push } from '../../common/utils'
 
 function* room() {
@@ -40,7 +37,6 @@ type roomIdType = AxiosResponse<request.ResponseType<RoomReturnType>>
 function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   try {
     const response: roomIdType = yield call(request.makeRoomRequest, payload)
-    console.log(response.data.data.rooms)
     const roomUuids = response.data.data.rooms.map((v) => v.uuid)
     joinRooms({ roomUuids })
     yield put(getRoomSuccess(response.data.data.rooms))

@@ -7,7 +7,9 @@ import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { updateProfileRequest } from 'modules/profile'
 import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
@@ -62,7 +64,9 @@ const Profile: FC<Prop> = ({
   const myProfile = useSelector((state: RootState) => state.profile)
 
   const login = useSelector((state: RootState) => state.login)
-  const [selectedList, setSelectedList] = useState([{ uuid, name }])
+  const [selectedList, setSelectedList] = useState([{
+    uuid, name,
+  }])
 
   const handleEditClick = () => {
     if (isEditMode) {
@@ -73,8 +77,10 @@ const Profile: FC<Prop> = ({
 
       if (editName.value !== name || editStatusMessage.value !== statusMessage) {
         dispatch(
-          updateProfileRequest({ name: editName.value,
-            statusMessage: editStatusMessage.value }),
+          updateProfileRequest({
+            name: editName.value,
+            statusMessage: editStatusMessage.value,
+          }),
         )
       }
     }
@@ -89,8 +95,12 @@ const Profile: FC<Prop> = ({
     })
   }
   const onChatClick = () => {
-    const { uuid: userUuid, name: userName } = myProfile
-    dispatch(makeRoomRequest(selectedList.concat({ userUuid, userName })))
+    const {
+      uuid, name,
+    } = myProfile
+    dispatch(makeRoomRequest(selectedList.concat({
+      uuid, name,
+    })))
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)

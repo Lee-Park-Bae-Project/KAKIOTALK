@@ -4,10 +4,14 @@ import React, {
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { RootState } from 'modules'
 import { makeRoomRequest } from 'modules/room'
-import { Dialog, PopUp } from 'components'
+import {
+  Dialog, PopUp,
+} from 'components'
 import ChatStart from '../../../pages/main/ChatStart'
 
 const S = { Container: styled.div`
@@ -26,16 +30,19 @@ interface MakeChatProp{
 const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   const [isClicked, setClicked] = useState(false)
   const [selectedList, setSelectedList] = useState<InviteUser[]>([])
-  const room = useSelector((state: RootState) => state.room)
   const myProfile = useSelector((state: RootState) => state.profile)
   const handlePopUpClick = () => {
     setClicked(!isClicked)
   }
   const dispatch = useDispatch()
   const onConfirm = () => {
-    const { uuid, name } = myProfile
+    const {
+      uuid, name,
+    } = myProfile
 
-    dispatch(makeRoomRequest(selectedList.concat({ uuid, name })))
+    dispatch(makeRoomRequest(selectedList.concat({
+      uuid, name,
+    })))
     setSelectedList([])
     handlePopUpClick()
   }

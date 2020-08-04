@@ -2,7 +2,7 @@
 import {
   apply, call, delay, fork, put, take,
 } from 'redux-saga/effects'
-import {  eventChannel } from 'redux-saga'
+import { eventChannel } from 'redux-saga'
 import createWebSocketConnection from 'socket'
 import { Socket } from '@kakio/common'
 import {
@@ -16,6 +16,7 @@ function createSocketChannel(socket: SocketIOClient.Socket) {
   return eventChannel((emit) => {
     const chatFromServerHandler = (newChat: ApiChat) => {
       const { uuid: roomUuid } = newChat.metaInfo.room
+
       emit(addChat(roomUuid, newChat))
       emit(addChatOffset({
         roomUuid,
@@ -52,7 +53,7 @@ function* handleSocketAction(socket: SocketIOClient.Socket) {
         yield apply(socket, socket.emit, [EventMap.CHAT_FROM_CLIENT, payload])
         break
       }
-      default: { 
+      default: {
         yield apply(socket, socket.emit, [type, payload])
         break
       }

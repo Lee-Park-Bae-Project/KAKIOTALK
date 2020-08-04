@@ -68,27 +68,27 @@ const ChatList: React.FC<Props> = ({
     const target = chatContainerRef.current
     const { chats } = chatState.data[roomUuid]
 
-    if (!prevChats) return
+    if (!prevChats || prevChats.chats.length === 0) return
+
     // 다른 사람이 채팅 보낸 경우
     if (prevChats.chats[0].metaInfo.sender.uuid !== userUuid) return
+
     // load more 했을 경우
     if (prevChats.chats[prevChats.chats.length - 1].uuid !== chats[chats.length - 1].uuid) {
       target.scrollTop = target.scrollHeight - prevScrollHeight
       setScrollHeight(target.scrollHeight)
       return
     }
+
     // 내가 보낸 경우
     target.scrollTop = target.scrollHeight
   }, [chatState.data[roomUuid]])
 
-  if (!chatState.data[roomUuid]) {
-    return <div>loading</div>
+  if (!prevChats || !firstChat) {
+    return null
   }
-  if (!firstChat) {
-    return <div>loading</div>
-  }
-  const { chats } = chatState.data[roomUuid]
 
+  const { chats } = chatState.data[roomUuid]
   return (
     <S.Container>
       { chatState.isLoading && <div>loading...</div> }

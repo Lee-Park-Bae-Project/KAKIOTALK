@@ -37,7 +37,7 @@ const MakeChat: FC<Props> = ({
           textSize="15px"
         />
         </S.UserCardContainer>
-      <S.Input type="checkbox"/>
+      <S.Input type="checkbox" />
       <S.Checkmark onClick={handleFriendToAddClick} />
     </S.Container>
   )

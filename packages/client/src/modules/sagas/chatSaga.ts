@@ -16,7 +16,9 @@ import {
 import { ApiChat } from 'types'
 import { AxiosResponse } from 'axios'
 import * as request from 'common/request'
-import { RootState, Store } from 'modules'
+import {
+  RootState, Store,
+} from 'modules'
 
 interface Temp {
   chats: ApiChat[]
@@ -48,15 +50,19 @@ function* loadMoreSaga(action: ReturnType<typeof loadMoreRequest>) {
     const { roomUuid } = action.payload
     const { store } = Store
     const chatState = store.getState().chat
-    const { offset, limit } = chatState.data[roomUuid]
+    const {
+      offset, limit,
+    } = chatState.data[roomUuid]
     const response: ResponseType = yield call(request.loadMoreChat, {
       roomUuid,
       offset,
       limit,
     })
 
-    yield put(loadMoreSuccess({ ...response.data.data,
-      roomUuid }))
+    yield put(loadMoreSuccess({
+      ...response.data.data,
+      roomUuid,
+    }))
   } catch (e) {
     yield put(loadMoreFailure(e))
   }

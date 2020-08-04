@@ -17,8 +17,10 @@ interface Props{
   userUuid: string
   roomUuid: string
 }
-const ChatArea: React.FC<Props> = ({ userUuid,
-  roomUuid }) => {
+const ChatArea: React.FC<Props> = ({
+  userUuid,
+  roomUuid,
+}) => {
   const [firstChat, setFirstChat] = useState<APIs.GetFirstChat | null>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatBottomRef = useRef<HTMLDivElement>(null)
@@ -30,15 +32,14 @@ const ChatArea: React.FC<Props> = ({ userUuid,
   // }, [chatState])
 
   useEffect(() => {
-    if (!roomUuid) return
+    if (!roomUuid || firstChat) return
     const fetch = async () => {
       const response = await request.getFirstChat({ roomUuid })
-      console.log(response.data.data)
       setFirstChat(response.data.data)
     }
 
     fetch()
-  }, [roomUuid])
+  }, [roomUuid, chatState])
 
   return (
     <S.Container ref={chatContainerRef}>

@@ -49,6 +49,7 @@ const TextArea: React.FC<Props> = ({
       messageRef.current.value = ''
     }
   }
+
   const handleEnterPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       if (e.target && e.currentTarget.value.trim().length > 0) {
@@ -68,7 +69,7 @@ const TextArea: React.FC<Props> = ({
           onClick={handleSubmit}
           hasContent={hasContent}
         >
-          전송
+          ??
         </S.SendBtn>
       </S.ButtonWrapper>
     </S.Container>
