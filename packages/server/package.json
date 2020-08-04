@@ -14,7 +14,6 @@
     "lint": "eslint --fix \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
-    "@types/axios": "^0.14.0",
     "axios": "^0.19.2",
     "babel-core": "^6.26.3",
     "bluebird": "^3.7.2",
