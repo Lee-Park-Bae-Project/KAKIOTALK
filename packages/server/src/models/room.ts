@@ -7,11 +7,17 @@ import {
 
 import { Models } from '@kakio/common'
 import { UserModel } from './user'
+import { ChatModel } from './chat'
 
-export const ROOM_ASSOCIATION_ALIAS = { RoomParticipants: 'participants' as const }
+export const ROOM_ASSOCIATION_ALIAS = {
+  RoomParticipants: 'participants' as const,
+  Chats: 'chats' as const,
+}
 
 export interface RoomModel extends Model, Models.Room {
-  [ROOM_ASSOCIATION_ALIAS.RoomParticipants]: UserModel[]
+  [ROOM_ASSOCIATION_ALIAS.RoomParticipants]: UserModel[],
+  [ROOM_ASSOCIATION_ALIAS.Chats]: ChatModel[]
+
 }
 
 export type RoomStatic = typeof Model & {
@@ -46,6 +52,15 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         foreignKey: 'roomId',
         otherKey: 'userId',
       }
+    )
+    RoomStaticModel.hasMany(
+      models.Chat,
+      {
+        foreignKey: 'roomId',
+        sourceKey: 'id',
+        as: ROOM_ASSOCIATION_ALIAS.Chats,
+      }
+
     )
   }
 
