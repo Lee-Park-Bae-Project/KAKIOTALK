@@ -16,6 +16,8 @@ export const LEAVE_ROOM_REQUEST = 'room/LEAVE_ROOM_REQUEST' as const
 export const LEAVE_ROOM_SUCCESS = 'room/LEAVE_ROOM_SUCCESS' as const
 export const LEAVE_ROOM_FAILURE = 'room/LEAVE_ROOM_FAILURE' as const
 
+export const GET_NEW_MESSAGE = 'room/GET_NEW_MESSAGE' as const
+
 export const getRoomRequest = () => ({
   type: GET_ROOM_REQUEST,
   payload: {},
@@ -85,4 +87,10 @@ export const leaveRoomSuccess = ({
 export const leaveRoomFailure = (e: any) => ({
   type: LEAVE_ROOM_FAILURE,
   payload: e,
+})
+export const getNewMessage = (roomUuid: string, content: string, updatedAt: string) => ({
+  type: GET_NEW_MESSAGE,
+  payload: {
+    roomUuid, content, updatedAt,
+  },
 })
