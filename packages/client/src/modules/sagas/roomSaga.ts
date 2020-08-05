@@ -1,19 +1,24 @@
 import {
-  call, getContext, put, spawn, takeEvery,
+  call, put, takeEvery, takeLatest,
 } from 'redux-saga/effects'
 
 import {
   GET_ROOM_REQUEST,
   getRoomFailure,
   getRoomSuccess,
+  LEAVE_ROOM_FAILURE,
+  LEAVE_ROOM_REQUEST,
+  leaveRoomFailure,
+  leaveRoomRequest,
+  leaveRoomSuccess,
   MAKE_ROOM_REQUEST,
   makeRoomRequest,
-
 } from 'modules/room/action'
 
 import * as request from 'common/request'
 import { url } from 'common/constants'
-import { Models } from '@kakio/common'
+import { APIs, Models } from '@kakio/common'
+
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'modules/socket'
 import { alert } from 'common/utils'
@@ -49,7 +54,20 @@ function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   }
 }
 
+function* leaveRoom(action: ReturnType<typeof leaveRoomRequest>) {
+  try {
+    const response: request.AxiosResponseType<APIs.LeaveRoom> = yield call(request.leaveRoom, action.payload.roomUuid)
+    const { roomUuid, userUuid } = response.data.data
+    yield put(leaveRoomSuccess({ roomUuid, userUuid }))
+    // TODO: getContext 로 chat-list 로 이동
+  } catch (e) {
+    // TODO: alert 띄우기
+    yield put(leaveRoomFailure(e))
+  }
+}
+
 export default function* roomSaga() {
+  yield takeLatest(LEAVE_ROOM_REQUEST, leaveRoom)
   yield takeEvery(MAKE_ROOM_REQUEST, makeRoomSaga)
   yield takeEvery(GET_ROOM_REQUEST, room)
 }

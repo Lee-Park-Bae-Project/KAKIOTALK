@@ -21,6 +21,8 @@ export type ResponseType<T> = {
   data: T
 }
 
+export type AxiosResponseType<T> = AxiosResponse<ResponseType<T>>
+
 export type ApiCallback<T = {}> = (
   err: AxiosResponse<ResponseType<T>> | null,
   response?: AxiosResponse<ResponseType<T>>,
@@ -146,3 +148,9 @@ export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Models.Ro
   url: '/chat/room',
   data: { args },
 })
+
+export const leaveRoom = (roomUuid: string) => Axios<APIs.LeaveRoom>({
+  method: 'DELETE',
+  url: `/chat/leave/${roomUuid}`,
+})
+

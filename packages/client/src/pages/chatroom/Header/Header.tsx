@@ -1,13 +1,17 @@
 import React from 'react'
 import Icon from 'Icon/Icon'
 import { useHistory } from 'react-router-dom'
+import * as request from 'common/request'
 import * as S from './styles'
 
 interface Props{
   roomName: string
+  handleMenuClicked: () => void
   toggleSearchBar: () => void
 }
-const Header: React.FC<Props> = ({ roomName, toggleSearchBar }) => {
+const Header: React.FC<Props> = ({
+  roomName, handleMenuClicked, toggleSearchBar,
+}) => {
   const history = useHistory()
 
   const handleBack = () => {
@@ -27,7 +31,7 @@ const Header: React.FC<Props> = ({ roomName, toggleSearchBar }) => {
             onClick={toggleSearchBar}
           />
         </div>
-        <Icon icon="Menu"/>
+        <Icon icon="Menu" onClick={handleMenuClicked}/>
       </div>
     </S.Container>
   )

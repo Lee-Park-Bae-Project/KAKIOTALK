@@ -1,13 +1,13 @@
 import { models } from '../models'
 
 interface LeaveRoom{
-  roomId: string
-  userId: string
+  roomId: number
+  userId: number
 }
 // eslint-disable-next-line import/prefer-default-export
 export const leaveRoom = async ({
   roomId, userId,
-}) => models.RoomParticipants.destroy({ where: {
+}: LeaveRoom) => models.RoomParticipants.destroy({ where: {
   userId,
   roomId,
 } })

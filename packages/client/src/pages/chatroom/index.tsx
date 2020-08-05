@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import SearchAccordion from 'system/ChatRoomSearchBar'
 import { getChatRequest } from 'modules/chat'
+import { leaveRoomRequest } from 'modules/room'
 import { useAuth } from 'hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'modules'
@@ -28,6 +29,9 @@ const ChatRoom: FC = () => {
     setIsSearchOpen(!isSearchOpen)
   }, [isSearchOpen, setIsSearchOpen])
 
+  const handleMenuClicked = () => {
+    dispatch(leaveRoomRequest(roomUuid))
+  }
   useEffect(() => {
     if (roomUuid.length) {
       dispatch(joinRooms({ roomUuids: [roomUuid] }))
@@ -60,7 +64,7 @@ const ChatRoom: FC = () => {
 
   return (
     <S.Container>
-      <Header roomName={roomName} toggleSearchBar={toggleSearchBar}/>
+      <Header roomName={roomName} handleMenuClicked={handleMenuClicked} toggleSearchBar={toggleSearchBar}/>
       <SearchAccordion
         open={isSearchOpen}
         toggleSearchBar={toggleSearchBar}

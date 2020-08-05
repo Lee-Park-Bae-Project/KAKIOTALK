@@ -152,7 +152,6 @@ export const getLastChat = controllerHelper(async (req, res, next) => {
 })
 
 export const leaveRoom = controllerHelper(async (req, res, next) => {
-  console.log(req.params)
   const { roomUuid } = req.params
   const { decodedUser } = req
   const user = await userService.findByGoogleId(decodedUser.googleId)
@@ -163,9 +162,12 @@ export const leaveRoom = controllerHelper(async (req, res, next) => {
   const deletedNum = await roomService.leaveRoom({
     roomId: room.id, userId: user.id,
   })
-  console.log(deletedNum)
   if (!deletedNum) {
     throw httpError.CAN_NOT_BE_DONE
   }
-  return deletedNum
+  return {
+    deletedNum,
+    roomUuid: room.uuid,
+    userUuid: user.uuid,
+  }
 })
