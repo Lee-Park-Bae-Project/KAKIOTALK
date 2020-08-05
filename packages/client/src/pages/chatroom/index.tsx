@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import {
-  List, ChatRoomSearchBar as SearchAccordion,
-} from 'system'
+import { ChatRoomSearchBar as SearchAccordion } from 'system'
 import { getChatRequest } from 'modules/chat'
 import {
   getRoomRequest, leaveRoomRequest,
@@ -16,14 +14,14 @@ import {
   Dialog, Drawer,
 } from 'components'
 import Icon from 'Icon/Icon'
-
 import { RootState } from 'modules'
 import { joinRooms } from 'modules/socket'
-
-import Header from './Header'
-import TextArea from './TextArea'
-import ChatArea from './ChatArea'
 import * as S from './style'
+import ChatArea from './ChatArea'
+import TextArea from './TextArea'
+import Header from './Header'
+
+import MenuDrawer from './MenuDrawer'
 
 const {
   useEffect, useState, useCallback,
@@ -52,16 +50,12 @@ const ChatRoom: FC = () => {
     setIsDrawerOpen(!isDrawerOpen)
   }
 
-  const toggleLeaveAlert = () => {
-    setIsLeaveAlertOpen(!isLeaveAlertOpen)
-  }
-
   useEffect(() => {
     if (roomUuid.length) {
       dispatch(joinRooms({ roomUuids: [roomUuid] }))
       dispatch(getRoomRequest())
     }
-  }, [roomUuid])
+  }, [roomUuid, dispatch])
 
   useEffect(() => {
     setRoomUuid(params.roomUuid)
@@ -103,32 +97,11 @@ const ChatRoom: FC = () => {
       />
       <ChatArea roomUuid={roomUuid} userUuid={uuid}/>
       <TextArea roomUuid={roomUuid} userUuid={uuid}/>
-      <Drawer
-        open={isDrawerOpen}
+      <MenuDrawer
+        handleLeaveRoom={handleLeaveRoom}
+        isDrawerOpen={isDrawerOpen}
+        roomState={roomState}
         toggleDrawer={toggleDrawer}
-      >
-        <Icon icon="ArrowRight" onClick={toggleDrawer}/>
-        <List>
-          {
-            roomState.data[0].participants.map((v) => (
-                <p key={v.uuid}>{v.name}</p>
-            ))
-          }
-        </List>
-        <S.Button onClick={toggleLeaveAlert}>나가기</S.Button>
-
-      </Drawer>
-      <Dialog
-        isVisible={isLeaveAlertOpen}
-        title={'나가기'}
-        description={'나가시겠습니까?'}
-        isHideButton={false}
-        canCancel={true}
-        confirmText="확인"
-        cancelText="취소"
-        onConfirm={handleLeaveRoom}
-        onCancel={toggleLeaveAlert}
-
       />
     </S.Container>
   )
