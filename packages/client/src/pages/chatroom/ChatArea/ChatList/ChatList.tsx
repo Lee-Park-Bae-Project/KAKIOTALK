@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ApiChat } from 'types'
 import { APIs } from '@kakio/common'
-import DateDivider from 'components/DateDivider'
+import { Loader } from 'components'
 import ChatBox from 'components/ChatBox'
 import { loadMoreRequest } from 'modules/chat'
 import {
@@ -82,13 +82,13 @@ const ChatList: React.FC<Props> = ({
   }, [chatState.data[roomUuid]])
 
   if (!chatState.data[roomUuid]) {
-    return <div>loading</div>
+    return <Loader/>
   }
   const { chats } = chatState.data[roomUuid]
 
   return (
     <S.Container>
-      { chatState.isLoading && <div>loading...</div> }
+      { chatState.isLoading && <Loader/> }
       <S.Content ref={root}>
         {
             firstChat && chats.map((chat, idx) => (
