@@ -111,7 +111,7 @@ const ChatRoom: FC = () => {
             ))
           }
         </List> */}
-        <S.Button onClick={toggleLeaveAlert}>out</S.Button>
+        <S.Button onClick={toggleLeaveAlert}>나가기</S.Button>
 
       </Drawer>
       <Dialog
