@@ -6,11 +6,11 @@ import * as S from './styles'
 
 interface Props{
   roomName: string
-  handleMenuClicked: () => void
   toggleSearchBar: () => void
+  toggleDrawer: () => void
 }
 const Header: React.FC<Props> = ({
-  roomName, handleMenuClicked, toggleSearchBar,
+  roomName, toggleSearchBar, toggleDrawer,
 }) => {
   const history = useHistory()
 
@@ -31,7 +31,7 @@ const Header: React.FC<Props> = ({
             onClick={toggleSearchBar}
           />
         </div>
-        <Icon icon="Menu" onClick={handleMenuClicked}/>
+        <Icon icon="Menu" onClick={toggleDrawer}/>
       </div>
     </S.Container>
   )

@@ -14,4 +14,4 @@ export { default as Loader } from './Loader'
 export { default as MakeChat } from './MakeChat'
 export { default as SelectedList } from './SelectedList'
 export { default as SelectedName } from './SelectedName'
-
+export { default as Drawer } from './Drawer'

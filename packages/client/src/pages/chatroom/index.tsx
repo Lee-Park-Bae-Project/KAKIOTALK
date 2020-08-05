@@ -1,12 +1,22 @@
 import React, { FC } from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import SearchAccordion from 'system/ChatRoomSearchBar'
+import {
+  List, ChatRoomSearchBar as SearchAccordion,
+} from 'system'
 import { getChatRequest } from 'modules/chat'
 import { leaveRoomRequest } from 'modules/room'
 import { useAuth } from 'hooks'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import {
+  Dialog, Drawer,
+} from 'components'
+import Icon from 'Icon/Icon'
+
 import { RootState } from 'modules'
 import { joinRooms } from 'modules/socket'
+
 import Header from './Header'
 import TextArea from './TextArea'
 import ChatArea from './ChatArea'
@@ -25,13 +35,24 @@ const ChatRoom: FC = () => {
   const roomState = useSelector((state: RootState) => state.room)
   const { isLoggedIn } = useAuth()
   const { uuid } = useSelector((state: RootState) => state.profile)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isLeaveAlertOpen, setIsLeaveAlertOpen] = useState(false)
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)
   }, [isSearchOpen, setIsSearchOpen])
 
-  const handleMenuClicked = () => {
+  const handleLeaveRoom = () => {
     dispatch(leaveRoomRequest(roomUuid))
   }
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen)
+  }
+
+  const toggleLeaveAlert = () => {
+    setIsLeaveAlertOpen(!isLeaveAlertOpen)
+  }
+
   useEffect(() => {
     if (roomUuid.length) {
       dispatch(joinRooms({ roomUuids: [roomUuid] }))
@@ -62,15 +83,47 @@ const ChatRoom: FC = () => {
     setRoomUuid(params.roomUuid)
   }, [params])
 
+  // if (!roomState.data[0]) {
+  //   return <div>loading</div>
+  // }
   return (
     <S.Container>
-      <Header roomName={roomName} handleMenuClicked={handleMenuClicked} toggleSearchBar={toggleSearchBar}/>
+      <Header
+        roomName={roomName}
+        toggleSearchBar={toggleSearchBar}
+        toggleDrawer={toggleDrawer}
+      />
       <SearchAccordion
         open={isSearchOpen}
         toggleSearchBar={toggleSearchBar}
       />
       <ChatArea roomUuid={roomUuid} userUuid={uuid}/>
       <TextArea roomUuid={roomUuid} userUuid={uuid}/>
+      <Drawer
+        open={isDrawerOpen}
+        toggleDrawer={toggleDrawer}
+      >
+        <Icon icon="ArrowRight" onClick={toggleDrawer}/>
+        {/* <List>
+          {
+            roomState.data[0].participants.map((v) => (
+                <p key={v.uuid}>{v.name}</p>
+            ))
+          }
+        </List> */}
+        <S.Button onClick={toggleLeaveAlert}>out</S.Button>
+
+      </Drawer>
+      <Dialog
+        isVisible={isLeaveAlertOpen}
+        title={'나가기'}
+        description={'나가시겠습니까?'}
+        isHideButton={false}
+        canCancel={true}
+        cancelText="취소"
+        confirmText="확인"
+        onCancel={toggleLeaveAlert}
+      />
     </S.Container>
   )
 }
