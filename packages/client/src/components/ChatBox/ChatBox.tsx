@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { convertTimeForMsgFormat } from 'common/utils'
 import { useOutsideClick } from 'hooks'
-import Profile from 'system/Profile'
+import { Profile } from 'system'
 import { ApiChat } from 'types'
 import shortid from 'shortid'
 import * as S from './style'
