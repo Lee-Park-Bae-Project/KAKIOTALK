@@ -34,8 +34,12 @@ const ChatArea: React.FC<Props> = ({
   useEffect(() => {
     if (!roomUuid) return
     const fetch = async () => {
-      const response = await request.getFirstChat({ roomUuid })
-      setFirstChat(response.data.data)
+      try {
+        const response = await request.getFirstChat({ roomUuid })
+        setFirstChat(response.data.data)
+      } catch (e) {
+        setFirstChat(null)
+      }
     }
 
     fetch()

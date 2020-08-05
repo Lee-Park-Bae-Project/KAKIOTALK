@@ -13,4 +13,5 @@ export type RoomAction =
 | ReturnType<typeof Action.getRoomFailure>
 | ReturnType<typeof Action.makeRoomRequest>
 | ReturnType<typeof Action.resetRoom>
+| ReturnType<typeof Action.leaveRoomSuccess>
 

@@ -68,7 +68,7 @@ const ChatList: React.FC<Props> = ({
     const target = chatContainerRef.current
     const { chats } = chatState.data[roomUuid]
 
-    if (!prevChats) return
+    if (!prevChats || !prevChats.chats.length) return
     // 다른 사람이 채팅 보낸 경우
     if (prevChats.chats[0].metaInfo.sender.uuid !== userUuid) return
     // load more 했을 경우
@@ -84,9 +84,6 @@ const ChatList: React.FC<Props> = ({
   if (!chatState.data[roomUuid]) {
     return <div>loading</div>
   }
-  if (!firstChat) {
-    return <div>loading</div>
-  }
   const { chats } = chatState.data[roomUuid]
 
   return (
@@ -94,7 +91,7 @@ const ChatList: React.FC<Props> = ({
       { chatState.isLoading && <div>loading...</div> }
       <S.Content ref={root}>
         {
-            chats.map((chat, idx) => (
+            firstChat && chats.map((chat, idx) => (
               <div key={chat.uuid} ref={idx === chats.length - 1 ? lastTop : null}>
                 <ChatBox
                   chat={chat}
