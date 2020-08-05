@@ -2,6 +2,7 @@
 // import { response } from 'express'
 import * as chatService from '../services/chat'
 import * as userService from '../services/user'
+import * as roomService from '../services/room'
 import {
   controllerHelper, response, uuid,
 } from '../common/utils'
@@ -148,4 +149,23 @@ export const getLastChat = controllerHelper(async (req, res, next) => {
   }
 
   return lastChat
+})
+
+export const leaveRoom = controllerHelper(async (req, res, next) => {
+  console.log(req.params)
+  const { roomUuid } = req.params
+  const { decodedUser } = req
+  const user = await userService.findByGoogleId(decodedUser.googleId)
+  const room = await chatService.findRoomByUuid(roomUuid)
+  if (!user || !user.id) throw httpError.USER_NOT_FOUND
+  if (!room || !room.id) throw httpError.ROOM_NOT_FOUND
+
+  const deletedNum = await roomService.leaveRoom({
+    roomId: room.id, userId: user.id,
+  })
+  console.log(deletedNum)
+  if (!deletedNum) {
+    throw httpError.CAN_NOT_BE_DONE
+  }
+  return deletedNum
 })
