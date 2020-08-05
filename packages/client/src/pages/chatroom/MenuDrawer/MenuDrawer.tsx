@@ -42,20 +42,29 @@ const Menu: React.FC<Props> = ({
         open={isDrawerOpen}
         toggleDrawer={toggleDrawer}
       >
-        <Icon icon="ArrowRight" onClick={toggleDrawer}/>
+        <S.Header>
+          <Icon icon="ArrowRight" onClick={toggleDrawer}/>
+        </S.Header>
         <List>
-          {thisRoomState.participants.map((v) => {
-            if (profile.uuid === v.uuid) return null
-            return (
-              <UserCard
-                key={v.uuid}
-                isMyProfile={false}
-                name={v.name}
-              />
-            )
-          })}
+          {
+            thisRoomState.participants.map((v) => {
+              if (profile.uuid === v.uuid) return null
+              return (
+                <UserCard
+                  key={v.uuid}
+                  isMyProfile={false}
+                  name={v.name}
+                />
+              )
+            })
+          }
         </List>
-        <S.Button onClick={toggleLeaveAlert}>나가기</S.Button>
+
+        <S.Bottom>
+          <S.IconWrapper>
+          <Icon icon="Exit" onClick={toggleLeaveAlert}/>
+          </S.IconWrapper>
+        </S.Bottom>
       </Drawer>
       <Dialog
         isVisible={isLeaveAlertOpen}
