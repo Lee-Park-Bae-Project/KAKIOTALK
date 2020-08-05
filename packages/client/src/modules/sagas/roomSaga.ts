@@ -65,9 +65,8 @@ function* leaveRoom(action: ReturnType<typeof leaveRoomRequest>) {
     yield put(leaveRoomSuccess({
       roomUuid, userUuid,
     }))
-    // TODO: getContext 로 chat-list 로 이동
+    yield call(push, url.main.chatList)
   } catch (e) {
-    // TODO: alert 띄우기
     yield put(leaveRoomFailure(e))
   }
 }
