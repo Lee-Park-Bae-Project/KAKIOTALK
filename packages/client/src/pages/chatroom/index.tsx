@@ -4,6 +4,7 @@ import { ChatRoomSearchBar as SearchAccordion } from 'system'
 import { getChatRequest } from 'modules/chat'
 import {
   getRoomRequest, leaveRoomRequest,
+  RoomData,
 } from 'modules/room'
 
 import { useAuth } from 'hooks'
@@ -12,15 +13,16 @@ import {
 } from 'react-redux'
 import {
   Dialog, Drawer,
+  Loader,
 } from 'components'
 import Icon from 'Icon/Icon'
 import { RootState } from 'modules'
 import { joinRooms } from 'modules/socket'
+
 import * as S from './style'
 import ChatArea from './ChatArea'
 import TextArea from './TextArea'
 import Header from './Header'
-
 import MenuDrawer from './MenuDrawer'
 
 const {
@@ -38,6 +40,8 @@ const ChatRoom: FC = () => {
   const { uuid } = useSelector((state: RootState) => state.profile)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isLeaveAlertOpen, setIsLeaveAlertOpen] = useState(false)
+  const [thisRoomState, setThisRoomState] = useState<RoomData | undefined>(undefined)
+
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)
   }, [isSearchOpen, setIsSearchOpen])
@@ -49,14 +53,6 @@ const ChatRoom: FC = () => {
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen)
   }
-
-  useEffect(() => {
-    if (roomUuid.length) {
-      dispatch(joinRooms({ roomUuids: [roomUuid] }))
-      dispatch(getRoomRequest())
-    }
-  }, [roomUuid, dispatch])
-
   useEffect(() => {
     setRoomUuid(params.roomUuid)
     const limit = 30
@@ -69,20 +65,30 @@ const ChatRoom: FC = () => {
   }, [])
 
   useEffect(() => {
-    const rn = roomState.data.find((v) => v.uuid === roomUuid)
-    if (!rn) {
-      return
-    }
-
-    setRoomName(rn.participants.map((v) => v.name).join(', '))
-  }, [roomState, roomUuid])
-
-  useEffect(() => {
     setRoomUuid(params.roomUuid)
   }, [params])
 
-  if (!roomState.data[0]) {
-    return <div>loading</div>
+  useEffect(() => {
+    if (roomUuid.length) {
+      dispatch(joinRooms({ roomUuids: [roomUuid] }))
+      dispatch(getRoomRequest())
+    }
+  }, [roomUuid, dispatch])
+
+  useEffect(() => {
+    setThisRoomState(roomState.data.find((v) => v.uuid === params.roomUuid))
+  }, [roomState, roomUuid])
+
+  useEffect(() => {
+    if (!thisRoomState) return
+    setRoomName(thisRoomState.participants
+      .filter((v) => v.uuid !== uuid)
+      .map((v) => v.name)
+      .join(', '))
+  }, [thisRoomState])
+
+  if (!thisRoomState) {
+    return <Loader/>
   }
   return (
     <S.Container>
@@ -100,7 +106,7 @@ const ChatRoom: FC = () => {
       <MenuDrawer
         handleLeaveRoom={handleLeaveRoom}
         isDrawerOpen={isDrawerOpen}
-        roomState={roomState}
+        thisRoomState={thisRoomState}
         toggleDrawer={toggleDrawer}
       />
     </S.Container>
