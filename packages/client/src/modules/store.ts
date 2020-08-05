@@ -1,4 +1,6 @@
-import { applyMiddleware, createStore } from 'redux'
+import {
+  applyMiddleware, createStore,
+} from 'redux'
 import rootReducer from 'modules/rootReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
@@ -20,4 +22,6 @@ const store = createStore(
 )
 sagaMiddleware.run(rootSaga)
 const persistor = persistStore(store)
-export default { store, persistor }
+export default {
+  store, persistor,
+}

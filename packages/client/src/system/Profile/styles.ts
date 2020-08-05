@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Flex from 'atoms/Flex'
-import { color, fontSize } from 'styles/global'
+import {
+  color, fontSize,
+} from 'styles/global'
 
 interface ContainerProps {
   isOverflow: boolean

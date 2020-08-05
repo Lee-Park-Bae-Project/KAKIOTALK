@@ -1,9 +1,17 @@
 import React, { useEffect } from 'react'
 import * as S from 'components/GoogleSignin/styles'
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
-import { useHistory, withRouter } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { configs, url } from 'common/constants'
+import GoogleLogin, {
+  GoogleLoginResponse, GoogleLoginResponseOffline,
+} from 'react-google-login'
+import {
+  useHistory, withRouter,
+} from 'react-router-dom'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import {
+  configs, url,
+} from 'common/constants'
 import { alert } from 'common/utils'
 import { loginRequest } from 'modules/login'
 import { RootState } from 'modules'

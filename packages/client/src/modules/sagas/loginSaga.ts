@@ -9,9 +9,15 @@ import {
   LOGOUT_REQUEST,
   logoutSuccess,
 } from 'modules/login'
-import { getProfile, resetProfile } from 'modules/profile'
-import { getFriends, resetFriends } from 'modules/friends'
-import { getRoomRequest, resetRoom } from 'modules/room'
+import {
+  getProfile, resetProfile,
+} from 'modules/profile'
+import {
+  getFriends, resetFriends,
+} from 'modules/friends'
+import {
+  getRoomRequest, resetRoom,
+} from 'modules/room'
 import { alert } from 'common/utils'
 import * as request from 'common/request'
 

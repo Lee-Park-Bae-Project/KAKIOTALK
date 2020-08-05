@@ -13,10 +13,14 @@ interface LoginUserType {
   googleAccessToken: string,
   imageUrl: string,
 }
-export const loginRequest = (loginUser: LoginUserType) => ({ type: LOGIN_REQUEST, payload: loginUser })
+export const loginRequest = (loginUser: LoginUserType) => ({
+  type: LOGIN_REQUEST, payload: loginUser,
+})
 export const loginSuccess = () => ({ type: LOGIN_SUCCESS })
-export const loginFailure = (e: AxiosError) => ({ type: LOGIN_FAILURE,
-  payload: e })
+export const loginFailure = (e: AxiosError) => ({
+  type: LOGIN_FAILURE,
+  payload: e,
+})
 export const logoutRequest = () => ({ type: LOGOUT_REQUEST })
 export const logoutSuccess = () => ({ type: LOGOUT_SUCCESS })
 export const logoutFailure = () => ({ type: LOGOUT_FAILURE })

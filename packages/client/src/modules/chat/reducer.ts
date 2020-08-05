@@ -2,12 +2,16 @@
 import produce from 'immer'
 import * as Action from 'modules/chat/action'
 
-import { ChatAction,
-  ChatState } from 'modules/chat/types'
+import {
+  ChatAction,
+  ChatState,
+} from 'modules/chat/types'
 import { ApiChat } from 'types'
 
-const initialState: ChatState = { isLoading: false,
-  data: {} }
+const initialState: ChatState = {
+  isLoading: false,
+  data: {},
+}
 const LIMIT = 30
 
 const chat = (state: ChatState = initialState, action: ChatAction) => {
@@ -45,7 +49,9 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
       return state
     }
     case Action.ADD_CHAT: {
-      const { roomUuid, newChat } = action.payload
+      const {
+        roomUuid, newChat,
+      } = action.payload
       const newState = produce(state, (draft) => {
         draft.data[roomUuid].chats.unshift(newChat)
       })
@@ -54,7 +60,9 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
     }
 
     case Action.ADD_CHAT_OFFSET: {
-      const { roomUuid, amount } = action.payload
+      const {
+        roomUuid, amount,
+      } = action.payload
       return produce(state, (draft) => {
         draft.data[roomUuid].offset += amount
       })

@@ -4,7 +4,9 @@ import React, {
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
-import { Dialog, PopUp } from 'components'
+import {
+  Dialog, PopUp,
+} from 'components'
 import { getLogout } from 'common/request'
 import { logoutRequest } from 'modules/login'
 import { useDispatch } from 'react-redux'

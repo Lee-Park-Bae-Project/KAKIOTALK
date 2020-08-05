@@ -17,7 +17,9 @@ import {
 
 import * as request from 'common/request'
 import { url } from 'common/constants'
-import { APIs, Models } from '@kakio/common'
+import {
+  APIs, Models,
+} from '@kakio/common'
 
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'modules/socket'
@@ -57,8 +59,12 @@ function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
 function* leaveRoom(action: ReturnType<typeof leaveRoomRequest>) {
   try {
     const response: request.AxiosResponseType<APIs.LeaveRoom> = yield call(request.leaveRoom, action.payload.roomUuid)
-    const { roomUuid, userUuid } = response.data.data
-    yield put(leaveRoomSuccess({ roomUuid, userUuid }))
+    const {
+      roomUuid, userUuid,
+    } = response.data.data
+    yield put(leaveRoomSuccess({
+      roomUuid, userUuid,
+    }))
     // TODO: getContext 로 chat-list 로 이동
   } catch (e) {
     // TODO: alert 띄우기
