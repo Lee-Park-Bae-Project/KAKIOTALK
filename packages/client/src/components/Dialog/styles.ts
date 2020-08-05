@@ -24,6 +24,8 @@ export const Content = styled(Flex)`
   background-color: white;
   width: 20rem;
   padding: 2rem;
+
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 `
 
 export const Title = styled.p`
