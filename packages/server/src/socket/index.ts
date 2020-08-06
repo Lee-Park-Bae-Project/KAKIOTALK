@@ -1,6 +1,7 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
 import { Socket } from '@kakio/common'
+import * as roomService from '@src/services/room'
 import * as T from '../types'
 import { addMessage } from '../services/chat'
 
@@ -69,6 +70,26 @@ const joinRooms = socketCallBack((socket) => {
   })
 })
 
+const leaveRoomFromClienttest = socketCallBack((socket) => {
+  socket.on(EventMap.LEAVE_ROOM_FROM_CLIENT, async ({
+    roomUuid, userUuid,
+  }: Socket.LeaveRoom) => {
+    console.log(chalk.cyan('leave room', roomUuid, userUuid))
+    try {
+      await roomService.leaveRoomFromClient({
+        roomUuid, userUuid,
+      })
+      console.log(chalk.cyan('emit leave roomfrom server'))
+      socket.to(roomUuid).emit(EventMap.LEAVE_ROOM_FROM_SERVER, {
+        roomUuid,
+        userUuid,
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  })
+})
+
 const connection = () => {
   io.on(EventMap.CONNECT, (socket:openSocket.Socket) => {
     socket.emit(EventMap.CONNECT, `connected: ${socket.id}`)
@@ -78,6 +99,7 @@ const connection = () => {
     afterLogin(socket)
     chatFromClient(socket)
     joinRooms(socket)
+    leaveRoomFromClienttest(socket)
   })
 }
 
