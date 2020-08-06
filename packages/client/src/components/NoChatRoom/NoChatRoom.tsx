@@ -9,7 +9,7 @@ const S = { Container: styled.section`
 
 const NoChatRoom = () => (
     <S.Container>
-      <p>아직 대화방이 없어요</p>
+      <p>채팅 아이콘을 클릭해 친구들과 대화해보세요^_^</p>
     </S.Container>
 )
 export default NoChatRoom
