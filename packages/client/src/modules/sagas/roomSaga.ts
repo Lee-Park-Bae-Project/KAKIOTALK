@@ -56,23 +56,7 @@ function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   }
 }
 
-function* leaveRoom(action: ReturnType<typeof leaveRoomRequest>) {
-  try {
-    const response: request.AxiosResponseType<APIs.LeaveRoom> = yield call(request.leaveRoom, action.payload.roomUuid)
-    const {
-      roomUuid, userUuid,
-    } = response.data.data
-    yield put(leaveRoomSuccess({
-      roomUuid, userUuid,
-    }))
-    yield call(push, url.main.chatList)
-  } catch (e) {
-    yield put(leaveRoomFailure(e))
-  }
-}
-
 export default function* roomSaga() {
-  yield takeLatest(LEAVE_ROOM_REQUEST, leaveRoom)
   yield takeEvery(MAKE_ROOM_REQUEST, makeRoomSaga)
   yield takeEvery(GET_ROOM_REQUEST, room)
 }

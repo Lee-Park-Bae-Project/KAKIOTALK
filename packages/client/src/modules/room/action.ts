@@ -1,5 +1,7 @@
 import { AxiosError } from 'axios'
-import { Models } from '@kakio/common'
+import {
+  Models, Socket,
+} from '@kakio/common'
 import { InviteUser } from 'types'
 
 export const GET_ROOM_REQUEST = 'room/GET_ROOM_REQUEST' as const
@@ -54,9 +56,17 @@ export const makeRoomFailure = (e: AxiosError) => ({
   payload: {},
 })
 
-export const leaveRoomRequest = (roomUuid: string) => ({
-  type: LEAVE_ROOM_REQUEST,
-  payload: { roomUuid },
+export const leaveRoomRequest = ({
+  roomUuid,
+  userUuid,
+}: {
+  roomUuid: string
+  userUuid: string
+}) => ({
+  type: Socket.EventMap.LEAVE_ROOM_FROM_CLIENT,
+  payload: {
+    roomUuid, userUuid,
+  },
 })
 
 interface LeaveRoomSuccess {

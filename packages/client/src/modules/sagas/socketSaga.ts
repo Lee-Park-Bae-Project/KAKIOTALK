@@ -10,6 +10,9 @@ import {
   addChatOffset,
 } from 'modules/chat'
 import { ApiChat } from 'types'
+import {
+  leaveRoomFailure, leaveRoomSuccess,
+} from 'modules/room'
 
 const { EventMap } = Socket
 function createSocketChannel(socket: SocketIOClient.Socket) {
@@ -23,13 +26,25 @@ function createSocketChannel(socket: SocketIOClient.Socket) {
       }))
     }
 
+    const leaveRoomFromServerHandler = ({
+      roomUuid, userUuid,
+    }: Socket.LeaveRoom) => {
+      console.log('leave room from server', roomUuid, userUuid)
+      put(leaveRoomSuccess({
+        roomUuid, userUuid,
+      }))
+    }
+
     const errorHandler = (errorEvent: any) => {
       emit(new Error(errorEvent))
     }
     socket.on('error', errorHandler)
     socket.on(EventMap.CHAT_FROM_SERVER, chatFromServerHandler)
+    socket.on(EventMap.LEAVE_ROOM_FROM_SERVER, leaveRoomFromServerHandler)
+
     const unsubscribe = () => {
       socket.off(EventMap.CHAT_FROM_SERVER, chatFromServerHandler)
+      socket.off(EventMap.LEAVE_ROOM_FROM_SERVER, leaveRoomFromServerHandler)
     }
 
     return unsubscribe
@@ -42,6 +57,7 @@ function* handleSocketAction(socket: SocketIOClient.Socket) {
       EventMap.AFTER_LOGIN,
       EventMap.JOIN_ROOM,
       EventMap.CHAT_FROM_CLIENT,
+      EventMap.LEAVE_ROOM_FROM_CLIENT,
     ])
     const {
       type, payload,
@@ -50,6 +66,10 @@ function* handleSocketAction(socket: SocketIOClient.Socket) {
     switch (type) {
       case EventMap.CHAT_FROM_CLIENT: {
         yield apply(socket, socket.emit, [EventMap.CHAT_FROM_CLIENT, payload])
+        break
+      }
+      case EventMap.LEAVE_ROOM_FROM_CLIENT: {
+        yield apply(socket, socket.emit, [EventMap.LEAVE_ROOM_FROM_CLIENT, payload])
         break
       }
       default: {

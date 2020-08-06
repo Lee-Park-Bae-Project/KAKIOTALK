@@ -47,7 +47,10 @@ const ChatRoom: FC = () => {
   }, [isSearchOpen, setIsSearchOpen])
 
   const handleLeaveRoom = () => {
-    dispatch(leaveRoomRequest(roomUuid))
+    dispatch(leaveRoomRequest({
+      roomUuid,
+      userUuid: uuid,
+    }))
   }
 
   const toggleDrawer = () => {
