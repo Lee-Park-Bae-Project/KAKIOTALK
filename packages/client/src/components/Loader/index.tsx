@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import Flex from 'atoms/Flex'
 
-const S = { Loader: styled.div`
+const S = {
+  Loader: styled.div`
   margin: 1rem auto;
   border: 0.5rem solid rgba(255,255,255,1);
   border-radius: 50%;
@@ -19,10 +21,17 @@ const S = { Loader: styled.div`
       transform: rotate(360deg);
     }
   }
-  ` }
+  `,
+  Container: styled(Flex)`
+    flex:1;
+    `,
+
+}
 
 const Loader: FC = () => (
+    <S.Container>
       <S.Loader/>
+    </S.Container>
 )
 
 export default Loader

@@ -36,9 +36,7 @@ const Main: FC = () => {
           </S.NavigationBarWrapper>
         </Fragment>
       ) : (
-        <S.LoaderContainer>
           <Loader />
-        </S.LoaderContainer>
       )}
     </S.Container>
   )

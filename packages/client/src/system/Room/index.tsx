@@ -26,9 +26,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
         />
       </S.Header>
       {roomState.isLoading ? (
-        <S.LoaderContainer>
           <Loader/>
-        </S.LoaderContainer>
       ) : !roomState.data.length ? (
         <NoChatRoom/>
       ) : (
