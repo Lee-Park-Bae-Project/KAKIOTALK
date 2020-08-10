@@ -6,11 +6,6 @@ import {
   GET_ROOM_REQUEST,
   getRoomFailure,
   getRoomSuccess,
-  LEAVE_ROOM_FAILURE,
-  LEAVE_ROOM_REQUEST,
-  leaveRoomFailure,
-  leaveRoomRequest,
-  leaveRoomSuccess,
   MAKE_ROOM_REQUEST,
   makeRoomRequest,
 } from 'modules/room/action'
@@ -23,16 +18,13 @@ import {
 
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'modules/socket'
-import { alert } from 'common/utils'
-import { InviteUser } from 'types'
-import { MockedComponentClass } from 'react-dom/test-utils'
 import { push } from '../../common/utils'
 
 function* room() {
   try {
     const response: AxiosResponse<request.ResponseType<Models.Room[]>> = yield call(request.getRooms)
     const roomUuids = response.data.data.map((v) => v.uuid)
-    joinRooms({ roomUuids })
+    yield put(joinRooms({ roomUuids }))
     yield put(getRoomSuccess(response.data.data))
   } catch (e) {
     yield put(getRoomFailure(e.message))
@@ -48,7 +40,7 @@ function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   try {
     const response: roomIdType = yield call(request.makeRoomRequest, payload)
     const roomUuids = response.data.data.rooms.map((v) => v.uuid)
-    joinRooms({ roomUuids })
+    yield put(joinRooms({ roomUuids }))
     yield put(getRoomSuccess(response.data.data.rooms))
     yield call(push, `${url.room}/${response.data.data.roomUuid}`)
   } catch (e) {

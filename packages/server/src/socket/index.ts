@@ -45,7 +45,6 @@ const chatFromClient = socketCallBack((socket) => {
   }: T.SendMsg) => {
     console.log(chalk.cyan('chat from client'))
     try {
-      console.log(roomUuid, content, createdAt, userUuid)
       const updatedAt = createdAt
       const data = await addMessage({
         roomUuid,
@@ -80,7 +79,7 @@ const leaveRoomFromClienttest = socketCallBack((socket) => {
         roomUuid, userUuid,
       })
       console.log(chalk.cyan('emit leave roomfrom server'))
-      socket.to(roomUuid).emit(EventMap.LEAVE_ROOM_FROM_SERVER, {
+      io.to(roomUuid).emit(EventMap.LEAVE_ROOM_FROM_SERVER, {
         roomUuid,
         userUuid,
       })

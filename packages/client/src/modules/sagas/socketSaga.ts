@@ -10,9 +10,9 @@ import {
   addChatOffset,
 } from 'modules/chat'
 import { ApiChat } from 'types'
-import {
-  leaveRoomFailure, leaveRoomSuccess,
-} from 'modules/room'
+import { leaveRoomSuccess } from 'modules/room'
+import { url } from 'common/constants'
+import { push } from 'common/utils'
 
 const { EventMap } = Socket
 function createSocketChannel(socket: SocketIOClient.Socket) {
@@ -29,8 +29,8 @@ function createSocketChannel(socket: SocketIOClient.Socket) {
     const leaveRoomFromServerHandler = ({
       roomUuid, userUuid,
     }: Socket.LeaveRoom) => {
-      console.log('leave room from server', roomUuid, userUuid)
-      put(leaveRoomSuccess({
+      push(url.main.chatList)
+      emit(leaveRoomSuccess({
         roomUuid, userUuid,
       }))
     }
@@ -62,7 +62,6 @@ function* handleSocketAction(socket: SocketIOClient.Socket) {
     const {
       type, payload,
     } = event
-
     switch (type) {
       case EventMap.CHAT_FROM_CLIENT: {
         yield apply(socket, socket.emit, [EventMap.CHAT_FROM_CLIENT, payload])
