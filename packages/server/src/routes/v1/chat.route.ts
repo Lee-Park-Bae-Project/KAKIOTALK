@@ -5,7 +5,6 @@ import {
   getFirstChat,
   getLastChat,
   getRoom,
-  leaveRoom,
   makeRoom,
 } from '../../controllers/chat'
 
@@ -21,6 +20,5 @@ router.get('/last-chat/:roomUuid', getLastChat)
 router.get('/room/:roomId?', getRoom)
 router.post('/:roomUuid', addMessage)
 router.get('/makeRoom', makeRoom)
-router.delete('/leave/:roomUuid', leaveRoom)
 export default router
 

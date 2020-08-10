@@ -69,7 +69,7 @@ const joinRooms = socketCallBack((socket) => {
   })
 })
 
-const leaveRoomFromClienttest = socketCallBack((socket) => {
+const leaveRoomFromClient = socketCallBack((socket) => {
   socket.on(EventMap.LEAVE_ROOM_FROM_CLIENT, async ({
     roomUuid, userUuid,
   }: Socket.LeaveRoom) => {
@@ -78,11 +78,15 @@ const leaveRoomFromClienttest = socketCallBack((socket) => {
       await roomService.leaveRoomFromClient({
         roomUuid, userUuid,
       })
-      console.log(chalk.cyan('emit leave roomfrom server'))
       io.to(roomUuid).emit(EventMap.LEAVE_ROOM_FROM_SERVER, {
         roomUuid,
         userUuid,
       })
+
+      const participantsNum = await roomService.getRoomParticipantsNum({ roomUuid })
+      if (!participantsNum) {
+        await roomService.deleteRoom({ roomUuid })
+      }
     } catch (e) {
       console.error(e)
     }
@@ -98,7 +102,7 @@ const connection = () => {
     afterLogin(socket)
     chatFromClient(socket)
     joinRooms(socket)
-    leaveRoomFromClienttest(socket)
+    leaveRoomFromClient(socket)
   })
 }
 

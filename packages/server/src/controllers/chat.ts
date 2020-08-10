@@ -150,24 +150,3 @@ export const getLastChat = controllerHelper(async (req, res, next) => {
 
   return lastChat
 })
-
-export const leaveRoom = controllerHelper(async (req, res, next) => {
-  const { roomUuid } = req.params
-  const { decodedUser } = req
-  const user = await userService.findByGoogleId(decodedUser.googleId)
-  const room = await chatService.findRoomByUuid(roomUuid)
-  if (!user || !user.id) throw httpError.USER_NOT_FOUND
-  if (!room || !room.id) throw httpError.ROOM_NOT_FOUND
-
-  const deletedNum = await roomService.leaveRoom({
-    roomId: room.id, userId: user.id,
-  })
-  if (!deletedNum) {
-    throw httpError.CAN_NOT_BE_DONE
-  }
-  return {
-    deletedNum,
-    roomUuid: room.uuid,
-    userUuid: user.uuid,
-  }
-})

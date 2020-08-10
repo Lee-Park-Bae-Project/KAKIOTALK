@@ -4,18 +4,6 @@ import * as chatService from '../services/chat'
 import * as userService from '../services/user'
 import * as httpError from '../common/error'
 
-interface LeaveRoom{
-  roomId: number
-  userId: number
-}
-// eslint-disable-next-line import/prefer-default-export
-export const leaveRoom = async ({
-  roomId, userId,
-}: LeaveRoom) => models.RoomParticipants.destroy({ where: {
-  userId,
-  roomId,
-} })
-
 export const leaveRoomFromClient = async ({
   roomUuid, userUuid,
 }: Socket.LeaveRoom) => {
@@ -28,5 +16,17 @@ export const leaveRoomFromClient = async ({
     roomId: room.id,
   } })
 
+  if (!deletedNum) throw httpError.CAN_NOT_BE_DONE
+}
+
+export const getRoomParticipantsNum = async ({ roomUuid }: { roomUuid: string }) => {
+  const room = await chatService.findRoomByUuid(roomUuid)
+  if (!room || !room.id) throw httpError.ROOM_NOT_FOUND
+  const participants = await models.RoomParticipants.findAll({ where: { roomId: room.id } })
+  return participants.length
+}
+
+export const deleteRoom = async ({ roomUuid }: {roomUuid:string}) => {
+  const deletedNum = await models.Room.destroy({ where: { uuid: roomUuid } })
   if (!deletedNum) throw httpError.CAN_NOT_BE_DONE
 }
