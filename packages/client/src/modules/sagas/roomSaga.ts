@@ -1,5 +1,5 @@
 import {
-  call, put, takeEvery, takeLatest,
+  call, put, takeEvery,
 } from 'redux-saga/effects'
 
 import {
@@ -18,14 +18,15 @@ import {
 
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'modules/socket'
+import { unwrapPromise } from 'types'
 import { push } from '../../common/utils'
 
 function* room() {
   try {
-    const response: AxiosResponse<request.ResponseType<Models.Room[]>> = yield call(request.getRooms)
-    const roomUuids = response.data.data.map((v) => v.uuid)
+    const data: unwrapPromise<typeof request.getRooms> = yield call(request.getRooms)
+    const roomUuids = data.map((v) => v.uuid)
     yield put(joinRooms({ roomUuids }))
-    yield put(getRoomSuccess(response.data.data))
+    yield put(getRoomSuccess(data))
   } catch (e) {
     yield put(getRoomFailure(e.message))
   }
