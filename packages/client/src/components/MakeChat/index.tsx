@@ -21,24 +21,23 @@ const MakeChat: FC<Props> = ({
   uuid, name, handleFriendToAdd, imageUrl,
 }) => {
   const handleFriendToAddClick = () => {
-    if (handleFriendToAdd && uuid) {
+    if (handleFriendToAdd) {
       handleFriendToAdd(uuid, name)
     }
   }
   return (
     <S.Container >
-      <S.UserCardContainer onClick={handleFriendToAddClick}>
+      <S.UserCardContainer >
         <TextIcon
           icon='Account'
           color={color.GRAY}
           text={name}
-          onClick={handleFriendToAddClick}
           imageUrl={imageUrl}
           textSize="15px"
         />
         </S.UserCardContainer>
-      <S.Input type="checkbox" />
-      <S.Checkmark onClick={handleFriendToAddClick} />
+      <S.Input type="checkbox" onClick={handleFriendToAddClick}/>
+      <S.Checkmark />
     </S.Container>
   )
 }

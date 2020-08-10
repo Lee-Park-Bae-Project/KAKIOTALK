@@ -16,7 +16,6 @@ function createSocketChannel(socket: SocketIOClient.Socket) {
   return eventChannel((emit) => {
     const chatFromServerHandler = (newChat: ApiChat) => {
       const { uuid: roomUuid } = newChat.metaInfo.room
-
       emit(addChat(roomUuid, newChat))
       emit(addChatOffset({
         roomUuid,

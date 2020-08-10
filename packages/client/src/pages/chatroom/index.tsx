@@ -7,7 +7,9 @@ import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { RootState } from 'modules'
+import { APIs } from '@kakio/common'
 import { joinRooms } from 'modules/socket'
+import * as request from 'common/request'
 import Header from './Header'
 import TextArea from './TextArea'
 import ChatArea from './ChatArea'
@@ -52,7 +54,6 @@ const ChatRoom: FC = () => {
     if (!rn) {
       return
     }
-
     setRoomName(rn.participants.map((v) => v.name).join(', '))
   }, [roomState, roomUuid])
 
@@ -67,8 +68,8 @@ const ChatRoom: FC = () => {
         open={isSearchOpen}
         toggleSearchBar={toggleSearchBar}
       />
-      <ChatArea roomUuid={roomUuid} userUuid={uuid}/>
-      <TextArea roomUuid={roomUuid} userUuid={uuid}/>
+      <ChatArea roomUuid={roomUuid} userUuid={uuid} />
+      <TextArea roomUuid={roomUuid} userUuid={uuid} />
     </S.Container>
   )
 }

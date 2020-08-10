@@ -141,7 +141,8 @@ export const loadMoreChat = ({
   url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
 })
 
-export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<Pick<Models.Room, 'uuid'>>({
+export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<{Rooms: Pick<Models.Room, 'uuid' | 'participants'>[]
+uuid: string}>({
   method: 'POST',
   url: '/chat/room',
   data: { args },

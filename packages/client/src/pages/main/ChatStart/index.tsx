@@ -23,7 +23,7 @@ interface Props{
   handleFriendToAdd?: (uuid: string, name: string) => void
 }
 interface ChatRoomStartContainerProp{
-  updateList: (selectList: InviteUser[]) => void;
+  updateList: (selectList: InviteUser[]) => void
 }
 const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)

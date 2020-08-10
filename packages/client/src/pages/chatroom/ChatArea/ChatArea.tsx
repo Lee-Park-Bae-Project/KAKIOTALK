@@ -32,14 +32,13 @@ const ChatArea: React.FC<Props> = ({
   // }, [chatState])
 
   useEffect(() => {
-    if (!roomUuid || firstChat) return
+    if (!roomUuid) return
     const fetch = async () => {
       const response = await request.getFirstChat({ roomUuid })
       setFirstChat(response.data.data)
     }
-
     fetch()
-  }, [roomUuid, chatState])
+  }, [roomUuid, chatState.data[roomUuid]])
 
   return (
     <S.Container ref={chatContainerRef}>
