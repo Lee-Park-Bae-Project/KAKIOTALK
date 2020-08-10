@@ -1,0 +1,16 @@
+name: Client-Auto-Deploy
+
+on:
+  push:
+    branches: [ master, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Deploy
+      env:
+          VERCEL_TOKEN: "${{ secrets.VERCEL_TOKEN }}"
+      run: yarn deploy:client -t ${VERCEL_TOKEN}

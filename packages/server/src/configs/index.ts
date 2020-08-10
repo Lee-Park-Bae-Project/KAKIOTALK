@@ -5,7 +5,7 @@ require('dotenv').config()
 
 export const env = process.env.NODE_ENV || 'development'
 
-const whiteList = ['http://localhost:3000', 'https://focused-mccarthy-3df3e2.netlify.app']
+const whiteList = ['http://localhost:3000', 'https://kakiotalk.now.sh']
 export const corsConfig: CorsOptions = {
   origin: whiteList,
   credentials: true,
