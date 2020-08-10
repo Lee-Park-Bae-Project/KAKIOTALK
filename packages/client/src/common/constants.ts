@@ -20,7 +20,7 @@ const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || ''
 const PUBLIC_URL = process.env.REACT_APP_PUBLIC_URL
 
 const LOGIN_URL = 'http://locahost:3000/login'
-const LOGIN_URL_PRODUCT = 'https://lee-park-bae-project.github.io/KAKIOTALK/login'
+const LOGIN_URL_PRODUCT = 'https://kakiotalk.now.sh/login'
 
 export const configs = {
   SOCKET_URL,
