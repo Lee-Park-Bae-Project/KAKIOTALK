@@ -8,7 +8,7 @@ import { alert } from 'common/utils'
 import { loginRequest } from 'modules/login'
 import { RootState } from 'modules'
 
-const loginURL = configs.NODE_ENV_VAR === 'production' ? configs.LOGIN_URL_PRODUCT : configs.LOGIN_URL
+const loginURL = configs.LOGIN_URL
 
 const isResOffline = (res: any): res is GoogleLoginResponseOffline => res.code !== undefined
 
