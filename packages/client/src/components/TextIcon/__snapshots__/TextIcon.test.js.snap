@@ -14,9 +14,9 @@ exports[`<TextIcon/> matches snapshot 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-bdVaJa",
+            "componentId": "sc-bwzfXH",
             "isStatic": false,
-            "lastClassName": "jBfTTi",
+            "lastClassName": "hSFraI",
             "rules": Array [
               "
     display: flex;
@@ -33,7 +33,7 @@ exports[`<TextIcon/> matches snapshot 1`] = `
           "displayName": "styled.div",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-bdVaJa",
+          "styledComponentId": "sc-bwzfXH",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -44,24 +44,60 @@ exports[`<TextIcon/> matches snapshot 1`] = `
       iconPosition="left"
     >
       <div
-        className="sc-bdVaJa jBfTTi"
+        className="sc-bwzfXH hSFraI"
       >
         <Icon
           icon="Account"
+          size="2rem"
         >
-          <ForwardRef(SvgAccount)
-            fill="currentColor"
-            height="2rem"
-            width="2rem"
-          >
-            <svg
-              fill="currentColor"
-              height="2rem"
-              width="2rem"
+          <styled.div>
+            <StyledComponent
+              forwardedComponent={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-bdVaJa",
+                    "isStatic": false,
+                    "lastClassName": "NKuto",
+                    "rules": Array [
+                      "
+    cursor: pointer;
+    display: flex;
+  ",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-bdVaJa",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                }
+              }
+              forwardedRef={null}
             >
-              account.svg
-            </svg>
-          </ForwardRef(SvgAccount)>
+              <div
+                className="sc-bdVaJa NKuto"
+              >
+                <ForwardRef(SvgAccount)
+                  fill="currentColor"
+                  height="2rem"
+                  width="2rem"
+                >
+                  <svg
+                    fill="currentColor"
+                    height="2rem"
+                    width="2rem"
+                  >
+                    account.svg
+                  </svg>
+                </ForwardRef(SvgAccount)>
+              </div>
+            </StyledComponent>
+          </styled.div>
         </Icon>
         <styled.span
           text="hi"
@@ -74,23 +110,26 @@ exports[`<TextIcon/> matches snapshot 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-bwzfXH",
+                  "componentId": "sc-htpNat",
                   "isStatic": false,
-                  "lastClassName": "efmkIq",
+                  "lastClassName": "gssNWV",
                   "rules": Array [
                     "
     color: ",
                     [Function],
                     ";
-    line-height: 2rem;
-    padding: 1rem;
+    line-height: 1.5rem;
+    padding: 0.5rem;
+    font-size: ",
+                    [Function],
+                    ";
   ",
                   ],
                 },
                 "displayName": "styled.span",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-bwzfXH",
+                "styledComponentId": "sc-htpNat",
                 "target": "span",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -103,7 +142,7 @@ exports[`<TextIcon/> matches snapshot 1`] = `
             textSize="1rem"
           >
             <span
-              className="sc-bwzfXH efmkIq"
+              className="sc-htpNat gssNWV"
             >
               hi
             </span>

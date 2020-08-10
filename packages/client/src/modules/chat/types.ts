@@ -1,5 +1,7 @@
 import * as Action from 'modules/chat/action'
-import { ReduxChatMap, ReduxState } from 'types'
+import {
+  ReduxChatMap, ReduxState,
+} from 'types'
 
 export type ChatState = ReduxState<ReduxChatMap>
 

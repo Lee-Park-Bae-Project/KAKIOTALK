@@ -2,9 +2,13 @@ import React, {
   FC, Fragment, useEffect,
 } from 'react'
 import * as S from 'pages/main/styles'
-import { Loader, NavigationBar } from 'components'
-import Room from 'system/Room'
-import { useSelector } from 'react-redux'
+import {
+  Loader, NavigationBar,
+} from 'components'
+import { Room } from 'system'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { Route } from 'react-router-dom'
 import { url } from 'common/constants'
 import { afterLogin } from 'modules/socket'

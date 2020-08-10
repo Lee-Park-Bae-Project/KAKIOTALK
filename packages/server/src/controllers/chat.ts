@@ -2,6 +2,7 @@
 // import { response } from 'express'
 import * as chatService from '../services/chat'
 import * as userService from '../services/user'
+import * as roomService from '../services/room'
 import {
   controllerHelper, response, uuid,
 } from '../common/utils'

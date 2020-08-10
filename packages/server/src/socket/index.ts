@@ -1,6 +1,7 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
 import { Socket } from '@kakio/common'
+import * as roomService from '@src/services/room'
 import * as T from '../types'
 import { addMessage } from '../services/chat'
 
@@ -22,7 +23,7 @@ const socketCallBack = ((cb: SocketType) => (socket: openSocket.Socket) => cb(so
 
 const onDisconnect = ((socket: openSocket.Socket) => {
   socket.on(EventMap.DISCONNECT, () => {
-    console.log(chalk.yellow(`${socket.id} is disconnected`))
+    console.log(chalk.yellow(`${socket.id} is disconnected!!`))
     io.emit('leave', `${socket.id} is disconnected`)
   })
 })
@@ -44,7 +45,6 @@ const chatFromClient = socketCallBack((socket) => {
   }: T.SendMsg) => {
     console.log(chalk.cyan('chat from client'))
     try {
-      console.log(roomUuid, content, createdAt, userUuid)
       const updatedAt = createdAt
       const data = await addMessage({
         roomUuid,
@@ -69,6 +69,30 @@ const joinRooms = socketCallBack((socket) => {
   })
 })
 
+const leaveRoomFromClient = socketCallBack((socket) => {
+  socket.on(EventMap.LEAVE_ROOM_FROM_CLIENT, async ({
+    roomUuid, userUuid,
+  }: Socket.LeaveRoom) => {
+    console.log(chalk.cyan('leave room', roomUuid, userUuid))
+    try {
+      await roomService.leaveRoomFromClient({
+        roomUuid, userUuid,
+      })
+      io.to(roomUuid).emit(EventMap.LEAVE_ROOM_FROM_SERVER, {
+        roomUuid,
+        userUuid,
+      })
+
+      const participantsNum = await roomService.getRoomParticipantsNum({ roomUuid })
+      if (!participantsNum) {
+        await roomService.deleteRoom({ roomUuid })
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  })
+})
+
 const connection = () => {
   io.on(EventMap.CONNECT, (socket:openSocket.Socket) => {
     socket.emit(EventMap.CONNECT, `connected: ${socket.id}`)
@@ -78,6 +102,7 @@ const connection = () => {
     afterLogin(socket)
     chatFromClient(socket)
     joinRooms(socket)
+    leaveRoomFromClient(socket)
   })
 }
 

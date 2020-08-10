@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import {
+  useEffect, useState,
+} from 'react'
 import * as request from 'common/request'
 import { url } from 'common/constants'
 

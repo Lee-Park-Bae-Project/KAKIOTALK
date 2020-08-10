@@ -21,6 +21,8 @@ export type ResponseType<T> = {
   data: T
 }
 
+export type AxiosResponseType<T> = AxiosResponse<ResponseType<T>>
+
 export type ApiCallback<T = {}> = (
   err: AxiosResponse<ResponseType<T>> | null,
   response?: AxiosResponse<ResponseType<T>>,

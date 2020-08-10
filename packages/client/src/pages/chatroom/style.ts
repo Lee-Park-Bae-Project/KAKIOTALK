@@ -9,3 +9,6 @@ export const Container = styled.div`
   flex-direction:column;
   height: 100vh;
 `
+export const Button = styled.div`
+  
+`

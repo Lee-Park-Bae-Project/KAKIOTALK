@@ -22,12 +22,14 @@ export const getChatRequest = ({
   roomUuid,
   offset,
   limit,
-}: GetChatRequest) => ({ type: GET_CHAT_REQUEST,
+}: GetChatRequest) => ({
+  type: GET_CHAT_REQUEST,
   payload: {
     roomUuid,
     offset,
     limit,
-  } })
+  },
+})
 
 interface GetChatSuccess {
   roomUuid: string
@@ -37,13 +39,15 @@ interface GetChatSuccess {
 }
 export const getChatSuccess = ({
   roomUuid, chats, offset, limit,
-}: GetChatSuccess) => ({ type: GET_CHAT_SUCCESS,
+}: GetChatSuccess) => ({
+  type: GET_CHAT_SUCCESS,
   payload: {
     roomUuid,
     chats,
     offset,
     limit,
-  } })
+  },
+})
 
 export const getChatFailure = (e: AxiosError) => ({
   type: GET_CHAT_FAILURE,
@@ -51,25 +55,37 @@ export const getChatFailure = (e: AxiosError) => ({
   payload: {},
 })
 
-export const addChat = (roomUuid: string, newChat: ApiChat) => ({ type: ADD_CHAT,
-  payload: { roomUuid,
-    newChat } })
+export const addChat = (roomUuid: string, newChat: ApiChat) => ({
+  type: ADD_CHAT,
+  payload: {
+    roomUuid,
+    newChat,
+  },
+})
 
-export const addChatOffset = ({ roomUuid,
-  amount }: {
+export const addChatOffset = ({
+  roomUuid,
+  amount,
+}: {
   roomUuid: string
   amount: number
-}) => ({ type: ADD_CHAT_OFFSET,
-  payload: { roomUuid,
-    amount } })
+}) => ({
+  type: ADD_CHAT_OFFSET,
+  payload: {
+    roomUuid,
+    amount,
+  },
+})
 
 interface LoadMoreRequest {
   roomUuid: string
   offset: number
   limit: number
 }
-export const loadMoreRequest = (roomUuid: string) => ({ type: LOAD_MORE_REQUEST,
-  payload: { roomUuid } })
+export const loadMoreRequest = (roomUuid: string) => ({
+  type: LOAD_MORE_REQUEST,
+  payload: { roomUuid },
+})
 
 interface GetChatSuccess {
   roomUuid: string
@@ -80,15 +96,19 @@ interface GetChatSuccess {
 
 export const loadMoreSuccess = ({
   roomUuid, chats, offset, limit,
-}: GetChatSuccess) => ({ type: LOAD_MORE_SUCCESS,
+}: GetChatSuccess) => ({
+  type: LOAD_MORE_SUCCESS,
   payload: {
     roomUuid,
     chats,
     offset,
     limit,
-  } })
+  },
+})
 
-export const loadMoreFailure = (e: AxiosError) => ({ type: LOAD_MORE_FAILURE,
-  message: e.message })
+export const loadMoreFailure = (e: AxiosError) => ({
+  type: LOAD_MORE_FAILURE,
+  message: e.message,
+})
 export const resetChat = () => ({ type: RESET_CHAT })
 
