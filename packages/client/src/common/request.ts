@@ -31,7 +31,7 @@ async function Axios<T>(config: AxiosRequestConfig) {
     const response = await instance.request<ResponseType<T>>(config)
     return response.data.data
   } catch (e) {
-    throw new Error(e)
+    throw new Error(e.response.data.data.message)
   }
 }
 

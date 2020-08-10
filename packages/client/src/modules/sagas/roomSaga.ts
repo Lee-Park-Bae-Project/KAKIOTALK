@@ -39,11 +39,11 @@ interface RoomReturnType{
 type roomIdType = AxiosResponse<request.ResponseType<RoomReturnType>>
 function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   try {
-    const response: roomIdType = yield call(request.makeRoomRequest, payload)
-    const roomUuids = response.data.data.rooms.map((v) => v.uuid)
-    yield put(joinRooms({ roomUuids }))
-    yield put(getRoomSuccess(response.data.data.rooms))
-    yield call(push, `${url.room}/${response.data.data.roomUuid}`)
+    const response = yield call(request.makeRoomRequest, payload)
+    const roomUuids = response.rooms.map((v: any) => v.uuid)
+    joinRooms({ roomUuids })
+    yield put(getRoomSuccess(response.rooms))
+    yield call(push, `${url.room}/${response.roomUuid}`)
   } catch (e) {
     yield put(getRoomFailure(e.message))
   }

@@ -12,7 +12,7 @@ function* getFriendsSaga() {
     const data: unwrapPromise<typeof request.getFriendList> = yield call(request.getFriendList)
     yield put(Action.getFriendsSuccess(data))
   } catch (e) {
-    alert.error(e.response.data.data.message)
+    alert.error(e.message)
   }
 }
 function* addFriendSaga({ payload }: ReturnType<typeof Action.addFriend>) {
@@ -21,7 +21,7 @@ function* addFriendSaga({ payload }: ReturnType<typeof Action.addFriend>) {
     yield put(Action.addFriendSuccess(data))
     alert.addFriend(data.name)
   } catch (e) {
-    alert.error(e.response.data.data.message)
+    alert.error(e.message)
   }
 }
 
@@ -31,7 +31,7 @@ function* deleteFriendSaga({ payload }: ReturnType<typeof Action.deleteFriend>) 
     yield put(Action.deleteFriendSuccess(data.uuid))
     alert.deleteFriend()
   } catch (e) {
-    alert.error(e.response.data.data.message)
+    alert.error(e.message)
   }
 }
 export default function* friendsSaga() {
