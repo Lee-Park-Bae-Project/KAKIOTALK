@@ -13,7 +13,7 @@ exports[`<Circle /> matches snapshot 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-bdVaJa",
             "isStatic": false,
-            "lastClassName": "kZWESs",
+            "lastClassName": "fJTehO",
             "rules": Array [
               "
     display: flex;
@@ -35,7 +35,7 @@ exports[`<Circle /> matches snapshot 1`] = `
               "#FEFFFF",
               ";
     font-weight: ",
-              "600",
+              "400",
               ";
   ",
             ],
@@ -53,7 +53,7 @@ exports[`<Circle /> matches snapshot 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-bdVaJa kZWESs"
+        className="sc-bdVaJa fJTehO"
       >
         22
       </div>
