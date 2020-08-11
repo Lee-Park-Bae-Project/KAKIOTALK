@@ -39,19 +39,16 @@ export const getChats = controllerHelper(async (req, res, next) => {
 
 export const getRoom = controllerHelper(async (req, res, next) => {
   const { roomId } = req.params
-  let rooms
   if (roomId) {
-    rooms = await chatService.findRoomByUuid(roomId)
-  } else {
-    const { googleId } = req.decodedUser!
-
-    const user = await userService.findByGoogleId(googleId)
-    if (!user) {
-      throw httpError.USER_NOT_FOUND
-    }
-    rooms = await chatService.findAllRooms(user.id)
+    return chatService.findRoomByUuid(roomId)
   }
-  return rooms
+  const { googleId } = req.decodedUser!
+
+  const user = await userService.findByGoogleId(googleId)
+  if (!user) {
+    throw httpError.USER_NOT_FOUND
+  }
+  return chatService.findAllRooms(user.id)
 })
 
 export const addMessage = controllerHelper(async (req, res, next) => {
