@@ -19,14 +19,8 @@ const instance = axios.create({
 export type ResponseType<T> = {
   success: boolean
   data: T
+  message?: string
 }
-
-export type AxiosResponseType<T> = AxiosResponse<ResponseType<T>>
-
-export type ApiCallback<T = {}> = (
-  err: AxiosResponse<ResponseType<T>> | null,
-  response?: AxiosResponse<ResponseType<T>>,
-) => void
 
 async function Axios<T>(config: AxiosRequestConfig) {
   try {
