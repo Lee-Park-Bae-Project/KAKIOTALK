@@ -1,5 +1,4 @@
 import { Models } from '@kakio/common'
-import { UserModel } from '@src/models/user'
 
 import { chatFromServer } from '../socket'
 
