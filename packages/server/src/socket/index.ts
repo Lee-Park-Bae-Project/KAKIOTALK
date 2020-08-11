@@ -1,7 +1,7 @@
 import openSocket from 'socket.io'
 import chalk from 'chalk'
 import { Socket } from '@kakio/common'
-import * as roomService from '@src/services/room'
+import * as roomService from '../services/room'
 import * as T from '../types'
 import { addMessage } from '../services/chat'
 
