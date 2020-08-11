@@ -15,9 +15,7 @@ import {
 
 import { unwrapPromise } from 'types'
 import * as request from 'common/request'
-import {
-  RootState, Store,
-} from 'modules'
+import { Store } from 'modules'
 
 function* getChatSaga(action: ReturnType<typeof getChatRequest>) {
   try {

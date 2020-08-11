@@ -4,23 +4,26 @@ import httpStatus from 'http-status'
 import uuid4 from 'uuid4'
 import { ControllerHelper } from '../types'
 
-export const response = (res:Response, data = {}, code = httpStatus.OK) => {
+export const response = (res:Response, data: any = {}, _code = httpStatus.OK) => {
   let result = {
     success: true,
     data: {},
+    message: '',
   }
+  let code = _code
 
-  if (code > 399) {
+  if (_code > 399) {
     result.success = false
-    // code = httpStatus.OK;
+    result.message = data.message
+    code = httpStatus.OK
   }
 
-  if (typeof data === 'object') {
+  if (_code < 400 && typeof data === 'object') {
     result = {
-      ...result, data,
+      ...result,
+      data,
     }
   }
-
   return res.status(code).json(result)
 }
 

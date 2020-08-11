@@ -5,6 +5,7 @@ import * as Type from 'types'
 import {
   APIs, Models,
 } from '@kakio/common'
+import { Store } from 'modules'
 import { configs } from './constants'
 
 const API_SERVER_URL = configs.NODE_ENV_VAR === 'production' ? configs.API_SERVER_URL_PRODUCT : configs.API_SERVER_URL
@@ -25,9 +26,13 @@ export type ResponseType<T> = {
 async function Axios<T>(config: AxiosRequestConfig) {
   try {
     const response = await instance.request<ResponseType<T>>(config)
-    return response.data.data
+    if (response.data.success) {
+      return response.data.data
+    }
+    throw new Error(response.data.message)
   } catch (e) {
-    throw new Error(e.response.data.data.message)
+    // Store.store.dispatch(logoutRequest())
+    throw new Error(e.message)
   }
 }
 
