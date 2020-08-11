@@ -6,13 +6,13 @@ import { IDecodedUser } from '../types'
 import {
   cookieName, jwtConfig,
 } from '../configs'
-import { message } from '../common/utils'
+import * as httpError from '../common/error'
 
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.cookies[cookieName]
     if (!token) {
-      throw new Error(message.LOGIN_REQUIRED)
+      throw httpError.UNAUTHORIZED
     }
     const decoded = jwt.verify(token, jwtConfig.secret)
 

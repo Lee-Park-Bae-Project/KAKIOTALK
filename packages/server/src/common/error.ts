@@ -72,3 +72,14 @@ export const CANNOT_ADD_ROOM_PARTICIPANT = _he(_code.BAD_REQUEST, '잘못된 요
  */
 export const CAN_NOT_BE_DONE = _he(_code.NOT_ACCEPTABLE, '요청을 완료하지 못했습니다.')
 
+export const INVALID_GOOGLE_ID = _he(_code.UNAUTHORIZED, '계정이 유효하지 않습니다.')
+
+export const CAN_NOT_ADD_ME = _he(_code.UNAUTHORIZED, '본인은 친구로 추가할 수 없습니다.')
+
+export const INVALID_EMAIL = _he(_code.UNAUTHORIZED, '유효하지 않은 이메일입니다.')
+
+export const ALREADY_EXIST_FRIEND = _he(_code.UNAUTHORIZED, '이미 추가되어 있는 친구입니다.')
+
+export const INVALID_FRIEND_ID = _he(_code.UNAUTHORIZED, '친구의 계정이 유효하지 않습니다.')
+
+export const ERROR_OCCURED = _he(_code.UNAUTHORIZED, '오류가 발생했습니다.')
