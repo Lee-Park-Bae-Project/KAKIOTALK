@@ -8,7 +8,7 @@ const useOutsideClick = (ref: React.RefObject<HTMLElement>, callback: () => void
   }
 
   useEffect(() => {
-    document.addEventListener('click', handleClick)
+    document.addEventListener('click', handleClick, true)
     return () => {
       document.removeEventListener('click', handleClick)
     }
