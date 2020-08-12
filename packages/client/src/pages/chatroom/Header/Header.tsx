@@ -1,7 +1,6 @@
 import React from 'react'
 import Icon from 'Icon/Icon'
 import { useHistory } from 'react-router-dom'
-import * as request from 'common/request'
 import * as S from './styles'
 
 interface Props{

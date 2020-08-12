@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useEffect,
+  FC, Fragment,
 } from 'react'
 import { List } from 'system'
 import Hr from 'atoms/Hr'

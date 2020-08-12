@@ -1,5 +1,5 @@
 import React, {
-  FC, useEffect, useState,
+  FC, useState,
 } from 'react'
 import styled from 'styled-components'
 import { color } from 'styles/global'
@@ -30,7 +30,6 @@ interface MakeChatProp{
 const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   const [isClicked, setClicked] = useState(false)
   const [selectedList, setSelectedList] = useState<InviteUser[]>([])
-  const room = useSelector((state: RootState) => state.room)
   const myProfile = useSelector((state: RootState) => state.profile)
   const handlePopUpClick = () => {
     setClicked(!isClicked)

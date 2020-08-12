@@ -11,11 +11,7 @@ import { useAuth } from 'hooks'
 import {
   useDispatch, useSelector,
 } from 'react-redux'
-import {
-  Dialog, Drawer,
-  Loader,
-} from 'components'
-import Icon from 'Icon/Icon'
+import { Loader } from 'components'
 import { RootState } from 'modules'
 import { joinRooms } from 'modules/socket'
 
@@ -36,10 +32,8 @@ const ChatRoom: FC = () => {
   const [roomName, setRoomName] = useState<string>('')
   const dispatch = useDispatch()
   const roomState = useSelector((state: RootState) => state.room)
-  const { isLoggedIn } = useAuth()
   const { uuid } = useSelector((state: RootState) => state.profile)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const [isLeaveAlertOpen, setIsLeaveAlertOpen] = useState(false)
   const [thisRoomState, setThisRoomState] = useState<RoomData | undefined>(undefined)
 
   const toggleSearchBar = useCallback(() => {

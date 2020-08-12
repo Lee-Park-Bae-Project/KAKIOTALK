@@ -1,6 +1,5 @@
 import moment from 'moment'
 import swal from 'sweetalert'
-import { useEffect } from 'react'
 import 'moment/locale/ko'
 import { createBrowserHistory } from 'history'
 

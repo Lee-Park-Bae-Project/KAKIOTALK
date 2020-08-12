@@ -20,6 +20,17 @@ const reducer = (state = {}, action: AlertType) => {
       alert.error(action.payload.msg)
       return state
     }
+    case Action.CONFIRM_DELETE: {
+      const {
+        name, cb,
+      } = action.payload
+      alert.confirmDelete(name).then((confirm) => {
+        if (confirm) {
+          cb()
+        }
+      })
+      return state
+    }
     default: {
       return state
     }

@@ -11,7 +11,6 @@ import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { updateProfileRequest } from 'modules/profile'
-import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
 import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
@@ -63,7 +62,6 @@ const Profile: FC<Prop> = ({
 
   const myProfile = useSelector((state: RootState) => state.profile)
 
-  const login = useSelector((state: RootState) => state.login)
   const [selectedList, setSelectedList] = useState([{
     uuid, name,
   }])
@@ -88,16 +86,9 @@ const Profile: FC<Prop> = ({
   }
 
   const onDeleteClick = () => {
-    alert.confirmDelete(name).then((confirm) => {
-      if (confirm) {
-        dispatch(deleteFriend(uuid))
-      }
-    })
+    dispatch(AlertAction.confirmDelete(name, () => dispatch(deleteFriend(uuid))))
   }
   const onChatClick = () => {
-    const {
-      uuid: userUuid, name: userName,
-    } = myProfile
     dispatch(makeRoomRequest(selectedList.concat({
       uuid, name,
     })))
