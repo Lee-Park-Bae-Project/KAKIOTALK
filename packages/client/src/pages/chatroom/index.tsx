@@ -85,7 +85,7 @@ const ChatRoom: FC = () => {
   }, [thisRoomState])
 
   if (!thisRoomState) {
-    return <Loader/>
+    return null
   }
   return (
     <S.Container>
