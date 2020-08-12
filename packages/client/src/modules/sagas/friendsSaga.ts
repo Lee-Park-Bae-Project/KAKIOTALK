@@ -4,24 +4,24 @@ import {
 
 import * as Action from 'modules/friends/action'
 import * as request from 'common/request'
-import { alert } from 'common/utils'
 import { unwrapPromise } from 'types'
+import * as AlertAction from 'modules/alert/action'
 
 function* getFriendsSaga() {
   try {
     const data: unwrapPromise<typeof request.getFriendList> = yield call(request.getFriendList)
     yield put(Action.getFriendsSuccess(data))
   } catch (e) {
-    alert.error(e.message)
+    yield put(AlertAction.error(e.message))
   }
 }
 function* addFriendSaga({ payload }: ReturnType<typeof Action.addFriend>) {
   try {
     const data: unwrapPromise<typeof request.addFriend> = yield call(request.addFriend, payload)
     yield put(Action.addFriendSuccess(data))
-    alert.addFriend(data.name)
+    yield put(AlertAction.addFriend(data.name))
   } catch (e) {
-    alert.error(e.message)
+    yield put(AlertAction.error(e.message))
   }
 }
 
@@ -29,9 +29,9 @@ function* deleteFriendSaga({ payload }: ReturnType<typeof Action.deleteFriend>) 
   try {
     const data: unwrapPromise<typeof request.deleteFriend> = yield call(request.deleteFriend, payload)
     yield put(Action.deleteFriendSuccess(data.uuid))
-    alert.deleteFriend()
+    yield put(AlertAction.deleteFriend())
   } catch (e) {
-    alert.error(e.message)
+    yield put(AlertAction.error(e.message))
   }
 }
 export default function* friendsSaga() {

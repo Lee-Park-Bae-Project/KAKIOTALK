@@ -17,6 +17,7 @@ import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
+import * as AlertAction from 'modules/alert'
 
 interface Prop {
   /** 유져 식별자 */
@@ -70,7 +71,7 @@ const Profile: FC<Prop> = ({
   const handleEditClick = () => {
     if (isEditMode) {
       if (editName.value.length === 0) {
-        alert.error('이름을 입력해주세요!')
+        dispatch(AlertAction.error('이름을 입력해주세요!'))
         return
       }
 

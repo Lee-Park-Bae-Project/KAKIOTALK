@@ -3,15 +3,15 @@ import {
 } from 'redux-saga/effects'
 import * as Action from 'modules/profile/action'
 import * as request from 'common/request'
-import { alert } from 'common/utils'
 import { unwrapPromise } from 'types'
+import * as AlertAction from 'modules/alert'
 
 function* getProfileSaga() {
   try {
     const data: unwrapPromise<typeof request.getProfile> = yield call(request.getProfile)
     yield put(Action.getProfileSuccess(data))
   } catch (e) {
-    alert.error(e.message)
+    yield put(AlertAction.error(e.message))
   }
 }
 
@@ -20,7 +20,7 @@ function* updateProfileSaga({ payload }: ReturnType<typeof Action.updateProfileR
     const data: unwrapPromise<typeof request.updateProfile> = yield call(request.updateProfile, payload)
     yield put(Action.updateProfielSuccess(data))
   } catch (e) {
-    alert.error(e.message)
+    yield put(AlertAction.error(e.message))
   }
 }
 export default function* profileSaga() {
