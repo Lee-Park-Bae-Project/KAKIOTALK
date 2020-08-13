@@ -35,14 +35,14 @@ ${(props) => props.IsCheck && css`&:checked{
 }`}
 `
 
-export const UserCardContainer = styled(Flex)<IsCheck>`
+export const UserCardContainer = styled(Flex)`
 height:5rem;
 justify-content: space-between;
 padding: 0 1rem;
 background-color: ${color.WHITE};
-${(props) => props.IsCheck && css`&:hover {
+&:hover {
   background-color: ${color.HOVER_GRAY};
-}`}
+}
 `
 
 export const Container = styled.label<IsCheck>`
@@ -60,9 +60,7 @@ export const Container = styled.label<IsCheck>`
   justify-content: space-between;
   padding-right: 0.8rem;
   /** 선택했을 때 배경색 변경 */
-  ${(props) => props.IsCheck && css`&:hover ${Input} ~ ${Checkmark}{
-    background-color:${color.HOVER_GRAY}    
-  }`}
+
   /** 노란색 체크 */
   ${(props) => props.IsCheck && css`& ${Input}:checked ~ ${Checkmark}{
     background-color: ${color.YELLO}
@@ -77,7 +75,7 @@ export const Container = styled.label<IsCheck>`
   top: 5px;
   width: 5px;
   height: 10px;
-  border: solid white;
+  border: solid black;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);

@@ -29,12 +29,13 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
   const dispatch = useDispatch()
   const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
+  const [isCheck, setIsCheck] = useState<Record<string, boolean|undefined>[]>([])
 
   const { isLoggedIn } = useAuth()
   const friendKeyword = useInput('')
 
   const handleFriendToAdd = (uuid: string, name: string) => {
-    console.log(uuid, name)
+    console.log(isCheck)
     if (selectedUser.some((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
       updateList(selectedUser.filter((item) => item.uuid !== uuid))
@@ -78,6 +79,7 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
                   imageUrl={imageUrl}
                   handleFriendToAdd={handleFriendToAdd}
                   isCheck={selectedUser.filter((user) => user.uuid === uuid).length > 0}
+
                 />
           ))) : (
         <h5> 친구를 추가해 보세요!</h5>

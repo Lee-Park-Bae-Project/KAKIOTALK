@@ -18,6 +18,7 @@ interface Props{
   imageUrl?: string
   /** 본인 or 친구 중 누구의 프로필인지 판별 */
   isCheck: boolean
+
 }
 
 const MakeChat: FC<Props> = ({
@@ -32,7 +33,7 @@ const MakeChat: FC<Props> = ({
 
   return (
     <S.Container IsCheck = {isCheck}>
-      <S.UserCardContainer IsCheck = {isCheck}>
+      <S.UserCardContainer>
         <TextIcon
           icon='Account'
           color={color.GRAY}
