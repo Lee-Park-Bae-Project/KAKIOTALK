@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import Icon from 'Icon/Icon'
 import Flex from 'atoms/Flex'
+import { isBoolean } from 'lodash'
 import * as S from './style'
 
   interface Props{
@@ -19,9 +20,9 @@ const SelectedName: FC<Props> = ({
     handleFriendToAdd(uuid, name)
   }
   return (
-    <S.Container>
-      <S.name onClick={handleFriendToAddClick}>{name}</S.name>
-      <Icon icon="Quit" size="1rem" onClick={handleFriendToAddClick} />
+    <S.Container onClick={handleFriendToAddClick}>
+      <S.name >{name}</S.name>
+      <Icon icon="Quit" size="1rem" />
     </S.Container>
   )
 }

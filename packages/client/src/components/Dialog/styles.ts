@@ -15,14 +15,16 @@ export const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 60rem;
 `
 
 export const Content = styled(Flex)`
   flex-direction: column;
   border-radius:1rem;
-  
   background-color: white;
   width: 20rem;
+  max-height: 40rem;
+  height: fit-content;
   padding: 2rem;
 
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);

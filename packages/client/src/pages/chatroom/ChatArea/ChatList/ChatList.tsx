@@ -68,12 +68,14 @@ const ChatList: React.FC<Props> = ({
     if (!prevChats || !prevChats.chats.length) return
     // 다른 사람이 채팅 보낸 경우
     if (prevChats.chats[0].metaInfo.sender.uuid !== userUuid) return
+
     // load more 했을 경우
     if (prevChats.chats[prevChats.chats.length - 1].uuid !== chats[chats.length - 1].uuid) {
       target.scrollTop = target.scrollHeight - prevScrollHeight
       setScrollHeight(target.scrollHeight)
       return
     }
+
     // 내가 보낸 경우
     target.scrollTop = target.scrollHeight
   }, [chatState.data[roomUuid]])

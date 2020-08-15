@@ -29,7 +29,6 @@ export const getChats = controllerHelper(async (req, res, next) => {
   if (!chats) {
     throw httpError.DATA_NOT_FOUND
   }
-
   return {
     chats,
     offset,
@@ -78,7 +77,6 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 })
 export const makeRoom = controllerHelper(async (req, res, next) => {
   const inviteUser = req.body.args
-  let rooms
   let roomUuid
   if (inviteUser.length === 2) {
     const privateRoom = await chatService.makePrivateRoom(inviteUser)
@@ -109,7 +107,7 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
     throw httpError.USER_NOT_FOUND
   }
   const userId = user.id
-  rooms = await chatService.findAllRooms(userId)
+  const rooms = await chatService.findAllRooms(userId)
   return {
     rooms, roomUuid,
   }
@@ -124,9 +122,6 @@ export const getFirstChat = controllerHelper(async (req, res, next) => {
 
   const roomId = room.id
   const firstChat = await chatService.findFirstChat(roomId)
-  if (!firstChat) {
-    throw httpError.DATA_NOT_FOUND
-  }
 
   return firstChat
 })

@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useState,
+  FC, Fragment, useEffect, useState,
 } from 'react'
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
@@ -14,6 +14,7 @@ import { updateProfileRequest } from 'modules/profile'
 import { deleteFriend } from 'modules/friends'
 import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
+import { getProfile } from 'common/request'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
 import * as AlertAction from 'modules/alert'
@@ -186,16 +187,6 @@ const Profile: FC<Prop> = ({
 
           ) : (
             <Fragment>
-              <Link
-                to={{
-                  pathname: '/chat',
-                  state: {
-                    uuid,
-                    name,
-                  },
-                }}
-                style={{ textDecoration: 'none' }}
-              >
                 <S.ButtonWrapper>
                 <TextIcon
                   icon='ChatFilled'
@@ -209,7 +200,6 @@ const Profile: FC<Prop> = ({
                 />
                 </S.ButtonWrapper>
 
-              </Link>
               <S.ButtonWrapper>
               <TextIcon
                 icon='Delete'

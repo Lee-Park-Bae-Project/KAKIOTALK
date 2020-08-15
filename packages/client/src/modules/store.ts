@@ -7,8 +7,10 @@ import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from 'modules/sagas'
 import { persistStore } from 'redux-persist'
+import { createBrowserHistory } from 'history'
 
-const sagaMiddleware = createSagaMiddleware()
+const customHistory = createBrowserHistory()
+const sagaMiddleware = createSagaMiddleware({ context: { history: customHistory } })
 const middlewares = []
 middlewares.push(sagaMiddleware)
 

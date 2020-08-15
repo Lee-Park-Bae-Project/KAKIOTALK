@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { color } from 'styles/global'
+import Flex from 'atoms/Flex'
 
 export const Header = styled.section`
   width: 100%;
@@ -18,4 +19,12 @@ export const IconWrapper = styled.span`
   display: flex;
   margin-right: auto;
 `
+export const Container = styled(Flex)`
+height: 5rem;
+justify-content: flex-start;
+padding: 0 1rem;
+background-color: ${color.WHITE};
+&:hover {
+  background-color: ${color.HOVER_GRAY};
+}`
 

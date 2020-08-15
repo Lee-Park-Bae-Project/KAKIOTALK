@@ -34,6 +34,7 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
         data: state.data,
       }
     }
+
     case Action.LEAVE_ROOM_SUCCESS: {
       const { roomUuid } = action.payload
       return {

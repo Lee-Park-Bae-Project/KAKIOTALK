@@ -15,8 +15,6 @@ import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { RootState } from 'modules'
-import { getFriends } from 'modules/friends'
-import { getProfile } from 'modules/profile'
 
 interface Props{
   friendList: SimpleUserType[]
@@ -25,22 +23,16 @@ interface Props{
   handleFriendToAdd?: (uuid: string, name: string) => void
 }
 interface ChatRoomStartContainerProp{
-  updateList: (selectList: InviteUser[]) => void;
+  updateList: (selectList: InviteUser[]) => void
 }
 const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
-  const login = useSelector((state: RootState) => state.login)
   const dispatch = useDispatch()
   const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
+  const [isCheck, setIsCheck] = useState<Record<string, boolean|undefined>[]>([])
+
   const { isLoggedIn } = useAuth()
   const friendKeyword = useInput('')
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getFriends())
-      dispatch(getProfile())
-    }
-  }, [isLoggedIn])
 
   const handleFriendToAdd = (uuid: string, name: string) => {
     if (selectedUser.some((user) => user.uuid === uuid)) {
@@ -77,7 +69,7 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
               .indexOf(friendKeyword.value.toLowerCase()) >= 0,
           )
           .map(({
-            uuid, name, email, imageUrl,
+            uuid, name, imageUrl,
           }) => (
             <MakeChat
                   key={uuid}
@@ -85,9 +77,10 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
                   name={name}
                   imageUrl={imageUrl}
                   handleFriendToAdd={handleFriendToAdd}
+                  isCheck={selectedUser.filter((user) => user.uuid === uuid).length > 0}
                 />
           ))) : (
-        <h1> 친구를 추가해 보세요!</h1>
+        <h5> 친구를 추가해 보세요!</h5>
       )}
 
     </List>

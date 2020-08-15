@@ -6,7 +6,7 @@ import AddFriendTab from 'components/NavigationBar/AddFriendTab'
 import LogoutTab from 'components/NavigationBar/LogoutTab'
 import { useHistory } from 'react-router-dom'
 import { url } from 'common/constants'
-import MakeChatTab from './MakeChatTab'
+import MakeChatTab from 'components/NavigationBar/MakeChatTab'
 
 /**
  * - 네비게이션바

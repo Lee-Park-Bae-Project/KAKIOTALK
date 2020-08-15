@@ -1,6 +1,9 @@
-import React, { FC } from 'react'
+import React, {
+  FC, useEffect, useState,
+} from 'react'
 import TextIcon from 'components/TextIcon'
 import { color } from 'styles/global'
+import { InviteUser } from 'types'
 import * as S from './styles'
 
 interface Props{
@@ -14,31 +17,33 @@ interface Props{
   /** 유저 프로필사진 URL */
   imageUrl?: string
   /** 본인 or 친구 중 누구의 프로필인지 판별 */
+  isCheck: boolean
 
 }
 
 const MakeChat: FC<Props> = ({
-  uuid, name, handleFriendToAdd, imageUrl,
+  uuid, name, handleFriendToAdd, imageUrl, isCheck,
 }) => {
+  const [checkFriend, setCheckFriend] = useState<boolean>(false)
   const handleFriendToAddClick = () => {
-    if (handleFriendToAdd && uuid) {
+    if (handleFriendToAdd) {
       handleFriendToAdd(uuid, name)
     }
   }
+
   return (
     <S.Container >
-      <S.UserCardContainer onClick={handleFriendToAddClick}>
+      <S.UserCardContainer>
         <TextIcon
           icon='Account'
           color={color.GRAY}
           text={name}
-          onClick={handleFriendToAddClick}
           imageUrl={imageUrl}
           textSize="15px"
         />
         </S.UserCardContainer>
-      <S.Input type="checkbox" />
-      <S.Checkmark onClick={handleFriendToAddClick} />
+      <S.Input type="checkbox" onChange={handleFriendToAddClick} checked = {isCheck}/>
+
     </S.Container>
   )
 }

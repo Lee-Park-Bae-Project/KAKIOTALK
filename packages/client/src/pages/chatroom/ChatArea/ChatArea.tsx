@@ -23,6 +23,7 @@ const ChatArea: React.FC<Props> = ({
   const [firstChat, setFirstChat] = useState<APIs.GetFirstChat | null>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatBottomRef = useRef<HTMLDivElement>(null)
+  const chatState = useSelector((state: RootState) => state.chat)
 
   useEffect(() => {
     if (!roomUuid) return
@@ -34,9 +35,8 @@ const ChatArea: React.FC<Props> = ({
         setFirstChat(null)
       }
     }
-
     fetch()
-  }, [roomUuid])
+  }, [roomUuid, chatState.data[roomUuid]])
 
   return (
     <S.Container ref={chatContainerRef}>

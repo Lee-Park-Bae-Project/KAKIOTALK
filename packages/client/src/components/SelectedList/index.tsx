@@ -7,11 +7,11 @@ const S = { NameList: styled(Flex)`
   align-content: flex-start; 
   flex-direction: row;
   justify-content: flex-start;
-  height: 120%;
-  max-height:150vh;
-  overflow:scroll;
+  height: fit-content;
   float:left;
   width: 100%;
+  overflow: auto;
+  padding-bottom: 1.3rem;
   ` }
 
 const SelectedList: FC = ({ children }) => (
