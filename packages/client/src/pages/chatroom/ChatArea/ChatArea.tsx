@@ -1,5 +1,4 @@
 import React from 'react'
-import { ApiChat } from 'types'
 import * as request from 'common/request'
 import { APIs } from '@kakio/common'
 import { useSelector } from 'react-redux'
@@ -25,11 +24,6 @@ const ChatArea: React.FC<Props> = ({
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatBottomRef = useRef<HTMLDivElement>(null)
   const chatState = useSelector((state: RootState) => state.chat)
-
-  // useEffect(() => {
-  //   if (!chatContainerRef.current) return
-  //   console.log(chatContainerRef.current.scrollTop)
-  // }, [chatState])
 
   useEffect(() => {
     if (!roomUuid) return

@@ -1,11 +1,9 @@
-import axios, {
-  AxiosError, AxiosRequestConfig, AxiosResponse,
-} from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import * as Type from 'types'
 import { APIs, Models } from '@kakio/common'
 import { configs } from './constants'
 
-const API_SERVER_URL = configs.NODE_ENV_VAR === 'production' ? configs.API_SERVER_URL_PRODUCT : configs.API_SERVER_URL
+const { API_SERVER_URL } = configs
 
 const instance = axios.create({
   baseURL: API_SERVER_URL,
@@ -17,35 +15,42 @@ const instance = axios.create({
 export type ResponseType<T> = {
   success: boolean
   data: T
+  message?: string
 }
-
-export type AxiosResponseType<T> = AxiosResponse<ResponseType<T>>
-
-export type ApiCallback<T = {}> = (
-  err: AxiosResponse<ResponseType<T>> | null,
-  response?: AxiosResponse<ResponseType<T>>,
-) => void
 
 async function Axios<T>(config: AxiosRequestConfig) {
   try {
     const response = await instance.request<ResponseType<T>>(config)
-    return response.data.data
+    if (response.data.success) {
+      return response.data.data
+    }
+    throw new Error(response.data.message)
   } catch (e) {
-    throw new Error(e.response.data.data.message)
+    throw new Error(e.message)
   }
 }
 
-export const getProfile = () => Axios<Type.ApiUser>({ method: 'GET',
-  url: 'user/my-profile' })
+export const getProfile = () => Axios<Type.ApiUser>({
+  method: 'GET',
+  url: 'user/my-profile',
+})
 
-export const getFriendList = () => Axios<Type.ApiUser[]>({ method: 'GET',
-  url: 'social/friend-list' })
-export const getChatList = () => Axios({ method: 'GET',
-  url: 'dummy/chat-list' })
-export const getLogout = () => Axios({ method: 'GET',
-  url: 'auth/logout' })
-export const getUserInfo = () => Axios<Type.SimpleUserType>({ method: 'GET',
-  url: 'auth/check-auth' })
+export const getFriendList = () => Axios<Type.ApiUser[]>({
+  method: 'GET',
+  url: 'social/friend-list',
+})
+export const getChatList = () => Axios({
+  method: 'GET',
+  url: 'dummy/chat-list',
+})
+export const getLogout = () => Axios({
+  method: 'GET',
+  url: 'auth/logout',
+})
+export const getUserInfo = () => Axios<Type.SimpleUserType>({
+  method: 'GET',
+  url: 'auth/check-auth',
+})
 
 interface GetFirstChat extends AxiosRequestConfig{
   roomUuid: string
@@ -66,8 +71,10 @@ export const getLogin = (args: GetLoginArgs) => Axios({
   data: args,
 })
 
-export const getRooms = () => Axios<Models.Room[]>({ method: 'GET',
-  url: 'chat/room' })
+export const getRooms = () => Axios<Models.Room[]>({
+  method: 'GET',
+  url: 'chat/room',
+})
 
 export const addFriend = (email: string) => Axios<Type.ApiUser>({
   method: 'POST',
@@ -106,8 +113,10 @@ export const getChatByRoom = ({
   roomUuid,
   limit,
   offset,
-}: GetChatByRoom) => Axios<Chat>({ method: 'GET',
-  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}` })
+}: GetChatByRoom) => Axios<Chat>({
+  method: 'GET',
+  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
+})
 
 export const loadMoreChat = ({
   roomUuid,

@@ -6,9 +6,7 @@ import {
   Loader, NavigationBar,
 } from 'components'
 import { Room } from 'system'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { url } from 'common/constants'
 import { afterLogin } from 'modules/socket'

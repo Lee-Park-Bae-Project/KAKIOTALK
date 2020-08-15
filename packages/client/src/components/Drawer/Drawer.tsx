@@ -1,5 +1,4 @@
 import React from 'react'
-import { usePrevious } from 'hooks'
 import * as S from './styles'
 
 interface Props{
@@ -17,7 +16,6 @@ const Drawer: React.FC<Props> = ({
   const [isOpen, setIsOpen] = useState(false)
   const [sectionOpen, setSectionOpen] = useState(false)
   const [bgOpen, setBgOpen] = useState(false)
-  const ref = useRef(false)
   const bgRef = useRef(false)
   const sectionRef = useRef(false)
 

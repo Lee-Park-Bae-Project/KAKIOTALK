@@ -6,6 +6,7 @@ import profile from 'modules/profile'
 import login from 'modules/login'
 import room from 'modules/room'
 import chat from 'modules/chat'
+import alert from 'modules/alert'
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   login,
   room,
   chat,
+  alert,
 })
 
 export default persistReducer(persistConfig, rootReducer)

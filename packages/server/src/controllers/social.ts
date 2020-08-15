@@ -2,11 +2,10 @@ import {
   NextFunction, Request, Response,
 } from 'express'
 import createError from 'http-errors'
-import {
-  message, response,
-} from '../common/utils'
+import { response } from '../common/utils'
 import * as userService from '../services/user'
 import socialService from '../services/social'
+import * as httpError from '../common/error'
 
 const getFriendsList = async (
   req: Request,
@@ -17,11 +16,11 @@ const getFriendsList = async (
     const { googleId } = req.decodedUser
     const user = await userService.findByGoogleId(googleId)
     if (!user) {
-      throw createError(401, { message: message.INVALID_GOOGLE_ID })
+      throw httpError.INVALID_GOOGLE_ID
     }
     const data = await socialService.getFriendsList(user.id)
     if (!data) {
-      throw createError(401, { message: message.INVALID_FRIEND_ID })
+      throw httpError.INVALID_FRIEND_ID
     }
     const friendlist = data.friend.map((friend) => {
       const {
@@ -45,21 +44,19 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
     const friendEmail: string = req.body.email
     if (!user) {
-      throw createError(401, { message: message.ERROR_OCCURED })
+      throw httpError.USER_NOT_FOUND
     }
     if (friendEmail === user.email) {
-      throw createError(401, { message: message.CAN_NOT_ADD_ME })
+      throw httpError.CAN_NOT_ADD_ME
     }
 
     const friend = await userService.findByEmail(friendEmail)
     if (!friend || !user) {
-      next(createError(401, { message: message.INVALID_EMAIL }))
-      return
+      throw httpError.INVALID_EMAIL
     }
     const [, created] = await socialService.addFriend(user.id, friend.id)
     if (!created) {
-      next(createError(401, { message: message.ALREADY_EXIST_FRIEND }))
-      return
+      throw httpError.ALREADY_EXIST_FRIEND
     }
     const {
       uuid, email, name, statusMessage, imageUrl,
@@ -84,11 +81,11 @@ const deleteFriend = async (
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
     const deleteUser = await userService.findByUuid(req.body.uuid)
     if (!user || !deleteUser) {
-      throw createError(401, { message: message.INVALID_FRIEND_ID })
+      throw httpError.INVALID_FRIEND_ID
     }
     const deleted = await socialService.deleteFriend(user.id, deleteUser.id)
     if (deleted === 0) {
-      throw createError(401, { message: message.ERROR_OCCURED })
+      throw httpError.ERROR_OCCURED
     }
     const { uuid } = deleteUser
     response(res, { uuid })
