@@ -13,30 +13,17 @@ import {
   loadMoreSuccess,
 } from 'modules/chat'
 
-import { ApiChat } from 'types'
-import { AxiosResponse } from 'axios'
+import { unwrapPromise } from 'types'
 import * as request from 'common/request'
-import { RootState, Store } from 'modules'
+import { Store } from 'modules'
 
-interface Temp {
-  chats: ApiChat[]
-  offset: number
-  limit: number
-}
-type ResponseType = AxiosResponse<request.ResponseType<Temp>>
 function* getChatSaga(action: ReturnType<typeof getChatRequest>) {
   try {
     const { roomUuid } = action.payload
-    const response: ResponseType = yield call(request.getChatByRoom, action.payload)
-    const {
-      chats, offset, limit,
-    } = response.data.data
-
+    const data: unwrapPromise<typeof request.getChatByRoom> = yield call(request.getChatByRoom, action.payload)
     yield put(getChatSuccess({
       roomUuid,
-      chats,
-      offset,
-      limit,
+      ...data,
     }))
   } catch (e) {
     yield put(getChatFailure(e))
@@ -48,15 +35,19 @@ function* loadMoreSaga(action: ReturnType<typeof loadMoreRequest>) {
     const { roomUuid } = action.payload
     const { store } = Store
     const chatState = store.getState().chat
-    const { offset, limit } = chatState.data[roomUuid]
-    const response: ResponseType = yield call(request.loadMoreChat, {
+    const {
+      offset, limit,
+    } = chatState.data[roomUuid]
+    const data: unwrapPromise<typeof request.loadMoreChat> = yield call(request.loadMoreChat, {
       roomUuid,
       offset,
       limit,
     })
 
-    yield put(loadMoreSuccess({ ...response.data.data,
-      roomUuid }))
+    yield put(loadMoreSuccess({
+      ...data,
+      roomUuid,
+    }))
   } catch (e) {
     yield put(loadMoreFailure(e))
   }

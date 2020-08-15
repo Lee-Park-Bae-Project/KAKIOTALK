@@ -7,14 +7,16 @@ import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
 import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { updateProfileRequest } from 'modules/profile'
-import { alert } from 'common/utils'
 import { deleteFriend } from 'modules/friends'
 import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
+import * as AlertAction from 'modules/alert'
 
 interface Prop {
   /** 유져 식별자 */
@@ -60,20 +62,23 @@ const Profile: FC<Prop> = ({
 
   const myProfile = useSelector((state: RootState) => state.profile)
 
-  const login = useSelector((state: RootState) => state.login)
-  const [selectedList, setSelectedList] = useState([{ uuid, name }])
+  const [selectedList, setSelectedList] = useState([{
+    uuid, name,
+  }])
 
   const handleEditClick = () => {
     if (isEditMode) {
       if (editName.value.length === 0) {
-        alert.error('이름을 입력해주세요!')
+        dispatch(AlertAction.error('이름을 입력해주세요!'))
         return
       }
 
       if (editName.value !== name || editStatusMessage.value !== statusMessage) {
         dispatch(
-          updateProfileRequest({ name: editName.value,
-            statusMessage: editStatusMessage.value }),
+          updateProfileRequest({
+            name: editName.value,
+            statusMessage: editStatusMessage.value,
+          }),
         )
       }
     }
@@ -81,15 +86,12 @@ const Profile: FC<Prop> = ({
   }
 
   const onDeleteClick = () => {
-    alert.confirmDelete(name).then((confirm) => {
-      if (confirm) {
-        dispatch(deleteFriend(uuid))
-      }
-    })
+    dispatch(AlertAction.confirmDelete(name, () => dispatch(deleteFriend(uuid))))
   }
   const onChatClick = () => {
-    const { uuid: userUuid, name: userName } = myProfile
-    dispatch(makeRoomRequest(selectedList.concat({ uuid, name })))
+    dispatch(makeRoomRequest(selectedList.concat({
+      uuid, name,
+    })))
   }
   const [slideMount, setSlideMount] = useState(0)
   const [startPoint, setStartPoint] = useState(0)
@@ -185,9 +187,13 @@ const Profile: FC<Prop> = ({
           ) : (
             <Fragment>
               <Link
-                to={{ pathname: '/chat',
-                  state: { uuid,
-                    name } }}
+                to={{
+                  pathname: '/chat',
+                  state: {
+                    uuid,
+                    name,
+                  },
+                }}
                 style={{ textDecoration: 'none' }}
               >
                 <S.ButtonWrapper>

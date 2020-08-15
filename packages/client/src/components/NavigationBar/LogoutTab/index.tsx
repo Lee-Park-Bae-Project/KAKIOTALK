@@ -4,7 +4,9 @@ import React, {
 import styled from 'styled-components'
 import { color } from 'styles/global'
 import Icon from 'Icon/Icon'
-import { Dialog, PopUp } from 'components'
+import {
+  Dialog, PopUp,
+} from 'components'
 import { getLogout } from 'common/request'
 import { logoutRequest } from 'modules/login'
 import { useDispatch } from 'react-redux'
@@ -44,7 +46,6 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
       {isClicked ? (
         <PopUp refs={dialogRef} onClose={handlePopUpClick}>
           <Dialog
-            dialogRef={dialogRef}
             isVisible={true}
             title='정말로 로그 아웃 하시겠습니까?'
             isHideButton={false}

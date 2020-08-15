@@ -1,8 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
-import { ApiChat } from 'types'
 import { APIs } from '@kakio/common'
-import DateDivider from 'components/DateDivider'
+import { Loader } from 'components'
 import ChatBox from 'components/ChatBox'
 import { loadMoreRequest } from 'modules/chat'
 import {
@@ -36,7 +34,6 @@ const ChatList: React.FC<Props> = ({
   firstChat,
   chatContainerRef,
 }) => {
-  const dateToday = useRef<string>('')
   const dispatch = useDispatch()
   const chatState = useSelector((state: RootState) => state.chat)
   const root = useRef<HTMLDivElement>(null)
@@ -68,7 +65,7 @@ const ChatList: React.FC<Props> = ({
     const target = chatContainerRef.current
     const { chats } = chatState.data[roomUuid]
 
-    if (!prevChats) return
+    if (!prevChats || !prevChats.chats.length) return
     // 다른 사람이 채팅 보낸 경우
     if (prevChats.chats[0].metaInfo.sender.uuid !== userUuid) return
     // load more 했을 경우
@@ -82,19 +79,16 @@ const ChatList: React.FC<Props> = ({
   }, [chatState.data[roomUuid]])
 
   if (!chatState.data[roomUuid]) {
-    return <div>loading</div>
-  }
-  if (!firstChat) {
-    return <div>loading</div>
+    return <Loader/>
   }
   const { chats } = chatState.data[roomUuid]
 
   return (
     <S.Container>
-      { chatState.isLoading && <div>loading...</div> }
+      { chatState.isLoading && <Loader/> }
       <S.Content ref={root}>
         {
-            chats.map((chat, idx) => (
+            firstChat && chats.map((chat, idx) => (
               <div key={chat.uuid} ref={idx === chats.length - 1 ? lastTop : null}>
                 <ChatBox
                   chat={chat}

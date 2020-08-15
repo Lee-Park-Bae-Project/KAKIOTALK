@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
-import * as request from 'common/request'
+import { useEffect } from 'react'
 import { url } from 'common/constants'
-
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'modules'

@@ -24,8 +24,6 @@ interface Props{
   onCancel?: () => void;
   /** 확인 버튼 클릭 핸들러 */
   onConfirm?: () => void;
-  /** Dialog Ref */
-  dialogRef: React.MutableRefObject<null>
 }
 
 /**
@@ -44,7 +42,6 @@ const Dialog: FC<Props> = ({
   confirmText,
   onCancel,
   onConfirm,
-  dialogRef,
 }) => {
   if (!isVisible) {
     return null
@@ -52,7 +49,7 @@ const Dialog: FC<Props> = ({
   return (
   <S.Container>
     <S.ContentWrapper>
-      <S.Content ref={dialogRef}>
+      <S.Content>
         {title && <S.Title>{title}</S.Title>}
         {description && <S.Description>{description}</S.Description>}
         {children}
@@ -72,11 +69,8 @@ const Dialog: FC<Props> = ({
             />
           </ButtonGroup>
         )}
-
       </S.Content>
-
     </S.ContentWrapper>
-
   </S.Container>
   )
 }

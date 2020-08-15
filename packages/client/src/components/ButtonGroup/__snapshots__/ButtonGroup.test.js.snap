@@ -15,7 +15,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-htpNat",
             "isStatic": false,
-            "lastClassName": "gkFfxL",
+            "lastClassName": "eCJPJL",
             "rules": Array [
               "
   display: flex;
@@ -30,6 +30,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
   justify-content: ",
               [Function],
               ";
+  margin:1rem;
 ",
             ],
           },
@@ -49,7 +50,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
       right={false}
     >
       <div
-        className="sc-bwzfXH sc-htpNat gkFfxL"
+        className="sc-bwzfXH sc-htpNat eCJPJL"
         direction="row"
       >
         <Button
@@ -74,7 +75,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
                     "componentStyle": ComponentStyle {
                       "componentId": "sc-bdVaJa",
                       "isStatic": false,
-                      "lastClassName": "eknSne",
+                      "lastClassName": "yPZVg",
                       "rules": Array [
                         "
   width: 5rem;
@@ -86,7 +87,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
                         "0.8rem",
                         ";
   font-weight: ",
-                        "600",
+                        "400",
                         ";
 
   margin: 0.5rem;
@@ -130,7 +131,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
                 type="button"
               >
                 <button
-                  className="sc-bdVaJa eknSne"
+                  className="sc-bdVaJa yPZVg"
                   type="button"
                 >
                   confirm
@@ -161,7 +162,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
                     "componentStyle": ComponentStyle {
                       "componentId": "sc-bdVaJa",
                       "isStatic": false,
-                      "lastClassName": "eknSne",
+                      "lastClassName": "yPZVg",
                       "rules": Array [
                         "
   width: 5rem;
@@ -173,7 +174,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
                         "0.8rem",
                         ";
   font-weight: ",
-                        "600",
+                        "400",
                         ";
 
   margin: 0.5rem;
@@ -217,7 +218,7 @@ exports[`<ButtonnGroup /> matches snapshot 1`] = `
                 type="button"
               >
                 <button
-                  className="sc-bdVaJa eknSne"
+                  className="sc-bdVaJa yPZVg"
                   type="button"
                 >
                   cancel

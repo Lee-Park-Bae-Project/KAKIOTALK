@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+/* eslint-disable no-nested-ternary */
+import React from 'react'
 import List from 'system/List'
 import {
   RouteComponentProps, withRouter,
@@ -6,7 +7,7 @@ import {
 import { url } from 'common/constants'
 import * as S from 'system/Room/style'
 import {
-  Loader, RoomCard, SearchInput,
+  Loader, NoChatRoom, RoomCard, SearchInput,
 } from 'components'
 import { useSelector } from 'react-redux'
 import { RootState } from 'modules'
@@ -28,6 +29,8 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
         <S.LoaderContainer>
           <Loader/>
         </S.LoaderContainer>
+      ) : !roomState.data.length ? (
+        <NoChatRoom/>
       ) : (
         <List>
           {roomState.data

@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react'
 import * as S from 'components/GoogleSignin/styles'
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
-import { useHistory, withRouter } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { configs, url } from 'common/constants'
-import { alert } from 'common/utils'
+import GoogleLogin, {
+  GoogleLoginResponse, GoogleLoginResponseOffline,
+} from 'react-google-login'
+import {
+  useHistory, withRouter,
+} from 'react-router-dom'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
+import {
+  configs, url,
+} from 'common/constants'
 import { loginRequest } from 'modules/login'
 import { RootState } from 'modules'
+import * as AlertAction from 'modules/alert'
 
 const loginURL = configs.LOGIN_URL
 
@@ -30,7 +38,7 @@ const GoogleSignin: React.FC = () => {
     }))
   }
   const responseFail = (err: Error) => {
-    alert.error(err.message)
+    dispatch(AlertAction.error(err.message))
   }
   const responseAutoLoad = (success: boolean) => {
     console.warn(success)

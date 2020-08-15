@@ -1,7 +1,7 @@
 import React, {
   FC, Fragment, useEffect, useState,
 } from 'react'
-import List from 'system/List'
+import { List } from 'system'
 import {
   MakeChat, SearchInput, SelectedList, SelectedName,
 } from 'components'

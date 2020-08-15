@@ -6,8 +6,11 @@ import * as S from './styles'
 interface Props{
   roomName: string
   toggleSearchBar: () => void
+  toggleDrawer: () => void
 }
-const Header: React.FC<Props> = ({ roomName, toggleSearchBar }) => {
+const Header: React.FC<Props> = ({
+  roomName, toggleSearchBar, toggleDrawer,
+}) => {
   const history = useHistory()
 
   const handleBack = () => {
@@ -27,7 +30,7 @@ const Header: React.FC<Props> = ({ roomName, toggleSearchBar }) => {
             onClick={toggleSearchBar}
           />
         </div>
-        <Icon icon="Menu"/>
+        <Icon icon="Menu" onClick={toggleDrawer}/>
       </div>
     </S.Container>
   )
