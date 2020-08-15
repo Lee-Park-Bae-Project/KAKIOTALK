@@ -1,0 +1,25 @@
+name: Client Auto Stage Deploy
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Stage Deploy
+        env:
+          VERCEL_TOKEN: "${{ secrets.VERCEL_TOKEN }}"
+        run: yarn deploy:client:stage -t ${VERCEL_TOKEN}
+
+      - name: Comment PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.VERCEL_CLIENT_AUTO_DEPLOY }}
+        with:
+          msg: "🚀 Stage Deployed on [here](https://kakiotalk.junow.vercel.app)"
+          check_for_duplicate_msg: false # OPTIONAL

@@ -20,8 +20,8 @@
     "server:start": "yarn server start",
     "server:build": "yarn server build",
     "server:dev": "yarn server dev",
-    "deploy:client:stage": "vercel",
-    "deploy:client": "vercel --prod",
+    "deploy:client:stage": "vercel --confirm",
+    "deploy:client": "vercel --confirm --prod",
     "deploy:server": "yarn common:build && yarn server deploy"
   },
   "devDependencies": {
