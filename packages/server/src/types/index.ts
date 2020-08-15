@@ -11,7 +11,6 @@ export interface IDecodedUser {
 }
 
 export type Controller = (req: Request, res: Response, next: NextFunction) => any
-export type ControllerHelper = (controller: Controller) => Controller
 
 // types for socket.
 export interface SendMsg {

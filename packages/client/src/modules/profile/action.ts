@@ -1,4 +1,5 @@
 import { ApiUser } from 'types'
+import { ApiTypes } from '@kakio/common'
 
 export const GET_PROFILE_REQUEST = 'profile/GET_PROFILE' as const
 export const GET_PROFILE_SUCCESS = 'profile/GET_PROFILE_SUCCESS' as const
@@ -6,7 +7,7 @@ export const UPDATE_PROFILE_REQUEST = 'profile/UPDATE_PROFILE' as const
 export const UPDATE_PROFILE_SUCCESS = 'profile/UPDATE_PROFILE_SUCCESS' as const
 export const RESET_PROFILE = 'profile/RESET_PROFILE' as const
 export const getProfile = () => ({ type: GET_PROFILE_REQUEST })
-export const getProfileSuccess = (profile: ApiUser) => ({
+export const getProfileSuccess = (profile: ApiTypes.Profile) => ({
   type: GET_PROFILE_SUCCESS,
   payload: profile,
 })

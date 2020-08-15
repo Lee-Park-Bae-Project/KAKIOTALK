@@ -1,8 +1,10 @@
 
-import { Response } from 'express'
 import httpStatus from 'http-status'
 import uuid4 from 'uuid4'
-import { ControllerHelper } from '../types'
+import {
+  NextFunction, Request, Response,
+} from 'express'
+import { Controller } from '../types'
 
 export const response = (res:Response, data: any = {}, _code = httpStatus.OK) => {
   let result = {
@@ -32,12 +34,11 @@ export const uuid = () => {
   return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4]
 }
 
-export const controllerHelper: ControllerHelper = (controller) => async (req, res, next) => {
+export const controllerHelper = (controller: Controller) => async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = await controller(req, res, next)
     response(res, data)
   } catch (e) {
-    console.error(e)
     next(e)
   }
 }

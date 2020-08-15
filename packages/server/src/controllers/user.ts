@@ -1,15 +1,12 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
+import { ApiTypes } from '@kakio/common'
 import { response } from '../common/utils'
 import * as userService from '../services/user'
 import * as httpError from '../common/error'
 
-const getMyProfile = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getMyProfile = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.decodedUser) {
       throw httpError.UNAUTHORIZED
@@ -22,18 +19,21 @@ const getMyProfile = async (
     const {
       uuid, email, name, statusMessage, imageUrl,
     } = user
-    const myProfile = {
+
+    const myProfile: ApiTypes.Profile = {
       uuid,
       email,
       name,
       statusMessage,
       imageUrl,
     }
+
     response(res, myProfile)
   } catch (e) {
     next(e)
   }
 }
+
 const updateProfile = async (
   req: Request,
   res: Response,
@@ -64,6 +64,4 @@ const updateProfile = async (
     next(e)
   }
 }
-export {
-  getMyProfile, updateProfile,
-}
+export { updateProfile }

@@ -7,3 +7,9 @@ export interface LeaveRoom {
   roomUuid: string
   userUuid: string
 }
+
+export interface Profile
+  extends Pick<
+    T.User,
+    'uuid' | 'email' | 'name' | 'statusMessage' | 'imageUrl'
+  > {}

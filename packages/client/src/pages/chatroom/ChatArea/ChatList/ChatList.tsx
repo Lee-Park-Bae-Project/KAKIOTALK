@@ -1,5 +1,5 @@
 import React from 'react'
-import { APIs } from '@kakio/common'
+import { ApiTypes } from '@kakio/common'
 import { Loader } from 'components'
 import ChatBox from 'components/ChatBox'
 import { loadMoreRequest } from 'modules/chat'
@@ -23,7 +23,7 @@ interface Props{
   userUuid: string
   roomUuid: string
   chatBottomRef: React.RefObject<HTMLDivElement>
-  firstChat: APIs.GetFirstChat | null
+  firstChat: ApiTypes.GetFirstChat | null
   chatContainerRef: React.RefObject<HTMLDivElement>
 }
 

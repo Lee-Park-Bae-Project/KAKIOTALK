@@ -1,6 +1,6 @@
 import React from 'react'
 import * as request from 'common/request'
-import { APIs } from '@kakio/common'
+import { ApiTypes } from '@kakio/common'
 import { useSelector } from 'react-redux'
 import { RootState } from 'modules'
 import ChatList from './ChatList'
@@ -20,7 +20,7 @@ const ChatArea: React.FC<Props> = ({
   userUuid,
   roomUuid,
 }) => {
-  const [firstChat, setFirstChat] = useState<APIs.GetFirstChat | null>(null)
+  const [firstChat, setFirstChat] = useState<ApiTypes.GetFirstChat | null>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatBottomRef = useRef<HTMLDivElement>(null)
   const chatState = useSelector((state: RootState) => state.chat)

@@ -19,11 +19,6 @@ module.exports = {
     ],
     'comma-style': ['error', 'last'],
     'no-trailing-spaces': 'error',
-    // "function-paren-newline": ["error", { "minItems": 3 }],
-    'object-property-newline': [
-      'error',
-      { allowAllPropertiesOnSameLine: false },
-    ],
     'no-unused-vars': 'off',
     'no-multiple-empty-lines': [
       'error',
@@ -42,9 +37,16 @@ module.exports = {
         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
       },
     ],
-    'no-duplicate-imports': 'error',
-    'object-curly-newline': ['error', { minProperties: 3 }],
-    'react/prop-types': 0,
+    // 'no-duplicate-imports': 'error',
+    // 'object-curly-newline': [
+    //   'always', { 
+    //     ObjectPattern: { "multiline": true },
+    //     ImportDeclaration: { "multiline": true },
+    //     ExportDeclaration: { "multiline": true, "minProperties": 1 }
+    //   },
+    // ],
+    // 'object-property-newline': 0,
+    // 'react/prop-types': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     'import/no-extraneous-dependencies': 0,
     semi: ['error', 'never'],
@@ -58,7 +60,6 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    // 'eol-last': ['error', 'always'],
     'import/no-unresolved': 'off',
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-unused-vars': 0,

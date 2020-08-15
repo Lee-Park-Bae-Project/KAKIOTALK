@@ -13,7 +13,6 @@ import {
 } from 'react-redux'
 import { Loader } from 'components'
 import { RootState } from 'modules'
-import { APIs } from '@kakio/common'
 import { joinRooms } from 'modules/socket'
 import * as S from './style'
 import ChatArea from './ChatArea'

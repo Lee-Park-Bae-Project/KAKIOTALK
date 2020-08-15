@@ -1,5 +1,5 @@
 import * as Models from './modelTypes'
 import * as Socket from './socket'
-import * as APIs from './apiTypes'
+import * as ApiTypes from './apiTypes'
 
-export { Models, Socket, APIs }
+export { Models, Socket, ApiTypes }
