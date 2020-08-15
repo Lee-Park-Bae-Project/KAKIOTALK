@@ -53,7 +53,6 @@ const AddFriendTab: FC<AddFriendProp> = ({ size = '1.5rem' }) => {
             confirmText='확인'
             onCancel={handlePopUpClick}
             onConfirm={onConfirm}
-            dialogRef={dialogRef}
           >
             <SearchInput
               value={email}

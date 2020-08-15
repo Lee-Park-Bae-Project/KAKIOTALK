@@ -1,9 +1,10 @@
 import * as Action from 'modules/room/action'
 import { Models } from '@kakio/common'
 
+export type RoomData = Omit<Models.Room, 'id'>
 export interface RoomState {
-  isLoading: boolean;
-  data: Omit<Models.Room, 'id'>[];
+  isLoading: boolean
+  data: RoomData[]
 }
 
 export type RoomAction =
@@ -12,4 +13,5 @@ export type RoomAction =
 | ReturnType<typeof Action.getRoomFailure>
 | ReturnType<typeof Action.makeRoomRequest>
 | ReturnType<typeof Action.resetRoom>
+| ReturnType<typeof Action.leaveRoomSuccess>
 

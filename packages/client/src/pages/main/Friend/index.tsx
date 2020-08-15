@@ -1,7 +1,11 @@
-import React, { FC, Fragment } from 'react'
-import List from 'system/List'
+import React, {
+  FC, Fragment, useEffect,
+} from 'react'
+import { List } from 'system'
 import Hr from 'atoms/Hr'
-import { SearchInput, UserCard } from 'components'
+import {
+  SearchInput, UserCard,
+} from 'components'
 import { SimpleUserType } from 'types'
 import * as S from 'system/Room/style'
 import { useSelector } from 'react-redux'

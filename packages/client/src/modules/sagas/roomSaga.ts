@@ -1,5 +1,5 @@
 import {
-  call, getContext, put, spawn, takeEvery,
+  call, put, takeEvery,
 } from 'redux-saga/effects'
 
 import {
@@ -8,22 +8,25 @@ import {
   getRoomSuccess,
   MAKE_ROOM_REQUEST,
   makeRoomRequest,
-
 } from 'modules/room/action'
 
 import * as request from 'common/request'
 import { url } from 'common/constants'
-import { Models } from '@kakio/common'
+import {
+  APIs, Models,
+} from '@kakio/common'
+
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'modules/socket'
+import { unwrapPromise } from 'types'
 import { push } from '../../common/utils'
 
 function* room() {
   try {
-    const response: AxiosResponse<request.ResponseType<Models.Room[]>> = yield call(request.getRooms)
-    const roomUuids = response.data.data.map((v) => v.uuid)
-    joinRooms({ roomUuids })
-    yield put(getRoomSuccess(response.data.data))
+    const data: unwrapPromise<typeof request.getRooms> = yield call(request.getRooms)
+    const roomUuids = data.map((v) => v.uuid)
+    yield put(joinRooms({ roomUuids }))
+    yield put(getRoomSuccess(data))
   } catch (e) {
     yield put(getRoomFailure(e.message))
   }
@@ -36,11 +39,11 @@ interface RoomReturnType{
 type roomIdType = AxiosResponse<request.ResponseType<RoomReturnType>>
 function* makeRoomSaga({ payload }: ReturnType<typeof makeRoomRequest>) {
   try {
-    const response: roomIdType = yield call(request.makeRoomRequest, payload)
-    const roomUuids = response.data.data.rooms.map((v) => v.uuid)
+    const response = yield call(request.makeRoomRequest, payload)
+    const roomUuids = response.rooms.map((v: any) => v.uuid)
     joinRooms({ roomUuids })
-    yield put(getRoomSuccess(response.data.data.rooms))
-    yield call(push, `${url.room}/${response.data.data.roomUuid}`)
+    yield put(getRoomSuccess(response.rooms))
+    yield call(push, `${url.room}/${response.roomUuid}`)
   } catch (e) {
     yield put(getRoomFailure(e.message))
   }

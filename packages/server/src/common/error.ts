@@ -64,3 +64,11 @@ export const ROOM_NOT_MADE = _he(_code.NOT_FOUND, '방이 만들어지지 않았
  * 방에 유저를 추가 할 수 없습니다.
  */
 export const CANNOT_ADD_ROOM_PARTICIPANT = _he(_code.BAD_REQUEST, '잘못된 요청입니다.')
+
+/**
+ * NOT FOUND (406)
+ * @message
+ * 잘못된 요청입니다.
+ */
+export const CAN_NOT_BE_DONE = _he(_code.NOT_ACCEPTABLE, '요청을 완료하지 못했습니다.')
+

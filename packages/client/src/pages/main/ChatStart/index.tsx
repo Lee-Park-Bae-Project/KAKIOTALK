@@ -1,7 +1,7 @@
 import React, {
   FC, Fragment, useEffect, useState,
 } from 'react'
-import List from 'system/List'
+import { List } from 'system'
 import {
   MakeChat, SearchInput, SelectedList, SelectedName,
 } from 'components'
@@ -35,7 +35,6 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   const friendKeyword = useInput('')
 
   const handleFriendToAdd = (uuid: string, name: string) => {
-    console.log(isCheck)
     if (selectedUser.some((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
       updateList(selectedUser.filter((item) => item.uuid !== uuid))
@@ -79,7 +78,6 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
                   imageUrl={imageUrl}
                   handleFriendToAdd={handleFriendToAdd}
                   isCheck={selectedUser.filter((user) => user.uuid === uuid).length > 0}
-
                 />
           ))) : (
         <h5> 친구를 추가해 보세요!</h5>

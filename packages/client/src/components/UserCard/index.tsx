@@ -4,7 +4,7 @@ import React, {
 import * as S from 'components/UserCard/styles'
 import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
-import Profile from 'system/Profile'
+import { Profile } from 'system'
 import { useOutsideClick } from 'hooks'
 
 interface UserCardProp {

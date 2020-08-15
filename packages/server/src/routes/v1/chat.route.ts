@@ -19,6 +19,6 @@ router.get('/first-chat/:roomUuid', getFirstChat)
 router.get('/last-chat/:roomUuid', getLastChat)
 router.get('/room/:roomId?', getRoom)
 router.post('/:roomUuid', addMessage)
-
+router.get('/makeRoom', makeRoom)
 export default router
 

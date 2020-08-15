@@ -5,6 +5,10 @@ import {
 } from 'styles/global'
 
 export const Container = styled(Flex)`
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 `
 
 export const ContentWrapper = styled.div`
@@ -22,6 +26,8 @@ export const Content = styled(Flex)`
   max-height: 40rem;
   height: fit-content;
   padding: 2rem;
+
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 `
 
 export const Title = styled.p`

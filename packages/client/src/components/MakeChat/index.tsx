@@ -32,7 +32,7 @@ const MakeChat: FC<Props> = ({
   }
 
   return (
-    <S.Container IsCheck = {isCheck}>
+    <S.Container >
       <S.UserCardContainer>
         <TextIcon
           icon='Account'
@@ -42,8 +42,8 @@ const MakeChat: FC<Props> = ({
           textSize="15px"
         />
         </S.UserCardContainer>
-      <S.Input type="checkbox" onClick={handleFriendToAddClick} IsCheck = {isCheck}/>
-      <S.Checkmark IsCheck = {isCheck}/>
+      <S.Input type="checkbox" onClick={handleFriendToAddClick} checked = {isCheck}/>
+
     </S.Container>
   )
 }

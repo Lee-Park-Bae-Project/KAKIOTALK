@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ApiChat } from 'types'
 import { APIs } from '@kakio/common'
-import DateDivider from 'components/DateDivider'
+import { Loader } from 'components'
 import ChatBox from 'components/ChatBox'
 import { loadMoreRequest } from 'modules/chat'
 import {
@@ -69,7 +69,6 @@ const ChatList: React.FC<Props> = ({
     const { chats } = chatState.data[roomUuid]
 
     if (!prevChats || !prevChats.chats.length) return
-
     // 다른 사람이 채팅 보낸 경우
     if (prevChats.chats[0].metaInfo.sender.uuid !== userUuid) return
 
@@ -84,14 +83,14 @@ const ChatList: React.FC<Props> = ({
     target.scrollTop = target.scrollHeight
   }, [chatState.data[roomUuid]])
 
-  if (!prevChats || !firstChat) {
-    return null
+  if (!chatState.data[roomUuid]) {
+    return <Loader/>
   }
-
   const { chats } = chatState.data[roomUuid]
+
   return (
     <S.Container>
-      { chatState.isLoading && null }
+      { chatState.isLoading && <Loader/> }
       <S.Content ref={root}>
         {
             firstChat && chats.map((chat, idx) => (

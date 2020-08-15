@@ -5,7 +5,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
   lastMessage="hihi"
   lastModified="2020-04-25 22:13:52"
   numOfNewMessages={3}
-  userList={
+  participantsName={
     Array [
       "a",
       "s",
@@ -128,19 +128,54 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                     <Icon
                       icon="Person"
                     >
-                      <ForwardRef(SvgPerson)
-                        fill="currentColor"
-                        height="2rem"
-                        width="2rem"
-                      >
-                        <svg
-                          fill="currentColor"
-                          height="2rem"
-                          width="2rem"
+                      <styled.div>
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-gZMcBi",
+                                "isStatic": false,
+                                "lastClassName": "jwOYIq",
+                                "rules": Array [
+                                  "
+    cursor: pointer;
+    display: flex;
+  ",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-gZMcBi",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
                         >
-                          person.svg
-                        </svg>
-                      </ForwardRef(SvgPerson)>
+                          <div
+                            className="sc-gZMcBi jwOYIq"
+                          >
+                            <ForwardRef(SvgPerson)
+                              fill="currentColor"
+                              height="2rem"
+                              width="2rem"
+                            >
+                              <svg
+                                fill="currentColor"
+                                height="2rem"
+                                width="2rem"
+                              >
+                                person.svg
+                              </svg>
+                            </ForwardRef(SvgPerson)>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
                     </Icon>
                   </div>
                 </StyledComponent>
@@ -223,7 +258,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                                     "componentStyle": ComponentStyle {
                                       "componentId": "sc-bZQynM",
                                       "isStatic": false,
-                                      "lastClassName": "ierfGz",
+                                      "lastClassName": "fuzFHJ",
                                       "rules": Array [
                                         "
   text-overflow: ellipsis;
@@ -233,7 +268,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
   min-width: 0;
   display: block;
   font-weight: ",
-                                        "800",
+                                        "600",
                                         ";
 ",
                                       ],
@@ -251,9 +286,12 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-bZQynM ierfGz"
+                                  className="sc-bZQynM fuzFHJ"
                                 >
-                                  a, s, d, c
+                                  a
+                                  s
+                                  d
+                                  c
                                 </span>
                               </StyledComponent>
                             </styled.span>
@@ -360,7 +398,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "exgQnf",
+                  "lastClassName": "fkCQvy",
                   "rules": Array [
                     "
   display: flex;
@@ -376,7 +414,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
     ",
                     [Function],
                     ";
-  }  
+  } 
 ",
                   ],
                 },
@@ -395,7 +433,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-bdVaJa sc-dnqmqq exgQnf"
+              className="sc-bdVaJa sc-dnqmqq fkCQvy"
             >
               <styled.span>
                 <StyledComponent
@@ -442,9 +480,9 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-gZMcBi",
+                          "componentId": "sc-gqjmRU",
                           "isStatic": false,
-                          "lastClassName": "iFUJoV",
+                          "lastClassName": "jRtqYc",
                           "rules": Array [
                             "
     display: flex;
@@ -466,7 +504,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                             "#FEFFFF",
                             ";
     font-weight: ",
-                            "600",
+                            "400",
                             ";
   ",
                           ],
@@ -474,7 +512,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                         "displayName": "styled.div",
                         "foldedComponentIds": Array [],
                         "render": [Function],
-                        "styledComponentId": "sc-gZMcBi",
+                        "styledComponentId": "sc-gqjmRU",
                         "target": "div",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -484,7 +522,7 @@ exports[`<RoomCard/> matches snapshots 1`] = `
                     forwardedRef={null}
                   >
                     <div
-                      className="sc-gZMcBi iFUJoV"
+                      className="sc-gqjmRU jRtqYc"
                     >
                       3
                     </div>

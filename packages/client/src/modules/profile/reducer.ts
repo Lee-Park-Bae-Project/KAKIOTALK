@@ -1,8 +1,6 @@
 import * as Action from 'modules/profile/action'
 import { ProfileAction } from 'modules/profile/types'
-import { Models } from '@kakio/common'
-
-type UserState = Pick<Models.User, 'uuid' | 'email' | 'statusMessage' | 'name' | 'imageUrl'>
+import { UserState } from './types'
 
 const initialState: UserState = {
   uuid: '',

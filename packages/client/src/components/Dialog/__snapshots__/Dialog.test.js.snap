@@ -19,7 +19,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-bwzfXH",
             "isStatic": false,
-            "lastClassName": "fATUcp",
+            "lastClassName": "bTpMkn",
             "rules": Array [
               "
   display: flex;
@@ -28,7 +28,10 @@ exports[`<Dialog/> matches snapshot 1`] = `
   align-items: center;
 ",
               "
-
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 ",
             ],
           },
@@ -47,7 +50,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-bdVaJa sc-bwzfXH fATUcp"
+        className="sc-bdVaJa sc-bwzfXH bTpMkn"
       >
         <styled.div>
           <StyledComponent
@@ -58,15 +61,12 @@ exports[`<Dialog/> matches snapshot 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-htpNat",
                   "isStatic": false,
-                  "lastClassName": "kCsuXH",
+                  "lastClassName": "cnbCtX",
                   "rules": Array [
                     "
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 ",
                   ],
                 },
@@ -83,48 +83,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-htpNat kCsuXH"
-            />
-          </StyledComponent>
-        </styled.div>
-        <styled.div>
-          <StyledComponent
-            forwardedComponent={
-              Object {
-                "$$typeof": Symbol(react.forward_ref),
-                "attrs": Array [],
-                "componentStyle": ComponentStyle {
-                  "componentId": "sc-bxivhb",
-                  "isStatic": false,
-                  "lastClassName": "ljdJbk",
-                  "rules": Array [
-                    "
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-",
-                  ],
-                },
-                "displayName": "styled.div",
-                "foldedComponentIds": Array [],
-                "render": [Function],
-                "styledComponentId": "sc-bxivhb",
-                "target": "div",
-                "toString": [Function],
-                "warnTooManyClasses": [Function],
-                "withComponent": [Function],
-              }
-            }
-            forwardedRef={null}
-          >
-            <div
-              className="sc-bxivhb ljdJbk"
+              className="sc-htpNat cnbCtX"
             >
               <Styled(styled.div)>
                 <StyledComponent
@@ -133,9 +92,9 @@ exports[`<Dialog/> matches snapshot 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-ifAKCX",
+                        "componentId": "sc-bxivhb",
                         "isStatic": false,
-                        "lastClassName": "fopSWI",
+                        "lastClassName": "gmVLnA",
                         "rules": Array [
                           "
   display: flex;
@@ -145,10 +104,13 @@ exports[`<Dialog/> matches snapshot 1`] = `
 ",
                           "
   flex-direction: column;
+  border-radius:1rem;
   
   background-color: white;
   width: 20rem;
   padding: 2rem;
+
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 ",
                         ],
                       },
@@ -157,7 +119,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                         "sc-bdVaJa",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-ifAKCX",
+                      "styledComponentId": "sc-bxivhb",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -167,7 +129,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-bdVaJa sc-ifAKCX fopSWI"
+                    className="sc-bdVaJa sc-bxivhb gmVLnA"
                   >
                     <styled.p>
                       <StyledComponent
@@ -176,9 +138,9 @@ exports[`<Dialog/> matches snapshot 1`] = `
                             "$$typeof": Symbol(react.forward_ref),
                             "attrs": Array [],
                             "componentStyle": ComponentStyle {
-                              "componentId": "sc-EHOje",
+                              "componentId": "sc-ifAKCX",
                               "isStatic": false,
-                              "lastClassName": "dNfnXd",
+                              "lastClassName": "YleXk",
                               "rules": Array [
                                 "
   font-size: ",
@@ -188,7 +150,52 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                 "#4B4B4B",
                                 ";
   font-weight: ",
-                                "800",
+                                "600",
+                                ";
+  margin-right: auto;
+  padding:1rem;
+",
+                              ],
+                            },
+                            "displayName": "styled.p",
+                            "foldedComponentIds": Array [],
+                            "render": [Function],
+                            "styledComponentId": "sc-ifAKCX",
+                            "target": "p",
+                            "toString": [Function],
+                            "warnTooManyClasses": [Function],
+                            "withComponent": [Function],
+                          }
+                        }
+                        forwardedRef={null}
+                      >
+                        <p
+                          className="sc-ifAKCX YleXk"
+                        >
+                          this is title
+                        </p>
+                      </StyledComponent>
+                    </styled.p>
+                    <styled.p>
+                      <StyledComponent
+                        forwardedComponent={
+                          Object {
+                            "$$typeof": Symbol(react.forward_ref),
+                            "attrs": Array [],
+                            "componentStyle": ComponentStyle {
+                              "componentId": "sc-EHOje",
+                              "isStatic": false,
+                              "lastClassName": "kURyIg",
+                              "rules": Array [
+                                "
+  font-size: ",
+                                "1rem",
+                                ";
+  color: ",
+                                "#4B4B4B",
+                                ";
+  font-weight: ",
+                                "400",
                                 ";
   margin-right: auto;
 ",
@@ -207,51 +214,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                         forwardedRef={null}
                       >
                         <p
-                          className="sc-EHOje dNfnXd"
-                        >
-                          this is title
-                        </p>
-                      </StyledComponent>
-                    </styled.p>
-                    <styled.p>
-                      <StyledComponent
-                        forwardedComponent={
-                          Object {
-                            "$$typeof": Symbol(react.forward_ref),
-                            "attrs": Array [],
-                            "componentStyle": ComponentStyle {
-                              "componentId": "sc-bZQynM",
-                              "isStatic": false,
-                              "lastClassName": "bOBsNY",
-                              "rules": Array [
-                                "
-  font-size: ",
-                                "1rem",
-                                ";
-  color: ",
-                                "#4B4B4B",
-                                ";
-  font-weight: ",
-                                "600",
-                                ";
-  margin-right: auto;
-",
-                              ],
-                            },
-                            "displayName": "styled.p",
-                            "foldedComponentIds": Array [],
-                            "render": [Function],
-                            "styledComponentId": "sc-bZQynM",
-                            "target": "p",
-                            "toString": [Function],
-                            "warnTooManyClasses": [Function],
-                            "withComponent": [Function],
-                          }
-                        }
-                        forwardedRef={null}
-                      >
-                        <p
-                          className="sc-bZQynM bOBsNY"
+                          className="sc-EHOje kURyIg"
                         >
                           this is description
                         </p>
@@ -271,9 +234,9 @@ exports[`<Dialog/> matches snapshot 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-htoDjs",
+                                "componentId": "sc-gzVnrw",
                                 "isStatic": false,
-                                "lastClassName": "OoopI",
+                                "lastClassName": "iqggKt",
                                 "rules": Array [
                                   "
   display: flex;
@@ -288,6 +251,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
   justify-content: ",
                                   [Function],
                                   ";
+  margin:1rem;
 ",
                                 ],
                               },
@@ -296,7 +260,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                 "sc-bdVaJa",
                               ],
                               "render": [Function],
-                              "styledComponentId": "sc-htoDjs",
+                              "styledComponentId": "sc-gzVnrw",
                               "target": "div",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -307,7 +271,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                           right={true}
                         >
                           <div
-                            className="sc-bdVaJa sc-htoDjs OoopI"
+                            className="sc-bdVaJa sc-gzVnrw iqggKt"
                             direction="row"
                           >
                             <Button
@@ -331,9 +295,9 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-gzVnrw",
+                                          "componentId": "sc-bZQynM",
                                           "isStatic": false,
-                                          "lastClassName": "jyyXun",
+                                          "lastClassName": "cUkGfo",
                                           "rules": Array [
                                             "
   width: 5rem;
@@ -345,7 +309,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                             "0.8rem",
                                             ";
   font-weight: ",
-                                            "600",
+                                            "400",
                                             ";
 
   margin: 0.5rem;
@@ -377,7 +341,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                         "displayName": "styled.button",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-gzVnrw",
+                                        "styledComponentId": "sc-bZQynM",
                                         "target": "button",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -389,7 +353,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                     type="button"
                                   >
                                     <button
-                                      className="sc-gzVnrw hcBSYu"
+                                      className="sc-bZQynM haAQrh"
                                       type="button"
                                     >
                                       confirm
@@ -419,9 +383,9 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-gzVnrw",
+                                          "componentId": "sc-bZQynM",
                                           "isStatic": false,
-                                          "lastClassName": "jyyXun",
+                                          "lastClassName": "cUkGfo",
                                           "rules": Array [
                                             "
   width: 5rem;
@@ -433,7 +397,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                             "0.8rem",
                                             ";
   font-weight: ",
-                                            "600",
+                                            "400",
                                             ";
 
   margin: 0.5rem;
@@ -465,7 +429,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                         "displayName": "styled.button",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-gzVnrw",
+                                        "styledComponentId": "sc-bZQynM",
                                         "target": "button",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -477,7 +441,7 @@ exports[`<Dialog/> matches snapshot 1`] = `
                                     type="button"
                                   >
                                     <button
-                                      className="sc-gzVnrw jyyXun"
+                                      className="sc-bZQynM cUkGfo"
                                       type="button"
                                     >
                                       cancel

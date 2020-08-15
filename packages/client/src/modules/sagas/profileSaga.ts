@@ -4,22 +4,23 @@ import {
 import * as Action from 'modules/profile/action'
 import * as request from 'common/request'
 import { alert } from 'common/utils'
+import { unwrapPromise } from 'types'
 
 function* getProfileSaga() {
   try {
-    const response = yield call(request.getProfile)
-    yield put(Action.getProfileSuccess(response.data.data))
+    const data: unwrapPromise<typeof request.getProfile> = yield call(request.getProfile)
+    yield put(Action.getProfileSuccess(data))
   } catch (e) {
-    alert.error(e.response.data.data.message)
+    alert.error(e.message)
   }
 }
 
 function* updateProfileSaga({ payload }: ReturnType<typeof Action.updateProfileRequest>) {
   try {
-    const response = yield call(request.updateProfile, payload)
-    yield put(Action.updateProfielSuccess(response.data.data))
+    const data: unwrapPromise<typeof request.updateProfile> = yield call(request.updateProfile, payload)
+    yield put(Action.updateProfielSuccess(data))
   } catch (e) {
-    alert.error(e.response.data.data.message)
+    alert.error(e.message)
   }
 }
 export default function* profileSaga() {

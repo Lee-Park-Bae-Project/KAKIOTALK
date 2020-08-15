@@ -96,7 +96,7 @@ const Profile: FC<Prop> = ({
   }
   const onChatClick = () => {
     const {
-      uuid, name,
+      uuid: userUuid, name: userName,
     } = myProfile
     dispatch(makeRoomRequest(selectedList.concat({
       uuid, name,

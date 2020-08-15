@@ -35,6 +35,16 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
       }
     }
 
+    case Action.LEAVE_ROOM_SUCCESS: {
+      const {
+        roomUuid, userUuid,
+      } = action.payload
+      return {
+        ...state,
+        data: state.data.filter((v) => v.uuid !== roomUuid),
+      }
+    }
+
     default: return state
   }
 }

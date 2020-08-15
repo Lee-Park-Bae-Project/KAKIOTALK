@@ -5,17 +5,14 @@ import RoomCard from 'components/RoomCard'
 
 // faker.locale = 'ko';
 describe('<RoomCard/>', () => {
-  const userList = ['a',
-    's',
-    'd',
-    'c']
+  const participantsName = ['a', 's', 'd', 'c']
   const lastMessage = 'hihi'
   const lastModified = '2020-04-25 22:13:52'
 
   it('matches snapshots', () => {
     const wrapper = mount(
       <RoomCard
-        userList={userList}
+        participantsName={participantsName}
         lastMessage={lastMessage}
         lastModified={lastModified}
         numOfNewMessages={3}
