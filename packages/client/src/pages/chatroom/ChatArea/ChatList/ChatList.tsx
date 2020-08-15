@@ -1,6 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
-import { ApiChat } from 'types'
 import { APIs } from '@kakio/common'
 import { Loader } from 'components'
 import ChatBox from 'components/ChatBox'
@@ -36,7 +34,6 @@ const ChatList: React.FC<Props> = ({
   firstChat,
   chatContainerRef,
 }) => {
-  const dateToday = useRef<string>('')
   const dispatch = useDispatch()
   const chatState = useSelector((state: RootState) => state.chat)
   const root = useRef<HTMLDivElement>(null)

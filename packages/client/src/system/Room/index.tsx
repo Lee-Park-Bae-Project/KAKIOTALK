@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { Fragment } from 'react'
+import React from 'react'
 import List from 'system/List'
 import {
   RouteComponentProps, withRouter,

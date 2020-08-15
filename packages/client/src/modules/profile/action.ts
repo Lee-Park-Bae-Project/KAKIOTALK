@@ -1,4 +1,3 @@
-import { Models } from '@kakio/common'
 import { ApiUser } from 'types'
 
 export const GET_PROFILE_REQUEST = 'profile/GET_PROFILE' as const

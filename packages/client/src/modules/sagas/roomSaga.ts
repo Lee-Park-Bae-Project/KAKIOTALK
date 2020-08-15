@@ -12,9 +12,7 @@ import {
 
 import * as request from 'common/request'
 import { url } from 'common/constants'
-import {
-  APIs, Models,
-} from '@kakio/common'
+import { Models } from '@kakio/common'
 
 import { AxiosResponse } from 'axios'
 import { joinRooms } from 'modules/socket'

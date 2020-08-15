@@ -1,11 +1,9 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
-import createError from 'http-errors'
-import {
-  message, response,
-} from '../common/utils'
+import { response } from '../common/utils'
 import * as userService from '../services/user'
+import * as httpError from '../common/error'
 
 const getMyProfile = async (
   req: Request,
@@ -14,11 +12,13 @@ const getMyProfile = async (
 ) => {
   try {
     if (!req.decodedUser) {
-      next(createError(401, message.LOGIN_REQUIRED))
-      return
+      throw httpError.UNAUTHORIZED
     }
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
-    if (!user) throw createError(401, message.INVALID_GOOGLE_ID)
+
+    if (!user) {
+      throw httpError.INVALID_GOOGLE_ID
+    }
     const {
       uuid, email, name, statusMessage, imageUrl,
     } = user
@@ -41,8 +41,7 @@ const updateProfile = async (
 ) => {
   try {
     if (!req.decodedUser) {
-      next(createError(401, message.LOGIN_REQUIRED))
-      return
+      throw httpError.UNAUTHORIZED
     }
     await userService.updateProfile(
       req.decodedUser.googleId,
@@ -52,7 +51,9 @@ const updateProfile = async (
     const updatedUser = await userService.findByGoogleId(
       req.decodedUser.googleId
     )
-    if (!updatedUser) throw createError(401, message.INVALID_GOOGLE_ID)
+    if (!updatedUser) {
+      throw httpError.INVALID_GOOGLE_ID
+    }
     const {
       name, uuid, email, statusMessage, imageUrl,
     } = updatedUser

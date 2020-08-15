@@ -12,9 +12,9 @@ import {
 import {
   configs, url,
 } from 'common/constants'
-import { alert } from 'common/utils'
 import { loginRequest } from 'modules/login'
 import { RootState } from 'modules'
+import * as AlertAction from 'modules/alert'
 
 const loginURL = configs.NODE_ENV_VAR === 'production' ? configs.LOGIN_URL_PRODUCT : configs.LOGIN_URL
 
@@ -38,7 +38,7 @@ const GoogleSignin: React.FC = () => {
     }))
   }
   const responseFail = (err: Error) => {
-    alert.error(err.message)
+    dispatch(AlertAction.error(err.message))
   }
   const responseAutoLoad = (success: boolean) => {
     console.warn(success)
