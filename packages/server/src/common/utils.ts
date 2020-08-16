@@ -44,10 +44,10 @@ export const controllerHelper = (controller: Controller) => async (req: Request,
   }
 }
 
-export type ControllerCallBackType<T> = (req: Request, res: Response, next: NextFunction) => Promise<T>
+export type ControllerCallBackType = (req: Request, res: Response, next: NextFunction) => any
 export type ControllerType = (req: Request, res: Response, next: NextFunction) => void
 
-export function controllerHelperTest<T>(cb: ControllerCallBackType<T>) {
+export function controllerWrapper(cb: ControllerCallBackType) {
   const controller: ControllerType = async (req, res, next) => {
     try {
       const data = await cb(req, res, next)

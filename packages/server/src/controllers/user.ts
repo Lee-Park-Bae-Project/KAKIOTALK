@@ -1,31 +1,35 @@
 import { ApiTypes } from '@kakio/common'
-import { controllerHelperTest } from '../common/utils'
+import { delay } from 'bluebird'
+import { controllerWrapper } from '../common/utils'
 import * as userService from '../services/user'
 import * as httpError from '../common/error'
 
-export const getMyProfile = controllerHelperTest(async (req, res, next): Promise<ApiTypes.Profile> => {
+interface Profile {
+  name:string
+}
+export const getMyProfile = controllerWrapper(async (req, res, next) => {
   if (!req.decodedUser) {
     throw httpError.UNAUTHORIZED
   }
   const user = await userService.findByGoogleId(req.decodedUser.googleId)
-
   if (!user) {
     throw httpError.INVALID_GOOGLE_ID
   }
   const {
-    uuid, email, name, statusMessage, imageUrl, accessToken,
+    uuid, email, name, statusMessage, imageUrl,
   } = user
 
-  return {
+  const ret: ApiTypes.Profile = {
     uuid,
     email,
     name,
     statusMessage,
     imageUrl,
   }
+  return ret
 })
 
-export const updateProfile = controllerHelperTest(async (req, res, next): Promise<ApiTypes.Profile> => {
+export const updateProfile = controllerWrapper(async (req, res, next) => {
   if (!req.decodedUser) {
     throw httpError.UNAUTHORIZED
   }
@@ -42,12 +46,13 @@ export const updateProfile = controllerHelperTest(async (req, res, next): Promis
   const {
     name, uuid, email, statusMessage, imageUrl,
   } = updatedUser
-
-  return {
+  const ret: ApiTypes.Profile = {
     name,
     uuid,
     email,
     statusMessage,
     imageUrl,
   }
+  return ret
 })
+
