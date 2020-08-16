@@ -5,6 +5,7 @@ import {
   NextFunction, Request, Response,
 } from 'express'
 import { Controller } from '../types'
+import { ERROR_OCCURED } from './error'
 
 export const response = (res:Response, data: any = {}, _code = httpStatus.OK) => {
   let result = {
@@ -41,4 +42,20 @@ export const controllerHelper = (controller: Controller) => async (req: Request,
   } catch (e) {
     next(e)
   }
+}
+
+export type ControllerCallBackType<T> = (req: Request, res: Response, next: NextFunction) => Promise<T>
+export type ControllerType = (req: Request, res: Response, next: NextFunction) => void
+
+export function controllerHelperTest<T>(cb: ControllerCallBackType<T>) {
+  const controller: ControllerType = async (req, res, next) => {
+    try {
+      const data = await cb(req, res, next)
+      response(res, data)
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
+  return controller
 }
