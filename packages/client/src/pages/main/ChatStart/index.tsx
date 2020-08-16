@@ -23,13 +23,14 @@ interface Props{
   handleFriendToAdd?: (uuid: string, name: string) => void
 }
 interface ChatRoomStartContainerProp{
-  updateList: (selectList: InviteUser[]) => void
+  selectedUser: InviteUser[]
+  setSelectedUser: (selectList: InviteUser[]) => void
 }
-const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
+const ChatStart: FC<ChatRoomStartContainerProp> = ({
+  selectedUser, setSelectedUser,
+}) => {
   const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
   const dispatch = useDispatch()
-  const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
-  const [isCheck, setIsCheck] = useState<Record<string, boolean|undefined>[]>([])
 
   const { isLoggedIn } = useAuth()
   const friendKeyword = useInput('')
@@ -37,16 +38,13 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
   const handleFriendToAdd = (uuid: string, name: string) => {
     if (selectedUser.some((user) => user.uuid === uuid)) {
       setSelectedUser(selectedUser.filter((item) => item.uuid !== uuid))
-      updateList(selectedUser.filter((item) => item.uuid !== uuid))
     } else {
       setSelectedUser(selectedUser.concat({
         uuid, name,
       }))
-      updateList(selectedUser.concat({
-        uuid, name,
-      }))
     }
   }
+  const isCheck = (uuid: string) => selectedUser.filter((user) => user.uuid === uuid).length > 0
   return (
   <Fragment>
       <SelectedList>
@@ -77,7 +75,7 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({ updateList }) => {
                   name={name}
                   imageUrl={imageUrl}
                   handleFriendToAdd={handleFriendToAdd}
-                  isCheck={selectedUser.filter((user) => user.uuid === uuid).length > 0}
+                  isCheck={isCheck(uuid)}
                 />
           ))) : (
         <h5> 친구를 추가해 보세요!</h5>

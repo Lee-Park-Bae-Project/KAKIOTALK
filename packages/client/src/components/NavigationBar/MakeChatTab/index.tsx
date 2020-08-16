@@ -29,7 +29,7 @@ interface MakeChatProp{
 
 const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
   const [isClicked, setClicked] = useState(false)
-  const [selectedList, setSelectedList] = useState<InviteUser[]>([])
+  const [selectedUser, setSelectedUser] = useState<InviteUser[]>([])
   const myProfile = useSelector((state: RootState) => state.profile)
   const handlePopUpClick = () => {
     setClicked(!isClicked)
@@ -40,10 +40,10 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
       uuid, name,
     } = myProfile
 
-    dispatch(makeRoomRequest(selectedList.concat({
+    dispatch(makeRoomRequest(selectedUser.concat({
       uuid, name,
     })))
-    setSelectedList([])
+    setSelectedUser([])
     handlePopUpClick()
   }
 
@@ -64,7 +64,7 @@ const MakeChatTab: FC<MakeChatProp> = ({ size = '1.5rem' }) => {
           onCancel={handlePopUpClick}
           onConfirm={onConfirm}
           >
-          <ChatStart updateList={setSelectedList}/>
+          <ChatStart selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
           </Dialog>
         </PopUp>
       ) : null}
