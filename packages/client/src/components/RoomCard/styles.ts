@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 import Flex from 'atoms/Flex'
-import { color, weight } from 'styles/global'
+import {
+  color, weight,
+} from 'styles/global'
 
 export const grayColor = css`
   color: ${(props) => color.GRAY};
@@ -71,7 +73,8 @@ export const LastMsgWrapper = styled.div`
 export const SubInfoWrapper = styled(Flex)`
   flex-direction: column;
   align-items: flex-end;
-  flex:1
+  flex: 1;
+  padding:1rem;
   span {
     ${(props) => grayColor};
   } 
