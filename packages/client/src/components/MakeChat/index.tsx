@@ -1,9 +1,7 @@
-import React, {
-  FC, useEffect, useState,
-} from 'react'
+import React, { FC } from 'react'
 import TextIcon from 'components/TextIcon'
 import { color } from 'styles/global'
-import { InviteUser } from 'types'
+
 import * as S from './styles'
 
 interface Props{
@@ -24,13 +22,11 @@ interface Props{
 const MakeChat: FC<Props> = ({
   uuid, name, handleFriendToAdd, imageUrl, isCheck,
 }) => {
-  const [checkFriend, setCheckFriend] = useState<boolean>(false)
   const handleFriendToAddClick = () => {
     if (handleFriendToAdd) {
       handleFriendToAdd(uuid, name)
     }
   }
-
   return (
     <S.Container >
       <S.UserCardContainer>

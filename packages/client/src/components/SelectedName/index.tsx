@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
 import Icon from 'Icon/Icon'
-import Flex from 'atoms/Flex'
-import { isBoolean } from 'lodash'
 import * as S from './style'
 
   interface Props{

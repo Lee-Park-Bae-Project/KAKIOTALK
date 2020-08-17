@@ -6,7 +6,6 @@ import {
   ChatAction,
   ChatState,
 } from 'modules/chat/types'
-import { ApiChat } from 'types'
 
 const initialState: ChatState = {
   isLoading: false,
@@ -77,7 +76,7 @@ const chat = (state: ChatState = initialState, action: ChatAction) => {
     }
     case Action.LOAD_MORE_SUCCESS: {
       const {
-        roomUuid, chats, limit, offset,
+        roomUuid, chats, limit,
       } = action.payload
 
       const newState = produce(state, (draft) => {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  DependencyList, useCallback, useEffect, useRef,
+  DependencyList, useCallback, useRef,
 } from 'react'
 
 interface UseIntersectionObserver {

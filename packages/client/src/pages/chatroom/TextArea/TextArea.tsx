@@ -7,8 +7,6 @@ import React, {
 import { useDispatch } from 'react-redux'
 import { getCurTimeDBFormat } from 'common/utils'
 import { chatFromClient } from 'modules/socket'
-import { APIs } from '@kakio/common'
-import * as request from 'common/request'
 import * as S from './styles'
 
 interface Props{

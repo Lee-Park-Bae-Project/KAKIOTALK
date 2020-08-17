@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  apply, call, delay, fork, put, take,
+  apply, call, fork, put, take,
 } from 'redux-saga/effects'
 import { eventChannel } from 'redux-saga'
 import createWebSocketConnection from 'socket'

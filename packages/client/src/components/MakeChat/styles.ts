@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import Flex from 'atoms/Flex'
 import { color } from 'styles/global'
 

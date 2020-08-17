@@ -1,21 +1,17 @@
 import React, {
-  FC, Fragment, useEffect, useState,
+  FC, Fragment, useState,
 } from 'react'
 import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
 import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
-import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { updateProfileRequest } from 'modules/profile'
 import { deleteFriend } from 'modules/friends'
 import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
-import { getProfile } from 'common/request'
-import { RootState } from 'modules'
+
 import { useInput } from 'hooks'
 import * as AlertAction from 'modules/alert'
 
@@ -60,8 +56,6 @@ const Profile: FC<Prop> = ({
   const editName = useInput(name)
   const editStatusMessage = useInput(statusMessage || '')
   const dispatch = useDispatch()
-
-  const myProfile = useSelector((state: RootState) => state.profile)
 
   const [selectedList, setSelectedList] = useState([{
     uuid, name,

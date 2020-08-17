@@ -1,5 +1,5 @@
 import React, {
-  FC, Fragment, useEffect, useState,
+  FC, Fragment,
 } from 'react'
 import { List } from 'system'
 import {
@@ -8,12 +8,8 @@ import {
 import {
   InviteUser, SimpleUserType,
 } from 'types'
-import {
-  useAuth, useInput,
-} from 'hooks'
-import {
-  useDispatch, useSelector,
-} from 'react-redux'
+import { useInput } from 'hooks'
+import { useSelector } from 'react-redux'
 import { RootState } from 'modules'
 
 interface Props{
@@ -30,9 +26,7 @@ const ChatStart: FC<ChatRoomStartContainerProp> = ({
   selectedUser, setSelectedUser,
 }) => {
   const friendList: SimpleUserType[] = useSelector((state: RootState) => state.friends)
-  const dispatch = useDispatch()
 
-  const { isLoggedIn } = useAuth()
   const friendKeyword = useInput('')
 
   const handleFriendToAdd = (uuid: string, name: string) => {
