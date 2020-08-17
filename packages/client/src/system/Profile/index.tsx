@@ -174,7 +174,7 @@ const Profile: FC<Prop> = ({
           {isMyProfile ? (
             <S.ButtonWrapper >
             <TextIcon
-              icon='Edit'
+              icon={isEditMode ? 'Check' : 'Edit'}
               color={color.WHITE}
               text={isEditMode ? '저장' : '프로필 수정'}
               iconPosition='top'

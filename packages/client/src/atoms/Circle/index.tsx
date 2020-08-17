@@ -14,8 +14,8 @@ const S = { Container: styled.div`
     justify-content: center;
     width: fit-content;
     height: 1rem;
-    margin: 1rem;
-    padding: 0.1rem 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.1rem 0.3rem;
     border-radius: 2rem;
     text-align: center;
     font-size: ${fontSize.SMALL};

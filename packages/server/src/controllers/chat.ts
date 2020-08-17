@@ -70,7 +70,7 @@ export const addMessage = controllerHelper(async (req, res, next) => {
   }
 
   const data = await chatService.createChat({
-    roomParticipantsId, content, createdAt, updatedAt,
+    roomParticipantsId, content, createdAt, updatedAt, roomId: room.id,
   })
 
   return data

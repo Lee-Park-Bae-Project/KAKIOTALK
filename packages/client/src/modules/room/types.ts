@@ -14,4 +14,5 @@ export type RoomAction =
 | ReturnType<typeof Action.makeRoomRequest>
 | ReturnType<typeof Action.resetRoom>
 | ReturnType<typeof Action.leaveRoomSuccess>
+| ReturnType<typeof Action.getNewMessage>
 

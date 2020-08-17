@@ -27,6 +27,7 @@ export interface Room {
   uuid: string
   createdAt: string
   updatedAt: string
+  lastMessage: string
   participants: Pick<User, 'uuid' | 'name' | 'email' | 'statusMessage'>[]
 }
 
@@ -43,6 +44,7 @@ export interface Chat {
   id: number
   uuid: string
   roomParticipantsId: number
+  roomId: number
   content: string
   createdAt: string
   updatedAt: string

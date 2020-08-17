@@ -42,6 +42,31 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
         data: state.data.filter((v) => v.uuid !== roomUuid),
       }
     }
+    case Action.GET_NEW_MESSAGE: {
+      const {
+        roomUuid, content, updatedAt,
+      } = action.payload
+      const updatedData = state.data.map((room) => {
+        if (room.uuid === roomUuid) {
+          const {
+            uuid, createdAt, participants,
+          } = room
+          const updatedRoom = {
+            uuid,
+            createdAt,
+            participants,
+            lastMessage: content,
+            updatedAt,
+          }
+          return updatedRoom
+        }
+        return room
+      })
+      return {
+        isLoading: false,
+        data: updatedData,
+      }
+    }
 
     default: return state
   }

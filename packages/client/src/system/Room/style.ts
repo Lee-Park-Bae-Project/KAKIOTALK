@@ -20,7 +20,7 @@ border : 2px solid ${color.GRAY}
 border-radius: 2rem;
 
 `
-export const Container = styled.div`
+export const Container = styled(Flex)`
 width:100%;
 height:100%;
 `

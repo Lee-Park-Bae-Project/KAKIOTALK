@@ -22,6 +22,10 @@ module.exports = {
       onUpdate: 'cascade',
       onDelete: 'cascade',
     },
+    roomId: {
+      allowNull: false,
+      type: Sequelize.INTEGER.UNSIGNED,
+    },
     content: {
       type: Sequelize.TEXT,
       allowNull: false,

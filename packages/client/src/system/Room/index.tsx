@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react'
+import React, { useEffect } from 'react'
 import List from 'system/List'
 import {
   RouteComponentProps, withRouter,
@@ -9,14 +9,20 @@ import * as S from 'system/Room/style'
 import {
   Loader, NoChatRoom, RoomCard, SearchInput,
 } from 'components'
-import { useSelector } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
+import { getRoomRequest } from 'modules/room'
 
 const Room: React.FC<RouteComponentProps> = ({ history }) => {
   const roomKeyword = useInput('')
   const roomState = useSelector((state: RootState) => state.room)
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getRoomRequest())
+  }, [])
   return (
       <S.Container>
       <S.Header>
@@ -26,9 +32,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
         />
       </S.Header>
       {roomState.isLoading ? (
-        <S.LoaderContainer>
           <Loader/>
-        </S.LoaderContainer>
       ) : !roomState.data.length ? (
         <NoChatRoom/>
       ) : (
@@ -40,7 +44,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
                 .indexOf(roomKeyword.value.toLowerCase()) >= 0,
             ),)
             .map(({
-              uuid, participants,
+              uuid, participants, updatedAt, lastMessage,
             }) => {
               const participantsNames = participants.map((v) => v.name).join(', ')
               const onClick = () => {
@@ -50,7 +54,10 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
                 <RoomCard
                   key={uuid}
                   participantsName={participantsNames}
+                  numOfParticipants={participants.length}
                   onClick={onClick}
+                  lastModified={updatedAt}
+                  lastMessage={lastMessage}
                 />
               )
             })}

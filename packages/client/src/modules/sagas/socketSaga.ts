@@ -9,8 +9,11 @@ import {
   addChat,
   addChatOffset,
 } from 'modules/chat'
+import {
+  getNewMessage, leaveRoomSuccess,
+} from 'modules/room'
 import { ApiChat } from 'types'
-import { leaveRoomSuccess } from 'modules/room'
+
 import { url } from 'common/constants'
 import { push } from 'common/utils'
 
@@ -19,11 +22,15 @@ function createSocketChannel(socket: SocketIOClient.Socket) {
   return eventChannel((emit) => {
     const chatFromServerHandler = (newChat: ApiChat) => {
       const { uuid: roomUuid } = newChat.metaInfo.room
+      const {
+        updatedAt, content,
+      } = newChat
       emit(addChat(roomUuid, newChat))
       emit(addChatOffset({
         roomUuid,
         amount: 1,
       }))
+      emit(getNewMessage(roomUuid, content, updatedAt))
     }
 
     const leaveRoomFromServerHandler = ({

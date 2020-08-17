@@ -54,6 +54,7 @@ const LogoutTab: FC<LogoutProp> = ({ size = '1.5rem' }) => {
             confirmText='확인'
             onConfirm={confirmLogout}
             onCancel={handlePopUpClick}
+            dialogRef={dialogRef}
           ></Dialog>
         </PopUp>
       ) : null}

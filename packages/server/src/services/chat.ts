@@ -31,7 +31,12 @@ export const findAllRooms = async (userId: number) => {
           attributes: ['uuid', 'name', 'statusMessage', 'email'],
           model: models.User,
           as: ROOM_ASSOCIATION_ALIAS.RoomParticipants,
-        }],
+        },
+        {
+          model: models.Chat,
+          as: ROOM_ASSOCIATION_ALIAS.Chats,
+        },
+        ],
       }],
     }
   )
@@ -41,11 +46,12 @@ export const findAllRooms = async (userId: number) => {
   }
 
   const { rooms } = data
-
   if (!rooms) {
     throw HttpError.IDK
   }
   const preProcessed = rooms.map((room) => {
+    const { chats } = room
+    const lastMessage = chats.length > 0 ? chats[chats.length - 1].content : null
     const participants = room.participants.map((participant) => {
       const {
         uuid, name, statusMessage, email,
@@ -61,6 +67,7 @@ export const findAllRooms = async (userId: number) => {
       uuid: room.uuid,
       createdAt: room.createdAt,
       updatedAt: room.updatedAt,
+      lastMessage,
       participants,
     }
   })
@@ -151,11 +158,13 @@ const findChatById = async (id: number) => models.Chat.findOne({
 export const createChat = async ({
   roomParticipantsId,
   content,
+  roomId,
   createdAt,
   updatedAt,
 }: Omit<Models.Chat, 'id' | 'uuid' | 'sender'>) => models.Chat.create({
   roomParticipantsId,
   content,
+  roomId,
   createdAt,
   updatedAt,
 })
@@ -180,6 +189,7 @@ export const addMessage = async ({
     if (!room || !user) {
       throw new Error('no room or user')
     }
+    const roomId = room.id
     const roomParticipants = await findRoomParticipants(room.id, user.id)
     if (!roomParticipants) {
       throw new Error('no room participants')
@@ -189,6 +199,7 @@ export const addMessage = async ({
     const newChatData = await createChat({
       roomParticipantsId,
       content,
+      roomId,
       createdAt,
       updatedAt,
     })
@@ -235,7 +246,6 @@ export const makePrivateRoom = async (user) => {
   })
   return room
 }
-
 export const createRoom = async () => models.Room.create()
 
 export const makeGroupRoom = async (inviteUser, roomId) => {
