@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import * as S from 'components/RoomCard/styles'
 import Icon from 'Icon/Icon'
-import Circle from 'atoms/Circle'
 import {
   convertMillToMMDDYYYY, convertTimeForMsgFormat, getCurTimeDBFormat, getDayDiff,
 } from 'common/utils'
@@ -41,7 +40,6 @@ const RoomCard: FC<Props> = ({
     </S.RoomInfoWrapper>
     <S.SubInfoWrapper>
       <S.Time>{ dayDiffFromNow >= 1 ? convertMillToMMDDYYYY(Date.parse(lastModified)) : convertTimeForMsgFormat(lastModified)}</S.Time>
-      <Circle num={numOfNewMessages} />
     </S.SubInfoWrapper>
   </S.Container>
   )
