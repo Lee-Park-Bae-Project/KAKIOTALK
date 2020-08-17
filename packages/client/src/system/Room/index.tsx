@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react'
+import React, { useEffect } from 'react'
 import List from 'system/List'
 import {
   RouteComponentProps, withRouter,
@@ -9,14 +9,20 @@ import * as S from 'system/Room/style'
 import {
   Loader, NoChatRoom, RoomCard, SearchInput,
 } from 'components'
-import { useSelector } from 'react-redux'
+import {
+  useDispatch, useSelector,
+} from 'react-redux'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
+import { getRoomRequest } from 'modules/room'
 
 const Room: React.FC<RouteComponentProps> = ({ history }) => {
   const roomKeyword = useInput('')
   const roomState = useSelector((state: RootState) => state.room)
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getRoomRequest())
+  }, [])
   return (
       <S.Container>
       <S.Header>
