@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom'
 const S = { Container: styled.div`
     width: fit-content;
     height: fit-content;
+    padding-left: 1.5rem;
   ` }
 
 interface LogoutProp {

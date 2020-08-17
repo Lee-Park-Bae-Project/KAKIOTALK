@@ -17,6 +17,7 @@ import ChatStart from '../../../pages/main/ChatStart'
 const S = { Container: styled.div`
 width: fit-content;
 height: fit-content;
+padding-left:1.5rem;
 ` }
 interface InviteUser{
   uuid: string;

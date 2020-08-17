@@ -4,6 +4,7 @@ import FriendTab from 'components/NavigationBar/FriendTab'
 import ChatTab from 'components/NavigationBar/ChatTab'
 import AddFriendTab from 'components/NavigationBar/AddFriendTab'
 import LogoutTab from 'components/NavigationBar/LogoutTab'
+import Logo from 'components/Logo'
 import { useHistory } from 'react-router-dom'
 import { url } from 'common/constants'
 import MakeChatTab from 'components/NavigationBar/MakeChatTab'
@@ -24,6 +25,7 @@ const NavigationBar: FC = () => {
   return (
   <S.Container>
     <S.ItemWrapper>
+      <Logo size={'2rem'}/>
       <FriendTab isRouted={isRouted.friendList}/>
       <ChatTab isRouted={isRouted.chatList}/>
       <AddFriendTab/>

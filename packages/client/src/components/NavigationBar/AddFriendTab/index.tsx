@@ -1,4 +1,6 @@
-import React, { FC, useState } from 'react'
+import React, {
+  FC, useState,
+} from 'react'
 import styled from 'styled-components'
 import Flex from 'atoms/Flex'
 import { color } from 'styles/global'
@@ -12,6 +14,7 @@ import { addFriend } from 'modules/friends'
 const S = { Container: styled(Flex)`
     width: fit-content;
     height: fit-content;
+    padding-left: 1.5rem;
   ` }
 
 interface AddFriendProp {

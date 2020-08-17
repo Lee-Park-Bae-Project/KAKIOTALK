@@ -9,24 +9,21 @@ export const Container = styled.div`
 
 export const MainWrapper = styled.div`
 position:absolute;
-top:10%;
-left:3rem;
-right:0;
-height:90%;
+top:4rem;
+left: 0;
+right: 0;
+height:100%;
 `
 
 export const NavigationBarWrapper = styled.div`
-position:fixed;
-left:0%;
-height: 100%;
-width: auto;
+position: relative;
+width: 100%;
+height: auto;
+left: 0;
+right: 0;
+
 `
 
-export const Header = styled.div`
-position:fixed;
-left:3rem;
-top:0;
-`
 export const LoaderContainer = styled(Flex)`
 min-height:100vh;
 `

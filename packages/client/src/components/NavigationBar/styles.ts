@@ -5,14 +5,18 @@ import { color } from 'styles/global'
 export const Container = styled(Flex)`
   background-color: ${color.BROWN};
   justify-content: flex-start;
-  flex-direction: column;
-  height: 100%;
-  width: 3rem;
+  flex-direction: row;
+  width: 100%;
+  height: 3.7rem;
+  left: 1rem;
+  right: 1rem;
 `
 
 export const ItemWrapper = styled(Flex)`
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 10rem;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 3.7rem;
   width: 100%;
+  left: 1rem;
+  right: 1rem;  
 `
