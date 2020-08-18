@@ -20,8 +20,11 @@ export interface Friend
     'uuid' | 'email' | 'name' | 'statusMessage' | 'imageUrl'
   > {}
 
-export interface Room
-  extends Pick<T.Room, 'uuid' | 'createdAt' | 'updatedAt' | 'lastMessage'> {
+export interface GetRoom {
+  uuid: string
+  createdAt: string
+  updatedAt: string
+  lastMessage: string | null
   participants: {
     uuid: string
     name: string

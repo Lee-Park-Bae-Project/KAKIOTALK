@@ -75,7 +75,7 @@ export const getLogin = (args: GetLoginArgs) => Axios({
   data: args,
 })
 
-export const getRooms = () => Axios<ApiTypes.Room[]>({
+export const getRooms = () => Axios<ApiTypes.GetRoom[]>({
   method: 'GET',
   url: 'chat/room',
 })

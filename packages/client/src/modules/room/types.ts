@@ -6,7 +6,7 @@ import {
 export type RoomData = Omit<Models.Room, 'id'>
 export interface RoomState {
   isLoading: boolean
-  data: ApiTypes.Room[]
+  data: ApiTypes.GetRoom[]
 }
 
 export type RoomAction =

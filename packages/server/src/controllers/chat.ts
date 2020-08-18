@@ -45,7 +45,7 @@ export const getRoom = controllerWrapper(async (req, res, next) => {
   if (!user) {
     throw httpError.USER_NOT_FOUND
   }
-  const ret: ApiTypes.Room[] = await chatService.findAllRooms(user.id)
+  const ret: ApiTypes.GetRoom[] = await chatService.findAllRooms(user.id)
 
   return ret
 })

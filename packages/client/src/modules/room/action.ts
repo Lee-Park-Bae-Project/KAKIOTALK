@@ -23,7 +23,7 @@ export const getRoomRequest = () => ({
   payload: {},
 })
 
-export const getRoomSuccess = (room: ApiTypes.Room[]) => ({
+export const getRoomSuccess = (room: ApiTypes.GetRoom[]) => ({
   type: GET_ROOM_SUCCESS,
   payload: room,
 })

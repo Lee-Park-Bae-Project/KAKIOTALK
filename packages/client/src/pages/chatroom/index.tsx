@@ -34,7 +34,7 @@ const ChatRoom: FC = () => {
   const roomState = useSelector((state: RootState) => state.room)
   const { uuid } = useSelector((state: RootState) => state.profile)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const [thisRoomState, setThisRoomState] = useState<ApiTypes.Room | undefined>(undefined)
+  const [thisRoomState, setThisRoomState] = useState<ApiTypes.GetRoom | undefined>(undefined)
 
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)

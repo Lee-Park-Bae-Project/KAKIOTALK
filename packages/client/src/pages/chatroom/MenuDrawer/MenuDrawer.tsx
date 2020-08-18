@@ -18,7 +18,7 @@ const {
   useState, useEffect,
 } = React
 interface Props{
-  thisRoomState: ApiTypes.Room
+  thisRoomState: ApiTypes.GetRoom
   toggleDrawer: () => void
   isDrawerOpen: boolean
   handleLeaveRoom: () => void

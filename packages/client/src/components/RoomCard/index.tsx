@@ -8,7 +8,7 @@ import {
 interface Props {
   participantsName: string;
   numOfParticipants: number;
-  lastMessage?: string;
+  lastMessage?: string | null;
   lastModified?: string;
   numOfNewMessages?: number;
   onClick?: () => void;

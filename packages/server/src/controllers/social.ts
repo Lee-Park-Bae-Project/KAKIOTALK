@@ -8,7 +8,7 @@ import * as userService from '../services/user'
 import socialService from '../services/social'
 import * as httpError from '../common/error'
 
-const getFriendsList = async (
+export const getFriendsList = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -40,7 +40,7 @@ const getFriendsList = async (
     next(e)
   }
 }
-const addFriend = async (req: Request, res: Response, next: NextFunction) => {
+export const addFriend = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await userService.findByGoogleId(req.decodedUser.googleId)
     const friendEmail: string = req.body.email
@@ -74,27 +74,16 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const deleteFriend = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const user = await userService.findByGoogleId(req.decodedUser.googleId)
-    const deleteUser = await userService.findByUuid(req.body.uuid)
-    if (!user || !deleteUser) {
-      throw httpError.INVALID_FRIEND_ID
-    }
-    const deleted = await socialService.deleteFriend(user.id, deleteUser.id)
-    if (deleted === 0) {
-      throw httpError.ERROR_OCCURED
-    }
-    const { uuid } = deleteUser
-    response(res, { uuid })
-  } catch (e) {
-    next(e)
+export const deleteFriend = controllerWrapper(async (req, res, next) => {
+  const user = await userService.findByGoogleId(req.decodedUser.googleId)
+  const deleteUser = await userService.findByUuid(req.body.uuid)
+  if (!user || !deleteUser) {
+    throw httpError.INVALID_FRIEND_ID
   }
-}
-export {
-  getFriendsList, addFriend, deleteFriend,
-}
+  const deleted = await socialService.deleteFriend(user.id, deleteUser.id)
+  if (deleted === 0) {
+    throw httpError.ERROR_OCCURED
+  }
+  const { uuid } = deleteUser
+  return { uuid }
+})

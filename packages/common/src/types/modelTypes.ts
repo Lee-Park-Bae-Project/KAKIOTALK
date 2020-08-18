@@ -27,7 +27,7 @@ export interface Room {
   uuid: string
   createdAt: string
   updatedAt: string
-  lastMessage: string
+  lastMessage: string | null
   participants: Pick<User, 'uuid' | 'name' | 'email' | 'statusMessage'>[]
 }
 

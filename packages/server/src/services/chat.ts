@@ -1,4 +1,6 @@
-import { Models } from '@kakio/common'
+import {
+  ApiTypes, Models,
+} from '@kakio/common'
 
 import {
   CHAT_ASSOCIATION_ALIAS,
@@ -47,7 +49,10 @@ export const findAllRooms = async (userId: number) => {
   if (!rooms) {
     throw HttpError.ROOM_NOT_FOUND
   }
-  const preProcessed = rooms.map((room) => {
+
+  const pre: ApiTypes.GetRoom[] = []
+
+  rooms.forEach((room) => {
     const { chats } = room
     const lastMessage = chats.length > 0 ? chats[chats.length - 1].content : null
     const participants = room.participants.map((participant) => {
@@ -61,15 +66,19 @@ export const findAllRooms = async (userId: number) => {
         email,
       }
     })
-    return {
+
+    const next = {
       uuid: room.uuid,
       createdAt: room.createdAt,
       updatedAt: room.updatedAt,
       lastMessage,
       participants,
     }
+
+    pre.push(next)
   })
-  return preProcessed
+
+  return pre
 }
 
 interface GetChatsByRoomId {
@@ -206,7 +215,6 @@ export const addMessage = async ({
     const newChat = await findChatById(chatId)
     return newChat
   } catch (e) {
-    console.error(e)
     return e
   }
 }
