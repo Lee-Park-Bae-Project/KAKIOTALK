@@ -4,8 +4,6 @@ import uuid4 from 'uuid4'
 import {
   NextFunction, Request, Response,
 } from 'express'
-import { Controller } from '../types'
-import { ERROR_OCCURED } from './error'
 
 export const response = (res:Response, data: any = {}, _code = httpStatus.OK) => {
   let result = {
@@ -33,15 +31,6 @@ export const response = (res:Response, data: any = {}, _code = httpStatus.OK) =>
 export const uuid = () => {
   const tokens = uuid4().split('-')
   return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4]
-}
-
-export const controllerHelper = (controller: Controller) => async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const data = await controller(req, res, next)
-    response(res, data)
-  } catch (e) {
-    next(e)
-  }
 }
 
 export type ControllerCallBackType = (req: Request, res: Response, next: NextFunction) => any

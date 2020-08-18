@@ -10,8 +10,6 @@ export interface IDecodedUser {
   exp: string;
 }
 
-export type Controller = (req: Request, res: Response, next: NextFunction) => any
-
 // types for socket.
 export interface SendMsg {
   roomUuid: string;
