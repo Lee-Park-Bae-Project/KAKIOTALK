@@ -14,6 +14,7 @@ import {
 import { Loader } from 'components'
 import { RootState } from 'modules'
 import { joinRooms } from 'modules/socket'
+import { ApiTypes } from '@kakio/common'
 import * as S from './style'
 import ChatArea from './ChatArea'
 import TextArea from './TextArea'
@@ -33,7 +34,7 @@ const ChatRoom: FC = () => {
   const roomState = useSelector((state: RootState) => state.room)
   const { uuid } = useSelector((state: RootState) => state.profile)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const [thisRoomState, setThisRoomState] = useState<RoomData | undefined>(undefined)
+  const [thisRoomState, setThisRoomState] = useState<ApiTypes.Room | undefined>(undefined)
 
   const toggleSearchBar = useCallback(() => {
     setIsSearchOpen(!isSearchOpen)

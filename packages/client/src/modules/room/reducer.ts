@@ -38,7 +38,7 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
     case Action.LEAVE_ROOM_SUCCESS: {
       const { roomUuid } = action.payload
       return {
-        ...state,
+        isLoading: true,
         data: state.data.filter((v) => v.uuid !== roomUuid),
       }
     }
@@ -46,11 +46,11 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
       const {
         roomUuid, content, updatedAt,
       } = action.payload
-      const updatedData = state.data.map((room) => {
-        if (room.uuid === roomUuid) {
+      const updatedData = state.data.map((_room) => {
+        if (_room.uuid === roomUuid) {
           const {
             uuid, createdAt, participants,
-          } = room
+          } = _room
           const updatedRoom = {
             uuid,
             createdAt,
@@ -60,7 +60,7 @@ const room = (state: RoomState = initialState, action: RoomAction) => {
           }
           return updatedRoom
         }
-        return room
+        return _room
       })
       return {
         isLoading: false,

@@ -11,13 +11,14 @@ import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { getProfile } from 'modules/profile'
+import { ApiTypes } from '@kakio/common'
 import * as S from './styles'
 
 const {
   useState, useEffect,
 } = React
 interface Props{
-  thisRoomState: RoomData
+  thisRoomState: ApiTypes.Room
   toggleDrawer: () => void
   isDrawerOpen: boolean
   handleLeaveRoom: () => void

@@ -19,3 +19,13 @@ export interface Friend
     T.User,
     'uuid' | 'email' | 'name' | 'statusMessage' | 'imageUrl'
   > {}
+
+export interface Room
+  extends Pick<T.Room, 'uuid' | 'createdAt' | 'updatedAt' | 'lastMessage'> {
+  participants: {
+    uuid: string
+    name: string
+    statusMessage: string
+    email: string
+  }[]
+}

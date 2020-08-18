@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 import {
-  Models, Socket,
+  ApiTypes, Models, Socket,
 } from '@kakio/common'
 import { InviteUser } from 'types'
 
@@ -23,7 +23,7 @@ export const getRoomRequest = () => ({
   payload: {},
 })
 
-export const getRoomSuccess = (room: Models.Room[]) => ({
+export const getRoomSuccess = (room: ApiTypes.Room[]) => ({
   type: GET_ROOM_SUCCESS,
   payload: room,
 })

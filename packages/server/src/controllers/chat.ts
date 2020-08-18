@@ -1,14 +1,12 @@
 
 // import { response } from 'express'
+import { ApiTypes } from '@kakio/common'
 import * as chatService from '../services/chat'
 import * as userService from '../services/user'
-import * as roomService from '../services/room'
-import {
-  controllerHelper, response, uuid,
-} from '../common/utils'
+import { controllerWrapper } from '../common/utils'
 import * as httpError from '../common/error'
 
-export const getChats = controllerHelper(async (req, res, next) => {
+export const getChats = controllerWrapper(async (req, res, next) => {
   const { roomId: roomUuid } = req.params
   const limit = Number(req.query.limit)
   const offset = Number(req.query.offset)
@@ -36,7 +34,7 @@ export const getChats = controllerHelper(async (req, res, next) => {
   }
 })
 
-export const getRoom = controllerHelper(async (req, res, next) => {
+export const getRoom = controllerWrapper(async (req, res, next) => {
   const { roomId } = req.params
   if (roomId) {
     return chatService.findRoomByUuid(roomId)
@@ -47,26 +45,31 @@ export const getRoom = controllerHelper(async (req, res, next) => {
   if (!user) {
     throw httpError.USER_NOT_FOUND
   }
-  return chatService.findAllRooms(user.id)
+  const ret: ApiTypes.Room[] = await chatService.findAllRooms(user.id)
+
+  return ret
 })
 
-export const addMessage = controllerHelper(async (req, res, next) => {
+export const addMessage = controllerWrapper(async (req, res, next) => {
   const { roomUuid } = req.params
   const {
     content, createdAt, updatedAt,
   } = req.body
   const room = await chatService.findRoomByUuid(roomUuid)
   const user = await userService.findByGoogleId(req.decodedUser.googleId)
-  if (!room || !user) {
-    throw httpError.IDK
+  if (!room) {
+    throw httpError.ROOM_NOT_FOUND
+  }
+  if (!user) {
+    throw httpError.USER_NOT_FOUND
   }
   const roomParticipants = await chatService.findRoomParticipants(room.id, user.id)
   if (!roomParticipants) {
-    throw httpError.IDK
+    throw httpError.DATA_NOT_FOUND
   }
   const roomParticipantsId = roomParticipants.id
   if (!roomParticipants) {
-    throw httpError.IDK
+    throw httpError.DATA_NOT_FOUND
   }
 
   const data = await chatService.createChat({
@@ -75,7 +78,7 @@ export const addMessage = controllerHelper(async (req, res, next) => {
 
   return data
 })
-export const makeRoom = controllerHelper(async (req, res, next) => {
+export const makeRoom = controllerWrapper(async (req, res, next) => {
   const inviteUser = req.body.args
   let roomUuid
   if (inviteUser.length === 2) {
@@ -113,7 +116,7 @@ export const makeRoom = controllerHelper(async (req, res, next) => {
   }
 })
 
-export const getFirstChat = controllerHelper(async (req, res, next) => {
+export const getFirstChat = controllerWrapper(async (req, res, next) => {
   const { roomUuid } = req.params
   const room = await chatService.findRoomByUuid(roomUuid)
   if (!room) {
@@ -126,7 +129,7 @@ export const getFirstChat = controllerHelper(async (req, res, next) => {
   return firstChat
 })
 
-export const getLastChat = controllerHelper(async (req, res, next) => {
+export const getLastChat = controllerWrapper(async (req, res, next) => {
   const { roomUuid } = req.params
 
   const room = await chatService.findRoomByUuid(roomUuid)

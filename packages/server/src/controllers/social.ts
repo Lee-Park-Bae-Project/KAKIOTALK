@@ -1,8 +1,9 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
-import createError from 'http-errors'
-import { response } from '../common/utils'
+import {
+  controllerWrapper, response,
+} from '../common/utils'
 import * as userService from '../services/user'
 import socialService from '../services/social'
 import * as httpError from '../common/error'
@@ -72,6 +73,7 @@ const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     next(e)
   }
 }
+
 const deleteFriend = async (
   req: Request,
   res: Response,

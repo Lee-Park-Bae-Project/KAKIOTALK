@@ -1,7 +1,5 @@
 import { Models } from '@kakio/common'
 
-import { chatFromServer } from '../socket'
-
 import {
   CHAT_ASSOCIATION_ALIAS,
   models,
@@ -24,7 +22,7 @@ export const findAllRooms = async (userId: number) => {
     {
       where: { id: userId },
       include: [{
-        attributes: ['uuid', 'createdAt', 'updatedAt'],
+        attributes: ['uuid', 'createdAt', 'updatedAt', 'lastMessage'],
         model: models.Room,
         as: USER_ASSOCIATION_ALIAS.RoomParticipants,
         include: [{
@@ -42,12 +40,12 @@ export const findAllRooms = async (userId: number) => {
   )
 
   if (!data) {
-    throw HttpError.IDK
+    throw HttpError.ERROR_OCCURED
   }
 
   const { rooms } = data
   if (!rooms) {
-    throw HttpError.IDK
+    throw HttpError.ROOM_NOT_FOUND
   }
   const preProcessed = rooms.map((room) => {
     const { chats } = room
