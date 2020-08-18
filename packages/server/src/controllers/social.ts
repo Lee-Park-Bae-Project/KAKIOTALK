@@ -1,6 +1,7 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
+import { ApiTypes } from '@kakio/common'
 import {
   controllerWrapper, response,
 } from '../common/utils'
@@ -85,5 +86,6 @@ export const deleteFriend = controllerWrapper(async (req, res, next) => {
     throw httpError.ERROR_OCCURED
   }
   const { uuid } = deleteUser
-  return { uuid }
+  const ret: ApiTypes.DeleteFriend = { uuid }
+  return ret
 })

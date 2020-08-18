@@ -86,7 +86,7 @@ export const addFriend = (email: string) => Axios<Type.ApiUser>({
   data: { email },
 })
 
-export const deleteFriend = (uuid: string) => Axios<{uuid: string}>({
+export const deleteFriend = (uuid: string) => Axios<ApiTypes.DeleteFriend>({
   method: 'DELETE',
   url: 'social/delete-friend',
   data: { uuid },

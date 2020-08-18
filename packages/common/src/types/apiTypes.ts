@@ -32,3 +32,7 @@ export interface GetRoom {
     email: string
   }[]
 }
+
+export interface DeleteFriend {
+  uuid: string
+}
