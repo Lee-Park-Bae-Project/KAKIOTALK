@@ -1,4 +1,5 @@
 import { ApiUser } from 'types'
+import { ApiTypes } from '@kakio/common'
 
 export const GET_FRIENDS_REQUEST = 'friends/GET_FRIENDS_REQUEST' as const
 export const GET_FRIENDS_SUCCESS = 'friends/GET_FRIENDS_SUCCESS' as const
@@ -9,7 +10,7 @@ export const DELETE_FRIEND_SUCCESS = 'friends/DELETE_FRIEND_SUCCESS' as const
 
 export const RESET_FRIENDS = 'friends/RESET_FRIENDS' as const
 export const getFriends = () => ({ type: GET_FRIENDS_REQUEST })
-export const getFriendsSuccess = (friends: ApiUser[]) => ({
+export const getFriendsSuccess = (friends: ApiTypes.Friend[]) => ({
   type: GET_FRIENDS_SUCCESS,
   payload: friends,
 })

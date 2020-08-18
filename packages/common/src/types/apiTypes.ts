@@ -13,3 +13,9 @@ export interface Profile
     T.User,
     'uuid' | 'email' | 'name' | 'statusMessage' | 'imageUrl'
   > {}
+
+export interface Friend
+  extends Pick<
+    T.User,
+    'uuid' | 'email' | 'name' | 'statusMessage' | 'imageUrl'
+  > {}

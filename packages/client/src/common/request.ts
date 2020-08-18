@@ -37,7 +37,7 @@ export const getProfile = () => Axios<ApiTypes.Profile>({
   url: 'user/my-profile',
 })
 
-export const getFriendList = () => Axios<Type.ApiUser[]>({
+export const getFriendList = () => Axios<ApiTypes.Friend[]>({
   method: 'GET',
   url: 'social/friend-list',
 })

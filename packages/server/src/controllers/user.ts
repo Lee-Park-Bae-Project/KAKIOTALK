@@ -1,5 +1,7 @@
 import { ApiTypes } from '@kakio/common'
-import { delay } from 'bluebird'
+import {
+  NextFunction, Request, Response,
+} from 'express'
 import { controllerWrapper } from '../common/utils'
 import * as userService from '../services/user'
 import * as httpError from '../common/error'
@@ -55,4 +57,3 @@ export const updateProfile = controllerWrapper(async (req, res, next) => {
   }
   return ret
 })
-
