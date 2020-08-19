@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import * as Type from 'types'
-import { APIs, Models } from '@kakio/common'
+import {
+  APIs, Models,
+} from '@kakio/common'
 import { configs } from './constants'
 
 const { API_SERVER_URL } = configs
@@ -55,8 +57,10 @@ export const getUserInfo = () => Axios<Type.SimpleUserType>({
 interface GetFirstChat extends AxiosRequestConfig{
   roomUuid: string
 }
-export const getFirstChat = ({ roomUuid }: GetFirstChat) => Axios<APIs.GetFirstChat>({ method: 'GET',
-  url: `chat/first-chat/${roomUuid}` })
+export const getFirstChat = ({ roomUuid }: GetFirstChat) => Axios<APIs.GetFirstChat>({
+  method: 'GET',
+  url: `chat/first-chat/${roomUuid}`,
+})
 
 interface GetLoginArgs {
   googleId: string
@@ -87,14 +91,18 @@ export const deleteFriend = (uuid: string) => Axios<{uuid: string}>({
   url: 'social/delete-friend',
   data: { uuid },
 })
-export const updateProfile = ({ name,
-  statusMessage }: {
+export const updateProfile = ({
+  name,
+  statusMessage,
+}: {
   name: string
   statusMessage: string
 }) => Axios<Type.ApiUser>({
   method: 'PATCH',
   url: 'user/update-profile',
-  data: { name, statusMessage },
+  data: {
+    name, statusMessage,
+  },
 })
 
 interface GetChatByRoom {
@@ -130,8 +138,10 @@ export const loadMoreChat = ({
   chats: Type.ApiChat[]
   offset: number
   limit: number}
->({ method: 'GET',
-  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}` })
+>({
+  method: 'GET',
+  url: `/chat/message/${roomUuid}?offset=${offset}&limit=${limit}`,
+})
 
 export const makeRoomRequest = (args: Type.InviteUser[]) => Axios<{Rooms: Pick<Models.Room, 'uuid' | 'participants'>[]
 uuid: string}>({
@@ -139,3 +149,14 @@ uuid: string}>({
   url: '/chat/room',
   data: { args },
 })
+
+export const googleLogin = () => Axios<{loginUrl: string}>({
+  method: 'GET',
+  url: '/auth/google',
+  withCredentials: false,
+})
+
+// export const googleLogin = () => Axios({
+//   method: 'GET',
+//   url: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=559423734767-eqosl4f6j9kc771u93ste9g78ecrgl6d.apps.googleusercontent.com&redirect_uri=http://localhost:3050/v1/auth/google/callback&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline',
+// })

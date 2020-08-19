@@ -5,3 +5,4 @@ export type LoginAction =
   | ReturnType<typeof Action.loginFailure>
   | ReturnType<typeof Action.logoutRequest>
   | ReturnType<typeof Action.loginRequest>
+  | ReturnType<typeof Action.googleLoginSuccess>

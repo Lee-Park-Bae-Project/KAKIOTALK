@@ -91,3 +91,9 @@ export const INVALID_FRIEND_ID = _he(ERROR_CODE, '친구의 계정이 유효하�
  * 오류가 발생했습니다.
  */
 export const ERROR_OCCURED = _he(ERROR_CODE, '오류가 발생했습니다.')
+
+/**
+ * @message
+ * 구글 로그인을 이용할 수 없습니다.
+ */
+export const GOOGLE_LOGIN_ERROR = _he(ERROR_CODE, '구글 로그인을 이용할 수 없습니다.')

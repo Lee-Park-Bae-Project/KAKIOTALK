@@ -1,26 +1,44 @@
 import styled from 'styled-components'
-import Flex from '../../atoms/Flex'
-import Logo from '../../components/Logo'
-import Signin from '../../components/GoogleSignin'
 import { color } from '../../styles/global'
 
-export const Container = styled(Flex)`
-  background: ${color.YELLO};
+export const Container = styled.section`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+
+  background-color: ${color.YELLO};
+`
+
+export const H1 = styled.h1`
+  padding: 3rem;
+  text-align: center;
+`
+export const H4 = styled.h3`
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+`
+
+export const LoginWrapper = styled.section`
+  display: flex;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+`
+
+export const LoginContainer = styled.div`
+  display: flex;
   flex-direction: column;
-`
+  width: 20rem;
+  height: 22rem;
+  background-color: ${color.WHITE};
 
-export const SigninButton = styled.div`
-  cursor: pointer;
-  margin-top: 3rem;
-  outline: none;
-  background: none;
-  border: none;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `
-export {
-  Logo,
-  Signin,
-}

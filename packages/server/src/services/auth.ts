@@ -2,20 +2,28 @@ import jwt from 'jsonwebtoken'
 import * as userService from './user'
 import { jwtConfig } from '../configs'
 
-const login = async (
-  googleId: string,
-  email: string,
-  name: string,
-  googleAccessToken: string,
-  imageUrl:string,
-) => {
-  userService.findOrCreate(
+interface LoginArgs {
+  googleId: string
+  email: string
+  name: string
+  googleAccessToken: string
+  googleRefreshToken: string
+  imageUrl: string
+}
+interface Login {
+  (args: LoginArgs) : Promise<string>
+}
+const login: Login = async ({
+  email, googleAccessToken, googleId, imageUrl, name, googleRefreshToken,
+}) => {
+  userService.findOrCreate({
     googleId,
     name,
     email,
     googleAccessToken,
     imageUrl,
-  )
+    googleRefreshToken,
+  })
 
   const payload = { googleId }
   const accessToken = jwt.sign(payload, jwtConfig.secret, { expiresIn: jwtConfig.ttl })

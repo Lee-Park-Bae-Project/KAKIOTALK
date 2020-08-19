@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import * as icons from './svg'
 
 export type IconType = keyof typeof icons;
-export const iconTypes: IconType[] = Object.keys(icons) as IconType[] // 스토리에서 불러오기 위함
+export const iconTypes: IconType[] = Object.keys(icons) as IconType[]
 
 export type IconProps = {
   /** 사용 할 아이콘 타입 */

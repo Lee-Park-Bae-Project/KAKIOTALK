@@ -6,13 +6,18 @@ export const createUser = (googleId: string) => models.User.create({ googleId })
 export const findByAccessToken = (accessToken: string) => models.User.findOne({ where: { accessToken } })
 export const findByEmail = (email: string) => models.User.findOne({ where: { email } })
 export const findById = (id: number) => models.User.findOne({ where: { id } })
-export const findOrCreate = (
+
+interface FindOrCreateArgs {
   googleId: string,
   name: string,
   email: string,
-  googleAccessToken: string,
   imageUrl:string,
-) => models.User.findOrCreate({
+  googleAccessToken: string,
+  googleRefreshToken: string
+}
+export const findOrCreate = ({
+  email, googleAccessToken, googleId, googleRefreshToken, imageUrl, name,
+}: FindOrCreateArgs) => models.User.findOrCreate({
   where: { googleId },
   defaults: {
     googleId,
@@ -20,8 +25,10 @@ export const findOrCreate = (
     email,
     googleAccessToken,
     imageUrl,
+    googleRefreshToken,
   },
 })
+
 export const setAccessToken = (googleId: string, accessToken: string) => models.User.update(
   { accessToken },
   {
@@ -29,14 +36,30 @@ export const setAccessToken = (googleId: string, accessToken: string) => models.
     returning: true,
   }
 )
-export const setUserInfo = (
-  googleId: string,
-  email:string,
-  imageUrl:string
-) => models.User.update(
+
+interface SetUserInfoArgs {
+  googleId: string
+  email: string
+  name: string
+  imageUrl: string
+  googleAccessToken: string
+  googleRefreshToken: string
+}
+
+export const setUserInfo = ({
+  googleId,
+  email,
+  imageUrl,
+  googleAccessToken,
+  googleRefreshToken,
+  name,
+}: SetUserInfoArgs) => models.User.update(
   {
     email,
     imageUrl,
+    googleAccessToken,
+    googleRefreshToken,
+    name,
   },
   { where: { googleId } }
 )

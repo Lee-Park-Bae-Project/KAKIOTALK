@@ -4,6 +4,9 @@ export const LOGIN_FAILURE = 'login/LOGIN_FAILURE' as const
 export const LOGOUT_REQUEST = 'login/LOGOUT_REQUEST' as const
 export const LOGOUT_SUCCESS = 'login/LOGOUT_SUCCESS' as const
 export const LOGOUT_FAILURE = 'login/LOGOUT_FAILURE' as const
+
+export const GOOGLE_LOGIN_SUCCESS = 'login/GOOGLE_LOGIN_SUCCESS' as const
+
 interface LoginUserType {
   googleId: string,
   email: string,
@@ -23,3 +26,4 @@ export const logoutRequest = () => ({ type: LOGOUT_REQUEST })
 export const logoutSuccess = () => ({ type: LOGOUT_SUCCESS })
 export const logoutFailure = () => ({ type: LOGOUT_FAILURE })
 
+export const googleLoginSuccess = () => ({ type: GOOGLE_LOGIN_SUCCESS })

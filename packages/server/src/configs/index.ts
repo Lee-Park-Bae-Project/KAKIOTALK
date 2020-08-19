@@ -5,7 +5,11 @@ require('dotenv').config()
 
 export const env = process.env.NODE_ENV || 'development'
 
-const whiteList = ['http://localhost:3000', 'https://kakiotalk.now.sh', 'https://kakiotalk.junow.vercel.app']
+const whiteList = [
+  'http://localhost:3000',
+  'https://kakiotalk.now.sh',
+  'https://kakiotalk.junow.vercel.app',
+]
 export const corsConfig: CorsOptions = {
   origin: whiteList,
   credentials: true,
@@ -23,3 +27,8 @@ export const jwtConfig = {
   secret: process.env.JWT_SECRET || 'secret',
   ttl: process.env.NODE_ENV === 'development' ? '100h' : '2h',
 }
+
+export const SERVER_URL = ''
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID ?? ''
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET ?? ''
+export const REDIRECT_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3050/v1/auth/google/callback' : 'https://kakio.site/v1/google/callback'
