@@ -7,6 +7,7 @@ import {
   cookieName, jwtConfig,
 } from '../configs'
 import * as httpError from '../common/error'
+import { refreshAccessToken } from '../services/auth'
 
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -19,7 +20,10 @@ const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     req.decodedUser = decoded as IDecodedUser
     next()
   } catch (e) {
-    next(e)
+    // console.log(req.originalUrl)
+    // refreshAccessToken()
+    // res.redirect(req.originalUrl)
+    throw httpError.UNAUTHORIZED
   }
 }
 
