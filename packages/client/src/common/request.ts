@@ -155,8 +155,3 @@ export const googleLogin = () => Axios<{loginUrl: string}>({
   url: '/auth/google',
   withCredentials: false,
 })
-
-// export const googleLogin = () => Axios({
-//   method: 'GET',
-//   url: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=559423734767-eqosl4f6j9kc771u93ste9g78ecrgl6d.apps.googleusercontent.com&redirect_uri=http://localhost:3050/v1/auth/google/callback&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline',
-// })
