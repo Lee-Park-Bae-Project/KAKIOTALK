@@ -8,7 +8,7 @@ import * as config from '../configs'
 import {
   controllerHelper, response,
 } from '../common/utils'
-import loginService from '../services/auth'
+import * as loginService from '../services/auth'
 import * as httpError from '../common/error'
 
 const logout = async (req: Request, res: Response, next: NextFunction) => {
@@ -57,7 +57,7 @@ export const googleLoginCallback = async (req: Request, res: Response, next: Nex
       refresh_token: googleRefreshToken,
     } = tokenResponse.data
 
-    const profileResponse = await axios.get(config.GOOGLE_PROFILE_URL(googleAccessToken))
+    const profileResponse = await axios.get(config.GOOGLE_PROFILE_URL, { headers: { Authorization: `Bearer ${googleAccessToken}` } })
     const {
       id: googleId, email, name, picture: imageUrl,
     } = profileResponse.data

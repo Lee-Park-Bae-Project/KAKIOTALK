@@ -51,4 +51,10 @@ export const GOOGLE_TOKEN_URL = (code: string) => 'https://oauth2.googleapis.com
 + 'grant_type=authorization_code&'
 + `redirect_uri=${REDIRECT_URL}`
 
-export const GOOGLE_PROFILE_URL = (googleAccessToken: string) => `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${googleAccessToken}`
+export const GOOGLE_TOKEN_REFRESH_URL = (refreshToken: string) => 'https://oauth2.googleapis.com/token?'
++ `client_id=${GOOGLE_CLIENT_ID}&`
++ `client_secret=${GOOGLE_CLIENT_SECRET}&`
++ `refresh_token=${refreshToken}`
++ 'grant_type=refresh_token'
+
+export const GOOGLE_PROFILE_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
