@@ -2,12 +2,9 @@ import {
   NextFunction, Request, Response,
 } from 'express'
 import axios from 'axios'
+import { Utils } from '@kakio/common'
 import * as userService from '../services/user'
-import {
-  cookieConfig, cookieName,
-
-  GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, REDIRECT_URL,
-} from '../configs'
+import * as config from '../configs'
 import {
   controllerHelper, response,
 } from '../common/utils'
@@ -16,7 +13,7 @@ import * as httpError from '../common/error'
 
 const logout = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.clearCookie(cookieName, { path: '/' })
+    res.clearCookie(config.cookieName, { path: '/' })
     response(res)
   } catch (e) {
     next(e)
@@ -40,18 +37,7 @@ const getUserInfo = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export const googleLogin = controllerHelper(async (req: Request, res: Response, next: NextFunction) => {
-  const uri = 'https://accounts.google.com/o/oauth2/v2/auth?'
-    + `client_id=${GOOGLE_CLIENT_ID}&`
-    + `redirect_uri=${REDIRECT_URL}&`
-    + 'response_type=code&'
-    + 'scope=https://www.googleapis.com/auth/userinfo.profile&'
-    + 'access_type=offline&'
-    + 'prompt=select_account&'
-    + 'include_granted_scopes=true'
-    // res.redirect('https://naver.com')
-  return { loginUrl: uri }
-})
+export const googleLogin = controllerHelper(async (req: Request, res: Response, next: NextFunction) => ({ loginUrl: config.GOOGLE_LOGIN_URL }))
 
 export const googleLoginCallback = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -59,15 +45,10 @@ export const googleLoginCallback = async (req: Request, res: Response, next: Nex
       error, code,
     } = req.query
 
-    if (error) {
-      throw new Error('this is google error')
-    }
-    const uri = 'https://oauth2.googleapis.com/token?'
-  + `client_id=${GOOGLE_CLIENT_ID}&`
-  + `client_secret=${GOOGLE_CLIENT_SECRET}&`
-  + `code=${code}&`
-  + 'grant_type=authorization_code&'
-  + `redirect_uri=${REDIRECT_URL}`
+    if (error) throw httpError.GOOGLE_LOGIN_ERROR
+    if (!Utils.isString(code)) throw httpError.GOOGLE_LOGIN_ERROR
+
+    const uri = config.GOOGLE_TOKEN_URL(code as string)
 
     const tokenResponse = await axios.post(uri)
 
@@ -76,7 +57,7 @@ export const googleLoginCallback = async (req: Request, res: Response, next: Nex
       refresh_token: googleRefreshToken,
     } = tokenResponse.data
 
-    const profileResponse = await axios.get(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${googleAccessToken}`)
+    const profileResponse = await axios.get(config.GOOGLE_PROFILE_URL(googleAccessToken))
     const {
       id: googleId, email, name, picture: imageUrl,
     } = profileResponse.data
@@ -92,8 +73,8 @@ export const googleLoginCallback = async (req: Request, res: Response, next: Nex
     await userService.setUserInfo({
       email, googleAccessToken, googleId, googleRefreshToken, imageUrl, name,
     })
-    res.cookie(cookieName, token, cookieConfig)
-    res.redirect('http://localhost:3000/login?login=true')
+    res.cookie(config.cookieName, token, config.cookieConfig)
+    res.redirect(config.LOGIN_SUCCESS_URL)
   } catch (e) {
     next(e)
   }

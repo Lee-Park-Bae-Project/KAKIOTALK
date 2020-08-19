@@ -1,6 +1,7 @@
 import {
-  DataTypes, ENUM, Sequelize,
+  DataTypes, Sequelize,
 } from 'sequelize'
+import { Utils } from '@kakio/common'
 import { env } from '../configs'
 import Chat, { CHAT_ASSOCIATION_ALIAS } from './chat'
 import User, { USER_ASSOCIATION_ALIAS } from './user'
@@ -18,7 +19,7 @@ export interface ModelTypes {
   RoomParticipants: ReturnType<typeof RoomParticipants>;
 }
 
-const config = require('../configs/sequelize.js')[env || 'development']
+const config = require('../configs/sequelize.js')[Utils.getNodeEnv()]
 
 export const sequelize = new Sequelize(config.database, config.username, config.password, config)
 

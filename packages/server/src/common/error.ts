@@ -94,6 +94,6 @@ export const ERROR_OCCURED = _he(ERROR_CODE, '오류가 발생했습니다.')
 
 /**
  * @message
- * 구글 로그인을 이용할 수 없습니다.
+ * 구글 로그인 중 에러가 발생했습니다.
  */
-export const GOOGLE_LOGIN_ERROR = _he(ERROR_CODE, '구글 로그인을 이용할 수 없습니다.')
+export const GOOGLE_LOGIN_ERROR = _he(ERROR_CODE, '구글 로그인 중 에러가 발생했습니다.')
