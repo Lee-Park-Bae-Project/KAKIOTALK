@@ -2,9 +2,7 @@
 import jwt from 'jsonwebtoken'
 import axios from 'axios'
 import * as userService from './user'
-import {
-  GOOGLE_TOKEN_REFRESH_URL, jwtConfig,
-} from '../configs'
+import * as config from '../configs'
 import { GOOGLE_LOGIN_ERROR } from '../common/error'
 
 interface LoginArgs {
@@ -31,7 +29,7 @@ export const login: Login = async ({
   })
 
   const payload = { googleId }
-  const accessToken = jwt.sign(payload, jwtConfig.secret, { expiresIn: jwtConfig.ttl })
+  const accessToken = jwt.sign(payload, config.jwtConfig.secret, { expiresIn: config.jwtConfig.ttl })
   // const accessToken = jwt.sign(payload, jwtConfig.secret, { expiresIn: 0 })
 
   await userService.setAccessToken(googleId, accessToken)
@@ -46,10 +44,38 @@ export const refreshAccessToken = async (googleId: string, refreshToken: string)
       expires_in: number
       scope: string
       token_type: string
-    }>(GOOGLE_TOKEN_REFRESH_URL(refreshToken))
+    }>(config.GOOGLE_TOKEN_REFRESH_URL(refreshToken))
     const { access_token } = response.data
     const newUserProfile = await userService.setAccessToken(googleId, access_token)
   } catch (e) {
     throw GOOGLE_LOGIN_ERROR
+  }
+}
+
+export const getTokenFromGoogle = async (code: string) => {
+  const uri = config.GOOGLE_TOKEN_URL(code)
+  const response = await axios.post(uri)
+  const {
+    access_token: googleAccessToken,
+    refresh_token: googleRefreshToken,
+  } = response.data
+
+  return {
+    googleAccessToken,
+    googleRefreshToken,
+  }
+}
+
+export const getProfileFromGoogle = async (googleAccessToken: string) => {
+  const response = await axios.get(config.GOOGLE_PROFILE_URL, { headers: { Authorization: `Bearer ${googleAccessToken}` } })
+  const {
+    id: googleId, email, name, picture: imageUrl,
+  } = response.data
+
+  return {
+    googleId,
+    email,
+    name,
+    imageUrl,
   }
 }
