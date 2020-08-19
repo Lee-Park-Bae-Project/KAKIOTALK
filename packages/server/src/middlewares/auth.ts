@@ -1,13 +1,11 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
-import jwt from 'jsonwebtoken'
 import { IDecodedUser } from '../types'
-import {
-  cookieName, jwtConfig,
-} from '../configs'
+import { cookieName } from '../configs'
 import * as httpError from '../common/error'
 import { refreshAccessToken } from '../services/auth'
+import { verifyJwt } from '../common/utils'
 
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -15,7 +13,7 @@ const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     if (!token) {
       throw httpError.UNAUTHORIZED
     }
-    const decoded = jwt.verify(token, jwtConfig.secret)
+    const decoded = verifyJwt(token)
 
     req.decodedUser = decoded as IDecodedUser
     next()

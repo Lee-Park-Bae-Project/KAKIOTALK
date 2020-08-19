@@ -1,9 +1,8 @@
 /* eslint-disable camelcase */
-import jwt from 'jsonwebtoken'
 import * as userService from './user'
-import * as config from '../configs'
 import { GOOGLE_LOGIN_ERROR } from '../common/error'
 import * as request from '../common/request'
+import { signJwt } from '../common/utils'
 
 interface LoginArgs {
   googleId: string
@@ -29,7 +28,8 @@ export const login: Login = async ({
   })
 
   const payload = { googleId }
-  const accessToken = jwt.sign(payload, config.jwtConfig.secret, { expiresIn: config.jwtConfig.ttl })
+  // const accessToken = jwt.sign(payload, config.jwtConfig.secret, { expiresIn: config.jwtConfig.ttl })
+  const accessToken = signJwt({ payload })
   // const accessToken = jwt.sign(payload, jwtConfig.secret, { expiresIn: 0 })
 
   await userService.setAccessToken(googleId, accessToken)

@@ -2,7 +2,9 @@
 import { Response } from 'express'
 import httpStatus from 'http-status'
 import uuid4 from 'uuid4'
+import jwt from 'jsonwebtoken'
 import { ControllerHelper } from '../types'
+import { jwtConfig } from '../configs'
 
 export const response = (res:Response, data: any = {}, _code = httpStatus.OK) => {
   let result = {
@@ -41,3 +43,19 @@ export const controllerHelper: ControllerHelper = (controller) => async (req, re
     next(e)
   }
 }
+
+interface SignJwtArgs {
+  payload: string | object | Buffer
+  configs?: jwt.SignOptions | undefined
+}
+export const signJwt = ({
+  payload,
+  configs = {},
+}: SignJwtArgs): string => jwt.sign(payload, jwtConfig.secret, {
+  expiresIn: jwtConfig.ttl, ...configs,
+})
+
+interface VerifyJwt {
+  (token: string): string | object
+}
+export const verifyJwt: VerifyJwt = (token: string) => jwt.verify(token, jwtConfig.secret)

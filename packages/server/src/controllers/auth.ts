@@ -1,7 +1,6 @@
 import {
   NextFunction, Request, Response,
 } from 'express'
-import axios from 'axios'
 import { Utils } from '@kakio/common'
 import * as userService from '../services/user'
 import * as config from '../configs'
