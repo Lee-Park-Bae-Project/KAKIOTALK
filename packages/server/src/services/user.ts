@@ -1,4 +1,5 @@
 import { models } from '../models'
+import * as httpError from '../common/error'
 
 export const findByGoogleId = (googleId: string) => models.User.findOne({ where: { googleId } })
 export const findByUuid = (uuid: string) => models.User.findOne({ where: { uuid } })
@@ -31,6 +32,14 @@ export const findOrCreate = ({
 
 export const setAccessToken = (googleId: string, accessToken: string) => models.User.update(
   { accessToken },
+  {
+    where: { googleId },
+    returning: true,
+  }
+)
+
+export const setRefreshToken = (googleId: string, refreshToken: string) => models.User.update(
+  { refreshToken },
   {
     where: { googleId },
     returning: true,
@@ -75,3 +84,13 @@ export const updateProfile = (
   },
   { where: { googleId } }
 )
+
+export const getRefreshToken = async (googleId: string) => {
+  const a = await models.User.findOne({
+    attributes: ['googleRefreshToken'],
+    where: { googleId },
+  })
+
+  if (!a) throw httpError.USER_NOT_FOUND
+  return a.googleAccessToken
+}
