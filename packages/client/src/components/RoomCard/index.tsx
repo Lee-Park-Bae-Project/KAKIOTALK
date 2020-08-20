@@ -10,7 +10,6 @@ interface Props {
   numOfParticipants: number;
   lastMessage?: string;
   lastModified?: string;
-  numOfNewMessages?: number;
   onClick?: () => void;
 }
 const RoomCard: FC<Props> = ({
@@ -18,7 +17,6 @@ const RoomCard: FC<Props> = ({
   numOfParticipants,
   lastMessage = 'this is last message',
   lastModified = getCurTimeDBFormat(),
-  numOfNewMessages = 99,
   onClick = undefined,
 }) => {
   const dayDiffFromNow = getDayDiff(lastModified)
