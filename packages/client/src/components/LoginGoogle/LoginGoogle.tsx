@@ -22,7 +22,9 @@ const LoginGoogle = () => {
   }, [])
 
   return (
-    <S.LoginGoogleButton type="button" onClick={handleClick}/>
+    <>
+      <S.LoginGoogleButton type="button" onClick={handleClick}/>
+    </>
   )
 }
 

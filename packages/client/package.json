@@ -104,13 +104,5 @@
     "react-docgen-typescript-loader": "^3.6.0",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>src/setupTests.ts"
-    ]
   }
 }

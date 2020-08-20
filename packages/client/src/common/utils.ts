@@ -22,8 +22,6 @@ export const convertToLL = (date: string) => moment(date).format('LL')
 
 export const getCurTimeDBFormat = () => moment(Date.now()).format(DB_TIME_FORMAT)
 
-export const getCurTimeDBFormatForTest = (date: Date) => Date.now()
-
 export const getDayDiff = (date: string) => Math.abs(moment(date).diff(moment(Date.now()), 'days'))
 export const alert = {
   addFriend: (name: string) => swal(`${name}님을 친구로 추가했습니다.`, '', 'success'),

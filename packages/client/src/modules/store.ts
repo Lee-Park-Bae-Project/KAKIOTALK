@@ -14,7 +14,7 @@ const sagaMiddleware = createSagaMiddleware({ context: { history: customHistory 
 const middlewares = []
 middlewares.push(sagaMiddleware)
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger)
 }
 
