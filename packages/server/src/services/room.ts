@@ -30,3 +30,10 @@ export const deleteRoom = async ({ roomUuid }: {roomUuid:string}) => {
   const deletedNum = await models.Room.destroy({ where: { uuid: roomUuid } })
   if (!deletedNum) throw httpError.CAN_NOT_BE_DONE
 }
+interface GetNewChatInfo {
+  roomUuid:string
+  updatedAt:string
+}
+export const updateRoomInfo = ({
+  roomUuid, updatedAt,
+}:GetNewChatInfo) => models.Room.update({ createdAt: updatedAt }, { where: { uuid: roomUuid } })

@@ -46,6 +46,9 @@ const chatFromClient = socketCallBack((socket) => {
     console.log(chalk.cyan('chat from client'))
     try {
       const updatedAt = createdAt
+      await roomService.updateRoomInfo({
+        roomUuid, updatedAt,
+      })
       const data = await addMessage({
         roomUuid,
         content,
