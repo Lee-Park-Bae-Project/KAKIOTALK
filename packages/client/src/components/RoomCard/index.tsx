@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import * as S from 'components/RoomCard/styles'
 import Icon from 'Icon/Icon'
 import {
-  convertMillToMMDDYYYY, convertTimeForMsgFormat, getCurTimeDBFormat, getDayDiff,
+  convertToLL, convertToLT, getCurTimeDBFormat, getDayDiff,
 } from 'common/utils'
 
 interface Props {
@@ -37,7 +37,7 @@ const RoomCard: FC<Props> = ({
       </S.InfoWrapper>
     </S.RoomInfoWrapper>
     <S.SubInfoWrapper>
-      <S.Time>{ dayDiffFromNow >= 1 ? convertMillToMMDDYYYY(Date.parse(lastModified)) : convertTimeForMsgFormat(lastModified)}</S.Time>
+      <S.Time>{ dayDiffFromNow ? convertToLT(lastModified) : convertToLL(lastModified)}</S.Time>
     </S.SubInfoWrapper>
   </S.Container>
   )
