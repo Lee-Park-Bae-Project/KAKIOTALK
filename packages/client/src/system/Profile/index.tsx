@@ -198,7 +198,8 @@ const Profile: FC<Prop> = ({
             </S.ButtonWrapper>
 
           ) }
-          {isYourFriend ? <Fragment>
+          {!isMyProfile && <>
+          ({isYourFriend ? <Fragment>
                 <S.ButtonWrapper>
                 <TextIcon
                   icon='ChatFilled'
@@ -240,7 +241,7 @@ const Profile: FC<Prop> = ({
               </S.ButtonWrapper>
 
             )
-            }
+            })</>}
         </S.Footer>
       </S.ProfileWrapper>
     </S.Container>
