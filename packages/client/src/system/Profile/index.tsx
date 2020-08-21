@@ -5,16 +5,16 @@ import * as S from 'system/Profile/styles'
 import Icon from 'Icon/Icon'
 import { color } from 'styles/global'
 import TextIcon from 'components/TextIcon'
-import { Link } from 'react-router-dom'
 import Hr from 'atoms/Hr'
 import {
   useDispatch, useSelector,
 } from 'react-redux'
 import { updateProfileRequest } from 'modules/profile'
-import { deleteFriend } from 'modules/friends'
+import {
+  addFriend, deleteFriend,
+} from 'modules/friends'
 import { makeRoomRequest } from 'modules/room'
 import { throttle } from 'lodash'
-import { getProfile } from 'common/request'
 import { RootState } from 'modules'
 import { useInput } from 'hooks'
 import * as AlertAction from 'modules/alert'
@@ -36,6 +36,10 @@ interface Prop {
   isMyProfile: boolean
   /** 프로필 창 oveflow 여부 */
   isOverflow: boolean
+  /** 친구 여부 */
+  isYourFriend?: boolean
+  /** 유저 이메일 */
+  email?: string
 }
 
 /**
@@ -50,6 +54,8 @@ const Profile: FC<Prop> = ({
   profileRef,
   isMyProfile,
   isOverflow,
+  isYourFriend = true,
+  email = null,
 }) => {
   interface InviteUser{
     uuid: string;
@@ -120,6 +126,12 @@ const Profile: FC<Prop> = ({
       setSlideMount(0)
     }
   }
+
+  const handleAddFriend = () => {
+    if (email) {
+      dispatch(addFriend(email))
+    }
+  }
   return (
     <S.Container
       ref={profileRef}
@@ -171,7 +183,7 @@ const Profile: FC<Prop> = ({
 
         <Hr />
         <S.Footer>
-          {isMyProfile ? (
+          {isMyProfile && (
             <S.ButtonWrapper >
             <TextIcon
               icon={isEditMode ? 'Check' : 'Edit'}
@@ -185,8 +197,8 @@ const Profile: FC<Prop> = ({
             />
             </S.ButtonWrapper>
 
-          ) : (
-            <Fragment>
+          ) }
+          {isYourFriend ? <Fragment>
                 <S.ButtonWrapper>
                 <TextIcon
                   icon='ChatFilled'
@@ -213,7 +225,22 @@ const Profile: FC<Prop> = ({
               />
               </S.ButtonWrapper>
             </Fragment>
-          )}
+            : (
+              <S.ButtonWrapper>
+                <TextIcon
+                icon='AddFriend'
+                color={color.WHITE}
+                text='친구 추가'
+                textColor={color.WHITE}
+                iconPosition='top'
+                onClick={handleAddFriend}
+                size='1.2rem'
+                textSize='0.8rem'
+                />
+              </S.ButtonWrapper>
+
+            )
+            }
         </S.Footer>
       </S.ProfileWrapper>
     </S.Container>
