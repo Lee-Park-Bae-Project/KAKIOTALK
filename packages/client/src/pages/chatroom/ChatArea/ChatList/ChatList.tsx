@@ -41,6 +41,7 @@ const ChatList: React.FC<Props> = ({
   const [scrollHeight, setScrollHeight] = useState(10000)
   const prevScrollHeight = usePrevious(scrollHeight)
   const prevChats = usePrevious(chatState.data[roomUuid])
+  const friendState = useSelector((state: RootState) => state.friends)
 
   const lastTop = useCallback((node: HTMLDivElement) => {
     restorePos.current = node
@@ -96,6 +97,7 @@ const ChatList: React.FC<Props> = ({
                   chat={chat}
                   isMine={userUuid === chat.metaInfo.sender.uuid}
                   ref={idx === chats.length - 1 && chat.uuid !== firstChat.uuid ? first : null}
+                  isYourFriend={friendState.some((friend) => chat.metaInfo.sender.uuid === friend.uuid)}
                 />
               </div>
             ))

@@ -42,7 +42,7 @@ const Room: React.FC<RouteComponentProps> = ({ history }) => {
               (participant) => participant.name
                 .toLowerCase()
                 .indexOf(roomKeyword.value.toLowerCase()) >= 0,
-            ),)
+            ),).sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1))
             .map(({
               uuid, participants, updatedAt, lastMessage,
             }) => {

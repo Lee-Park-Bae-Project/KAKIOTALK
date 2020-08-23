@@ -8,4 +8,3 @@ export type UserListAction =
 | ReturnType<typeof Action.addFriendSuccess>
 | ReturnType<typeof Action.deleteFriendSuccess>
 | ReturnType<typeof Action.resetFriends>
-| any

@@ -16,11 +16,12 @@ type Props = {
   chat: ApiChat
   isMine: boolean
   ref?: React.Ref<HTMLDivElement>;
+  isYourFriend: boolean;
 }
 
 // eslint-disable-next-line react/display-name
 const ChatBox: React.ForwardRefExoticComponent<Props> = forwardRef(({
-  chat, isMine,
+  chat, isMine, isYourFriend,
 }, ref) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false)
   const [isOverflow, setIsOverflow] = useState(false)
@@ -47,12 +48,14 @@ const ChatBox: React.ForwardRefExoticComponent<Props> = forwardRef(({
               <Profile
                 uuid={chat.uuid}
                 name={chat.metaInfo.sender.name}
+                email={chat.metaInfo.sender.email}
                 statusMessage={chat.metaInfo.sender.statusMessage}
                 handleCloseClick={handlePopUpClick}
                 imageUrl='https://images.unsplash.com/photo-1591369376214-b9f91924f10d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'
                 profileRef={profileRef}
                 isMyProfile={isMine}
                 isOverflow={isOverflow}
+                isYourFriend={isYourFriend}
               />
             </>
           )
