@@ -84,6 +84,9 @@ const Profile: FC<Prop> = ({
     dispatch(AlertAction.confirmDelete(name, () => dispatch(deleteFriend(uuid))))
   }
   const onChatClick = () => {
+    console.log('@#@#@#@#@@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#')
+    console.log(selectedList)
+    console.log('@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#')
     dispatch(makeRoomRequest(selectedList.concat({
       uuid, name,
     })))

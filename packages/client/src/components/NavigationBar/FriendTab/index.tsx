@@ -8,7 +8,7 @@ import { url } from 'common/constants'
 const S = { Container: styled.div`
     width: fit-content;
     height: fit-content;
-    padding-left: 40rem;
+    padding-left: 77rem;
   ` }
 
 interface FriendTabProp {
